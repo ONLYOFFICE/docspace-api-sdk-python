@@ -32,10 +32,10 @@ from typing_extensions import Self
 
 class DocsCloudTenantInfo(BaseModel):
     """
-    Represents the license and server information of a DocsCloud tenant, with usage statistics for the current period.
+    Represents the license and server information of a Docs Connect tenant, with usage statistics for the current period.
     """ # noqa: E501
     license: Optional[DocsCloudLicenseInfo] = Field(default=None, description="The license information.")
-    server: Optional[DocsCloudServerInfo] = Field(default=None, description="The DocsCloud server information.")
+    server: Optional[DocsCloudServerInfo] = Field(default=None, description="The Docs Connect server information.")
     users_limit: Optional[DocsCloudUsersLimit] = Field(default=None, description="The user limits of the license.", alias="usersLimit")
     stats: Optional[DocsCloudStats] = Field(default=None, description="The usage statistics for the current period.")
     __properties: ClassVar[List[str]] = ["license", "server", "usersLimit", "stats"]

@@ -1,5 +1,5 @@
-# UnknownNullableWrapper
-The successful API response.
+# JsonValueWrapper
+The successful API response containing an arbitrary JSON value.
 
 ## Properties
 
@@ -14,19 +14,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace_api_sdk.models.unknown_nullable_wrapper import UnknownNullableWrapper
+from docspace_api_sdk.models.json_value_wrapper import JsonValueWrapper
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of UnknownNullableWrapper from a JSON string
-unknown_nullable_wrapper_instance = UnknownNullableWrapper.from_json(json)
+# create an instance of JsonValueWrapper from a JSON string
+json_value_wrapper_instance = JsonValueWrapper.from_json(json)
 # print the JSON string representation of the object
-print(UnknownNullableWrapper.to_json())
+print(JsonValueWrapper.to_json())
 
 # convert the object into a dict
-unknown_nullable_wrapper_dict = unknown_nullable_wrapper_instance.to_dict()
-# create an instance of UnknownNullableWrapper from a dict
-unknown_nullable_wrapper_from_dict = UnknownNullableWrapper.from_dict(unknown_nullable_wrapper_dict)
+json_value_wrapper_dict = json_value_wrapper_instance.to_dict()
+# create an instance of JsonValueWrapper from a dict
+json_value_wrapper_from_dict = JsonValueWrapper.from_dict(json_value_wrapper_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

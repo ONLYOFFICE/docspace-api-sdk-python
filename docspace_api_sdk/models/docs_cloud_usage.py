@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class DocsCloudUsage(BaseModel):
     """
-    Represents the usage statistics of a DocsCloud tenant.
+    Represents the usage statistics of a Docs Connect tenant.
     """ # noqa: E501
     since: Optional[datetime] = Field(default=None, description="The date and time the usage statistics are counted from.", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
     active_count: Optional[StrictInt] = Field(default=None, description="The number of active users.", alias="activeCount", json_schema_extra={"examples": [10]})

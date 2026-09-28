@@ -39,6 +39,7 @@ class AiActionType(str, Enum):
     IMAGEGENERATION = 'ImageGeneration'
     OCR = 'OCR'
     VISION = 'Vision'
+    FORMANALYSIS = 'FormAnalysis'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

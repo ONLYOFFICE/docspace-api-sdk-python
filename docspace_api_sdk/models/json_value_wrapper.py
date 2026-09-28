@@ -27,9 +27,9 @@ from docspace_api_sdk.models.get_portal_prices200_response_links_inner import Ge
 from typing import Optional, Set
 from typing_extensions import Self
 
-class UnknownNullableWrapper(BaseModel):
+class JsonValueWrapper(BaseModel):
     """
-    The successful API response.
+    The successful API response containing an arbitrary JSON value.
     """ # noqa: E501
     response: Optional[Any] = None
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
@@ -56,7 +56,7 @@ class UnknownNullableWrapper(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UnknownNullableWrapper from a JSON string"""
+        """Create an instance of JsonValueWrapper from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -93,7 +93,7 @@ class UnknownNullableWrapper(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UnknownNullableWrapper from a dict"""
+        """Create an instance of JsonValueWrapper from a dict"""
         if obj is None:
             return None
 

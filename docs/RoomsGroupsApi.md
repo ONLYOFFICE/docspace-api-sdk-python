@@ -271,7 +271,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The room group no longer exists; the body is empty and the rooms it gathered are left as they were |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -372,7 +372,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_room_groups**
-> RoomGroupArrayWrapper get_room_groups(include_members=include_members)
+> RoomGroupArrayWrapper get_room_groups(include_members=include_members, search_area=search_area)
 
 Returns every room group of the calling account, each with the rooms it gathers. Only groups the caller
 created are listed: groups of other members never appear here, and an account that has never made one gets an
@@ -392,6 +392,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **include_members** | **bool**| Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. | [optional] 
+ **search_area** | [**SearchArea**](.md)| The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted. | [optional] 
 
 ### Return type
 
@@ -407,6 +408,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.room_group_array_wrapper import RoomGroupArrayWrapper
+from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -428,10 +430,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.GroupsApi(api_client)
     include_members = true # bool | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. (optional)
+    search_area = docspace_api_sdk.SearchArea() # SearchArea | The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted. (optional)
 
     try:
         # List room groups
-        api_response = api_instance.get_room_groups(include_members=include_members)
+        api_response = api_instance.get_room_groups(include_members=include_members, search_area=search_area)
         print("The response of GroupsApi->get_room_groups:\n")
         pprint(api_response)
     except Exception as e:

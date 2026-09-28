@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class DocsCloudWopiConfig(BaseModel):
     """
-    Represents the WOPI configuration of a DocsCloud tenant.
+    Represents the WOPI configuration of a Docs Connect tenant.
     """ # noqa: E501
     enable: Optional[StrictBool] = Field(default=None, description="Whether WOPI is enabled.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["enable"]

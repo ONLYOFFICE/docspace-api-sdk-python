@@ -5,65 +5,45 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_room_tags**](#add_room_tags) | **PUT** /api/2.0/files/rooms/{id}/tags | Attach tags to a room
-[**add_room_tags_third_party**](#add_room_tags_third_party) | **PUT** /api/2.0/files/rooms/{id}/tags | Attach tags to a room (third-party storage)
 [**archive_room**](#archive_room) | **PUT** /api/2.0/files/rooms/{id}/archive | Archive a room
-[**archive_room_third_party**](#archive_room_third_party) | **PUT** /api/2.0/files/rooms/{id}/archive | Archive a room (third-party storage)
 [**change_room_cover**](#change_room_cover) | **POST** /api/2.0/files/rooms/{id}/cover | Change the room cover
-[**change_room_cover_third_party**](#change_room_cover_third_party) | **POST** /api/2.0/files/rooms/{id}/cover | Change the room cover (third-party storage)
 [**create_room**](#create_room) | **POST** /api/2.0/files/rooms | Create a room
 [**create_room_from_template**](#create_room_from_template) | **POST** /api/2.0/files/rooms/fromtemplate | Create a room from the template
 [**create_room_logo**](#create_room_logo) | **POST** /api/2.0/files/rooms/{id}/logo | Set the room logo
-[**create_room_logo_third_party**](#create_room_logo_third_party) | **POST** /api/2.0/files/rooms/{id}/logo | Set the room logo (third-party storage)
 [**create_room_tag**](#create_room_tag) | **POST** /api/2.0/files/tags | Create a room tag
 [**create_room_template**](#create_room_template) | **POST** /api/2.0/files/roomtemplate | Create a room template
 [**create_room_third_party**](#create_room_third_party) | **POST** /api/2.0/files/rooms/thirdparty/{id} | Create a third-party room
 [**delete_custom_tags**](#delete_custom_tags) | **DELETE** /api/2.0/files/tags | Delete the custom room tags
 [**delete_room**](#delete_room) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room
-[**delete_room_third_party**](#delete_room_third_party) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room (third-party storage)
 [**delete_room_logo**](#delete_room_logo) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo
-[**delete_room_logo_third_party**](#delete_room_logo_third_party) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo (third-party storage)
 [**delete_room_tags**](#delete_room_tags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Detach tags from a room
-[**delete_room_tags_third_party**](#delete_room_tags_third_party) | **DELETE** /api/2.0/files/rooms/{id}/tags | Detach tags from a room (third-party storage)
 [**get_external_db_sync_status**](#get_external_db_sync_status) | **GET** /api/2.0/files/rooms/{id}/externaldbsync | Get external DB sync status
 [**get_new_room_items**](#get_new_room_items) | **GET** /api/2.0/files/rooms/{id}/news | Get new items in a room
-[**get_new_room_items_third_party**](#get_new_room_items_third_party) | **GET** /api/2.0/files/rooms/{id}/news | Get new items in a room (third-party storage)
 [**get_public_settings**](#get_public_settings) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get room template public access
 [**get_room_covers**](#get_room_covers) | **GET** /api/2.0/files/rooms/covers | Get room cover gallery
 [**get_room_creating_status**](#get_room_creating_status) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress
 [**get_room_index_export**](#get_room_index_export) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export
 [**get_room_info**](#get_room_info) | **GET** /api/2.0/files/rooms/{id} | Get room information
-[**get_room_info_third_party**](#get_room_info_third_party) | **GET** /api/2.0/files/rooms/{id} | Get room information (third-party storage)
 [**get_room_links**](#get_room_links) | **GET** /api/2.0/files/rooms/{id}/links | Get the room links
-[**get_room_links_third_party**](#get_room_links_third_party) | **GET** /api/2.0/files/rooms/{id}/links | Get the room links (third-party storage)
 [**get_room_security_info**](#get_room_security_info) | **GET** /api/2.0/files/rooms/{id}/share | Get the room access rights
-[**get_room_security_info_third_party**](#get_room_security_info_third_party) | **GET** /api/2.0/files/rooms/{id}/share | Get the room access rights (third-party storage)
 [**get_room_tags_info**](#get_room_tags_info) | **GET** /api/2.0/files/tags | Get available room tags
 [**get_room_template_creating_status**](#get_room_template_creating_status) | **GET** /api/2.0/files/roomtemplate/status | Get room template creation status
 [**get_rooms_folder**](#get_rooms_folder) | **GET** /api/2.0/files/rooms | Get rooms
 [**get_rooms_new_items**](#get_rooms_new_items) | **GET** /api/2.0/files/rooms/news | Get new items in all rooms
 [**get_rooms_primary_external_link**](#get_rooms_primary_external_link) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link
-[**get_rooms_primary_external_link_third_party**](#get_rooms_primary_external_link_third_party) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link (third-party storage)
 [**has_tag_links**](#has_tag_links) | **GET** /api/2.0/files/tags/{tagName}/haslinks | Check room tag usage
 [**pin_room**](#pin_room) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room
-[**pin_room_third_party**](#pin_room_third_party) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room (third-party storage)
 [**reorder_room**](#reorder_room) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder room contents
-[**reorder_room_third_party**](#reorder_room_third_party) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder room contents (third-party storage)
 [**resend_email_invitations**](#resend_email_invitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations
-[**resend_email_invitations_third_party**](#resend_email_invitations_third_party) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations (third-party storage)
 [**set_public_settings**](#set_public_settings) | **PUT** /api/2.0/files/roomtemplate/public | Set room template public access
 [**set_room_link**](#set_room_link) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link
-[**set_room_link_third_party**](#set_room_link_third_party) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link (third-party storage)
 [**set_room_security**](#set_room_security) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights
-[**set_room_security_third_party**](#set_room_security_third_party) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights (third-party storage)
 [**start_external_db_sync**](#start_external_db_sync) | **POST** /api/2.0/files/rooms/{id}/externaldbsync | Start external DB sync
 [**start_room_index_export**](#start_room_index_export) | **POST** /api/2.0/files/rooms/{id}/indexexport | Start the room index export
 [**terminate_room_index_export**](#terminate_room_index_export) | **DELETE** /api/2.0/files/rooms/indexexport | Terminate the room index export
 [**unarchive_room**](#unarchive_room) | **PUT** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room
-[**unarchive_room_third_party**](#unarchive_room_third_party) | **PUT** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room (third-party storage)
 [**unpin_room**](#unpin_room) | **PUT** /api/2.0/files/rooms/{id}/unpin | Unpin a room
-[**unpin_room_third_party**](#unpin_room_third_party) | **PUT** /api/2.0/files/rooms/{id}/unpin | Unpin a room (third-party storage)
 [**update_room**](#update_room) | **PUT** /api/2.0/files/rooms/{id} | Update a room
-[**update_room_third_party**](#update_room_third_party) | **PUT** /api/2.0/files/rooms/{id} | Update a room (third-party storage)
 [**update_room_tag**](#update_room_tag) | **PUT** /api/2.0/files/tags | Rename a room tag
 [**upload_room_logo**](#upload_room_logo) | **POST** /api/2.0/files/logos | Upload a room logo image
 
@@ -88,12 +68,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| The names to attach or to detach. | [optional] 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -160,98 +144,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **add_room_tags_third_party**
-> ThirdPartyFolderWrapper add_room_tags_third_party(id, batch_tags_request_dto=batch_tags_request_dto)
-
-Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels
-shared by every room, and a name that the catalogue does not hold yet is created there by this call, so
-attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as
-they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and
-does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager
-of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag
-has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names
-already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags
-themselves in the catalogue.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| The names to attach or to detach. | [optional] 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.batch_tags_request_dto import BatchTagsRequestDto
-from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    batch_tags_request_dto = docspace_api_sdk.BatchTagsRequestDto() # BatchTagsRequestDto | The names to attach or to detach. (optional)
-
-    try:
-        # Attach tags to a room (third-party storage)
-        api_response = api_instance.add_room_tags_third_party(id, batch_tags_request_dto=batch_tags_request_dto)
-        print("The response of RoomsApi->add_room_tags_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->add_room_tags_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The room with its tag set after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not edit this room, or the room is archived |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **archive_room**
 > FileOperationWrapper archive_room(id, archive_room_request=archive_room_request)
 
@@ -272,12 +164,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **archive_room_request** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md)| The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] 
 
 ### Return type
 
 [**FileOperationWrapper**](FileOperationWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -343,97 +239,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **archive_room_third_party**
-> FileOperationWrapper archive_room_third_party(id, archive_room_request=archive_room_request)
-
-Queues a background job that moves one room from the Rooms section to the Archive section, and returns the
-operation record of that job. An archived room stays readable to its members and becomes read only: files
-cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,
-which is why many other room operations answer an archived room with a refusal. The caller must be a manager
-of the room; administrators of the portal cannot archive a room they were not invited to, and a room template
-cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll
-`GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.
-`deleteAfter` decides only how long the finished record survives, not what happens to the room. Use
-`PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **archive_room_request** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md)| The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] 
-
-### Return type
-
-[**FileOperationWrapper**](FileOperationWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.archive_room_request import ArchiveRoomRequest
-from docspace_api_sdk.models.file_operation_wrapper import FileOperationWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    archive_room_request = docspace_api_sdk.ArchiveRoomRequest() # ArchiveRoomRequest | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. (optional)
-
-    try:
-        # Archive a room (third-party storage)
-        api_response = api_instance.archive_room_third_party(id, archive_room_request=archive_room_request)
-        print("The response of RoomsApi->archive_room_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->archive_room_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The queued archive operation to poll |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **change_room_cover**
 > FolderWrapper change_room_cover(id, cover_request_dto)
 
@@ -454,12 +259,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **cover_request_dto** | [**CoverRequestDto**](CoverRequestDto.md)| The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. | 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -502,99 +311,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling RoomsApi->change_room_cover: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The room as it is after the cover change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not edit this room, or the room is archived |  -  |
-**404** | No room with this ID is visible to the caller |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **change_room_cover_third_party**
-> ThirdPartyFolderWrapper change_room_cover_third_party(id, cover_request_dto)
-
-Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.
-`cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six
-hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either
-field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,
-and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:
-setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that
-logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an
-unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives
-archiving and unarchiving.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **cover_request_dto** | [**CoverRequestDto**](CoverRequestDto.md)| The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.cover_request_dto import CoverRequestDto
-from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    cover_request_dto = docspace_api_sdk.CoverRequestDto() # CoverRequestDto | The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
-
-    try:
-        # Change the room cover (third-party storage)
-        api_response = api_instance.change_room_cover_third_party(id, cover_request_dto)
-        print("The response of RoomsApi->change_room_cover_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->change_room_cover_third_party: %s\n" % e)
 ```
 
 
@@ -821,12 +537,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room the logo is set on. | 
+ **id** | **Union[int, str]**| The room the logo is set on. | 
  **logo_request** | [**LogoRequest**](LogoRequest.md)| The uploaded picture and the piece of it to use. | 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -869,98 +589,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling RoomsApi->create_room_logo: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The room with the addresses of its new logo |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**404** | No room with this ID is visible to the caller |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_room_logo_third_party**
-> ThirdPartyFolderWrapper create_room_logo_third_party(id, logo_request)
-
-Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses
-of the four logo sizes. This is the second half of a two-step flow: upload the picture with
-`POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never
-sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it
-cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and
-`height` crop the picture; sending a position without a size is rejected as an invalid request, while a size
-without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the
-interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the
-room, an archived room is refused, and an unknown room is answered with 404.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room the logo is set on. | 
- **logo_request** | [**LogoRequest**](LogoRequest.md)| The uploaded picture and the piece of it to use. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.logo_request import LogoRequest
-from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room the logo is set on.
-    logo_request = docspace_api_sdk.LogoRequest() # LogoRequest | The uploaded picture and the piece of it to use.
-
-    try:
-        # Set the room logo (third-party storage)
-        api_response = api_instance.create_room_logo_third_party(id, logo_request)
-        print("The response of RoomsApi->create_room_logo_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->create_room_logo_third_party: %s\n" % e)
 ```
 
 
@@ -1157,7 +785,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Status |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The state of the template creation just queued: `isCompleted` is still false, so the job has to be polled for its result |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1367,12 +995,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **delete_room_request** | [**DeleteRoomRequest**](DeleteRoomRequest.md)| The body of the request. It is required even though the deletion does not depend on what it holds. | 
 
 ### Return type
 
 [**FileOperationWrapper**](FileOperationWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -1438,97 +1070,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_room_third_party**
-> FileOperationWrapper delete_room_third_party(id, delete_room_request)
-
-Queues a background job that deletes one room with everything inside it, and returns the operation record of
-that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job
-finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before
-the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is
-answered as missing; the same checks run again when the job starts, which is why the `error` of the finished
-operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the
-returned record again by its `id`. The record is kept until it is read once, so one poll after completion
-still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived
-room is deleted the same way, and a second delete of the same id reports that the room is missing.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **delete_room_request** | [**DeleteRoomRequest**](DeleteRoomRequest.md)| The body of the request. It is required even though the deletion does not depend on what it holds. | 
-
-### Return type
-
-[**FileOperationWrapper**](FileOperationWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.delete_room_request import DeleteRoomRequest
-from docspace_api_sdk.models.file_operation_wrapper import FileOperationWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '10' # str | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    delete_room_request = docspace_api_sdk.DeleteRoomRequest() # DeleteRoomRequest | The body of the request. It is required even though the deletion does not depend on what it holds.
-
-    try:
-        # Remove a room (third-party storage)
-        api_response = api_instance.delete_room_third_party(id, delete_room_request)
-        print("The response of RoomsApi->delete_room_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->delete_room_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The queued delete operation to poll |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **delete_room_logo**
 > FolderWrapper delete_room_logo(id)
 
@@ -1548,11 +1089,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
+ **id** | **Union[int, str]**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -1616,93 +1161,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_room_logo_third_party**
-> ThirdPartyFolderWrapper delete_room_logo_third_party(id)
-
-Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back
-to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,
-and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so
-membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,
-and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even
-with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was
-deleted is answered as missing. After the logo is removed a new one can be set again through
-`POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-    try:
-        # Remove a room logo (third-party storage)
-        api_response = api_instance.delete_room_logo_third_party(id)
-        print("The response of RoomsApi->delete_room_logo_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->delete_room_logo_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The room with its logo removed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **delete_room_tags**
 > FolderWrapper delete_room_tags(id, batch_tags_request_dto=batch_tags_request_dto)
 
@@ -1722,12 +1180,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| The names to attach or to detach. | [optional] 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -1770,97 +1232,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling RoomsApi->delete_room_tags: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The room with its tag set after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not edit this room, or the room is archived |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_room_tags_third_party**
-> ThirdPartyFolderWrapper delete_room_tags_third_party(id, batch_tags_request_dto=batch_tags_request_dto)
-
-Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the
-room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and
-`DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or
-not attached to this room, are skipped without an error, so a successful answer does not prove that anything
-was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null
-entry in the list is rejected as an invalid request. The caller must be a manager of the room or an
-administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last
-room stays in the catalogue, and only deleting that room takes the tag with it.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md)| The names to attach or to detach. | [optional] 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.batch_tags_request_dto import BatchTagsRequestDto
-from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    batch_tags_request_dto = docspace_api_sdk.BatchTagsRequestDto() # BatchTagsRequestDto | The names to attach or to detach. (optional)
-
-    try:
-        # Detach tags from a room (third-party storage)
-        api_response = api_instance.delete_room_tags_third_party(id, batch_tags_request_dto=batch_tags_request_dto)
-        print("The response of RoomsApi->delete_room_tags_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->delete_room_tags_third_party: %s\n" % e)
 ```
 
 
@@ -1994,11 +1365,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
+ **id** | **Union[int, str]**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
 
 ### Return type
 
 [**NewItemsFileEntryBaseArrayWrapper**](NewItemsFileEntryBaseArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -2039,94 +1414,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling RoomsApi->get_new_room_items: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The new files of the room, grouped by day |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_new_room_items_third_party**
-> NewItemsFileEntryBaseArrayWrapper get_new_room_items_third_party(id)
-
-Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with
-the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a
-folder somebody else created is not an entry of its own, while a file created inside it is, however deep it
-lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears
-from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call
-before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that
-there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who
-is not a member is refused, and an unknown or deleted room is answered as missing. Use
-`GET api/2.0/files/rooms/news` for the same report across every room at once.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Return type
-
-[**NewItemsFileEntryBaseArrayWrapper**](NewItemsFileEntryBaseArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.new_items_file_entry_base_array_wrapper import NewItemsFileEntryBaseArrayWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-    try:
-        # Get new items in a room (third-party storage)
-        api_response = api_instance.get_new_room_items_third_party(id)
-        print("The response of RoomsApi->get_new_room_items_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->get_new_room_items_third_party: %s\n" % e)
 ```
 
 
@@ -2228,7 +1515,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | True when the template is shared with everyone, false when only its owner and the accounts it was shared with can reach it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -2510,11 +1797,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
+ **id** | **Union[int, str]**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -2577,94 +1868,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_room_info_third_party**
-> ThirdPartyFolderWrapper get_room_info_third_party(id)
-
-Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,
-together with the access level the caller has in it. Reading the room is not a side-effect-free call: it
-clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read
-`GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;
-portal administrators can read a room they were never invited to, while a member without access is refused.
-The operation also answers an anonymous caller, but only in the context of a valid external share link of that
-room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or
-lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are
-recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and
-page through rooms instead of guessing ids.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-    try:
-        # Get room information (third-party storage)
-        api_response = api_instance.get_room_info_third_party(id)
-        print("The response of RoomsApi->get_room_info_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->get_room_info_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The room with its settings and the access level of the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_room_links**
 > FileShareArrayWrapper get_room_links(id, type=type)
 
@@ -2686,12 +1889,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **type** | [**LinkType**](.md)| Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together. | [optional] 
 
 ### Return type
 
 [**FileShareArrayWrapper**](FileShareArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -2757,98 +1964,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_room_links_third_party**
-> FileShareArrayWrapper get_room_links_third_party(id, type=type)
-
-Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`
-narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag
-that marks the primary external link of the room and, for invitation links, how many times it may still be
-used. Public and form filling rooms come with an external link created for them, so an empty answer there
-means that the link was revoked rather than that the room is private; rooms of the other kinds start with no
-links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data
-room can be an invitation link alone. The caller needs access to the room and the right to see its links: a
-member invited without that right gets an empty list rather than an error, while somebody who is not in the
-room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the
-reported count is the number of entries actually sent.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **type** | [**LinkType**](.md)| Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together. | [optional] 
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
-from docspace_api_sdk.models.link_type import LinkType
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    type = docspace_api_sdk.LinkType() # LinkType | Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together. (optional)
-
-    try:
-        # Get the room links (third-party storage)
-        api_response = api_instance.get_room_links_third_party(id, type=type)
-        print("The response of RoomsApi->get_room_links_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->get_room_links_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The sharing links of the room |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_room_security_info**
 > FileShareArrayWrapper get_room_security_info(id, filter_type=filter_type, count=count, start_index=start_index, filter_value=filter_value)
 
@@ -2870,7 +1985,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **filter_type** | [**ShareFilterType**](.md)| What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. | [optional] 
  **count** | **int**| How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. | [optional] 
  **start_index** | **int**| How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. | [optional] 
@@ -2879,6 +1994,10 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FileShareArrayWrapper**](FileShareArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -2924,104 +2043,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling RoomsApi->get_room_security_info: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | One page of the room access entries, ordered by role and then by name |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_room_security_info_third_party**
-> FileShareArrayWrapper get_room_security_info_third_party(id, filter_type=filter_type, count=count, start_index=start_index, filter_value=filter_value)
-
-Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary
-members, the guests and finally the invitations nobody has accepted yet, with the total in the response
-headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing
-links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the
-displayed name of the subject, and an invitation that is still pending is listed under the email address it
-was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member
-who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal
-administrators can read the list of a room they were never invited to; somebody who is not in the room at all
-is refused. Asking for the link entries instead needs the right to see the links of the room, and a member
-without it gets an empty page rather than an error.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **filter_type** | [**ShareFilterType**](.md)| What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. | [optional] 
- **count** | **int**| How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. | [optional] 
- **start_index** | **int**| How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. | [optional] 
- **filter_value** | **str**| Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. | [optional] 
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
-from docspace_api_sdk.models.share_filter_type import ShareFilterType
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    filter_type = docspace_api_sdk.ShareFilterType() # ShareFilterType | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. (optional)
-    count = 25 # int | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. (optional)
-    start_index = 0 # int | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. (optional)
-    filter_value = 'Smith' # str | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. (optional)
-
-    try:
-        # Get the room access rights (third-party storage)
-        api_response = api_instance.get_room_security_info_third_party(id, filter_type=filter_type, count=count, start_index=start_index, filter_value=filter_value)
-        print("The response of RoomsApi->get_room_security_info_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->get_room_security_info_third_party: %s\n" % e)
 ```
 
 
@@ -3211,7 +2232,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Status |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The state of the caller's latest template creation, or an empty body when this account has started none |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -3452,11 +2473,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
+ **id** | **Union[int, str]**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
 
 ### Return type
 
 [**FileShareWrapper**](FileShareWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -3497,96 +2522,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling RoomsApi->get_rooms_primary_external_link: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The primary external link of the room |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not see the links of this room |  -  |
-**404** | No room with this ID is visible to the caller, or its primary link was revoked |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_rooms_primary_external_link_third_party**
-> FileShareWrapper get_rooms_primary_external_link_third_party(id)
-
-Returns the primary external link of a room, which is the one address meant to be handed out to people outside
-the portal. A public room and a form filling room get such a link when they are created, and asking for it
-again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link
-yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:
-a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A
-link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an
-unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the
-same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request
-token that has to travel with the address.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Return type
-
-[**FileShareWrapper**](FileShareWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-    try:
-        # Get the room primary external link (third-party storage)
-        api_response = api_instance.get_rooms_primary_external_link_third_party(id)
-        print("The response of RoomsApi->get_rooms_primary_external_link_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->get_rooms_primary_external_link_third_party: %s\n" % e)
 ```
 
 
@@ -3723,11 +2658,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
+ **id** | **Union[int, str]**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -3791,95 +2730,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **pin_room_third_party**
-> ThirdPartyFolderWrapper pin_room_third_party(id)
-
-Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.
-Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,
-and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned
-rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between
-each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal
-with the default configuration, and AI rooms are counted separately against their own allowance; a request
-over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a
-room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,
-including guests and portal administrators who were never invited, while somebody who is not in the room is
-refused, an archived room is rejected and an unknown room is answered as missing.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-    try:
-        # Pin a room (third-party storage)
-        api_response = api_instance.pin_room_third_party(id)
-        print("The response of RoomsApi->pin_room_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->pin_room_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The room with its pinned flag set for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **reorder_room**
 > FolderWrapper reorder_room(id)
 
@@ -3900,11 +2750,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
+ **id** | **Union[int, str]**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -3968,94 +2822,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **reorder_room_third_party**
-> ThirdPartyFolderWrapper reorder_room_third_party(id)
-
-Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no
-gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only
-the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one
-sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.
-The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a
-room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes
-nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.
-The caller must be a manager of the room; a member invited with any other level is refused, an archived room
-is rejected, and an unknown or deleted room is answered as missing.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-    try:
-        # Reorder room contents (third-party storage)
-        api_response = api_instance.reorder_room_third_party(id)
-        print("The response of RoomsApi->reorder_room_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->reorder_room_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The room whose contents were renumbered |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **resend_email_invitations**
 > resend_email_invitations(id, user_invitation)
 
@@ -4076,12 +2842,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **user_invitation** | [**UserInvitation**](UserInvitation.md)| Which pending invitations to send again. | 
 
 ### Return type
 
 void (empty response body)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -4121,94 +2891,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         api_instance.resend_email_invitations(id, user_invitation)
     except Exception as e:
         print("Exception when calling RoomsApi->resend_email_invitations: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The invitations that were still pending have been sent again |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **resend_email_invitations_third_party**
-> resend_email_invitations_third_party(id, user_invitation)
-
-Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers
-every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag
-is limited to the named accounts. An account that has already accepted the invitation, is not a member of the
-room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not
-set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room
-or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an
-archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an
-invalid request. The call is rate limited, so a client that loops over members should send one batch instead.
-The response carries no body.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **user_invitation** | [**UserInvitation**](UserInvitation.md)| Which pending invitations to send again. | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.user_invitation import UserInvitation
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    user_invitation = docspace_api_sdk.UserInvitation() # UserInvitation | Which pending invitations to send again.
-
-    try:
-        # Resend the room invitations (third-party storage)
-        api_instance.resend_email_invitations_third_party(id, user_invitation)
-    except Exception as e:
-        print("Exception when calling RoomsApi->resend_email_invitations_third_party: %s\n" % e)
 ```
 
 
@@ -4309,7 +2991,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The recipient list of the template has been rewritten to match the requested access; nothing is returned |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -4340,12 +3022,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **room_link_request** | [**RoomLinkRequest**](RoomLinkRequest.md)| The link to create, change or revoke. | 
 
 ### Return type
 
 [**FileShareWrapper**](FileShareWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -4411,98 +3097,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **set_room_link_third_party**
-> FileShareWrapper set_room_link_third_party(id, room_link_request)
-
-Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an
-invitation link makes whoever opens it a member with the given access level, while an external link opens the
-room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and
-an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access
-level of 0 deletes the link, and deleting the primary external link of a public or form filling room
-immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one
-invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,
-form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently
-for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to
-external links only.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **room_link_request** | [**RoomLinkRequest**](RoomLinkRequest.md)| The link to create, change or revoke. | 
-
-### Return type
-
-[**FileShareWrapper**](FileShareWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper
-from docspace_api_sdk.models.room_link_request import RoomLinkRequest
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    room_link_request = docspace_api_sdk.RoomLinkRequest() # RoomLinkRequest | The link to create, change or revoke.
-
-    try:
-        # Set the room external or invitation link (third-party storage)
-        api_response = api_instance.set_room_link_third_party(id, room_link_request)
-        print("The response of RoomsApi->set_room_link_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->set_room_link_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The link as it is after the change, or an empty body when nothing was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **set_room_security**
 > RoomSecurityWrapper set_room_security(id, room_invitation_request)
 
@@ -4524,12 +3118,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **room_invitation_request** | [**RoomInvitationRequest**](RoomInvitationRequest.md)| The membership changes to apply, together with how the people concerned are notified. | 
 
 ### Return type
 
 [**RoomSecurityWrapper**](RoomSecurityWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -4572,97 +3170,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling RoomsApi->set_room_security: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The access entries of the named subjects, plus a warning or an error when something was not applied |  -  |
-**401** | Unauthorized |  -  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **set_room_security_third_party**
-> RoomSecurityWrapper set_room_security_third_party(id, room_invitation_request)
-
-Adds, changes and removes room members in one batch, and returns the resulting access list of the named
-subjects. Each entry names either an account or a group of the portal, or the email address of somebody who
-has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.
-An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty
-list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a
-user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.
-Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see
-is dropped without an error, which is why the answer has to be compared with the request. Removing a member
-who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation
-email with the optional `message`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **room_invitation_request** | [**RoomInvitationRequest**](RoomInvitationRequest.md)| The membership changes to apply, together with how the people concerned are notified. | 
-
-### Return type
-
-[**RoomSecurityWrapper**](RoomSecurityWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.room_invitation_request import RoomInvitationRequest
-from docspace_api_sdk.models.room_security_wrapper import RoomSecurityWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    room_invitation_request = docspace_api_sdk.RoomInvitationRequest() # RoomInvitationRequest | The membership changes to apply, together with how the people concerned are notified.
-
-    try:
-        # Set the room access rights (third-party storage)
-        api_response = api_instance.set_room_security_third_party(id, room_invitation_request)
-        print("The response of RoomsApi->set_room_security_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->set_room_security_third_party: %s\n" % e)
 ```
 
 
@@ -4966,12 +3473,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **archive_room_request** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md)| The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] 
 
 ### Return type
 
 [**FileOperationWrapper**](FileOperationWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -5037,97 +3548,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **unarchive_room_third_party**
-> FileOperationWrapper unarchive_room_third_party(id, archive_room_request=archive_room_request)
-
-Queues a background job that moves one room from the Archive section back to the Rooms section, and returns
-the operation record of that job. The room becomes writable again with the membership, tags, logo and links it
-had before, while the pinned state of its members is not restored and has to be set again with
-`PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to
-it is refused, a room template is answered as missing, and a room that was never archived simply stays where
-it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is
-true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished
-record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room
-id is reported as missing.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **archive_room_request** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md)| The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] 
-
-### Return type
-
-[**FileOperationWrapper**](FileOperationWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.archive_room_request import ArchiveRoomRequest
-from docspace_api_sdk.models.file_operation_wrapper import FileOperationWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    archive_room_request = docspace_api_sdk.ArchiveRoomRequest() # ArchiveRoomRequest | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. (optional)
-
-    try:
-        # Unarchive a room (third-party storage)
-        api_response = api_instance.unarchive_room_third_party(id, archive_room_request=archive_room_request)
-        print("The response of RoomsApi->unarchive_room_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->unarchive_room_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The queued unarchive operation to poll |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **unpin_room**
 > FolderWrapper unpin_room(id)
 
@@ -5147,11 +3567,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
+ **id** | **Union[int, str]**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -5215,93 +3639,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **unpin_room_third_party**
-> ThirdPartyFolderWrapper unpin_room_third_party(id)
-
-Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.
-Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents
-are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees
-one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused
-`PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so
-the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can
-read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted
-room is answered as missing. An archived room cannot be unpinned.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-    try:
-        # Unpin a room (third-party storage)
-        api_response = api_instance.unpin_room_third_party(id)
-        print("The response of RoomsApi->unpin_room_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->unpin_room_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The room with its pinned flag cleared for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **update_room**
 > FolderWrapper update_room(id, update_room_request)
 
@@ -5323,12 +3660,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **id** | **Union[int, str]**| The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
  **update_room_request** | [**UpdateRoomRequest**](UpdateRoomRequest.md)| The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. | 
 
 ### Return type
 
 [**FolderWrapper**](FolderWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -5371,98 +3712,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling RoomsApi->update_room: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The room as it is after the update |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_room_third_party**
-> ThirdPartyFolderWrapper update_room_third_party(id, update_room_request)
-
-Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in
-the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an
-invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do
-not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a
-room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag
-set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the
-cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal
-default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on
-renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use
-`POST api/2.0/files/rooms/{id}/logo` for logo cropping.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
- **update_room_request** | [**UpdateRoomRequest**](UpdateRoomRequest.md)| The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. | 
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.models.update_room_request import UpdateRoomRequest
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.RoomsApi(api_client)
-    id = '1' # str | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    update_room_request = docspace_api_sdk.UpdateRoomRequest() # UpdateRoomRequest | The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
-
-    try:
-        # Update a room (third-party storage)
-        api_response = api_instance.update_room_third_party(id, update_room_request)
-        print("The response of RoomsApi->update_room_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling RoomsApi->update_room_third_party: %s\n" % e)
 ```
 
 

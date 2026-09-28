@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
@@ -1224,7 +1224,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_get_assignment(
         self,
-        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1242,7 +1242,7 @@ class AssignmentsApi:
 
         Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
 
-        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1296,7 +1296,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_get_assignment_with_http_info(
         self,
-        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1314,7 +1314,7 @@ class AssignmentsApi:
 
         Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
 
-        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1368,7 +1368,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_get_assignment_without_preload_content(
         self,
-        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1386,7 +1386,7 @@ class AssignmentsApi:
 
         Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
 
-        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1506,7 +1506,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_resolve_for_action(
         self,
-        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.")],
         entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
@@ -1525,7 +1525,7 @@ class AssignmentsApi:
 
         Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
-        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -1582,7 +1582,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_resolve_for_action_with_http_info(
         self,
-        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.")],
         entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
@@ -1601,7 +1601,7 @@ class AssignmentsApi:
 
         Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
-        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -1658,7 +1658,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_resolve_for_action_without_preload_content(
         self,
-        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.")],
         entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
@@ -1677,7 +1677,7 @@ class AssignmentsApi:
 
         Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
-        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -1805,7 +1805,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_try_resolve_for_action(
         self,
-        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.")],
         entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
@@ -1824,7 +1824,7 @@ class AssignmentsApi:
 
         Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
-        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -1881,7 +1881,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_try_resolve_for_action_with_http_info(
         self,
-        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.")],
         entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
@@ -1900,7 +1900,7 @@ class AssignmentsApi:
 
         Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
-        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -1957,7 +1957,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_try_resolve_for_action_without_preload_content(
         self,
-        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.")],
+        action_type: Annotated[StrictStr, Field(description="The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.")],
         entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
         _request_timeout: Union[
             None,
@@ -1976,7 +1976,7 @@ class AssignmentsApi:
 
         Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
-        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (required)
+        :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str

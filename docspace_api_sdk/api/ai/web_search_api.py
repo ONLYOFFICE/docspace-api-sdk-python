@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictStr
@@ -696,6 +696,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiWebSearchConfig",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -768,6 +769,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiWebSearchConfig",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -840,6 +842,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiWebSearchConfig",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -978,6 +981,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bool",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1050,6 +1054,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bool",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1122,6 +1127,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bool",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",

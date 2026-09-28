@@ -5,38 +5,29 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**abort_upload_session**](#abort_upload_session) | **DELETE** /api/2.0/files/{folderId}/session/{sessionId} | Abort an upload session
-[**abort_upload_session_third_party**](#abort_upload_session_third_party) | **DELETE** /api/2.0/files/{folderId}/session/{sessionId} | Abort an upload session (third-party storage)
 [**add_favorites**](#add_favorites) | **POST** /api/2.0/files/favorites | Add favorite files and folders
 [**bulk_download**](#bulk_download) | **PUT** /api/2.0/files/fileops/bulkdownload | Bulk download
 [**check_conversion_status**](#check_conversion_status) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status
-[**check_conversion_status_third_party**](#check_conversion_status_third_party) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status (third-party storage)
 [**check_move_or_copy_batch_items**](#check_move_or_copy_batch_items) | **GET** /api/2.0/files/fileops/move | Check move or copy conflicts
 [**check_move_or_copy_dest_folder**](#check_move_or_copy_dest_folder) | **GET** /api/2.0/files/fileops/checkdestfolder | Check the destination folder
 [**copy_batch_items**](#copy_batch_items) | **PUT** /api/2.0/files/fileops/copy | Copy files and folders
 [**create_upload_session**](#create_upload_session) | **POST** /api/2.0/files/{folderId}/upload/create_session | Chunked upload
-[**create_upload_session_third_party**](#create_upload_session_third_party) | **POST** /api/2.0/files/{folderId}/upload/create_session | Chunked upload (third-party storage)
 [**create_upload_session_in_folder**](#create_upload_session_in_folder) | **POST** /api/2.0/files/{folderId}/session | Create an upload session
-[**create_upload_session_in_folder_third_party**](#create_upload_session_in_folder_third_party) | **POST** /api/2.0/files/{folderId}/session | Create an upload session (third-party storage)
 [**delete_batch_items**](#delete_batch_items) | **PUT** /api/2.0/files/fileops/delete | Delete files and folders
 [**delete_favorites_from_body**](#delete_favorites_from_body) | **DELETE** /api/2.0/files/favorites | Delete favorite files and folders
 [**delete_file_versions**](#delete_file_versions) | **PUT** /api/2.0/files/fileops/deleteversion | Delete file versions
 [**duplicate_batch_items**](#duplicate_batch_items) | **PUT** /api/2.0/files/fileops/duplicate | Duplicate files and folders
 [**empty_trash**](#empty_trash) | **PUT** /api/2.0/files/fileops/emptytrash | Empty the Trash folder
 [**finalize_session**](#finalize_session) | **PUT** /api/2.0/files/{folderId}/session/{sessionId}/finalize | Finalize an upload session
-[**finalize_session_third_party**](#finalize_session_third_party) | **PUT** /api/2.0/files/{folderId}/session/{sessionId}/finalize | Finalize an upload session (third-party storage)
 [**get_operation_statuses**](#get_operation_statuses) | **GET** /api/2.0/files/fileops | Get active file operations
 [**get_operation_statuses_by_type**](#get_operation_statuses_by_type) | **GET** /api/2.0/files/fileops/{operationType} | Get file operations by type
 [**mark_as_read**](#mark_as_read) | **PUT** /api/2.0/files/fileops/markasread | Mark files and folders as read
 [**move_batch_items**](#move_batch_items) | **PUT** /api/2.0/files/fileops/move | Move files and folders
 [**start_file_conversion**](#start_file_conversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion
-[**start_file_conversion_third_party**](#start_file_conversion_third_party) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion (third-party storage)
 [**terminate_tasks**](#terminate_tasks) | **PUT** /api/2.0/files/fileops/terminate/{id} | Cancel file operations
 [**update_file_comment**](#update_file_comment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment
-[**update_file_comment_third_party**](#update_file_comment_third_party) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment (third-party storage)
 [**upload_async_session**](#upload_async_session) | **POST** /api/2.0/files/{folderId}/session/{sessionId}/upload | Upload a numbered chunk
-[**upload_async_session_third_party**](#upload_async_session_third_party) | **POST** /api/2.0/files/{folderId}/session/{sessionId}/upload | Upload a numbered chunk (third-party storage)
 [**upload_session**](#upload_session) | **POST** /api/2.0/files/{folderId}/session/{sessionId} | Upload the next chunk
-[**upload_session_third_party**](#upload_session_third_party) | **POST** /api/2.0/files/{folderId}/session/{sessionId} | Upload the next chunk (third-party storage)
 
 
 # **abort_upload_session**
@@ -60,11 +51,15 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **session_id** | **str**| The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | 
- **folder_id** | **int**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
+ **folder_id** | **Union[int, str]**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
 
 ### Return type
 
 void (empty response body)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str`.
 
 ### Authorization
 
@@ -103,93 +98,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         api_instance.abort_upload_session(session_id, folder_id)
     except Exception as e:
         print("Exception when calling OperationsApi->abort_upload_session: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The session and the parts received so far have been discarded |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **abort_upload_session_third_party**
-> abort_upload_session_third_party(session_id, folder_id)
-
-Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already
-received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder
-segment is not matched against it, and neither is the account that opened it, which makes the id the only
-secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone
-afterwards: a second attempt, a session already closed by
-`PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of
-silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left
-to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at
-all, since the session and its buffered parts are dropped when it expires.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **session_id** | **str**| The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | 
- **folder_id** | **str**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.OperationsApi(api_client)
-    session_id = '9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c' # str | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-    folder_id = '1' # str | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-
-    try:
-        # Abort an upload session (third-party storage)
-        api_instance.abort_upload_session_third_party(session_id, folder_id)
-    except Exception as e:
-        print("Exception when calling OperationsApi->abort_upload_session_third_party: %s\n" % e)
 ```
 
 
@@ -415,12 +323,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file whose conversion is asked about. | 
+ **file_id** | **Union[int, str]**| The file whose conversion is asked about. | 
  **start** | **bool**| Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. | [optional] 
 
 ### Return type
 
 [**ConversationResultArrayWrapper**](ConversationResultArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -462,97 +374,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling OperationsApi->check_conversion_status: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The conversion entry of the file, or an empty list when the portal has none |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **check_conversion_status_third_party**
-> ConversationResultArrayWrapper check_conversion_status_third_party(file_id, start=start)
-
-Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows
-about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for
-the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the
-conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry
-reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion
-stopped is discarded a few minutes later, so an empty list means either already reported or never started
-rather than an error. The same empty list is the answer for an identifier no file matches. Passing
-`start=true` starts the conversion as well, with the format from the portal settings and no password, which
-makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,
-and anyone else is refused.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file whose conversion is asked about. | 
- **start** | **bool**| Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. | [optional] 
-
-### Return type
-
-[**ConversationResultArrayWrapper**](ConversationResultArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.OperationsApi(api_client)
-    file_id = '1' # str | The file whose conversion is asked about.
-    start = false # bool | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. (optional)
-
-    try:
-        # Get conversion status (third-party storage)
-        api_response = api_instance.check_conversion_status_third_party(file_id, start=start)
-        print("The response of OperationsApi->check_conversion_status_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling OperationsApi->check_conversion_status_third_party: %s\n" % e)
 ```
 
 
@@ -870,12 +691,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | 
+ **folder_id** | **Union[int, str]**| The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | 
  **session_request** | [**SessionRequest**](SessionRequest.md)| The file the session is opened for, and how a clash with an existing name is settled. | 
 
 ### Return type
 
 [**ChunkedUploadSessionResponseWrapperWrapper**](ChunkedUploadSessionResponseWrapperWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md).
 
 ### Authorization
 
@@ -942,100 +767,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_upload_session_third_party**
-> ThirdPartyChunkedUploadSessionResponseWrapperWrapper create_upload_session_third_party(folder_id, session_request)
-
-Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it
-without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in
-the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and
-the answer carries the session id every later call quotes, the address of the standalone chunk handler, the
-moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as
-multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within
-`chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with
-`PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the
-target folder, which room managers and content creators have and readers, editors and guests do not: they get
-403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A
-payload above the portal limit for chunked uploads is refused before the session exists.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **folder_id** | **str**| The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | 
- **session_request** | [**SessionRequest**](SessionRequest.md)| The file the session is opened for, and how a clash with an existing name is settled. | 
-
-### Return type
-
-[**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.session_request import SessionRequest
-from docspace_api_sdk.models.third_party_chunked_upload_session_response_wrapper_wrapper import ThirdPartyChunkedUploadSessionResponseWrapperWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.OperationsApi(api_client)
-    folder_id = '1' # str | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-    session_request = docspace_api_sdk.SessionRequest() # SessionRequest | The file the session is opened for, and how a clash with an existing name is settled.
-
-    try:
-        # Chunked upload (third-party storage)
-        api_response = api_instance.create_upload_session_third_party(folder_id, session_request)
-        print("The response of OperationsApi->create_upload_session_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling OperationsApi->create_upload_session_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The created session, wrapped in the success envelope |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot add content to the target folder |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **create_upload_session_in_folder**
 > ChunkedUploadSessionResponseResponseWrapper create_upload_session_in_folder(folder_id, session_request)
 
@@ -1059,12 +790,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | 
+ **folder_id** | **Union[int, str]**| The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | 
  **session_request** | [**SessionRequest**](SessionRequest.md)| The file the session is opened for, and how a clash with an existing name is settled. | 
 
 ### Return type
 
 [**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md).
 
 ### Authorization
 
@@ -1107,100 +842,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling OperationsApi->create_upload_session_in_folder: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The created upload session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_upload_session_in_folder_third_party**
-> ThirdPartyChunkedUploadSessionResponseResponseWrapper create_upload_session_in_folder_third_party(folder_id, session_request)
-
-Opens a chunked upload session for a file in the folder named by the path and returns the session itself,
-which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its
-success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk
-handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether
-parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the
-whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and
-answers 201, and above it the parts go one by one to
-`POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after
-`PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the
-folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder
-is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve
-hours later.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **folder_id** | **str**| The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | 
- **session_request** | [**SessionRequest**](SessionRequest.md)| The file the session is opened for, and how a clash with an existing name is settled. | 
-
-### Return type
-
-[**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.session_request import SessionRequest
-from docspace_api_sdk.models.third_party_chunked_upload_session_response_response_wrapper import ThirdPartyChunkedUploadSessionResponseResponseWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.OperationsApi(api_client)
-    folder_id = '1' # str | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-    session_request = docspace_api_sdk.SessionRequest() # SessionRequest | The file the session is opened for, and how a clash with an existing name is settled.
-
-    try:
-        # Create an upload session (third-party storage)
-        api_response = api_instance.create_upload_session_in_folder_third_party(folder_id, session_request)
-        print("The response of OperationsApi->create_upload_session_in_folder_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling OperationsApi->create_upload_session_in_folder_third_party: %s\n" % e)
 ```
 
 
@@ -1698,12 +1339,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
+ **folder_id** | **Union[int, str]**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
  **session_id** | **str**| The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | 
 
 ### Return type
 
 [**UploadSessionResponseWrapper**](UploadSessionResponseWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyUploadSessionResponseWrapper**](ThirdPartyUploadSessionResponseWrapper.md).
 
 ### Authorization
 
@@ -1745,97 +1390,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling OperationsApi->finalize_session: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The assembled file and the identifiers of the closed session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **finalize_session_third_party**
-> ThirdPartyUploadSessionResponseWrapper finalize_session_third_party(folder_id, session_id)
-
-Assembles the parts received so far into the file the session was opened for and closes the session. What
-comes out depends on how the session started: one opened against an existing file through
-`POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,
-while one opened against a folder either creates the file or, when a file of the same name was taken over,
-stores the content as its next version. A form loses its filling state on the way in. The answer arrives with
-201 and carries the identifiers of the file together with the file itself. The call ends the session: the
-record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort
-afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the
-progress from the chunk calls first. An unknown, already closed or expired session id fails instead of
-answering as missing.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **folder_id** | **str**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
- **session_id** | **str**| The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | 
-
-### Return type
-
-[**ThirdPartyUploadSessionResponseWrapper**](ThirdPartyUploadSessionResponseWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_upload_session_response_wrapper import ThirdPartyUploadSessionResponseWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.OperationsApi(api_client)
-    folder_id = '1' # str | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    session_id = '9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c' # str | The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-
-    try:
-        # Finalize an upload session (third-party storage)
-        api_response = api_instance.finalize_session_third_party(folder_id, session_id)
-        print("The response of OperationsApi->finalize_session_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling OperationsApi->finalize_session_third_party: %s\n" % e)
 ```
 
 
@@ -2239,12 +1793,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file to convert. | 
+ **file_id** | **Union[int, str]**| The file to convert. | 
  **check_conversion_request_dto** | [**CheckConversionRequestDto**](CheckConversionRequestDto.md)| The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] 
 
 ### Return type
 
 [**ConversationResultArrayWrapper**](ConversationResultArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` `third_party_check_conversion_request_dto: ThirdPartyCheckConversionRequestDto`.
 
 ### Authorization
 
@@ -2287,99 +1845,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling OperationsApi->start_file_conversion: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The conversion entry to poll, or the finished result when the conversion is synchronous |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **start_file_conversion_third_party**
-> ConversationResultArrayWrapper start_file_conversion_third_party(file_id, third_party_check_conversion_request_dto=third_party_check_conversion_request_dto)
-
-Queues the conversion of a file into the portal's own editable format and answers with the conversion entry
-the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the
-target format and, left empty, the portal's default for that kind of document is used; `password` unlocks a
-protected source file; `version` converts an older version instead of the current one. `createNewIfExist`
-decides where the result goes: with `true` a new file is created beside the source, while with `false`, the
-default, the converted file that already exists is replaced. `sync=true` converts inside the request and
-answers with the finished result instead of a queue entry, which is only sensible for small documents.
-Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the
-converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,
-and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The
-caller needs read access to the file. The call is mutating and not idempotent.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file to convert. | 
- **third_party_check_conversion_request_dto** | [**ThirdPartyCheckConversionRequestDto**](ThirdPartyCheckConversionRequestDto.md)| The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] 
-
-### Return type
-
-[**ConversationResultArrayWrapper**](ConversationResultArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
-from docspace_api_sdk.models.third_party_check_conversion_request_dto import ThirdPartyCheckConversionRequestDto
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.OperationsApi(api_client)
-    file_id = '1' # str | The file to convert.
-    third_party_check_conversion_request_dto = docspace_api_sdk.ThirdPartyCheckConversionRequestDto() # ThirdPartyCheckConversionRequestDto | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. (optional)
-
-    try:
-        # Start file conversion (third-party storage)
-        api_response = api_instance.start_file_conversion_third_party(file_id, third_party_check_conversion_request_dto=third_party_check_conversion_request_dto)
-        print("The response of OperationsApi->start_file_conversion_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling OperationsApi->start_file_conversion_third_party: %s\n" % e)
 ```
 
 
@@ -2510,12 +1975,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file whose version comment is replaced. | 
+ **file_id** | **Union[int, str]**| The file whose version comment is replaced. | 
  **update_comment** | [**UpdateComment**](UpdateComment.md)| The version and the comment to store on it. | 
 
 ### Return type
 
 [**StringWrapper**](StringWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -2581,97 +2050,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_file_comment_third_party**
-> StringWrapper update_file_comment_third_party(file_id, update_comment)
-
-Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers
-with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the
-version and has to be an existing one: a version that does not exist is rejected as an invalid request, while
-a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The
-caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room
-manager and a member with content-creator rights have; a member with editing access to somebody else's file,
-read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or
-lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves
-the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file whose version comment is replaced. | 
- **update_comment** | [**UpdateComment**](UpdateComment.md)| The version and the comment to store on it. | 
-
-### Return type
-
-[**StringWrapper**](StringWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.models.update_comment import UpdateComment
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.OperationsApi(api_client)
-    file_id = '1' # str | The file whose version comment is replaced.
-    update_comment = docspace_api_sdk.UpdateComment() # UpdateComment | The version and the comment to store on it.
-
-    try:
-        # Update a comment (third-party storage)
-        api_response = api_instance.update_file_comment_third_party(file_id, update_comment)
-        print("The response of OperationsApi->update_file_comment_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling OperationsApi->update_file_comment_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The comment as it was stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **upload_async_session**
 > ChunkedUploadSessionResponseResponseWrapper upload_async_session(folder_id, session_id, chunk_number=chunk_number, file=file)
 
@@ -2693,7 +2071,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
+ **folder_id** | **Union[int, str]**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
  **session_id** | **str**| The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string. | 
  **chunk_number** | **int**| The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself. | [optional] 
  **file** | **bytes**| The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused. | [optional] 
@@ -2701,6 +2079,10 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md).
 
 ### Authorization
 
@@ -2767,101 +2149,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **upload_async_session_third_party**
-> ThirdPartyChunkedUploadSessionResponseResponseWrapper upload_async_session_third_party(folder_id, session_id, chunk_number=chunk_number, file=file)
-
-Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow
-uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the
-same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server
-count the parts itself. The answer is always the session, never the file, and this call never completes the
-upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use
-`POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload
-should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,
-so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that
-is not a fillable form is refused when the session targets a form-filling room. The session is found by its id
-alone.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **folder_id** | **str**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
- **session_id** | **str**| The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string. | 
- **chunk_number** | **int**| The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself. | [optional] 
- **file** | **bytes**| The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused. | [optional] 
-
-### Return type
-
-[**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_chunked_upload_session_response_response_wrapper import ThirdPartyChunkedUploadSessionResponseResponseWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.OperationsApi(api_client)
-    folder_id = '1' # str | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    session_id = '9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c' # str | The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
-    chunk_number = 1 # int | The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself. (optional)
-    file = None # bytes | The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused. (optional)
-
-    try:
-        # Upload a numbered chunk (third-party storage)
-        api_response = api_instance.upload_async_session_third_party(folder_id, session_id, chunk_number=chunk_number, file=file)
-        print("The response of OperationsApi->upload_async_session_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling OperationsApi->upload_async_session_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The session with its progress after the part was stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **upload_session**
 > UploadSessionResponseWrapper upload_session(folder_id, session_id, file=file)
 
@@ -2882,13 +2169,17 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
+ **folder_id** | **Union[int, str]**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
  **session_id** | **str**| The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel. | 
  **file** | **bytes**| The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused. | [optional] 
 
 ### Return type
 
 [**UploadSessionResponseWrapper**](UploadSessionResponseWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyUploadSessionResponseWrapper**](ThirdPartyUploadSessionResponseWrapper.md).
 
 ### Authorization
 
@@ -2931,98 +2222,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling OperationsApi->upload_session: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The progress of the session, or the stored file once the last part has arrived |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **upload_session_third_party**
-> ThirdPartyUploadSessionResponseWrapper upload_session_third_party(folder_id, session_id, file=file)
-
-Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the
-server keep count: parts are appended in the order they arrive, so two of these calls must never run in
-parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is
-false; when the last part completes the declared size the file is written, its upload links are cleared, it is
-marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.
-A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on
-the first such call and needs no separate finalize step. A part larger than that limit is refused. The first
-part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a
-form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **folder_id** | **str**| The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | 
- **session_id** | **str**| The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel. | 
- **file** | **bytes**| The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused. | [optional] 
-
-### Return type
-
-[**ThirdPartyUploadSessionResponseWrapper**](ThirdPartyUploadSessionResponseWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_upload_session_response_wrapper import ThirdPartyUploadSessionResponseWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.OperationsApi(api_client)
-    folder_id = '1' # str | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    session_id = '9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c' # str | The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
-    file = None # bytes | The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused. (optional)
-
-    try:
-        # Upload the next chunk (third-party storage)
-        api_response = api_instance.upload_session_third_party(folder_id, session_id, file=file)
-        print("The response of OperationsApi->upload_session_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling OperationsApi->upload_session_third_party: %s\n" % e)
 ```
 
 

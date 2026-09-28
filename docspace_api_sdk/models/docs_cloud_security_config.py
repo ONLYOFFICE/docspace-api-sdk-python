@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class DocsCloudSecurityConfig(BaseModel):
     """
-    Represents the security configuration of a DocsCloud tenant.
+    Represents the security configuration of a Docs Connect tenant.
     """ # noqa: E501
     secret: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The security secret.", json_schema_extra={"examples": ["abc123"]})
     header: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The security header name.", json_schema_extra={"examples": ["Authorization"]})

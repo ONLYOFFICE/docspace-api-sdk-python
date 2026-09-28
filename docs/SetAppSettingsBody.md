@@ -5,7 +5,7 @@ The configuration document a portal application keeps.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**SetAppSettingsBodySettings**](SetAppSettingsBodySettings.md) |  | [optional] 
+**settings** | **object** |  | [optional] 
 
 ## Example
 

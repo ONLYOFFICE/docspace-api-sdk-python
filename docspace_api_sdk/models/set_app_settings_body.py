@@ -23,7 +23,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.set_app_settings_body_settings import SetAppSettingsBodySettings
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +30,7 @@ class SetAppSettingsBody(BaseModel):
     """
     The configuration document a portal application keeps.
     """ # noqa: E501
-    settings: Optional[SetAppSettingsBodySettings] = None
+    settings: Optional[Any] = None
     __properties: ClassVar[List[str]] = ["settings"]
 
     model_config = ConfigDict(
@@ -73,9 +72,11 @@ class SetAppSettingsBody(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of settings
-        if self.settings:
-            _dict['settings'] = self.settings.to_dict()
+        # set to None if settings (nullable) is None
+        # and model_fields_set contains the field
+        if self.settings is None and "settings" in self.model_fields_set:
+            _dict['settings'] = None
+
         return _dict
 
     @classmethod
@@ -89,7 +90,7 @@ class SetAppSettingsBody(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "settings": SetAppSettingsBodySettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
+            "settings": obj.get("settings")
         })
         return _obj
 

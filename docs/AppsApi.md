@@ -186,7 +186,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_settings**
-> UnknownNullableWrapper get_settings(id)
+> JsonValueWrapper get_settings(id)
 
 Returns only the settings document of one portal application, such as `ai-rooms` or `docs-cloud`: the JSON
 that the current portal has saved for it through `PUT api/2.0/apps/{id}/settings`, with no wrapper around it.
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UnknownNullableWrapper**](UnknownNullableWrapper.md)
+[**JsonValueWrapper**](JsonValueWrapper.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.unknown_nullable_wrapper import UnknownNullableWrapper
+from docspace_api_sdk.models.json_value_wrapper import JsonValueWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 

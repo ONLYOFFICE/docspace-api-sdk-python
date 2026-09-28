@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt
@@ -28,6 +28,7 @@ from docspace_api_sdk.models.icon_request import IconRequest
 from docspace_api_sdk.models.room_group_array_wrapper import RoomGroupArrayWrapper
 from docspace_api_sdk.models.room_group_request_dto import RoomGroupRequestDto
 from docspace_api_sdk.models.room_group_wrapper import RoomGroupWrapper
+from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.models.update_room_group_request import UpdateRoomGroupRequest
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -1288,6 +1289,7 @@ class GroupsApi:
     def get_room_groups(
         self,
         include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1307,6 +1309,8 @@ class GroupsApi:
 
         :param include_members: Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
         :type include_members: bool
+        :param search_area: The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
+        :type search_area: SearchArea
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1331,6 +1335,7 @@ class GroupsApi:
 
         _param = self._get_room_groups_serialize(
             include_members=include_members,
+            search_area=search_area,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1362,6 +1367,7 @@ class GroupsApi:
     def get_room_groups_with_http_info(
         self,
         include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1381,6 +1387,8 @@ class GroupsApi:
 
         :param include_members: Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
         :type include_members: bool
+        :param search_area: The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
+        :type search_area: SearchArea
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1405,6 +1413,7 @@ class GroupsApi:
 
         _param = self._get_room_groups_serialize(
             include_members=include_members,
+            search_area=search_area,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1436,6 +1445,7 @@ class GroupsApi:
     def get_room_groups_without_preload_content(
         self,
         include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1455,6 +1465,8 @@ class GroupsApi:
 
         :param include_members: Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
         :type include_members: bool
+        :param search_area: The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
+        :type search_area: SearchArea
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1479,6 +1491,7 @@ class GroupsApi:
 
         _param = self._get_room_groups_serialize(
             include_members=include_members,
+            search_area=search_area,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1505,6 +1518,7 @@ class GroupsApi:
     def _get_room_groups_serialize(
         self,
         include_members,
+        search_area,
         _request_auth,
         _content_type,
         _headers,
@@ -1530,6 +1544,10 @@ class GroupsApi:
         if include_members is not None:
             
             _query_params.append(('includeMembers', include_members))
+            
+        if search_area is not None:
+            
+            _query_params.append(('searchArea', search_area.value))
             
         # process the header parameters
         # process the form parameters

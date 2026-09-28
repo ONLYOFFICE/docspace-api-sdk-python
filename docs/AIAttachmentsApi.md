@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**ai_attachments_delete_many**](#ai_attachments_delete_many) | **DELETE** /api/2.0/ai/attachments/delete-many | Delete many
 [**ai_attachments_get**](#ai_attachments_get) | **POST** /api/2.0/ai/attachments/get | Get one attachment
 [**ai_attachments_get_many**](#ai_attachments_get_many) | **POST** /api/2.0/ai/attachments/get-many | Get many
+[**ai_attachments_get_suggested_questions**](#ai_attachments_get_suggested_questions) | **POST** /api/2.0/ai/attachments/suggested-questions | Get suggested questions
 [**ai_attachments_link_to_message**](#ai_attachments_link_to_message) | **POST** /api/2.0/ai/attachments/link-to-message | Link to message
 [**ai_attachments_save_file**](#ai_attachments_save_file) | **POST** /api/2.0/ai/attachments/save-file | Save file
 [**ai_attachments_save_files_many**](#ai_attachments_save_files_many) | **POST** /api/2.0/ai/attachments/save-files-many | Save files many
@@ -320,6 +321,84 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The attachments, aligned by position with the IDs that were sent. A missing one leaves its slot empty. |  -  |
 **400** | The list of attachment IDs is malformed. |  -  |
+**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ai_attachments_get_suggested_questions**
+> AiSuccessResponse ai_attachments_get_suggested_questions(request_body)
+
+
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request_body** | [**Dict[str, Optional[object]]**](object.md)|  | 
+
+### Return type
+
+[**AiSuccessResponse**](AiSuccessResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.AttachmentsApi(api_client)
+    request_body = None # Dict[str, Optional[object]] | 
+
+    try:
+        # Get suggested questions
+        api_response = api_instance.ai_attachments_get_suggested_questions(request_body)
+        print("The response of AttachmentsApi->ai_attachments_get_suggested_questions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AttachmentsApi->ai_attachments_get_suggested_questions: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 **403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |

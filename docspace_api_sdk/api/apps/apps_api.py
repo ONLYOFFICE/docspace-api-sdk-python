@@ -18,16 +18,16 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
 from typing_extensions import Annotated
 from docspace_api_sdk.models.app_array_wrapper import AppArrayWrapper
 from docspace_api_sdk.models.app_wrapper import AppWrapper
+from docspace_api_sdk.models.json_value_wrapper import JsonValueWrapper
 from docspace_api_sdk.models.set_app_enabled_body import SetAppEnabledBody
 from docspace_api_sdk.models.set_app_settings_body import SetAppSettingsBody
-from docspace_api_sdk.models.unknown_nullable_wrapper import UnknownNullableWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -629,7 +629,7 @@ class AppsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UnknownNullableWrapper:
+    ) -> JsonValueWrapper:
         """Get app settings
 
         Returns only the settings document of one portal application, such as `ai-rooms` or `docs-cloud`: the JSON  that the current portal has saved for it through `PUT api/2.0/apps/{id}/settings`, with no wrapper around it.  The identifier must be an application declared in the installation configuration, as listed by  `GET api/2.0/apps`. Any authenticated portal member  may read it. The call is read-only and idempotent. The document comes back exactly as it was saved: its shape  is defined by the application itself and is not validated by the portal, and an empty result means that the  portal has never saved settings for this application, so the application uses its own defaults. The enabled  state is not part of the answer: read it from `GET api/2.0/apps/{id}`.
@@ -667,7 +667,7 @@ class AppsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UnknownNullableWrapper",
+            '200': "JsonValueWrapper",
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -704,7 +704,7 @@ class AppsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UnknownNullableWrapper]:
+    ) -> ApiResponse[JsonValueWrapper]:
         """Get app settings
 
         Returns only the settings document of one portal application, such as `ai-rooms` or `docs-cloud`: the JSON  that the current portal has saved for it through `PUT api/2.0/apps/{id}/settings`, with no wrapper around it.  The identifier must be an application declared in the installation configuration, as listed by  `GET api/2.0/apps`. Any authenticated portal member  may read it. The call is read-only and idempotent. The document comes back exactly as it was saved: its shape  is defined by the application itself and is not validated by the portal, and an empty result means that the  portal has never saved settings for this application, so the application uses its own defaults. The enabled  state is not part of the answer: read it from `GET api/2.0/apps/{id}`.
@@ -742,7 +742,7 @@ class AppsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UnknownNullableWrapper",
+            '200': "JsonValueWrapper",
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -817,7 +817,7 @@ class AppsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UnknownNullableWrapper",
+            '200': "JsonValueWrapper",
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",

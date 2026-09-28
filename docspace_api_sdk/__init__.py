@@ -316,7 +316,6 @@ __all__ = [
     "ApiKeyResponseWrapper",
     "AppArrayWrapper",
     "AppDto",
-    "AppDtoSettings",
     "AppWrapper",
     "ApplyFilterOption",
     "ArchiveRoomRequest",
@@ -704,6 +703,7 @@ __all__ = [
     "ItemKeyValuePairStringBoolean",
     "ItemKeyValuePairStringLogoRequestsDto",
     "ItemKeyValuePairStringString",
+    "JsonValueWrapper",
     "LinkAccountRequestDto",
     "LinkType",
     "Location",
@@ -853,7 +853,6 @@ __all__ = [
     "SessionRequest",
     "SetAppEnabledBody",
     "SetAppSettingsBody",
-    "SetAppSettingsBodySettings",
     "SetManagerRequest",
     "SetPublicDto",
     "SetRestrictedAiModelsRequestDto",
@@ -1008,7 +1007,6 @@ __all__ = [
     "TopUpDepositRequestDto",
     "TransactionInfo",
     "TurnOnAdminMessageSettingsRequestDto",
-    "UnknownNullableWrapper",
     "UpcomingPaymentArrayWrapper",
     "UpcomingPaymentDto",
     "UpdateApiKeyRequest",
@@ -1379,7 +1377,6 @@ from docspace_api_sdk.models.api_key_response_dto import ApiKeyResponseDto as Ap
 from docspace_api_sdk.models.api_key_response_wrapper import ApiKeyResponseWrapper as ApiKeyResponseWrapper
 from docspace_api_sdk.models.app_array_wrapper import AppArrayWrapper as AppArrayWrapper
 from docspace_api_sdk.models.app_dto import AppDto as AppDto
-from docspace_api_sdk.models.app_dto_settings import AppDtoSettings as AppDtoSettings
 from docspace_api_sdk.models.app_wrapper import AppWrapper as AppWrapper
 from docspace_api_sdk.models.apply_filter_option import ApplyFilterOption as ApplyFilterOption
 from docspace_api_sdk.models.archive_room_request import ArchiveRoomRequest as ArchiveRoomRequest
@@ -1767,6 +1764,7 @@ from docspace_api_sdk.models.item_key_value_pair_object_object import ItemKeyVal
 from docspace_api_sdk.models.item_key_value_pair_string_boolean import ItemKeyValuePairStringBoolean as ItemKeyValuePairStringBoolean
 from docspace_api_sdk.models.item_key_value_pair_string_logo_requests_dto import ItemKeyValuePairStringLogoRequestsDto as ItemKeyValuePairStringLogoRequestsDto
 from docspace_api_sdk.models.item_key_value_pair_string_string import ItemKeyValuePairStringString as ItemKeyValuePairStringString
+from docspace_api_sdk.models.json_value_wrapper import JsonValueWrapper as JsonValueWrapper
 from docspace_api_sdk.models.link_account_request_dto import LinkAccountRequestDto as LinkAccountRequestDto
 from docspace_api_sdk.models.link_type import LinkType as LinkType
 from docspace_api_sdk.models.location import Location as Location
@@ -1916,7 +1914,6 @@ from docspace_api_sdk.models.service_price_info_array_wrapper import ServicePric
 from docspace_api_sdk.models.session_request import SessionRequest as SessionRequest
 from docspace_api_sdk.models.set_app_enabled_body import SetAppEnabledBody as SetAppEnabledBody
 from docspace_api_sdk.models.set_app_settings_body import SetAppSettingsBody as SetAppSettingsBody
-from docspace_api_sdk.models.set_app_settings_body_settings import SetAppSettingsBodySettings as SetAppSettingsBodySettings
 from docspace_api_sdk.models.set_manager_request import SetManagerRequest as SetManagerRequest
 from docspace_api_sdk.models.set_public_dto import SetPublicDto as SetPublicDto
 from docspace_api_sdk.models.set_restricted_ai_models_request_dto import SetRestrictedAiModelsRequestDto as SetRestrictedAiModelsRequestDto
@@ -2071,7 +2068,6 @@ from docspace_api_sdk.models.token_diagnostics_wrapper import TokenDiagnosticsWr
 from docspace_api_sdk.models.top_up_deposit_request_dto import TopUpDepositRequestDto as TopUpDepositRequestDto
 from docspace_api_sdk.models.transaction_info import TransactionInfo as TransactionInfo
 from docspace_api_sdk.models.turn_on_admin_message_settings_request_dto import TurnOnAdminMessageSettingsRequestDto as TurnOnAdminMessageSettingsRequestDto
-from docspace_api_sdk.models.unknown_nullable_wrapper import UnknownNullableWrapper as UnknownNullableWrapper
 from docspace_api_sdk.models.upcoming_payment_array_wrapper import UpcomingPaymentArrayWrapper as UpcomingPaymentArrayWrapper
 from docspace_api_sdk.models.upcoming_payment_dto import UpcomingPaymentDto as UpcomingPaymentDto
 from docspace_api_sdk.models.update_api_key_request import UpdateApiKeyRequest as UpdateApiKeyRequest

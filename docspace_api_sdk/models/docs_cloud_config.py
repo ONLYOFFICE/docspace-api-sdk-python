@@ -33,7 +33,7 @@ from typing_extensions import Self
 
 class DocsCloudConfig(BaseModel):
     """
-    Represents the configuration of a DocsCloud tenant.
+    Represents the configuration of a Docs Connect tenant.
     """ # noqa: E501
     tenant_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The tenant name.", alias="tenantName", json_schema_extra={"examples": ["My Portal"]})
     security: Optional[DocsCloudSecurityConfig] = Field(default=None, description="The security configuration.")

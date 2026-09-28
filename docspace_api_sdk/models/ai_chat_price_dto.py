@@ -32,7 +32,10 @@ class AiChatPriceDto(BaseModel):
     """ # noqa: E501
     prompt: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cost of one million tokens sent to the model, which includes the conversation history resent with  every turn and not just the newest message.", json_schema_extra={"examples": [5.0]})
     completion: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cost of one million tokens the model writes back. It is normally the dearer of the two directions.", json_schema_extra={"examples": [15.0]})
-    __properties: ClassVar[List[str]] = ["prompt", "completion"]
+    prompt_cache_read: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cost of one million prompt tokens served from the prompt cache. It is absent when the model does not  support prompt caching.", alias="promptCacheRead", json_schema_extra={"examples": [0.2]})
+    prompt_cache_write: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cost of one million prompt tokens written to the prompt cache with the default lifetime. It is absent  when the model does not support prompt caching.", alias="promptCacheWrite", json_schema_extra={"examples": [2.5]})
+    prompt_cache_write1_h: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cost of one million prompt tokens written to the prompt cache with a one-hour lifetime. It is absent  when the model offers no such option.", alias="promptCacheWrite1H", json_schema_extra={"examples": [4.0]})
+    __properties: ClassVar[List[str]] = ["prompt", "completion", "promptCacheRead", "promptCacheWrite", "promptCacheWrite1H"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +76,21 @@ class AiChatPriceDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if prompt_cache_read (nullable) is None
+        # and model_fields_set contains the field
+        if self.prompt_cache_read is None and "prompt_cache_read" in self.model_fields_set:
+            _dict['promptCacheRead'] = None
+
+        # set to None if prompt_cache_write (nullable) is None
+        # and model_fields_set contains the field
+        if self.prompt_cache_write is None and "prompt_cache_write" in self.model_fields_set:
+            _dict['promptCacheWrite'] = None
+
+        # set to None if prompt_cache_write1_h (nullable) is None
+        # and model_fields_set contains the field
+        if self.prompt_cache_write1_h is None and "prompt_cache_write1_h" in self.model_fields_set:
+            _dict['promptCacheWrite1H'] = None
+
         return _dict
 
     @classmethod
@@ -87,7 +105,10 @@ class AiChatPriceDto(BaseModel):
 
         _obj = cls.model_validate({
             "prompt": obj.get("prompt"),
-            "completion": obj.get("completion")
+            "completion": obj.get("completion"),
+            "promptCacheRead": obj.get("promptCacheRead"),
+            "promptCacheWrite": obj.get("promptCacheWrite"),
+            "promptCacheWrite1H": obj.get("promptCacheWrite1H")
         })
         return _obj
 

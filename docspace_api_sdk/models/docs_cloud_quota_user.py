@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class DocsCloudQuotaUser(BaseModel):
     """
-    Represents a single user entry of a DocsCloud quota.
+    Represents a single user entry of a Docs Connect quota.
     """ # noqa: E501
     user_id: Optional[StrictStr] = Field(default=None, description="The user ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     expire: Optional[StrictStr] = Field(default=None, description="The expiration date of the user.", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})

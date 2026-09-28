@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class DocsCloudPayment(BaseModel):
     """
-    Represents the payment information of a DocsCloud tenant.
+    Represents the payment information of a Docs Connect tenant.
     """ # noqa: E501
     cart_id: Optional[StrictStr] = Field(default=None, description="The cart ID.", alias="cartId", json_schema_extra={"examples": ["CartId"]})
     product_id: Optional[StrictInt] = Field(default=None, description="The product ID.", alias="productId", json_schema_extra={"examples": [12345]})

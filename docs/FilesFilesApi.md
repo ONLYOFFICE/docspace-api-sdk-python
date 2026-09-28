@@ -5,93 +5,57 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_file_to_recent**](#add_file_to_recent) | **POST** /api/2.0/files/file/{fileId}/recent | Add a file to Recent
-[**add_file_to_recent_third_party**](#add_file_to_recent_third_party) | **POST** /api/2.0/files/file/{fileId}/recent | Add a file to Recent (third-party storage)
 [**add_templates**](#add_templates) | **POST** /api/2.0/files/templates | Add template files
 [**change_version_history**](#change_version_history) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history
-[**change_version_history_third_party**](#change_version_history_third_party) | **PUT** /api/2.0/files/file/{fileId}/history | Change version history (third-party storage)
 [**check_fill_form_draft**](#check_fill_form_draft) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Open a form draft for filling
-[**check_fill_form_draft_third_party**](#check_fill_form_draft_third_party) | **POST** /api/2.0/files/masterform/{fileId}/checkfillformdraft | Open a form draft for filling (third-party storage)
 [**copy_file_as**](#copy_file_as) | **POST** /api/2.0/files/file/{fileId}/copyas | Copy a file
-[**copy_file_as_third_party**](#copy_file_as_third_party) | **POST** /api/2.0/files/file/{fileId}/copyas | Copy a file (third-party storage)
 [**create_edit_session**](#create_edit_session) | **POST** /api/2.0/files/file/{fileId}/edit_session | Create the editing session
-[**create_edit_session_third_party**](#create_edit_session_third_party) | **POST** /api/2.0/files/file/{fileId}/edit_session | Create the editing session (third-party storage)
 [**create_file**](#create_file) | **POST** /api/2.0/files/{folderId}/file | Create a file
-[**create_file_third_party**](#create_file_third_party) | **POST** /api/2.0/files/{folderId}/file | Create a file (third-party storage)
 [**create_file_in_my_documents**](#create_file_in_my_documents) | **POST** /api/2.0/files/@my/file | Create a file in My documents
 [**create_file_primary_external_link**](#create_file_primary_external_link) | **POST** /api/2.0/files/file/{id}/link | Create the file primary external link
-[**create_file_primary_external_link_third_party**](#create_file_primary_external_link_third_party) | **POST** /api/2.0/files/file/{id}/link | Create the file primary external link (third-party storage)
 [**create_html_file**](#create_html_file) | **POST** /api/2.0/files/{folderId}/html | Create an HTML file
-[**create_html_file_third_party**](#create_html_file_third_party) | **POST** /api/2.0/files/{folderId}/html | Create an HTML file (third-party storage)
 [**create_html_file_in_my_documents**](#create_html_file_in_my_documents) | **POST** /api/2.0/files/@my/html | Create an HTML file in My documents
 [**create_text_file**](#create_text_file) | **POST** /api/2.0/files/{folderId}/text | Create a text file
-[**create_text_file_third_party**](#create_text_file_third_party) | **POST** /api/2.0/files/{folderId}/text | Create a text file (third-party storage)
 [**create_text_file_in_my_documents**](#create_text_file_in_my_documents) | **POST** /api/2.0/files/@my/text | Create a text file in My documents
 [**create_thumbnails**](#create_thumbnails) | **POST** /api/2.0/files/thumbnails | Queue file thumbnails
 [**delete_file**](#delete_file) | **DELETE** /api/2.0/files/file/{fileId} | Delete a file
-[**delete_file_third_party**](#delete_file_third_party) | **DELETE** /api/2.0/files/file/{fileId} | Delete a file (third-party storage)
 [**delete_recent**](#delete_recent) | **DELETE** /api/2.0/files/recent | Delete recent files
 [**delete_templates**](#delete_templates) | **DELETE** /api/2.0/files/templates | Delete template files
 [**generate_xlsx**](#generate_xlsx) | **POST** /api/2.0/files/file/{fileId}/xlsx | Generate a form answers report
 [**get_all_form_roles**](#get_all_form_roles) | **GET** /api/2.0/files/file/{fileId}/formroles | Get form roles
-[**get_all_form_roles_third_party**](#get_all_form_roles_third_party) | **GET** /api/2.0/files/file/{fileId}/formroles | Get form roles (third-party storage)
 [**get_edit_diff_url**](#get_edit_diff_url) | **GET** /api/2.0/files/file/{fileId}/edit/diff | Get changes URL
-[**get_edit_diff_url_third_party**](#get_edit_diff_url_third_party) | **GET** /api/2.0/files/file/{fileId}/edit/diff | Get changes URL (third-party storage)
 [**get_edit_history**](#get_edit_history) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history
-[**get_edit_history_third_party**](#get_edit_history_third_party) | **GET** /api/2.0/files/file/{fileId}/edit/history | Get version history (third-party storage)
 [**get_encryption_info**](#get_encryption_info) | **GET** /api/2.0/files/{fileId}/access | Get file encryption information
-[**get_encryption_info_third_party**](#get_encryption_info_third_party) | **GET** /api/2.0/files/{fileId}/access | Get file encryption information (third-party storage)
 [**get_file_history**](#get_file_history) | **GET** /api/2.0/files/file/{fileId}/log | Get file history
 [**get_file_info**](#get_file_info) | **GET** /api/2.0/files/file/{fileId} | Get file information
-[**get_file_info_third_party**](#get_file_info_third_party) | **GET** /api/2.0/files/file/{fileId} | Get file information (third-party storage)
 [**get_file_links**](#get_file_links) | **GET** /api/2.0/files/file/{id}/links | Get file external links
-[**get_file_links_third_party**](#get_file_links_third_party) | **GET** /api/2.0/files/file/{id}/links | Get file external links (third-party storage)
 [**get_file_primary_external_link**](#get_file_primary_external_link) | **GET** /api/2.0/files/file/{id}/link | Get the file primary external link
-[**get_file_primary_external_link_third_party**](#get_file_primary_external_link_third_party) | **GET** /api/2.0/files/file/{id}/link | Get the file primary external link (third-party storage)
 [**get_file_version_info**](#get_file_version_info) | **GET** /api/2.0/files/file/{fileId}/history | Get file versions
-[**get_file_version_info_third_party**](#get_file_version_info_third_party) | **GET** /api/2.0/files/file/{fileId}/history | Get file versions (third-party storage)
 [**get_fill_result**](#get_fill_result) | **GET** /api/2.0/files/file/fillresult | Get form-filling result
 [**get_form_submissions**](#get_form_submissions) | **GET** /api/2.0/files/file/{fileId}/submissions | Get form submission results
 [**get_presigned_file_uri**](#get_presigned_file_uri) | **GET** /api/2.0/files/file/{fileId}/presigned | Get a signed download address
-[**get_presigned_file_uri_third_party**](#get_presigned_file_uri_third_party) | **GET** /api/2.0/files/file/{fileId}/presigned | Get a signed download address (third-party storage)
 [**get_presigned_uri**](#get_presigned_uri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link
-[**get_presigned_uri_third_party**](#get_presigned_uri_third_party) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link (third-party storage)
 [**get_protected_file_users**](#get_protected_file_users) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users for document protection
-[**get_protected_file_users_third_party**](#get_protected_file_users_third_party) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users for document protection (third-party storage)
 [**get_reference_data**](#get_reference_data) | **POST** /api/2.0/files/file/referencedata | Resolve a spreadsheet reference
 [**get_xlsx**](#get_xlsx) | **GET** /api/2.0/files/file/{fileId}/xlsx | Get form report generation status
 [**is_form_pdf**](#is_form_pdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file
-[**is_form_pdf_third_party**](#is_form_pdf_third_party) | **GET** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file (third-party storage)
 [**lock_file**](#lock_file) | **PUT** /api/2.0/files/file/{fileId}/lock | Lock a file
-[**lock_file_third_party**](#lock_file_third_party) | **PUT** /api/2.0/files/file/{fileId}/lock | Lock a file (third-party storage)
 [**manage_form_filling**](#manage_form_filling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action
 [**open_edit_file**](#open_edit_file) | **GET** /api/2.0/files/file/{fileId}/openedit | Get the editor configuration
-[**open_edit_file_third_party**](#open_edit_file_third_party) | **GET** /api/2.0/files/file/{fileId}/openedit | Get the editor configuration (third-party storage)
 [**restore_file_version**](#restore_file_version) | **POST** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version
-[**restore_file_version_third_party**](#restore_file_version_third_party) | **POST** /api/2.0/files/file/{fileId}/restoreversion | Restore a file version (third-party storage)
 [**save_editing_file_from_form**](#save_editing_file_from_form) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save edited file content
-[**save_editing_file_from_form_third_party**](#save_editing_file_from_form_third_party) | **PUT** /api/2.0/files/file/{fileId}/saveediting | Save edited file content (third-party storage)
 [**save_file_as_pdf**](#save_file_as_pdf) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF
-[**save_file_as_pdf_third_party**](#save_file_as_pdf_third_party) | **POST** /api/2.0/files/file/{id}/saveaspdf | Save a file as PDF (third-party storage)
 [**save_form_role_mapping**](#save_form_role_mapping) | **POST** /api/2.0/files/file/{fileId}/formrolemapping | Save form role mapping
 [**set_custom_filter_tag**](#set_custom_filter_tag) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode
-[**set_custom_filter_tag_third_party**](#set_custom_filter_tag_third_party) | **PUT** /api/2.0/files/file/{fileId}/customfilter | Set the Custom Filter editing mode (third-party storage)
 [**set_encryption_info**](#set_encryption_info) | **PUT** /api/2.0/files/{fileId}/access | Set file encryption information
-[**set_encryption_info_third_party**](#set_encryption_info_third_party) | **PUT** /api/2.0/files/{fileId}/access | Set file encryption information (third-party storage)
 [**set_file_external_link**](#set_file_external_link) | **PUT** /api/2.0/files/file/{id}/links | Set a file external link
-[**set_file_external_link_third_party**](#set_file_external_link_third_party) | **PUT** /api/2.0/files/file/{id}/links | Set a file external link (third-party storage)
 [**set_file_order**](#set_file_order) | **PUT** /api/2.0/files/{fileId}/order | Set file order
-[**set_file_order_third_party**](#set_file_order_third_party) | **PUT** /api/2.0/files/{fileId}/order | Set file order (third-party storage)
 [**set_files_order**](#set_files_order) | **PUT** /api/2.0/files/order | Set order of files
 [**start_edit_file**](#start_edit_file) | **POST** /api/2.0/files/file/{fileId}/startedit | Open an editing session
-[**start_edit_file_third_party**](#start_edit_file_third_party) | **POST** /api/2.0/files/file/{fileId}/startedit | Open an editing session (third-party storage)
 [**start_filling_file**](#start_filling_file) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start filling a form
-[**start_filling_file_third_party**](#start_filling_file_third_party) | **PUT** /api/2.0/files/file/{fileId}/startfilling | Start filling a form (third-party storage)
 [**toggle_file_favorite**](#toggle_file_favorite) | **GET** /api/2.0/files/favorites/{fileId} | Set the file favorite status
-[**toggle_file_favorite_third_party**](#toggle_file_favorite_third_party) | **GET** /api/2.0/files/favorites/{fileId} | Set the file favorite status (third-party storage)
 [**track_edit_file**](#track_edit_file) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | Track an editing session
-[**track_edit_file_third_party**](#track_edit_file_third_party) | **GET** /api/2.0/files/file/{fileId}/trackeditfile | Track an editing session (third-party storage)
 [**update_file**](#update_file) | **PUT** /api/2.0/files/file/{fileId} | Update a file
-[**update_file_third_party**](#update_file_third_party) | **PUT** /api/2.0/files/file/{fileId} | Update a file (third-party storage)
 
 
 # **add_file_to_recent**
@@ -115,11 +79,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **file_id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -160,97 +128,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->add_file_to_recent: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The file as it stands after the entry was recorded |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The calling account cannot read this file |  -  |
-**404** | No file answers to this identifier |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **add_file_to_recent_third_party**
-> ThirdPartyFileWrapper add_file_to_recent_third_party(file_id)
-
-Stamps the file as just used by the calling account and puts it at the top of that account's Recent section,
-then answers with the file as it stands now. The list is personal: no other member sees the change, and the
-file itself is untouched. Read access is enough, so a room member with view-only rights and an invited guest
-may call it, and a visitor who reaches the file through an external link is recorded against that link. A
-caller without read access is refused with 403, and an identifier that resolves to nothing answers 404.
-Repeating the call is safe: the file keeps a single entry and only moves back to the top. The section holds
-the 1000 newest entries of an account and drops the oldest beyond that on its own; folders never enter it, and
-an encrypted file of a private room is answered normally but never recorded. Read the section back with
-`GET api/2.0/files/recent` and drop entries with `DELETE api/2.0/files/recent`; whether it is offered among
-the sections of `GET api/2.0/files/@root` is decided by `PUT api/2.0/files/displayrecent`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-
-    try:
-        # Add a file to Recent (third-party storage)
-        api_response = api_instance.add_file_to_recent_third_party(file_id)
-        print("The response of FilesApi->add_file_to_recent_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->add_file_to_recent_third_party: %s\n" % e)
 ```
 
 
@@ -386,12 +263,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file whose version history is changed. | 
+ **file_id** | **Union[int, str]**| The file whose version history is changed. | 
  **change_history** | [**ChangeHistory**](ChangeHistory.md)| The change to make to the revision group. | 
 
 ### Return type
 
 [**FileArrayWrapper**](FileArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyFileArrayWrapper**](ThirdPartyFileArrayWrapper.md).
 
 ### Authorization
 
@@ -458,99 +339,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **change_version_history_third_party**
-> ThirdPartyFileArrayWrapper change_version_history_third_party(file_id, change_history)
-
-Closes or reopens a revision group in the version history of a file and answers with every stored version of
-that file, newest first. With `continueVersion=false` the named version is completed: its content is stored
-again as a fresh version that opens a new revision group, so the editing that follows no longer extends the
-previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so
-the next save continues that revision instead of becoming a version of its own; a file that has only one group
-is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history
-of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator
-rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.
-The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session
-or is kept in a connected third-party storage is refused.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file whose version history is changed. | 
- **change_history** | [**ChangeHistory**](ChangeHistory.md)| The change to make to the revision group. | 
-
-### Return type
-
-[**ThirdPartyFileArrayWrapper**](ThirdPartyFileArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.change_history import ChangeHistory
-from docspace_api_sdk.models.third_party_file_array_wrapper import ThirdPartyFileArrayWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file whose version history is changed.
-    change_history = docspace_api_sdk.ChangeHistory() # ChangeHistory | The change to make to the revision group.
-
-    try:
-        # Change version history (third-party storage)
-        api_response = api_instance.change_version_history_third_party(file_id, change_history)
-        print("The response of FilesApi->change_version_history_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->change_version_history_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The versions of the file after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not change the version history of the file |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **check_fill_form_draft**
 > StringWrapper check_fill_form_draft(file_id, check_fill_form_draft)
 
@@ -575,12 +363,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | 
+ **file_id** | **Union[int, str]**| The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | 
  **check_fill_form_draft** | [**CheckFillFormDraft**](CheckFillFormDraft.md)| The revision of the form to open and what the caller intends to do with it. | 
 
 ### Return type
 
 [**StringWrapper**](StringWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -646,101 +438,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **check_fill_form_draft_third_party**
-> StringWrapper check_fill_form_draft_third_party(file_id, check_fill_form_draft)
-
-Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal
-draft that filling needs. The form has to live in a form-filling room and filling has to be started for it
-with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling
-has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form
-itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into
-the filling flow, and a holder of an external link may call it without signing in, while a caller with neither
-a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into
-the room's in-progress folder under the caller's name, clears the new-item badge, closes the editing session
-of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call
-naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL
-string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor
-configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with
-403, and one that does not exist is answered as missing.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | 
- **check_fill_form_draft** | [**CheckFillFormDraft**](CheckFillFormDraft.md)| The revision of the form to open and what the caller intends to do with it. | 
-
-### Return type
-
-[**StringWrapper**](StringWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.check_fill_form_draft import CheckFillFormDraft
-from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-    check_fill_form_draft = docspace_api_sdk.CheckFillFormDraft() # CheckFillFormDraft | The revision of the form to open and what the caller intends to do with it.
-
-    try:
-        # Open a form draft for filling (third-party storage)
-        api_response = api_instance.check_fill_form_draft_third_party(file_id, check_fill_form_draft)
-        print("The response of FilesApi->check_fill_form_draft_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->check_fill_form_draft_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The editor address to open, with an optional notice fragment |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot open the form, or asked for a past revision without history access |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **copy_file_as**
 > FileEntryBaseWrapper copy_file_as(file_id, copy_as_json_element)
 
@@ -762,12 +459,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file to copy. | 
+ **file_id** | **Union[int, str]**| The file to copy. | 
  **copy_as_json_element** | [**CopyAsJsonElement**](CopyAsJsonElement.md)| The title, the destination and the conversion options of the copy. | 
 
 ### Return type
 
 [**FileEntryBaseWrapper**](FileEntryBaseWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -835,100 +536,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **copy_file_as_third_party**
-> FileEntryBaseWrapper copy_file_as_third_party(file_id, copy_as_json_element)
-
-Copies one file into another folder under a new title, converting its content when the new title names a
-different format, and answers with the copy that was created. The extension of `destTitle` decides what
-happens: the same extension as the source copies the bytes as they are, a different one has the document
-service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source
-file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a
-string for a folder in a connected third-party storage; anything else is answered with an empty body and
-nothing is copied. The caller needs read access to the source file and the right to create files in the
-destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a
-format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another
-copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file to copy. | 
- **copy_as_json_element** | [**CopyAsJsonElement**](CopyAsJsonElement.md)| The title, the destination and the conversion options of the copy. | 
-
-### Return type
-
-[**FileEntryBaseWrapper**](FileEntryBaseWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.copy_as_json_element import CopyAsJsonElement
-from docspace_api_sdk.models.file_entry_base_wrapper import FileEntryBaseWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file to copy.
-    copy_as_json_element = docspace_api_sdk.CopyAsJsonElement() # CopyAsJsonElement | The title, the destination and the conversion options of the copy.
-
-    try:
-        # Copy a file (third-party storage)
-        api_response = api_instance.copy_file_as_third_party(file_id, copy_as_json_element)
-        print("The response of FilesApi->copy_file_as_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->copy_file_as_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The copy that was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The content cannot be converted into the format of the new title |  -  |
-**403** | The caller may not read the file or may not create files in the destination folder |  -  |
-**404** | The file or the destination folder does not exist |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **create_edit_session**
 > ChunkedUploadSessionResponseWrapperWrapper create_edit_session(file_id, file_size=file_size)
 
@@ -950,12 +557,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file whose content the session will replace; take the id from a folder listing or from the file itself. | 
+ **file_id** | **Union[int, str]**| The file whose content the session will replace; take the id from a folder listing or from the file itself. | 
  **file_size** | **int**| The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part. | [optional] 
 
 ### Return type
 
 [**ChunkedUploadSessionResponseWrapperWrapper**](ChunkedUploadSessionResponseWrapperWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md).
 
 ### Authorization
 
@@ -1021,98 +632,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_edit_session_third_party**
-> ThirdPartyChunkedUploadSessionResponseWrapperWrapper create_edit_session_third_party(file_id, file_size=file_size)
-
-Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a
-document. The answer carries the session id the later calls quote, the address of the standalone chunk
-handler, the expiry and the reserved size, and nothing is written until the parts reach
-`POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with
-`PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.
-Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current
-one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be
-allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader
-and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit
-for chunked uploads is refused before the session is created.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file whose content the session will replace; take the id from a folder listing or from the file itself. | 
- **file_size** | **int**| The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part. | [optional] 
-
-### Return type
-
-[**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_chunked_upload_session_response_wrapper_wrapper import ThirdPartyChunkedUploadSessionResponseWrapperWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file whose content the session will replace; take the id from a folder listing or from the file itself.
-    file_size = 1024 # int | The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part. (optional)
-
-    try:
-        # Create the editing session (third-party storage)
-        api_response = api_instance.create_edit_session_third_party(file_id, file_size=file_size)
-        print("The response of FilesApi->create_edit_session_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->create_edit_session_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The created editing session, wrapped in the success envelope |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot edit this file |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **create_file**
 > FileWrapper create_file(folder_id, create_file_json_element)
 
@@ -1135,12 +654,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The folder the file is created in. | 
+ **folder_id** | **Union[int, str]**| The folder the file is created in. | 
  **create_file_json_element** | [**CreateFileJsonElement**](CreateFileJsonElement.md)| The title of the new file and the source of its content. | 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -1196,100 +719,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The created file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_file_third_party**
-> ThirdPartyFileWrapper create_file_third_party(folder_id, create_file_json_element)
-
-Creates a file in the folder named in the route and answers with the stored file. The extension in the title
-decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the
-portal's own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension
-and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title
-verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`
-copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a
-number for a file in the portal, a string for one in a connected third-party storage - and with neither of
-them the portal's blank template for that format and the caller's language is used. The caller needs the right
-to create files in the folder, and the room roots, Archive and the template sections are refused even to an
-admin. The call is mutating and not idempotent. To create the file in the caller's own section use
-`POST api/2.0/files/@my/file`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **folder_id** | **str**| The folder the file is created in. | 
- **create_file_json_element** | [**CreateFileJsonElement**](CreateFileJsonElement.md)| The title of the new file and the source of its content. | 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.create_file_json_element import CreateFileJsonElement
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    folder_id = '1' # str | The folder the file is created in.
-    create_file_json_element = docspace_api_sdk.CreateFileJsonElement() # CreateFileJsonElement | The title of the new file and the source of its content.
-
-    try:
-        # Create a file (third-party storage)
-        api_response = api_instance.create_file_third_party(folder_id, create_file_json_element)
-        print("The response of FilesApi->create_file_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->create_file_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The created file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The file created in the folder: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1381,7 +811,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The created file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The file created in My documents: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1412,12 +842,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The file the link points at. | 
+ **id** | **Union[int, str]**| The file the link points at. | 
  **file_link_request** | [**FileLinkRequest**](FileLinkRequest.md)| The settings of the link. They are applied in full, so a field left out is reset rather than kept. | 
 
 ### Return type
 
 [**FileShareWrapper**](FileShareWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -1485,100 +919,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_file_primary_external_link_third_party**
-> FileShareWrapper create_file_primary_external_link_third_party(id, file_link_request)
-
-Answers with the primary external link of a file, creating it on the first call and returning the one that
-already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does
-not reconfigure the existing link, and changing one is the business of `PUT api/2.0/files/file/{id}/links`.
-The parameters therefore only shape the link at the moment it is born - `access` its rights, `expirationDate`
-its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,
-`internal` whether only signed-in members may follow it, `denyDownload` whether the content may only be
-viewed, and `password` a secret to be asked for. A PDF form gets the rights it needs for filling out whatever
-was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller
-needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is
-not recreated but answered with 404. Read the address from `sharedTo.shareLink`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The file the link points at. | 
- **file_link_request** | [**FileLinkRequest**](FileLinkRequest.md)| The settings of the link. They are applied in full, so a field left out is reset rather than kept. | 
-
-### Return type
-
-[**FileShareWrapper**](FileShareWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.file_link_request import FileLinkRequest
-from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    id = '1' # str | The file the link points at.
-    file_link_request = docspace_api_sdk.FileLinkRequest() # FileLinkRequest | The settings of the link. They are applied in full, so a field left out is reset rather than kept.
-
-    try:
-        # Create the file primary external link (third-party storage)
-        api_response = api_instance.create_file_primary_external_link_third_party(id, file_link_request)
-        print("The response of FilesApi->create_file_primary_external_link_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->create_file_primary_external_link_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The primary external link of the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not share the file |  -  |
-**404** | The file does not exist, or its primary link was revoked |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **create_html_file**
 > FileWrapper create_html_file(folder_id, create_text_or_html_file)
 
@@ -1600,12 +940,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The folder the file is created in. | 
+ **folder_id** | **Union[int, str]**| The folder the file is created in. | 
  **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)| The title, the content and the collision behaviour of the new file. | 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -1648,99 +992,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->create_html_file: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The created or updated HTML file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not create files in this folder |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_html_file_third_party**
-> ThirdPartyFileWrapper create_html_file_third_party(folder_id, create_text_or_html_file)
-
-Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers
-with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a
-request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round
-than its name reads: with `true` the file that already carries this title is updated, the markup replacing its
-content and a version appearing in its history, while with `false`, which is also the default, another file is
-created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by
-the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new
-file appears beside it instead. The caller needs the right to create files in the folder and is otherwise
-refused with 403. The call is mutating. To create the file in the caller's own section use
-`POST api/2.0/files/@my/html`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **folder_id** | **str**| The folder the file is created in. | 
- **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)| The title, the content and the collision behaviour of the new file. | 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.create_text_or_html_file import CreateTextOrHtmlFile
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    folder_id = '1' # str | The folder the file is created in.
-    create_text_or_html_file = docspace_api_sdk.CreateTextOrHtmlFile() # CreateTextOrHtmlFile | The title, the content and the collision behaviour of the new file.
-
-    try:
-        # Create an HTML file (third-party storage)
-        api_response = api_instance.create_html_file_third_party(folder_id, create_text_or_html_file)
-        print("The response of FilesApi->create_html_file_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->create_html_file_third_party: %s\n" % e)
 ```
 
 
@@ -1878,12 +1129,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **int**| The folder the file is created in. | 
+ **folder_id** | **Union[int, str]**| The folder the file is created in. | 
  **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)| The title, the content and the collision behaviour of the new file. | 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -1926,98 +1181,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->create_text_file: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The created or updated text file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_text_file_third_party**
-> ThirdPartyFileWrapper create_text_file_third_party(folder_id, create_text_or_html_file)
-
-Creates a text file in the folder named in the route out of the text passed as the content, and answers with
-the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as
-soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an
-HTML file; the extension is added to the title unless the title already ends with it. A request carrying no
-content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:
-with `true` the file that already carries this title is updated and a version appears in its history, while
-with `false`, which is also the default, another file is created and its title made unique, as in Notes
-(1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file
-appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To
-create the file in the caller's own section use `POST api/2.0/files/@my/text`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **folder_id** | **str**| The folder the file is created in. | 
- **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)| The title, the content and the collision behaviour of the new file. | 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.create_text_or_html_file import CreateTextOrHtmlFile
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    folder_id = '1' # str | The folder the file is created in.
-    create_text_or_html_file = docspace_api_sdk.CreateTextOrHtmlFile() # CreateTextOrHtmlFile | The title, the content and the collision behaviour of the new file.
-
-    try:
-        # Create a text file (third-party storage)
-        api_response = api_instance.create_text_file_third_party(folder_id, create_text_or_html_file)
-        print("The response of FilesApi->create_text_file_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->create_text_file_third_party: %s\n" % e)
 ```
 
 
@@ -2242,13 +1405,17 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file to delete. | 
+ **file_id** | **Union[int, str]**| The file to delete. | 
  **delete** | [**Delete**](Delete.md)| When and how the file is deleted. | 
  **return_single_operation** | **bool**| Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] 
 
 ### Return type
 
 [**FileOperationArrayWrapper**](FileOperationArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -2292,101 +1459,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->delete_file: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The file operations of the caller, including the deletion just queued |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_file_third_party**
-> FileOperationArrayWrapper delete_file_third_party(file_id, delete, return_single_operation=return_single_operation)
-
-Queues the deletion of one file and answers with the caller's file operations, the one just created among
-them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation
-reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved
-to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,
-where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing
-session on the file has ended, so a file somebody is working on is not pulled away.
-`returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of
-the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as
-room manager and a content creator acting on their own file have; editing access alone, read access, a guest
-and a member without access to the room are all refused. The call is destructive. To delete several items at
-once use `PUT api/2.0/files/fileops/delete`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file to delete. | 
- **delete** | [**Delete**](Delete.md)| When and how the file is deleted. | 
- **return_single_operation** | **bool**| Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] 
-
-### Return type
-
-[**FileOperationArrayWrapper**](FileOperationArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.delete import Delete
-from docspace_api_sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file to delete.
-    delete = docspace_api_sdk.Delete() # Delete | When and how the file is deleted.
-    return_single_operation = false # bool | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional)
-
-    try:
-        # Delete a file (third-party storage)
-        api_response = api_instance.delete_file_third_party(file_id, delete, return_single_operation=return_single_operation)
-        print("The response of FilesApi->delete_file_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->delete_file_third_party: %s\n" % e)
 ```
 
 
@@ -2696,11 +1768,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **file_id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Return type
 
 [**FormRoleArrayWrapper**](FormRoleArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -2766,97 +1842,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_all_form_roles_third_party**
-> FormRoleArrayWrapper get_all_form_roles_third_party(file_id)
-
-Returns the roles of a PDF form together with the state each of them is in, which is how a client shows who is
-expected to fill the form next. Every entry carries the name of the role, the account holding it, the sequence
-number that decides the turn and a status: the roles of earlier turns are reported as complete, those of later
-turns as waiting, and the role whose turn it is as either yours to fill or already in progress, depending on
-whether that person has opened the form; when the filling has been stopped, the role it was interrupted at is
-reported as stopped instead. A form whose filling was never started answers with an empty list. The file has
-to be a PDF form, or the completed copy of one, and anything else is refused. Read access to the form is
-enough, so every member of the room sees the roles, while a caller without access to the room and a guest
-outside it are refused with 403 and an unknown file is answered with 404. The operation is read-only. The
-assignment itself is written by `POST api/2.0/files/file/{fileId}/formrolemapping`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Return type
-
-[**FormRoleArrayWrapper**](FormRoleArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.form_role_array_wrapper import FormRoleArrayWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-
-    try:
-        # Get form roles (third-party storage)
-        api_response = api_instance.get_all_form_roles_third_party(file_id)
-        print("The response of FilesApi->get_all_form_roles_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_all_form_roles_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The roles of the form with the state of each |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller has no read access to the form |  -  |
-**404** | No file with this identifier exists |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_edit_diff_url**
 > EditHistoryDataWrapper get_edit_diff_url(file_id, version=version)
 
@@ -2879,12 +1864,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file whose changes are read. | 
+ **file_id** | **Union[int, str]**| The file whose changes are read. | 
  **version** | **int**| The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version. | [optional] 
 
 ### Return type
 
 [**EditHistoryDataWrapper**](EditHistoryDataWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -2948,97 +1937,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_edit_diff_url_third_party**
-> EditHistoryDataWrapper get_edit_diff_url_third_party(file_id, version=version)
-
-Answers with everything an editor needs in order to show what changed in one version of a file: the address of
-the version itself, its document key and format, the address of the recorded changes, the same trio for the
-version it is compared against, and a token that signs the whole answer for the document service. `version`
-picks the version, and 0, the default, means the current one. `changesUrl` and `previous` are filled in only
-when the portal has stored the changes of that version, which is the case for versions written by an editing
-session; for a version uploaded as a whole they stay empty and only the file itself can be shown. The
-addresses are meant for the document service and carry their own time-limited keys. The caller needs the right
-to read the history of the file, which editing access and above grant: read-only access, commenting access, a
-guest and an anonymous caller are all refused, as is a file kept in a connected third-party storage. The
-operation is read-only. For the list of versions themselves use
-`GET api/2.0/files/file/{fileId}/edit/history`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file whose changes are read. | 
- **version** | **int**| The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version. | [optional] 
-
-### Return type
-
-[**EditHistoryDataWrapper**](EditHistoryDataWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.edit_history_data_wrapper import EditHistoryDataWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file whose changes are read.
-    version = 1 # int | The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version. (optional)
-
-    try:
-        # Get changes URL (third-party storage)
-        api_response = api_instance.get_edit_diff_url_third_party(file_id, version=version)
-        print("The response of FilesApi->get_edit_diff_url_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_edit_diff_url_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The addresses and keys the editor needs to show the changes |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_edit_history**
 > EditHistoryArrayWrapper get_edit_history(file_id)
 
@@ -3061,11 +1959,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **file_id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Return type
 
 [**EditHistoryArrayWrapper**](EditHistoryArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -3128,95 +2030,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_edit_history_third_party**
-> EditHistoryArrayWrapper get_edit_history_third_party(file_id)
-
-Returns the editing revisions of a file, oldest first, as the document service understands them: each entry
-carries the version and the revision group it belongs to, the account that saved it, when it was saved, the
-comment left on it, the document key of that revision and, where the portal stored them, the changes it
-introduced. Only the revisions a person saved are listed - the autosaves an editing session writes in between
-are left out, which is what separates this list from the plain version list of
-`GET api/2.0/files/file/{fileId}/history`. The caller needs the right to read the history of the file, which
-editing access and above grant: commenting access, read-only access, a guest, a member without access to the
-room and an anonymous caller are all refused, and so is a file kept in a connected third-party storage, which
-keeps no history in the portal. The operation is read-only. Take one entry to
-`GET api/2.0/files/file/{fileId}/edit/diff` to show its changes, or to
-`POST api/2.0/files/file/{fileId}/restoreversion` to bring it back.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Return type
-
-[**EditHistoryArrayWrapper**](EditHistoryArrayWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.edit_history_array_wrapper import EditHistoryArrayWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-
-    try:
-        # Get version history (third-party storage)
-        api_response = api_instance.get_edit_history_third_party(file_id)
-        print("The response of FilesApi->get_edit_history_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_edit_history_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The editing revisions of the file, oldest first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_encryption_info**
 > FileEncryptionInfoWrapper get_encryption_info(file_id)
 
@@ -3237,11 +2050,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any. | 
+ **file_id** | **Union[int, str]**| The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any. | 
 
 ### Return type
 
 [**FileEncryptionInfoWrapper**](FileEncryptionInfoWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -3282,96 +2099,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->get_encryption_info: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The key pairs of the caller and the file keys issued to them |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The file cannot carry encryption keys |  -  |
-**403** | The caller has no read access to the file |  -  |
-**404** | The file does not exist |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_encryption_info_third_party**
-> FileEncryptionInfoWrapper get_encryption_info_third_party(file_id)
-
-Returns what the caller needs in order to decrypt one file of an end-to-end encrypted private room: `userKeys`
-holds the key pairs of the calling account, the private half of each of them encrypted with that person's own
-password, and `fileKeys` holds the file keys that were issued to this account for this file, each naming the
-public key it was encrypted for. Only the keys of the calling account are ever returned, never those of the
-other people in the room. An account that holds no key pair yet, and a file no key was issued for, answer with
-empty lists rather than with an error, so an empty `fileKeys` means the caller cannot open that file rather
-than that the file is unencrypted. The caller needs read access to the file; a caller without it, and a file
-that does not exist, are both refused with 403. The operation is read-only. Keys are issued by
-`PUT api/2.0/files/{fileId}/access`, and the personal key pairs are managed under `api/2.0/privacyroom/keys`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any. | 
-
-### Return type
-
-[**FileEncryptionInfoWrapper**](FileEncryptionInfoWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.file_encryption_info_wrapper import FileEncryptionInfoWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = 'file_id_example' # str | The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any.
-
-    try:
-        # Get file encryption information (third-party storage)
-        api_response = api_instance.get_encryption_info_third_party(file_id)
-        print("The response of FilesApi->get_encryption_info_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_encryption_info_third_party: %s\n" % e)
 ```
 
 
@@ -3516,12 +2243,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file to read. | 
+ **file_id** | **Union[int, str]**| The file to read. | 
  **version** | **int**| The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version. | [optional] 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -3585,95 +2316,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_file_info_third_party**
-> ThirdPartyFileWrapper get_file_info_third_party(file_id, version=version)
-
-Returns one file as the portal stores it, together with the state it has for the caller: the title, the folder
-it lies in, the size, the current version and revision group, the addresses for viewing and editing it, the
-actions the caller is allowed to perform on it, the sharing rights it was reached through, and the thumbnail
-state. `version` picks an older version instead of the current one; the default of -1 means the current
-version. When the file belongs to another person's own section and the caller cannot read the folder holding
-it, the answer reports the Shared with me section as its folder, so that a client can show it in a place the
-caller can actually open. The caller needs read access to the file, which any member of the room it lies in
-has; a caller without access to the room is refused and an anonymous caller without an external share link is
-rejected. The operation is read-only. For every version at once use `GET api/2.0/files/file/{fileId}/history`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file to read. | 
- **version** | **int**| The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version. | [optional] 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file to read.
-    version = 1 # int | The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version. (optional)
-
-    try:
-        # Get file information (third-party storage)
-        api_response = api_instance.get_file_info_third_party(file_id, version=version)
-        print("The response of FilesApi->get_file_info_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_file_info_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The file as it is stored, with the state it has for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_file_links**
 > FileShareArrayWrapper get_file_links(id, count=count, start_index=start_index)
 
@@ -3695,13 +2337,17 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
  **count** | **int**| How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] 
  **start_index** | **int**| How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] 
 
 ### Return type
 
 [**FileShareArrayWrapper**](FileShareArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -3767,99 +2413,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_file_links_third_party**
-> FileShareArrayWrapper get_file_links_third_party(id, count=count, start_index=start_index)
-
-Lists the external links of a file, each with its identifier, title, address, rights, expiration date and
-download restriction. `startIndex` and `count` page through the list, and the total number of links is
-reported in the response headers rather than in the body. A file that has never been shared by link answers
-with an empty list; the primary link is part of this list once it exists, and it is the only one that is
-created on demand, by `GET api/2.0/files/file/{id}/link`. For a PDF form kept in a form-filling room the link
-of the room is appended to the answer, because that is the address through which the form is filled out. The
-caller needs the right to share the file, which its creator, the room admin and a DocSpace admin acting as
-room manager have; a caller without access to the file is refused and an anonymous caller is rejected. The
-operation is read-only. Take an identifier from here to `PUT api/2.0/files/file/{id}/links` to change or
-remove that link.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
- **count** | **int**| How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] 
- **start_index** | **int**| How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] 
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-    count = 25 # int | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. (optional)
-    start_index = 0 # int | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. (optional)
-
-    try:
-        # Get file external links (third-party storage)
-        api_response = api_instance.get_file_links_third_party(id, count=count, start_index=start_index)
-        print("The response of FilesApi->get_file_links_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_file_links_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The external links of the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_file_primary_external_link**
 > FileShareWrapper get_file_primary_external_link(id, count=count, start_index=start_index)
 
@@ -3881,13 +2434,17 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
  **count** | **int**| How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] 
  **start_index** | **int**| How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] 
 
 ### Return type
 
 [**FileShareWrapper**](FileShareWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -3954,100 +2511,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_file_primary_external_link_third_party**
-> FileShareWrapper get_file_primary_external_link_third_party(id, count=count, start_index=start_index)
-
-Answers with the primary external link of a file - the one the Copy link action of a client hands out - with
-its address in `sharedTo.shareLink`, its rights in `access`, and its expiration date, password flag and
-download restriction beside them. The link is created on the first read if the file has none, with read
-rights, no password and no expiry, so this operation mutates on that first call and is a plain read
-afterwards; repeated calls answer with the same link identifier. A PDF form in a form-filling room is answered
-with the link of that room, carried over to the form. The caller needs the right to share the file, which its
-creator, the room admin and a DocSpace admin acting as room manager have; a caller without access to the file
-is refused with 403 and an anonymous caller is rejected, while a link that was deliberately revoked is
-answered with 404 rather than being recreated. The custom links of the same file, the primary one excepted,
-are listed by `GET api/2.0/files/file/{id}/links`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
- **count** | **int**| How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. | [optional] 
- **start_index** | **int**| How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | [optional] 
-
-### Return type
-
-[**FileShareWrapper**](FileShareWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-    count = 25 # int | How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it. (optional)
-    start_index = 0 # int | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. (optional)
-
-    try:
-        # Get the file primary external link (third-party storage)
-        api_response = api_instance.get_file_primary_external_link_third_party(id, count=count, start_index=start_index)
-        print("The response of FilesApi->get_file_primary_external_link_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_file_primary_external_link_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The primary external link of the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not share the file |  -  |
-**404** | The file does not exist, or its primary link was revoked |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_file_version_info**
 > FileArrayWrapper get_file_version_info(file_id)
 
@@ -4069,11 +2532,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **file_id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Return type
 
 [**FileArrayWrapper**](FileArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyFileArrayWrapper**](ThirdPartyFileArrayWrapper.md).
 
 ### Authorization
 
@@ -4114,94 +2581,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->get_file_version_info: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Every stored version of the file, newest first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_file_version_info_third_party**
-> ThirdPartyFileArrayWrapper get_file_version_info_third_party(file_id)
-
-Returns every stored version of a file, newest first, each of them shaped like the file itself - the version
-and the revision group it belongs to, the size, the comment saved with it, the addresses for viewing it, and
-the thumbnail and lock state. Unlike the editing revisions of `GET api/2.0/files/file/{fileId}/edit/history`,
-this list also holds the autosave revisions an editing session writes, so it is the fuller of the two, and it
-is the shape a client already knows how to render. The caller needs the right to read the history of the file,
-which is a stricter rule than reading the file: in a room only its managers and content creators may read the
-history, and in a personal section editing access is enough, so a member with read access to somebody else's
-file, and even a DocSpace admin in that position, are refused, as is an anonymous caller. The operation is
-read-only. To restore one of the versions use `POST api/2.0/files/file/{fileId}/restoreversion`, and to close
-or reopen a revision group `PUT api/2.0/files/file/{fileId}/history`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Return type
-
-[**ThirdPartyFileArrayWrapper**](ThirdPartyFileArrayWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_file_array_wrapper import ThirdPartyFileArrayWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-
-    try:
-        # Get file versions (third-party storage)
-        api_response = api_instance.get_file_version_info_third_party(file_id)
-        print("The response of FilesApi->get_file_version_info_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_file_version_info_third_party: %s\n" % e)
 ```
 
 
@@ -4422,11 +2801,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **file_id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Return type
 
 [**FileLinkWrapper**](FileLinkWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -4490,94 +2873,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_presigned_file_uri_third_party**
-> FileLinkWrapper get_presigned_file_uri_third_party(file_id)
-
-Returns a direct download address for the current content of the file together with the signature token that
-the document service validates, which is what the portal hands over when the editors have to fetch the
-document themselves. The address points at the portal's file stream endpoint and is rewritten to the host the
-document service can reach, so on a deployment where the editors sit behind a private address it is not the
-address a browser should follow. The answer also carries the extension of the stored document, leading dot
-included. The caller needs read access to the file, and an unknown file id is reported as missing. The call
-only reads, and each call mints a fresh address and token rather than reusing the previous one, so the value
-is worth requesting again once a token has expired. For a link meant for a person, a plain address with no
-token to put behind a download button, use `GET api/2.0/files/file/{fileId}/presigneduri` instead.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Return type
-
-[**FileLinkWrapper**](FileLinkWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.file_link_wrapper import FileLinkWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-
-    try:
-        # Get a signed download address (third-party storage)
-        api_response = api_instance.get_presigned_file_uri_third_party(file_id)
-        print("The response of FilesApi->get_presigned_file_uri_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_presigned_file_uri_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The download address of the file with its signature token |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_presigned_uri**
 > StringWrapper get_presigned_uri(file_id)
 
@@ -4599,11 +2894,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **file_id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Return type
 
 [**StringWrapper**](StringWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -4667,95 +2966,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_presigned_uri_third_party**
-> StringWrapper get_presigned_uri_third_party(file_id)
-
-Builds a download address for the current version of a file and answers with it as a plain string. The address
-points at the portal's own file handler and carries the file identifier, the version it was built for and a
-time-limited authentication key, so it can be handed to a downloader that cannot sign in to the portal itself;
-it stops working once that key has expired, and it keeps naming the version that was current when it was built
-rather than following later edits. The caller needs read access to the file: a member of the room it lies in
-gets an address, a caller without access to the room is refused, an unknown identifier is answered as not
-found and an anonymous caller is rejected. The operation is read-only and safe to repeat, though every call
-mints a new key. Nothing is downloaded here - follow the address to fetch the bytes. For the variant the
-document service signs, which comes back as an object with the file type and a token, use
-`GET api/2.0/files/file/{fileId}/presigned`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Return type
-
-[**StringWrapper**](StringWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-
-    try:
-        # Get file download link (third-party storage)
-        api_response = api_instance.get_presigned_uri_third_party(file_id)
-        print("The response of FilesApi->get_presigned_uri_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_presigned_uri_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The download address of the current file version |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_protected_file_users**
 > MentionWrapperArrayWrapper get_protected_file_users(file_id)
 
@@ -4775,11 +2985,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **file_id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Return type
 
 [**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -4820,93 +3034,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->get_protected_file_users: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The users the file is shared with, ordered by display name |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_protected_file_users_third_party**
-> MentionWrapperArrayWrapper get_protected_file_users_third_party(file_id)
-
-Lists the users the file is shared with, which is what a client offers when the author protects a document and
-picks who may still edit it. The list is built from the whole access list of the file: every entry that is not
-an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left
-out, ordered by display name. Access inherited from the room counts, so a member who never received a share on
-the file itself is listed too. A file kept in the legacy project storage always answers with an empty list
-rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with
-nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For
-the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Return type
-
-[**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-
-    try:
-        # Get users for document protection (third-party storage)
-        api_response = api_instance.get_protected_file_users_third_party(file_id)
-        print("The response of FilesApi->get_protected_file_users_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->get_protected_file_users_third_party: %s\n" % e)
 ```
 
 
@@ -5128,11 +3255,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **file_id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
 
 ### Return type
 
 [**BooleanWrapper**](BooleanWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -5196,94 +3327,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **is_form_pdf_third_party**
-> BooleanWrapper is_form_pdf_third_party(file_id)
-
-Tells whether a file is a PDF form that can be filled out in the portal, and answers with a single boolean.
-The check is by content, not by extension: the beginning of the file is read and the answer is `true` only
-when it carries the marker the editors write into the forms they produce, so an ordinary PDF, and a PDF form
-made in other software, both answer `false`. A file whose name is not a PDF at all answers `false` without
-being read. Use it before offering the form-filling operations on a file, because a document that answers
-`false` cannot be started for filling. The caller needs read access to the file, and read access is enough - a
-member of the room with read-only rights gets the answer; a caller without access to the room is refused and
-an anonymous caller is rejected. The operation is read-only and idempotent. It says nothing about the state of
-the filling - for that read `GET api/2.0/files/file/{fileId}/formroles`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
-
-### Return type
-
-[**BooleanWrapper**](BooleanWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-
-    try:
-        # Check the PDF file (third-party storage)
-        api_response = api_instance.is_form_pdf_third_party(file_id)
-        print("The response of FilesApi->is_form_pdf_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->is_form_pdf_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | True when the file is a PDF form made in the editors, false otherwise |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **lock_file**
 > FileWrapper lock_file(file_id, lock_file_parameters)
 
@@ -5305,12 +3348,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file to lock or unlock. | 
+ **file_id** | **Union[int, str]**| The file to lock or unlock. | 
  **lock_file_parameters** | [**LockFileParameters**](LockFileParameters.md)| The lock state to reach. | 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -5353,98 +3400,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->lock_file: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The file with its lock state as it now stands |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **lock_file_third_party**
-> ThirdPartyFileWrapper lock_file_third_party(file_id, lock_file_parameters)
-
-Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now
-stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment
-is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for
-everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a
-note about the unlocking is appended to the current version comment, unless the file lives in a connected
-third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and
-still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller
-needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member
-with content-creator rights have; a member without access to the room and a guest are refused, and so is a
-file in Trash. A lock set by somebody else can only be released by a room manager.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file to lock or unlock. | 
- **lock_file_parameters** | [**LockFileParameters**](LockFileParameters.md)| The lock state to reach. | 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.lock_file_parameters import LockFileParameters
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file to lock or unlock.
-    lock_file_parameters = docspace_api_sdk.LockFileParameters() # LockFileParameters | The lock state to reach.
-
-    try:
-        # Lock a file (third-party storage)
-        api_response = api_instance.lock_file_third_party(file_id, lock_file_parameters)
-        print("The response of FilesApi->lock_file_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->lock_file_third_party: %s\n" % e)
 ```
 
 
@@ -5581,7 +3536,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`. | 
+ **file_id** | **Union[int, str]**| The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`. | 
  **version** | **int**| Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. | [optional] 
  **view** | **bool**| Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller's  rights and the room the file lies in allow. | [optional] 
  **editor_type** | [**EditorType**](.md)| Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. | [optional] 
@@ -5591,6 +3546,10 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ConfigurationWrapper**](ConfigurationWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyConfigurationWrapper**](ThirdPartyConfigurationWrapper.md).
 
 ### Authorization
 
@@ -5660,107 +3619,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **open_edit_file_third_party**
-> ThirdPartyConfigurationWrapper open_edit_file_third_party(file_id, version=version, view=view, editor_type=editor_type, edit=edit, fill=fill)
-
-Builds everything an editor client needs to open the file: the document descriptor with its download address,
-title, type and document key, the editor configuration with the mode, the caller's permissions, the user and
-the customization, the callback the editors report back to, and the signature token the document service
-validates. `version` opens one entry of the file history and requires access to that history; left out, the
-current revision is opened. `view`, `edit` and `fill` say what the client intends to do, and `editorType`
-picks the desktop, mobile or embedded layout. For a PDF form the room decides the outcome and may overrule the
-request: a form-filling room, a virtual data room, a public room and a user folder each produce their own
-mode, and a form opened from the templates folder is read-only and, outside the mobile layout, framed as
-embedded. When the portal is over its storage quota the configuration comes back read-only with the exceeded
-scope named. In a private room the caller's encryption keys are added to the editor configuration. Payment is
-not required and an anonymous caller opens through an external link.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`. | 
- **version** | **int**| Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. | [optional] 
- **view** | **bool**| Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller's  rights and the room the file lies in allow. | [optional] 
- **editor_type** | [**EditorType**](.md)| Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. | [optional] 
- **edit** | **bool**| Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. | [optional] 
- **fill** | **bool**| Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. | [optional] 
-
-### Return type
-
-[**ThirdPartyConfigurationWrapper**](ThirdPartyConfigurationWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.editor_type import EditorType
-from docspace_api_sdk.models.third_party_configuration_wrapper import ThirdPartyConfigurationWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`.
-    version = 1 # int | Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. (optional)
-    view = false # bool | Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller's  rights and the room the file lies in allow. (optional)
-    editor_type = docspace_api_sdk.EditorType() # EditorType | Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. (optional)
-    edit = false # bool | Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. (optional)
-    fill = false # bool | Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. (optional)
-
-    try:
-        # Get the editor configuration (third-party storage)
-        api_response = api_instance.open_edit_file_third_party(file_id, version=version, view=view, editor_type=editor_type, edit=edit, fill=fill)
-        print("The response of FilesApi->open_edit_file_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->open_edit_file_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The editor configuration for the requested file and mode |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot read the file, or asked for a past version without access to the file history |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **restore_file_version**
 > EditHistoryArrayWrapper restore_file_version(file_id, version=version, url=url)
 
@@ -5782,13 +3640,17 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file whose version is restored. | 
+ **file_id** | **Union[int, str]**| The file whose version is restored. | 
  **version** | **int**| The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one. | [optional] 
  **url** | **str**| The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used. | [optional] 
 
 ### Return type
 
 [**EditHistoryArrayWrapper**](EditHistoryArrayWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -5854,99 +3716,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **restore_file_version_third_party**
-> EditHistoryArrayWrapper restore_file_version_third_party(file_id, version=version, url=url)
-
-Brings an earlier version of a file back and answers with the editing revisions of the file after the restore.
-Nothing is overwritten: the content of the chosen version is stored again as a new version on top of the
-history, carrying a comment that says which version it was reverted to, so the intervening versions stay
-readable. `url` changes the source - with it the content is fetched from that address, which is how the
-document service returns a document with a set of changes rolled back, and the new version records that
-instead. Any links that pointed at drafts of the file are dropped, and the file is marked as new for the other
-people who can read it. `version` has to name an existing version and is refused with 400 when it is missing
-or already the current one. The caller needs the right to edit the history of the file and is otherwise
-refused with 403, an anonymous caller included. The call is mutating and not idempotent. A locked file, one in
-Trash, one being edited, an encrypted one and one kept in a connected third-party storage are all refused.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file whose version is restored. | 
- **version** | **int**| The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one. | [optional] 
- **url** | **str**| The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used. | [optional] 
-
-### Return type
-
-[**EditHistoryArrayWrapper**](EditHistoryArrayWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.edit_history_array_wrapper import EditHistoryArrayWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file whose version is restored.
-    version = 1 # int | The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one. (optional)
-    url = 'https://document-server.example.com/cache/files/conv_1_docx/output.docx' # str | The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used. (optional)
-
-    try:
-        # Restore a file version (third-party storage)
-        api_response = api_instance.restore_file_version_third_party(file_id, version=version, url=url)
-        print("The response of FilesApi->restore_file_version_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->restore_file_version_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The editing revisions of the file after the restore |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The version is missing or is already the current one |  -  |
-**403** | The caller may not change the version history of the file |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **save_editing_file_from_form**
 > FileWrapper save_editing_file_from_form(file_id, download_uri=download_uri, file_extension=file_extension, file=file, forcesave=forcesave)
 
@@ -5969,7 +3738,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it. | 
+ **file_id** | **Union[int, str]**| The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it. | 
  **download_uri** | **str**| An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given. | [optional] 
  **file_extension** | **str**| The format the submitted content is in, with the leading dot, as in `.docx`. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed. | [optional] 
  **file** | **bytes**| The edited content, sent as the `File` part of a `multipart/form-data` body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file. | [optional] 
@@ -5978,6 +3747,10 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -6046,105 +3819,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **save_editing_file_from_form_third_party**
-> ThirdPartyFileWrapper save_editing_file_from_form_third_party(file_id, download_uri=download_uri, file_extension=file_extension, file=file, forcesave=forcesave)
-
-Replaces the content of an existing file with an edited copy and answers with the file as it now stands. The
-content is the `File` part of a `multipart/form-data` body, and when no such part is sent the raw request body
-is saved instead, so an empty body empties the file. The `DownloadUri` query parameter does not supply content
-here; it is only read for the extension when `FileExtension` is empty. `fileExtension` names the format of the
-content being sent, and when it differs from the stored format the portal converts the content, or keeps it
-under a renamed copy when a third-party storage cannot convert it. The caller needs edit access to the file.
-The call is mutating and not idempotent: an ordinary call adds a version to the file history, while
-`forcesave=true` records an editor autosave, which overwrites the previous autosave revision instead of adding
-another version and leaves a running editing session in place. It is refused with 403 when the file is locked,
-lies in Trash, or is open in an editing session started by somebody else, and an unknown file id is reported
-as missing. For content too large to post in one request use `POST api/2.0/files/file/{fileId}/edit_session`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it. | 
- **download_uri** | **str**| An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given. | [optional] 
- **file_extension** | **str**| The format the submitted content is in, with the leading dot, as in `.docx`. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed. | [optional] 
- **file** | **bytes**| The edited content, sent as the `File` part of a `multipart/form-data` body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file. | [optional] 
- **forcesave** | **bool**| Records the write as an editor autosave: the file keeps its running editing session and the previous autosave  revision is overwritten. Left off, the write closes the solo editing session, is refused while somebody else  has the file open, and adds a version to the history. | [optional] 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it.
-    download_uri = 'https://example.com/file.txt' # str | An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given. (optional)
-    file_extension = 'file_extension_example' # str | The format the submitted content is in, with the leading dot, as in `.docx`. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed. (optional)
-    file = None # bytes | The edited content, sent as the `File` part of a `multipart/form-data` body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file. (optional)
-    forcesave = True # bool | Records the write as an editor autosave: the file keeps its running editing session and the previous autosave  revision is overwritten. Left off, the write closes the solo editing session, is refused while somebody else  has the file open, and adds a version to the history. (optional)
-
-    try:
-        # Save edited file content (third-party storage)
-        api_response = api_instance.save_editing_file_from_form_third_party(file_id, download_uri=download_uri, file_extension=file_extension, file=file, forcesave=forcesave)
-        print("The response of FilesApi->save_editing_file_from_form_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->save_editing_file_from_form_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The file is saved and the stored version is returned |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The file id cannot be resolved to a storage that could accept the content |  -  |
-**403** | The caller cannot edit the file, or it is locked, in Trash, or open in somebody else's editing session |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **save_file_as_pdf**
 > FileWrapper save_file_as_pdf(id, save_as_pdf)
 
@@ -6167,12 +3841,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The file to convert; it is left untouched. | 
+ **id** | **Union[int, str]**| The file to convert; it is left untouched. | 
  **save_as_pdf** | [**SaveAsPdf**](SaveAsPdf.md)| The destination folder and the name of the PDF. | 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` `third_party_save_as_pdf: ThirdPartySaveAsPdf` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -6215,100 +3893,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->save_file_as_pdf: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The PDF file that was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**404** | The source file or the destination folder does not exist |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **save_file_as_pdf_third_party**
-> ThirdPartyFileWrapper save_file_as_pdf_third_party(id, third_party_save_as_pdf)
-
-Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with
-the file that was created. The source is left untouched, so the two files then live side by side. `title`
-names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the
-name of the source with its extension replaced. The conversion is done by the document service while the
-request waits, so the call takes as long as the document needs and answers with the finished file rather than
-with a queue entry. The caller needs read access to the source file and the right to create files in the
-destination folder, and is otherwise refused; a source file or a destination folder that does not exist is
-answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique
-when one of that name is already there. The result is marked as new for the room, and for a form the portal
-recognises it is stored as a PDF form. To convert in place instead use
-`PUT api/2.0/files/file/{fileId}/checkconversion`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The file to convert; it is left untouched. | 
- **third_party_save_as_pdf** | [**ThirdPartySaveAsPdf**](ThirdPartySaveAsPdf.md)| The destination folder and the name of the PDF. | 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.models.third_party_save_as_pdf import ThirdPartySaveAsPdf
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    id = '1' # str | The file to convert; it is left untouched.
-    third_party_save_as_pdf = docspace_api_sdk.ThirdPartySaveAsPdf() # ThirdPartySaveAsPdf | The destination folder and the name of the PDF.
-
-    try:
-        # Save a file as PDF (third-party storage)
-        api_response = api_instance.save_file_as_pdf_third_party(id, third_party_save_as_pdf)
-        print("The response of FilesApi->save_file_as_pdf_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->save_file_as_pdf_third_party: %s\n" % e)
 ```
 
 
@@ -6444,12 +4028,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The spreadsheet whose Custom Filter mode is switched. | 
+ **file_id** | **Union[int, str]**| The spreadsheet whose Custom Filter mode is switched. | 
  **custom_filter_parameters** | [**CustomFilterParameters**](CustomFilterParameters.md)| The Custom Filter state to reach. | 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -6515,98 +4103,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **set_custom_filter_tag_third_party**
-> ThirdPartyFileWrapper set_custom_filter_tag_third_party(file_id, custom_filter_parameters)
-
-Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In
-that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that
-several people can work on the same data without moving the rows under each other; with the mode off,
-filtering is shared again, as everywhere else. Turning it on also drops everybody else out of the running
-editing session, the caller excepted, because the mode has to be established before the sheet is opened. Only
-formats that support the mode are accepted; anything else is rejected as an invalid request. The caller needs
-the right to use the mode in the room, which the room admin and a DocSpace admin acting as room manager have;
-read-only access, a member without access to the room and an anonymous caller are refused. Once the mode has
-been switched on by one person, only that person, a room manager or a DocSpace admin can switch it off again.
-The call is mutating and, called twice with the same value, changes nothing the second time.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The spreadsheet whose Custom Filter mode is switched. | 
- **custom_filter_parameters** | [**CustomFilterParameters**](CustomFilterParameters.md)| The Custom Filter state to reach. | 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.custom_filter_parameters import CustomFilterParameters
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The spreadsheet whose Custom Filter mode is switched.
-    custom_filter_parameters = docspace_api_sdk.CustomFilterParameters() # CustomFilterParameters | The Custom Filter state to reach.
-
-    try:
-        # Set the Custom Filter editing mode (third-party storage)
-        api_response = api_instance.set_custom_filter_tag_third_party(file_id, custom_filter_parameters)
-        print("The response of FilesApi->set_custom_filter_tag_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->set_custom_filter_tag_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The spreadsheet with its Custom Filter state as it now stands |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **set_encryption_info**
 > set_encryption_info(file_id, access_request_key_dto=access_request_key_dto)
 
@@ -6629,12 +4125,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the keys are issued for; it has to lie in a private room. | 
+ **file_id** | **Union[int, str]**| The file the keys are issued for; it has to lie in a private room. | 
  **access_request_key_dto** | [**List[AccessRequestKeyDto]**](AccessRequestKeyDto.md)| One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person's key. | [optional] 
 
 ### Return type
 
 void (empty response body)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -6699,98 +4199,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **set_encryption_info_third_party**
-> set_encryption_info_third_party(file_id, access_request_key_dto=access_request_key_dto)
-
-Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each
-entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key
-itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public
-key that `GET api/2.0/files/file/{fileId}/publickeys` reports for them. The keys of the accounts named in the
-request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for
-a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that
-person's key. The file has to lie in a private room, and every account named in the request has to have read
-access to it. The caller needs read access to the file and the right to create content in that room, which its
-members with editing rights and its admins have; a caller without those rights, a file outside a private room
-and a file that does not exist are all refused with 403. Read the result back with
-`GET api/2.0/files/{fileId}/access`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the keys are issued for; it has to lie in a private room. | 
- **access_request_key_dto** | [**List[AccessRequestKeyDto]**](AccessRequestKeyDto.md)| One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person's key. | [optional] 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.access_request_key_dto import AccessRequestKeyDto
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '12345' # str | The file the keys are issued for; it has to lie in a private room.
-    access_request_key_dto = [docspace_api_sdk.AccessRequestKeyDto()] # List[AccessRequestKeyDto] | One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person's key. (optional)
-
-    try:
-        # Set file encryption information (third-party storage)
-        api_instance.set_encryption_info_third_party(file_id, access_request_key_dto=access_request_key_dto)
-    except Exception as e:
-        print("Exception when calling FilesApi->set_encryption_info_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The file keys were stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not issue keys for this file, or the file is not in a private room |  -  |
-**404** | The file does not exist |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **set_file_external_link**
 > FileShareWrapper set_file_external_link(id, file_link_request)
 
@@ -6812,12 +4220,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The file the link points at. | 
+ **id** | **Union[int, str]**| The file the link points at. | 
  **file_link_request** | [**FileLinkRequest**](FileLinkRequest.md)| The settings of the link. They are applied in full, so a field left out is reset rather than kept. | 
 
 ### Return type
 
 [**FileShareWrapper**](FileShareWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str`.
 
 ### Authorization
 
@@ -6883,98 +4295,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **set_file_external_link_third_party**
-> FileShareWrapper set_file_external_link_third_party(id, file_link_request)
-
-Creates an external link to a file, or changes or revokes an existing one, and answers with the link as it now
-stands. `linkId` decides which: an identifier that is not yet in use, the empty one included, creates a link,
-while the identifier of an existing link rewrites it, so the whole set of parameters is applied every time and
-a field left out is reset rather than kept. `access` carries the rights the link grants, and `access` set to
-the value that denies everything revokes the link instead - the answer is then empty, and a revoked primary
-link is not recreated by a later read. `title` names the link for the people who manage it, `expirationDate`
-limits its lifetime and is refused when it lies more than a few years ahead, `password` asks visitors for a
-secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members alone, and
-`primary=true` makes it the primary link of the file. The caller needs the right to share the file and is
-otherwise refused, an unknown file being answered as not found. The call is mutating.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**| The file the link points at. | 
- **file_link_request** | [**FileLinkRequest**](FileLinkRequest.md)| The settings of the link. They are applied in full, so a field left out is reset rather than kept. | 
-
-### Return type
-
-[**FileShareWrapper**](FileShareWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.file_link_request import FileLinkRequest
-from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    id = '1' # str | The file the link points at.
-    file_link_request = docspace_api_sdk.FileLinkRequest() # FileLinkRequest | The settings of the link. They are applied in full, so a field left out is reset rather than kept.
-
-    try:
-        # Set a file external link (third-party storage)
-        api_response = api_instance.set_file_external_link_third_party(id, file_link_request)
-        print("The response of FilesApi->set_file_external_link_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->set_file_external_link_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The link as it now stands, or nothing when it was revoked |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **set_file_order**
 > FileWrapper set_file_order(file_id, order_request_dto=order_request_dto)
 
@@ -6996,12 +4316,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file to move. | 
+ **file_id** | **Union[int, str]**| The file to move. | 
  **order_request_dto** | [**OrderRequestDto**](OrderRequestDto.md)| The position the file is to take. | [optional] 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -7044,100 +4368,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->set_file_order: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The file with the position it now holds |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not reorder this file |  -  |
-**404** | The file does not exist |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **set_file_order_third_party**
-> ThirdPartyFileWrapper set_file_order_third_party(file_id, order_request_dto=order_request_dto)
-
-Puts a file at a given position inside its folder and answers with the file, its `order` reporting where it
-now stands. Positions count from 1, and the file that held the wanted position, together with everything after
-it, is shifted to make room, so the numbering of a folder stays without gaps; a position beyond the end of the
-folder places the file last. The value may also be sent as a dotted path, as in 1.2.3, in which case only
-its last segment is read. Ordering is what the manual sorting of a room is built on, and it only means
-something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The caller needs
-edit access to the file, which room managers, content creators and members with editing rights have; a member
-acting on somebody else's file, a guest and an anonymous caller are refused with 403, and an unknown file is
-answered with 404. The call is mutating and idempotent. To move several items in one go use
-`PUT api/2.0/files/order`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file to move. | 
- **order_request_dto** | [**OrderRequestDto**](OrderRequestDto.md)| The position the file is to take. | [optional] 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.order_request_dto import OrderRequestDto
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file to move.
-    order_request_dto = docspace_api_sdk.OrderRequestDto() # OrderRequestDto | The position the file is to take. (optional)
-
-    try:
-        # Set file order (third-party storage)
-        api_response = api_instance.set_file_order_third_party(file_id, order_request_dto=order_request_dto)
-        print("The response of FilesApi->set_file_order_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->set_file_order_third_party: %s\n" % e)
 ```
 
 
@@ -7274,12 +4504,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file to open the editing session on. The caller needs edit access to it. | 
+ **file_id** | **Union[int, str]**| The file to open the editing session on. The caller needs edit access to it. | 
  **start_edit** | [**StartEdit**](StartEdit.md)| The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | 
 
 ### Return type
 
 [**StringWrapper**](StringWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -7345,98 +4579,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **start_edit_file_third_party**
-> StringWrapper start_edit_file_third_party(file_id, start_edit)
-
-Opens an editing session on the file and answers with the document key that identifies it, the value an editor
-client passes to the document service in order to join the co-editing session for that exact revision. The
-file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.
-With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of
-the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking
-the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403
-when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an
-anonymous caller whose external link does not grant editing are all refused. The call is mutating and not
-idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling
-that operation with `isFinish=true`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file to open the editing session on. The caller needs edit access to it. | 
- **start_edit** | [**StartEdit**](StartEdit.md)| The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | 
-
-### Return type
-
-[**StringWrapper**](StringWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.start_edit import StartEdit
-from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file to open the editing session on. The caller needs edit access to it.
-    start_edit = docspace_api_sdk.StartEdit() # StartEdit | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
-
-    try:
-        # Open an editing session (third-party storage)
-        api_response = api_instance.start_edit_file_third_party(file_id, start_edit)
-        print("The response of FilesApi->start_edit_file_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->start_edit_file_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The document key of the editing session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot edit the file, or the file is already being edited and the session was claimed alone |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **start_filling_file**
 > FileWrapper start_filling_file(file_id)
 
@@ -7457,11 +4599,15 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result. | 
+ **file_id** | **Union[int, str]**| The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result. | 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -7526,95 +4672,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **start_filling_file_third_party**
-> ThirdPartyFileWrapper start_filling_file_third_party(file_id)
-
-Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal
-stores the filling properties on it - the room it belongs to, its title, the account that started it and the
-id it keeps as the original form - so that later submissions are collected against this form. The file has to
-be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is
-stored. Access follows room membership rather than portal role: a member holding only form-filling access on
-the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they
-can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is
-mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers
-submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result. | 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result.
-
-    try:
-        # Start filling a form (third-party storage)
-        api_response = api_instance.start_filling_file_third_party(file_id)
-        print("The response of FilesApi->start_filling_file_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->start_filling_file_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The form file, with the filling properties now stored on it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller holds only form-filling access on the room, or no access to it at all |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **toggle_file_favorite**
 > BooleanWrapper toggle_file_favorite(file_id, favorite=favorite)
 
@@ -7636,12 +4693,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
+ **file_id** | **Union[int, str]**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
  **favorite** | **bool**| Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it. | [optional] 
 
 ### Return type
 
 [**BooleanWrapper**](BooleanWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -7707,98 +4768,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **toggle_file_favorite_third_party**
-> BooleanWrapper toggle_file_favorite_third_party(file_id, favorite=favorite)
-
-Sets or clears the favorite mark of one file for the calling account: `true` adds the file to the favorites,
-`false` takes it out again. The call changes stored state even though it is a GET, so it is not one to issue
-speculatively; repeating it with the same value changes nothing further. The mark is personal, no other member
-sees it, and the file stays where it is stored. Read access is enough, so a room member with view-only rights
-and a guest may call it. The answer only echoes the value that was asked for: an identifier that resolves to
-nothing and a file the caller cannot read are skipped without a word, an encrypted file of a private room is
-never marked, and the requested value still comes back, so read the outcome from
-`GET api/2.0/files/@favorites` instead. A file moved to the Trash keeps its mark and is left out of that
-listing until it is restored. To mark several entries at once, or to mark folders, use
-`POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. | 
- **favorite** | **bool**| Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it. | [optional] 
-
-### Return type
-
-[**BooleanWrapper**](BooleanWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '10' # str | The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-    favorite = true # bool | Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it. (optional)
-
-    try:
-        # Set the file favorite status (third-party storage)
-        api_response = api_instance.toggle_file_favorite_third_party(file_id, favorite=favorite)
-        print("The response of FilesApi->toggle_file_favorite_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->toggle_file_favorite_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Echo of the requested state, which does not prove that the mark was changed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | Changing the favorite mark is refused for the caller |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **track_edit_file**
 > ItemKeyValuePairBooleanStringWrapper track_edit_file(file_id, tab_id=tab_id, doc_key_for_track=doc_key_for_track, is_finish=is_finish)
 
@@ -7821,7 +4790,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file whose editing session is being tracked. | 
+ **file_id** | **Union[int, str]**| The file whose editing session is being tracked. | 
  **tab_id** | **UUID**| The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor. | [optional] 
  **doc_key_for_track** | **str**| The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file's current key on every call, so a key left over from an older revision is refused. | [optional] 
  **is_finish** | **bool**| Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited. | [optional] 
@@ -7829,6 +4798,10 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ItemKeyValuePairBooleanStringWrapper**](ItemKeyValuePairBooleanStringWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str`.
 
 ### Authorization
 
@@ -7895,102 +4868,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **track_edit_file_third_party**
-> ItemKeyValuePairBooleanStringWrapper track_edit_file_third_party(file_id, tab_id=tab_id, doc_key_for_track=doc_key_for_track, is_finish=is_finish)
-
-Keeps an editing session on the file alive, or ends it; an editor client calls it repeatedly while a document
-is open. `docKeyForTrack` has to be the document key of the file as it currently stands, the value
-`POST api/2.0/files/file/{fileId}/startedit` returned, and a key matching neither the current revision nor the
-one being edited is refused with 403. `tabId` names the client tab that holds the session, so several tabs and
-several users are tracked on one file independently. Refreshing an entry requires one of the editing rights on
-the file - editing, reviewing, commenting, filling or filter editing - so a reader is refused. With
-`isFinish=false` the entry is refreshed and the file stays marked as being edited; with `isFinish=true` the
-entry for that tab is dropped and the other clients are told that editing has stopped. The call changes the
-tracking state and never the document, and repeating it is safe. It answers `key` true with an empty `value`
-whenever it succeeds, so a failure arrives as an error rather than as a false key. An anonymous caller is
-accepted only through an external share link.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file whose editing session is being tracked. | 
- **tab_id** | **UUID**| The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor. | [optional] 
- **doc_key_for_track** | **str**| The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file's current key on every call, so a key left over from an older revision is refused. | [optional] 
- **is_finish** | **bool**| Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited. | [optional] 
-
-### Return type
-
-[**ItemKeyValuePairBooleanStringWrapper**](ItemKeyValuePairBooleanStringWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.item_key_value_pair_boolean_string_wrapper import ItemKeyValuePairBooleanStringWrapper
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file whose editing session is being tracked.
-    tab_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor. (optional)
-    doc_key_for_track = 'abc123' # str | The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file's current key on every call, so a key left over from an older revision is refused. (optional)
-    is_finish = true # bool | Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited. (optional)
-
-    try:
-        # Track an editing session (third-party storage)
-        api_response = api_instance.track_edit_file_third_party(file_id, tab_id=tab_id, doc_key_for_track=doc_key_for_track, is_finish=is_finish)
-        print("The response of FilesApi->track_edit_file_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->track_edit_file_third_party: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The session was refreshed or closed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The document key does not match the revision being edited |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **update_file**
 > FileWrapper update_file(file_id, update_file)
 
@@ -8012,12 +4889,16 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | **int**| The file to update. | 
+ **file_id** | **Union[int, str]**| The file to update. | 
  **update_file** | [**UpdateFile**](UpdateFile.md)| The new title and the version to restore. | 
 
 ### Return type
 
 [**FileWrapper**](FileWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -8060,98 +4941,6 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->update_file: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The file after the rename, the restore, or both |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not rename the file or change its version |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_file_third_party**
-> ThirdPartyFileWrapper update_file_third_party(file_id, update_file)
-
-Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A
-non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename
-cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores
-that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top
-of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes
-this operation a read of the file when both fields are left out. The caller needs edit access, and renaming
-somebody else's file additionally needs room-manager rights: a member or room admin with plain editing access,
-read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while
-a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for
-everybody else who can read it.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **file_id** | **str**| The file to update. | 
- **update_file** | [**UpdateFile**](UpdateFile.md)| The new title and the version to restore. | 
-
-### Return type
-
-[**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
-from docspace_api_sdk.models.update_file import UpdateFile
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: bearerAuth
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.FilesApi(api_client)
-    file_id = '1' # str | The file to update.
-    update_file = docspace_api_sdk.UpdateFile() # UpdateFile | The new title and the version to restore.
-
-    try:
-        # Update a file (third-party storage)
-        api_response = api_instance.update_file_third_party(file_id, update_file)
-        print("The response of FilesApi->update_file_third_party:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling FilesApi->update_file_third_party: %s\n" % e)
 ```
 
 

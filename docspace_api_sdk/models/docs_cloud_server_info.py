@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class DocsCloudServerInfo(BaseModel):
     """
-    Represents the DocsCloud server information.
+    Represents the Docs Connect server information.
     """ # noqa: E501
     version: Optional[StrictStr] = Field(default=None, description="The server version.", json_schema_extra={"examples": ["8.0.0"]})
     package_type: Optional[StrictStr] = Field(default=None, description="The server package type (Open Source, Enterprise Edition or Developer Edition).", alias="packageType", json_schema_extra={"examples": ["Enterprise Edition"]})
