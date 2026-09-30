@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class DeleteRoomRequest(BaseModel):
     """
-    The parameters for deleting a room.
+    The body of a room deletion request.
     """ # noqa: E501
-    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a room after the editing session is finished or not.", alias="deleteAfter", json_schema_extra={"examples": [False]})
+    delete_after: Optional[StrictBool] = Field(default=None, description="Carried by the contract but not acted upon: the deletion behaves the same either way, and the record of the  finished job is kept until it is read once.", alias="deleteAfter", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["deleteAfter"]
 
     model_config = ConfigDict(

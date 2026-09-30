@@ -32,12 +32,12 @@ class AiThread(BaseModel):
     """
     Chat conversation metadata. Represents a single chat session (thread).
     """ # noqa: E501
-    thread_id: StrictStr = Field(description="Unique thread identifier (UUID).", alias="threadId")
-    title: Optional[StrictStr] = Field(default=None, description="Optional thread title. Auto-generated from the first message if not set.")
-    last_edit_date: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Timestamp (ms since epoch) of the last message in this thread. Used for sorting.", alias="lastEditDate")
+    thread_id: StrictStr = Field(description="Unique thread identifier (UUID).", alias="threadId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
+    title: Optional[StrictStr] = Field(default=None, description="Optional thread title. Auto-generated from the first message if not set.", json_schema_extra={"examples": ["Contract review"]})
+    last_edit_date: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Timestamp (ms since epoch) of the last message in this thread. Used for sorting.", alias="lastEditDate", json_schema_extra={"examples": [1767225600000]})
     provider: Optional[AiTProvider] = Field(default=None, description="Provider configuration at the time of last message. Used for thread-level provider display.")
     model: Optional[AiModel] = Field(default=None, description="Model info at the time of last message.")
-    profile_id: Optional[StrictStr] = Field(default=None, description="ID of the profile used for this thread. Links to `Profile.id`.", alias="profileId")
+    profile_id: Optional[StrictStr] = Field(default=None, description="ID of the profile used for this thread. Links to `Profile.id`.", alias="profileId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     __properties: ClassVar[List[str]] = ["threadId", "title", "lastEditDate", "provider", "model", "profileId"]
 
     model_config = ConfigDict(

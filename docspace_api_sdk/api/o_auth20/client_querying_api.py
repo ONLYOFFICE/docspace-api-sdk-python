@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from datetime import datetime
@@ -27,9 +27,9 @@ from typing import Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.client_info_response import ClientInfoResponse
 from docspace_api_sdk.models.client_response import ClientResponse
+from docspace_api_sdk.models.pageable_client_info_response import PageableClientInfoResponse
+from docspace_api_sdk.models.pageable_client_response import PageableClientResponse
 from docspace_api_sdk.models.pageable_modification_response import PageableModificationResponse
-from docspace_api_sdk.models.pageable_response import PageableResponse
-from docspace_api_sdk.models.pageable_response_client_info_response import PageableResponseClientInfoResponse
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -69,7 +69,7 @@ class ClientQueryingApi:
     ) -> ClientResponse:
         """Get client details
 
-        Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
+        Returns the whole stored record of one client: its name and description, its secret, scopes, redirect URIs, allowed origins, logout redirect URIs and audit fields. An administrator sees any client of the tenant, a plain user only the clients they created, and a guest none of them. Whatever the caller may not see is reported as 404 rather than 403, so absence and lack of access are deliberately indistinguishable, and an identifier that is not a valid client ID is reported the same way. The response is a single object, not a collection.
 
         :param client_id: ID of the client to retrieve (required)
         :type client_id: str
@@ -110,6 +110,8 @@ class ClientQueryingApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -142,7 +144,7 @@ class ClientQueryingApi:
     ) -> ApiResponse[ClientResponse]:
         """Get client details
 
-        Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
+        Returns the whole stored record of one client: its name and description, its secret, scopes, redirect URIs, allowed origins, logout redirect URIs and audit fields. An administrator sees any client of the tenant, a plain user only the clients they created, and a guest none of them. Whatever the caller may not see is reported as 404 rather than 403, so absence and lack of access are deliberately indistinguishable, and an identifier that is not a valid client ID is reported the same way. The response is a single object, not a collection.
 
         :param client_id: ID of the client to retrieve (required)
         :type client_id: str
@@ -183,6 +185,8 @@ class ClientQueryingApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -215,7 +219,7 @@ class ClientQueryingApi:
     ) -> RESTResponseType:
         """Get client details
 
-        Retrieves detailed information about a specific OAuth2 client including its name, description, redirect URIs, and scopes.
+        Returns the whole stored record of one client: its name and description, its secret, scopes, redirect URIs, allowed origins, logout redirect URIs and audit fields. An administrator sees any client of the tenant, a plain user only the clients they created, and a guest none of them. Whatever the caller may not see is reported as 404 rather than 403, so absence and lack of access are deliberately indistinguishable, and an identifier that is not a valid client ID is reported the same way. The response is a single object, not a collection.
 
         :param client_id: ID of the client to retrieve (required)
         :type client_id: str
@@ -256,6 +260,8 @@ class ClientQueryingApi:
             '404': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -312,7 +318,7 @@ class ClientQueryingApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/{clientId}"
+        resource_path = "/api/2.0/oauth2/clients/{clientId}"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -349,9 +355,9 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ClientInfoResponse:
-        """Retrieves detailed information for a specific client
+        """Get client info
 
-        Retrieves the detailed information for a client with the ID specified in the request.
+        Retrieves the detailed information for a client with the ID specified in the request. It returns the consent-facing subset of the client - name, description, logo, the website, terms and policy URLs, authentication methods and scopes - and deliberately omits the secret, the redirect URIs and the allowed origins, which is what makes it safe to render on a consent screen. An administrator sees any client of the tenant, a plain user only the clients they created, and a guest none of them. A client the caller may not see is reported as 404, exactly like an unknown one.
 
         :param client_id: ID of the client to retrieve (required)
         :type client_id: str
@@ -387,9 +393,13 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
-            '400': None,
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': None,
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -420,9 +430,9 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ClientInfoResponse]:
-        """Retrieves detailed information for a specific client
+        """Get client info
 
-        Retrieves the detailed information for a client with the ID specified in the request.
+        Retrieves the detailed information for a client with the ID specified in the request. It returns the consent-facing subset of the client - name, description, logo, the website, terms and policy URLs, authentication methods and scopes - and deliberately omits the secret, the redirect URIs and the allowed origins, which is what makes it safe to render on a consent screen. An administrator sees any client of the tenant, a plain user only the clients they created, and a guest none of them. A client the caller may not see is reported as 404, exactly like an unknown one.
 
         :param client_id: ID of the client to retrieve (required)
         :type client_id: str
@@ -458,9 +468,13 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
-            '400': None,
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': None,
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -491,9 +505,9 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Retrieves detailed information for a specific client
+        """Get client info
 
-        Retrieves the detailed information for a client with the ID specified in the request.
+        Retrieves the detailed information for a client with the ID specified in the request. It returns the consent-facing subset of the client - name, description, logo, the website, terms and policy URLs, authentication methods and scopes - and deliberately omits the secret, the redirect URIs and the allowed origins, which is what makes it safe to render on a consent screen. An administrator sees any client of the tenant, a plain user only the clients they created, and a guest none of them. A client the caller may not see is reported as 404, exactly like an unknown one.
 
         :param client_id: ID of the client to retrieve (required)
         :type client_id: str
@@ -529,9 +543,13 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
-            '400': None,
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '404': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': None,
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -588,7 +606,7 @@ class ClientQueryingApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/{clientId}/info"
+        resource_path = "/api/2.0/oauth2/clients/{clientId}/info"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -611,7 +629,7 @@ class ClientQueryingApi:
     @validate_call
     def get_clients(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        limit: Annotated[Optional[Annotated[int, Field(le=50, strict=True, ge=1)]], Field(description="How many entries to return, between 1 and 50. Defaults to 30 when omitted.")] = None,
         last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
         last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
@@ -626,12 +644,12 @@ class ClientQueryingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PageableResponse:
+    ) -> PageableClientResponse:
         """List clients
 
-        Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
+        Returns one page of the tenant's clients, newest first, each in the same full form as the single-client read. An administrator sees every client of the tenant, a plain user only the clients they created. Paging is keyset-based rather than offset-based: limit sets the page size, and last_client_id and last_created_on are carried over from the previous page to ask for the next one. The limit defaults to 30 and has to lie between 1 and 50; a value outside that range, or a last_created_on that cannot be parsed as a date, is rejected with 400.
 
-        :param limit: Pagination limit (required)
+        :param limit: How many entries to return, between 1 and 50. Defaults to 30 when omitted.
         :type limit: int
         :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
@@ -670,11 +688,13 @@ class ClientQueryingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PageableResponse",
+            '200': "PageableClientResponse",
             '400': "ProblemDetail",
             '403': "ProblemDetail",
+            '406': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -691,7 +711,7 @@ class ClientQueryingApi:
     @validate_call
     def get_clients_with_http_info(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        limit: Annotated[Optional[Annotated[int, Field(le=50, strict=True, ge=1)]], Field(description="How many entries to return, between 1 and 50. Defaults to 30 when omitted.")] = None,
         last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
         last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
@@ -706,12 +726,12 @@ class ClientQueryingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PageableResponse]:
+    ) -> ApiResponse[PageableClientResponse]:
         """List clients
 
-        Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
+        Returns one page of the tenant's clients, newest first, each in the same full form as the single-client read. An administrator sees every client of the tenant, a plain user only the clients they created. Paging is keyset-based rather than offset-based: limit sets the page size, and last_client_id and last_created_on are carried over from the previous page to ask for the next one. The limit defaults to 30 and has to lie between 1 and 50; a value outside that range, or a last_created_on that cannot be parsed as a date, is rejected with 400.
 
-        :param limit: Pagination limit (required)
+        :param limit: How many entries to return, between 1 and 50. Defaults to 30 when omitted.
         :type limit: int
         :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
@@ -750,11 +770,13 @@ class ClientQueryingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PageableResponse",
+            '200': "PageableClientResponse",
             '400': "ProblemDetail",
             '403': "ProblemDetail",
+            '406': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -771,7 +793,7 @@ class ClientQueryingApi:
     @validate_call
     def get_clients_without_preload_content(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        limit: Annotated[Optional[Annotated[int, Field(le=50, strict=True, ge=1)]], Field(description="How many entries to return, between 1 and 50. Defaults to 30 when omitted.")] = None,
         last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
         last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
@@ -789,9 +811,9 @@ class ClientQueryingApi:
     ) -> RESTResponseType:
         """List clients
 
-        Retrieves a paginated list of OAuth2 clients. The results can be paginated using the limit parameter and last seen client ID/creation date.
+        Returns one page of the tenant's clients, newest first, each in the same full form as the single-client read. An administrator sees every client of the tenant, a plain user only the clients they created. Paging is keyset-based rather than offset-based: limit sets the page size, and last_client_id and last_created_on are carried over from the previous page to ask for the next one. The limit defaults to 30 and has to lie between 1 and 50; a value outside that range, or a last_created_on that cannot be parsed as a date, is rejected with 400.
 
-        :param limit: Pagination limit (required)
+        :param limit: How many entries to return, between 1 and 50. Defaults to 30 when omitted.
         :type limit: int
         :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
@@ -830,11 +852,13 @@ class ClientQueryingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PageableResponse",
+            '200': "PageableClientResponse",
             '400': "ProblemDetail",
             '403': "ProblemDetail",
+            '406': "ProblemDetail",
             '429': "ProblemDetail",
             '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -912,7 +936,7 @@ class ClientQueryingApi:
         ]
 
 
-        resource_path = "/api/2.0/clients"
+        resource_path = "/api/2.0/oauth2/clients"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -935,7 +959,7 @@ class ClientQueryingApi:
     @validate_call
     def get_clients_info(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="How many entries to return, between 1 and 50. It has no default and has to be sent on every call.")],
         last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
         last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
@@ -950,12 +974,12 @@ class ClientQueryingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PageableResponseClientInfoResponse:
-        """Retrieves a pageable list of client information
+    ) -> PageableClientInfoResponse:
+        """List client info
 
-        Retrieves a paginated list of information for all clients.
+        Retrieves a paginated list of information for all clients, each in the same consent-facing form as the single-client info read. An administrator sees every client of the tenant, a plain user only the clients they created. Paging is keyset-based: limit sets the page size, and last_client_id and last_created_on are carried over from the previous page. Unlike the full client listing, limit has no default here - it has to be supplied on every call and has to lie between 1 and 50, and a missing or out-of-range value is rejected with 400.
 
-        :param limit: Pagination limit (required)
+        :param limit: How many entries to return, between 1 and 50. It has no default and has to be sent on every call. (required)
         :type limit: int
         :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
@@ -994,10 +1018,13 @@ class ClientQueryingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PageableResponseClientInfoResponse",
-            '400': None,
+            '200': "PageableClientInfoResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '406': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': None,
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1014,7 +1041,7 @@ class ClientQueryingApi:
     @validate_call
     def get_clients_info_with_http_info(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="How many entries to return, between 1 and 50. It has no default and has to be sent on every call.")],
         last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
         last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
@@ -1029,12 +1056,12 @@ class ClientQueryingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PageableResponseClientInfoResponse]:
-        """Retrieves a pageable list of client information
+    ) -> ApiResponse[PageableClientInfoResponse]:
+        """List client info
 
-        Retrieves a paginated list of information for all clients.
+        Retrieves a paginated list of information for all clients, each in the same consent-facing form as the single-client info read. An administrator sees every client of the tenant, a plain user only the clients they created. Paging is keyset-based: limit sets the page size, and last_client_id and last_created_on are carried over from the previous page. Unlike the full client listing, limit has no default here - it has to be supplied on every call and has to lie between 1 and 50, and a missing or out-of-range value is rejected with 400.
 
-        :param limit: Pagination limit (required)
+        :param limit: How many entries to return, between 1 and 50. It has no default and has to be sent on every call. (required)
         :type limit: int
         :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
@@ -1073,10 +1100,13 @@ class ClientQueryingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PageableResponseClientInfoResponse",
-            '400': None,
+            '200': "PageableClientInfoResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '406': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': None,
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1093,7 +1123,7 @@ class ClientQueryingApi:
     @validate_call
     def get_clients_info_without_preload_content(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="How many entries to return, between 1 and 50. It has no default and has to be sent on every call.")],
         last_client_id: Annotated[Optional[StrictStr], Field(description="ID of the last retrieved client")] = None,
         last_created_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved client")] = None,
         _request_timeout: Union[
@@ -1109,11 +1139,11 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Retrieves a pageable list of client information
+        """List client info
 
-        Retrieves a paginated list of information for all clients.
+        Retrieves a paginated list of information for all clients, each in the same consent-facing form as the single-client info read. An administrator sees every client of the tenant, a plain user only the clients they created. Paging is keyset-based: limit sets the page size, and last_client_id and last_created_on are carried over from the previous page. Unlike the full client listing, limit has no default here - it has to be supplied on every call and has to lie between 1 and 50, and a missing or out-of-range value is rejected with 400.
 
-        :param limit: Pagination limit (required)
+        :param limit: How many entries to return, between 1 and 50. It has no default and has to be sent on every call. (required)
         :type limit: int
         :param last_client_id: ID of the last retrieved client
         :type last_client_id: str
@@ -1152,10 +1182,13 @@ class ClientQueryingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PageableResponseClientInfoResponse",
-            '400': None,
+            '200': "PageableClientInfoResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '406': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': None,
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1233,7 +1266,7 @@ class ClientQueryingApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/info"
+        resource_path = "/api/2.0/oauth2/clients/info"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -1256,7 +1289,7 @@ class ClientQueryingApi:
     @validate_call
     def get_consents(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="How many entries to return, between 1 and 50. It has no default and has to be sent on every call.")],
         last_modified_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved consent")] = None,
         _request_timeout: Union[
             None,
@@ -1271,11 +1304,11 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PageableModificationResponse:
-        """Retrieves a pageable list of consents
+        """List user consents
 
-        Retrieves a paginated list of user consents.
+        Retrieves a paginated list of user consents: the clients the calling user has authorized, each with the scopes granted, the moment the consent was last changed and the client's consent-facing details. It always reports the caller's own consents and nothing else - there is no role check on this endpoint, so guests may call it too, and no parameter widens it to another user. The consents are read from the authorization service over gRPC, so an authorization service that cannot be reached surfaces as 503. Paging is keyset-based on last_modified_on, and limit has no default: it has to be supplied on every call and has to lie between 1 and 50.
 
-        :param limit: Pagination limit (required)
+        :param limit: How many entries to return, between 1 and 50. It has no default and has to be sent on every call. (required)
         :type limit: int
         :param last_modified_on: Date of the last retrieved consent
         :type last_modified_on: datetime
@@ -1312,6 +1345,13 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageableModificationResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '406': "ProblemDetail",
+            '429': "ProblemDetail",
+            '503': "ProblemDetail",
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1328,7 +1368,7 @@ class ClientQueryingApi:
     @validate_call
     def get_consents_with_http_info(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="How many entries to return, between 1 and 50. It has no default and has to be sent on every call.")],
         last_modified_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved consent")] = None,
         _request_timeout: Union[
             None,
@@ -1343,11 +1383,11 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PageableModificationResponse]:
-        """Retrieves a pageable list of consents
+        """List user consents
 
-        Retrieves a paginated list of user consents.
+        Retrieves a paginated list of user consents: the clients the calling user has authorized, each with the scopes granted, the moment the consent was last changed and the client's consent-facing details. It always reports the caller's own consents and nothing else - there is no role check on this endpoint, so guests may call it too, and no parameter widens it to another user. The consents are read from the authorization service over gRPC, so an authorization service that cannot be reached surfaces as 503. Paging is keyset-based on last_modified_on, and limit has no default: it has to be supplied on every call and has to lie between 1 and 50.
 
-        :param limit: Pagination limit (required)
+        :param limit: How many entries to return, between 1 and 50. It has no default and has to be sent on every call. (required)
         :type limit: int
         :param last_modified_on: Date of the last retrieved consent
         :type last_modified_on: datetime
@@ -1384,6 +1424,13 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageableModificationResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '406': "ProblemDetail",
+            '429': "ProblemDetail",
+            '503': "ProblemDetail",
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1400,7 +1447,7 @@ class ClientQueryingApi:
     @validate_call
     def get_consents_without_preload_content(
         self,
-        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="Pagination limit")],
+        limit: Annotated[int, Field(le=50, strict=True, ge=1, description="How many entries to return, between 1 and 50. It has no default and has to be sent on every call.")],
         last_modified_on: Annotated[Optional[datetime], Field(description="Date of the last retrieved consent")] = None,
         _request_timeout: Union[
             None,
@@ -1415,11 +1462,11 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Retrieves a pageable list of consents
+        """List user consents
 
-        Retrieves a paginated list of user consents.
+        Retrieves a paginated list of user consents: the clients the calling user has authorized, each with the scopes granted, the moment the consent was last changed and the client's consent-facing details. It always reports the caller's own consents and nothing else - there is no role check on this endpoint, so guests may call it too, and no parameter widens it to another user. The consents are read from the authorization service over gRPC, so an authorization service that cannot be reached surfaces as 503. Paging is keyset-based on last_modified_on, and limit has no default: it has to be supplied on every call and has to lie between 1 and 50.
 
-        :param limit: Pagination limit (required)
+        :param limit: How many entries to return, between 1 and 50. It has no default and has to be sent on every call. (required)
         :type limit: int
         :param last_modified_on: Date of the last retrieved consent
         :type last_modified_on: datetime
@@ -1456,6 +1503,13 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PageableModificationResponse",
+            '400': "ProblemDetail",
+            '403': "ProblemDetail",
+            '406': "ProblemDetail",
+            '429': "ProblemDetail",
+            '503': "ProblemDetail",
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1528,7 +1582,7 @@ class ClientQueryingApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/consents"
+        resource_path = "/api/2.0/oauth2/clients/consents"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -1565,8 +1619,9 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ClientInfoResponse:
-        """Handles the GET request for public client information
+        """Get public client info
 
+        Returns the same consent-facing client information as the signed read, but without requiring a portal signature. It is meant for a login or consent page that has to render the client before the user is known, so it resolves the client by ID alone: there is no authentication, no tenant scoping and no creator check, and any caller who knows a client ID can read that client's public details. It still exposes no secret, no redirect URIs and no allowed origins. Being unauthenticated it is rate-limited on a separate, tighter budget than the signed endpoints. An unknown client ID, and an identifier that is not a client ID at all, are both reported as 404.
 
         :param client_id: ID of the client to retrieve (required)
         :type client_id: str
@@ -1602,9 +1657,12 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
-            '400': None,
+            '400': "ProblemDetail",
+            '404': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': None,
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1635,8 +1693,9 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ClientInfoResponse]:
-        """Handles the GET request for public client information
+        """Get public client info
 
+        Returns the same consent-facing client information as the signed read, but without requiring a portal signature. It is meant for a login or consent page that has to render the client before the user is known, so it resolves the client by ID alone: there is no authentication, no tenant scoping and no creator check, and any caller who knows a client ID can read that client's public details. It still exposes no secret, no redirect URIs and no allowed origins. Being unauthenticated it is rate-limited on a separate, tighter budget than the signed endpoints. An unknown client ID, and an identifier that is not a client ID at all, are both reported as 404.
 
         :param client_id: ID of the client to retrieve (required)
         :type client_id: str
@@ -1672,9 +1731,12 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
-            '400': None,
+            '400': "ProblemDetail",
+            '404': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': None,
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1705,8 +1767,9 @@ class ClientQueryingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Handles the GET request for public client information
+        """Get public client info
 
+        Returns the same consent-facing client information as the signed read, but without requiring a portal signature. It is meant for a login or consent page that has to render the client before the user is known, so it resolves the client by ID alone: there is no authentication, no tenant scoping and no creator check, and any caller who knows a client ID can read that client's public details. It still exposes no secret, no redirect URIs and no allowed origins. Being unauthenticated it is rate-limited on a separate, tighter budget than the signed endpoints. An unknown client ID, and an identifier that is not a client ID at all, are both reported as 404.
 
         :param client_id: ID of the client to retrieve (required)
         :type client_id: str
@@ -1742,9 +1805,12 @@ class ClientQueryingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ClientInfoResponse",
-            '400': None,
+            '400': "ProblemDetail",
+            '404': "ProblemDetail",
             '429': "ProblemDetail",
-            '500': None,
+            '500': "ProblemDetail",
+            '405': "ProblemDetail",
+            '406': "ProblemDetail",
         }
 
         response_data = self.api_client.call_api(
@@ -1800,7 +1866,7 @@ class ClientQueryingApi:
         ]
 
 
-        resource_path = "/api/2.0/clients/{clientId}/public/info"
+        resource_path = "/api/2.0/oauth2/clients/{clientId}/public/info"
 
         return self.api_client.param_serialize(
             method='GET',

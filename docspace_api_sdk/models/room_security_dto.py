@@ -30,11 +30,11 @@ from typing_extensions import Self
 
 class RoomSecurityDto(BaseModel):
     """
-    The room security parameters.
+    The outcome of a change of the room membership.
     """ # noqa: E501
-    members: Optional[List[FileShareDto]] = Field(default=None, description="The list of room members.", json_schema_extra={"examples": [[{"access": 1, "isOwner": False}]]})
-    warning: Optional[StrictStr] = Field(default=None, description="The warning message.", json_schema_extra={"examples": ["Warning message"]})
-    error: Optional[RoomSecurityError] = Field(default=None, description="The error type.")
+    members: Optional[List[FileShareDto]] = Field(default=None, description="The access entries of the subjects named in the request, read back after the change was applied. A subject the  caller may not see is missing from it, so comparing this list with the request is the way to learn who was  skipped; it is null when nothing was applied at all.", json_schema_extra={"examples": [[{"access": 10, "isOwner": False, "subjectType": 0}]]})
+    warning: Optional[StrictStr] = Field(default=None, description="The reason the first subject that could not be handled was skipped, in the language of the request, while the  rest of the list was still applied. Null when every named subject went through. The text is meant to be shown  to a person, not matched against.", json_schema_extra={"examples": ["The maximum number of links is 10"]})
+    error: Optional[RoomSecurityError] = Field(default=None, description="Reports the one case in which nothing at all was changed: a member being removed still holds a role in a form  of the room, and the request did not ask to remove them anyway. Repeat the call with `force` to remove them  together with the role.")
     __properties: ClassVar[List[str]] = ["members", "warning", "error"]
 
     model_config = ConfigDict(

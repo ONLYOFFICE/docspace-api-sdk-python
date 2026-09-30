@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class DocsCloudUserStats(BaseModel):
     """
-    Represents the usage statistics of a single DocsCloud user category (editor or viewer).
+    Represents the usage statistics of a single Docs Connect user category (editor or viewer).
     """ # noqa: E501
     active: Optional[StrictInt] = Field(default=None, description="The number of active users.", json_schema_extra={"examples": [10]})
     internal: Optional[StrictInt] = Field(default=None, description="The number of internal users.", json_schema_extra={"examples": [8]})

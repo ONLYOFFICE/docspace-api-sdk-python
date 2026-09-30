@@ -32,10 +32,10 @@ class UpdateGroupRequest(BaseModel):
     """
     The request for updating a group.
     """ # noqa: E501
-    members_to_add: Optional[List[UUID]] = Field(default=None, description="The list of user IDs to add to the group.", alias="membersToAdd", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
-    members_to_remove: Optional[List[UUID]] = Field(default=None, description="The list of user IDs to remove from the group.", alias="membersToRemove", json_schema_extra={"examples": [["11111111-1111-1111-1111-111111111111"]]})
-    group_manager: Optional[UUID] = Field(default=None, description="The group manager ID.", alias="groupManager", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    group_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The group name.", alias="groupName", json_schema_extra={"examples": ["Sales Team"]})
+    members_to_add: Optional[List[UUID]] = Field(default=None, description="The accounts to add to the group. An account that is a guest, is disabled or does not exist is skipped  without an error, so the answer has to be read to see what was applied.", alias="membersToAdd", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
+    members_to_remove: Optional[List[UUID]] = Field(default=None, description="The accounts to remove from the group. Removals are applied after the additions, so an account named in both  lists ends up removed, and an ID that is not a member is skipped without an error.", alias="membersToRemove", json_schema_extra={"examples": [["11111111-1111-1111-1111-111111111111"]]})
+    group_manager: Optional[UUID] = Field(default=None, description="The account to make the manager of the group, which also adds it to the group. Omit it to keep the current  manager - it cannot be cleared through this operation.", alias="groupManager", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    group_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The new name of the group, up to 128 characters. Omit it to keep the current name.", alias="groupName", json_schema_extra={"examples": ["Sales Team"]})
     __properties: ClassVar[List[str]] = ["membersToAdd", "membersToRemove", "groupManager", "groupName"]
 
     model_config = ConfigDict(

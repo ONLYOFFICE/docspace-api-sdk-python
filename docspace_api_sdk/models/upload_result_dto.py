@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class UploadResultDto(BaseModel):
     """
-    The upload result parameters.
+    The outcome of storing an image in temporary storage before it is used as a room logo.
     """ # noqa: E501
-    success: Optional[StrictBool] = Field(default=None, description="Specifies if the upload operation is successful or not.", json_schema_extra={"examples": [True]})
+    success: Optional[StrictBool] = Field(default=None, description="True when the image was stored and its path is in the data field. A rejected image is reported with an error  response rather than with a false here, so this field is true in every answer that carries a body.", json_schema_extra={"examples": [True]})
     data: Optional[Any] = None
-    message: Optional[StrictStr] = Field(default=None, description="The message sent after the successful upload operation.", json_schema_extra={"examples": ["File uploaded successfully"]})
+    message: Optional[StrictStr] = Field(default=None, description="Left empty by this operation: nothing is reported here, and a refused image comes back as an error response  instead.", json_schema_extra={"examples": [""]})
     __properties: ClassVar[List[str]] = ["success", "data", "message"]
 
     model_config = ConfigDict(

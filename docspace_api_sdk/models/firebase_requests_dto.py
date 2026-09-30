@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class FirebaseRequestsDto(BaseModel):
     """
-    The Firebase-related request parameters.
+    Which mobile device receives the Documents push notifications, and whether it is subscribed.
     """ # noqa: E501
-    firebase_device_token: Optional[StrictStr] = Field(default=None, description="The Firebase device token.", alias="firebaseDeviceToken", json_schema_extra={"examples": ["dGhpc2lzYXRva2Vu..."]})
-    is_subscribed: Optional[StrictBool] = Field(default=None, description="Specifies whether the user is subscribed to the push notifications or not.", alias="isSubscribed", json_schema_extra={"examples": [True]})
+    firebase_device_token: Optional[StrictStr] = Field(default=None, description="The registration token Firebase issued to the mobile client for this device, obtained on the device itself.  It is kept as an opaque string of up to 255 characters and is never verified here; it identifies the device  and is matched but never changed, and a token belonging to another member or another portal matches nothing.", alias="firebaseDeviceToken", json_schema_extra={"examples": ["dGhpc2lzYXRva2Vu..."]})
+    is_subscribed: Optional[StrictBool] = Field(default=None, description="Whether the device is to receive the room activity messages - an invitation, a role change, an archived room,  a new document. On a first registration it is stored as given; on a registration that already exists it is  ignored, because registering does not update, and the subscription is changed with  `PUT api/2.0/settings/push/docsubscribe` instead.", alias="isSubscribed", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["firebaseDeviceToken", "isSubscribed"]
 
     model_config = ConfigDict(

@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool
@@ -71,9 +71,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PaymentCalculationWrapper:
-        """Calculate the DocsCloud subscription switch cost
+        """Calculate the Docs Connect Dev Pack switch cost
 
-        Calculates the top-up cost of switching the current DocsCloud subscription to DocsCloudDevPack,  without making any changes. The quantity is taken from the currently purchased DocsCloud quota.  Only the portal payer can perform this action.
+        Prices the upgrade of the paid Docs Connect subscription of the current portal to Docs Connect Dev Pack for  the requested number of users, without changing the subscription or charging anything. It applies the  same preconditions as the switch itself: the portal must hold an active Docs Connect subscription, must  not already hold a Docs Connect Dev Pack one, and its tariff must not be delayed or unpaid; the quotas and  the state of the current tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a  DocSpace administrator of a portal registered with the billing service. The call is read-only and  idempotent, so it can be repeated for different quantities before any switch is made. It returns the  amount that switching would cost, the three-letter ISO 4217 currency of that amount, the quantity the  amount was calculated for, and the identifier of the billing operation; an empty result means the  billing service could not price the switch, which should then not be attempted. The switch itself is  performed by `POST api/2.0/settings/docscloud/switchtodevpack` with the same `quantity` and takes no  identifier from this response; to price a change in the number of users of a subscription the portal  already has, use `PUT api/2.0/portal/payment/calculatewallet` instead.
 
         :param docs_cloud_dev_pack_request_dto:
         :type docs_cloud_dev_pack_request_dto: DocsCloudDevPackRequestDto
@@ -148,9 +148,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PaymentCalculationWrapper]:
-        """Calculate the DocsCloud subscription switch cost
+        """Calculate the Docs Connect Dev Pack switch cost
 
-        Calculates the top-up cost of switching the current DocsCloud subscription to DocsCloudDevPack,  without making any changes. The quantity is taken from the currently purchased DocsCloud quota.  Only the portal payer can perform this action.
+        Prices the upgrade of the paid Docs Connect subscription of the current portal to Docs Connect Dev Pack for  the requested number of users, without changing the subscription or charging anything. It applies the  same preconditions as the switch itself: the portal must hold an active Docs Connect subscription, must  not already hold a Docs Connect Dev Pack one, and its tariff must not be delayed or unpaid; the quotas and  the state of the current tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a  DocSpace administrator of a portal registered with the billing service. The call is read-only and  idempotent, so it can be repeated for different quantities before any switch is made. It returns the  amount that switching would cost, the three-letter ISO 4217 currency of that amount, the quantity the  amount was calculated for, and the identifier of the billing operation; an empty result means the  billing service could not price the switch, which should then not be attempted. The switch itself is  performed by `POST api/2.0/settings/docscloud/switchtodevpack` with the same `quantity` and takes no  identifier from this response; to price a change in the number of users of a subscription the portal  already has, use `PUT api/2.0/portal/payment/calculatewallet` instead.
 
         :param docs_cloud_dev_pack_request_dto:
         :type docs_cloud_dev_pack_request_dto: DocsCloudDevPackRequestDto
@@ -225,9 +225,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Calculate the DocsCloud subscription switch cost
+        """Calculate the Docs Connect Dev Pack switch cost
 
-        Calculates the top-up cost of switching the current DocsCloud subscription to DocsCloudDevPack,  without making any changes. The quantity is taken from the currently purchased DocsCloud quota.  Only the portal payer can perform this action.
+        Prices the upgrade of the paid Docs Connect subscription of the current portal to Docs Connect Dev Pack for  the requested number of users, without changing the subscription or charging anything. It applies the  same preconditions as the switch itself: the portal must hold an active Docs Connect subscription, must  not already hold a Docs Connect Dev Pack one, and its tariff must not be delayed or unpaid; the quotas and  the state of the current tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a  DocSpace administrator of a portal registered with the billing service. The call is read-only and  idempotent, so it can be repeated for different quantities before any switch is made. It returns the  amount that switching would cost, the three-letter ISO 4217 currency of that amount, the quantity the  amount was calculated for, and the identifier of the billing operation; an empty result means the  billing service could not price the switch, which should then not be attempted. The switch itself is  performed by `POST api/2.0/settings/docscloud/switchtodevpack` with the same `quantity` and takes no  identifier from this response; to price a change in the number of users of a subscription the portal  already has, use `PUT api/2.0/portal/payment/calculatewallet` instead.
 
         :param docs_cloud_dev_pack_request_dto:
         :type docs_cloud_dev_pack_request_dto: DocsCloudDevPackRequestDto
@@ -382,9 +382,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocumentBuilderTaskWrapper:
-        """Start the DocsCloud tenant quota report generation
+        """Start the Docs Connect quota report
 
-        Starts generating the DocsCloud user quota report as an xlsx file and saves it in My Documents.
+        Queues a background job that renders the current Docs Connect user quota of the portal into an xlsx file and  saves that file in the My documents folder of the calling user; the report lists the editor and the viewer  users with the type and the expiration date of each, and summarizes the internal, external and remaining users  against the license limits. The file is not ready when the response arrives: poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until `isCompleted` is true, then take the file from  `resultFileId` or `resultFileUrl`, and use `DELETE api/2.0/settings/docscloud/tenant/quota/report` to cancel a  job that is still running. The caller must be a portal administrator allowed to edit the portal settings. The  portal should have an activated Docs Connect tenant: this call does not check that, and without a tenant the job  itself fails and reports the reason in the `error` of the status response. One report per caller runs at a  time: while a report of this user is still being built, the call describes that running job and no second  generation is started, so a repeated call is safe. What comes back is the initial state of the job, with  `percentage` 0 and a created `status`, not the report; the report is a point-in-time snapshot and carries the  generation date in its file name. To read the same data as JSON, without building a file, use  `GET api/2.0/settings/docscloud/tenant/quota`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -452,9 +452,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
-        """Start the DocsCloud tenant quota report generation
+        """Start the Docs Connect quota report
 
-        Starts generating the DocsCloud user quota report as an xlsx file and saves it in My Documents.
+        Queues a background job that renders the current Docs Connect user quota of the portal into an xlsx file and  saves that file in the My documents folder of the calling user; the report lists the editor and the viewer  users with the type and the expiration date of each, and summarizes the internal, external and remaining users  against the license limits. The file is not ready when the response arrives: poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until `isCompleted` is true, then take the file from  `resultFileId` or `resultFileUrl`, and use `DELETE api/2.0/settings/docscloud/tenant/quota/report` to cancel a  job that is still running. The caller must be a portal administrator allowed to edit the portal settings. The  portal should have an activated Docs Connect tenant: this call does not check that, and without a tenant the job  itself fails and reports the reason in the `error` of the status response. One report per caller runs at a  time: while a report of this user is still being built, the call describes that running job and no second  generation is started, so a repeated call is safe. What comes back is the initial state of the job, with  `percentage` 0 and a created `status`, not the report; the report is a point-in-time snapshot and carries the  generation date in its file name. To read the same data as JSON, without building a file, use  `GET api/2.0/settings/docscloud/tenant/quota`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -522,9 +522,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Start the DocsCloud tenant quota report generation
+        """Start the Docs Connect quota report
 
-        Starts generating the DocsCloud user quota report as an xlsx file and saves it in My Documents.
+        Queues a background job that renders the current Docs Connect user quota of the portal into an xlsx file and  saves that file in the My documents folder of the calling user; the report lists the editor and the viewer  users with the type and the expiration date of each, and summarizes the internal, external and remaining users  against the license limits. The file is not ready when the response arrives: poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until `isCompleted` is true, then take the file from  `resultFileId` or `resultFileUrl`, and use `DELETE api/2.0/settings/docscloud/tenant/quota/report` to cancel a  job that is still running. The caller must be a portal administrator allowed to edit the portal settings. The  portal should have an activated Docs Connect tenant: this call does not check that, and without a tenant the job  itself fails and reports the reason in the `error` of the status response. One report per caller runs at a  time: while a report of this user is still being built, the call describes that running job and no second  generation is started, so a repeated call is safe. What comes back is the initial state of the job, with  `percentage` 0 and a created `status`, not the report; the report is a point-in-time snapshot and carries the  generation date in its file name. To read the same data as JSON, without building a file, use  `GET api/2.0/settings/docscloud/tenant/quota`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -644,7 +644,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the tenant from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -658,11 +658,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocsCloudTenantWrapper:
-        """Get the DocsCloud tenant
+        """Get the Docs Connect tenant
 
-        Returns the DocsCloud tenant of the current portal.
+        Returns the Docs Connect tenant of the current portal: the Docs Connect server assigned to the portal, with its  address, the date the tenant subscription ends and the payment the tenant was created for. A tenant exists  only after a Docs Connect subscription has been granted, by `POST api/2.0/settings/docscloud/trial` or by a  Docs Connect purchase, and only on an installation where the Docs Connect service is configured. The caller must  be a portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it  is served from a cache that keeps the tenant for an hour and the absence of a tenant for a minute, so pass  `refresh=true` right after a subscription change to read the current state from Docs Connect instead. In the  result, `address` is the absolute URL of the assigned server, `isActive` tells whether `endDate` is still in  the future, and the dates are in UTC. An empty result means the portal has no Docs Connect tenant yet, which is  the normal state before a subscription and not an error, so this is the operation to call to find out whether  Docs Connect is activated at all. The license and server details, the editing settings, the user quota and the  usage statistics are not part of it: they live in `GET api/2.0/settings/docscloud/tenant/info`,  `.../tenant/config`, `.../tenant/quota` and `.../tenant/usage`, each of which fails with 400 while the  portal has no activated tenant.
 
-        :param refresh: Specifies whether to bypass the cache and request the tenant from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the tenant from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -696,6 +696,7 @@ class DocsCloudApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -718,7 +719,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_with_http_info(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the tenant from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -732,11 +733,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocsCloudTenantWrapper]:
-        """Get the DocsCloud tenant
+        """Get the Docs Connect tenant
 
-        Returns the DocsCloud tenant of the current portal.
+        Returns the Docs Connect tenant of the current portal: the Docs Connect server assigned to the portal, with its  address, the date the tenant subscription ends and the payment the tenant was created for. A tenant exists  only after a Docs Connect subscription has been granted, by `POST api/2.0/settings/docscloud/trial` or by a  Docs Connect purchase, and only on an installation where the Docs Connect service is configured. The caller must  be a portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it  is served from a cache that keeps the tenant for an hour and the absence of a tenant for a minute, so pass  `refresh=true` right after a subscription change to read the current state from Docs Connect instead. In the  result, `address` is the absolute URL of the assigned server, `isActive` tells whether `endDate` is still in  the future, and the dates are in UTC. An empty result means the portal has no Docs Connect tenant yet, which is  the normal state before a subscription and not an error, so this is the operation to call to find out whether  Docs Connect is activated at all. The license and server details, the editing settings, the user quota and the  usage statistics are not part of it: they live in `GET api/2.0/settings/docscloud/tenant/info`,  `.../tenant/config`, `.../tenant/quota` and `.../tenant/usage`, each of which fails with 400 while the  portal has no activated tenant.
 
-        :param refresh: Specifies whether to bypass the cache and request the tenant from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the tenant from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -770,6 +771,7 @@ class DocsCloudApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -792,7 +794,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_without_preload_content(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the tenant from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -806,11 +808,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the DocsCloud tenant
+        """Get the Docs Connect tenant
 
-        Returns the DocsCloud tenant of the current portal.
+        Returns the Docs Connect tenant of the current portal: the Docs Connect server assigned to the portal, with its  address, the date the tenant subscription ends and the payment the tenant was created for. A tenant exists  only after a Docs Connect subscription has been granted, by `POST api/2.0/settings/docscloud/trial` or by a  Docs Connect purchase, and only on an installation where the Docs Connect service is configured. The caller must  be a portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it  is served from a cache that keeps the tenant for an hour and the absence of a tenant for a minute, so pass  `refresh=true` right after a subscription change to read the current state from Docs Connect instead. In the  result, `address` is the absolute URL of the assigned server, `isActive` tells whether `endDate` is still in  the future, and the dates are in UTC. An empty result means the portal has no Docs Connect tenant yet, which is  the normal state before a subscription and not an error, so this is the operation to call to find out whether  Docs Connect is activated at all. The license and server details, the editing settings, the user quota and the  usage statistics are not part of it: they live in `GET api/2.0/settings/docscloud/tenant/info`,  `.../tenant/config`, `.../tenant/quota` and `.../tenant/usage`, each of which fails with 400 while the  portal has no activated tenant.
 
-        :param refresh: Specifies whether to bypass the cache and request the tenant from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the tenant from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old, or up to a minute old while the portal has no tenant.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -844,6 +846,7 @@ class DocsCloudApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -936,7 +939,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_config(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the configuration from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -950,11 +953,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocsCloudConfigWrapper:
-        """Get the DocsCloud tenant configuration
+        """Get the Docs Connect tenant configuration
 
-        Returns the DocsCloud tenant configuration of the current portal.
+        Returns the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules. The portal must have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial`  or by a Docs Connect purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none  and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,  on an installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for  an hour, so pass `refresh=true` to read the current state from Docs Connect; the same values are changed by  `PUT api/2.0/settings/docscloud/tenant/config`, which drops the cached copy itself, so no refresh is needed  after an update. In the result, `security.secret` is a credential, so the response should be treated as  sensitive; `server.fileSizeLimit` is in bytes and an update cannot raise it above 209715200 (200 MB); and an  empty or absent `ipFilter.rules` means no address restriction is configured. The license and server version,  the address of the assigned server, the per-user quota and the usage counters are not part of it: they live in  `.../tenant/info`, `.../tenant`, `.../tenant/quota` and `.../tenant/usage`.
 
-        :param refresh: Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the configuration from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -989,6 +992,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1010,7 +1014,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_config_with_http_info(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the configuration from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1024,11 +1028,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocsCloudConfigWrapper]:
-        """Get the DocsCloud tenant configuration
+        """Get the Docs Connect tenant configuration
 
-        Returns the DocsCloud tenant configuration of the current portal.
+        Returns the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules. The portal must have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial`  or by a Docs Connect purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none  and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,  on an installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for  an hour, so pass `refresh=true` to read the current state from Docs Connect; the same values are changed by  `PUT api/2.0/settings/docscloud/tenant/config`, which drops the cached copy itself, so no refresh is needed  after an update. In the result, `security.secret` is a credential, so the response should be treated as  sensitive; `server.fileSizeLimit` is in bytes and an update cannot raise it above 209715200 (200 MB); and an  empty or absent `ipFilter.rules` means no address restriction is configured. The license and server version,  the address of the assigned server, the per-user quota and the usage counters are not part of it: they live in  `.../tenant/info`, `.../tenant`, `.../tenant/quota` and `.../tenant/usage`.
 
-        :param refresh: Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the configuration from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1063,6 +1067,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1084,7 +1089,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_config_without_preload_content(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the configuration from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1098,11 +1103,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the DocsCloud tenant configuration
+        """Get the Docs Connect tenant configuration
 
-        Returns the DocsCloud tenant configuration of the current portal.
+        Returns the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules. The portal must have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial`  or by a Docs Connect purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none  and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,  on an installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for  an hour, so pass `refresh=true` to read the current state from Docs Connect; the same values are changed by  `PUT api/2.0/settings/docscloud/tenant/config`, which drops the cached copy itself, so no refresh is needed  after an update. In the result, `security.secret` is a credential, so the response should be treated as  sensitive; `server.fileSizeLimit` is in bytes and an update cannot raise it above 209715200 (200 MB); and an  empty or absent `ipFilter.rules` means no address restriction is configured. The license and server version,  the address of the assigned server, the per-user quota and the usage counters are not part of it: they live in  `.../tenant/info`, `.../tenant`, `.../tenant/quota` and `.../tenant/usage`.
 
-        :param refresh: Specifies whether to bypass the cache and request the tenant configuration from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the configuration from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to an hour old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1137,6 +1142,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1228,7 +1234,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_info(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant information from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the license, server and usage information from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1242,11 +1248,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocsCloudTenantInfoWrapper:
-        """Get the DocsCloud tenant information
+        """Get the Docs Connect tenant information
 
-        Returns the DocsCloud license and server information with usage statistics of the current portal.
+        Returns the Docs Connect license of the current portal, the Docs Connect server serving it, the user limits of  that license and the editor and viewer usage counted against them for the current period. The portal must  have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect  purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none and this call  fails with 400. The caller must be a portal administrator allowed to edit the portal settings, on an  installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for a  minute, so pass `refresh=true` right after a subscription change to read the current state from Docs Connect.  In the result, `license.valid` is when the license expires and `license.trial` is reported as `false` once  the portal holds a paid Docs Connect or Docs Connect Dev Pack subscription, even when the license itself still says  trial; `usersLimit` caps the editors and the viewers allowed, `stats` counts the active, internal, external  and remaining users of each of those two kinds over the last `stats.periodDay` days, and the dates are in  UTC. The editing settings, the per-user quota lists and the address of the assigned server live in  `.../tenant/config`, `.../tenant/quota` and `.../tenant`, while `.../tenant/usage` gives one active-user  total instead of this per-role breakdown.
 
-        :param refresh: Specifies whether to bypass the cache and request the tenant information from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the license, server and usage information from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1281,6 +1287,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantInfoWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1302,7 +1309,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_info_with_http_info(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant information from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the license, server and usage information from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1316,11 +1323,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocsCloudTenantInfoWrapper]:
-        """Get the DocsCloud tenant information
+        """Get the Docs Connect tenant information
 
-        Returns the DocsCloud license and server information with usage statistics of the current portal.
+        Returns the Docs Connect license of the current portal, the Docs Connect server serving it, the user limits of  that license and the editor and viewer usage counted against them for the current period. The portal must  have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect  purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none and this call  fails with 400. The caller must be a portal administrator allowed to edit the portal settings, on an  installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for a  minute, so pass `refresh=true` right after a subscription change to read the current state from Docs Connect.  In the result, `license.valid` is when the license expires and `license.trial` is reported as `false` once  the portal holds a paid Docs Connect or Docs Connect Dev Pack subscription, even when the license itself still says  trial; `usersLimit` caps the editors and the viewers allowed, `stats` counts the active, internal, external  and remaining users of each of those two kinds over the last `stats.periodDay` days, and the dates are in  UTC. The editing settings, the per-user quota lists and the address of the assigned server live in  `.../tenant/config`, `.../tenant/quota` and `.../tenant`, while `.../tenant/usage` gives one active-user  total instead of this per-role breakdown.
 
-        :param refresh: Specifies whether to bypass the cache and request the tenant information from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the license, server and usage information from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1355,6 +1362,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantInfoWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1376,7 +1384,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_info_without_preload_content(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the tenant information from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the license, server and usage information from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1390,11 +1398,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the DocsCloud tenant information
+        """Get the Docs Connect tenant information
 
-        Returns the DocsCloud license and server information with usage statistics of the current portal.
+        Returns the Docs Connect license of the current portal, the Docs Connect server serving it, the user limits of  that license and the editor and viewer usage counted against them for the current period. The portal must  have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect  purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none and this call  fails with 400. The caller must be a portal administrator allowed to edit the portal settings, on an  installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for a  minute, so pass `refresh=true` right after a subscription change to read the current state from Docs Connect.  In the result, `license.valid` is when the license expires and `license.trial` is reported as `false` once  the portal holds a paid Docs Connect or Docs Connect Dev Pack subscription, even when the license itself still says  trial; `usersLimit` caps the editors and the viewers allowed, `stats` counts the active, internal, external  and remaining users of each of those two kinds over the last `stats.periodDay` days, and the dates are in  UTC. The editing settings, the per-user quota lists and the address of the assigned server live in  `.../tenant/config`, `.../tenant/quota` and `.../tenant`, while `.../tenant/usage` gives one active-user  total instead of this per-role breakdown.
 
-        :param refresh: Specifies whether to bypass the cache and request the tenant information from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the license, server and usage information from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1429,6 +1437,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantInfoWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1520,7 +1529,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_quota(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the user quota from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the user quota from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1534,11 +1543,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocsCloudQuotaWrapper:
-        """Get the DocsCloud tenant quota
+        """Get the Docs Connect tenant quota
 
-        Returns the DocsCloud user quota (active users) of the current portal.
+        Returns the Docs Connect user quota of the current portal: the users who currently count as Docs Connect editors and  the users who count as viewers, each with the identifier Docs Connect knows them by and the date their quota entry  expires. The portal must have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial`  or by a Docs Connect purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none  and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,  on an installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for  a minute, so pass `refresh=true` to read the current state from Docs Connect. In the result, `users` holds the  editor entries and `usersView` the viewer entries, both unordered; `userId` is the DocSpace user ID for a  portal member and an identifier of Docs Connect's own for anyone else; `expire` is the date and time the entry  expires, as a UTC string; and empty lists mean no user has been counted yet. It lists the users themselves,  not the counters: the license limits with the per-role totals are in  `GET api/2.0/settings/docscloud/tenant/info`, a single active-user total is in `.../tenant/usage`, and the  same lists as a downloadable xlsx file are produced by  `POST api/2.0/settings/docscloud/tenant/quota/report`.
 
-        :param refresh: Specifies whether to bypass the cache and request the user quota from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the user quota from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1573,6 +1582,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudQuotaWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1594,7 +1604,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_quota_with_http_info(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the user quota from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the user quota from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1608,11 +1618,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocsCloudQuotaWrapper]:
-        """Get the DocsCloud tenant quota
+        """Get the Docs Connect tenant quota
 
-        Returns the DocsCloud user quota (active users) of the current portal.
+        Returns the Docs Connect user quota of the current portal: the users who currently count as Docs Connect editors and  the users who count as viewers, each with the identifier Docs Connect knows them by and the date their quota entry  expires. The portal must have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial`  or by a Docs Connect purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none  and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,  on an installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for  a minute, so pass `refresh=true` to read the current state from Docs Connect. In the result, `users` holds the  editor entries and `usersView` the viewer entries, both unordered; `userId` is the DocSpace user ID for a  portal member and an identifier of Docs Connect's own for anyone else; `expire` is the date and time the entry  expires, as a UTC string; and empty lists mean no user has been counted yet. It lists the users themselves,  not the counters: the license limits with the per-role totals are in  `GET api/2.0/settings/docscloud/tenant/info`, a single active-user total is in `.../tenant/usage`, and the  same lists as a downloadable xlsx file are produced by  `POST api/2.0/settings/docscloud/tenant/quota/report`.
 
-        :param refresh: Specifies whether to bypass the cache and request the user quota from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the user quota from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1647,6 +1657,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudQuotaWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1668,7 +1679,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_quota_without_preload_content(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the user quota from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the user quota from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1682,11 +1693,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the DocsCloud tenant quota
+        """Get the Docs Connect tenant quota
 
-        Returns the DocsCloud user quota (active users) of the current portal.
+        Returns the Docs Connect user quota of the current portal: the users who currently count as Docs Connect editors and  the users who count as viewers, each with the identifier Docs Connect knows them by and the date their quota entry  expires. The portal must have an activated Docs Connect tenant, granted by `POST api/2.0/settings/docscloud/trial`  or by a Docs Connect purchase: an empty result from `GET api/2.0/settings/docscloud/tenant` means there is none  and this call fails with 400. The caller must be a portal administrator allowed to edit the portal settings,  on an installation where the Docs Connect service is configured. The call is read-only, idempotent and cached for  a minute, so pass `refresh=true` to read the current state from Docs Connect. In the result, `users` holds the  editor entries and `usersView` the viewer entries, both unordered; `userId` is the DocSpace user ID for a  portal member and an identifier of Docs Connect's own for anyone else; `expire` is the date and time the entry  expires, as a UTC string; and empty lists mean no user has been counted yet. It lists the users themselves,  not the counters: the license limits with the per-role totals are in  `GET api/2.0/settings/docscloud/tenant/info`, a single active-user total is in `.../tenant/usage`, and the  same lists as a downloadable xlsx file are produced by  `POST api/2.0/settings/docscloud/tenant/quota/report`.
 
-        :param refresh: Specifies whether to bypass the cache and request the user quota from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the user quota from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1721,6 +1732,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudQuotaWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1825,9 +1837,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocumentBuilderTaskWrapper:
-        """Get the status of the DocsCloud tenant quota report generation
+        """Get the Docs Connect quota report status
 
-        Returns the status of generating the DocsCloud user quota report.
+        Returns the state of the Docs Connect user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report`, so that the caller can follow the generation and pick  up the resulting file. It reports the caller's own job only: a report started by another administrator is not  visible here, and an empty result means this user has no job, because none was started, because it was  terminated, or because a finished one has already been cleared (a job state is kept for a day, and starting a  new report drops the previous finished one); that is a normal state and not an error. The caller must be a  portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it is  meant to be polled while the job runs. In the result, `percentage` goes from 0 to 100 and `isCompleted`  becomes true both on success and on failure, so check `error`: it is empty when the report was built and  carries the failure message otherwise;  `resultFileId`, `resultFileName` and `resultFileUrl` are filled in only once the file exists, and that file  also stays in the My documents folder of the caller. Use the `POST` operation on this path to start a report  and the `DELETE` one to cancel it.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1895,9 +1907,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
-        """Get the status of the DocsCloud tenant quota report generation
+        """Get the Docs Connect quota report status
 
-        Returns the status of generating the DocsCloud user quota report.
+        Returns the state of the Docs Connect user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report`, so that the caller can follow the generation and pick  up the resulting file. It reports the caller's own job only: a report started by another administrator is not  visible here, and an empty result means this user has no job, because none was started, because it was  terminated, or because a finished one has already been cleared (a job state is kept for a day, and starting a  new report drops the previous finished one); that is a normal state and not an error. The caller must be a  portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it is  meant to be polled while the job runs. In the result, `percentage` goes from 0 to 100 and `isCompleted`  becomes true both on success and on failure, so check `error`: it is empty when the report was built and  carries the failure message otherwise;  `resultFileId`, `resultFileName` and `resultFileUrl` are filled in only once the file exists, and that file  also stays in the My documents folder of the caller. Use the `POST` operation on this path to start a report  and the `DELETE` one to cancel it.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1965,9 +1977,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the status of the DocsCloud tenant quota report generation
+        """Get the Docs Connect quota report status
 
-        Returns the status of generating the DocsCloud user quota report.
+        Returns the state of the Docs Connect user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report`, so that the caller can follow the generation and pick  up the resulting file. It reports the caller's own job only: a report started by another administrator is not  visible here, and an empty result means this user has no job, because none was started, because it was  terminated, or because a finished one has already been cleared (a job state is kept for a day, and starting a  new report drops the previous finished one); that is a normal state and not an error. The caller must be a  portal administrator allowed to edit the portal settings. The call is read-only and idempotent, and it is  meant to be polled while the job runs. In the result, `percentage` goes from 0 to 100 and `isCompleted`  becomes true both on success and on failure, so check `error`: it is empty when the report was built and  carries the failure message otherwise;  `resultFileId`, `resultFileName` and `resultFileUrl` are filled in only once the file exists, and that file  also stays in the My documents folder of the caller. Use the `POST` operation on this path to start a report  and the `DELETE` one to cancel it.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2087,7 +2099,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_usage(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the usage statistics from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2101,11 +2113,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocsCloudUsageWrapper:
-        """Get the DocsCloud tenant usage
+        """Get the Docs Connect tenant usage
 
-        Returns the DocsCloud usage statistics of the current portal.
+        Returns the Docs Connect usage of the current portal: the number of users who have been active in Docs Connect in  the current period, and the moment that period is counted from. The portal must have an activated Docs Connect  tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. The caller must be a  portal administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is read-only, idempotent and cached for a minute, so pass `refresh=true` to read the  current state from Docs Connect. In the result, `activeCount` counts the users seen since `since`, which is in  UTC, and it is one total for the whole tenant, with no split by role and no limit to compare it against. For  the editor and viewer breakdown with the license limits use `GET api/2.0/settings/docscloud/tenant/info`, and  for the users counted one by one `GET api/2.0/settings/docscloud/tenant/quota`.
 
-        :param refresh: Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the usage statistics from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2140,6 +2152,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudUsageWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2161,7 +2174,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_usage_with_http_info(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the usage statistics from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2175,11 +2188,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocsCloudUsageWrapper]:
-        """Get the DocsCloud tenant usage
+        """Get the Docs Connect tenant usage
 
-        Returns the DocsCloud usage statistics of the current portal.
+        Returns the Docs Connect usage of the current portal: the number of users who have been active in Docs Connect in  the current period, and the moment that period is counted from. The portal must have an activated Docs Connect  tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. The caller must be a  portal administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is read-only, idempotent and cached for a minute, so pass `refresh=true` to read the  current state from Docs Connect. In the result, `activeCount` counts the users seen since `since`, which is in  UTC, and it is one total for the whole tenant, with no split by role and no limit to compare it against. For  the editor and viewer breakdown with the license limits use `GET api/2.0/settings/docscloud/tenant/info`, and  for the users counted one by one `GET api/2.0/settings/docscloud/tenant/quota`.
 
-        :param refresh: Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the usage statistics from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2214,6 +2227,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudUsageWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2235,7 +2249,7 @@ class DocsCloudApi:
     @validate_call
     def get_tenant_usage_without_preload_content(
         self,
-        refresh: Annotated[Optional[StrictBool], Field(description="Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.")] = None,
+        refresh: Annotated[Optional[StrictBool], Field(description="Pass `true` to skip the cached copy and request the usage statistics from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2249,11 +2263,11 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the DocsCloud tenant usage
+        """Get the Docs Connect tenant usage
 
-        Returns the DocsCloud usage statistics of the current portal.
+        Returns the Docs Connect usage of the current portal: the number of users who have been active in Docs Connect in  the current period, and the moment that period is counted from. The portal must have an activated Docs Connect  tenant, granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. The caller must be a  portal administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is read-only, idempotent and cached for a minute, so pass `refresh=true` to read the  current state from Docs Connect. In the result, `activeCount` counts the users seen since `since`, which is in  UTC, and it is one total for the whole tenant, with no split by role and no limit to compare it against. For  the editor and viewer breakdown with the license limits use `GET api/2.0/settings/docscloud/tenant/info`, and  for the users counted one by one `GET api/2.0/settings/docscloud/tenant/quota`.
 
-        :param refresh: Specifies whether to bypass the cache and request the usage statistics from DocsCloud again.
+        :param refresh: Pass `true` to skip the cached copy and request the usage statistics from Docs Connect again, replacing the cached one; with the default `false` the answer may be up to a minute old.
         :type refresh: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2288,6 +2302,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudUsageWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2392,9 +2407,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """Start the DocsCloud trial
+        """Start the Docs Connect trial
 
-        Starts the DocsCloud trial.
+        Activates the free Docs Connect trial subscription for the current portal, and, once a Docs Connect server is  assigned to the portal, allows the address of that server in the Content Security Policy settings.  The portal tariff must be in the trial or paid state (not delayed and not unpaid), and the portal must not  already hold a Docs Connect trial, Docs Connect or Docs Connect Dev Pack subscription: the quotas of the current  tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a portal administrator allowed to edit  the portal settings, on an installation where the billing service is configured. The operation changes the  portal subscription and is not idempotent: repeating it after a successful activation fails with 400.  It returns `true` when the trial has been granted, and `false` when the billing service declines it  (for example, when this portal has already used its trial), in which case nothing is changed. It never buys  a paid plan: an existing paid Docs Connect subscription is moved to Docs Connect Dev Pack by  `POST api/2.0/settings/docscloud/switchtodevpack` instead.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2465,9 +2480,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """Start the DocsCloud trial
+        """Start the Docs Connect trial
 
-        Starts the DocsCloud trial.
+        Activates the free Docs Connect trial subscription for the current portal, and, once a Docs Connect server is  assigned to the portal, allows the address of that server in the Content Security Policy settings.  The portal tariff must be in the trial or paid state (not delayed and not unpaid), and the portal must not  already hold a Docs Connect trial, Docs Connect or Docs Connect Dev Pack subscription: the quotas of the current  tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a portal administrator allowed to edit  the portal settings, on an installation where the billing service is configured. The operation changes the  portal subscription and is not idempotent: repeating it after a successful activation fails with 400.  It returns `true` when the trial has been granted, and `false` when the billing service declines it  (for example, when this portal has already used its trial), in which case nothing is changed. It never buys  a paid plan: an existing paid Docs Connect subscription is moved to Docs Connect Dev Pack by  `POST api/2.0/settings/docscloud/switchtodevpack` instead.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2538,9 +2553,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Start the DocsCloud trial
+        """Start the Docs Connect trial
 
-        Starts the DocsCloud trial.
+        Activates the free Docs Connect trial subscription for the current portal, and, once a Docs Connect server is  assigned to the portal, allows the address of that server in the Content Security Policy settings.  The portal tariff must be in the trial or paid state (not delayed and not unpaid), and the portal must not  already hold a Docs Connect trial, Docs Connect or Docs Connect Dev Pack subscription: the quotas of the current  tariff are listed by `GET api/2.0/portal/tariff`. The caller must be a portal administrator allowed to edit  the portal settings, on an installation where the billing service is configured. The operation changes the  portal subscription and is not idempotent: repeating it after a successful activation fails with 400.  It returns `true` when the trial has been granted, and `false` when the billing service declines it  (for example, when this portal has already used its trial), in which case nothing is changed. It never buys  a paid plan: an existing paid Docs Connect subscription is moved to Docs Connect Dev Pack by  `POST api/2.0/settings/docscloud/switchtodevpack` instead.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2677,9 +2692,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """Switch the DocsCloud subscription to DocsCloudDevPack
+        """Switch Docs Connect to Docs Connect Dev Pack
 
-        Switches the current DocsCloud subscription to DocsCloudDevPack: charges the price difference  from the wallet and transfers the subscription (with its license) to the target product.  The quantity is taken from the currently purchased DocsCloud quota.  Only the portal payer can perform this action.
+        Upgrades the paid Docs Connect subscription of the current portal to Docs Connect Dev Pack for the requested  number of users, charging the price difference to the portal wallet and moving the Docs Connect license  to the new product. The portal must hold an active Docs Connect subscription, must not already hold a  Docs Connect Dev Pack one, and its tariff must not be delayed or unpaid: the quotas and the state of the  current tariff are listed by `GET api/2.0/portal/tariff`, and the amount that will be charged is  returned by `POST api/2.0/settings/docscloud/calculatedevpack` for the same `quantity`. The caller  must be a DocSpace administrator of a portal registered with the billing service. The switch is  synchronous, mutating and not idempotent: repeating it after a successful call fails with 400, and  concurrent calls for one portal are serialized so that the wallet is charged only once. It returns  `true` when the subscription has been switched, and `false` when the billing service declines or  fails to perform the switch, in which case nothing is charged and the portal stays on Docs Connect.  Only the Docs Connect to Docs Connect Dev Pack direction is supported: to change the number of users of a  subscription the portal already has, or to schedule a reversion from Docs Connect Dev Pack back to  Docs Connect at the next billing period, use `PUT api/2.0/portal/payment/updatewallet` instead.
 
         :param docs_cloud_dev_pack_request_dto:
         :type docs_cloud_dev_pack_request_dto: DocsCloudDevPackRequestDto
@@ -2754,9 +2769,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """Switch the DocsCloud subscription to DocsCloudDevPack
+        """Switch Docs Connect to Docs Connect Dev Pack
 
-        Switches the current DocsCloud subscription to DocsCloudDevPack: charges the price difference  from the wallet and transfers the subscription (with its license) to the target product.  The quantity is taken from the currently purchased DocsCloud quota.  Only the portal payer can perform this action.
+        Upgrades the paid Docs Connect subscription of the current portal to Docs Connect Dev Pack for the requested  number of users, charging the price difference to the portal wallet and moving the Docs Connect license  to the new product. The portal must hold an active Docs Connect subscription, must not already hold a  Docs Connect Dev Pack one, and its tariff must not be delayed or unpaid: the quotas and the state of the  current tariff are listed by `GET api/2.0/portal/tariff`, and the amount that will be charged is  returned by `POST api/2.0/settings/docscloud/calculatedevpack` for the same `quantity`. The caller  must be a DocSpace administrator of a portal registered with the billing service. The switch is  synchronous, mutating and not idempotent: repeating it after a successful call fails with 400, and  concurrent calls for one portal are serialized so that the wallet is charged only once. It returns  `true` when the subscription has been switched, and `false` when the billing service declines or  fails to perform the switch, in which case nothing is charged and the portal stays on Docs Connect.  Only the Docs Connect to Docs Connect Dev Pack direction is supported: to change the number of users of a  subscription the portal already has, or to schedule a reversion from Docs Connect Dev Pack back to  Docs Connect at the next billing period, use `PUT api/2.0/portal/payment/updatewallet` instead.
 
         :param docs_cloud_dev_pack_request_dto:
         :type docs_cloud_dev_pack_request_dto: DocsCloudDevPackRequestDto
@@ -2831,9 +2846,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Switch the DocsCloud subscription to DocsCloudDevPack
+        """Switch Docs Connect to Docs Connect Dev Pack
 
-        Switches the current DocsCloud subscription to DocsCloudDevPack: charges the price difference  from the wallet and transfers the subscription (with its license) to the target product.  The quantity is taken from the currently purchased DocsCloud quota.  Only the portal payer can perform this action.
+        Upgrades the paid Docs Connect subscription of the current portal to Docs Connect Dev Pack for the requested  number of users, charging the price difference to the portal wallet and moving the Docs Connect license  to the new product. The portal must hold an active Docs Connect subscription, must not already hold a  Docs Connect Dev Pack one, and its tariff must not be delayed or unpaid: the quotas and the state of the  current tariff are listed by `GET api/2.0/portal/tariff`, and the amount that will be charged is  returned by `POST api/2.0/settings/docscloud/calculatedevpack` for the same `quantity`. The caller  must be a DocSpace administrator of a portal registered with the billing service. The switch is  synchronous, mutating and not idempotent: repeating it after a successful call fails with 400, and  concurrent calls for one portal are serialized so that the wallet is charged only once. It returns  `true` when the subscription has been switched, and `false` when the billing service declines or  fails to perform the switch, in which case nothing is charged and the portal stays on Docs Connect.  Only the Docs Connect to Docs Connect Dev Pack direction is supported: to change the number of users of a  subscription the portal already has, or to schedule a reversion from Docs Connect Dev Pack back to  Docs Connect at the next billing period, use `PUT api/2.0/portal/payment/updatewallet` instead.
 
         :param docs_cloud_dev_pack_request_dto:
         :type docs_cloud_dev_pack_request_dto: DocsCloudDevPackRequestDto
@@ -2988,9 +3003,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Terminate the DocsCloud tenant quota report generation
+        """Terminate the Docs Connect quota report
 
-        Terminates generating the DocsCloud user quota report.
+        Cancels the Docs Connect user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report` and removes its job, so that a new report can be started  right away. There is no precondition: the call is accepted even when this user has no report job at all, and  it affects the caller's own job only, never one started by another administrator. The caller must be a portal  administrator allowed to edit the portal settings. The cancellation is asynchronous and idempotent: 200 means  the request has been queued for the report worker, not that the job has already stopped, so poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until it returns an empty result. Nothing is returned in  the body. A report file that has already been saved in the My documents folder of the caller is left there  and has to be deleted through the file operations if it is no longer wanted.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3058,9 +3073,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Terminate the DocsCloud tenant quota report generation
+        """Terminate the Docs Connect quota report
 
-        Terminates generating the DocsCloud user quota report.
+        Cancels the Docs Connect user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report` and removes its job, so that a new report can be started  right away. There is no precondition: the call is accepted even when this user has no report job at all, and  it affects the caller's own job only, never one started by another administrator. The caller must be a portal  administrator allowed to edit the portal settings. The cancellation is asynchronous and idempotent: 200 means  the request has been queued for the report worker, not that the job has already stopped, so poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until it returns an empty result. Nothing is returned in  the body. A report file that has already been saved in the My documents folder of the caller is left there  and has to be deleted through the file operations if it is no longer wanted.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3128,9 +3143,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Terminate the DocsCloud tenant quota report generation
+        """Terminate the Docs Connect quota report
 
-        Terminates generating the DocsCloud user quota report.
+        Cancels the Docs Connect user quota report that the current user started with  `POST api/2.0/settings/docscloud/tenant/quota/report` and removes its job, so that a new report can be started  right away. There is no precondition: the call is accepted even when this user has no report job at all, and  it affects the caller's own job only, never one started by another administrator. The caller must be a portal  administrator allowed to edit the portal settings. The cancellation is asynchronous and idempotent: 200 means  the request has been queued for the report worker, not that the job has already stopped, so poll  `GET api/2.0/settings/docscloud/tenant/quota/report` until it returns an empty result. Nothing is returned in  the body. A report file that has already been saved in the My documents folder of the caller is left there  and has to be deleted through the file operations if it is no longer wanted.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3264,9 +3279,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DocsCloudConfigWrapper:
-        """Update the DocsCloud tenant configuration
+        """Update the Docs Connect tenant configuration
 
-        Updates the DocsCloud tenant configuration of the current portal with the parameters specified in the request.
+        Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
 
         :param docs_cloud_config:
         :type docs_cloud_config: DocsCloudConfig
@@ -3303,6 +3318,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -3338,9 +3354,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DocsCloudConfigWrapper]:
-        """Update the DocsCloud tenant configuration
+        """Update the Docs Connect tenant configuration
 
-        Updates the DocsCloud tenant configuration of the current portal with the parameters specified in the request.
+        Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
 
         :param docs_cloud_config:
         :type docs_cloud_config: DocsCloudConfig
@@ -3377,6 +3393,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -3412,9 +3429,9 @@ class DocsCloudApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update the DocsCloud tenant configuration
+        """Update the Docs Connect tenant configuration
 
-        Updates the DocsCloud tenant configuration of the current portal with the parameters specified in the request.
+        Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
 
         :param docs_cloud_config:
         :type docs_cloud_config: DocsCloudConfig
@@ -3451,6 +3468,7 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudConfigWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",

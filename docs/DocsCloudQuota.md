@@ -1,5 +1,5 @@
 # DocsCloudQuota
-Represents the current user quota of a DocsCloud tenant.
+Represents the current user quota of a Docs Connect tenant.
 
 ## Properties
 

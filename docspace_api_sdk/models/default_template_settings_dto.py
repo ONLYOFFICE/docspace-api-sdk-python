@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class DefaultTemplateSettingsDto(BaseModel):
     """
-    Default templates settings parameters.
+    The blank document the portal creates for each extension it covers.
     """ # noqa: E501
-    items: Optional[List[DefaultTemplateItemDto]] = Field(description="Default templates list.", json_schema_extra={"examples": [[{"extension": ".docx", "title": "Blank Document"}]]})
+    items: Optional[List[DefaultTemplateItemDto]] = Field(description="One entry per extension the portal's built-in template set covers, whether or not a custom blank has been  chosen for it, so the list is never empty and its length follows the template set rather than the number of  custom blanks. Entries come in the order an interface shows them: text document, spreadsheet, presentation and  PDF first, everything else by extension.", json_schema_extra={"examples": [[{"fileExtension": ".docx", "fileTitle": "Company letter.docx", "selectedFile": 123}]]})
     __properties: ClassVar[List[str]] = ["items"]
 
     model_config = ConfigDict(

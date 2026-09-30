@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class ReviewConfig(BaseModel):
     """
-    Configuration for review display settings.
+    How tracked changes are displayed when the document opens.
     """ # noqa: E501
-    review_display: Optional[StrictStr] = Field(default=None, description="The review display string representation.", alias="reviewDisplay", json_schema_extra={"examples": ["full"]})
+    review_display: Optional[StrictStr] = Field(default=None, description="How the editors render tracked changes at first: with the markup, in a simplified markup, as the final text,  or as the original text. A session that may not write opens on the final text.", alias="reviewDisplay", json_schema_extra={"examples": ["original"]})
     __properties: ClassVar[List[str]] = ["reviewDisplay"]
 
     model_config = ConfigDict(

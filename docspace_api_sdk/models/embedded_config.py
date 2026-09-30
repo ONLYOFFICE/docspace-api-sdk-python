@@ -28,13 +28,13 @@ from typing_extensions import Self
 
 class EmbeddedConfig(BaseModel):
     """
-    The configuration parameters for the embedded document type.
+    The addresses the framed viewer needs. It is reported for the embedded layout only.
     """ # noqa: E501
-    embed_url: Optional[StrictStr] = Field(default=None, description="The absolute URL to the document serving as a source file for the document embedded into the web page.", alias="embedUrl", json_schema_extra={"examples": ["https://portal.example.com/files/editor?action=embedded&share=abc123"]})
-    save_url: Optional[StrictStr] = Field(default=None, description="The absolute URL that will allow the document to be saved onto the user personal computer.", alias="saveUrl", json_schema_extra={"examples": ["https://portal.example.com/files/filehandler?action=download&share=abc123"]})
-    share_link_param: Optional[StrictStr] = Field(default=None, description="The shared URL parameter.", alias="shareLinkParam", json_schema_extra={"examples": ["&share=abc123"]})
-    share_url: Optional[StrictStr] = Field(default=None, description="The absolute URL that will allow other users to share this document.", alias="shareUrl", json_schema_extra={"examples": ["https://portal.example.com/files/editor?action=view&share=abc123"]})
-    toolbar_docked: Optional[StrictStr] = Field(default=None, description="The place for the embedded viewer toolbar, can be either top or bottom.", alias="toolbarDocked", json_schema_extra={"examples": ["top"]})
+    embed_url: Optional[StrictStr] = Field(default=None, description="The page to put into the frame. It is empty when the opening carries no external share key, since a framed  viewer cannot authenticate a portal member.", alias="embedUrl", json_schema_extra={"examples": ["https://portal.example.com/products/files/doceditor?action=embedded&share=HkQd9nT2"]})
+    save_url: Optional[StrictStr] = Field(default=None, description="Where the download button of the framed viewer leads.", alias="saveUrl", json_schema_extra={"examples": ["https://portal.example.com/filehandler.ashx?action=download&share=HkQd9nT2"]})
+    share_link_param: Optional[StrictStr] = Field(default=None, description="The query fragment carrying the external share key, ampersand included, out of which the addresses around it  are built.", alias="shareLinkParam", json_schema_extra={"examples": ["&fileid=512&share=HkQd9nT2"]})
+    share_url: Optional[StrictStr] = Field(default=None, description="The address behind the share button of the framed viewer, the document opened full-screen for reading. It is  empty when the opening carries no external share key.", alias="shareUrl", json_schema_extra={"examples": ["https://portal.example.com/products/files/doceditor?action=view&share=HkQd9nT2"]})
+    toolbar_docked: Optional[StrictStr] = Field(default=None, description="Where the framed viewer puts its toolbar. The portal always asks for the top.", alias="toolbarDocked", json_schema_extra={"examples": ["top"]})
     __properties: ClassVar[List[str]] = ["embedUrl", "saveUrl", "shareLinkParam", "shareUrl", "toolbarDocked"]
 
     model_config = ConfigDict(

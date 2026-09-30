@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class TenantUserInvitationSettingsRequestDto(BaseModel):
     """
-    The request parameters for updating the user invitation settings.
+    Whether the portal still lets its members invite new members and new guests.
     """ # noqa: E501
-    allow_inviting_members: Optional[StrictBool] = Field(default=None, description="Specifies whether to allow inviting new DocSpace members through the Contacts section.", alias="allowInvitingMembers", json_schema_extra={"examples": [True]})
-    allow_inviting_guests: Optional[StrictBool] = Field(default=None, description="Specifies whether to allow all DocSpace members to invite external guests to the rooms.", alias="allowInvitingGuests", json_schema_extra={"examples": [False]})
+    allow_inviting_members: Optional[StrictBool] = Field(default=None, description="Whether new DocSpace members may be invited through the Contacts section. Switching it off only stops new  invitations being created; links already issued keep working and members already invited stay.", alias="allowInvitingMembers", json_schema_extra={"examples": [True]})
+    allow_inviting_guests: Optional[StrictBool] = Field(default=None, description="Whether every DocSpace member, and not only an administrator, may invite external guests into rooms.  Switching it off leaves the guests already invited in place.", alias="allowInvitingGuests", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["allowInvitingMembers", "allowInvitingGuests"]
 
     model_config = ConfigDict(

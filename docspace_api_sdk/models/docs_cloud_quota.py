@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class DocsCloudQuota(BaseModel):
     """
-    Represents the current user quota of a DocsCloud tenant.
+    Represents the current user quota of a Docs Connect tenant.
     """ # noqa: E501
     users: Optional[List[DocsCloudQuotaUser]] = Field(default=None, description="The editor users.", json_schema_extra={"examples": [[{"userid": "00000000-0000-0000-0000-000000000000", "expire": "2024-01-15T10:30:00Z"}]]})
     users_view: Optional[List[DocsCloudQuotaUser]] = Field(default=None, description="The viewer users.", alias="usersView", json_schema_extra={"examples": [[{"userid": "00000000-0000-0000-0000-000000000000", "expire": "2024-01-15T10:30:00Z"}]]})

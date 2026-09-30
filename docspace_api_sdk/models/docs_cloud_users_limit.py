@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class DocsCloudUsersLimit(BaseModel):
     """
-    Represents the user limits of a DocsCloud license.
+    Represents the user limits of a Docs Connect license.
     """ # noqa: E501
     edit: Optional[StrictInt] = Field(default=None, description="The maximum number of users who can edit documents.", json_schema_extra={"examples": [100]})
     view: Optional[StrictInt] = Field(default=None, description="The maximum number of users who can view documents.", json_schema_extra={"examples": [100]})

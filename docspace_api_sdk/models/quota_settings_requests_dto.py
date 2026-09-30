@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class QuotaSettingsRequestsDto(BaseModel):
     """
-    The request parameters for managing the user storage quota configurations.
+    The default storage limit given to newly created users, rooms or AI agents, and whether it is enforced.
     """ # noqa: E501
-    enable_quota: Optional[StrictBool] = Field(default=None, description="Specifies whether the storage quota restrictions are enabled.", alias="enableQuota", json_schema_extra={"examples": [True]})
+    enable_quota: Optional[StrictBool] = Field(default=None, description="Whether the limit is enforced at all. While it is false the size is ignored and nothing created afterwards  carries a limit; objects that already have one keep it either way.", alias="enableQuota", json_schema_extra={"examples": [True]})
     default_quota: QuotaSettingsRequestsDtoDefaultQuota = Field(alias="defaultQuota")
     __properties: ClassVar[List[str]] = ["enableQuota", "defaultQuota"]
 

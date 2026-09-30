@@ -1,11 +1,11 @@
 # TenantDevToolsAccessSettingsDto
-The request parameters for managing the Developer Tools access settings for the current tenant.
+Whether the `User` role is barred from the portal developer tools.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**limited_access_for_users** | **bool** | Determines if users have restricted access to the Developer Tools. | [optional] 
+**limited_access_for_users** | **bool** | Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way. | [optional] 
 
 ## Example
 

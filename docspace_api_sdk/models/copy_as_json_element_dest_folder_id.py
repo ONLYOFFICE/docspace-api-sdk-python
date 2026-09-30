@@ -29,7 +29,7 @@ COPYASJSONELEMENTDESTFOLDERID_ONE_OF_SCHEMAS = ["int", "str"]
 
 class CopyAsJsonElementDestFolderId(BaseModel):
     """
-    The destination folder ID of the copied file.
+    The folder the copy is placed in, as a number for a folder inside the portal and as a string for one in a  connected third-party storage; obtain it from `GET api/2.0/files/@root`. Anything else is answered with an  empty body and nothing is copied.
     """
     # data type: int
     oneof_schema_1_validator: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [1234]})

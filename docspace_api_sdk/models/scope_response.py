@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class ScopeResponse(BaseModel):
     """
-    The response containing the scope information.
+    One scope from the tenant scope catalogue, as it may be requested by a client.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The scope name.")
-    group: Optional[StrictStr] = Field(default=None, description="The group the scope belongs to.")
-    type: Optional[StrictStr] = Field(default=None, description="The scope type.")
+    name: Optional[StrictStr] = Field(default=None, description="The scope exactly as it is written in an authorization request, for example files:read or openid.", json_schema_extra={"examples": ["files:read"]})
+    group: Optional[StrictStr] = Field(default=None, description="The area of the portal the scope belongs to, which is what groups the scopes on the consent screen: files, rooms, contacts, profiles or openid.", json_schema_extra={"examples": ["files"]})
+    type: Optional[StrictStr] = Field(default=None, description="What the scope allows inside its group: read for read-only access, write for changes, and openid for the identity scope itself.", json_schema_extra={"examples": ["read"]})
     __properties: ClassVar[List[str]] = ["name", "group", "type"]
 
     model_config = ConfigDict(

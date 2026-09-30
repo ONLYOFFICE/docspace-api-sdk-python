@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class BackupServiceStateDto(BaseModel):
     """
-    Backup service state.
+    Whether the paid backup service is switched on for a portal.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the backup service is enabled or not.", json_schema_extra={"examples": [True]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the paid backup service is switched on for this portal, which is a setting of its  wallet rather than the health of the backup service. While it is true, backups beyond the free  monthly allowance are charged to the wallet.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["enabled"]
 
     model_config = ConfigDict(

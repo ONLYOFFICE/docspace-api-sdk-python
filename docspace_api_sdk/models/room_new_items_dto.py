@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class RoomNewItemsDto(BaseModel):
     """
-    The room new items information.
+    The unseen entries of one room inside a day group.
     """ # noqa: E501
-    room: Optional[FileEntryBaseDto] = Field(default=None, description="The room file entry.")
-    items: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of file entry items.")
+    room: Optional[FileEntryBaseDto] = Field(default=None, description="The room the entries were found in, in its short form: only the identifier, the title, the room type and the  logo are filled in.")
+    items: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The files of that room the caller has not opened yet, the most recently changed first. Reading them here does  not clear the badges; opening the room itself does.")
     __properties: ClassVar[List[str]] = ["room", "items"]
 
     model_config = ConfigDict(

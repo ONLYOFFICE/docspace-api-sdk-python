@@ -30,9 +30,9 @@ class AccountInfoDto(BaseModel):
     """
     The account information parameters.
     """ # noqa: E501
-    provider: Optional[StrictStr] = Field(description="The account provider.", json_schema_extra={"examples": ["Google"]})
-    url: Optional[StrictStr] = Field(description="The account URL.", json_schema_extra={"examples": ["https://example.com/account"]})
-    linked: StrictBool = Field(description="Specifies if an account is linked with other profiles or not.", json_schema_extra={"examples": [True]})
+    provider: Optional[StrictStr] = Field(description="The name of the identity provider, in lowercase, as every other operation of this group expects it: `google`,  `zoom`, `linkedin`, `facebook`, `twitter`, `microsoft`, `appleid`, `weixin` or `nextcloud`.", json_schema_extra={"examples": ["google"]})
+    url: Optional[StrictStr] = Field(description="The URL that starts the login with this provider. Open it as it is - it already carries the provider and the  popup or redirect mode the request asked for.", json_schema_extra={"examples": ["/login.ashx?auth=google&mode=popup&callback=onAuthCallback"]})
+    linked: StrictBool = Field(description="Whether this provider is already linked to the calling profile. It is always false for an anonymous caller,  because there is no profile to compare against.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["provider", "url", "linked"]
 
     model_config = ConfigDict(

@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class StartFillingForm(BaseModel):
     """
-    The parameters of the button that starts filling out the form.
+    The button the editor shows to begin filling out a form.
     """ # noqa: E501
-    text: Optional[StrictStr] = Field(default=None, description="The caption of the button that starts filling out the form.", json_schema_extra={"examples": ["Start Filling"]})
+    text: Optional[StrictStr] = Field(default=None, description="The caption to put on the button, already translated into the language of the caller.", json_schema_extra={"examples": ["Start filling"]})
     __properties: ClassVar[List[str]] = ["text"]
 
     model_config = ConfigDict(

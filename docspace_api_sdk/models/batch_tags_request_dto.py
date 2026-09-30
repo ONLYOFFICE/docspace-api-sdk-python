@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class BatchTagsRequestDto(BaseModel):
     """
-    The parameters for managing room tags.
+    The tag names a request attaches to a room or detaches from it.
     """ # noqa: E501
-    names: List[StrictStr] = Field(description="The list of tag names.", json_schema_extra={"examples": [["tag1", "tag2", "tag3"]]})
+    names: List[StrictStr] = Field(description="The tags, by name: a tag has no identifier of its own, and the name is what links a room to it.  `GET api/2.0/files/tags` lists the names already in the portal catalogue. An empty list is accepted and does  nothing, while a blank or overlong entry makes the whole request invalid.", json_schema_extra={"examples": [["Finance", "2026"]]})
     __properties: ClassVar[List[str]] = ["names"]
 
     model_config = ConfigDict(

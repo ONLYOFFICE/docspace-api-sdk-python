@@ -28,16 +28,16 @@ from typing_extensions import Self
 
 class FirebaseDto(BaseModel):
     """
-    The Firebase parameters.
+    The Firebase project a client initialises its SDK with to receive push notifications from this portal.
     """ # noqa: E501
-    api_key: Optional[StrictStr] = Field(description="The Firebase API key.", alias="apiKey", json_schema_extra={"examples": ["AIzaSyDxK9L3j4H8mN2pQ5rS6tU7vW8xY9zA1bC"]})
-    auth_domain: Optional[StrictStr] = Field(description="The Firebase authentication domain.", alias="authDomain", json_schema_extra={"examples": ["myapp-12345.firebaseapp.com"]})
-    project_id: Optional[StrictStr] = Field(description="The Firebase project ID.", alias="projectId", json_schema_extra={"examples": ["myapp-12345"]})
-    storage_bucket: Optional[StrictStr] = Field(description="The Firebase storage bucket.", alias="storageBucket", json_schema_extra={"examples": ["myapp-12345.appspot.com"]})
-    messaging_sender_id: Optional[StrictStr] = Field(description="The Firebase messaging sender ID.", alias="messagingSenderId", json_schema_extra={"examples": ["123456789012"]})
-    app_id: Optional[StrictStr] = Field(description="The Firebase application ID.", alias="appId", json_schema_extra={"examples": ["1:123456789012:web:a1b2c3d4e5f6g7h8"]})
-    measurement_id: Optional[StrictStr] = Field(description="The Firebase measurement ID.", alias="measurementId", json_schema_extra={"examples": ["G-ABCD123456"]})
-    database_url: Optional[StrictStr] = Field(description="The Firebase database URL.", alias="databaseURL", json_schema_extra={"examples": ["https://myapp-12345.firebaseio.com"]})
+    api_key: Optional[StrictStr] = Field(description="The web API key of the project. Every field of this object is an empty string on an installation that  configures no Firebase project, and an empty `projectId` is the cheapest thing to test for before  initialising an SDK. None of these values is a secret - they are meant to be embedded in a client.", alias="apiKey", json_schema_extra={"examples": ["AIzaSyDxK9L3j4H8mN2pQ5rS6tU7vW8xY9zA1bC"]})
+    auth_domain: Optional[StrictStr] = Field(description="The host the Firebase SDK performs its own authentication against.", alias="authDomain", json_schema_extra={"examples": ["myapp-12345.firebaseapp.com"]})
+    project_id: Optional[StrictStr] = Field(description="The identifier of the Firebase project itself, which ties all the other fields together.", alias="projectId", json_schema_extra={"examples": ["myapp-12345"]})
+    storage_bucket: Optional[StrictStr] = Field(description="The Cloud Storage bucket of the project. The portal does not store portal files there; it is part of the  SDK configuration.", alias="storageBucket", json_schema_extra={"examples": ["myapp-12345.appspot.com"]})
+    messaging_sender_id: Optional[StrictStr] = Field(description="The sender ID that push messages of this project arrive under, which a client checks an incoming message  against.", alias="messagingSenderId", json_schema_extra={"examples": ["123456789012"]})
+    app_id: Optional[StrictStr] = Field(description="The identifier of the Firebase application registration this client is to use.", alias="appId", json_schema_extra={"examples": ["1:123456789012:web:a1b2c3d4e5f6g7h8"]})
+    measurement_id: Optional[StrictStr] = Field(description="The Google Analytics measurement ID of the project, empty when the project reports no analytics.", alias="measurementId", json_schema_extra={"examples": ["G-ABCD123456"]})
+    database_url: Optional[StrictStr] = Field(description="The Realtime Database endpoint of the project, empty when the project has no such database.", alias="databaseURL", json_schema_extra={"examples": ["https://myapp-12345.firebaseio.com"]})
     __properties: ClassVar[List[str]] = ["apiKey", "authDomain", "projectId", "storageBucket", "messagingSenderId", "appId", "measurementId", "databaseURL"]
 
     model_config = ConfigDict(

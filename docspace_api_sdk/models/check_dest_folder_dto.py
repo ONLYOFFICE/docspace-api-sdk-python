@@ -30,10 +30,10 @@ from typing_extensions import Self
 
 class CheckDestFolderDto(BaseModel):
     """
-    The result of checking whether files can be moved or copied to the specified folder.
+    The verdict on placing the requested files in the destination folder.
     """ # noqa: E501
-    result: Optional[CheckDestFolderResult] = Field(default=None, description="The result of the validation operation.")
-    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The list of files in the destination folder.", json_schema_extra={"examples": [[{"id": 10, "title": "document.docx"}]]})
+    result: Optional[CheckDestFolderResult] = Field(default=None, description="Whether the destination folder accepts all of the requested files, only some of them or none at all.")
+    files: Optional[List[FileEntryBaseDto]] = Field(default=None, description="The requested files the destination accepts, each with the information it was listed under. The files it  rejects are absent, so an empty list means that none of them is accepted.", json_schema_extra={"examples": [[{"title": "document.docx", "fileEntryType": 2}]]})
     __properties: ClassVar[List[str]] = ["result", "files"]
 
     model_config = ConfigDict(

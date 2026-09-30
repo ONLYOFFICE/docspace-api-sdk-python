@@ -32,11 +32,11 @@ from docspace_api_sdk.models.file_operation_request_base_dto import FileOperatio
 
 class DuplicateRequestDto(FileOperationRequestBaseDto):
     """
-    The request parameters for duplicating files and fodlers.
+    The files and folders to duplicate.
     """
 
-    folder_ids: Optional[List[DuplicateRequestDtoAllOfFolderIds]] = Field(default=None, description="The list of folder IDs.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
-    file_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    folder_ids: Optional[List[DuplicateRequestDtoAllOfFolderIds]] = Field(default=None, description="The folders to duplicate, by id; the copy of each one is created in the folder that already holds it. A number  addresses a folder stored in the portal itself, a string addresses a folder on a connected third-party  account, and both kinds may be sent in one list.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The files to duplicate, by id; the copy of each one is created in the folder that already holds it. A number  addresses a file stored in the portal itself, a string addresses a file on a connected third-party account,  and both kinds may be sent in one list.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
 
     model_config = ConfigDict(
         populate_by_name=True,

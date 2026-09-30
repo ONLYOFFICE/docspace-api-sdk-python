@@ -1,11 +1,11 @@
 # ExternalShareRequestParam
-The external data parameters.
+The password that unlocks a protected external share link.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**password** | **str** | The password to share external data. | [optional] 
+**password** | **str** | The password chosen by the member who shared the entry, spelled exactly as they typed it. It is compared  against the stored value and never returned back; a mismatch is reported through the answer's status instead  of an error. | [optional] 
 
 ## Example
 

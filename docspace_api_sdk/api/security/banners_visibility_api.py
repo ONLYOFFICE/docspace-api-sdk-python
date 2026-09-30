@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
@@ -63,7 +63,7 @@ class BannersVisibilityApi:
     ) -> TenantBannerSettingsWrapper:
         """Set the banners visibility
 
-        Sets the visibility settings of the promotional banners in the portal.
+        Sets whether the portal's promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller's role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
 
         :param tenant_banner_settings_dto:
         :type tenant_banner_settings_dto: TenantBannerSettingsDto
@@ -137,7 +137,7 @@ class BannersVisibilityApi:
     ) -> ApiResponse[TenantBannerSettingsWrapper]:
         """Set the banners visibility
 
-        Sets the visibility settings of the promotional banners in the portal.
+        Sets whether the portal's promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller's role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
 
         :param tenant_banner_settings_dto:
         :type tenant_banner_settings_dto: TenantBannerSettingsDto
@@ -211,7 +211,7 @@ class BannersVisibilityApi:
     ) -> RESTResponseType:
         """Set the banners visibility
 
-        Sets the visibility settings of the promotional banners in the portal.
+        Sets whether the portal's promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller's role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
 
         :param tenant_banner_settings_dto:
         :type tenant_banner_settings_dto: TenantBannerSettingsDto

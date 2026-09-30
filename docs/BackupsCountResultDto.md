@@ -1,12 +1,12 @@
 # BackupsCountResultDto
-The number of backups.
+The backups of a portal, split by who paid for them.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**free** | **int** | The number of free backups. | [optional] 
-**paid** | **int** | The number of paid backups. | [optional] 
+**free** | **int** | The number of backups covered by the free monthly allowance. | [optional] 
+**paid** | **int** | The number of backups charged to the portal wallet. | [optional] 
 
 ## Example
 

@@ -31,11 +31,11 @@ class TaskProgressResponseDto(BaseModel):
     """
     The task progress response parameters.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The task progress ID.", json_schema_extra={"examples": ["task-123456"]})
-    error: Optional[StrictStr] = Field(default=None, description="The task progress error message.", json_schema_extra={"examples": ["An error occurred during processing"]})
-    percentage: StrictInt = Field(description="The percentage of the task progress.", json_schema_extra={"examples": [75]})
-    is_completed: StrictBool = Field(description="Specifies if the task peogress is completed or not.", alias="isCompleted", json_schema_extra={"examples": [False]})
-    status: DistributedTaskStatus = Field(description="The status of the distributed task.")
+    id: Optional[StrictStr] = Field(description="The ID of the queued job. It identifies this run of the job and changes every time the job is started again.", json_schema_extra={"examples": ["task-123456"]})
+    error: Optional[StrictStr] = Field(default=None, description="The message of the error that stopped the job. It is empty while the job is running and after a job that  succeeded, and it is the only place where the reason for a failure is reported.", json_schema_extra={"examples": ["An error occurred during processing"]})
+    percentage: StrictInt = Field(description="The share of the job that is already done, from 0 to 100.", json_schema_extra={"examples": [75]})
+    is_completed: StrictBool = Field(description="Specifies whether the job has stopped running. This is the field to poll: true means the job will not change  any more, whether it succeeded, failed or was cancelled, and `status` tells which of the three it is.", alias="isCompleted", json_schema_extra={"examples": [False]})
+    status: DistributedTaskStatus = Field(description="The state of the job: `Created` while it waits in the queue, `Running` while it works, `Completed` once it has  finished on its own, `Canceled` after a terminate operation, and `Failted` when it stopped on an error, in  which case `error` carries the reason.")
     __properties: ClassVar[List[str]] = ["id", "error", "percentage", "isCompleted", "status"]
 
     model_config = ConfigDict(

@@ -28,13 +28,13 @@ from typing_extensions import Self
 
 class CustomerMonthlyUsageDto(BaseModel):
     """
-    Aggregated customer spending for a single calendar month.
+    What the portal spent from its wallet in one calendar month, added up across every service.
     """ # noqa: E501
-    year: Optional[StrictInt] = Field(default=None, description="The calendar year.", json_schema_extra={"examples": [2025]})
-    month: Optional[StrictInt] = Field(default=None, description="The calendar month (1-12).", json_schema_extra={"examples": [1]})
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the amounts.", json_schema_extra={"examples": ["USD"]})
-    total_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total amount charged across all services in this month.", alias="totalAmount", json_schema_extra={"examples": [199.98]})
-    operation_count: Optional[StrictInt] = Field(default=None, description="The number of individual purchase operations in this month.", alias="operationCount", json_schema_extra={"examples": [3]})
+    year: Optional[StrictInt] = Field(default=None, description="The year the month belongs to. Months are cut in the portal time zone, so a movement at the edge of a  month falls where the portal sees it and not where UTC does.", json_schema_extra={"examples": [2025]})
+    month: Optional[StrictInt] = Field(default=None, description="The month itself, January being 1. Only months that had spending appear at all, so a gap in the list is a  month with nothing in it rather than missing data.", json_schema_extra={"examples": [1]})
+    currency: Optional[StrictStr] = Field(default=None, description="The currency `totalAmount` is expressed in, as a three-letter ISO 4217 code - the accounting currency of  the wallet.", json_schema_extra={"examples": ["USD"]})
+    total_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="What the month came to across every service, as a positive amount spent rather than a signed balance.", alias="totalAmount", json_schema_extra={"examples": [199.98]})
+    operation_count: Optional[StrictInt] = Field(default=None, description="How many separate movements that total was added up from, for a client that wants to show the weight  behind a figure. The movements themselves are in `GET api/2.0/portal/payment/customer/operations`.", alias="operationCount", json_schema_extra={"examples": [3]})
     __properties: ClassVar[List[str]] = ["year", "month", "currency", "totalAmount", "operationCount"]
 
     model_config = ConfigDict(

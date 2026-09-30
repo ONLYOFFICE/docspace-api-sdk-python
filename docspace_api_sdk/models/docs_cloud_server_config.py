@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class DocsCloudServerConfig(BaseModel):
     """
-    Represents the server configuration of a DocsCloud tenant.
+    Represents the server configuration of a Docs Connect tenant.
     """ # noqa: E501
     is_anonymous_support: Optional[StrictBool] = Field(default=None, description="Whether anonymous access is supported.", alias="isAnonymousSupport", json_schema_extra={"examples": [False]})
     file_size_limit: Optional[Annotated[int, Field(le=209715200, strict=True, ge=0)]] = Field(default=None, description="The maximum file size in bytes.", alias="fileSizeLimit", json_schema_extra={"examples": [104857600]})

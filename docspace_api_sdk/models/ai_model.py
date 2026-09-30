@@ -24,6 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.ai_provider_type import AiProviderType
+from docspace_api_sdk.models.ai_reasoning_support import AiReasoningSupport
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,12 +32,13 @@ class AiModel(BaseModel):
     """
     AI model metadata. Describes a single model available from a provider.
     """ # noqa: E501
-    id: StrictStr = Field(description="Model identifier as used by the provider API (e.g. `gpt-4o`, `claude-sonnet-4-20250514`).")
-    name: StrictStr = Field(description="Human-readable model name for display in the UI.")
+    id: StrictStr = Field(description="Model identifier as used by the provider API (e.g. `gpt-4o`, `claude-sonnet-4-20250514`).", json_schema_extra={"examples": ["gpt-4o"]})
+    name: StrictStr = Field(description="Human-readable model name for display in the UI.", json_schema_extra={"examples": ["GPT-4o"]})
     provider: AiProviderType = Field(description="Provider that offers this model.")
-    reasoning: Optional[StrictBool] = Field(default=None, description="Whether this model supports extended thinking / chain-of-thought reasoning.")
-    capabilities: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`.")
-    __properties: ClassVar[List[str]] = ["id", "name", "provider", "reasoning", "capabilities"]
+    reasoning: Optional[StrictBool] = Field(default=None, description="Whether this model supports extended thinking / chain-of-thought reasoning.", json_schema_extra={"examples": [False]})
+    reasoning_support: Optional[AiReasoningSupport] = Field(default=None, description="What the model can do with extended thinking, when the provider's catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider's id-based table.", alias="reasoningSupport")
+    capabilities: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`.", json_schema_extra={"examples": [7]})
+    __properties: ClassVar[List[str]] = ["id", "name", "provider", "reasoning", "reasoningSupport", "capabilities"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +82,9 @@ class AiModel(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of provider
         if self.provider:
             _dict['provider'] = self.provider.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of reasoning_support
+        if self.reasoning_support:
+            _dict['reasoningSupport'] = self.reasoning_support.to_dict()
         return _dict
 
     @classmethod
@@ -97,6 +102,7 @@ class AiModel(BaseModel):
             "name": obj.get("name"),
             "provider": AiProviderType.from_dict(obj["provider"]) if obj.get("provider") is not None else None,
             "reasoning": obj.get("reasoning"),
+            "reasoningSupport": AiReasoningSupport.from_dict(obj["reasoningSupport"]) if obj.get("reasoningSupport") is not None else None,
             "capabilities": obj.get("capabilities")
         })
         return _obj

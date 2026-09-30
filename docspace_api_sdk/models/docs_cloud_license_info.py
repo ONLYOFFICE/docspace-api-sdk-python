@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class DocsCloudLicenseInfo(BaseModel):
     """
-    Represents the license information of a DocsCloud tenant.
+    Represents the license information of a Docs Connect tenant.
     """ # noqa: E501
     valid: Optional[datetime] = Field(default=None, description="The date and time until which the license is valid.", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
     trial: Optional[StrictBool] = Field(default=None, description="Whether the license is a trial.", json_schema_extra={"examples": [False]})

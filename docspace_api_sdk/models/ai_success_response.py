@@ -30,7 +30,7 @@ class AiSuccessResponse(BaseModel):
     """
     Generic success acknowledgement for mutations that return no data.
     """ # noqa: E501
-    success: StrictBool = Field(description="Always true — the mutation completed.")
+    success: StrictBool = Field(description="Always true — the mutation completed.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["success"]
 
     model_config = ConfigDict(

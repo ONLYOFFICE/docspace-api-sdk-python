@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from docspace_api_sdk.models.tenant_banner_settings_wrapper import TenantBannerSettingsWrapper
@@ -60,7 +60,7 @@ class BannersVisibilityApi:
     ) -> TenantBannerSettingsWrapper:
         """Get the banners visibility
 
-        Returns the visibility settings of the promotional banners in the portal.
+        Returns whether the portal's promotional banners are currently hidden from every user's interface. Requires an  authenticated session; every role can read it, since the flag affects what they see regardless of their own  permissions. This is a read-only, idempotent call. The flag only takes effect on a Standalone (self-hosted)  installation; on SaaS, banners are always shown no matter what is saved here. Change the setting with  `POST api/2.0/settings/banner`, which additionally requires an Enterprise license.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -129,7 +129,7 @@ class BannersVisibilityApi:
     ) -> ApiResponse[TenantBannerSettingsWrapper]:
         """Get the banners visibility
 
-        Returns the visibility settings of the promotional banners in the portal.
+        Returns whether the portal's promotional banners are currently hidden from every user's interface. Requires an  authenticated session; every role can read it, since the flag affects what they see regardless of their own  permissions. This is a read-only, idempotent call. The flag only takes effect on a Standalone (self-hosted)  installation; on SaaS, banners are always shown no matter what is saved here. Change the setting with  `POST api/2.0/settings/banner`, which additionally requires an Enterprise license.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -198,7 +198,7 @@ class BannersVisibilityApi:
     ) -> RESTResponseType:
         """Get the banners visibility
 
-        Returns the visibility settings of the promotional banners in the portal.
+        Returns whether the portal's promotional banners are currently hidden from every user's interface. Requires an  authenticated session; every role can read it, since the flag affects what they see regardless of their own  permissions. This is a read-only, idempotent call. The flag only takes effect on a Standalone (self-hosted)  installation; on SaaS, banners are always shown no matter what is saved here. Change the setting with  `POST api/2.0/settings/banner`, which additionally requires an Enterprise license.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

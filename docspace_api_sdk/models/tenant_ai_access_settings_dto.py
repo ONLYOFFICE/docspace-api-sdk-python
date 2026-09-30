@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class TenantAiAccessSettingsDto(BaseModel):
     """
-    The request parameters for managing the tenant-level AI access settings.
+    Whether AI functionality is available on the portal.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether AI functionality is enabled for the tenant.  Set to `true` to enable all AI features or `false` to disable them tenant-wide.", json_schema_extra={"examples": [False]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Whether AI is available on the portal at all - chat, agents and vectorization together. Switching it off  hides the AI Agents folder and makes every AI endpoint unreachable for all members at once, not only for the  caller, and the change is pushed to connected clients rather than waiting for their next request.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["enabled"]
 
     model_config = ConfigDict(

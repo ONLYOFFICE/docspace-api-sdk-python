@@ -31,6 +31,7 @@ class CultureSpecificExternalResources(BaseModel):
     """
     The external resources settings.
     """ # noqa: E501
+    admin_panel: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the administration panel. It is returned only to the full administrators of a licensed (Enterprise) server (standalone) portal.", alias="adminPanel")
     api: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the product API.")
     common: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the common product information.")
     forum: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the forum.")
@@ -40,7 +41,7 @@ class CultureSpecificExternalResources(BaseModel):
     social_networks: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the product social nerworks.", alias="socialNetworks")
     support: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the product support.")
     videoguides: Optional[CultureSpecificExternalResource] = Field(default=None, description="The link to the video guides.")
-    __properties: ClassVar[List[str]] = ["api", "common", "forum", "helpcenter", "integrations", "site", "socialNetworks", "support", "videoguides"]
+    __properties: ClassVar[List[str]] = ["adminPanel", "api", "common", "forum", "helpcenter", "integrations", "site", "socialNetworks", "support", "videoguides"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +82,9 @@ class CultureSpecificExternalResources(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of admin_panel
+        if self.admin_panel:
+            _dict['adminPanel'] = self.admin_panel.to_dict()
         # override the default output from pydantic by calling `to_dict()` of api
         if self.api:
             _dict['api'] = self.api.to_dict()
@@ -121,6 +125,7 @@ class CultureSpecificExternalResources(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "adminPanel": CultureSpecificExternalResource.from_dict(obj["adminPanel"]) if obj.get("adminPanel") is not None else None,
             "api": CultureSpecificExternalResource.from_dict(obj["api"]) if obj.get("api") is not None else None,
             "common": CultureSpecificExternalResource.from_dict(obj["common"]) if obj.get("common") is not None else None,
             "forum": CultureSpecificExternalResource.from_dict(obj["forum"]) if obj.get("forum") is not None else None,

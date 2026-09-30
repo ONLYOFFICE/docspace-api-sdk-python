@@ -31,13 +31,13 @@ from typing_extensions import Self
 
 class BackupScheduleDto(BaseModel):
     """
-    The backup schedule parameters.
+    The request parameters for setting the backup schedule.
     """ # noqa: E501
-    storage_type: Optional[BackupStorageType] = Field(default=None, description="The backup storage type.", alias="storageType")
-    storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The backup storage parameters.", alias="storageParams", json_schema_extra={"examples": [[{"key": "path", "value": "/backup"}]]})
-    backups_stored: Optional[StrictInt] = Field(default=None, description="The maximum number of the stored backup copies.", alias="backupsStored", json_schema_extra={"examples": [5]})
-    cron_params: Optional[Cron] = Field(default=None, description="The backup cron parameters.", alias="cronParams")
-    dump: Optional[StrictBool] = Field(default=None, description="Specifies if a dump will be created or not.", json_schema_extra={"examples": [False]})
+    storage_type: Optional[BackupStorageType] = Field(default=None, description="The storage the scheduled archives are written to. It defaults to `Documents`, and it decides which  keys `storageParams` has to carry.", alias="storageType")
+    storage_params: Optional[List[ItemKeyValuePairObjectObject]] = Field(default=None, description="The settings of the chosen storage, as an array of key and value pairs. `Documents` and  `ThridpartyDocuments` need `folderId`, `Local` needs `filePath`, `ThirdPartyConsumer` needs `module`  plus the settings of that consumer, and `DataStore` needs none.", alias="storageParams", json_schema_extra={"examples": [[{"key": "folderId", "value": "1234"}]]})
+    backups_stored: Optional[StrictInt] = Field(default=None, description="The number of scheduled copies to keep, from 1 to 30. It defaults to 1, and only the copies this  schedule creates are counted and removed - archives started by hand are left alone.", alias="backupsStored", json_schema_extra={"examples": [5]})
+    cron_params: Optional[Cron] = Field(default=None, description="When the backup runs. It is required: a request without it fails rather than falling back to a  default.", alias="cronParams")
+    dump: Optional[StrictBool] = Field(default=None, description="Schedules a backup of the whole server rather than of this one portal. It requires the space access  permission and works on a standalone installation only.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["storageType", "storageParams", "backupsStored", "cronParams", "dump"]
 
     model_config = ConfigDict(

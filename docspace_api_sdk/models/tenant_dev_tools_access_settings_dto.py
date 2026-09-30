@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class TenantDevToolsAccessSettingsDto(BaseModel):
     """
-    The request parameters for managing the Developer Tools access settings for the current tenant.
+    Whether the `User` role is barred from the portal developer tools.
     """ # noqa: E501
-    limited_access_for_users: Optional[StrictBool] = Field(default=None, description="Determines if users have restricted access to the Developer Tools.", alias="limitedAccessForUsers", json_schema_extra={"examples": [False]})
+    limited_access_for_users: Optional[StrictBool] = Field(default=None, description="Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way.", alias="limitedAccessForUsers", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["limitedAccessForUsers"]
 
     model_config = ConfigDict(

@@ -28,14 +28,14 @@ from typing_extensions import Self
 
 class ThirdPartyBackupRequestDto(BaseModel):
     """
-    The third-party backup request parameters.
+    The credentials and the title of the third-party storage account the portal writes its backups to.
     """ # noqa: E501
-    url: Optional[StrictStr] = Field(default=None, description="The connection URL for the sharepoint.", json_schema_extra={"examples": ["https://sharepoint.example.com"]})
-    login: Optional[StrictStr] = Field(default=None, description="The login.", json_schema_extra={"examples": ["admin"]})
-    password: Optional[StrictStr] = Field(default=None, description="The password.", json_schema_extra={"examples": ["P@ssw0rd"]})
-    token: Optional[StrictStr] = Field(default=None, description="The authentication token.", json_schema_extra={"examples": ["abc123def456"]})
-    customer_title: Optional[StrictStr] = Field(default=None, description="The customer title.", alias="customerTitle", json_schema_extra={"examples": ["My Cloud Storage"]})
-    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key.", alias="providerKey", json_schema_extra={"examples": ["SharePoint"]})
+    url: Optional[StrictStr] = Field(default=None, description="The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it.", json_schema_extra={"examples": ["https://cloud.example.com/remote.php/dav/files/admin/"]})
+    login: Optional[StrictStr] = Field(default=None, description="The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request.", json_schema_extra={"examples": ["admin"]})
+    password: Optional[StrictStr] = Field(default=None, description="The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved.", json_schema_extra={"examples": ["p@ssw0rd!"]})
+    token: Optional[StrictStr] = Field(default=None, description="The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`.", json_schema_extra={"examples": ["4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9"]})
+    customer_title: Optional[StrictStr] = Field(default=None, description="The name the backup account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated; on the first connection a title that comes out of that empty is refused.", alias="customerTitle", json_schema_extra={"examples": ["Backup storage"]})
+    provider_key: Optional[StrictStr] = Field(default=None, description="The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`.", alias="providerKey", json_schema_extra={"examples": ["Nextcloud"]})
     __properties: ClassVar[List[str]] = ["url", "login", "password", "token", "customerTitle", "providerKey"]
 
     model_config = ConfigDict(

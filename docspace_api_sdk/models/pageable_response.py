@@ -29,12 +29,12 @@ from typing_extensions import Self
 
 class PageableResponse(BaseModel):
     """
-    The response containing paginated data.
+    One page of results together with the cursor that asks for the next page.
     """ # noqa: E501
-    data: Optional[Dict[str, Any]] = Field(default=None, description="The paginated data.")
-    limit: Optional[StrictInt] = Field(default=None, description="The maximum number of results returned per page.")
-    last_client_id: Optional[StrictStr] = Field(default=None, description="The identifier of the last retrieved client.")
-    last_created_on: Optional[datetime] = Field(default=None, description="The creation date of the last retrieved client.")
+    data: Optional[Any] = None
+    limit: Optional[StrictInt] = Field(default=None, description="The page size that was applied to this request, between 1 and 50.", json_schema_extra={"examples": [50]})
+    last_client_id: Optional[StrictStr] = Field(default=None, description="The cursor to send back as last_client_id to ask for the next page, together with last_created_on. It is null when the page is empty.", json_schema_extra={"examples": ["6c7cf17b-1bd3-47d5-94c6-be2d3570e168"]})
+    last_created_on: Optional[datetime] = Field(default=None, description="The cursor to send back as last_created_on to ask for the next page, together with last_client_id. It is null when the page is empty.", json_schema_extra={"examples": ["2024-04-04T12:00:00Z"]})
     __properties: ClassVar[List[str]] = ["data", "limit", "last_client_id", "last_created_on"]
 
     model_config = ConfigDict(
@@ -76,6 +76,11 @@ class PageableResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if data (nullable) is None
+        # and model_fields_set contains the field
+        if self.data is None and "data" in self.model_fields_set:
+            _dict['data'] = None
+
         return _dict
 
     @classmethod

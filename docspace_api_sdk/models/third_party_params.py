@@ -29,14 +29,14 @@ from typing_extensions import Self
 
 class ThirdPartyParams(BaseModel):
     """
-    The third-party account parameters.
+    A third-party storage account connected to the portal.
     """ # noqa: E501
-    auth_data: Optional[AuthData] = Field(default=None, description="The authentication data.")
-    corporate: Optional[StrictBool] = Field(default=None, description="Specifies if this is a corporate account or not.", json_schema_extra={"examples": [False]})
-    rooms_storage: Optional[StrictBool] = Field(default=None, description="Specifies if this is a room storage or not.", alias="roomsStorage", json_schema_extra={"examples": [False]})
-    customer_title: Optional[StrictStr] = Field(default=None, description="The customer title.", json_schema_extra={"examples": ["My Storage"]})
-    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID.", json_schema_extra={"examples": [1]})
-    provider_key: Optional[StrictStr] = Field(default=None, description="The provider key.", json_schema_extra={"examples": ["GoogleDrive"]})
+    auth_data: Optional[AuthData] = Field(default=None, description="The stored credentials of the account. They are not filled in here: the portal does not give back credentials  once an account is saved.")
+    corporate: Optional[StrictBool] = Field(default=None, description="Whether the account is attached to the legacy Common section, which is the case only for accounts inherited  from an older portal.", json_schema_extra={"examples": [False]})
+    rooms_storage: Optional[StrictBool] = Field(default=None, description="Whether the account is attached to the Rooms section, room templates and the archive counted in. This is where  `POST api/2.0/files/thirdparty` puts every account it connects.", alias="roomsStorage", json_schema_extra={"examples": [True]})
+    customer_title: Optional[StrictStr] = Field(default=None, description="The name the account is shown under in the portal, as it was saved when the account was connected.", json_schema_extra={"examples": ["Nextcloud storage"]})
+    provider_id: Optional[StrictInt] = Field(default=None, description="The account ID to send to `DELETE api/2.0/files/thirdparty/{providerId}`, or as `providerId` to  re-authenticate the account.", json_schema_extra={"examples": [12]})
+    provider_key: Optional[StrictStr] = Field(default=None, description="The storage service behind the account. `WebDav` stands for every WebDAV preset, so it does not tell which of  them was chosen when the account was connected.", json_schema_extra={"examples": ["WebDav"]})
     __properties: ClassVar[List[str]] = ["auth_data", "corporate", "roomsStorage", "customer_title", "provider_id", "provider_key"]
 
     model_config = ConfigDict(

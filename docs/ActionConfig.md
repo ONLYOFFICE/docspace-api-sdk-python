@@ -1,12 +1,12 @@
 # ActionConfig
-The information about the action in the document that will be scrolled to.
+An anchor inside a document, as the editor writes it.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | **str** | The action data that will be scrolled to. | [optional] 
-**type** | **str** | The action type. | [optional] 
+**data** | **str** | The anchor value produced by the editor, opaque to the portal: it names the comment, the mention or the  place the document is scrolled to. | [optional] 
+**type** | **str** | What the anchor points at, as the editor names it - a comment thread, for instance. | [optional] 
 
 ## Example
 

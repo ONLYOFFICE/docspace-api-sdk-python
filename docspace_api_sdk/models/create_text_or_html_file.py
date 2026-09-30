@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class CreateTextOrHtmlFile(BaseModel):
     """
-    The parameters for creating an HTML or text file.
+    The parameters of a text or HTML file created from content sent in the request.
     """ # noqa: E501
-    title: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=165)]] = Field(description="The file title for text or HTML file.", json_schema_extra={"examples": ["Document.txt"]})
-    content: Optional[StrictStr] = Field(default=None, description="The text or HTML file contents.", json_schema_extra={"examples": ["This is the file content"]})
-    create_new_if_exist: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a new text or HTML file if it exists or not.", alias="createNewIfExist", json_schema_extra={"examples": [False]})
+    title: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=165)]] = Field(description="The title of the file. The extension the operation stands for is appended unless the title already ends with  it, so Notes becomes Notes.txt or Notes.html.", json_schema_extra={"examples": ["Document.txt"]})
+    content: Optional[StrictStr] = Field(default=None, description="The content of the file, as plain text or as HTML markup. A request carrying none is rejected as an invalid  request, and for a text file content that looks like markup makes the portal store it as HTML instead.", json_schema_extra={"examples": ["This is the file content"]})
+    create_new_if_exist: Optional[StrictBool] = Field(default=None, description="What to do when the folder already holds a file of this title, the other way round than the name reads: `true`  updates that file and adds a version to its history, `false` creates another file and makes its title unique,  as in Notes (1).txt.", alias="createNewIfExist", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["title", "content", "createNewIfExist"]
 
     model_config = ConfigDict(

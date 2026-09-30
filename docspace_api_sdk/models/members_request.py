@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class MembersRequest(BaseModel):
     """
-    The member request.
+    The accounts a member operation applies to.
     """ # noqa: E501
-    members: Optional[List[UUID]] = Field(default=None, description="The list of group member IDs.", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000", "11111111-1111-1111-1111-111111111111"]]})
+    members: Optional[List[UUID]] = Field(default=None, description="The accounts the operation applies to. When adding or replacing members, an account that is a guest, is  disabled or does not exist is skipped without an error; when removing them, an ID that is not a member is  skipped as well.", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000", "11111111-1111-1111-1111-111111111111"]]})
     __properties: ClassVar[List[str]] = ["members"]
 
     model_config = ConfigDict(

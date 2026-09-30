@@ -31,9 +31,9 @@ class CreateApiKeyRequestDto(BaseModel):
     """
     The request parameters for creating a new API key.
     """ # noqa: E501
-    name: Annotated[str, Field(min_length=0, strict=True, max_length=30)] = Field(description="The API key name.", json_schema_extra={"examples": ["My API Key"]})
-    permissions: Optional[List[StrictStr]] = Field(default=None, description="The list of permissions granted to the API key.", json_schema_extra={"examples": [["read", "write"]]})
-    expires_in_days: Optional[Annotated[int, Field(le=365, strict=True, ge=1)]] = Field(default=None, description="The number of days until the API key expires (null for no expiration).", alias="expiresInDays", json_schema_extra={"examples": [30]})
+    name: Annotated[str, Field(min_length=0, strict=True, max_length=30)] = Field(description="The label that tells this key apart in the key list. It is required, may be up to 30 characters long, and does  not have to be unique.", json_schema_extra={"examples": ["My API Key"]})
+    permissions: Optional[List[StrictStr]] = Field(default=None, description="The scopes the key may use. Every value has to come from `GET api/2.0/keys/permissions`, an unknown value or  an empty array is rejected, and passing `*` or omitting the field records a key without scope restrictions.", json_schema_extra={"examples": [["rooms:read", "files:write"]]})
+    expires_in_days: Optional[Annotated[int, Field(le=365, strict=True, ge=1)]] = Field(default=None, description="The lifetime of the key in days, counted from the moment it is created, from 1 to 365. Omit it to create a key  that never expires.", alias="expiresInDays", json_schema_extra={"examples": [30]})
     __properties: ClassVar[List[str]] = ["name", "permissions", "expiresInDays"]
 
     model_config = ConfigDict(

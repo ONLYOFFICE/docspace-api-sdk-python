@@ -21,25 +21,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from docspace_api_sdk.models.api_date_time import ApiDateTime
 from typing import Optional, Set
 from typing_extensions import Self
 
 class UpcomingPaymentDto(BaseModel):
     """
-    The upcoming payment parameters.
+    One charge the portal is going to be billed for at the start of the next period.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The quota ID.", json_schema_extra={"examples": [-11]})
-    name: Optional[StrictStr] = Field(default=None, description="The quota name.", json_schema_extra={"examples": ["storage"]})
-    title: Optional[StrictStr] = Field(default=None, description="The quota title.", json_schema_extra={"examples": ["Business plan"]})
-    unit_of_measure: Optional[StrictStr] = Field(default=None, description="The quota unit of measure.", alias="unitOfMeasure", json_schema_extra={"examples": ["admins"]})
-    quantity: Optional[StrictInt] = Field(default=None, description="The quantity that will be charged (the next quantity if set, otherwise the current quantity).", json_schema_extra={"examples": [100]})
-    wallet: Optional[StrictBool] = Field(default=None, description="The quota applies to the wallet or not.", json_schema_extra={"examples": [True]})
-    due_date: Optional[datetime] = Field(default=None, description="The due date of the upcoming payment in the portal time zone.", alias="dueDate", json_schema_extra={"examples": ["2026-07-08T11:39:43.0000000+03:00"]})
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount that will be charged (unit price multiplied by the quantity).", json_schema_extra={"examples": [14]})
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the amount.", json_schema_extra={"examples": ["USD"]})
+    id: Optional[StrictInt] = Field(default=None, description="The quota that is going to be charged. When a switch to another quota is scheduled, this is the quota  being switched to, so it can differ from what `GET api/2.0/portal/tariff` reports for today.", json_schema_extra={"examples": [-11]})
+    name: Optional[StrictStr] = Field(default=None, description="The quota's stable key, which is the same identifier the wallet operations use for a service.", json_schema_extra={"examples": ["storage"]})
+    title: Optional[StrictStr] = Field(default=None, description="The quota name in the portal language, meant to be printed on an invoice preview.", json_schema_extra={"examples": ["Business plan"]})
+    unit_of_measure: Optional[StrictStr] = Field(default=None, description="What `quantity` counts, in the portal language - seats, administrators, gigabytes. It is empty for a quota  that is simply on or off.", alias="unitOfMeasure", json_schema_extra={"examples": ["admins"]})
+    quantity: Optional[StrictInt] = Field(default=None, description="How much is going to be charged for, which is the quantity scheduled for the next period when one has been  scheduled and today's quantity otherwise.", json_schema_extra={"examples": [100]})
+    wallet: Optional[StrictBool] = Field(default=None, description="Whether the charge is paid out of the portal wallet rather than from the subscription.", json_schema_extra={"examples": [True]})
+    due_date: Optional[ApiDateTime] = Field(default=None, description="When the charge falls due, in the portal time zone.", alias="dueDate")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="What the charge comes to: the unit price of the quota multiplied by `quantity`. Taxes are not part of it,  and a quota with no price of its own is not listed at all rather than listed with a zero.", json_schema_extra={"examples": [14]})
+    currency: Optional[StrictStr] = Field(default=None, description="The currency `amount` is expressed in, as a three-letter ISO 4217 code. It follows the portal's billing  account, so every entry of one answer carries the same code.", json_schema_extra={"examples": ["USD"]})
     __properties: ClassVar[List[str]] = ["id", "name", "title", "unitOfMeasure", "quantity", "wallet", "dueDate", "amount", "currency"]
 
     model_config = ConfigDict(
@@ -81,6 +81,9 @@ class UpcomingPaymentDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of due_date
+        if self.due_date:
+            _dict['dueDate'] = self.due_date.to_dict()
         # set to None if name (nullable) is None
         # and model_fields_set contains the field
         if self.name is None and "name" in self.model_fields_set:
@@ -95,11 +98,6 @@ class UpcomingPaymentDto(BaseModel):
         # and model_fields_set contains the field
         if self.unit_of_measure is None and "unit_of_measure" in self.model_fields_set:
             _dict['unitOfMeasure'] = None
-
-        # set to None if due_date (nullable) is None
-        # and model_fields_set contains the field
-        if self.due_date is None and "due_date" in self.model_fields_set:
-            _dict['dueDate'] = None
 
         # set to None if currency (nullable) is None
         # and model_fields_set contains the field
@@ -125,7 +123,7 @@ class UpcomingPaymentDto(BaseModel):
             "unitOfMeasure": obj.get("unitOfMeasure"),
             "quantity": obj.get("quantity"),
             "wallet": obj.get("wallet"),
-            "dueDate": obj.get("dueDate"),
+            "dueDate": ApiDateTime.from_dict(obj["dueDate"]) if obj.get("dueDate") is not None else None,
             "amount": obj.get("amount"),
             "currency": obj.get("currency")
         })

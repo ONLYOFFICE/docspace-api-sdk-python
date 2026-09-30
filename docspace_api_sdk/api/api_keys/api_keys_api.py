@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field
@@ -70,7 +70,7 @@ class ApiKeysApi:
     ) -> ApiKeyResponseWrapper:
         """Create a user API key
 
-        Creates a user API key with the parameters specified in the request.
+        Creates an API key that authenticates requests as the calling account, and is the only operation that ever  returns the secret.  Any portal member except a guest may create one; when the portal limits developer tools to administrators,  only a DocSpace administrator may call it.  The call is not idempotent - every call issues a new key - and it is throttled, so a client that retries on a  timeout can end up with several keys.  The answer carries the full secret in `key`: it is shown here and never again, later reads expose only the  last four characters in `keyPostfix`, so store it now.  Pass the scopes the key may use in `permissions`, taking the values from  `GET api/2.0/keys/permissions`; pass `*` or omit the field to record a key without scope restrictions, and set  `expiresInDays` to make it expire, otherwise it stays valid until it is deleted.  An empty `permissions` array and an unknown scope are both rejected with 400.  Send the key in the `Authorization` header as `Bearer sk-...` to use it.
 
         :param create_api_key_request_dto:
         :type create_api_key_request_dto: CreateApiKeyRequestDto
@@ -106,10 +106,11 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -144,7 +145,7 @@ class ApiKeysApi:
     ) -> ApiResponse[ApiKeyResponseWrapper]:
         """Create a user API key
 
-        Creates a user API key with the parameters specified in the request.
+        Creates an API key that authenticates requests as the calling account, and is the only operation that ever  returns the secret.  Any portal member except a guest may create one; when the portal limits developer tools to administrators,  only a DocSpace administrator may call it.  The call is not idempotent - every call issues a new key - and it is throttled, so a client that retries on a  timeout can end up with several keys.  The answer carries the full secret in `key`: it is shown here and never again, later reads expose only the  last four characters in `keyPostfix`, so store it now.  Pass the scopes the key may use in `permissions`, taking the values from  `GET api/2.0/keys/permissions`; pass `*` or omit the field to record a key without scope restrictions, and set  `expiresInDays` to make it expire, otherwise it stays valid until it is deleted.  An empty `permissions` array and an unknown scope are both rejected with 400.  Send the key in the `Authorization` header as `Bearer sk-...` to use it.
 
         :param create_api_key_request_dto:
         :type create_api_key_request_dto: CreateApiKeyRequestDto
@@ -180,10 +181,11 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -218,7 +220,7 @@ class ApiKeysApi:
     ) -> RESTResponseType:
         """Create a user API key
 
-        Creates a user API key with the parameters specified in the request.
+        Creates an API key that authenticates requests as the calling account, and is the only operation that ever  returns the secret.  Any portal member except a guest may create one; when the portal limits developer tools to administrators,  only a DocSpace administrator may call it.  The call is not idempotent - every call issues a new key - and it is throttled, so a client that retries on a  timeout can end up with several keys.  The answer carries the full secret in `key`: it is shown here and never again, later reads expose only the  last four characters in `keyPostfix`, so store it now.  Pass the scopes the key may use in `permissions`, taking the values from  `GET api/2.0/keys/permissions`; pass `*` or omit the field to record a key without scope restrictions, and set  `expiresInDays` to make it expire, otherwise it stays valid until it is deleted.  An empty `permissions` array and an unknown scope are both rejected with 400.  Send the key in the `Authorization` header as `Bearer sk-...` to use it.
 
         :param create_api_key_request_dto:
         :type create_api_key_request_dto: CreateApiKeyRequestDto
@@ -254,10 +256,11 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -357,7 +360,7 @@ class ApiKeysApi:
     @validate_call
     def delete_api_key(
         self,
-        key_id: Annotated[UUID, Field(description="The API key ID.")],
+        key_id: Annotated[UUID, Field(description="The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -371,11 +374,11 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """Delete a user API key
+        """Delete an API key
 
-        Deletes a user API key by its ID.
+        Deletes the API key with the ID given in the route, so that it stops authenticating requests immediately.  The caller may delete a key they created themselves, and a DocSpace administrator may delete any key of the  portal.  The removal is permanent and cannot be undone: the secret was only ever readable at creation time, so a  deleted key cannot be restored and a new one has to be issued through `POST api/2.0/keys`.  To stop a key temporarily instead, set `isActive` to false through `PUT api/2.0/keys/{keyId}`.  The answer is a plain boolean reporting whether the key was removed.
 
-        :param key_id: The API key ID. (required)
+        :param key_id: The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. (required)
         :type key_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -409,6 +412,7 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -431,7 +435,7 @@ class ApiKeysApi:
     @validate_call
     def delete_api_key_with_http_info(
         self,
-        key_id: Annotated[UUID, Field(description="The API key ID.")],
+        key_id: Annotated[UUID, Field(description="The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -445,11 +449,11 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """Delete a user API key
+        """Delete an API key
 
-        Deletes a user API key by its ID.
+        Deletes the API key with the ID given in the route, so that it stops authenticating requests immediately.  The caller may delete a key they created themselves, and a DocSpace administrator may delete any key of the  portal.  The removal is permanent and cannot be undone: the secret was only ever readable at creation time, so a  deleted key cannot be restored and a new one has to be issued through `POST api/2.0/keys`.  To stop a key temporarily instead, set `isActive` to false through `PUT api/2.0/keys/{keyId}`.  The answer is a plain boolean reporting whether the key was removed.
 
-        :param key_id: The API key ID. (required)
+        :param key_id: The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. (required)
         :type key_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -483,6 +487,7 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -505,7 +510,7 @@ class ApiKeysApi:
     @validate_call
     def delete_api_key_without_preload_content(
         self,
-        key_id: Annotated[UUID, Field(description="The API key ID.")],
+        key_id: Annotated[UUID, Field(description="The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -519,11 +524,11 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete a user API key
+        """Delete an API key
 
-        Deletes a user API key by its ID.
+        Deletes the API key with the ID given in the route, so that it stops authenticating requests immediately.  The caller may delete a key they created themselves, and a DocSpace administrator may delete any key of the  portal.  The removal is permanent and cannot be undone: the secret was only ever readable at creation time, so a  deleted key cannot be restored and a new one has to be issued through `POST api/2.0/keys`.  To stop a key temporarily instead, set `isActive` to false through `PUT api/2.0/keys/{keyId}`.  The answer is a plain boolean reporting whether the key was removed.
 
-        :param key_id: The API key ID. (required)
+        :param key_id: The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. (required)
         :type key_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -557,6 +562,7 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -662,7 +668,7 @@ class ApiKeysApi:
     ) -> STRINGArrayWrapper:
         """Get API key permissions
 
-        Returns a list of all available permissions for the API key.
+        Returns every scope value the portal accepts in the `permissions` array of an API key.  Read it before `POST api/2.0/keys` or `PUT api/2.0/keys/{keyId}`, because any other value is rejected with  400.  Any portal member except a guest may call it, and the call is read-only.  The answer is a flat list sorted alphabetically, holding the per-area scopes such as `accounts:read`,  `files:write` and `rooms:write`, the portal-wide `*:read` and `*:write`, and `*` which stands for a key  without scope restrictions.  The list is fixed for the portal and identical for every caller, so it can be cached by the client.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -695,6 +701,7 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -731,7 +738,7 @@ class ApiKeysApi:
     ) -> ApiResponse[STRINGArrayWrapper]:
         """Get API key permissions
 
-        Returns a list of all available permissions for the API key.
+        Returns every scope value the portal accepts in the `permissions` array of an API key.  Read it before `POST api/2.0/keys` or `PUT api/2.0/keys/{keyId}`, because any other value is rejected with  400.  Any portal member except a guest may call it, and the call is read-only.  The answer is a flat list sorted alphabetically, holding the per-area scopes such as `accounts:read`,  `files:write` and `rooms:write`, the portal-wide `*:read` and `*:write`, and `*` which stands for a key  without scope restrictions.  The list is fixed for the portal and identical for every caller, so it can be cached by the client.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -764,6 +771,7 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -800,7 +808,7 @@ class ApiKeysApi:
     ) -> RESTResponseType:
         """Get API key permissions
 
-        Returns a list of all available permissions for the API key.
+        Returns every scope value the portal accepts in the `permissions` array of an API key.  Read it before `POST api/2.0/keys` or `PUT api/2.0/keys/{keyId}`, because any other value is rejected with  400.  Any portal member except a guest may call it, and the call is read-only.  The answer is a flat list sorted alphabetically, holding the per-area scopes such as `accounts:read`,  `files:write` and `rooms:write`, the portal-wide `*:read` and `*:write`, and `*` which stands for a key  without scope restrictions.  The list is fixed for the portal and identical for every caller, so it can be cached by the client.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -833,6 +841,7 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "STRINGArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -932,9 +941,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiKeyResponseWrapper:
-        """Get current user's API key
+        """Get the current API key
 
-        Returns information about the current user's API key.
+        Returns the API key that authenticated this very request, letting the holder of a key find out what it is  allowed to do without knowing its ID.  The key is identified by the `Authorization` header of the call itself, so the request has to be sent as  `Bearer sk-...`; a session authenticated in any other way has no key to report and this operation is not  usable for it.  The call is read-only and returns one entry, with the same fields as `GET api/2.0/keys` and without the  secret - read `permissions` for the granted scopes, `expiresAt` for the expiry and `isActive` for the state.  To look at a key other than the one in use, call `GET api/2.0/keys` instead.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1001,9 +1010,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ApiKeyResponseWrapper]:
-        """Get current user's API key
+        """Get the current API key
 
-        Returns information about the current user's API key.
+        Returns the API key that authenticated this very request, letting the holder of a key find out what it is  allowed to do without knowing its ID.  The key is identified by the `Authorization` header of the call itself, so the request has to be sent as  `Bearer sk-...`; a session authenticated in any other way has no key to report and this operation is not  usable for it.  The call is read-only and returns one entry, with the same fields as `GET api/2.0/keys` and without the  secret - read `permissions` for the granted scopes, `expiresAt` for the expiry and `isActive` for the state.  To look at a key other than the one in use, call `GET api/2.0/keys` instead.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1070,9 +1079,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get current user's API key
+        """Get the current API key
 
-        Returns information about the current user's API key.
+        Returns the API key that authenticated this very request, letting the holder of a key find out what it is  allowed to do without knowing its ID.  The key is identified by the `Authorization` header of the call itself, so the request has to be sent as  `Bearer sk-...`; a session authenticated in any other way has no key to report and this operation is not  usable for it.  The call is read-only and returns one entry, with the same fields as `GET api/2.0/keys` and without the  secret - read `permissions` for the granted scopes, `expiresAt` for the expiry and `isActive` for the state.  To look at a key other than the one in use, call `GET api/2.0/keys` instead.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1204,9 +1213,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiKeyResponseArrayWrapper:
-        """Get current user's API keys
+        """Get the API keys
 
-        Returns a list of all API keys for the current user.
+        Returns the API keys the caller is allowed to see, which is not the same set for everybody: a DocSpace  administrator gets every key of the portal, while any other member gets only the keys they created  themselves.  Any portal member except a guest may call it, and the call is read-only.  The secrets are not returned - each entry identifies its key by `id` and by the last four characters in  `keyPostfix`, and a secret can only be read once, at the moment `POST api/2.0/keys` creates it.  Expired and deactivated keys stay in the list, so check `expiresAt` against the current time and read  `isActive` before treating an entry as usable.  An empty list means the caller has created no keys, not that the portal has none.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1239,6 +1248,7 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1273,9 +1283,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ApiKeyResponseArrayWrapper]:
-        """Get current user's API keys
+        """Get the API keys
 
-        Returns a list of all API keys for the current user.
+        Returns the API keys the caller is allowed to see, which is not the same set for everybody: a DocSpace  administrator gets every key of the portal, while any other member gets only the keys they created  themselves.  Any portal member except a guest may call it, and the call is read-only.  The secrets are not returned - each entry identifies its key by `id` and by the last four characters in  `keyPostfix`, and a secret can only be read once, at the moment `POST api/2.0/keys` creates it.  Expired and deactivated keys stay in the list, so check `expiresAt` against the current time and read  `isActive` before treating an entry as usable.  An empty list means the caller has created no keys, not that the portal has none.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1308,6 +1318,7 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1342,9 +1353,9 @@ class ApiKeysApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get current user's API keys
+        """Get the API keys
 
-        Returns a list of all API keys for the current user.
+        Returns the API keys the caller is allowed to see, which is not the same set for everybody: a DocSpace  administrator gets every key of the portal, while any other member gets only the keys they created  themselves.  Any portal member except a guest may call it, and the call is read-only.  The secrets are not returned - each entry identifies its key by `id` and by the last four characters in  `keyPostfix`, and a secret can only be read once, at the moment `POST api/2.0/keys` creates it.  Expired and deactivated keys stay in the list, so check `expiresAt` against the current time and read  `isActive` before treating an entry as usable.  An empty list means the caller has created no keys, not that the portal has none.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1377,6 +1388,7 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ApiKeyResponseArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1463,8 +1475,8 @@ class ApiKeysApi:
     @validate_call
     def update_api_key(
         self,
-        key_id: Annotated[UUID, Field(description="The unique identifier of the API key to update.")],
-        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
+        key_id: Annotated[UUID, Field(description="The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.")],
+        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1480,11 +1492,11 @@ class ApiKeysApi:
     ) -> BooleanWrapper:
         """Update an API key
 
-        Updates an existing API key changing its name, permissions, and status.
+        Renames an API key, replaces the scopes it may use, or activates and deactivates it, without changing the  secret.  The caller may update a key they created themselves, and a DocSpace administrator may update any key of the  portal.  Take the values for `permissions` from `GET api/2.0/keys/permissions`; an unknown scope or an empty array is  rejected with 400, and the fields that are left out keep their current values.  The answer is a plain boolean: true when the key was changed, and false when it was not - which is also what  an already expired key returns, because such a key is left untouched instead of being reported as an error.  Deactivating a key through `isActive` stops it from authenticating while keeping it in the list, so use it  when the key may be needed again and `DELETE api/2.0/keys/{keyId}` when it may not.
 
-        :param key_id: The unique identifier of the API key to update. (required)
+        :param key_id: The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. (required)
         :type key_id: UUID
-        :param update_api_key_request: The request parameters for updating an existing API key. (required)
+        :param update_api_key_request: The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1519,10 +1531,11 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1541,8 +1554,8 @@ class ApiKeysApi:
     @validate_call
     def update_api_key_with_http_info(
         self,
-        key_id: Annotated[UUID, Field(description="The unique identifier of the API key to update.")],
-        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
+        key_id: Annotated[UUID, Field(description="The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.")],
+        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1558,11 +1571,11 @@ class ApiKeysApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Update an API key
 
-        Updates an existing API key changing its name, permissions, and status.
+        Renames an API key, replaces the scopes it may use, or activates and deactivates it, without changing the  secret.  The caller may update a key they created themselves, and a DocSpace administrator may update any key of the  portal.  Take the values for `permissions` from `GET api/2.0/keys/permissions`; an unknown scope or an empty array is  rejected with 400, and the fields that are left out keep their current values.  The answer is a plain boolean: true when the key was changed, and false when it was not - which is also what  an already expired key returns, because such a key is left untouched instead of being reported as an error.  Deactivating a key through `isActive` stops it from authenticating while keeping it in the list, so use it  when the key may be needed again and `DELETE api/2.0/keys/{keyId}` when it may not.
 
-        :param key_id: The unique identifier of the API key to update. (required)
+        :param key_id: The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. (required)
         :type key_id: UUID
-        :param update_api_key_request: The request parameters for updating an existing API key. (required)
+        :param update_api_key_request: The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1597,10 +1610,11 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1619,8 +1633,8 @@ class ApiKeysApi:
     @validate_call
     def update_api_key_without_preload_content(
         self,
-        key_id: Annotated[UUID, Field(description="The unique identifier of the API key to update.")],
-        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The request parameters for updating an existing API key.")],
+        key_id: Annotated[UUID, Field(description="The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.")],
+        update_api_key_request: Annotated[UpdateApiKeyRequest, Field(description="The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1636,11 +1650,11 @@ class ApiKeysApi:
     ) -> RESTResponseType:
         """Update an API key
 
-        Updates an existing API key changing its name, permissions, and status.
+        Renames an API key, replaces the scopes it may use, or activates and deactivates it, without changing the  secret.  The caller may update a key they created themselves, and a DocSpace administrator may update any key of the  portal.  Take the values for `permissions` from `GET api/2.0/keys/permissions`; an unknown scope or an empty array is  rejected with 400, and the fields that are left out keep their current values.  The answer is a plain boolean: true when the key was changed, and false when it was not - which is also what  an already expired key returns, because such a key is left untouched instead of being reported as an error.  Deactivating a key through `isActive` stops it from authenticating while keeping it in the list, so use it  when the key may be needed again and `DELETE api/2.0/keys/{keyId}` when it may not.
 
-        :param key_id: The unique identifier of the API key to update. (required)
+        :param key_id: The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`. (required)
         :type key_id: UUID
-        :param update_api_key_request: The request parameters for updating an existing API key. (required)
+        :param update_api_key_request: The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. (required)
         :type update_api_key_request: UpdateApiKeyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1675,10 +1689,11 @@ class ApiKeysApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

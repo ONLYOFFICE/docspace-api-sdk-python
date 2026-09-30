@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
@@ -63,7 +63,7 @@ class AccessToDevToolsApi:
     ) -> TenantDevToolsAccessSettingsWrapper:
         """Set the Developer Tools access settings
 
-        Sets the Developer Tools access settings for the portal.
+        Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
 
         :param tenant_dev_tools_access_settings_dto:
         :type tenant_dev_tools_access_settings_dto: TenantDevToolsAccessSettingsDto
@@ -137,7 +137,7 @@ class AccessToDevToolsApi:
     ) -> ApiResponse[TenantDevToolsAccessSettingsWrapper]:
         """Set the Developer Tools access settings
 
-        Sets the Developer Tools access settings for the portal.
+        Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
 
         :param tenant_dev_tools_access_settings_dto:
         :type tenant_dev_tools_access_settings_dto: TenantDevToolsAccessSettingsDto
@@ -211,7 +211,7 @@ class AccessToDevToolsApi:
     ) -> RESTResponseType:
         """Set the Developer Tools access settings
 
-        Sets the Developer Tools access settings for the portal.
+        Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
 
         :param tenant_dev_tools_access_settings_dto:
         :type tenant_dev_tools_access_settings_dto: TenantDevToolsAccessSettingsDto

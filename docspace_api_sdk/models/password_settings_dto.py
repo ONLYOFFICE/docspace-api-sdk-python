@@ -28,16 +28,16 @@ from typing_extensions import Self
 
 class PasswordSettingsDto(BaseModel):
     """
-    The password settings parameters.
+    The password policy of the portal, with the expressions a client can check a password against.
     """ # noqa: E501
-    min_length: StrictInt = Field(description="The minimum number of characters required for valid passwords.", alias="minLength", json_schema_extra={"examples": [8]})
-    upper_case: StrictBool = Field(description="Specifies whether the password should contain the uppercase letters or not.", alias="upperCase", json_schema_extra={"examples": [True]})
-    digits: StrictBool = Field(description="Specifies whether the password should contain the digits or not.", json_schema_extra={"examples": [True]})
-    spec_symbols: StrictBool = Field(description="Specifies whether the password should contain the special symbols or not.", alias="specSymbols", json_schema_extra={"examples": [False]})
-    allowed_characters_regex_str: Optional[StrictStr] = Field(description="The allowed password characters in the regex string format.", alias="allowedCharactersRegexStr", json_schema_extra={"examples": ["^[a-zA-Z0-9!@#$%^&*()]+$"]})
-    digits_regex_str: Optional[StrictStr] = Field(description="The password digits in the regex string format.", alias="digitsRegexStr", json_schema_extra={"examples": ["(?=.*\\\\d)"]})
-    upper_case_regex_str: Optional[StrictStr] = Field(description="The password uppercase letters in the regex string format.", alias="upperCaseRegexStr", json_schema_extra={"examples": ["(?=.*[A-Z])"]})
-    spec_symbols_regex_str: Optional[StrictStr] = Field(description="The passaword special symbols in the regex string format.", alias="specSymbolsRegexStr", json_schema_extra={"examples": ["(?=.*[!@#$%^&*()])"]})
+    min_length: StrictInt = Field(description="The shortest password the portal accepts, 8 characters on a portal nobody has configured. Whatever the  policy says, a password longer than 30 characters is refused as well, and that ceiling is not reported  here.", alias="minLength", json_schema_extra={"examples": [8]})
+    upper_case: StrictBool = Field(description="Whether at least one uppercase letter is demanded. While it is `false` an uppercase letter is still  allowed - the flag adds a requirement rather than permission.", alias="upperCase", json_schema_extra={"examples": [True]})
+    digits: StrictBool = Field(description="Whether at least one digit is demanded, read the same way as `upperCase`.", json_schema_extra={"examples": [True]})
+    spec_symbols: StrictBool = Field(description="Whether at least one special symbol is demanded, read the same way as `upperCase`. Which symbols count is  spelled out by `specSymbolsRegexStr`.", alias="specSymbols", json_schema_extra={"examples": [False]})
+    allowed_characters_regex_str: Optional[StrictStr] = Field(description="The expression the whole password has to match, which is what defines the alphabet the portal accepts at  all. It comes from the installation's configuration rather than from the portal policy, so it is the same  for every portal of an installation and unaffected by the flags above.", alias="allowedCharactersRegexStr", json_schema_extra={"examples": ["^[a-zA-Z0-9!@#$%^&*()]+$"]})
+    digits_regex_str: Optional[StrictStr] = Field(description="The look-ahead expression that tests the digit requirement, meant to be applied only while `digits` is  `true`. It is always filled in, so its presence is not itself a requirement.", alias="digitsRegexStr", json_schema_extra={"examples": ["(?=.*\\\\d)"]})
+    upper_case_regex_str: Optional[StrictStr] = Field(description="The look-ahead expression that tests the uppercase requirement, to be applied while `upperCase` is `true`.", alias="upperCaseRegexStr", json_schema_extra={"examples": ["(?=.*[A-Z])"]})
+    spec_symbols_regex_str: Optional[StrictStr] = Field(description="The look-ahead expression that tests the special-symbol requirement, to be applied while `specSymbols` is  `true`. It also enumerates the symbols the portal treats as special.", alias="specSymbolsRegexStr", json_schema_extra={"examples": ["(?=.*[!@#$%^&*()])"]})
     __properties: ClassVar[List[str]] = ["minLength", "upperCase", "digits", "specSymbols", "allowedCharactersRegexStr", "digitsRegexStr", "upperCaseRegexStr", "specSymbolsRegexStr"]
 
     model_config = ConfigDict(

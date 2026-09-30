@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class RoomsNotificationsSettingsRequestDto(BaseModel):
     """
-    The request parameters for configuring notification settings for the chat or collaboration rooms.
+    Which single room the calling user silences, and which way.
     """ # noqa: E501
     rooms_id: Optional[Any] = Field(default=None, alias="roomsId")
-    mute: Optional[StrictBool] = Field(default=None, description="Specifies whether the notifications will be delivered to the specified room or not.", json_schema_extra={"examples": [True]})
+    mute: Optional[StrictBool] = Field(default=None, description="Which way the room goes: `true` adds it to the caller silenced list, `false` takes it off again. While a room  is silenced its activity is left out of the hourly and daily digests, the letters it would send at once are  not sent, and its new-item counters are hidden.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["roomsId", "mute"]
 
     model_config = ConfigDict(

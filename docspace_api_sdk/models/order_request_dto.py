@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class OrderRequestDto(BaseModel):
     """
-    The parameters for ordering requests.
+    The position an entry is to take inside its folder.
     """ # noqa: E501
-    order: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=1)]] = Field(default=None, description="The order value.", json_schema_extra={"examples": [1]})
+    order: Optional[Annotated[int, Field(le=2147483647, strict=True, ge=1)]] = Field(default=None, description="The position the entry is to take, counting from 1. The entry that held it, and everything after it, is  shifted to make room. A dotted path such as 1.2.3 is accepted as well, of which only the last segment is  read.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["order"]
 
     model_config = ConfigDict(

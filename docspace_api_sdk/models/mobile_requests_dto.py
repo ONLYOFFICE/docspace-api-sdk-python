@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class MobileRequestsDto(BaseModel):
     """
-    The parameters required for the mobile phone verification.
+    The phone number a user going through phone activation registers for SMS codes.
     """ # noqa: E501
-    mobile_phone: Optional[StrictStr] = Field(default=None, description="The user's mobile phone number.", alias="mobilePhone", json_schema_extra={"examples": ["+1234567890"]})
+    mobile_phone: Optional[StrictStr] = Field(default=None, description="The number the SMS codes are sent to, in international form with the leading `+` and no spaces. It is stored  as not yet activated and only becomes the confirmed number once a code sent to it is accepted; an already  activated number is not replaced this way and has to be erased first.", alias="mobilePhone", json_schema_extra={"examples": ["+1234567890"]})
     __properties: ClassVar[List[str]] = ["mobilePhone"]
 
     model_config = ConfigDict(

@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class CustomFilterParameters(BaseModel):
     """
-    The parameters for setting the Custom Filter editing mode.
+    The Custom Filter state a spreadsheet is to be put into.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the Custom Filter editing mode is enabled or not.", json_schema_extra={"examples": [True]})
+    enabled: Optional[StrictBool] = Field(default=None, description="The state to reach: `true` turns the mode on, so that the sorting and filtering each person applies stays  visible to that person alone, and drops the others out of a running editing session; `false` turns it off and  makes filtering shared again.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["enabled"]
 
     model_config = ConfigDict(

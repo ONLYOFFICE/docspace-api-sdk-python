@@ -28,12 +28,12 @@ from typing_extensions import Self
 
 class RoomFromTemplateStatusDto(BaseModel):
     """
-    The progress parameters of creating a room from the template.
+    The progress of the job that creates a room out of a room template.
     """ # noqa: E501
-    room_id: StrictInt = Field(description="The room ID.", alias="roomId", json_schema_extra={"examples": [456]})
-    progress: Union[StrictFloat, StrictInt] = Field(description="The progress of creating a room from the template.", json_schema_extra={"examples": [50.0]})
-    error: Optional[StrictStr] = Field(description="The error message that is sent when a room is not created successfully from the template.", json_schema_extra={"examples": ["Room creation failed"]})
-    is_completed: StrictBool = Field(description="Specifies whether the process of creating a room from the template is completed.", alias="isCompleted", json_schema_extra={"examples": [False]})
+    room_id: StrictInt = Field(description="The room the job is creating. It is meaningful once the room exists, which is guaranteed only after  `isCompleted` turns true and `error` stays empty; until then it carries no usable id.", alias="roomId", json_schema_extra={"examples": [456]})
+    progress: Union[StrictFloat, StrictInt] = Field(description="How far the job has got. The value climbs while the contents of the template are being copied into the new  room and reaches its maximum at the very end.", json_schema_extra={"examples": [50.0]})
+    error: Optional[StrictStr] = Field(description="Why the job stopped. It is empty while the job runs and after a successful one, and a filled value means that  no room was created, so the request has to be repeated rather than waited out.", json_schema_extra={"examples": ["Room creation failed"]})
+    is_completed: StrictBool = Field(description="Whether the job has ended. It is set both after a successful creation and after a failure, so it is the flag  to poll for, while `error` is what separates the two outcomes.", alias="isCompleted", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["roomId", "progress", "error", "isCompleted"]
 
     model_config = ConfigDict(

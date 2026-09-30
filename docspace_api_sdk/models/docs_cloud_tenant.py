@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class DocsCloudTenant(BaseModel):
     """
-    Represents a DocsCloud tenant of a portal.
+    Represents a Docs Connect tenant of a portal.
     """ # noqa: E501
     dedicated_resource_ex_id: Optional[StrictInt] = Field(default=None, description="The external ID of the dedicated resource the tenant is hosted on.", alias="dedicatedResourceExId", json_schema_extra={"examples": [12345]})
     alias: Optional[StrictStr] = Field(default=None, description="The tenant alias.", json_schema_extra={"examples": ["my-portal"]})

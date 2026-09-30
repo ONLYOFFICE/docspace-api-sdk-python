@@ -28,13 +28,13 @@ from typing_extensions import Self
 
 class UserConfig(BaseModel):
     """
-    The configuration parameters of the user currently viewing or editing the document.
+    The account the editors attribute the changes of this session to.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The user ID.", json_schema_extra={"examples": ["user_0001"]})
-    name: Optional[StrictStr] = Field(default=None, description="The full name of the user.", json_schema_extra={"examples": ["John Doe"]})
-    image: Optional[StrictStr] = Field(default=None, description="The path to the user's avatar.", json_schema_extra={"examples": ["https://portal.example.com/avatar/user_0001.png"]})
-    roles: Optional[List[StrictStr]] = Field(default=None, description="Roles", json_schema_extra={"examples": [["admin", "editor"]]})
-    customer_id: Optional[StrictStr] = Field(default=None, description="Customer identifier associated with the user.", alias="customerId", json_schema_extra={"examples": ["cust_001"]})
+    id: Optional[StrictStr] = Field(default=None, description="The account the changes are recorded under. Two sessions carrying the same value are taken by the editors for  the same person.", json_schema_extra={"examples": ["9924256b-447c-4f19-9dbd-8ad8c39e8ff5"]})
+    name: Optional[StrictStr] = Field(default=None, description="The name shown next to the changes and in the list of participants.", json_schema_extra={"examples": ["John Doe"]})
+    image: Optional[StrictStr] = Field(default=None, description="An absolute address of the avatar shown for this participant.", json_schema_extra={"examples": ["https://portal.example.com/storage/userphotos/9924256b_medium.png"]})
+    roles: Optional[List[StrictStr]] = Field(default=None, description="The filling roles this participant holds in the form being filled out. It is set only for a form in a virtual  data room, where the role decides which fields open for them.", json_schema_extra={"examples": [["Manager"]]})
+    customer_id: Optional[StrictStr] = Field(default=None, description="Identifies the paying customer this participant belongs to, on deployments where the editors are licensed per  customer.", alias="customerId", json_schema_extra={"examples": ["cust_001"]})
     __properties: ClassVar[List[str]] = ["id", "name", "image", "roles", "customerId"]
 
     model_config = ConfigDict(

@@ -10,7 +10,12 @@ Method | HTTP request | Description
 # **get_space_usage_statistics**
 > UsageSpaceStatItemArrayWrapper get_space_usage_statistics(id)
 
-Returns the space usage statistics for the module with the ID specified in the request.
+Returns the storage space used by one portal module, broken down per data category the module tracks (for
+example per room type), together with a human-readable size and whether the category is disabled. Requires
+Owner or DocSpaceAdmin (the EditPortalSettings permission). `id` identifies the module by the same GUID the
+portal's module catalog uses; a module that does not exist, or one that does not report space usage at all,
+returns an empty list rather than an error. This is a read-only, idempotent call, and the list is not
+paginated. Sizes are already formatted as display strings (for example `1.5 GB`), not raw byte counts.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -19,7 +24,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**| The ID extracted from the route parameters. | 
+ **id** | **UUID**| The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. | 
 
 ### Return type
 
@@ -55,7 +60,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.StatisticsApi(api_client)
-    id = UUID('1') # UUID | The ID extracted from the route parameters.
+    id = UUID('1') # UUID | The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found.
 
     try:
         # Get the space usage statistics
@@ -77,7 +82,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Module space usage statistics |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | Per-category space usage statistics for the requested module |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |

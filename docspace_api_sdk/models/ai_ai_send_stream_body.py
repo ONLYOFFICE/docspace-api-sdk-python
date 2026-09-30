@@ -32,11 +32,11 @@ class AiAiSendStreamBody(BaseModel):
     """
     Shared body of the two streaming send endpoints (`sendWithStream` and its OpenAI-framed twin) — the `Chat` action is implied, so there is no `actionType`.
     """ # noqa: E501
-    thread_id: Optional[StrictStr] = Field(default=None, description="Target thread; a new one is created (with an auto title) when omitted.", alias="threadId")
+    thread_id: Optional[StrictStr] = Field(default=None, description="Target thread; a new one is created (with an auto title) when omitted.", alias="threadId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
     user_message: AiThreadMessageLike = Field(description="The user turn to send.", alias="userMessage")
     action_args: Optional[AiAiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
-    entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId")
-    profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId")
+    entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId", json_schema_extra={"examples": ["1234"]})
+    profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     __properties: ClassVar[List[str]] = ["threadId", "userMessage", "actionArgs", "entityId", "profileId"]
 
     model_config = ConfigDict(

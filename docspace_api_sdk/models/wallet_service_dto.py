@@ -35,11 +35,11 @@ from docspace_api_sdk.models.quota_dto import QuotaDto
 
 class WalletServiceDto(QuotaDto):
     """
-    The wallet service information.
+    One service the portal can pay for out of its wallet: a quota sold per unit rather than per period.
     """
 
-    inner_services: Optional[List[WalletServiceDto]] = Field(default=None, description="The list of inner services.", alias="innerServices", json_schema_extra={"examples": [[{"title": "File Storage", "size": 1073741824}]]})
-    service_name: Optional[StrictStr] = Field(default=None, description="The service name.", alias="serviceName", json_schema_extra={"examples": ["backup"]})
+    inner_services: Optional[List[WalletServiceDto]] = Field(default=None, description="The variants of this service that are folded into it, so a client renders one card per group instead of  one per variant. It is empty when the service has no variants, and always empty in the answer of  `GET api/2.0/portal/payment/walletservice`, which looks one service up on its own.", alias="innerServices", json_schema_extra={"examples": [[{"serviceName": "docs-cloud-dev", "title": "Developer pack"}]]})
+    service_name: Optional[StrictStr] = Field(default=None, description="The stable key of the service, which is what the wallet operations take as their `service` argument and  what the usage reports key their entries by.", alias="serviceName", json_schema_extra={"examples": ["backup"]})
 
     model_config = ConfigDict(
         populate_by_name=True,

@@ -30,13 +30,13 @@ from typing_extensions import Self
 
 class AdminMessageSettingsRequestsDto(BaseModel):
     """
-    The request parameters for configuring the administrator message content.
+    The message sent to the portal administrators, with the CAPTCHA proof that a person wrote it.
     """ # noqa: E501
-    message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The content of the administrator message to be sent.", json_schema_extra={"examples": ["Hello, this is a test message from the administrator."]})
-    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="Email", json_schema_extra={"examples": ["user@example.com"]})
-    culture: Optional[StrictStr] = Field(default=None, description="Culture", json_schema_extra={"examples": ["en-US"]})
-    recaptcha_type: Optional[RecaptchaType] = Field(default=None, description="The type of CAPTCHA validation used.", alias="recaptchaType")
-    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse", json_schema_extra={"examples": ["03AGdBq24PBCbwiDRaS..."]})
+    message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="What the sender wants to tell the portal administrators. Markup is stripped before the letter is written, so  a body that carries nothing but markup counts as empty and is refused with 400.", json_schema_extra={"examples": ["Hello, this is a test message from the administrator."]})
+    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The address the sender can be answered at, which the letter is signed with. It has to be a well-formed email  address.", json_schema_extra={"examples": ["user@example.com"]})
+    culture: Optional[StrictStr] = Field(default=None, description="The language the letter is written in, as a culture name such as `en-US`. A culture the installation does not  have falls back to the portal language rather than failing the call.", json_schema_extra={"examples": ["en-US"]})
+    recaptcha_type: Optional[RecaptchaType] = Field(default=None, description="Which CAPTCHA service the proof in `recaptchaResponse` came from. It has to match the service the  installation is configured with, which `GET api/2.0/capabilities` reports; the default value means the  installation is left to decide.", alias="recaptchaType")
+    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The token the CAPTCHA widget produced in the browser, passed on unchanged for the portal to verify with the  CAPTCHA service. It is single-use and short-lived, so it cannot be reused for a second message.", alias="recaptchaResponse", json_schema_extra={"examples": ["03AGdBq24PBCbwiDRaS..."]})
     __properties: ClassVar[List[str]] = ["message", "email", "culture", "recaptchaType", "recaptchaResponse"]
 
     model_config = ConfigDict(

@@ -28,15 +28,15 @@ from typing_extensions import Self
 
 class CapabilitiesDto(BaseModel):
     """
-    The capabilities parameters.
+    The sign-in methods this portal offers, as a login client needs them before anyone has signed in.
     """ # noqa: E501
-    ldap_enabled: StrictBool = Field(description="Specifies if the LDAP settings are enabled or not.", alias="ldapEnabled", json_schema_extra={"examples": [False]})
-    ldap_domain: Optional[StrictStr] = Field(default=None, description="The LDAP domain.", alias="ldapDomain", json_schema_extra={"examples": ["example.com"]})
-    providers: Optional[List[StrictStr]] = Field(description="The list of providers.", json_schema_extra={"examples": [["google", "facebook", "microsoft"]]})
-    sso_label: Optional[StrictStr] = Field(description="The SP login label.", alias="ssoLabel", json_schema_extra={"examples": ["Enterprise SSO"]})
-    oauth_enabled: StrictBool = Field(description="Specifies if OAuth is enabled or not.", alias="oauthEnabled", json_schema_extra={"examples": [True]})
-    sso_url: Optional[StrictStr] = Field(description="The SSO URL. If this parameter is empty, then the SSO settings are disabled.", alias="ssoUrl", json_schema_extra={"examples": ["https://sso.example.com/login"]})
-    identity_server_enabled: StrictBool = Field(description="Specifies if an identity server is enabled or not.", alias="identityServerEnabled", json_schema_extra={"examples": [False]})
+    ldap_enabled: StrictBool = Field(description="Whether members may sign in with their directory credentials. It is `false` both when LDAP sign-in is  switched off and when the pricing plan or the installation does not include it, and also when the settings  could not be read at all - a `false` here means the method is not offered, never that it is unknown.", alias="ldapEnabled", json_schema_extra={"examples": [False]})
+    ldap_domain: Optional[StrictStr] = Field(default=None, description="The directory domain members authenticate against, to be shown next to the login field. It is empty  whenever `ldapEnabled` is `false`, and also while the portal has not completed a directory synchronisation.", alias="ldapDomain", json_schema_extra={"examples": ["example.com"]})
+    providers: Optional[List[StrictStr]] = Field(description="The keys of the external identity providers to offer, ordered for the country the caller's IP address  resolves to and reduced to those this installation has credentials for. Pass one of them as `provider` to  `POST api/2.0/authentication`. An empty list means external sign-in is not on offer.", json_schema_extra={"examples": [["google", "facebook", "microsoft"]]})
+    sso_label: Optional[StrictStr] = Field(description="The caption for the single sign-on button in the portal language, empty whenever `ssoUrl` is.", alias="ssoLabel", json_schema_extra={"examples": ["Enterprise SSO"]})
+    oauth_enabled: StrictBool = Field(description="Whether external identity providers may be used on this portal at all. While it is `false`, `providers` is  empty because the list is not even assembled.", alias="oauthEnabled", json_schema_extra={"examples": [True]})
+    sso_url: Optional[StrictStr] = Field(description="The address to send the browser to for SAML single sign-on. It is empty when single sign-on is not on  offer, which is the one thing to test - there is no separate flag for it.", alias="ssoUrl", json_schema_extra={"examples": ["https://sso.example.com/login"]})
+    identity_server_enabled: StrictBool = Field(description="Whether the installation exposes its built-in identity server, which is what the portal's own OAuth  applications authenticate against. It concerns third-party applications signing in to the portal, not  portal members signing in to an external provider - that is `providers`.", alias="identityServerEnabled", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["ldapEnabled", "ldapDomain", "providers", "ssoLabel", "oauthEnabled", "ssoUrl", "identityServerEnabled"]
 
     model_config = ConfigDict(

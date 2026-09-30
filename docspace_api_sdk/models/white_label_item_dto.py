@@ -31,12 +31,12 @@ from typing_extensions import Self
 
 class WhiteLabelItemDto(BaseModel):
     """
-    The white label item parameters.
+    One branding logo slot of the portal: the size it is drawn at, and where its images are served from.
     """ # noqa: E501
-    type: Optional[WhiteLabelLogoType] = Field(default=None, description="The white label logo type.")
-    name: Optional[StrictStr] = Field(default=None, description="The white label file name.", json_schema_extra={"examples": ["Example Name"]})
-    size: Optional[WhiteLabelItemSizeDto] = Field(default=None, description="The white label file size.")
-    path: Optional[WhiteLabelItemPathDto] = Field(default=None, description="The white label file path.")
+    type: Optional[WhiteLabelLogoType] = Field(default=None, description="Which branding slot this entry describes. `Notification` is part of the type but never appears here: that  logo is derived from the login-page one and used only in letters.")
+    name: Optional[StrictStr] = Field(default=None, description="The stable name of the same slot, which is what `GET api/2.0/settings/whitelabel/logos/isdefault` keys its  entries by. It is a name to match on, not a file name.", json_schema_extra={"examples": ["LightSmall"]})
+    size: Optional[WhiteLabelItemSizeDto] = Field(default=None, description="The pixel box the slot is drawn in. Only `width` and `height` carry information here; the resize flags and  offsets alongside them are left at their defaults and say nothing about how an uploaded image is treated.")
+    path: Optional[WhiteLabelItemPathDto] = Field(default=None, description="The absolute URLs to render the slot from, one per theme.")
     __properties: ClassVar[List[str]] = ["type", "name", "size", "path"]
 
     model_config = ConfigDict(

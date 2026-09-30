@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class CoversResultDto(BaseModel):
     """
-    The result of the cover request containing the cover image data.
+    One drawing of the built-in gallery of room covers.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(description="The cover unique identifier.", json_schema_extra={"examples": ["cover-123"]})
-    data: Optional[StrictStr] = Field(description="The cover image data.", json_schema_extra={"examples": ["base64EncodedImageData"]})
+    id: Optional[StrictStr] = Field(description="The name of the cover, and the value to send as `cover` when a room is created or changed. The names are the  same on every portal and do not change with the language of the request.", json_schema_extra={"examples": ["bookmark"]})
+    data: Optional[StrictStr] = Field(description="The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays.", json_schema_extra={"examples": ["<svg viewBox=\"0 0 32 32\"><path d=\"M8 4h16v24l-8-6-8 6z\"/></svg>"]})
     __properties: ClassVar[List[str]] = ["id", "data"]
 
     model_config = ConfigDict(

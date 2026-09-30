@@ -32,9 +32,9 @@ class AiImportResult(BaseModel):
     """
     Outcome of `PromptsEngine.importBundle`. Either every entry persisted with counts, or no entries persisted plus a per-entry error report.
     """ # noqa: E501
-    success: StrictBool = Field(description="True when the whole bundle was imported.")
+    success: StrictBool = Field(description="True when the whole bundle was imported.", json_schema_extra={"examples": [True]})
     imported: Optional[AiImportResultImported] = None
-    errors: Optional[List[AiImportError]] = Field(default=None, description="What was rejected, per entry. Present on failure - and then nothing was imported.")
+    errors: Optional[List[AiImportError]] = Field(default=None, description="What was rejected, per entry. Present on failure - and then nothing was imported.", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["success", "imported", "errors"]
 
     model_config = ConfigDict(

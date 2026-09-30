@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class WhiteLabelItemPathDto(BaseModel):
     """
-    The white label item path parameters.
+    The image URLs of one logo slot, per interface theme.
     """ # noqa: E501
-    light: Optional[StrictStr] = Field(default=None, description="The path to the light theme logo.", json_schema_extra={"examples": ["/images/logo-light.png"]})
-    dark: Optional[StrictStr] = Field(default=None, description="The path to the dark theme logo.", json_schema_extra={"examples": ["/images/logo-dark.png"]})
+    light: Optional[StrictStr] = Field(default=None, description="The absolute URL of the image to render on a light background. It is filled in unless the request asked  for the dark theme alone with `isDark=true`, in which case only `dark` comes back.", json_schema_extra={"examples": ["/images/logo-light.png"]})
+    dark: Optional[StrictStr] = Field(default=None, description="The absolute URL of the image to render on a dark background. When both themes are asked for it comes back  empty for a slot that has no separate dark image, meaning the light one is to be used for both; when  `isDark=false` was passed it is left out entirely.", json_schema_extra={"examples": ["/images/logo-dark.png"]})
     __properties: ClassVar[List[str]] = ["light", "dark"]
 
     model_config = ConfigDict(

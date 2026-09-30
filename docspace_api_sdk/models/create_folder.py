@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class CreateFolder(BaseModel):
     """
-    The parameters for creating a folder.
+    The title a folder is created with or renamed to.
     """ # noqa: E501
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(description="The folder title to create.", json_schema_extra={"examples": ["New Folder"]})
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=165)]] = Field(description="The title the folder is given. It is trimmed before it is stored and may not be blank or consist of spaces  alone; it need not differ from the titles of the neighbouring folders, so the same title may appear twice in  one parent.", json_schema_extra={"examples": ["New Folder"]})
     __properties: ClassVar[List[str]] = ["title"]
 
     model_config = ConfigDict(

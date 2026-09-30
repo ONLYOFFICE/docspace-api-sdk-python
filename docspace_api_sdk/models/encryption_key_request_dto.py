@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class EncryptionKeyRequestDto(BaseModel):
     """
-    The request parameters for storing the encryption key pair of a user.
+    The two halves of an encryption key pair to store for the calling user, plus the identifier the pair is kept  under.
     """ # noqa: E501
-    id: Optional[UUID] = Field(default=None, description="The identifier of the key pair.", json_schema_extra={"examples": ["9924256B-447C-4F19-9dbd-8ad8c39e8ff5"]})
-    public_key: Optional[StrictStr] = Field(default=None, description="The public key of the pair, used to encrypt the file keys.", alias="publicKey", json_schema_extra={"examples": ["MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A..."]})
-    private_key_enc: Optional[StrictStr] = Field(default=None, description="The private key of the pair, encrypted with the user password.", alias="privateKeyEnc", json_schema_extra={"examples": ["U2FsdGVkX1+Lm3s..."]})
+    id: Optional[UUID] = Field(default=None, description="Names the pair inside the caller's own key set. The client generates it, and leaving it out means the all-zero  GUID, which is the pair a client that never sends an identifier keeps working with.", json_schema_extra={"examples": ["9924256B-447C-4F19-9dbd-8ad8c39e8ff5"]})
+    public_key: Optional[StrictStr] = Field(default=None, description="The public half of the pair, as the client's crypto engine produced it and stored verbatim. This is the half  handed to the other members of a private room so that they can encrypt file keys for this user.", alias="publicKey", json_schema_extra={"examples": ["MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A..."]})
+    private_key_enc: Optional[StrictStr] = Field(default=None, description="The private half of the pair, encrypted on the client with the user's password before it is sent. The portal  stores it as opaque text and cannot decrypt it, so material lost on the client cannot be recovered from here.", alias="privateKeyEnc", json_schema_extra={"examples": ["U2FsdGVkX1+Lm3s..."]})
     __properties: ClassVar[List[str]] = ["id", "publicKey", "privateKeyEnc"]
 
     model_config = ConfigDict(

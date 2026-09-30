@@ -18,11 +18,14 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
-from typing import Any, Dict
-from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
+from pydantic import Field
+from typing_extensions import Annotated
+from docspace_api_sdk.models.ai_editor_tools_call200_response import AiEditorToolsCall200Response
+from docspace_api_sdk.models.ai_editor_tools_call_request import AiEditorToolsCallRequest
+from docspace_api_sdk.models.ai_editor_tools_list200_response import AiEditorToolsList200Response
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -46,7 +49,7 @@ class EditorToolsApi:
     @validate_call
     def ai_editor_tools_call(
         self,
-        request_body: Dict[str, Any],
+        ai_editor_tools_call_request: Annotated[AiEditorToolsCallRequest, Field(description="The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -59,13 +62,13 @@ class EditorToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiSuccessResponse:
-        """Execute a DocSpace tool on behalf of the editor AI plugin
+    ) -> AiEditorToolsCall200Response:
+        """Call an editor tool
 
-        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and with the caller's forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
+        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
 
-        :param request_body: (required)
-        :type request_body: Dict[str, object]
+        :param ai_editor_tools_call_request: The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in. (required)
+        :type ai_editor_tools_call_request: AiEditorToolsCallRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,7 +92,7 @@ class EditorToolsApi:
         """ # noqa: E501
 
         _param = self._ai_editor_tools_call_serialize(
-            request_body=request_body,
+            ai_editor_tools_call_request=ai_editor_tools_call_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -97,8 +100,12 @@ class EditorToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiEditorToolsCall200Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -115,7 +122,7 @@ class EditorToolsApi:
     @validate_call
     def ai_editor_tools_call_with_http_info(
         self,
-        request_body: Dict[str, Any],
+        ai_editor_tools_call_request: Annotated[AiEditorToolsCallRequest, Field(description="The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -128,13 +135,13 @@ class EditorToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiSuccessResponse]:
-        """Execute a DocSpace tool on behalf of the editor AI plugin
+    ) -> ApiResponse[AiEditorToolsCall200Response]:
+        """Call an editor tool
 
-        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and with the caller's forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
+        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
 
-        :param request_body: (required)
-        :type request_body: Dict[str, object]
+        :param ai_editor_tools_call_request: The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in. (required)
+        :type ai_editor_tools_call_request: AiEditorToolsCallRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -158,7 +165,7 @@ class EditorToolsApi:
         """ # noqa: E501
 
         _param = self._ai_editor_tools_call_serialize(
-            request_body=request_body,
+            ai_editor_tools_call_request=ai_editor_tools_call_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -166,8 +173,12 @@ class EditorToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiEditorToolsCall200Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -184,7 +195,7 @@ class EditorToolsApi:
     @validate_call
     def ai_editor_tools_call_without_preload_content(
         self,
-        request_body: Dict[str, Any],
+        ai_editor_tools_call_request: Annotated[AiEditorToolsCallRequest, Field(description="The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -198,12 +209,12 @@ class EditorToolsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Execute a DocSpace tool on behalf of the editor AI plugin
+        """Call an editor tool
 
-        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and with the caller's forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
+        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
 
-        :param request_body: (required)
-        :type request_body: Dict[str, object]
+        :param ai_editor_tools_call_request: The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in. (required)
+        :type ai_editor_tools_call_request: AiEditorToolsCallRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -227,7 +238,7 @@ class EditorToolsApi:
         """ # noqa: E501
 
         _param = self._ai_editor_tools_call_serialize(
-            request_body=request_body,
+            ai_editor_tools_call_request=ai_editor_tools_call_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -235,8 +246,12 @@ class EditorToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiEditorToolsCall200Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -248,7 +263,7 @@ class EditorToolsApi:
 
     def _ai_editor_tools_call_serialize(
         self,
-        request_body,
+        ai_editor_tools_call_request,
         _request_auth,
         _content_type,
         _headers,
@@ -274,8 +289,8 @@ class EditorToolsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_editor_tools_call_request is not None:
+            _body_params = ai_editor_tools_call_request
 
 
         # set the HTTP header `Accept`
@@ -302,6 +317,8 @@ class EditorToolsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -340,10 +357,10 @@ class EditorToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiSuccessResponse:
-        """Sanitized DocSpace tool catalog for the editor AI plugin
+    ) -> AiEditorToolsList200Response:
+        """List editor tools
 
-        Returns the sanitized catalog of DocSpace tools available to the document editor's AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
+        Returns the catalogue of DocSpace tools the document editor's AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. `entityId` scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with `POST api/2.0/ai/editor-tools/call`, which accepts only the names this catalogue reports.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -375,8 +392,10 @@ class EditorToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiEditorToolsList200Response",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -405,10 +424,10 @@ class EditorToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiSuccessResponse]:
-        """Sanitized DocSpace tool catalog for the editor AI plugin
+    ) -> ApiResponse[AiEditorToolsList200Response]:
+        """List editor tools
 
-        Returns the sanitized catalog of DocSpace tools available to the document editor's AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
+        Returns the catalogue of DocSpace tools the document editor's AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. `entityId` scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with `POST api/2.0/ai/editor-tools/call`, which accepts only the names this catalogue reports.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -440,8 +459,10 @@ class EditorToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiEditorToolsList200Response",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -471,9 +492,9 @@ class EditorToolsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Sanitized DocSpace tool catalog for the editor AI plugin
+        """List editor tools
 
-        Returns the sanitized catalog of DocSpace tools available to the document editor's AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
+        Returns the catalogue of DocSpace tools the document editor's AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. `entityId` scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with `POST api/2.0/ai/editor-tools/call`, which accepts only the names this catalogue reports.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -505,8 +526,10 @@ class EditorToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiEditorToolsList200Response",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -556,6 +579,8 @@ class EditorToolsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 

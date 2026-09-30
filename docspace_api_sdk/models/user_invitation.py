@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class UserInvitation(BaseModel):
     """
-    The user invitation parameters.
+    Which pending room invitations are to be sent again.
     """ # noqa: E501
-    users_ids: Optional[List[UUID]] = Field(default=None, description="The list of user IDs.", alias="usersIds", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
-    resend_all: Optional[StrictBool] = Field(default=None, description="Specifies whether to resend all user invitations or not.", alias="resendAll", json_schema_extra={"examples": [False]})
+    users_ids: Optional[List[UUID]] = Field(default=None, description="The accounts to write to, taken from `GET api/2.0/files/rooms/{id}/share`. Anyone who has already joined, is  not in the room, or is invisible to the caller is skipped without an error, and the field is ignored once  every pending invitation is being resent.", alias="usersIds", json_schema_extra={"examples": [["e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b"]]})
+    resend_all: Optional[StrictBool] = Field(default=None, description="Whether every invitation of the room that is still waiting is sent again. With it on the list of accounts is  ignored, and with it off an empty list means that nothing is sent at all.", alias="resendAll", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["usersIds", "resendAll"]
 
     model_config = ConfigDict(

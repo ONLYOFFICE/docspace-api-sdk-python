@@ -32,10 +32,10 @@ from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto
 
 class AuthWithCodeRequestsDto(AuthRequestsDto):
     """
-    The parameters required for the user two-factor authentication requests.
+    The same credentials as an ordinary sign-in, plus the one-time code that completes it.
     """
 
-    code: Optional[StrictStr] = Field(default=None, description="The code for two-factor authentication.", json_schema_extra={"examples": ["123456"]})
+    code: Optional[StrictStr] = Field(default=None, description="The one-time code from the SMS the portal sent or from the authenticator app, whichever second factor the  portal has enabled for this user. It is single-use and expires; a wrong, empty or expired value fails the  sign-in and counts against the brute-force limit.", json_schema_extra={"examples": ["123456"]})
 
     model_config = ConfigDict(
         populate_by_name=True,

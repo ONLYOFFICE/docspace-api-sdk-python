@@ -122,6 +122,7 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
+    "AIConfig",
     "AccessRequestKeyDto",
     "AccountInfoArrayWrapper",
     "AccountInfoDto",
@@ -147,6 +148,8 @@ __all__ = [
     "AiAgentNewItemsDto",
     "AiAgentsCreateRequest",
     "AiAgentsDeleteRequest",
+    "AiAgentsGet200Response",
+    "AiAgentsGet200ResponseAllOfResponse",
     "AiAgentsResetQuotaRequest",
     "AiAgentsUpdateQuotaRequest",
     "AiAgentsUpdateQuotaRequestRoomIdsInner",
@@ -154,6 +157,7 @@ __all__ = [
     "AiAiActionArgs",
     "AiAiActionArgsPrompt",
     "AiAiApproveToolCallRequest",
+    "AiAiReasoningLevel",
     "AiAiRegenerateStreamRequest",
     "AiAiSendCustomRequest",
     "AiAiSendRequest",
@@ -163,8 +167,10 @@ __all__ = [
     "AiAiToolCallData",
     "AiAiUserSettingsDto",
     "AiAiUserSettingsWrapper",
+    "AiApiDateTime",
     "AiAssignmentMutationResult",
     "AiAssignmentsAssignRequest",
+    "AiAssignmentsCascadeProfileDeleteRequest",
     "AiAttachment",
     "AiAttachmentFormKeysInner",
     "AiAttachmentsLinkToMessageRequest",
@@ -175,36 +181,44 @@ __all__ = [
     "AiBulkAssignmentResult",
     "AiBulkAssignmentResultErrorsInner",
     "AiChatEvent",
-    "AiChatModelPricing",
-    "AiChatPrice",
+    "AiChatPriceDto",
     "AiChatSettingsDto",
     "AiCreateProfileInput",
     "AiCreatePromptInput",
     "AiDistributedTaskStatus",
-    "AiEmbeddingModelPricing",
-    "AiEmbeddingPrice",
+    "AiEditorToolsCall200Response",
+    "AiEditorToolsCallRequest",
+    "AiEditorToolsList200Response",
+    "AiEditorToolsList200ResponseToolsInner",
+    "AiEmbeddingPriceDto",
     "AiEmbeddingProviderType",
     "AiEmployeeDto",
+    "AiEntryPricingDtoAiChatPriceDto",
+    "AiEntryPricingDtoAiEmbeddingPriceDto",
+    "AiEntryPricingDtoAiImagePriceDto",
+    "AiEntryPricingDtoDecimal",
     "AiErrorResponse",
-    "AiExportTextToDocx200Response",
+    "AiExportTextToDocx202Response",
     "AiExportTextToDocxRequest",
     "AiExportTextToDocxRequestFolderId",
     "AiFileEntryBaseDto",
-    "AiFileEntryDtoInteger",
+    "AiFileEntryDto",
+    "AiFileEntryDtoAllOfAvailableShareRights",
+    "AiFileEntryDtoAllOfSecurity",
+    "AiFileEntryDtoAllOfShareSettings",
     "AiFileEntryType",
     "AiFileOperationDto",
     "AiFileOperationType",
     "AiFileOperationWrapper",
     "AiFileShare",
-    "AiFolderContentDtoInteger",
-    "AiFolderContentIntegerWrapper",
-    "AiFolderDtoInteger",
-    "AiFolderIntegerArrayWrapper",
-    "AiFolderIntegerWrapper",
+    "AiFolderArrayWrapper",
+    "AiFolderContentDto",
+    "AiFolderContentWrapper",
+    "AiFolderDto",
     "AiFolderMutationResult",
     "AiFolderType",
-    "AiImageModelPricing",
-    "AiImagePrice",
+    "AiFolderWrapper",
+    "AiImagePriceDto",
     "AiImportError",
     "AiImportMode",
     "AiImportResult",
@@ -224,12 +238,17 @@ __all__ = [
     "AiOpenAIToolCallDelta",
     "AiOpenAIToolCallDeltaFunction",
     "AiOpenOrCreateResult",
+    "AiOpenaiChatCompletions403Response",
+    "AiOpenaiChatCompletions403ResponseError",
     "AiPreferencesSetDeepModeRequest",
-    "AiPricesResponse",
-    "AiPricesResponseWrapper",
+    "AiPreferencesSetReasoningLevelRequest",
+    "AiPricesDto",
+    "AiPricesWrapper",
     "AiProfile",
     "AiProfileMutationResult",
     "AiProfilesGetById200Response",
+    "AiProfilesListProviderModels400Response",
+    "AiProfilesListProviderModels400ResponseAnyOf",
     "AiProfilesListProviderModelsRequest",
     "AiProfilesTestConnection200Response",
     "AiProfilesTestConnection200ResponseAnyOf",
@@ -244,6 +263,8 @@ __all__ = [
     "AiPromptsUpdateRequest",
     "AiPromptsUpdateRequestUpdates",
     "AiProviderType",
+    "AiReasoningDepth",
+    "AiReasoningSupport",
     "AiResolvedAssignment",
     "AiRoomDataLifetimeDto",
     "AiRoomDataLifetimePeriod",
@@ -257,10 +278,12 @@ __all__ = [
     "AiThreadMessageLikeContent",
     "AiThreadMessageLikeContentAnyOfInner",
     "AiThreadMessageLikeStatus",
+    "AiThreadsAppendUserMessage200Response",
     "AiThreadsAppendUserMessageRequest",
     "AiThreadsCreateRequest",
     "AiThreadsOpenOrCreateRequest",
     "AiThreadsOpenOrCreateRequestEntityMeta",
+    "AiThreadsRegenerateTitle200Response",
     "AiThreadsRegenerateTitleRequest",
     "AiThreadsRenameRequest",
     "AiThreadsTouchRequest",
@@ -268,6 +291,7 @@ __all__ = [
     "AiToolsAddCustomServerRequest",
     "AiToolsBulkResult",
     "AiToolsBulkResultErrorsInner",
+    "AiToolsListSystemTools200Response",
     "AiToolsMutationResult",
     "AiToolsRemoveCustomServerRequest",
     "AiToolsReplaceAllCustomServersRequest",
@@ -276,19 +300,22 @@ __all__ = [
     "AiToolsUpdateCustomServerRequest",
     "AiVectorizationSettingsDto",
     "AiVectorizationSettingsWrapper",
+    "AiVectorizationStartTask200Response",
+    "AiVectorizationStartTaskRequest",
     "AiWatermarkAdditions",
     "AiWatermarkDto",
     "AiWebSearchConfig",
     "AiWebSearchConfigureRequest",
     "AiWebSearchMutationResult",
-    "AiWebSearchPricing",
+    "AmazonS3RegionArrayWrapper",
+    "AmazonS3RegionDto",
     "AnonymousConfigDto",
+    "ApiDateTime",
     "ApiKeyResponseArrayWrapper",
     "ApiKeyResponseDto",
     "ApiKeyResponseWrapper",
     "AppArrayWrapper",
     "AppDto",
-    "AppDtoSettings",
     "AppWrapper",
     "ApplyFilterOption",
     "ArchiveRoomRequest",
@@ -297,6 +324,12 @@ __all__ = [
     "AuditEventArrayWrapper",
     "AuditEventDto",
     "AuditReportFormat",
+    "AuditTrailActionMapperDto",
+    "AuditTrailModuleMapperDto",
+    "AuditTrailProductMapperArrayWrapper",
+    "AuditTrailProductMapperDto",
+    "AuditTrailTypesDto",
+    "AuditTrailTypesWrapper",
     "AuthData",
     "AuthKey",
     "AuthRequestsDto",
@@ -345,17 +378,17 @@ __all__ = [
     "ChangeWalletServiceStateRequestDto",
     "ChatSettings",
     "ChatSettingsDto",
-    "CheckConversionRequestDtoInteger",
+    "CheckConversionRequestDto",
     "CheckDestFolderDto",
     "CheckDestFolderResult",
     "CheckDestFolderWrapper",
     "CheckDocServiceUrlRequestDto",
     "CheckFillFormDraft",
     "CheckUploadRequest",
-    "ChunkedUploadSessionResponseInteger",
-    "ChunkedUploadSessionResponseIntegerWrapper",
-    "ChunkedUploadSessionResponseWrapperInteger",
-    "ChunkedUploadSessionResponseWrapperIntegerWrapper",
+    "ChunkedUploadSessionResponse",
+    "ChunkedUploadSessionResponseResponseWrapper",
+    "ChunkedUploadSessionResponseWrapper",
+    "ChunkedUploadSessionResponseWrapperWrapper",
     "ClientInfoResponse",
     "ClientResponse",
     "ClientSecretResponse",
@@ -367,8 +400,8 @@ __all__ = [
     "CompanyWhiteLabelSettingsDtoWrapper",
     "CompanyWhiteLabelSettingsResponseWrapper",
     "CompanyWhiteLabelSettingsWrapper",
-    "ConfigurationDtoInteger",
-    "ConfigurationIntegerWrapper",
+    "ConfigurationDto",
+    "ConfigurationWrapper",
     "ConfirmData",
     "ConfirmDto",
     "ConfirmType",
@@ -453,6 +486,7 @@ __all__ = [
     "DeleteFolder",
     "DeleteRoomRequest",
     "DeleteVersionBatchRequestDto",
+    "DiscountCategory",
     "DisplayRequestDto",
     "DistributedTaskStatus",
     "DnsSettingsRequestsDto",
@@ -491,7 +525,7 @@ __all__ = [
     "DownloadRequestDtoAllOfFolderIds",
     "DownloadRequestItemDto",
     "DownloadRequestItemDtoKey",
-    "DraftLocationInteger",
+    "DraftLocation",
     "DuplicateRequestDto",
     "DuplicateRequestDtoAllOfFileIds",
     "DuplicateRequestDtoAllOfFolderIds",
@@ -503,6 +537,7 @@ __all__ = [
     "EditHistoryDto",
     "EditHistoryUrl",
     "EditorConfigurationDto",
+    "EditorToolCallParametersDto",
     "EditorToolCallStateDto",
     "EditorType",
     "EmailActivationSettings",
@@ -520,6 +555,8 @@ __all__ = [
     "EmployeeStatus",
     "EmployeeType",
     "EmployeeWrapper",
+    "EnabledModuleArrayWrapper",
+    "EnabledModuleDto",
     "EncryprtionStatus",
     "EncryptionKeyArrayWrapper",
     "EncryptionKeyDto",
@@ -543,23 +580,19 @@ __all__ = [
     "ExternalSharingSettingsWrapper",
     "FeatureUsedDto",
     "FeedbackConfig",
+    "FieldError",
+    "FileArrayWrapper",
     "FileConflictResolveType",
-    "FileDtoInteger",
-    "FileDtoIntegerAllOfViewAccessibility",
+    "FileDto",
+    "FileDtoAllOfViewAccessibility",
     "FileEncryptionInfoDto",
     "FileEncryptionInfoWrapper",
+    "FileEntryArrayWrapper",
     "FileEntryBaseArrayWrapper",
     "FileEntryBaseDto",
     "FileEntryBaseWrapper",
-    "FileEntryDtoInteger",
-    "FileEntryDtoIntegerAllOfAvailableShareRights",
-    "FileEntryDtoIntegerAllOfSecurity",
-    "FileEntryDtoIntegerAllOfShareSettings",
-    "FileEntryDtoString",
-    "FileEntryIntegerArrayWrapper",
+    "FileEntryDto",
     "FileEntryType",
-    "FileIntegerArrayWrapper",
-    "FileIntegerWrapper",
     "FileKeys",
     "FileLink",
     "FileLinkRequest",
@@ -583,31 +616,29 @@ __all__ = [
     "FileType",
     "FileUploadResultDto",
     "FileUploadResultWrapper",
+    "FileWrapper",
     "FilesSettingsDto",
     "FilesSettingsDtoInternalFormats",
     "FilesSettingsWrapper",
     "FilesStatisticsFolder",
     "FilesStatisticsResultDto",
     "FilesStatisticsResultWrapper",
-    "FillingFormResultDtoInteger",
-    "FillingFormResultIntegerWrapper",
+    "FillingFormResultDto",
+    "FillingFormResultWrapper",
     "FilterType",
     "FinishDto",
     "FireBaseUser",
     "FireBaseUserWrapper",
     "FirebaseDto",
     "FirebaseRequestsDto",
-    "FolderContentDtoInteger",
-    "FolderContentIntegerArrayWrapper",
-    "FolderContentIntegerWrapper",
-    "FolderDtoInteger",
-    "FolderDtoString",
-    "FolderIntegerArrayWrapper",
-    "FolderIntegerWrapper",
+    "FolderArrayWrapper",
+    "FolderContentArrayWrapper",
+    "FolderContentDto",
+    "FolderContentWrapper",
+    "FolderDto",
     "FolderLinkRequest",
-    "FolderStringArrayWrapper",
-    "FolderStringWrapper",
     "FolderType",
+    "FolderWrapper",
     "FormFillingManageAction",
     "FormFillingStatus",
     "FormGalleryDto",
@@ -621,9 +652,12 @@ __all__ = [
     "FormsItemArrayWrapper",
     "FormsItemData",
     "FormsItemDto",
+    "GenerateDocxToolCallParametersDto",
+    "GenerateFormToolCallParametersDto",
+    "GeneratePresentationToolCallParametersDto",
     "GetPortalPrices200Response",
     "GetPortalPrices200ResponseLinksInner",
-    "GetReferenceDataDtoInteger",
+    "GetReferenceDataDto",
     "GobackConfig",
     "GreetingSettingsRequestsDto",
     "GroupArrayWrapper",
@@ -639,6 +673,8 @@ __all__ = [
     "HistoryArrayWrapper",
     "HistoryData",
     "HistoryDto",
+    "IAccountEntryArrayWrapper",
+    "IAccountEntryDto",
     "ICompressWrapper",
     "IPRestriction",
     "IPRestrictionArrayWrapper",
@@ -667,6 +703,7 @@ __all__ = [
     "ItemKeyValuePairStringBoolean",
     "ItemKeyValuePairStringLogoRequestsDto",
     "ItemKeyValuePairStringString",
+    "JsonValueWrapper",
     "LinkAccountRequestDto",
     "LinkType",
     "Location",
@@ -684,7 +721,7 @@ __all__ = [
     "LogoRequest",
     "LogoRequestsDto",
     "MailDomainSettingsRequestsDto",
-    "ManageFormFillingDtoInteger",
+    "ManageFormFillingDto",
     "MemberRequestDto",
     "MembersRequest",
     "MentionMessageWrapper",
@@ -715,22 +752,23 @@ __all__ = [
     "NotificationType",
     "OAuth20Token",
     "ObjectArrayWrapper",
-    "ObjectWrapper",
     "OperationDto",
     "OperationOrderType",
     "OperationStatus",
+    "OperationTokenUsage",
     "OperationType",
     "Options",
     "OrderBy",
     "OrderRequestDto",
-    "OrdersItemRequestDtoInteger",
-    "OrdersRequestDtoInteger",
+    "OrdersItemRequestDto",
+    "OrdersRequestDto",
     "OwnerChangeInstructionsDto",
     "OwnerChangeInstructionsWrapper",
     "OwnerIdSettingsRequestDto",
+    "PageableClientInfoResponse",
+    "PageableClientResponse",
     "PageableModificationResponse",
     "PageableResponse",
-    "PageableResponseClientInfoResponse",
     "Paragraph",
     "PasswordHasher",
     "PasswordSettingsDto",
@@ -747,6 +785,8 @@ __all__ = [
     "PluginsConfig",
     "PluginsDto",
     "PriceDto",
+    "PriceStatus",
+    "PriceTimeUnit",
     "ProblemDetail",
     "ProductAdministratorDto",
     "ProductAdministratorWrapper",
@@ -756,7 +796,6 @@ __all__ = [
     "ProviderDto",
     "ProviderFilter",
     "QuantityRequestDto",
-    "Quota",
     "QuotaArrayWrapper",
     "QuotaDto",
     "QuotaFilter",
@@ -799,8 +838,8 @@ __all__ = [
     "Run",
     "STRINGArrayWrapper",
     "SalesRequestsDto",
-    "SaveAsPdfInteger",
-    "SaveFormRoleMappingDtoInteger",
+    "SaveAsPdf",
+    "SaveFormRoleMappingDto",
     "ScheduleDto",
     "ScheduleWrapper",
     "ScopeResponse",
@@ -810,10 +849,11 @@ __all__ = [
     "SecurityInfoRequestDto",
     "SecurityInfoSimpleRequestDto",
     "SecurityRequestsDto",
+    "ServicePriceInfo",
+    "ServicePriceInfoArrayWrapper",
     "SessionRequest",
     "SetAppEnabledBody",
     "SetAppSettingsBody",
-    "SetAppSettingsBodySettings",
     "SetManagerRequest",
     "SetPublicDto",
     "SetRestrictedAiModelsRequestDto",
@@ -827,15 +867,25 @@ __all__ = [
     "SmtpOperationStatusRequestsWrapper",
     "SmtpSettingsDto",
     "SmtpSettingsWrapper",
+    "SocketSettingsDto",
+    "SocketSettingsWrapper",
     "SortOrder",
     "SortedByType",
+    "SsoBindingTypeDto",
     "SsoCertificate",
+    "SsoEncryptAlgorithmTypeDto",
     "SsoFieldMapping",
+    "SsoIdpCertificateActionTypeDto",
     "SsoIdpCertificateAdvanced",
     "SsoIdpSettings",
+    "SsoNameIdFormatTypeDto",
     "SsoSettingsRequestsDto",
     "SsoSettingsV2",
+    "SsoSettingsV2ConstantsDto",
+    "SsoSettingsV2ConstantsWrapper",
     "SsoSettingsV2Wrapper",
+    "SsoSigningAlgorithmTypeDto",
+    "SsoSpCertificateActionTypeDto",
     "SsoSpCertificateAdvanced",
     "StartEdit",
     "StartFillingForm",
@@ -858,7 +908,8 @@ __all__ = [
     "SubmitForm",
     "SubscriptionBalanceInfo",
     "SubscriptionBalanceInfoWrapper",
-    "Tariff",
+    "TariffDto",
+    "TariffQuotaDto",
     "TariffState",
     "TariffWrapper",
     "TaskProgressResponseDto",
@@ -922,15 +973,38 @@ __all__ = [
     "TfaSetupCodeWrapper",
     "TfaValidateRequestsDto",
     "ThirdPartyBackupRequestDto",
+    "ThirdPartyCheckConversionRequestDto",
+    "ThirdPartyChunkedUploadSessionResponse",
+    "ThirdPartyChunkedUploadSessionResponseResponseWrapper",
+    "ThirdPartyChunkedUploadSessionResponseWrapper",
+    "ThirdPartyChunkedUploadSessionResponseWrapperWrapper",
+    "ThirdPartyConfigurationDto",
+    "ThirdPartyConfigurationWrapper",
+    "ThirdPartyDraftLocation",
+    "ThirdPartyFileArrayWrapper",
+    "ThirdPartyFileDto",
+    "ThirdPartyFileEntryDto",
+    "ThirdPartyFileWrapper",
+    "ThirdPartyFolderArrayWrapper",
+    "ThirdPartyFolderContentDto",
+    "ThirdPartyFolderContentWrapper",
+    "ThirdPartyFolderDto",
+    "ThirdPartyFolderWrapper",
     "ThirdPartyParams",
     "ThirdPartyParamsArrayWrapper",
     "ThirdPartyRequestDto",
+    "ThirdPartySaveAsPdf",
+    "ThirdPartyUploadSessionResponseDto",
+    "ThirdPartyUploadSessionResponseWrapper",
     "Thumbnail",
     "ThumbnailsDataDto",
     "ThumbnailsDataWrapper",
     "ThumbnailsRequest",
+    "TimeBound",
     "TimezonesRequestsArrayWrapper",
     "TimezonesRequestsDto",
+    "TokenDiagnosticsDto",
+    "TokenDiagnosticsWrapper",
     "TopUpDepositRequestDto",
     "TransactionInfo",
     "TurnOnAdminMessageSettingsRequestDto",
@@ -948,14 +1022,14 @@ __all__ = [
     "UpdatePhotoMemberRequest",
     "UpdateRoomGroupRequest",
     "UpdateRoomRequest",
-    "UpdateRoomsQuotaRequestDtoInteger",
-    "UpdateRoomsRoomIdsRequestDtoInteger",
+    "UpdateRoomsQuotaRequestDto",
+    "UpdateRoomsRoomIdsRequestDto",
     "UpdateTagRequestDto",
     "UpdateWebhooksConfigRequestsDto",
     "UploadResultDto",
     "UploadResultWrapper",
-    "UploadSessionResponseDtoInteger",
-    "UploadSessionResponseIntegerWrapper",
+    "UploadSessionResponseDto",
+    "UploadSessionResponseWrapper",
     "UsageSpaceStatItemArrayWrapper",
     "UsageSpaceStatItemDto",
     "UserConfig",
@@ -965,6 +1039,7 @@ __all__ = [
     "UserInfoWrapper",
     "UserInvitation",
     "UserInvitationRequestDto",
+    "ValidationErrorResponse",
     "ValidationResult",
     "VectorizationStatus",
     "WalletQuantityRequestDto",
@@ -1109,6 +1184,7 @@ from docspace_api_sdk.exceptions import ApiAttributeError as ApiAttributeError
 from docspace_api_sdk.exceptions import ApiException as ApiException
 
 # import models into sdk package
+from docspace_api_sdk.models.ai_config import AIConfig as AIConfig
 from docspace_api_sdk.models.access_request_key_dto import AccessRequestKeyDto as AccessRequestKeyDto
 from docspace_api_sdk.models.account_info_array_wrapper import AccountInfoArrayWrapper as AccountInfoArrayWrapper
 from docspace_api_sdk.models.account_info_dto import AccountInfoDto as AccountInfoDto
@@ -1134,6 +1210,8 @@ from docspace_api_sdk.models.ai_action_type import AiActionType as AiActionType
 from docspace_api_sdk.models.ai_agent_new_items_dto import AiAgentNewItemsDto as AiAgentNewItemsDto
 from docspace_api_sdk.models.ai_agents_create_request import AiAgentsCreateRequest as AiAgentsCreateRequest
 from docspace_api_sdk.models.ai_agents_delete_request import AiAgentsDeleteRequest as AiAgentsDeleteRequest
+from docspace_api_sdk.models.ai_agents_get200_response import AiAgentsGet200Response as AiAgentsGet200Response
+from docspace_api_sdk.models.ai_agents_get200_response_all_of_response import AiAgentsGet200ResponseAllOfResponse as AiAgentsGet200ResponseAllOfResponse
 from docspace_api_sdk.models.ai_agents_reset_quota_request import AiAgentsResetQuotaRequest as AiAgentsResetQuotaRequest
 from docspace_api_sdk.models.ai_agents_update_quota_request import AiAgentsUpdateQuotaRequest as AiAgentsUpdateQuotaRequest
 from docspace_api_sdk.models.ai_agents_update_quota_request_room_ids_inner import AiAgentsUpdateQuotaRequestRoomIdsInner as AiAgentsUpdateQuotaRequestRoomIdsInner
@@ -1141,6 +1219,7 @@ from docspace_api_sdk.models.ai_agents_update_request import AiAgentsUpdateReque
 from docspace_api_sdk.models.ai_ai_action_args import AiAiActionArgs as AiAiActionArgs
 from docspace_api_sdk.models.ai_ai_action_args_prompt import AiAiActionArgsPrompt as AiAiActionArgsPrompt
 from docspace_api_sdk.models.ai_ai_approve_tool_call_request import AiAiApproveToolCallRequest as AiAiApproveToolCallRequest
+from docspace_api_sdk.models.ai_ai_reasoning_level import AiAiReasoningLevel as AiAiReasoningLevel
 from docspace_api_sdk.models.ai_ai_regenerate_stream_request import AiAiRegenerateStreamRequest as AiAiRegenerateStreamRequest
 from docspace_api_sdk.models.ai_ai_send_custom_request import AiAiSendCustomRequest as AiAiSendCustomRequest
 from docspace_api_sdk.models.ai_ai_send_request import AiAiSendRequest as AiAiSendRequest
@@ -1150,8 +1229,10 @@ from docspace_api_sdk.models.ai_ai_settings_wrapper import AiAiSettingsWrapper a
 from docspace_api_sdk.models.ai_ai_tool_call_data import AiAiToolCallData as AiAiToolCallData
 from docspace_api_sdk.models.ai_ai_user_settings_dto import AiAiUserSettingsDto as AiAiUserSettingsDto
 from docspace_api_sdk.models.ai_ai_user_settings_wrapper import AiAiUserSettingsWrapper as AiAiUserSettingsWrapper
+from docspace_api_sdk.models.ai_api_date_time import AiApiDateTime as AiApiDateTime
 from docspace_api_sdk.models.ai_assignment_mutation_result import AiAssignmentMutationResult as AiAssignmentMutationResult
 from docspace_api_sdk.models.ai_assignments_assign_request import AiAssignmentsAssignRequest as AiAssignmentsAssignRequest
+from docspace_api_sdk.models.ai_assignments_cascade_profile_delete_request import AiAssignmentsCascadeProfileDeleteRequest as AiAssignmentsCascadeProfileDeleteRequest
 from docspace_api_sdk.models.ai_attachment import AiAttachment as AiAttachment
 from docspace_api_sdk.models.ai_attachment_form_keys_inner import AiAttachmentFormKeysInner as AiAttachmentFormKeysInner
 from docspace_api_sdk.models.ai_attachments_link_to_message_request import AiAttachmentsLinkToMessageRequest as AiAttachmentsLinkToMessageRequest
@@ -1162,36 +1243,44 @@ from docspace_api_sdk.models.ai_builtin_provider_type import AiBuiltinProviderTy
 from docspace_api_sdk.models.ai_bulk_assignment_result import AiBulkAssignmentResult as AiBulkAssignmentResult
 from docspace_api_sdk.models.ai_bulk_assignment_result_errors_inner import AiBulkAssignmentResultErrorsInner as AiBulkAssignmentResultErrorsInner
 from docspace_api_sdk.models.ai_chat_event import AiChatEvent as AiChatEvent
-from docspace_api_sdk.models.ai_chat_model_pricing import AiChatModelPricing as AiChatModelPricing
-from docspace_api_sdk.models.ai_chat_price import AiChatPrice as AiChatPrice
+from docspace_api_sdk.models.ai_chat_price_dto import AiChatPriceDto as AiChatPriceDto
 from docspace_api_sdk.models.ai_chat_settings_dto import AiChatSettingsDto as AiChatSettingsDto
 from docspace_api_sdk.models.ai_create_profile_input import AiCreateProfileInput as AiCreateProfileInput
 from docspace_api_sdk.models.ai_create_prompt_input import AiCreatePromptInput as AiCreatePromptInput
 from docspace_api_sdk.models.ai_distributed_task_status import AiDistributedTaskStatus as AiDistributedTaskStatus
-from docspace_api_sdk.models.ai_embedding_model_pricing import AiEmbeddingModelPricing as AiEmbeddingModelPricing
-from docspace_api_sdk.models.ai_embedding_price import AiEmbeddingPrice as AiEmbeddingPrice
+from docspace_api_sdk.models.ai_editor_tools_call200_response import AiEditorToolsCall200Response as AiEditorToolsCall200Response
+from docspace_api_sdk.models.ai_editor_tools_call_request import AiEditorToolsCallRequest as AiEditorToolsCallRequest
+from docspace_api_sdk.models.ai_editor_tools_list200_response import AiEditorToolsList200Response as AiEditorToolsList200Response
+from docspace_api_sdk.models.ai_editor_tools_list200_response_tools_inner import AiEditorToolsList200ResponseToolsInner as AiEditorToolsList200ResponseToolsInner
+from docspace_api_sdk.models.ai_embedding_price_dto import AiEmbeddingPriceDto as AiEmbeddingPriceDto
 from docspace_api_sdk.models.ai_embedding_provider_type import AiEmbeddingProviderType as AiEmbeddingProviderType
 from docspace_api_sdk.models.ai_employee_dto import AiEmployeeDto as AiEmployeeDto
+from docspace_api_sdk.models.ai_entry_pricing_dto_ai_chat_price_dto import AiEntryPricingDtoAiChatPriceDto as AiEntryPricingDtoAiChatPriceDto
+from docspace_api_sdk.models.ai_entry_pricing_dto_ai_embedding_price_dto import AiEntryPricingDtoAiEmbeddingPriceDto as AiEntryPricingDtoAiEmbeddingPriceDto
+from docspace_api_sdk.models.ai_entry_pricing_dto_ai_image_price_dto import AiEntryPricingDtoAiImagePriceDto as AiEntryPricingDtoAiImagePriceDto
+from docspace_api_sdk.models.ai_entry_pricing_dto_decimal import AiEntryPricingDtoDecimal as AiEntryPricingDtoDecimal
 from docspace_api_sdk.models.ai_error_response import AiErrorResponse as AiErrorResponse
-from docspace_api_sdk.models.ai_export_text_to_docx200_response import AiExportTextToDocx200Response as AiExportTextToDocx200Response
+from docspace_api_sdk.models.ai_export_text_to_docx202_response import AiExportTextToDocx202Response as AiExportTextToDocx202Response
 from docspace_api_sdk.models.ai_export_text_to_docx_request import AiExportTextToDocxRequest as AiExportTextToDocxRequest
 from docspace_api_sdk.models.ai_export_text_to_docx_request_folder_id import AiExportTextToDocxRequestFolderId as AiExportTextToDocxRequestFolderId
 from docspace_api_sdk.models.ai_file_entry_base_dto import AiFileEntryBaseDto as AiFileEntryBaseDto
-from docspace_api_sdk.models.ai_file_entry_dto_integer import AiFileEntryDtoInteger as AiFileEntryDtoInteger
+from docspace_api_sdk.models.ai_file_entry_dto import AiFileEntryDto as AiFileEntryDto
+from docspace_api_sdk.models.ai_file_entry_dto_all_of_available_share_rights import AiFileEntryDtoAllOfAvailableShareRights as AiFileEntryDtoAllOfAvailableShareRights
+from docspace_api_sdk.models.ai_file_entry_dto_all_of_security import AiFileEntryDtoAllOfSecurity as AiFileEntryDtoAllOfSecurity
+from docspace_api_sdk.models.ai_file_entry_dto_all_of_share_settings import AiFileEntryDtoAllOfShareSettings as AiFileEntryDtoAllOfShareSettings
 from docspace_api_sdk.models.ai_file_entry_type import AiFileEntryType as AiFileEntryType
 from docspace_api_sdk.models.ai_file_operation_dto import AiFileOperationDto as AiFileOperationDto
 from docspace_api_sdk.models.ai_file_operation_type import AiFileOperationType as AiFileOperationType
 from docspace_api_sdk.models.ai_file_operation_wrapper import AiFileOperationWrapper as AiFileOperationWrapper
 from docspace_api_sdk.models.ai_file_share import AiFileShare as AiFileShare
-from docspace_api_sdk.models.ai_folder_content_dto_integer import AiFolderContentDtoInteger as AiFolderContentDtoInteger
-from docspace_api_sdk.models.ai_folder_content_integer_wrapper import AiFolderContentIntegerWrapper as AiFolderContentIntegerWrapper
-from docspace_api_sdk.models.ai_folder_dto_integer import AiFolderDtoInteger as AiFolderDtoInteger
-from docspace_api_sdk.models.ai_folder_integer_array_wrapper import AiFolderIntegerArrayWrapper as AiFolderIntegerArrayWrapper
-from docspace_api_sdk.models.ai_folder_integer_wrapper import AiFolderIntegerWrapper as AiFolderIntegerWrapper
+from docspace_api_sdk.models.ai_folder_array_wrapper import AiFolderArrayWrapper as AiFolderArrayWrapper
+from docspace_api_sdk.models.ai_folder_content_dto import AiFolderContentDto as AiFolderContentDto
+from docspace_api_sdk.models.ai_folder_content_wrapper import AiFolderContentWrapper as AiFolderContentWrapper
+from docspace_api_sdk.models.ai_folder_dto import AiFolderDto as AiFolderDto
 from docspace_api_sdk.models.ai_folder_mutation_result import AiFolderMutationResult as AiFolderMutationResult
 from docspace_api_sdk.models.ai_folder_type import AiFolderType as AiFolderType
-from docspace_api_sdk.models.ai_image_model_pricing import AiImageModelPricing as AiImageModelPricing
-from docspace_api_sdk.models.ai_image_price import AiImagePrice as AiImagePrice
+from docspace_api_sdk.models.ai_folder_wrapper import AiFolderWrapper as AiFolderWrapper
+from docspace_api_sdk.models.ai_image_price_dto import AiImagePriceDto as AiImagePriceDto
 from docspace_api_sdk.models.ai_import_error import AiImportError as AiImportError
 from docspace_api_sdk.models.ai_import_mode import AiImportMode as AiImportMode
 from docspace_api_sdk.models.ai_import_result import AiImportResult as AiImportResult
@@ -1211,12 +1300,17 @@ from docspace_api_sdk.models.ai_open_ai_stream_error_error import AiOpenAIStream
 from docspace_api_sdk.models.ai_open_ai_tool_call_delta import AiOpenAIToolCallDelta as AiOpenAIToolCallDelta
 from docspace_api_sdk.models.ai_open_ai_tool_call_delta_function import AiOpenAIToolCallDeltaFunction as AiOpenAIToolCallDeltaFunction
 from docspace_api_sdk.models.ai_open_or_create_result import AiOpenOrCreateResult as AiOpenOrCreateResult
+from docspace_api_sdk.models.ai_openai_chat_completions403_response import AiOpenaiChatCompletions403Response as AiOpenaiChatCompletions403Response
+from docspace_api_sdk.models.ai_openai_chat_completions403_response_error import AiOpenaiChatCompletions403ResponseError as AiOpenaiChatCompletions403ResponseError
 from docspace_api_sdk.models.ai_preferences_set_deep_mode_request import AiPreferencesSetDeepModeRequest as AiPreferencesSetDeepModeRequest
-from docspace_api_sdk.models.ai_prices_response import AiPricesResponse as AiPricesResponse
-from docspace_api_sdk.models.ai_prices_response_wrapper import AiPricesResponseWrapper as AiPricesResponseWrapper
+from docspace_api_sdk.models.ai_preferences_set_reasoning_level_request import AiPreferencesSetReasoningLevelRequest as AiPreferencesSetReasoningLevelRequest
+from docspace_api_sdk.models.ai_prices_dto import AiPricesDto as AiPricesDto
+from docspace_api_sdk.models.ai_prices_wrapper import AiPricesWrapper as AiPricesWrapper
 from docspace_api_sdk.models.ai_profile import AiProfile as AiProfile
 from docspace_api_sdk.models.ai_profile_mutation_result import AiProfileMutationResult as AiProfileMutationResult
 from docspace_api_sdk.models.ai_profiles_get_by_id200_response import AiProfilesGetById200Response as AiProfilesGetById200Response
+from docspace_api_sdk.models.ai_profiles_list_provider_models400_response import AiProfilesListProviderModels400Response as AiProfilesListProviderModels400Response
+from docspace_api_sdk.models.ai_profiles_list_provider_models400_response_any_of import AiProfilesListProviderModels400ResponseAnyOf as AiProfilesListProviderModels400ResponseAnyOf
 from docspace_api_sdk.models.ai_profiles_list_provider_models_request import AiProfilesListProviderModelsRequest as AiProfilesListProviderModelsRequest
 from docspace_api_sdk.models.ai_profiles_test_connection200_response import AiProfilesTestConnection200Response as AiProfilesTestConnection200Response
 from docspace_api_sdk.models.ai_profiles_test_connection200_response_any_of import AiProfilesTestConnection200ResponseAnyOf as AiProfilesTestConnection200ResponseAnyOf
@@ -1231,6 +1325,8 @@ from docspace_api_sdk.models.ai_prompts_rename_folder_request import AiPromptsRe
 from docspace_api_sdk.models.ai_prompts_update_request import AiPromptsUpdateRequest as AiPromptsUpdateRequest
 from docspace_api_sdk.models.ai_prompts_update_request_updates import AiPromptsUpdateRequestUpdates as AiPromptsUpdateRequestUpdates
 from docspace_api_sdk.models.ai_provider_type import AiProviderType as AiProviderType
+from docspace_api_sdk.models.ai_reasoning_depth import AiReasoningDepth as AiReasoningDepth
+from docspace_api_sdk.models.ai_reasoning_support import AiReasoningSupport as AiReasoningSupport
 from docspace_api_sdk.models.ai_resolved_assignment import AiResolvedAssignment as AiResolvedAssignment
 from docspace_api_sdk.models.ai_room_data_lifetime_dto import AiRoomDataLifetimeDto as AiRoomDataLifetimeDto
 from docspace_api_sdk.models.ai_room_data_lifetime_period import AiRoomDataLifetimePeriod as AiRoomDataLifetimePeriod
@@ -1244,10 +1340,12 @@ from docspace_api_sdk.models.ai_thread_message_like import AiThreadMessageLike a
 from docspace_api_sdk.models.ai_thread_message_like_content import AiThreadMessageLikeContent as AiThreadMessageLikeContent
 from docspace_api_sdk.models.ai_thread_message_like_content_any_of_inner import AiThreadMessageLikeContentAnyOfInner as AiThreadMessageLikeContentAnyOfInner
 from docspace_api_sdk.models.ai_thread_message_like_status import AiThreadMessageLikeStatus as AiThreadMessageLikeStatus
+from docspace_api_sdk.models.ai_threads_append_user_message200_response import AiThreadsAppendUserMessage200Response as AiThreadsAppendUserMessage200Response
 from docspace_api_sdk.models.ai_threads_append_user_message_request import AiThreadsAppendUserMessageRequest as AiThreadsAppendUserMessageRequest
 from docspace_api_sdk.models.ai_threads_create_request import AiThreadsCreateRequest as AiThreadsCreateRequest
 from docspace_api_sdk.models.ai_threads_open_or_create_request import AiThreadsOpenOrCreateRequest as AiThreadsOpenOrCreateRequest
 from docspace_api_sdk.models.ai_threads_open_or_create_request_entity_meta import AiThreadsOpenOrCreateRequestEntityMeta as AiThreadsOpenOrCreateRequestEntityMeta
+from docspace_api_sdk.models.ai_threads_regenerate_title200_response import AiThreadsRegenerateTitle200Response as AiThreadsRegenerateTitle200Response
 from docspace_api_sdk.models.ai_threads_regenerate_title_request import AiThreadsRegenerateTitleRequest as AiThreadsRegenerateTitleRequest
 from docspace_api_sdk.models.ai_threads_rename_request import AiThreadsRenameRequest as AiThreadsRenameRequest
 from docspace_api_sdk.models.ai_threads_touch_request import AiThreadsTouchRequest as AiThreadsTouchRequest
@@ -1255,6 +1353,7 @@ from docspace_api_sdk.models.ai_threads_update_message_request import AiThreadsU
 from docspace_api_sdk.models.ai_tools_add_custom_server_request import AiToolsAddCustomServerRequest as AiToolsAddCustomServerRequest
 from docspace_api_sdk.models.ai_tools_bulk_result import AiToolsBulkResult as AiToolsBulkResult
 from docspace_api_sdk.models.ai_tools_bulk_result_errors_inner import AiToolsBulkResultErrorsInner as AiToolsBulkResultErrorsInner
+from docspace_api_sdk.models.ai_tools_list_system_tools200_response import AiToolsListSystemTools200Response as AiToolsListSystemTools200Response
 from docspace_api_sdk.models.ai_tools_mutation_result import AiToolsMutationResult as AiToolsMutationResult
 from docspace_api_sdk.models.ai_tools_remove_custom_server_request import AiToolsRemoveCustomServerRequest as AiToolsRemoveCustomServerRequest
 from docspace_api_sdk.models.ai_tools_replace_all_custom_servers_request import AiToolsReplaceAllCustomServersRequest as AiToolsReplaceAllCustomServersRequest
@@ -1263,19 +1362,22 @@ from docspace_api_sdk.models.ai_tools_set_disabled_request import AiToolsSetDisa
 from docspace_api_sdk.models.ai_tools_update_custom_server_request import AiToolsUpdateCustomServerRequest as AiToolsUpdateCustomServerRequest
 from docspace_api_sdk.models.ai_vectorization_settings_dto import AiVectorizationSettingsDto as AiVectorizationSettingsDto
 from docspace_api_sdk.models.ai_vectorization_settings_wrapper import AiVectorizationSettingsWrapper as AiVectorizationSettingsWrapper
+from docspace_api_sdk.models.ai_vectorization_start_task200_response import AiVectorizationStartTask200Response as AiVectorizationStartTask200Response
+from docspace_api_sdk.models.ai_vectorization_start_task_request import AiVectorizationStartTaskRequest as AiVectorizationStartTaskRequest
 from docspace_api_sdk.models.ai_watermark_additions import AiWatermarkAdditions as AiWatermarkAdditions
 from docspace_api_sdk.models.ai_watermark_dto import AiWatermarkDto as AiWatermarkDto
 from docspace_api_sdk.models.ai_web_search_config import AiWebSearchConfig as AiWebSearchConfig
 from docspace_api_sdk.models.ai_web_search_configure_request import AiWebSearchConfigureRequest as AiWebSearchConfigureRequest
 from docspace_api_sdk.models.ai_web_search_mutation_result import AiWebSearchMutationResult as AiWebSearchMutationResult
-from docspace_api_sdk.models.ai_web_search_pricing import AiWebSearchPricing as AiWebSearchPricing
+from docspace_api_sdk.models.amazon_s3_region_array_wrapper import AmazonS3RegionArrayWrapper as AmazonS3RegionArrayWrapper
+from docspace_api_sdk.models.amazon_s3_region_dto import AmazonS3RegionDto as AmazonS3RegionDto
 from docspace_api_sdk.models.anonymous_config_dto import AnonymousConfigDto as AnonymousConfigDto
+from docspace_api_sdk.models.api_date_time import ApiDateTime as ApiDateTime
 from docspace_api_sdk.models.api_key_response_array_wrapper import ApiKeyResponseArrayWrapper as ApiKeyResponseArrayWrapper
 from docspace_api_sdk.models.api_key_response_dto import ApiKeyResponseDto as ApiKeyResponseDto
 from docspace_api_sdk.models.api_key_response_wrapper import ApiKeyResponseWrapper as ApiKeyResponseWrapper
 from docspace_api_sdk.models.app_array_wrapper import AppArrayWrapper as AppArrayWrapper
 from docspace_api_sdk.models.app_dto import AppDto as AppDto
-from docspace_api_sdk.models.app_dto_settings import AppDtoSettings as AppDtoSettings
 from docspace_api_sdk.models.app_wrapper import AppWrapper as AppWrapper
 from docspace_api_sdk.models.apply_filter_option import ApplyFilterOption as ApplyFilterOption
 from docspace_api_sdk.models.archive_room_request import ArchiveRoomRequest as ArchiveRoomRequest
@@ -1284,6 +1386,12 @@ from docspace_api_sdk.models.array_array_wrapper import ArrayArrayWrapper as Arr
 from docspace_api_sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper as AuditEventArrayWrapper
 from docspace_api_sdk.models.audit_event_dto import AuditEventDto as AuditEventDto
 from docspace_api_sdk.models.audit_report_format import AuditReportFormat as AuditReportFormat
+from docspace_api_sdk.models.audit_trail_action_mapper_dto import AuditTrailActionMapperDto as AuditTrailActionMapperDto
+from docspace_api_sdk.models.audit_trail_module_mapper_dto import AuditTrailModuleMapperDto as AuditTrailModuleMapperDto
+from docspace_api_sdk.models.audit_trail_product_mapper_array_wrapper import AuditTrailProductMapperArrayWrapper as AuditTrailProductMapperArrayWrapper
+from docspace_api_sdk.models.audit_trail_product_mapper_dto import AuditTrailProductMapperDto as AuditTrailProductMapperDto
+from docspace_api_sdk.models.audit_trail_types_dto import AuditTrailTypesDto as AuditTrailTypesDto
+from docspace_api_sdk.models.audit_trail_types_wrapper import AuditTrailTypesWrapper as AuditTrailTypesWrapper
 from docspace_api_sdk.models.auth_data import AuthData as AuthData
 from docspace_api_sdk.models.auth_key import AuthKey as AuthKey
 from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto as AuthRequestsDto
@@ -1332,17 +1440,17 @@ from docspace_api_sdk.models.change_password_request import ChangePasswordReques
 from docspace_api_sdk.models.change_wallet_service_state_request_dto import ChangeWalletServiceStateRequestDto as ChangeWalletServiceStateRequestDto
 from docspace_api_sdk.models.chat_settings import ChatSettings as ChatSettings
 from docspace_api_sdk.models.chat_settings_dto import ChatSettingsDto as ChatSettingsDto
-from docspace_api_sdk.models.check_conversion_request_dto_integer import CheckConversionRequestDtoInteger as CheckConversionRequestDtoInteger
+from docspace_api_sdk.models.check_conversion_request_dto import CheckConversionRequestDto as CheckConversionRequestDto
 from docspace_api_sdk.models.check_dest_folder_dto import CheckDestFolderDto as CheckDestFolderDto
 from docspace_api_sdk.models.check_dest_folder_result import CheckDestFolderResult as CheckDestFolderResult
 from docspace_api_sdk.models.check_dest_folder_wrapper import CheckDestFolderWrapper as CheckDestFolderWrapper
 from docspace_api_sdk.models.check_doc_service_url_request_dto import CheckDocServiceUrlRequestDto as CheckDocServiceUrlRequestDto
 from docspace_api_sdk.models.check_fill_form_draft import CheckFillFormDraft as CheckFillFormDraft
 from docspace_api_sdk.models.check_upload_request import CheckUploadRequest as CheckUploadRequest
-from docspace_api_sdk.models.chunked_upload_session_response_integer import ChunkedUploadSessionResponseInteger as ChunkedUploadSessionResponseInteger
-from docspace_api_sdk.models.chunked_upload_session_response_integer_wrapper import ChunkedUploadSessionResponseIntegerWrapper as ChunkedUploadSessionResponseIntegerWrapper
-from docspace_api_sdk.models.chunked_upload_session_response_wrapper_integer import ChunkedUploadSessionResponseWrapperInteger as ChunkedUploadSessionResponseWrapperInteger
-from docspace_api_sdk.models.chunked_upload_session_response_wrapper_integer_wrapper import ChunkedUploadSessionResponseWrapperIntegerWrapper as ChunkedUploadSessionResponseWrapperIntegerWrapper
+from docspace_api_sdk.models.chunked_upload_session_response import ChunkedUploadSessionResponse as ChunkedUploadSessionResponse
+from docspace_api_sdk.models.chunked_upload_session_response_response_wrapper import ChunkedUploadSessionResponseResponseWrapper as ChunkedUploadSessionResponseResponseWrapper
+from docspace_api_sdk.models.chunked_upload_session_response_wrapper import ChunkedUploadSessionResponseWrapper as ChunkedUploadSessionResponseWrapper
+from docspace_api_sdk.models.chunked_upload_session_response_wrapper_wrapper import ChunkedUploadSessionResponseWrapperWrapper as ChunkedUploadSessionResponseWrapperWrapper
 from docspace_api_sdk.models.client_info_response import ClientInfoResponse as ClientInfoResponse
 from docspace_api_sdk.models.client_response import ClientResponse as ClientResponse
 from docspace_api_sdk.models.client_secret_response import ClientSecretResponse as ClientSecretResponse
@@ -1354,8 +1462,8 @@ from docspace_api_sdk.models.company_white_label_settings_dto import CompanyWhit
 from docspace_api_sdk.models.company_white_label_settings_dto_wrapper import CompanyWhiteLabelSettingsDtoWrapper as CompanyWhiteLabelSettingsDtoWrapper
 from docspace_api_sdk.models.company_white_label_settings_response_wrapper import CompanyWhiteLabelSettingsResponseWrapper as CompanyWhiteLabelSettingsResponseWrapper
 from docspace_api_sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper as CompanyWhiteLabelSettingsWrapper
-from docspace_api_sdk.models.configuration_dto_integer import ConfigurationDtoInteger as ConfigurationDtoInteger
-from docspace_api_sdk.models.configuration_integer_wrapper import ConfigurationIntegerWrapper as ConfigurationIntegerWrapper
+from docspace_api_sdk.models.configuration_dto import ConfigurationDto as ConfigurationDto
+from docspace_api_sdk.models.configuration_wrapper import ConfigurationWrapper as ConfigurationWrapper
 from docspace_api_sdk.models.confirm_data import ConfirmData as ConfirmData
 from docspace_api_sdk.models.confirm_dto import ConfirmDto as ConfirmDto
 from docspace_api_sdk.models.confirm_type import ConfirmType as ConfirmType
@@ -1440,6 +1548,7 @@ from docspace_api_sdk.models.delete_batch_request_dto_all_of_folder_ids import D
 from docspace_api_sdk.models.delete_folder import DeleteFolder as DeleteFolder
 from docspace_api_sdk.models.delete_room_request import DeleteRoomRequest as DeleteRoomRequest
 from docspace_api_sdk.models.delete_version_batch_request_dto import DeleteVersionBatchRequestDto as DeleteVersionBatchRequestDto
+from docspace_api_sdk.models.discount_category import DiscountCategory as DiscountCategory
 from docspace_api_sdk.models.display_request_dto import DisplayRequestDto as DisplayRequestDto
 from docspace_api_sdk.models.distributed_task_status import DistributedTaskStatus as DistributedTaskStatus
 from docspace_api_sdk.models.dns_settings_requests_dto import DnsSettingsRequestsDto as DnsSettingsRequestsDto
@@ -1478,7 +1587,7 @@ from docspace_api_sdk.models.download_request_dto_all_of_file_ids import Downloa
 from docspace_api_sdk.models.download_request_dto_all_of_folder_ids import DownloadRequestDtoAllOfFolderIds as DownloadRequestDtoAllOfFolderIds
 from docspace_api_sdk.models.download_request_item_dto import DownloadRequestItemDto as DownloadRequestItemDto
 from docspace_api_sdk.models.download_request_item_dto_key import DownloadRequestItemDtoKey as DownloadRequestItemDtoKey
-from docspace_api_sdk.models.draft_location_integer import DraftLocationInteger as DraftLocationInteger
+from docspace_api_sdk.models.draft_location import DraftLocation as DraftLocation
 from docspace_api_sdk.models.duplicate_request_dto import DuplicateRequestDto as DuplicateRequestDto
 from docspace_api_sdk.models.duplicate_request_dto_all_of_file_ids import DuplicateRequestDtoAllOfFileIds as DuplicateRequestDtoAllOfFileIds
 from docspace_api_sdk.models.duplicate_request_dto_all_of_folder_ids import DuplicateRequestDtoAllOfFolderIds as DuplicateRequestDtoAllOfFolderIds
@@ -1490,6 +1599,7 @@ from docspace_api_sdk.models.edit_history_data_wrapper import EditHistoryDataWra
 from docspace_api_sdk.models.edit_history_dto import EditHistoryDto as EditHistoryDto
 from docspace_api_sdk.models.edit_history_url import EditHistoryUrl as EditHistoryUrl
 from docspace_api_sdk.models.editor_configuration_dto import EditorConfigurationDto as EditorConfigurationDto
+from docspace_api_sdk.models.editor_tool_call_parameters_dto import EditorToolCallParametersDto as EditorToolCallParametersDto
 from docspace_api_sdk.models.editor_tool_call_state_dto import EditorToolCallStateDto as EditorToolCallStateDto
 from docspace_api_sdk.models.editor_type import EditorType as EditorType
 from docspace_api_sdk.models.email_activation_settings import EmailActivationSettings as EmailActivationSettings
@@ -1507,6 +1617,8 @@ from docspace_api_sdk.models.employee_full_wrapper import EmployeeFullWrapper as
 from docspace_api_sdk.models.employee_status import EmployeeStatus as EmployeeStatus
 from docspace_api_sdk.models.employee_type import EmployeeType as EmployeeType
 from docspace_api_sdk.models.employee_wrapper import EmployeeWrapper as EmployeeWrapper
+from docspace_api_sdk.models.enabled_module_array_wrapper import EnabledModuleArrayWrapper as EnabledModuleArrayWrapper
+from docspace_api_sdk.models.enabled_module_dto import EnabledModuleDto as EnabledModuleDto
 from docspace_api_sdk.models.encryprtion_status import EncryprtionStatus as EncryprtionStatus
 from docspace_api_sdk.models.encryption_key_array_wrapper import EncryptionKeyArrayWrapper as EncryptionKeyArrayWrapper
 from docspace_api_sdk.models.encryption_key_dto import EncryptionKeyDto as EncryptionKeyDto
@@ -1530,23 +1642,19 @@ from docspace_api_sdk.models.external_sharing_settings_request_dto import Extern
 from docspace_api_sdk.models.external_sharing_settings_wrapper import ExternalSharingSettingsWrapper as ExternalSharingSettingsWrapper
 from docspace_api_sdk.models.feature_used_dto import FeatureUsedDto as FeatureUsedDto
 from docspace_api_sdk.models.feedback_config import FeedbackConfig as FeedbackConfig
+from docspace_api_sdk.models.field_error import FieldError as FieldError
+from docspace_api_sdk.models.file_array_wrapper import FileArrayWrapper as FileArrayWrapper
 from docspace_api_sdk.models.file_conflict_resolve_type import FileConflictResolveType as FileConflictResolveType
-from docspace_api_sdk.models.file_dto_integer import FileDtoInteger as FileDtoInteger
-from docspace_api_sdk.models.file_dto_integer_all_of_view_accessibility import FileDtoIntegerAllOfViewAccessibility as FileDtoIntegerAllOfViewAccessibility
+from docspace_api_sdk.models.file_dto import FileDto as FileDto
+from docspace_api_sdk.models.file_dto_all_of_view_accessibility import FileDtoAllOfViewAccessibility as FileDtoAllOfViewAccessibility
 from docspace_api_sdk.models.file_encryption_info_dto import FileEncryptionInfoDto as FileEncryptionInfoDto
 from docspace_api_sdk.models.file_encryption_info_wrapper import FileEncryptionInfoWrapper as FileEncryptionInfoWrapper
+from docspace_api_sdk.models.file_entry_array_wrapper import FileEntryArrayWrapper as FileEntryArrayWrapper
 from docspace_api_sdk.models.file_entry_base_array_wrapper import FileEntryBaseArrayWrapper as FileEntryBaseArrayWrapper
 from docspace_api_sdk.models.file_entry_base_dto import FileEntryBaseDto as FileEntryBaseDto
 from docspace_api_sdk.models.file_entry_base_wrapper import FileEntryBaseWrapper as FileEntryBaseWrapper
-from docspace_api_sdk.models.file_entry_dto_integer import FileEntryDtoInteger as FileEntryDtoInteger
-from docspace_api_sdk.models.file_entry_dto_integer_all_of_available_share_rights import FileEntryDtoIntegerAllOfAvailableShareRights as FileEntryDtoIntegerAllOfAvailableShareRights
-from docspace_api_sdk.models.file_entry_dto_integer_all_of_security import FileEntryDtoIntegerAllOfSecurity as FileEntryDtoIntegerAllOfSecurity
-from docspace_api_sdk.models.file_entry_dto_integer_all_of_share_settings import FileEntryDtoIntegerAllOfShareSettings as FileEntryDtoIntegerAllOfShareSettings
-from docspace_api_sdk.models.file_entry_dto_string import FileEntryDtoString as FileEntryDtoString
-from docspace_api_sdk.models.file_entry_integer_array_wrapper import FileEntryIntegerArrayWrapper as FileEntryIntegerArrayWrapper
+from docspace_api_sdk.models.file_entry_dto import FileEntryDto as FileEntryDto
 from docspace_api_sdk.models.file_entry_type import FileEntryType as FileEntryType
-from docspace_api_sdk.models.file_integer_array_wrapper import FileIntegerArrayWrapper as FileIntegerArrayWrapper
-from docspace_api_sdk.models.file_integer_wrapper import FileIntegerWrapper as FileIntegerWrapper
 from docspace_api_sdk.models.file_keys import FileKeys as FileKeys
 from docspace_api_sdk.models.file_link import FileLink as FileLink
 from docspace_api_sdk.models.file_link_request import FileLinkRequest as FileLinkRequest
@@ -1570,31 +1678,29 @@ from docspace_api_sdk.models.file_status import FileStatus as FileStatus
 from docspace_api_sdk.models.file_type import FileType as FileType
 from docspace_api_sdk.models.file_upload_result_dto import FileUploadResultDto as FileUploadResultDto
 from docspace_api_sdk.models.file_upload_result_wrapper import FileUploadResultWrapper as FileUploadResultWrapper
+from docspace_api_sdk.models.file_wrapper import FileWrapper as FileWrapper
 from docspace_api_sdk.models.files_settings_dto import FilesSettingsDto as FilesSettingsDto
 from docspace_api_sdk.models.files_settings_dto_internal_formats import FilesSettingsDtoInternalFormats as FilesSettingsDtoInternalFormats
 from docspace_api_sdk.models.files_settings_wrapper import FilesSettingsWrapper as FilesSettingsWrapper
 from docspace_api_sdk.models.files_statistics_folder import FilesStatisticsFolder as FilesStatisticsFolder
 from docspace_api_sdk.models.files_statistics_result_dto import FilesStatisticsResultDto as FilesStatisticsResultDto
 from docspace_api_sdk.models.files_statistics_result_wrapper import FilesStatisticsResultWrapper as FilesStatisticsResultWrapper
-from docspace_api_sdk.models.filling_form_result_dto_integer import FillingFormResultDtoInteger as FillingFormResultDtoInteger
-from docspace_api_sdk.models.filling_form_result_integer_wrapper import FillingFormResultIntegerWrapper as FillingFormResultIntegerWrapper
+from docspace_api_sdk.models.filling_form_result_dto import FillingFormResultDto as FillingFormResultDto
+from docspace_api_sdk.models.filling_form_result_wrapper import FillingFormResultWrapper as FillingFormResultWrapper
 from docspace_api_sdk.models.filter_type import FilterType as FilterType
 from docspace_api_sdk.models.finish_dto import FinishDto as FinishDto
 from docspace_api_sdk.models.fire_base_user import FireBaseUser as FireBaseUser
 from docspace_api_sdk.models.fire_base_user_wrapper import FireBaseUserWrapper as FireBaseUserWrapper
 from docspace_api_sdk.models.firebase_dto import FirebaseDto as FirebaseDto
 from docspace_api_sdk.models.firebase_requests_dto import FirebaseRequestsDto as FirebaseRequestsDto
-from docspace_api_sdk.models.folder_content_dto_integer import FolderContentDtoInteger as FolderContentDtoInteger
-from docspace_api_sdk.models.folder_content_integer_array_wrapper import FolderContentIntegerArrayWrapper as FolderContentIntegerArrayWrapper
-from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper as FolderContentIntegerWrapper
-from docspace_api_sdk.models.folder_dto_integer import FolderDtoInteger as FolderDtoInteger
-from docspace_api_sdk.models.folder_dto_string import FolderDtoString as FolderDtoString
-from docspace_api_sdk.models.folder_integer_array_wrapper import FolderIntegerArrayWrapper as FolderIntegerArrayWrapper
-from docspace_api_sdk.models.folder_integer_wrapper import FolderIntegerWrapper as FolderIntegerWrapper
+from docspace_api_sdk.models.folder_array_wrapper import FolderArrayWrapper as FolderArrayWrapper
+from docspace_api_sdk.models.folder_content_array_wrapper import FolderContentArrayWrapper as FolderContentArrayWrapper
+from docspace_api_sdk.models.folder_content_dto import FolderContentDto as FolderContentDto
+from docspace_api_sdk.models.folder_content_wrapper import FolderContentWrapper as FolderContentWrapper
+from docspace_api_sdk.models.folder_dto import FolderDto as FolderDto
 from docspace_api_sdk.models.folder_link_request import FolderLinkRequest as FolderLinkRequest
-from docspace_api_sdk.models.folder_string_array_wrapper import FolderStringArrayWrapper as FolderStringArrayWrapper
-from docspace_api_sdk.models.folder_string_wrapper import FolderStringWrapper as FolderStringWrapper
 from docspace_api_sdk.models.folder_type import FolderType as FolderType
+from docspace_api_sdk.models.folder_wrapper import FolderWrapper as FolderWrapper
 from docspace_api_sdk.models.form_filling_manage_action import FormFillingManageAction as FormFillingManageAction
 from docspace_api_sdk.models.form_filling_status import FormFillingStatus as FormFillingStatus
 from docspace_api_sdk.models.form_gallery_dto import FormGalleryDto as FormGalleryDto
@@ -1608,9 +1714,12 @@ from docspace_api_sdk.models.form_submissions_wrapper import FormSubmissionsWrap
 from docspace_api_sdk.models.forms_item_array_wrapper import FormsItemArrayWrapper as FormsItemArrayWrapper
 from docspace_api_sdk.models.forms_item_data import FormsItemData as FormsItemData
 from docspace_api_sdk.models.forms_item_dto import FormsItemDto as FormsItemDto
+from docspace_api_sdk.models.generate_docx_tool_call_parameters_dto import GenerateDocxToolCallParametersDto as GenerateDocxToolCallParametersDto
+from docspace_api_sdk.models.generate_form_tool_call_parameters_dto import GenerateFormToolCallParametersDto as GenerateFormToolCallParametersDto
+from docspace_api_sdk.models.generate_presentation_tool_call_parameters_dto import GeneratePresentationToolCallParametersDto as GeneratePresentationToolCallParametersDto
 from docspace_api_sdk.models.get_portal_prices200_response import GetPortalPrices200Response as GetPortalPrices200Response
 from docspace_api_sdk.models.get_portal_prices200_response_links_inner import GetPortalPrices200ResponseLinksInner as GetPortalPrices200ResponseLinksInner
-from docspace_api_sdk.models.get_reference_data_dto_integer import GetReferenceDataDtoInteger as GetReferenceDataDtoInteger
+from docspace_api_sdk.models.get_reference_data_dto import GetReferenceDataDto as GetReferenceDataDto
 from docspace_api_sdk.models.goback_config import GobackConfig as GobackConfig
 from docspace_api_sdk.models.greeting_settings_requests_dto import GreetingSettingsRequestsDto as GreetingSettingsRequestsDto
 from docspace_api_sdk.models.group_array_wrapper import GroupArrayWrapper as GroupArrayWrapper
@@ -1626,6 +1735,8 @@ from docspace_api_sdk.models.history_action import HistoryAction as HistoryActio
 from docspace_api_sdk.models.history_array_wrapper import HistoryArrayWrapper as HistoryArrayWrapper
 from docspace_api_sdk.models.history_data import HistoryData as HistoryData
 from docspace_api_sdk.models.history_dto import HistoryDto as HistoryDto
+from docspace_api_sdk.models.i_account_entry_array_wrapper import IAccountEntryArrayWrapper as IAccountEntryArrayWrapper
+from docspace_api_sdk.models.i_account_entry_dto import IAccountEntryDto as IAccountEntryDto
 from docspace_api_sdk.models.i_compress_wrapper import ICompressWrapper as ICompressWrapper
 from docspace_api_sdk.models.ip_restriction import IPRestriction as IPRestriction
 from docspace_api_sdk.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapper as IPRestrictionArrayWrapper
@@ -1654,6 +1765,7 @@ from docspace_api_sdk.models.item_key_value_pair_object_object import ItemKeyVal
 from docspace_api_sdk.models.item_key_value_pair_string_boolean import ItemKeyValuePairStringBoolean as ItemKeyValuePairStringBoolean
 from docspace_api_sdk.models.item_key_value_pair_string_logo_requests_dto import ItemKeyValuePairStringLogoRequestsDto as ItemKeyValuePairStringLogoRequestsDto
 from docspace_api_sdk.models.item_key_value_pair_string_string import ItemKeyValuePairStringString as ItemKeyValuePairStringString
+from docspace_api_sdk.models.json_value_wrapper import JsonValueWrapper as JsonValueWrapper
 from docspace_api_sdk.models.link_account_request_dto import LinkAccountRequestDto as LinkAccountRequestDto
 from docspace_api_sdk.models.link_type import LinkType as LinkType
 from docspace_api_sdk.models.location import Location as Location
@@ -1671,7 +1783,7 @@ from docspace_api_sdk.models.logo_cover import LogoCover as LogoCover
 from docspace_api_sdk.models.logo_request import LogoRequest as LogoRequest
 from docspace_api_sdk.models.logo_requests_dto import LogoRequestsDto as LogoRequestsDto
 from docspace_api_sdk.models.mail_domain_settings_requests_dto import MailDomainSettingsRequestsDto as MailDomainSettingsRequestsDto
-from docspace_api_sdk.models.manage_form_filling_dto_integer import ManageFormFillingDtoInteger as ManageFormFillingDtoInteger
+from docspace_api_sdk.models.manage_form_filling_dto import ManageFormFillingDto as ManageFormFillingDto
 from docspace_api_sdk.models.member_request_dto import MemberRequestDto as MemberRequestDto
 from docspace_api_sdk.models.members_request import MembersRequest as MembersRequest
 from docspace_api_sdk.models.mention_message_wrapper import MentionMessageWrapper as MentionMessageWrapper
@@ -1702,22 +1814,23 @@ from docspace_api_sdk.models.notification_settings_wrapper import NotificationSe
 from docspace_api_sdk.models.notification_type import NotificationType as NotificationType
 from docspace_api_sdk.models.o_auth20_token import OAuth20Token as OAuth20Token
 from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper as ObjectArrayWrapper
-from docspace_api_sdk.models.object_wrapper import ObjectWrapper as ObjectWrapper
 from docspace_api_sdk.models.operation_dto import OperationDto as OperationDto
 from docspace_api_sdk.models.operation_order_type import OperationOrderType as OperationOrderType
 from docspace_api_sdk.models.operation_status import OperationStatus as OperationStatus
+from docspace_api_sdk.models.operation_token_usage import OperationTokenUsage as OperationTokenUsage
 from docspace_api_sdk.models.operation_type import OperationType as OperationType
 from docspace_api_sdk.models.options import Options as Options
 from docspace_api_sdk.models.order_by import OrderBy as OrderBy
 from docspace_api_sdk.models.order_request_dto import OrderRequestDto as OrderRequestDto
-from docspace_api_sdk.models.orders_item_request_dto_integer import OrdersItemRequestDtoInteger as OrdersItemRequestDtoInteger
-from docspace_api_sdk.models.orders_request_dto_integer import OrdersRequestDtoInteger as OrdersRequestDtoInteger
+from docspace_api_sdk.models.orders_item_request_dto import OrdersItemRequestDto as OrdersItemRequestDto
+from docspace_api_sdk.models.orders_request_dto import OrdersRequestDto as OrdersRequestDto
 from docspace_api_sdk.models.owner_change_instructions_dto import OwnerChangeInstructionsDto as OwnerChangeInstructionsDto
 from docspace_api_sdk.models.owner_change_instructions_wrapper import OwnerChangeInstructionsWrapper as OwnerChangeInstructionsWrapper
 from docspace_api_sdk.models.owner_id_settings_request_dto import OwnerIdSettingsRequestDto as OwnerIdSettingsRequestDto
+from docspace_api_sdk.models.pageable_client_info_response import PageableClientInfoResponse as PageableClientInfoResponse
+from docspace_api_sdk.models.pageable_client_response import PageableClientResponse as PageableClientResponse
 from docspace_api_sdk.models.pageable_modification_response import PageableModificationResponse as PageableModificationResponse
 from docspace_api_sdk.models.pageable_response import PageableResponse as PageableResponse
-from docspace_api_sdk.models.pageable_response_client_info_response import PageableResponseClientInfoResponse as PageableResponseClientInfoResponse
 from docspace_api_sdk.models.paragraph import Paragraph as Paragraph
 from docspace_api_sdk.models.password_hasher import PasswordHasher as PasswordHasher
 from docspace_api_sdk.models.password_settings_dto import PasswordSettingsDto as PasswordSettingsDto
@@ -1734,6 +1847,8 @@ from docspace_api_sdk.models.permissions_config import PermissionsConfig as Perm
 from docspace_api_sdk.models.plugins_config import PluginsConfig as PluginsConfig
 from docspace_api_sdk.models.plugins_dto import PluginsDto as PluginsDto
 from docspace_api_sdk.models.price_dto import PriceDto as PriceDto
+from docspace_api_sdk.models.price_status import PriceStatus as PriceStatus
+from docspace_api_sdk.models.price_time_unit import PriceTimeUnit as PriceTimeUnit
 from docspace_api_sdk.models.problem_detail import ProblemDetail as ProblemDetail
 from docspace_api_sdk.models.product_administrator_dto import ProductAdministratorDto as ProductAdministratorDto
 from docspace_api_sdk.models.product_administrator_wrapper import ProductAdministratorWrapper as ProductAdministratorWrapper
@@ -1743,7 +1858,6 @@ from docspace_api_sdk.models.provider_array_wrapper import ProviderArrayWrapper 
 from docspace_api_sdk.models.provider_dto import ProviderDto as ProviderDto
 from docspace_api_sdk.models.provider_filter import ProviderFilter as ProviderFilter
 from docspace_api_sdk.models.quantity_request_dto import QuantityRequestDto as QuantityRequestDto
-from docspace_api_sdk.models.quota import Quota as Quota
 from docspace_api_sdk.models.quota_array_wrapper import QuotaArrayWrapper as QuotaArrayWrapper
 from docspace_api_sdk.models.quota_dto import QuotaDto as QuotaDto
 from docspace_api_sdk.models.quota_filter import QuotaFilter as QuotaFilter
@@ -1786,8 +1900,8 @@ from docspace_api_sdk.models.rooms_notifications_settings_request_dto import Roo
 from docspace_api_sdk.models.run import Run as Run
 from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper as STRINGArrayWrapper
 from docspace_api_sdk.models.sales_requests_dto import SalesRequestsDto as SalesRequestsDto
-from docspace_api_sdk.models.save_as_pdf_integer import SaveAsPdfInteger as SaveAsPdfInteger
-from docspace_api_sdk.models.save_form_role_mapping_dto_integer import SaveFormRoleMappingDtoInteger as SaveFormRoleMappingDtoInteger
+from docspace_api_sdk.models.save_as_pdf import SaveAsPdf as SaveAsPdf
+from docspace_api_sdk.models.save_form_role_mapping_dto import SaveFormRoleMappingDto as SaveFormRoleMappingDto
 from docspace_api_sdk.models.schedule_dto import ScheduleDto as ScheduleDto
 from docspace_api_sdk.models.schedule_wrapper import ScheduleWrapper as ScheduleWrapper
 from docspace_api_sdk.models.scope_response import ScopeResponse as ScopeResponse
@@ -1797,10 +1911,11 @@ from docspace_api_sdk.models.security_dto import SecurityDto as SecurityDto
 from docspace_api_sdk.models.security_info_request_dto import SecurityInfoRequestDto as SecurityInfoRequestDto
 from docspace_api_sdk.models.security_info_simple_request_dto import SecurityInfoSimpleRequestDto as SecurityInfoSimpleRequestDto
 from docspace_api_sdk.models.security_requests_dto import SecurityRequestsDto as SecurityRequestsDto
+from docspace_api_sdk.models.service_price_info import ServicePriceInfo as ServicePriceInfo
+from docspace_api_sdk.models.service_price_info_array_wrapper import ServicePriceInfoArrayWrapper as ServicePriceInfoArrayWrapper
 from docspace_api_sdk.models.session_request import SessionRequest as SessionRequest
 from docspace_api_sdk.models.set_app_enabled_body import SetAppEnabledBody as SetAppEnabledBody
 from docspace_api_sdk.models.set_app_settings_body import SetAppSettingsBody as SetAppSettingsBody
-from docspace_api_sdk.models.set_app_settings_body_settings import SetAppSettingsBodySettings as SetAppSettingsBodySettings
 from docspace_api_sdk.models.set_manager_request import SetManagerRequest as SetManagerRequest
 from docspace_api_sdk.models.set_public_dto import SetPublicDto as SetPublicDto
 from docspace_api_sdk.models.set_restricted_ai_models_request_dto import SetRestrictedAiModelsRequestDto as SetRestrictedAiModelsRequestDto
@@ -1814,15 +1929,25 @@ from docspace_api_sdk.models.smtp_operation_status_requests_dto import SmtpOpera
 from docspace_api_sdk.models.smtp_operation_status_requests_wrapper import SmtpOperationStatusRequestsWrapper as SmtpOperationStatusRequestsWrapper
 from docspace_api_sdk.models.smtp_settings_dto import SmtpSettingsDto as SmtpSettingsDto
 from docspace_api_sdk.models.smtp_settings_wrapper import SmtpSettingsWrapper as SmtpSettingsWrapper
+from docspace_api_sdk.models.socket_settings_dto import SocketSettingsDto as SocketSettingsDto
+from docspace_api_sdk.models.socket_settings_wrapper import SocketSettingsWrapper as SocketSettingsWrapper
 from docspace_api_sdk.models.sort_order import SortOrder as SortOrder
 from docspace_api_sdk.models.sorted_by_type import SortedByType as SortedByType
+from docspace_api_sdk.models.sso_binding_type_dto import SsoBindingTypeDto as SsoBindingTypeDto
 from docspace_api_sdk.models.sso_certificate import SsoCertificate as SsoCertificate
+from docspace_api_sdk.models.sso_encrypt_algorithm_type_dto import SsoEncryptAlgorithmTypeDto as SsoEncryptAlgorithmTypeDto
 from docspace_api_sdk.models.sso_field_mapping import SsoFieldMapping as SsoFieldMapping
+from docspace_api_sdk.models.sso_idp_certificate_action_type_dto import SsoIdpCertificateActionTypeDto as SsoIdpCertificateActionTypeDto
 from docspace_api_sdk.models.sso_idp_certificate_advanced import SsoIdpCertificateAdvanced as SsoIdpCertificateAdvanced
 from docspace_api_sdk.models.sso_idp_settings import SsoIdpSettings as SsoIdpSettings
+from docspace_api_sdk.models.sso_name_id_format_type_dto import SsoNameIdFormatTypeDto as SsoNameIdFormatTypeDto
 from docspace_api_sdk.models.sso_settings_requests_dto import SsoSettingsRequestsDto as SsoSettingsRequestsDto
 from docspace_api_sdk.models.sso_settings_v2 import SsoSettingsV2 as SsoSettingsV2
+from docspace_api_sdk.models.sso_settings_v2_constants_dto import SsoSettingsV2ConstantsDto as SsoSettingsV2ConstantsDto
+from docspace_api_sdk.models.sso_settings_v2_constants_wrapper import SsoSettingsV2ConstantsWrapper as SsoSettingsV2ConstantsWrapper
 from docspace_api_sdk.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper as SsoSettingsV2Wrapper
+from docspace_api_sdk.models.sso_signing_algorithm_type_dto import SsoSigningAlgorithmTypeDto as SsoSigningAlgorithmTypeDto
+from docspace_api_sdk.models.sso_sp_certificate_action_type_dto import SsoSpCertificateActionTypeDto as SsoSpCertificateActionTypeDto
 from docspace_api_sdk.models.sso_sp_certificate_advanced import SsoSpCertificateAdvanced as SsoSpCertificateAdvanced
 from docspace_api_sdk.models.start_edit import StartEdit as StartEdit
 from docspace_api_sdk.models.start_filling_form import StartFillingForm as StartFillingForm
@@ -1845,7 +1970,8 @@ from docspace_api_sdk.models.subject_type import SubjectType as SubjectType
 from docspace_api_sdk.models.submit_form import SubmitForm as SubmitForm
 from docspace_api_sdk.models.subscription_balance_info import SubscriptionBalanceInfo as SubscriptionBalanceInfo
 from docspace_api_sdk.models.subscription_balance_info_wrapper import SubscriptionBalanceInfoWrapper as SubscriptionBalanceInfoWrapper
-from docspace_api_sdk.models.tariff import Tariff as Tariff
+from docspace_api_sdk.models.tariff_dto import TariffDto as TariffDto
+from docspace_api_sdk.models.tariff_quota_dto import TariffQuotaDto as TariffQuotaDto
 from docspace_api_sdk.models.tariff_state import TariffState as TariffState
 from docspace_api_sdk.models.tariff_wrapper import TariffWrapper as TariffWrapper
 from docspace_api_sdk.models.task_progress_response_dto import TaskProgressResponseDto as TaskProgressResponseDto
@@ -1909,15 +2035,38 @@ from docspace_api_sdk.models.tfa_setup_code_dto import TfaSetupCodeDto as TfaSet
 from docspace_api_sdk.models.tfa_setup_code_wrapper import TfaSetupCodeWrapper as TfaSetupCodeWrapper
 from docspace_api_sdk.models.tfa_validate_requests_dto import TfaValidateRequestsDto as TfaValidateRequestsDto
 from docspace_api_sdk.models.third_party_backup_request_dto import ThirdPartyBackupRequestDto as ThirdPartyBackupRequestDto
+from docspace_api_sdk.models.third_party_check_conversion_request_dto import ThirdPartyCheckConversionRequestDto as ThirdPartyCheckConversionRequestDto
+from docspace_api_sdk.models.third_party_chunked_upload_session_response import ThirdPartyChunkedUploadSessionResponse as ThirdPartyChunkedUploadSessionResponse
+from docspace_api_sdk.models.third_party_chunked_upload_session_response_response_wrapper import ThirdPartyChunkedUploadSessionResponseResponseWrapper as ThirdPartyChunkedUploadSessionResponseResponseWrapper
+from docspace_api_sdk.models.third_party_chunked_upload_session_response_wrapper import ThirdPartyChunkedUploadSessionResponseWrapper as ThirdPartyChunkedUploadSessionResponseWrapper
+from docspace_api_sdk.models.third_party_chunked_upload_session_response_wrapper_wrapper import ThirdPartyChunkedUploadSessionResponseWrapperWrapper as ThirdPartyChunkedUploadSessionResponseWrapperWrapper
+from docspace_api_sdk.models.third_party_configuration_dto import ThirdPartyConfigurationDto as ThirdPartyConfigurationDto
+from docspace_api_sdk.models.third_party_configuration_wrapper import ThirdPartyConfigurationWrapper as ThirdPartyConfigurationWrapper
+from docspace_api_sdk.models.third_party_draft_location import ThirdPartyDraftLocation as ThirdPartyDraftLocation
+from docspace_api_sdk.models.third_party_file_array_wrapper import ThirdPartyFileArrayWrapper as ThirdPartyFileArrayWrapper
+from docspace_api_sdk.models.third_party_file_dto import ThirdPartyFileDto as ThirdPartyFileDto
+from docspace_api_sdk.models.third_party_file_entry_dto import ThirdPartyFileEntryDto as ThirdPartyFileEntryDto
+from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper as ThirdPartyFileWrapper
+from docspace_api_sdk.models.third_party_folder_array_wrapper import ThirdPartyFolderArrayWrapper as ThirdPartyFolderArrayWrapper
+from docspace_api_sdk.models.third_party_folder_content_dto import ThirdPartyFolderContentDto as ThirdPartyFolderContentDto
+from docspace_api_sdk.models.third_party_folder_content_wrapper import ThirdPartyFolderContentWrapper as ThirdPartyFolderContentWrapper
+from docspace_api_sdk.models.third_party_folder_dto import ThirdPartyFolderDto as ThirdPartyFolderDto
+from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper as ThirdPartyFolderWrapper
 from docspace_api_sdk.models.third_party_params import ThirdPartyParams as ThirdPartyParams
 from docspace_api_sdk.models.third_party_params_array_wrapper import ThirdPartyParamsArrayWrapper as ThirdPartyParamsArrayWrapper
 from docspace_api_sdk.models.third_party_request_dto import ThirdPartyRequestDto as ThirdPartyRequestDto
+from docspace_api_sdk.models.third_party_save_as_pdf import ThirdPartySaveAsPdf as ThirdPartySaveAsPdf
+from docspace_api_sdk.models.third_party_upload_session_response_dto import ThirdPartyUploadSessionResponseDto as ThirdPartyUploadSessionResponseDto
+from docspace_api_sdk.models.third_party_upload_session_response_wrapper import ThirdPartyUploadSessionResponseWrapper as ThirdPartyUploadSessionResponseWrapper
 from docspace_api_sdk.models.thumbnail import Thumbnail as Thumbnail
 from docspace_api_sdk.models.thumbnails_data_dto import ThumbnailsDataDto as ThumbnailsDataDto
 from docspace_api_sdk.models.thumbnails_data_wrapper import ThumbnailsDataWrapper as ThumbnailsDataWrapper
 from docspace_api_sdk.models.thumbnails_request import ThumbnailsRequest as ThumbnailsRequest
+from docspace_api_sdk.models.time_bound import TimeBound as TimeBound
 from docspace_api_sdk.models.timezones_requests_array_wrapper import TimezonesRequestsArrayWrapper as TimezonesRequestsArrayWrapper
 from docspace_api_sdk.models.timezones_requests_dto import TimezonesRequestsDto as TimezonesRequestsDto
+from docspace_api_sdk.models.token_diagnostics_dto import TokenDiagnosticsDto as TokenDiagnosticsDto
+from docspace_api_sdk.models.token_diagnostics_wrapper import TokenDiagnosticsWrapper as TokenDiagnosticsWrapper
 from docspace_api_sdk.models.top_up_deposit_request_dto import TopUpDepositRequestDto as TopUpDepositRequestDto
 from docspace_api_sdk.models.transaction_info import TransactionInfo as TransactionInfo
 from docspace_api_sdk.models.turn_on_admin_message_settings_request_dto import TurnOnAdminMessageSettingsRequestDto as TurnOnAdminMessageSettingsRequestDto
@@ -1935,14 +2084,14 @@ from docspace_api_sdk.models.update_members_request_dto import UpdateMembersRequ
 from docspace_api_sdk.models.update_photo_member_request import UpdatePhotoMemberRequest as UpdatePhotoMemberRequest
 from docspace_api_sdk.models.update_room_group_request import UpdateRoomGroupRequest as UpdateRoomGroupRequest
 from docspace_api_sdk.models.update_room_request import UpdateRoomRequest as UpdateRoomRequest
-from docspace_api_sdk.models.update_rooms_quota_request_dto_integer import UpdateRoomsQuotaRequestDtoInteger as UpdateRoomsQuotaRequestDtoInteger
-from docspace_api_sdk.models.update_rooms_room_ids_request_dto_integer import UpdateRoomsRoomIdsRequestDtoInteger as UpdateRoomsRoomIdsRequestDtoInteger
+from docspace_api_sdk.models.update_rooms_quota_request_dto import UpdateRoomsQuotaRequestDto as UpdateRoomsQuotaRequestDto
+from docspace_api_sdk.models.update_rooms_room_ids_request_dto import UpdateRoomsRoomIdsRequestDto as UpdateRoomsRoomIdsRequestDto
 from docspace_api_sdk.models.update_tag_request_dto import UpdateTagRequestDto as UpdateTagRequestDto
 from docspace_api_sdk.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto as UpdateWebhooksConfigRequestsDto
 from docspace_api_sdk.models.upload_result_dto import UploadResultDto as UploadResultDto
 from docspace_api_sdk.models.upload_result_wrapper import UploadResultWrapper as UploadResultWrapper
-from docspace_api_sdk.models.upload_session_response_dto_integer import UploadSessionResponseDtoInteger as UploadSessionResponseDtoInteger
-from docspace_api_sdk.models.upload_session_response_integer_wrapper import UploadSessionResponseIntegerWrapper as UploadSessionResponseIntegerWrapper
+from docspace_api_sdk.models.upload_session_response_dto import UploadSessionResponseDto as UploadSessionResponseDto
+from docspace_api_sdk.models.upload_session_response_wrapper import UploadSessionResponseWrapper as UploadSessionResponseWrapper
 from docspace_api_sdk.models.usage_space_stat_item_array_wrapper import UsageSpaceStatItemArrayWrapper as UsageSpaceStatItemArrayWrapper
 from docspace_api_sdk.models.usage_space_stat_item_dto import UsageSpaceStatItemDto as UsageSpaceStatItemDto
 from docspace_api_sdk.models.user_config import UserConfig as UserConfig
@@ -1952,6 +2101,7 @@ from docspace_api_sdk.models.user_info import UserInfo as UserInfo
 from docspace_api_sdk.models.user_info_wrapper import UserInfoWrapper as UserInfoWrapper
 from docspace_api_sdk.models.user_invitation import UserInvitation as UserInvitation
 from docspace_api_sdk.models.user_invitation_request_dto import UserInvitationRequestDto as UserInvitationRequestDto
+from docspace_api_sdk.models.validation_error_response import ValidationErrorResponse as ValidationErrorResponse
 from docspace_api_sdk.models.validation_result import ValidationResult as ValidationResult
 from docspace_api_sdk.models.vectorization_status import VectorizationStatus as VectorizationStatus
 from docspace_api_sdk.models.wallet_quantity_request_dto import WalletQuantityRequestDto as WalletQuantityRequestDto

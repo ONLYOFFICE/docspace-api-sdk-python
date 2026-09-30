@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class NotificationChannelStatusDto(BaseModel):
     """
-    The notification channel settings.
+    The ways this installation can deliver a notification, and whether each of them is usable.
     """ # noqa: E501
-    channels: Optional[List[NotificationChannelDto]] = Field(default=None, description="The list of notification channels.", json_schema_extra={"examples": [[{"name": "email", "isActive": True}]]})
+    channels: Optional[List[NotificationChannelDto]] = Field(default=None, description="The channels the running installation is configured with. A channel appears only when the notification  service names a sender for it, so the list can be shorter than the channels this build implements, and an  empty list means the configuration names none of them.", json_schema_extra={"examples": [[{"name": "email.sender", "isEnabled": True}]]})
     __properties: ClassVar[List[str]] = ["channels"]
 
     model_config = ConfigDict(

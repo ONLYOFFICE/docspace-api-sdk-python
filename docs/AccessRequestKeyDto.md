@@ -1,13 +1,13 @@
 # AccessRequestKeyDto
-The encryption key granting one user access to a file.
+The file key issued to one account.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **UUID** | User ID | [optional] 
-**public_key_id** | **UUID** | Public key ID | [optional] 
-**private_key_enc** | **str** | Encrypted private key | [optional] 
+**user_id** | **UUID** | The account that is to open the file with this key; it has to have read access to the file. | [optional] 
+**public_key_id** | **UUID** | The public key the file key was encrypted with, as reported for that account by  `GET api/2.0/files/file/{fileId}/publickeys`. | [optional] 
+**private_key_enc** | **str** | The key of the file itself, encrypted by the client with that public key, so that the plain key never reaches  the portal. | [optional] 
 
 ## Example
 

@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class DocsCloudStats(BaseModel):
     """
-    Represents the usage statistics of a DocsCloud tenant for the current period.
+    Represents the usage statistics of a Docs Connect tenant for the current period.
     """ # noqa: E501
     period_day: Optional[StrictInt] = Field(default=None, description="The length of the statistics period in days.", alias="periodDay", json_schema_extra={"examples": [30]})
     editor: Optional[DocsCloudUserStats] = Field(default=None, description="The statistics for editor users.")

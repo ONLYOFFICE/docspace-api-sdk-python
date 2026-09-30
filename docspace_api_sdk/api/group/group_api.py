@@ -19,7 +19,7 @@
 from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
@@ -77,7 +77,7 @@ class GroupApi:
     ) -> GroupWrapper:
         """Add a new group
 
-        Adds a new group with the group manager, name, and members specified in the request.
+        Creates a group with the given name and, optionally, a manager and a first set of members.  The caller needs the permissions to edit groups and to add and remove users.  The name is required and cannot be blank, and unlike the operations that add members later, this one checks  every listed account upfront and rejects the whole call with 400 if any of them is unusable - a guest, a  disabled account or an ID that matches nobody.  The call is not idempotent: names are not unique, so repeating it creates a second group with the same name.  Creating a group raises a `GroupCreated` webhook, and the answer holds the new group with its members  included.  Members can be changed afterwards through `PUT api/2.0/group/{id}` or the dedicated member operations.
 
         :param group_request_dto:
         :type group_request_dto: GroupRequestDto
@@ -113,10 +113,11 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -151,7 +152,7 @@ class GroupApi:
     ) -> ApiResponse[GroupWrapper]:
         """Add a new group
 
-        Adds a new group with the group manager, name, and members specified in the request.
+        Creates a group with the given name and, optionally, a manager and a first set of members.  The caller needs the permissions to edit groups and to add and remove users.  The name is required and cannot be blank, and unlike the operations that add members later, this one checks  every listed account upfront and rejects the whole call with 400 if any of them is unusable - a guest, a  disabled account or an ID that matches nobody.  The call is not idempotent: names are not unique, so repeating it creates a second group with the same name.  Creating a group raises a `GroupCreated` webhook, and the answer holds the new group with its members  included.  Members can be changed afterwards through `PUT api/2.0/group/{id}` or the dedicated member operations.
 
         :param group_request_dto:
         :type group_request_dto: GroupRequestDto
@@ -187,10 +188,11 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -225,7 +227,7 @@ class GroupApi:
     ) -> RESTResponseType:
         """Add a new group
 
-        Adds a new group with the group manager, name, and members specified in the request.
+        Creates a group with the given name and, optionally, a manager and a first set of members.  The caller needs the permissions to edit groups and to add and remove users.  The name is required and cannot be blank, and unlike the operations that add members later, this one checks  every listed account upfront and rejects the whole call with 400 if any of them is unusable - a guest, a  disabled account or an ID that matches nobody.  The call is not idempotent: names are not unique, so repeating it creates a second group with the same name.  Creating a group raises a `GroupCreated` webhook, and the answer holds the new group with its members  included.  Members can be changed afterwards through `PUT api/2.0/group/{id}` or the dedicated member operations.
 
         :param group_request_dto:
         :type group_request_dto: GroupRequestDto
@@ -261,10 +263,11 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -364,8 +367,8 @@ class GroupApi:
     @validate_call
     def add_members_to(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        members_request: Annotated[MembersRequest, Field(description="The member request.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        members_request: Annotated[MembersRequest, Field(description="The accounts to add, replace with, or remove.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -381,11 +384,11 @@ class GroupApi:
     ) -> GroupWrapper:
         """Add group members
 
-        Adds new group members to the group with the ID specified in the request.
+        Adds the listed accounts to a group, keeping the members it already has.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Accounts that cannot be group members - a guest, a disabled account or an ID that matches nobody - are  silently skipped instead of failing the call, so compare the members in the answer with what was sent to see  what was actually applied.  The call is idempotent for an account that is already a member, and it does not change who manages the group;  use `PUT api/2.0/group/{id}/manager` for that.  The answer is the group with its members after the addition.  To replace the whole list instead of extending it, use `POST api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param members_request: The member request. (required)
+        :param members_request: The accounts to add, replace with, or remove. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -420,6 +423,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -443,8 +447,8 @@ class GroupApi:
     @validate_call
     def add_members_to_with_http_info(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        members_request: Annotated[MembersRequest, Field(description="The member request.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        members_request: Annotated[MembersRequest, Field(description="The accounts to add, replace with, or remove.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -460,11 +464,11 @@ class GroupApi:
     ) -> ApiResponse[GroupWrapper]:
         """Add group members
 
-        Adds new group members to the group with the ID specified in the request.
+        Adds the listed accounts to a group, keeping the members it already has.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Accounts that cannot be group members - a guest, a disabled account or an ID that matches nobody - are  silently skipped instead of failing the call, so compare the members in the answer with what was sent to see  what was actually applied.  The call is idempotent for an account that is already a member, and it does not change who manages the group;  use `PUT api/2.0/group/{id}/manager` for that.  The answer is the group with its members after the addition.  To replace the whole list instead of extending it, use `POST api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param members_request: The member request. (required)
+        :param members_request: The accounts to add, replace with, or remove. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -499,6 +503,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -522,8 +527,8 @@ class GroupApi:
     @validate_call
     def add_members_to_without_preload_content(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        members_request: Annotated[MembersRequest, Field(description="The member request.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        members_request: Annotated[MembersRequest, Field(description="The accounts to add, replace with, or remove.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -539,11 +544,11 @@ class GroupApi:
     ) -> RESTResponseType:
         """Add group members
 
-        Adds new group members to the group with the ID specified in the request.
+        Adds the listed accounts to a group, keeping the members it already has.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Accounts that cannot be group members - a guest, a disabled account or an ID that matches nobody - are  silently skipped instead of failing the call, so compare the members in the answer with what was sent to see  what was actually applied.  The call is idempotent for an account that is already a member, and it does not change who manages the group;  use `PUT api/2.0/group/{id}/manager` for that.  The answer is the group with its members after the addition.  To replace the whole list instead of extending it, use `POST api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param members_request: The member request. (required)
+        :param members_request: The accounts to add, replace with, or remove. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -578,6 +583,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -685,7 +691,7 @@ class GroupApi:
     @validate_call
     def delete_group(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -701,9 +707,9 @@ class GroupApi:
     ) -> None:
         """Delete a group
 
-        Deletes a group with the ID specified in the request from the list of groups on the portal.
+        Deletes a group and withdraws the access it had been granted to rooms, folders and files.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The removal is permanent and cannot be undone, and it affects sharing: everything that was shared with the  group loses that share, so members who had access only through this group lose it too.  The accounts themselves are kept - only their membership disappears.  The call answers 204 with no body and raises a `GroupDeleted` webhook; a second call with the same ID answers  404 rather than succeeding again.  To empty a group without deleting it, move its members away with  `PUT api/2.0/group/{fromId}/members/{toId}` or remove them through `DELETE api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404. (required)
         :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -736,7 +742,8 @@ class GroupApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '204': None,
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -760,7 +767,7 @@ class GroupApi:
     @validate_call
     def delete_group_with_http_info(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -776,9 +783,9 @@ class GroupApi:
     ) -> ApiResponse[None]:
         """Delete a group
 
-        Deletes a group with the ID specified in the request from the list of groups on the portal.
+        Deletes a group and withdraws the access it had been granted to rooms, folders and files.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The removal is permanent and cannot be undone, and it affects sharing: everything that was shared with the  group loses that share, so members who had access only through this group lose it too.  The accounts themselves are kept - only their membership disappears.  The call answers 204 with no body and raises a `GroupDeleted` webhook; a second call with the same ID answers  404 rather than succeeding again.  To empty a group without deleting it, move its members away with  `PUT api/2.0/group/{fromId}/members/{toId}` or remove them through `DELETE api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404. (required)
         :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -811,7 +818,8 @@ class GroupApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '204': None,
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -835,7 +843,7 @@ class GroupApi:
     @validate_call
     def delete_group_without_preload_content(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
+        id: Annotated[UUID, Field(description="The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -851,9 +859,9 @@ class GroupApi:
     ) -> RESTResponseType:
         """Delete a group
 
-        Deletes a group with the ID specified in the request from the list of groups on the portal.
+        Deletes a group and withdraws the access it had been granted to rooms, folders and files.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The removal is permanent and cannot be undone, and it affects sharing: everything that was shared with the  group loses that share, so members who had access only through this group lose it too.  The accounts themselves are kept - only their membership disappears.  The call answers 204 with no body and raises a `GroupDeleted` webhook; a second call with the same ID answers  404 rather than succeeding again.  To empty a group without deleting it, move its members away with  `PUT api/2.0/group/{fromId}/members/{toId}` or remove them through `DELETE api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404. (required)
         :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -886,7 +894,8 @@ class GroupApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '204': None,
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -978,8 +987,8 @@ class GroupApi:
     @validate_call
     def get_group(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the group members or not.")] = None,
+        id: Annotated[UUID, Field(description="The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404.")],
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -995,11 +1004,11 @@ class GroupApi:
     ) -> GroupWrapper:
         """Get a group
 
-        Returns the detailed information about the selected group.
+        Returns one group by its ID, with its name, its manager and - when asked for - the accounts that belong to  it.  The caller needs the permission to read groups, and the ID has to belong to a group that has not been  deleted, otherwise the operation answers 404.  The call is read-only, and the member list is left out unless `includeMembers` is set to true, so ask for it  only when the members are actually needed.  Use `GET api/2.0/group` to look a group up by name or to page through them all.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404. (required)
         :type id: UUID
-        :param include_members: Specifies whether to include the group members or not.
+        :param include_members: Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1034,6 +1043,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1057,8 +1067,8 @@ class GroupApi:
     @validate_call
     def get_group_with_http_info(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the group members or not.")] = None,
+        id: Annotated[UUID, Field(description="The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404.")],
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1074,11 +1084,11 @@ class GroupApi:
     ) -> ApiResponse[GroupWrapper]:
         """Get a group
 
-        Returns the detailed information about the selected group.
+        Returns one group by its ID, with its name, its manager and - when asked for - the accounts that belong to  it.  The caller needs the permission to read groups, and the ID has to belong to a group that has not been  deleted, otherwise the operation answers 404.  The call is read-only, and the member list is left out unless `includeMembers` is set to true, so ask for it  only when the members are actually needed.  Use `GET api/2.0/group` to look a group up by name or to page through them all.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404. (required)
         :type id: UUID
-        :param include_members: Specifies whether to include the group members or not.
+        :param include_members: Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1113,6 +1123,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1136,8 +1147,8 @@ class GroupApi:
     @validate_call
     def get_group_without_preload_content(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Specifies whether to include the group members or not.")] = None,
+        id: Annotated[UUID, Field(description="The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404.")],
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1153,11 +1164,11 @@ class GroupApi:
     ) -> RESTResponseType:
         """Get a group
 
-        Returns the detailed information about the selected group.
+        Returns one group by its ID, with its name, its manager and - when asked for - the accounts that belong to  it.  The caller needs the permission to read groups, and the ID has to belong to a group that has not been  deleted, otherwise the operation answers 404.  The call is read-only, and the member list is left out unless `includeMembers` is set to true, so ask for it  only when the members are actually needed.  Use `GET api/2.0/group` to look a group up by name or to page through them all.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404. (required)
         :type id: UUID
-        :param include_members: Specifies whether to include the group members or not.
+        :param include_members: Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1192,6 +1203,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1288,7 +1300,7 @@ class GroupApi:
     @validate_call
     def get_group_by_user_id(
         self,
-        userid: Annotated[UUID, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1304,9 +1316,9 @@ class GroupApi:
     ) -> GroupSummaryArrayWrapper:
         """Get user groups
 
-        Returns a list of groups for the user with the ID specified in the request.
+        Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
 
-        :param userid: The user ID. (required)
+        :param userid: The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (required)
         :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1340,6 +1352,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupSummaryArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1362,7 +1375,7 @@ class GroupApi:
     @validate_call
     def get_group_by_user_id_with_http_info(
         self,
-        userid: Annotated[UUID, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1378,9 +1391,9 @@ class GroupApi:
     ) -> ApiResponse[GroupSummaryArrayWrapper]:
         """Get user groups
 
-        Returns a list of groups for the user with the ID specified in the request.
+        Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
 
-        :param userid: The user ID. (required)
+        :param userid: The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (required)
         :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1414,6 +1427,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupSummaryArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1436,7 +1450,7 @@ class GroupApi:
     @validate_call
     def get_group_by_user_id_without_preload_content(
         self,
-        userid: Annotated[UUID, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1452,9 +1466,9 @@ class GroupApi:
     ) -> RESTResponseType:
         """Get user groups
 
-        Returns a list of groups for the user with the ID specified in the request.
+        Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
 
-        :param userid: The user ID. (required)
+        :param userid: The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (required)
         :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1488,6 +1502,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupSummaryArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1578,13 +1593,13 @@ class GroupApi:
     @validate_call
     def get_groups(
         self,
-        user_id: Annotated[Optional[UUID], Field(description="The user ID.")] = None,
-        manager: Annotated[Optional[StrictBool], Field(description="Specifies if the user is a manager or not.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for paginated results.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used to sort the query results.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching group data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.")] = None,
+        manager: Annotated[Optional[StrictBool], Field(description="Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the ordering: `Ascending`, which is the default, or `Descending`.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1600,21 +1615,21 @@ class GroupApi:
     ) -> GroupArrayWrapper:
         """Get groups
 
-        Returns the general information about all the groups, such as group ID and group manager.
+        Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
 
-        :param user_id: The user ID.
+        :param user_id: Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
         :type user_id: UUID
-        :param manager: Specifies if the user is a manager or not.
+        :param manager: Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.
         :type manager: bool
-        :param count: The number of records to retrieve.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index for paginated results.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param sort_by: Specifies the property used to sort the query results.
+        :param sort_by: What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction of the ordering: `Ascending`, which is the default, or `Descending`.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching group data.
+        :param filter_value: The text to match against the group name. Omit it to get every group.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1654,6 +1669,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1676,13 +1692,13 @@ class GroupApi:
     @validate_call
     def get_groups_with_http_info(
         self,
-        user_id: Annotated[Optional[UUID], Field(description="The user ID.")] = None,
-        manager: Annotated[Optional[StrictBool], Field(description="Specifies if the user is a manager or not.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for paginated results.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used to sort the query results.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching group data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.")] = None,
+        manager: Annotated[Optional[StrictBool], Field(description="Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the ordering: `Ascending`, which is the default, or `Descending`.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1698,21 +1714,21 @@ class GroupApi:
     ) -> ApiResponse[GroupArrayWrapper]:
         """Get groups
 
-        Returns the general information about all the groups, such as group ID and group manager.
+        Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
 
-        :param user_id: The user ID.
+        :param user_id: Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
         :type user_id: UUID
-        :param manager: Specifies if the user is a manager or not.
+        :param manager: Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.
         :type manager: bool
-        :param count: The number of records to retrieve.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index for paginated results.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param sort_by: Specifies the property used to sort the query results.
+        :param sort_by: What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction of the ordering: `Ascending`, which is the default, or `Descending`.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching group data.
+        :param filter_value: The text to match against the group name. Omit it to get every group.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1752,6 +1768,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1774,13 +1791,13 @@ class GroupApi:
     @validate_call
     def get_groups_without_preload_content(
         self,
-        user_id: Annotated[Optional[UUID], Field(description="The user ID.")] = None,
-        manager: Annotated[Optional[StrictBool], Field(description="Specifies if the user is a manager or not.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for paginated results.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property used to sort the query results.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching group data.")] = None,
+        user_id: Annotated[Optional[UUID], Field(description="Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.")] = None,
+        manager: Annotated[Optional[StrictBool], Field(description="Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the ordering: `Ascending`, which is the default, or `Descending`.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1796,21 +1813,21 @@ class GroupApi:
     ) -> RESTResponseType:
         """Get groups
 
-        Returns the general information about all the groups, such as group ID and group manager.
+        Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
 
-        :param user_id: The user ID.
+        :param user_id: Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
         :type user_id: UUID
-        :param manager: Specifies if the user is a manager or not.
+        :param manager: Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.
         :type manager: bool
-        :param count: The number of records to retrieve.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index for paginated results.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param sort_by: Specifies the property used to sort the query results.
+        :param sort_by: What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction of the ordering: `Ascending`, which is the default, or `Descending`.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching group data.
+        :param filter_value: The text to match against the group name. Omit it to get every group.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1850,6 +1867,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1974,8 +1992,8 @@ class GroupApi:
     @validate_call
     def move_members_to(
         self,
-        from_id: Annotated[UUID, Field(description="The group ID to move from.")],
-        to_id: Annotated[UUID, Field(description="The group ID to move to.")],
+        from_id: Annotated[UUID, Field(description="The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already.")],
+        to_id: Annotated[UUID, Field(description="The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1991,11 +2009,11 @@ class GroupApi:
     ) -> GroupWrapper:
         """Move group members
 
-        Moves all the members from the selected group to another one specified in the request.
+        Moves every member of one group into another group, emptying the first one.  The caller needs the permissions to edit groups and to add and remove users, and both IDs have to belong to  groups that have not been deleted, otherwise the operation answers 404.  The source group is kept, only without members, so delete it separately through  `DELETE api/2.0/group/{id}` if it is no longer needed.  Members that cannot be group members any more are silently skipped rather than failing the call, and an  account that already belongs to the destination is simply left there.  The answer is the destination group with its members, not the source one.  To move a chosen few instead of everybody, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
 
-        :param from_id: The group ID to move from. (required)
+        :param from_id: The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already. (required)
         :type from_id: UUID
-        :param to_id: The group ID to move to. (required)
+        :param to_id: The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already. (required)
         :type to_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2030,6 +2048,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -2053,8 +2072,8 @@ class GroupApi:
     @validate_call
     def move_members_to_with_http_info(
         self,
-        from_id: Annotated[UUID, Field(description="The group ID to move from.")],
-        to_id: Annotated[UUID, Field(description="The group ID to move to.")],
+        from_id: Annotated[UUID, Field(description="The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already.")],
+        to_id: Annotated[UUID, Field(description="The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2070,11 +2089,11 @@ class GroupApi:
     ) -> ApiResponse[GroupWrapper]:
         """Move group members
 
-        Moves all the members from the selected group to another one specified in the request.
+        Moves every member of one group into another group, emptying the first one.  The caller needs the permissions to edit groups and to add and remove users, and both IDs have to belong to  groups that have not been deleted, otherwise the operation answers 404.  The source group is kept, only without members, so delete it separately through  `DELETE api/2.0/group/{id}` if it is no longer needed.  Members that cannot be group members any more are silently skipped rather than failing the call, and an  account that already belongs to the destination is simply left there.  The answer is the destination group with its members, not the source one.  To move a chosen few instead of everybody, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
 
-        :param from_id: The group ID to move from. (required)
+        :param from_id: The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already. (required)
         :type from_id: UUID
-        :param to_id: The group ID to move to. (required)
+        :param to_id: The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already. (required)
         :type to_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2109,6 +2128,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -2132,8 +2152,8 @@ class GroupApi:
     @validate_call
     def move_members_to_without_preload_content(
         self,
-        from_id: Annotated[UUID, Field(description="The group ID to move from.")],
-        to_id: Annotated[UUID, Field(description="The group ID to move to.")],
+        from_id: Annotated[UUID, Field(description="The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already.")],
+        to_id: Annotated[UUID, Field(description="The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2149,11 +2169,11 @@ class GroupApi:
     ) -> RESTResponseType:
         """Move group members
 
-        Moves all the members from the selected group to another one specified in the request.
+        Moves every member of one group into another group, emptying the first one.  The caller needs the permissions to edit groups and to add and remove users, and both IDs have to belong to  groups that have not been deleted, otherwise the operation answers 404.  The source group is kept, only without members, so delete it separately through  `DELETE api/2.0/group/{id}` if it is no longer needed.  Members that cannot be group members any more are silently skipped rather than failing the call, and an  account that already belongs to the destination is simply left there.  The answer is the destination group with its members, not the source one.  To move a chosen few instead of everybody, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
 
-        :param from_id: The group ID to move from. (required)
+        :param from_id: The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already. (required)
         :type from_id: UUID
-        :param to_id: The group ID to move to. (required)
+        :param to_id: The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already. (required)
         :type to_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2188,6 +2208,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -2282,8 +2303,8 @@ class GroupApi:
     @validate_call
     def remove_members_from(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        members_request: Annotated[MembersRequest, Field(description="The member request.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        members_request: Annotated[MembersRequest, Field(description="The accounts to add, replace with, or remove.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2299,11 +2320,11 @@ class GroupApi:
     ) -> GroupWrapper:
         """Remove group members
 
-        Removes the group members specified in the request from the selected group.
+        Removes the listed accounts from a group, leaving the rest of its members in place.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The accounts themselves are kept; only their membership in this group ends, together with the access they had  through it.  The call is idempotent and forgiving: an ID that is not a member, and one that matches no account at all, are  both skipped without an error, and an empty list simply changes nothing.  The answer is the group with the members that remain.  Emptying a group cannot be done through `POST api/2.0/group/{id}/members`, which needs at least one valid  account, so list every member here, or move them away with `PUT api/2.0/group/{fromId}/members/{toId}`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param members_request: The member request. (required)
+        :param members_request: The accounts to add, replace with, or remove. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2338,6 +2359,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -2361,8 +2383,8 @@ class GroupApi:
     @validate_call
     def remove_members_from_with_http_info(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        members_request: Annotated[MembersRequest, Field(description="The member request.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        members_request: Annotated[MembersRequest, Field(description="The accounts to add, replace with, or remove.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2378,11 +2400,11 @@ class GroupApi:
     ) -> ApiResponse[GroupWrapper]:
         """Remove group members
 
-        Removes the group members specified in the request from the selected group.
+        Removes the listed accounts from a group, leaving the rest of its members in place.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The accounts themselves are kept; only their membership in this group ends, together with the access they had  through it.  The call is idempotent and forgiving: an ID that is not a member, and one that matches no account at all, are  both skipped without an error, and an empty list simply changes nothing.  The answer is the group with the members that remain.  Emptying a group cannot be done through `POST api/2.0/group/{id}/members`, which needs at least one valid  account, so list every member here, or move them away with `PUT api/2.0/group/{fromId}/members/{toId}`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param members_request: The member request. (required)
+        :param members_request: The accounts to add, replace with, or remove. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2417,6 +2439,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -2440,8 +2463,8 @@ class GroupApi:
     @validate_call
     def remove_members_from_without_preload_content(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        members_request: Annotated[MembersRequest, Field(description="The member request.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        members_request: Annotated[MembersRequest, Field(description="The accounts to add, replace with, or remove.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2457,11 +2480,11 @@ class GroupApi:
     ) -> RESTResponseType:
         """Remove group members
 
-        Removes the group members specified in the request from the selected group.
+        Removes the listed accounts from a group, leaving the rest of its members in place.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The accounts themselves are kept; only their membership in this group ends, together with the access they had  through it.  The call is idempotent and forgiving: an ID that is not a member, and one that matches no account at all, are  both skipped without an error, and an empty list simply changes nothing.  The answer is the group with the members that remain.  Emptying a group cannot be done through `POST api/2.0/group/{id}/members`, which needs at least one valid  account, so list every member here, or move them away with `PUT api/2.0/group/{fromId}/members/{toId}`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param members_request: The member request. (required)
+        :param members_request: The accounts to add, replace with, or remove. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2496,6 +2519,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -2603,8 +2627,8 @@ class GroupApi:
     @validate_call
     def set_group_manager(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        set_manager_request: Annotated[SetManagerRequest, Field(description="The request for setting a group manager.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        set_manager_request: Annotated[SetManagerRequest, Field(description="The account to make the manager of the group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2620,11 +2644,11 @@ class GroupApi:
     ) -> GroupWrapper:
         """Set a group manager
 
-        Sets a user with the ID specified in the request as a group manager.
+        Makes an account the manager of a group, replacing whoever managed it before.  The caller needs the permissions to edit groups and to add and remove users.  Both the group and the account have to exist: the operation answers 404 when the ID in the route matches no  live group and also when `userId` matches no account, so the message of the error says which of the two was  not found.  The account is added to the group at the same time, so a manager does not have to be a member beforehand, and  the previous manager stays in the group as an ordinary member.  A group has one manager, which makes the call idempotent when it names the account that manages it already.  The answer is the group with its new manager.  To change the members rather than the manager, use `PUT api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param set_manager_request: The request for setting a group manager. (required)
+        :param set_manager_request: The account to make the manager of the group. (required)
         :type set_manager_request: SetManagerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2659,6 +2683,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -2682,8 +2707,8 @@ class GroupApi:
     @validate_call
     def set_group_manager_with_http_info(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        set_manager_request: Annotated[SetManagerRequest, Field(description="The request for setting a group manager.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        set_manager_request: Annotated[SetManagerRequest, Field(description="The account to make the manager of the group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2699,11 +2724,11 @@ class GroupApi:
     ) -> ApiResponse[GroupWrapper]:
         """Set a group manager
 
-        Sets a user with the ID specified in the request as a group manager.
+        Makes an account the manager of a group, replacing whoever managed it before.  The caller needs the permissions to edit groups and to add and remove users.  Both the group and the account have to exist: the operation answers 404 when the ID in the route matches no  live group and also when `userId` matches no account, so the message of the error says which of the two was  not found.  The account is added to the group at the same time, so a manager does not have to be a member beforehand, and  the previous manager stays in the group as an ordinary member.  A group has one manager, which makes the call idempotent when it names the account that manages it already.  The answer is the group with its new manager.  To change the members rather than the manager, use `PUT api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param set_manager_request: The request for setting a group manager. (required)
+        :param set_manager_request: The account to make the manager of the group. (required)
         :type set_manager_request: SetManagerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2738,6 +2763,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -2761,8 +2787,8 @@ class GroupApi:
     @validate_call
     def set_group_manager_without_preload_content(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        set_manager_request: Annotated[SetManagerRequest, Field(description="The request for setting a group manager.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        set_manager_request: Annotated[SetManagerRequest, Field(description="The account to make the manager of the group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2778,11 +2804,11 @@ class GroupApi:
     ) -> RESTResponseType:
         """Set a group manager
 
-        Sets a user with the ID specified in the request as a group manager.
+        Makes an account the manager of a group, replacing whoever managed it before.  The caller needs the permissions to edit groups and to add and remove users.  Both the group and the account have to exist: the operation answers 404 when the ID in the route matches no  live group and also when `userId` matches no account, so the message of the error says which of the two was  not found.  The account is added to the group at the same time, so a manager does not have to be a member beforehand, and  the previous manager stays in the group as an ordinary member.  A group has one manager, which makes the call idempotent when it names the account that manages it already.  The answer is the group with its new manager.  To change the members rather than the manager, use `PUT api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param set_manager_request: The request for setting a group manager. (required)
+        :param set_manager_request: The account to make the manager of the group. (required)
         :type set_manager_request: SetManagerRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2817,6 +2843,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -2924,8 +2951,8 @@ class GroupApi:
     @validate_call
     def set_members_to(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        members_request: Annotated[MembersRequest, Field(description="The member request.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        members_request: Annotated[MembersRequest, Field(description="The accounts to add, replace with, or remove.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2941,11 +2968,11 @@ class GroupApi:
     ) -> GroupWrapper:
         """Replace group members
 
-        Replaces the group members with those specified in the request.
+        Replaces the whole member list of a group with the accounts given in the request, removing everybody who is  not in that list.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  At least one of the listed accounts has to be usable as a group member, otherwise the call is rejected with  400 and the group is left untouched; the accounts that cannot be members - a guest, a disabled account or an  ID that matches nobody - are then silently skipped while the rest are applied.  The replacement is not atomic: the current members are removed first and the new ones added afterwards, so a  failure in between can leave the group empty.  The answer is the group with the members it ends up with, which is why it should be read instead of assuming  the request was applied verbatim.  To add or remove a few accounts without touching the others, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param members_request: The member request. (required)
+        :param members_request: The accounts to add, replace with, or remove. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2980,10 +3007,12 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3002,8 +3031,8 @@ class GroupApi:
     @validate_call
     def set_members_to_with_http_info(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        members_request: Annotated[MembersRequest, Field(description="The member request.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        members_request: Annotated[MembersRequest, Field(description="The accounts to add, replace with, or remove.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3019,11 +3048,11 @@ class GroupApi:
     ) -> ApiResponse[GroupWrapper]:
         """Replace group members
 
-        Replaces the group members with those specified in the request.
+        Replaces the whole member list of a group with the accounts given in the request, removing everybody who is  not in that list.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  At least one of the listed accounts has to be usable as a group member, otherwise the call is rejected with  400 and the group is left untouched; the accounts that cannot be members - a guest, a disabled account or an  ID that matches nobody - are then silently skipped while the rest are applied.  The replacement is not atomic: the current members are removed first and the new ones added afterwards, so a  failure in between can leave the group empty.  The answer is the group with the members it ends up with, which is why it should be read instead of assuming  the request was applied verbatim.  To add or remove a few accounts without touching the others, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param members_request: The member request. (required)
+        :param members_request: The accounts to add, replace with, or remove. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3058,10 +3087,12 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3080,8 +3111,8 @@ class GroupApi:
     @validate_call
     def set_members_to_without_preload_content(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        members_request: Annotated[MembersRequest, Field(description="The member request.")],
+        id: Annotated[UUID, Field(description="The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.")],
+        members_request: Annotated[MembersRequest, Field(description="The accounts to add, replace with, or remove.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3097,11 +3128,11 @@ class GroupApi:
     ) -> RESTResponseType:
         """Replace group members
 
-        Replaces the group members with those specified in the request.
+        Replaces the whole member list of a group with the accounts given in the request, removing everybody who is  not in that list.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  At least one of the listed accounts has to be usable as a group member, otherwise the call is rejected with  400 and the group is left untouched; the accounts that cannot be members - a guest, a disabled account or an  ID that matches nobody - are then silently skipped while the rest are applied.  The replacement is not atomic: the current members are removed first and the new ones added afterwards, so a  failure in between can leave the group empty.  The answer is the group with the members it ends up with, which is why it should be read instead of assuming  the request was applied verbatim.  To add or remove a few accounts without touching the others, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404. (required)
         :type id: UUID
-        :param members_request: The member request. (required)
+        :param members_request: The accounts to add, replace with, or remove. (required)
         :type members_request: MembersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3136,10 +3167,12 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3242,8 +3275,8 @@ class GroupApi:
     @validate_call
     def update_group(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        update_group_request: Annotated[UpdateGroupRequest, Field(description="The request for updating a group.")],
+        id: Annotated[UUID, Field(description="The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404.")],
+        update_group_request: Annotated[UpdateGroupRequest, Field(description="The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3259,11 +3292,11 @@ class GroupApi:
     ) -> GroupWrapper:
         """Update a group
 
-        Updates the existing group changing the group manager, name, and/or members.
+        Changes the name and the manager of a group and adds or removes members, in one call.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Every field is optional and the ones that are left out are kept: omitting `groupName` keeps the current name,  and omitting `groupManager` keeps the current manager rather than clearing it.  Accounts in `membersToAdd` that cannot be group members - a guest, a disabled account or an ID that matches  nobody - are silently skipped instead of failing the call, so compare the members in the answer with what was  sent to see what was actually applied.  Members are added first and removed afterwards, an account listed in both lists therefore ends up removed,  and removing an account that is not a member changes nothing.  The change raises a `GroupUpdated` webhook, and the answer holds the group as it is after the update.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404. (required)
         :type id: UUID
-        :param update_group_request: The request for updating a group. (required)
+        :param update_group_request: The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. (required)
         :type update_group_request: UpdateGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3298,6 +3331,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -3321,8 +3355,8 @@ class GroupApi:
     @validate_call
     def update_group_with_http_info(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        update_group_request: Annotated[UpdateGroupRequest, Field(description="The request for updating a group.")],
+        id: Annotated[UUID, Field(description="The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404.")],
+        update_group_request: Annotated[UpdateGroupRequest, Field(description="The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3338,11 +3372,11 @@ class GroupApi:
     ) -> ApiResponse[GroupWrapper]:
         """Update a group
 
-        Updates the existing group changing the group manager, name, and/or members.
+        Changes the name and the manager of a group and adds or removes members, in one call.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Every field is optional and the ones that are left out are kept: omitting `groupName` keeps the current name,  and omitting `groupManager` keeps the current manager rather than clearing it.  Accounts in `membersToAdd` that cannot be group members - a guest, a disabled account or an ID that matches  nobody - are silently skipped instead of failing the call, so compare the members in the answer with what was  sent to see what was actually applied.  Members are added first and removed afterwards, an account listed in both lists therefore ends up removed,  and removing an account that is not a member changes nothing.  The change raises a `GroupUpdated` webhook, and the answer holds the group as it is after the update.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404. (required)
         :type id: UUID
-        :param update_group_request: The request for updating a group. (required)
+        :param update_group_request: The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. (required)
         :type update_group_request: UpdateGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3377,6 +3411,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -3400,8 +3435,8 @@ class GroupApi:
     @validate_call
     def update_group_without_preload_content(
         self,
-        id: Annotated[UUID, Field(description="The group ID.")],
-        update_group_request: Annotated[UpdateGroupRequest, Field(description="The request for updating a group.")],
+        id: Annotated[UUID, Field(description="The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404.")],
+        update_group_request: Annotated[UpdateGroupRequest, Field(description="The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3417,11 +3452,11 @@ class GroupApi:
     ) -> RESTResponseType:
         """Update a group
 
-        Updates the existing group changing the group manager, name, and/or members.
+        Changes the name and the manager of a group and adds or removes members, in one call.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Every field is optional and the ones that are left out are kept: omitting `groupName` keeps the current name,  and omitting `groupManager` keeps the current manager rather than clearing it.  Accounts in `membersToAdd` that cannot be group members - a guest, a disabled account or an ID that matches  nobody - are silently skipped instead of failing the call, so compare the members in the answer with what was  sent to see what was actually applied.  Members are added first and removed afterwards, an account listed in both lists therefore ends up removed,  and removing an account that is not a member changes nothing.  The change raises a `GroupUpdated` webhook, and the answer holds the group as it is after the update.
 
-        :param id: The group ID. (required)
+        :param id: The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404. (required)
         :type id: UUID
-        :param update_group_request: The request for updating a group. (required)
+        :param update_group_request: The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing. (required)
         :type update_group_request: UpdateGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3456,6 +3491,7 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",

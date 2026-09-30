@@ -21,32 +21,35 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from docspace_api_sdk.models.api_date_time import ApiDateTime
+from docspace_api_sdk.models.operation_token_usage import OperationTokenUsage
 from docspace_api_sdk.models.operation_type import OperationType
 from typing import Optional, Set
 from typing_extensions import Self
 
 class OperationDto(BaseModel):
     """
-    Represents an operation.
+    One movement on the portal wallet: what it was for, who caused it, and how much money it moved.
     """ # noqa: E501
-    var_date: Optional[datetime] = Field(default=None, description="The date when the operation took place.", alias="date", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
-    service: Optional[StrictStr] = Field(default=None, description="The service related to the operation.", json_schema_extra={"examples": ["Storage"]})
-    description: Optional[StrictStr] = Field(default=None, description="The brief operation description.", json_schema_extra={"examples": ["Storage quota increase"]})
-    details: Optional[StrictStr] = Field(default=None, description="The detailed information about the operation.", json_schema_extra={"examples": ["Increased storage from 50GB to 100GB"]})
-    service_unit: Optional[StrictStr] = Field(default=None, description="The service unit.", alias="serviceUnit", json_schema_extra={"examples": ["GB"]})
-    quantity: Optional[StrictInt] = Field(default=None, description="The quantity of the service used.", json_schema_extra={"examples": [1]})
-    currency: Optional[StrictStr] = Field(default=None, description="The three-character ISO 4217 currency symbol of the operation.", json_schema_extra={"examples": ["USD"]})
-    credit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The credit amount of the operation.", json_schema_extra={"examples": [99.99]})
-    debit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The debit amount of the operation.", json_schema_extra={"examples": [99.99]})
-    participant_name: Optional[StrictStr] = Field(default=None, description="The participant original name.", alias="participantName", json_schema_extra={"examples": ["Example Name"]})
-    participant_display_name: Optional[StrictStr] = Field(default=None, description="The participant display name.", alias="participantDisplayName", json_schema_extra={"examples": ["Example Name"]})
-    agent_id: Optional[StrictStr] = Field(default=None, description="AI Agent id.", alias="agentId", json_schema_extra={"examples": ["123"]})
-    agent_title: Optional[StrictStr] = Field(default=None, description="AI Agent name.", alias="agentTitle", json_schema_extra={"examples": ["My AI Agent"]})
-    type: Optional[OperationType] = Field(default=None, description="Type of the operation")
-    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName", "agentId", "agentTitle", "type"]
+    var_date: Optional[ApiDateTime] = Field(default=None, description="When the movement was booked, in the portal time zone - the same zone the `startDate` and `endDate`  filters are read in, so the two do line up here.", alias="date")
+    service: Optional[StrictStr] = Field(default=None, description="The wallet service the movement belongs to, by its stable key. It is what the `serviceName` filter  matches on, and it is empty for a movement that belongs to no service, such as a top-up.", json_schema_extra={"examples": ["disk-storage"]})
+    description: Optional[StrictStr] = Field(default=None, description="A one-line summary of the movement in the portal language, already composed from the service and the  quantity - meant to be printed as it is rather than parsed.", json_schema_extra={"examples": ["Storage quota increase"]})
+    details: Optional[StrictStr] = Field(default=None, description="The longer explanation of the same movement, where the service recorded one. It is empty for a movement  that has nothing to add to `description`.", json_schema_extra={"examples": ["Increased storage from 50GB to 100GB"]})
+    service_unit: Optional[StrictStr] = Field(default=None, description="What `quantity` counts for this service, in the portal language. AI consumption is reported in tokens  here rather than in the AI credits the service is sold in.", alias="serviceUnit", json_schema_extra={"examples": ["GB"]})
+    quantity: Optional[StrictInt] = Field(default=None, description="How many units the movement covers, in the unit named by `serviceUnit`. It is `0` for a movement that  moves money without consuming a service.", json_schema_extra={"examples": [1]})
+    currency: Optional[StrictStr] = Field(default=None, description="The currency `credit` and `debit` are expressed in, as a three-letter ISO 4217 code. It is the accounting  currency of the wallet, which need not be the currency the subscription is priced in.", json_schema_extra={"examples": ["USD"]})
+    credit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount that went into the wallet. It is `0` on a movement that only took money out, so the pair of  `credit` and `debit` is what shows which way the money went; the `credit` and `debit` filters of the  operation select the two directions by exactly this.", json_schema_extra={"examples": [99.99]})
+    debit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount that was taken out of the wallet, `0` on a movement that put money in.", json_schema_extra={"examples": [99.99]})
+    participant_name: Optional[StrictStr] = Field(default=None, description="Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead.", alias="participantName", json_schema_extra={"examples": ["john.doe@example.com"]})
+    participant_display_name: Optional[StrictStr] = Field(default=None, description="The same person as their portal display name. It falls back to `participantName` when the name belongs to  no portal account, so it is never empty while `participantName` is filled.", alias="participantDisplayName", json_schema_extra={"examples": ["John Doe"]})
+    source_type: Optional[StrictStr] = Field(default=None, description="What kind of thing an AI operation was run on - an agent, a file, a folder, a room or a form. It is empty  on any movement that is not an AI charge.", alias="sourceType", json_schema_extra={"examples": ["Agent"]})
+    source_title: Optional[StrictStr] = Field(default=None, description="The title that thing had when the operation ran, kept as recorded, so it does not follow a later rename.  Empty under the same conditions as `sourceType`.", alias="sourceTitle", json_schema_extra={"examples": ["My AI Agent"]})
+    source_id: Optional[StrictStr] = Field(default=None, description="The identifier of that thing, to look it up in the module it belongs to. Empty under the same conditions  as `sourceType`.", alias="sourceId", json_schema_extra={"examples": ["123"]})
+    token_usage: Optional[OperationTokenUsage] = Field(default=None, description="The tokens an AI operation consumed, broken down by kind - prompt, completion, cache reads and writes,  reasoning, images. It is `null` on any movement that is not an AI charge, and on an AI charge the billing  service recorded without token counts.", alias="tokenUsage")
+    type: Optional[OperationType] = Field(default=None, description="What kind of movement this is - a payment, a charge, a refund, a correction. It is what the `type` filter  matches on, and `Unknown` covers a movement the billing service reported under a kind this build does not  recognise.")
+    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName", "sourceType", "sourceTitle", "sourceId", "tokenUsage", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,11 +90,12 @@ class OperationDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if var_date (nullable) is None
-        # and model_fields_set contains the field
-        if self.var_date is None and "var_date" in self.model_fields_set:
-            _dict['date'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of var_date
+        if self.var_date:
+            _dict['date'] = self.var_date.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of token_usage
+        if self.token_usage:
+            _dict['tokenUsage'] = self.token_usage.to_dict()
         # set to None if service (nullable) is None
         # and model_fields_set contains the field
         if self.service is None and "service" in self.model_fields_set:
@@ -127,15 +131,20 @@ class OperationDto(BaseModel):
         if self.participant_display_name is None and "participant_display_name" in self.model_fields_set:
             _dict['participantDisplayName'] = None
 
-        # set to None if agent_id (nullable) is None
+        # set to None if source_type (nullable) is None
         # and model_fields_set contains the field
-        if self.agent_id is None and "agent_id" in self.model_fields_set:
-            _dict['agentId'] = None
+        if self.source_type is None and "source_type" in self.model_fields_set:
+            _dict['sourceType'] = None
 
-        # set to None if agent_title (nullable) is None
+        # set to None if source_title (nullable) is None
         # and model_fields_set contains the field
-        if self.agent_title is None and "agent_title" in self.model_fields_set:
-            _dict['agentTitle'] = None
+        if self.source_title is None and "source_title" in self.model_fields_set:
+            _dict['sourceTitle'] = None
+
+        # set to None if source_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.source_id is None and "source_id" in self.model_fields_set:
+            _dict['sourceId'] = None
 
         return _dict
 
@@ -150,7 +159,7 @@ class OperationDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "date": obj.get("date"),
+            "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
             "service": obj.get("service"),
             "description": obj.get("description"),
             "details": obj.get("details"),
@@ -161,8 +170,10 @@ class OperationDto(BaseModel):
             "debit": obj.get("debit"),
             "participantName": obj.get("participantName"),
             "participantDisplayName": obj.get("participantDisplayName"),
-            "agentId": obj.get("agentId"),
-            "agentTitle": obj.get("agentTitle"),
+            "sourceType": obj.get("sourceType"),
+            "sourceTitle": obj.get("sourceTitle"),
+            "sourceId": obj.get("sourceId"),
+            "tokenUsage": OperationTokenUsage.from_dict(obj["tokenUsage"]) if obj.get("tokenUsage") is not None else None,
             "type": obj.get("type")
         })
         return _obj

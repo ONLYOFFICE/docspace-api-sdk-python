@@ -32,7 +32,7 @@ class AiFolderMutationResult(BaseModel):
     """
     Outcome of `createFolder` / `renameFolder` — either the persisted folder or a field-scoped error.
     """ # noqa: E501
-    success: StrictBool = Field(description="True when the folder was persisted.")
+    success: StrictBool = Field(description="True when the folder was persisted.", json_schema_extra={"examples": [True]})
     folder: Optional[AiPromptFolder] = Field(default=None, description="The persisted folder. Present on success.")
     error: Optional[AiTErrorData] = Field(default=None, description="Why the folder was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "folder", "error"]

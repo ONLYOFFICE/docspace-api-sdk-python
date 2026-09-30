@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class SetPublicDto(BaseModel):
     """
-    The public settings of the room template to set.
+    The public access to set on a room template.
     """ # noqa: E501
-    id: Annotated[int, Field(le=2147483647, strict=True, ge=1)] = Field(description="The room template ID.", json_schema_extra={"examples": [1]})
-    public: Optional[StrictBool] = Field(default=None, description="Specifies whether the room template is public or not.", json_schema_extra={"examples": [True]})
+    id: Annotated[int, Field(le=2147483647, strict=True, ge=1)] = Field(description="The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted.", json_schema_extra={"examples": [1234]})
+    public: Optional[StrictBool] = Field(default=None, description="Whether the Everyone group keeps read access to the template. True shares it with every member allowed to  create rooms; false leaves it reachable only for its owner.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["id", "public"]
 
     model_config = ConfigDict(

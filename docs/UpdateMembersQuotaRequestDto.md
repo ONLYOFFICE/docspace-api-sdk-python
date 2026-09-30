@@ -5,7 +5,7 @@ The request parameters for updating a user quota.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_ids** | **List[UUID]** | The list of user IDs. | [optional] 
+**user_ids** | **List[UUID]** | The accounts the operation applies to. System accounts are dropped from the list without an error. | [optional] 
 **quota** | [**UpdateMembersQuotaRequestDtoQuota**](UpdateMembersQuotaRequestDtoQuota.md) |  | [optional] 
 
 ## Example

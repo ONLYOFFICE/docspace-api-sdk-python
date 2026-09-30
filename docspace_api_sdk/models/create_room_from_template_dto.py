@@ -32,21 +32,21 @@ from typing_extensions import Self
 
 class CreateRoomFromTemplateDto(BaseModel):
     """
-    The parameters for creating a room from a template.
+    The parameters of a room built from a room template.
     """ # noqa: E501
-    template_id: StrictInt = Field(description="The template ID from which the room to be created.", alias="templateId", json_schema_extra={"examples": [1]})
-    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=170)]] = Field(description="The room title.", json_schema_extra={"examples": ["My Room From Template"]})
-    logo: Optional[LogoRequest] = Field(default=None, description="The logo request parameters.")
-    copy_logo: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy a logo or not.", alias="copyLogo", json_schema_extra={"examples": [False]})
-    tags: Optional[List[StrictStr]] = Field(default=None, description="The collection of tags.", json_schema_extra={"examples": [["tag1", "tag2", "tag3"]]})
-    color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The color of the room to be created.", json_schema_extra={"examples": ["#FF0000"]})
-    cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The cover of the room to be created.", json_schema_extra={"examples": ["cover1.jpg"]})
-    quota: Optional[StrictInt] = Field(default=None, description="The room quota.", json_schema_extra={"examples": [1073741824]})
-    indexing: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a room with indexing.", json_schema_extra={"examples": [True]})
-    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloads from the room.", alias="denyDownload", json_schema_extra={"examples": [False]})
-    lifetime: Optional[RoomDataLifetimeDto] = Field(default=None, description="The room data lifetime information.")
-    watermark: Optional[WatermarkRequestDto] = Field(default=None, description="The watermark settings.")
-    private: Optional[StrictBool] = Field(default=None, description="Specifies whether the room to be created is private or not.", json_schema_extra={"examples": [False]})
+    template_id: StrictInt = Field(description="The room template to copy. Templates live in their own section and are listed by `GET api/2.0/files/rooms`  with a search area of 4; an ordinary room id is rejected here.", alias="templateId", json_schema_extra={"examples": [42]})
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=170)]] = Field(description="The name of the room to create. It is sanitised and truncated the way a room title is, and a blank value is  rejected; the title of the template is not reused.", json_schema_extra={"examples": ["Project Alpha"]})
+    logo: Optional[LogoRequest] = Field(default=None, description="The picture to use as the room logo, named by the path that `POST api/2.0/files/logos` returned for an image  uploaded beforehand, plus the crop to take from it. Leaving the field out keeps the room on its cover and  colour. It is ignored when the logo of the template is copied instead.")
+    copy_logo: Optional[StrictBool] = Field(default=None, description="Whether the new room keeps the logo of the template. With it on the uploaded picture is ignored; with it off  the room starts with no logo unless one is supplied.", alias="copyLogo", json_schema_extra={"examples": [False]})
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The labels to attach to the room, by name. Names the portal tag catalogue does not hold yet are added to it,  and `GET api/2.0/files/tags` lists what already exists. Leaving the field out keeps the tags of the template.", json_schema_extra={"examples": [["Finance", "2026"]]})
+    color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type.", json_schema_extra={"examples": ["FF5733"]})
+    cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover.", json_schema_extra={"examples": ["bookmark"]})
+    quota: Optional[StrictInt] = Field(default=None, description="The storage the room may take, in bytes. It is accepted only while the per-room quota feature is on for the  portal and must stay inside the portal own limit; leaving it out lets the room follow the portal default.", json_schema_extra={"examples": [1073741824]})
+    indexing: Optional[StrictBool] = Field(default=None, description="Whether the room keeps a manual order of its contents. With it on every file and folder carries a position  that listings follow and that `PUT api/2.0/files/rooms/{id}/reorder` compacts; with it off the contents are  ordered by the sorting of the request. Leaving it out keeps the setting of the template.", json_schema_extra={"examples": [True]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Whether members without editing rights are stopped from downloading and printing the contents of the room.  They can still open the documents in the editor. Leaving it out keeps the setting of the template.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    lifetime: Optional[RoomDataLifetimeDto] = Field(default=None, description="How long files may stay in the room before they are deleted automatically. The countdown starts when the  setting is saved, and leaving the field out keeps the files forever. Leaving the field out keeps the setting  of the template.")
+    watermark: Optional[WatermarkRequestDto] = Field(default=None, description="The watermark drawn over documents opened in the room. Leaving the field out adds no watermark, and sending it  with the switch turned off removes the one the room has. Leaving the field out keeps the setting of the  template.")
+    private: Optional[StrictBool] = Field(default=None, description="Whether the room is end-to-end encrypted. Its files can then be opened only in the desktop application by  members whose encryption keys are set up, and the flag cannot be changed after the room is created.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["templateId", "title", "logo", "copyLogo", "tags", "color", "cover", "quota", "indexing", "denyDownload", "lifetime", "watermark", "private"]
 
     model_config = ConfigDict(

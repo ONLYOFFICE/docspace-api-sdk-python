@@ -33,20 +33,20 @@ from typing_extensions import Self
 
 class QuotaDto(BaseModel):
     """
-    The quota information.
+    A quota - a plan, an add-on or a wallet service - with its price, the features it switches on and their limits.
     """ # noqa: E501
-    id: StrictInt = Field(description="The quota ID.", json_schema_extra={"examples": [1]})
-    title: Optional[StrictStr] = Field(default=None, description="The quota title.", json_schema_extra={"examples": ["Basic Plan"]})
-    price: PriceDto = Field(description="The price parameters.")
-    non_profit: StrictBool = Field(description="Specifies if the quota is nonprofit or not.", alias="nonProfit", json_schema_extra={"examples": [False]})
-    free: StrictBool = Field(description="Specifies if the quota is free or not.", json_schema_extra={"examples": [True]})
-    trial: StrictBool = Field(description="Specifies if the quota is trial or not.", json_schema_extra={"examples": [False]})
-    features: Optional[List[TenantQuotaFeatureDto]] = Field(description="The list of tenant quota features.", json_schema_extra={"examples": [[{"id": "00000000-0000-0000-0000-000000000001", "title": "Premium Storage"}]]})
-    users_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The user quota.", alias="usersQuota")
-    rooms_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The room quota.", alias="roomsQuota")
-    ai_agents_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The ai agent quota.", alias="aiAgentsQuota")
-    tenant_custom_quota: Optional[TenantQuotaSettings] = Field(default=None, description="The tenant custom quota.", alias="tenantCustomQuota")
-    due_date: Optional[datetime] = Field(default=None, description="The due date.", alias="dueDate", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    id: StrictInt = Field(description="The identifier of the quota, which is what the tariff reports as a quota `id` and what a purchase names.  A negative value belongs to a built-in quota rather than one on the price list.", json_schema_extra={"examples": [1]})
+    title: Optional[StrictStr] = Field(default=None, description="The quota name in the portal language, for printing rather than matching. It is empty when this build  ships no wording for the quota, which is normal for a quota that is not on the public price list.", json_schema_extra={"examples": ["Basic Plan"]})
+    price: PriceDto = Field(description="What the quota costs, in the currency resolved for the request. Its `value` is empty for a quota that is  not sold for money, which is what `free`, `trial` and `nonProfit` describe.")
+    non_profit: StrictBool = Field(description="Whether this is the non-profit quota, which is granted rather than bought. A portal on it cannot buy any  other plan, so a catalogue asked for plans returns this one alone.", alias="nonProfit", json_schema_extra={"examples": [False]})
+    free: StrictBool = Field(description="Whether this is the free quota a portal falls back to when nothing is paid for. It has no end date and  the tightest limits of any quota.", json_schema_extra={"examples": [True]})
+    trial: StrictBool = Field(description="Whether this is the trial quota, which grants the paid limits for a while and then expires. A trial is not  extended by paying - a plan has to be bought instead.", json_schema_extra={"examples": [False]})
+    features: Optional[List[TenantQuotaFeatureDto]] = Field(description="The features the quota switches on, each with the limit it grants and, on the quota the portal is  actually on, how much of that limit is already used. A feature that is absent is off, so the list is the  whole truth about what the quota includes.", json_schema_extra={"examples": [[{"id": "00000000-0000-0000-0000-000000000001", "title": "Premium Storage"}]]})
+    users_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The per-member storage allowance an administrator has set on top of the quota, and whether it is applied  at all. It describes the live portal rather than this quota, so every entry of a catalogue listing repeats  the same values, and it is empty unless the portal is a server installation or its plan includes  statistics.", alias="usersQuota")
+    rooms_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The same kind of per-room storage override, filled in and read the same way as `usersQuota`.", alias="roomsQuota")
+    ai_agents_quota: Optional[TenantEntityQuotaSettings] = Field(default=None, description="The same kind of per-agent storage override for AI agents, filled in and read the same way as  `usersQuota`.", alias="aiAgentsQuota")
+    tenant_custom_quota: Optional[TenantQuotaSettings] = Field(default=None, description="The storage allowance an administrator has set for the portal as a whole, which caps it below what the  quota grants. Filled in under the same conditions as `usersQuota`.", alias="tenantCustomQuota")
+    due_date: Optional[datetime] = Field(default=None, description="When the quota runs out, in UTC. It is empty on a quota from the catalogue, which has no date until it is  bought, and on a quota that never expires.", alias="dueDate", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
     __properties: ClassVar[List[str]] = ["id", "title", "price", "nonProfit", "free", "trial", "features", "usersQuota", "roomsQuota", "aiAgentsQuota", "tenantCustomQuota", "dueDate"]
 
     model_config = ConfigDict(

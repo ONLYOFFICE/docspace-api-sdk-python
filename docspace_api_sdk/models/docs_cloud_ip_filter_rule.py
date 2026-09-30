@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class DocsCloudIpFilterRule(BaseModel):
     """
-    Represents the IP filter rule of a DocsCloud tenant.
+    Represents the IP filter rule of a Docs Connect tenant.
     """ # noqa: E501
     address: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The IP address.", json_schema_extra={"examples": ["127.0.0.1"]})
     allowed: Optional[StrictBool] = Field(default=None, description="Whether the IP address is allowed.", json_schema_extra={"examples": [True]})

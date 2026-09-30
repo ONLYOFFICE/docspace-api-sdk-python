@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class AccessRequestKeyDto(BaseModel):
     """
-    The encryption key granting one user access to a file.
+    The file key issued to one account.
     """ # noqa: E501
-    user_id: Optional[UUID] = Field(default=None, description="User ID", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    public_key_id: Optional[UUID] = Field(default=None, description="Public key ID", alias="publicKeyId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    private_key_enc: Optional[StrictStr] = Field(default=None, description="Encrypted private key", alias="privateKeyEnc", json_schema_extra={"examples": ["encrypted_key_string"]})
+    user_id: Optional[UUID] = Field(default=None, description="The account that is to open the file with this key; it has to have read access to the file.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    public_key_id: Optional[UUID] = Field(default=None, description="The public key the file key was encrypted with, as reported for that account by  `GET api/2.0/files/file/{fileId}/publickeys`.", alias="publicKeyId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    private_key_enc: Optional[StrictStr] = Field(default=None, description="The key of the file itself, encrypted by the client with that public key, so that the plain key never reaches  the portal.", alias="privateKeyEnc", json_schema_extra={"examples": ["encrypted_key_string"]})
     __properties: ClassVar[List[str]] = ["userId", "publicKeyId", "privateKeyEnc"]
 
     model_config = ConfigDict(

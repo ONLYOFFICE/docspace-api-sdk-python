@@ -1,12 +1,12 @@
 # EditorToolCallStateDto
-The editor tool call state. Used to run the agent flow in the editor.
+A generation the editor is expected to run as soon as the document opens, left behind by an AI agent that created  the file but not its content.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tool_name** | **str** | The tool name. | 
-**parameters** | **object** | The tool call parameters. | 
+**tool_name** | **str** | Which generation to run, which also decides the shape of the parameters below. | 
+**parameters** | [**EditorToolCallParametersDto**](EditorToolCallParametersDto.md) | The arguments of the generation named above. | 
 
 ## Example
 

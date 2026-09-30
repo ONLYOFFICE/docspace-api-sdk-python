@@ -29,13 +29,13 @@ from typing_extensions import Self
 
 class RoomInvitationRequest(BaseModel):
     """
-    The request parameters for inviting users to the room.
+    One batch of membership changes for a room.
     """ # noqa: E501
-    invitations: Optional[List[RoomInvitation]] = Field(default=None, description="The collection of invitation parameters.", json_schema_extra={"examples": [[{"id": "00000000-0000-0000-0000-000000000000", "access": 1}]]})
-    notify: Optional[StrictBool] = Field(default=None, description="Specifies whether to notify users about the shared room or not.", json_schema_extra={"examples": [True]})
-    message: Optional[StrictStr] = Field(default=None, description="The message to send when notifying about the shared room.", json_schema_extra={"examples": ["You have been invited to the room"]})
-    culture: Optional[StrictStr] = Field(default=None, description="The language of the room invitation.", json_schema_extra={"examples": ["en-US"]})
-    force: Optional[StrictBool] = Field(default=None, description="Specifies whether to forcibly delete a user with form roles from the room.", json_schema_extra={"examples": [False]})
+    invitations: Optional[List[RoomInvitation]] = Field(default=None, description="Who is added, changed or removed, one entry per subject. The same subject named twice keeps the level of the  last entry, and an empty list is accepted and changes nothing.", json_schema_extra={"examples": [[{"id": "e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b", "access": 10}]]})
+    notify: Optional[StrictBool] = Field(default=None, description="Whether the subjects that gained access are told about it by email. With it off the change is silent, which is  the usual choice when membership is synchronised from another system.", json_schema_extra={"examples": [True]})
+    message: Optional[StrictStr] = Field(default=None, description="The line added to the invitation email. It is used only while the notification is on, and it reaches nobody  whose access was removed.", json_schema_extra={"examples": ["Please review the contract by Friday"]})
+    culture: Optional[StrictStr] = Field(default=None, description="The language of the invitation email, as a portal culture name such as en-US. Leaving it out sends each  message in the language of its recipient.", json_schema_extra={"examples": ["en-US"]})
+    force: Optional[StrictBool] = Field(default=None, description="Whether a member who still holds a role in an unfinished form is removed anyway. With it off such a removal is  refused and reported through the error of the answer, so the form can be reassigned first.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["invitations", "notify", "message", "culture", "force"]
 
     model_config = ConfigDict(

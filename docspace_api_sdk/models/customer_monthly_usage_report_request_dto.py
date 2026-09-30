@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class CustomerMonthlyUsageReportRequestDto(BaseModel):
     """
-    The request parameters for generating a customer monthly usage report.
+    The period covered by the monthly wallet spending report.
     """ # noqa: E501
-    start_date: Optional[datetime] = Field(default=None, description="The report start date.", alias="startDate", json_schema_extra={"examples": ["2025-01-01T00:00:00Z"]})
-    end_date: Optional[datetime] = Field(default=None, description="The report end date.", alias="endDate", json_schema_extra={"examples": ["2025-12-31T23:59:59Z"]})
+    start_date: Optional[datetime] = Field(default=None, description="The beginning of the reported period, inclusive. The months are cut in the portal time zone rather than in  UTC, so spending at the turn of a month falls where the portal sees it; defaults to the portal creation date.", alias="startDate", json_schema_extra={"examples": ["2025-01-01T00:00:00Z"]})
+    end_date: Optional[datetime] = Field(default=None, description="The end of the reported period, inclusive. Cut in the portal time zone in the same way as `startDate`, and  defaults to the moment the call is made.", alias="endDate", json_schema_extra={"examples": ["2025-12-31T23:59:59Z"]})
     __properties: ClassVar[List[str]] = ["startDate", "endDate"]
 
     model_config = ConfigDict(

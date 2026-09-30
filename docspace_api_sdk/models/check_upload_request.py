@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class CheckUploadRequest(BaseModel):
     """
-    The request parameters for checking file uploads.
+    The names to test against the files the folder already holds.
     """ # noqa: E501
-    files_title: Optional[List[StrictStr]] = Field(default=None, description="The list of file titles.", alias="filesTitle", json_schema_extra={"examples": [["file1.docx", "file2.pdf", "file3.xlsx"]]})
+    files_title: Optional[List[StrictStr]] = Field(default=None, description="The names to test, extensions included, spelled as they would be sent to the upload. Matching ignores case,  and a name repeated in the list is answered once.", alias="filesTitle", json_schema_extra={"examples": [["file1.docx", "file2.pdf", "file3.xlsx"]]})
     __properties: ClassVar[List[str]] = ["filesTitle"]
 
     model_config = ConfigDict(

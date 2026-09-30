@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class PluginsDto(BaseModel):
     """
-    The plugins parameters.
+    What the installation allows to be done with web plugins.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the plugins are enabled or not.", json_schema_extra={"examples": [True]})
-    upload: Optional[StrictBool] = Field(default=None, description="Specifies if the plugins can be uploaded or not.", json_schema_extra={"examples": [True]})
-    delete: Optional[StrictBool] = Field(default=None, description="Specifies if the plugins can be deleted or not.", json_schema_extra={"examples": [True]})
+    enabled: Optional[StrictBool] = Field(default=None, description="Whether web plugins run on this portal at all. While it is `false` the operations under  `api/2.0/settings/webplugins` are of no use, whatever the other two flags say. All three are `false`  unless the installation switched plugins on in its configuration.", json_schema_extra={"examples": [True]})
+    upload: Optional[StrictBool] = Field(default=None, description="Whether an administrator may add a plugin of their own through  `POST api/2.0/settings/webplugins`. While it is `false` only the plugins that ship with the installation  are available.", json_schema_extra={"examples": [True]})
+    delete: Optional[StrictBool] = Field(default=None, description="Whether an added plugin may be removed again through `DELETE api/2.0/settings/webplugins/{name}`. The  plugins that ship with the installation cannot be removed regardless of this flag.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["enabled", "upload", "delete"]
 
     model_config = ConfigDict(

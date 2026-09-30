@@ -28,14 +28,14 @@ from typing_extensions import Self
 
 class LogoConfigDto(BaseModel):
     """
-    The logo config parameters.
+    The logo the editor shows, resolved for the file type and the layout of this opening.
     """ # noqa: E501
-    image: Optional[StrictStr] = Field(default=None, description="The image of the logo.", json_schema_extra={"examples": ["http://localhost/logo.png"]})
-    image_dark: Optional[StrictStr] = Field(default=None, description="The dark image of the logo.", alias="imageDark", json_schema_extra={"examples": ["http://localhost/logo-dark.png"]})
-    image_light: Optional[StrictStr] = Field(default=None, description="The light image of the logo.", alias="imageLight", json_schema_extra={"examples": ["http://localhost/logo-light.png"]})
-    image_embedded: Optional[StrictStr] = Field(default=None, description="The embedded image of the logo.", alias="imageEmbedded", json_schema_extra={"examples": ["http://localhost/logo-embedded.png"]})
-    url: Optional[StrictStr] = Field(default=None, description="The url link of the logo.", json_schema_extra={"examples": ["http://localhost"]})
-    visible: Optional[StrictBool] = Field(default=None, description="Specifies if the logo is visible.", json_schema_extra={"examples": [True]})
+    image: Optional[StrictStr] = Field(default=None, description="The logo for the current layout and file type, as the portal branding defines it.", json_schema_extra={"examples": ["https://portal.example.com/logo/editor.png"]})
+    image_dark: Optional[StrictStr] = Field(default=None, description="The variant for a dark interface theme.", alias="imageDark", json_schema_extra={"examples": ["https://portal.example.com/logo/editor-dark.png"]})
+    image_light: Optional[StrictStr] = Field(default=None, description="The variant for a light interface theme.", alias="imageLight", json_schema_extra={"examples": ["https://portal.example.com/logo/editor-light.png"]})
+    image_embedded: Optional[StrictStr] = Field(default=None, description="The variant for the framed viewer. It is empty in every layout but the embedded one.", alias="imageEmbedded", json_schema_extra={"examples": ["https://portal.example.com/logo/editor-embedded.png"]})
+    url: Optional[StrictStr] = Field(default=None, description="Where clicking the logo takes the user.", json_schema_extra={"examples": ["https://portal.example.com"]})
+    visible: Optional[StrictBool] = Field(default=None, description="Whether the logo is shown at all; the mobile layout hides it.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["image", "imageDark", "imageLight", "imageEmbedded", "url", "visible"]
 
     model_config = ConfigDict(

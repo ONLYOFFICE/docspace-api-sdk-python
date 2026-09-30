@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class WebhooksConfigWithStatusDto(BaseModel):
     """
-    The webhook configuration with its status.
+    A webhook subscription together with how its last delivery ended.
     """ # noqa: E501
-    configs: Optional[WebhooksConfigDto] = Field(default=None, description="The webhook configuration.")
-    status: Optional[StrictInt] = Field(default=None, description="The webhook status.", json_schema_extra={"examples": [1]})
+    configs: Optional[WebhooksConfigDto] = Field(default=None, description="The subscription itself. Despite the plural name it is one subscription, not a list.")
+    status: Optional[StrictInt] = Field(default=None, description="The HTTP status code the target answered on the last attempt. `0` means nothing has been delivered yet,  which is not the same as a failure.", json_schema_extra={"examples": [200]})
     __properties: ClassVar[List[str]] = ["configs", "status"]
 
     model_config = ConfigDict(

@@ -5,7 +5,7 @@ The request for setting a group manager.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **UUID** | The user ID. | 
+**user_id** | **UUID** | The account to make the manager. It has to exist, otherwise the operation answers 404, and it is added to the  group at the same time, so it does not have to be a member beforehand. | 
 
 ## Example
 

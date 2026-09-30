@@ -29,15 +29,15 @@ from typing_extensions import Self
 
 class TenantQuotaFeatureDto(BaseModel):
     """
-    The tenant quota feature parameters.
+    One feature a quota switches on, with the limit it grants and how much of that limit is used.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The ID of the tenant quota feature.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
-    title: Optional[StrictStr] = Field(default=None, description="The title of the tenant quota feature.", json_schema_extra={"examples": ["Premium Storage"]})
-    image: Optional[StrictStr] = Field(default=None, description="The image URL of the tenant quota feature.", json_schema_extra={"examples": ["/images/premium-storage.png"]})
+    id: Optional[StrictStr] = Field(default=None, description="The stable key of the feature - `total_size`, `manager`, `room`, `backup` and so on. It is the value to  branch on, since `title` is prose in the portal language.", json_schema_extra={"examples": ["total_size"]})
+    title: Optional[StrictStr] = Field(default=None, description="The feature described in the portal language, with its limit already substituted into the sentence, so it  can be printed as it is. It is empty when this build ships no wording for the feature.", json_schema_extra={"examples": ["Premium Storage"]})
+    image: Optional[StrictStr] = Field(default=None, description="The feature's icon as SVG markup to render inline - not a URL to fetch. It is filled in only when the  quota comes from the catalogue, and left empty on the quota the portal is actually on, on a feature that  this quota switches off, and on a feature that ships no icon.", json_schema_extra={"examples": ["<svg viewBox=\"0 0 24 24\"><path d=\"...\"/></svg>"]})
     value: Optional[Any] = None
-    type: Optional[StrictStr] = Field(default=None, description="The type of the tenant quota feature.", json_schema_extra={"examples": ["Storage"]})
-    used: Optional[FeatureUsedDto] = Field(default=None, description="The used space parameters of the tenant quota feature.")
-    price_title: Optional[StrictStr] = Field(default=None, description="The price title of the tenant quota feature.", alias="priceTitle", json_schema_extra={"examples": ["$9.99/month"]})
+    type: Optional[StrictStr] = Field(default=None, description="How to read `value` and `used`: `size` for bytes, `count` for a number of things, `flag` for a feature  that is merely on or off.", json_schema_extra={"examples": ["size"]})
+    used: Optional[FeatureUsedDto] = Field(default=None, description="How much of the limit is already used. It is present only on the quota the portal is actually on, and  only for a feature whose consumption is counted; a guest is shown none of these figures and a plain member  only the one for total size, so an absent value can mean the caller may not see it rather than that  nothing is used.")
+    price_title: Optional[StrictStr] = Field(default=None, description="What the feature is charged as, in the portal language - for instance the per-unit price of an add-on. It  is filled in only for a feature that costs money on top of the plan.", alias="priceTitle", json_schema_extra={"examples": ["$9.99/month"]})
     __properties: ClassVar[List[str]] = ["id", "title", "image", "value", "type", "used", "priceTitle"]
 
     model_config = ConfigDict(

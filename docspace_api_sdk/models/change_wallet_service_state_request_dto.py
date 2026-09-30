@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class ChangeWalletServiceStateRequestDto(BaseModel):
     """
-    The request parameters for changing the tenant wallet service state.
+    Which wallet service is switched, and which way.
     """ # noqa: E501
-    service: Optional[TenantWalletService] = Field(default=None, description="The wallet service type.")
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether the wallet service is enabled.", json_schema_extra={"examples": [True]})
+    service: Optional[TenantWalletService] = Field(default=None, description="The service being switched, given by its catalogue name. Switching it on only makes it available to the  portal; its units are still bought with `PUT api/2.0/portal/payment/updatewallet`.")
+    enabled: Optional[StrictBool] = Field(default=None, description="Which way the service is switched: `true` makes it available to the portal, `false` withdraws it. Setting the  state the service already has changes nothing.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["service", "enabled"]
 
     model_config = ConfigDict(

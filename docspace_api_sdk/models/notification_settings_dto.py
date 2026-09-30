@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class NotificationSettingsDto(BaseModel):
     """
-    The notification settings parameters.
+    Whether one kind of notification is switched on for the calling user.
     """ # noqa: E501
-    type: Optional[NotificationType] = Field(default=None, description="The notification type.")
-    is_enabled: Optional[StrictBool] = Field(default=None, description="Specifies if the notification type is enabled or not.", alias="isEnabled", json_schema_extra={"examples": [True]})
+    type: Optional[NotificationType] = Field(default=None, description="Which kind of notification the flag belongs to, echoed from the request. It is published as a number:  badges, room activity, the daily feed, and the tips.")
+    is_enabled: Optional[StrictBool] = Field(default=None, description="Whether the caller receives that kind of notification. It describes the caller's own account and nobody  else's; a fresh account has the badges on and the other three off, because those are subscriptions that  only `POST api/2.0/settings/notification` creates.", alias="isEnabled", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["type", "isEnabled"]
 
     model_config = ConfigDict(

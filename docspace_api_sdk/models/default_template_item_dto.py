@@ -29,14 +29,14 @@ from typing_extensions import Self
 
 class DefaultTemplateItemDto(BaseModel):
     """
-    Default template setting
+    The blank document configured for one extension.
     """ # noqa: E501
-    selected_file: Optional[StrictInt] = Field(default=None, description="File id to use as a default template", alias="selectedFile", json_schema_extra={"examples": [123]})
-    file_extension: Optional[StrictStr] = Field(description="Extension of a default template", alias="fileExtension", json_schema_extra={"examples": [".docx"]})
-    file_title: Optional[StrictStr] = Field(default=None, description="Title of a default template", alias="fileTitle", json_schema_extra={"examples": ["Default Template"]})
-    last_modified: Optional[datetime] = Field(default=None, description="Last modified date of a default template", alias="lastModified", json_schema_extra={"examples": ["2025-01-01T00:00:00"]})
-    file_size: Optional[StrictInt] = Field(default=None, description="Filesize (in bytes) of a default template", alias="fileSize", json_schema_extra={"examples": [1024]})
-    view_url: Optional[StrictStr] = Field(default=None, description="View url of a default template", alias="viewUrl", json_schema_extra={"examples": ["http://localhost/template/view"]})
+    selected_file: Optional[StrictInt] = Field(default=None, description="The copy stored in the portal that serves as the blank for this extension. A null means no custom blank has  been chosen and new documents start from the portal's built-in one; the other fields of the entry are then  empty as well.", alias="selectedFile", json_schema_extra={"examples": [123]})
+    file_extension: Optional[StrictStr] = Field(description="The extension the entry describes, in lower case with the leading dot. It is the value to send back when this  blank is replaced or reset.", alias="fileExtension", json_schema_extra={"examples": [".docx"]})
+    file_title: Optional[StrictStr] = Field(default=None, description="The name the custom blank was copied under, useful for showing which document was chosen. Empty while the  built-in blank is in use.", alias="fileTitle", json_schema_extra={"examples": ["Company letter.docx"]})
+    last_modified: Optional[datetime] = Field(default=None, description="When the custom blank was last changed, in the time zone of the portal. Null while the built-in blank is in  use.", alias="lastModified", json_schema_extra={"examples": ["2026-03-18T11:42:07"]})
+    file_size: Optional[StrictInt] = Field(default=None, description="The size of the custom blank in bytes. Null while the built-in blank is in use.", alias="fileSize", json_schema_extra={"examples": [1024]})
+    view_url: Optional[StrictStr] = Field(default=None, description="The address the custom blank can be downloaded from, already carrying the access key of the calling account.  Empty while the built-in blank is in use.", alias="viewUrl", json_schema_extra={"examples": ["https://example.com/filehandler.ashx?action=download&fileid=123"]})
     __properties: ClassVar[List[str]] = ["selectedFile", "fileExtension", "fileTitle", "lastModified", "fileSize", "viewUrl"]
 
     model_config = ConfigDict(

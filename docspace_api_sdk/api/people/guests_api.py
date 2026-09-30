@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
@@ -64,7 +64,7 @@ class GuestsApi:
     ) -> EmployeeFullWrapper:
         """Approve a guest sharing link
 
-        Approves a guest sharing link and returns the detailed information about a guest.
+        Accepts a guest that another member shared, which links that guest to the calling account and makes it  visible in the caller's list of guests.  Everything the operation needs comes from the confirmation token of the link produced by  `GET api/2.0/people/guests/{userid}/share`: the request body is not read at all, so there is nothing to fill  in, and an expired or already used token is answered with 401.  The caller has to be a room admin or a DocSpace admin; a member or a guest gets 403.  The account the token names has to exist and still be a guest, otherwise the operation answers 404 or 400.  The call is idempotent: a guest that is already linked to the caller is simply returned again.  The answer is the full profile of the guest.
 
         :param email_member_request_dto:
         :type email_member_request_dto: EmailMemberRequestDto
@@ -100,12 +100,12 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
-            '404': None,
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -140,7 +140,7 @@ class GuestsApi:
     ) -> ApiResponse[EmployeeFullWrapper]:
         """Approve a guest sharing link
 
-        Approves a guest sharing link and returns the detailed information about a guest.
+        Accepts a guest that another member shared, which links that guest to the calling account and makes it  visible in the caller's list of guests.  Everything the operation needs comes from the confirmation token of the link produced by  `GET api/2.0/people/guests/{userid}/share`: the request body is not read at all, so there is nothing to fill  in, and an expired or already used token is answered with 401.  The caller has to be a room admin or a DocSpace admin; a member or a guest gets 403.  The account the token names has to exist and still be a guest, otherwise the operation answers 404 or 400.  The call is idempotent: a guest that is already linked to the caller is simply returned again.  The answer is the full profile of the guest.
 
         :param email_member_request_dto:
         :type email_member_request_dto: EmailMemberRequestDto
@@ -176,12 +176,12 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
-            '404': None,
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -216,7 +216,7 @@ class GuestsApi:
     ) -> RESTResponseType:
         """Approve a guest sharing link
 
-        Approves a guest sharing link and returns the detailed information about a guest.
+        Accepts a guest that another member shared, which links that guest to the calling account and makes it  visible in the caller's list of guests.  Everything the operation needs comes from the confirmation token of the link produced by  `GET api/2.0/people/guests/{userid}/share`: the request body is not read at all, so there is nothing to fill  in, and an expired or already used token is answered with 401.  The caller has to be a room admin or a DocSpace admin; a member or a guest gets 403.  The account the token names has to exist and still be a guest, otherwise the operation answers 404 or 400.  The call is idempotent: a guest that is already linked to the caller is simply returned again.  The answer is the full profile of the guest.
 
         :param email_member_request_dto:
         :type email_member_request_dto: EmailMemberRequestDto
@@ -252,12 +252,12 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullWrapper",
-            '404': None,
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -371,9 +371,9 @@ class GuestsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Delete guests
+        """Remove guest relations
 
-        Deletes guests from the list and excludes them from rooms to which they were invited.
+        Removes the listed guests from the caller's own list of guests and withdraws the access the caller had  granted them.  It does not delete the accounts: each guest keeps its profile and any access other members gave it, and only  the link to the caller and the caller's own shares disappear.  The caller has to be a room admin or a DocSpace admin, and every listed account has to exist, be an active  guest and be one of the caller's own guests - a single entry that is not rejects the whole call with 403 and  changes nothing.  The call returns no body; read `GET api/2.0/people/filter` with `area` set to `Guests` to see what is left.  To delete a guest account for good, disable it and then use `DELETE api/2.0/people/{userid}`.
 
         :param update_members_request_dto:
         :type update_members_request_dto: UpdateMembersRequestDto
@@ -409,11 +409,11 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -446,9 +446,9 @@ class GuestsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Delete guests
+        """Remove guest relations
 
-        Deletes guests from the list and excludes them from rooms to which they were invited.
+        Removes the listed guests from the caller's own list of guests and withdraws the access the caller had  granted them.  It does not delete the accounts: each guest keeps its profile and any access other members gave it, and only  the link to the caller and the caller's own shares disappear.  The caller has to be a room admin or a DocSpace admin, and every listed account has to exist, be an active  guest and be one of the caller's own guests - a single entry that is not rejects the whole call with 403 and  changes nothing.  The call returns no body; read `GET api/2.0/people/filter` with `area` set to `Guests` to see what is left.  To delete a guest account for good, disable it and then use `DELETE api/2.0/people/{userid}`.
 
         :param update_members_request_dto:
         :type update_members_request_dto: UpdateMembersRequestDto
@@ -484,11 +484,11 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -521,9 +521,9 @@ class GuestsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete guests
+        """Remove guest relations
 
-        Deletes guests from the list and excludes them from rooms to which they were invited.
+        Removes the listed guests from the caller's own list of guests and withdraws the access the caller had  granted them.  It does not delete the accounts: each guest keeps its profile and any access other members gave it, and only  the link to the caller and the caller's own shares disappear.  The caller has to be a room admin or a DocSpace admin, and every listed account has to exist, be an active  guest and be one of the caller's own guests - a single entry that is not rejects the whole call with 403 and  changes nothing.  The call returns no body; read `GET api/2.0/people/filter` with `area` set to `Guests` to see what is left.  To delete a guest account for good, disable it and then use `DELETE api/2.0/people/{userid}`.
 
         :param update_members_request_dto:
         :type update_members_request_dto: UpdateMembersRequestDto
@@ -559,11 +559,11 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

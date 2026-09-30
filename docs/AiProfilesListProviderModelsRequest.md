@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **provider_type** | [**AiProviderType**](AiProviderType.md) | Provider whose catalog to list. | 
 **base_url** | **str** | Provider API base URL. | 
-**api_key** | **str** | Provider API key. | 
+**api_key** | **str** | Provider API key. Omit it for a provider that needs none; the request is then made without one. | [optional] 
 
 ## Example
 

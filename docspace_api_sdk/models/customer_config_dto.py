@@ -28,14 +28,14 @@ from typing_extensions import Self
 
 class CustomerConfigDto(BaseModel):
     """
-    The customer config parameters.
+    The branding of the organization running the portal, as the editor About panel shows it. It is reported on a  server installation only.
     """ # noqa: E501
-    address: Optional[StrictStr] = Field(default=None, description="The address of the customer configuration.", json_schema_extra={"examples": ["123 Main Street, City"]})
-    logo: Optional[StrictStr] = Field(default=None, description="The logo of the customer configuration.", json_schema_extra={"examples": ["http://localhost/customer-logo.png"]})
-    logo_dark: Optional[StrictStr] = Field(default=None, description="The dark logo of the customer configuration.", alias="logoDark", json_schema_extra={"examples": ["http://localhost/customer-logo-dark.png"]})
-    mail: Optional[StrictStr] = Field(default=None, description="The mail address of the customer configuration.", json_schema_extra={"examples": ["contact@example.com"]})
-    name: Optional[StrictStr] = Field(default=None, description="The name of the customer configuration.", json_schema_extra={"examples": ["ONLYOFFICE"]})
-    www: Optional[StrictStr] = Field(default=None, description="The site web address of the customer configuration.", json_schema_extra={"examples": ["https://www.example.com"]})
+    address: Optional[StrictStr] = Field(default=None, description="The postal address from the portal branding settings; empty when none was entered.", json_schema_extra={"examples": ["20A-6 Ernesta Birznieka-Upisha Street, Riga"]})
+    logo: Optional[StrictStr] = Field(default=None, description="The About-panel logo of the organization.", json_schema_extra={"examples": ["https://portal.example.com/logo/about.png"]})
+    logo_dark: Optional[StrictStr] = Field(default=None, description="The About-panel logo for a dark interface theme.", alias="logoDark", json_schema_extra={"examples": ["https://portal.example.com/logo/about-dark.png"]})
+    mail: Optional[StrictStr] = Field(default=None, description="The contact address from the portal branding settings.", json_schema_extra={"examples": ["support@example.com"]})
+    name: Optional[StrictStr] = Field(default=None, description="The organization name shown in the editor.", json_schema_extra={"examples": ["Example Ltd"]})
+    www: Optional[StrictStr] = Field(default=None, description="The website of the organization.", json_schema_extra={"examples": ["https://www.example.com"]})
     __properties: ClassVar[List[str]] = ["address", "logo", "logoDark", "mail", "name", "www"]
 
     model_config = ConfigDict(

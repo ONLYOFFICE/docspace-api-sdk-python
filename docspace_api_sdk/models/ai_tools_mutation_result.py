@@ -31,7 +31,7 @@ class AiToolsMutationResult(BaseModel):
     """
     Outcome of an MCP-server CRUD call. Either success or a field-scoped error suitable for the settings form.
     """ # noqa: E501
-    success: StrictBool = Field(description="True when the MCP server was persisted.")
+    success: StrictBool = Field(description="True when the MCP server was persisted.", json_schema_extra={"examples": [True]})
     error: Optional[AiTErrorData] = Field(default=None, description="Why the MCP server was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "error"]
 

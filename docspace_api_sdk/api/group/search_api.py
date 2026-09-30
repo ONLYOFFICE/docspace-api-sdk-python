@@ -18,13 +18,14 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.group_array_wrapper import GroupArrayWrapper
+from docspace_api_sdk.models.error_api_response import ErrorApiResponse
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -48,11 +49,11 @@ class SearchApi:
     @validate_call
     def get_groups_with_files_shared(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")], Annotated[StrictStr, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")]],
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group the caller may grant access to.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,19 +67,19 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupArrayWrapper:
-        """Get groups with file sharing settings
+        """Search groups for a file
 
-        Returns groups with their sharing settings for a file with the ID specified in request.
+        Returns the groups that can be given access to the file with the ID given in the route, and reports for each  of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the file yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/file/{id}/search`.
 
-        :param id: The group ID. (required)
-        :type id: int
-        :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
+        :param id: The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. (required)
+        :type id: Union[int, str]
+        :param exclude_shared: Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
         :type exclude_shared: bool
-        :param count: The number of groups to retrieve in the request.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :param filter_value: The text to match against the group name. Omit it to get every group the caller may grant access to.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -117,6 +118,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -139,11 +141,11 @@ class SearchApi:
     @validate_call
     def get_groups_with_files_shared_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")], Annotated[StrictStr, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")]],
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group the caller may grant access to.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -157,19 +159,19 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GroupArrayWrapper]:
-        """Get groups with file sharing settings
+        """Search groups for a file
 
-        Returns groups with their sharing settings for a file with the ID specified in request.
+        Returns the groups that can be given access to the file with the ID given in the route, and reports for each  of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the file yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/file/{id}/search`.
 
-        :param id: The group ID. (required)
-        :type id: int
-        :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
+        :param id: The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. (required)
+        :type id: Union[int, str]
+        :param exclude_shared: Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
         :type exclude_shared: bool
-        :param count: The number of groups to retrieve in the request.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :param filter_value: The text to match against the group name. Omit it to get every group the caller may grant access to.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -208,6 +210,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -230,11 +233,11 @@ class SearchApi:
     @validate_call
     def get_groups_with_files_shared_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")], Annotated[StrictStr, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")]],
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group the caller may grant access to.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -248,19 +251,19 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get groups with file sharing settings
+        """Search groups for a file
 
-        Returns groups with their sharing settings for a file with the ID specified in request.
+        Returns the groups that can be given access to the file with the ID given in the route, and reports for each  of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the file yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/file/{id}/search`.
 
-        :param id: The group ID. (required)
-        :type id: int
-        :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
+        :param id: The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. (required)
+        :type id: Union[int, str]
+        :param exclude_shared: Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
         :type exclude_shared: bool
-        :param count: The number of groups to retrieve in the request.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :param filter_value: The text to match against the group name. Omit it to get every group the caller may grant access to.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -299,6 +302,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -409,11 +413,11 @@ class SearchApi:
     @validate_call
     def get_groups_with_folders_shared(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")], Annotated[StrictStr, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")]],
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group the caller may grant access to.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -427,19 +431,19 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupArrayWrapper:
-        """Get groups with folder sharing settings
+        """Search groups for a folder
 
-        Returns groups with their sharing settings in a folder with the ID specified in request.
+        Returns the groups that can be given access to the folder with the ID given in the route, and reports for  each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the folder yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/folder/{id}/search`.
 
-        :param id: The group ID. (required)
-        :type id: int
-        :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
+        :param id: The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. (required)
+        :type id: Union[int, str]
+        :param exclude_shared: Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
         :type exclude_shared: bool
-        :param count: The number of groups to retrieve in the request.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :param filter_value: The text to match against the group name. Omit it to get every group the caller may grant access to.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -478,6 +482,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -500,11 +505,11 @@ class SearchApi:
     @validate_call
     def get_groups_with_folders_shared_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")], Annotated[StrictStr, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")]],
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group the caller may grant access to.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -518,19 +523,19 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GroupArrayWrapper]:
-        """Get groups with folder sharing settings
+        """Search groups for a folder
 
-        Returns groups with their sharing settings in a folder with the ID specified in request.
+        Returns the groups that can be given access to the folder with the ID given in the route, and reports for  each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the folder yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/folder/{id}/search`.
 
-        :param id: The group ID. (required)
-        :type id: int
-        :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
+        :param id: The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. (required)
+        :type id: Union[int, str]
+        :param exclude_shared: Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
         :type exclude_shared: bool
-        :param count: The number of groups to retrieve in the request.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :param filter_value: The text to match against the group name. Omit it to get every group the caller may grant access to.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -569,6 +574,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -591,11 +597,11 @@ class SearchApi:
     @validate_call
     def get_groups_with_folders_shared_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")], Annotated[StrictStr, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")]],
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group the caller may grant access to.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -609,19 +615,19 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get groups with folder sharing settings
+        """Search groups for a folder
 
-        Returns groups with their sharing settings in a folder with the ID specified in request.
+        Returns the groups that can be given access to the folder with the ID given in the route, and reports for  each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the folder yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/folder/{id}/search`.
 
-        :param id: The group ID. (required)
-        :type id: int
-        :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
+        :param id: The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. (required)
+        :type id: Union[int, str]
+        :param exclude_shared: Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
         :type exclude_shared: bool
-        :param count: The number of groups to retrieve in the request.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :param filter_value: The text to match against the group name. Omit it to get every group the caller may grant access to.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -660,6 +666,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -770,11 +777,11 @@ class SearchApi:
     @validate_call
     def get_groups_with_rooms_shared(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")], Annotated[StrictStr, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")]],
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group the caller may grant access to.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -788,19 +795,19 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupArrayWrapper:
-        """Get groups with room sharing settings
+        """Search groups for a room
 
-        Returns groups with their sharing settings in a room with the ID specified in request.
+        Returns the groups that can be given access to the room with the ID given in the route, and reports for each  of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the room yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/room/{id}/search`.
 
-        :param id: The group ID. (required)
-        :type id: int
-        :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
+        :param id: The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. (required)
+        :type id: Union[int, str]
+        :param exclude_shared: Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
         :type exclude_shared: bool
-        :param count: The number of groups to retrieve in the request.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :param filter_value: The text to match against the group name. Omit it to get every group the caller may grant access to.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -839,6 +846,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -861,11 +869,11 @@ class SearchApi:
     @validate_call
     def get_groups_with_rooms_shared_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")], Annotated[StrictStr, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")]],
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group the caller may grant access to.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -879,19 +887,19 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GroupArrayWrapper]:
-        """Get groups with room sharing settings
+        """Search groups for a room
 
-        Returns groups with their sharing settings in a room with the ID specified in request.
+        Returns the groups that can be given access to the room with the ID given in the route, and reports for each  of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the room yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/room/{id}/search`.
 
-        :param id: The group ID. (required)
-        :type id: int
-        :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
+        :param id: The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. (required)
+        :type id: Union[int, str]
+        :param exclude_shared: Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
         :type exclude_shared: bool
-        :param count: The number of groups to retrieve in the request.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :param filter_value: The text to match against the group name. Omit it to get every group the caller may grant access to.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -930,6 +938,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -952,11 +961,11 @@ class SearchApi:
     @validate_call
     def get_groups_with_rooms_shared_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        exclude_shared: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude the group sharing settings from the response.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of groups to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which to begin retrieving groups with their sharing settings.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for retrieving groups with their sharing settings.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")], Annotated[StrictStr, Field(description="The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.")]],
+        exclude_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the group name. Omit it to get every group the caller may grant access to.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -970,19 +979,19 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get groups with room sharing settings
+        """Search groups for a room
 
-        Returns groups with their sharing settings in a room with the ID specified in request.
+        Returns the groups that can be given access to the room with the ID given in the route, and reports for each  of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the room yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/room/{id}/search`.
 
-        :param id: The group ID. (required)
-        :type id: int
-        :param exclude_shared: Specifies whether to exclude the group sharing settings from the response.
+        :param id: The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage. (required)
+        :type id: Union[int, str]
+        :param exclude_shared: Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
         :type exclude_shared: bool
-        :param count: The number of groups to retrieve in the request.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index from which to begin retrieving groups with their sharing settings.
+        :param start_index: The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
         :type start_index: int
-        :param filter_value: The text used as a filter for retrieving groups with their sharing settings.
+        :param filter_value: The text to match against the group name. Omit it to get every group the caller may grant access to.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1021,6 +1030,7 @@ class SearchApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",

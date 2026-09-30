@@ -74,9 +74,9 @@ class TenantQuota(BaseModel):
     count_ai_agent: Optional[StrictInt] = Field(default=None, description="The number of AI agents.", alias="countAIAgent", json_schema_extra={"examples": [5]})
     ai_tools: Optional[StrictBool] = Field(default=None, description="Specifies if the AI tools enabled as a wallet service or not.", alias="aiTools", json_schema_extra={"examples": [True]})
     ai_search: Optional[StrictBool] = Field(default=None, description="Specifies if the AI search enabled as a wallet service or not.", alias="aiSearch", json_schema_extra={"examples": [True]})
-    docs_cloud: Optional[StrictInt] = Field(default=None, description="The number of DocsCloud users.", alias="docsCloud", json_schema_extra={"examples": [True]})
-    docs_cloud_dev_pack: Optional[StrictBool] = Field(default=None, description="Specifies if the DocsCloudDevPack enabled or not.", alias="docsCloudDevPack", json_schema_extra={"examples": [True]})
-    docs_cloud_trial: Optional[StrictBool] = Field(default=None, description="Specifies if the DocsCloudTrial enabled or not.", alias="docsCloudTrial", json_schema_extra={"examples": [True]})
+    docs_cloud: Optional[StrictInt] = Field(default=None, description="The number of Docs Connect users.", alias="docsCloud", json_schema_extra={"examples": [True]})
+    docs_cloud_dev_pack: Optional[StrictBool] = Field(default=None, description="Specifies if the Docs Connect Dev Pack enabled or not.", alias="docsCloudDevPack", json_schema_extra={"examples": [True]})
+    docs_cloud_trial: Optional[StrictBool] = Field(default=None, description="Specifies if the Docs Connect trial enabled or not.", alias="docsCloudTrial", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["tenantId", "name", "price", "priceCurrencySymbol", "priceISOCurrencySymbol", "productId", "serviceName", "serviceGroup", "visible", "wallet", "additional", "dueDate", "features", "maxFileSize", "maxTotalSize", "countUser", "countRoomAdmin", "usersInRoom", "countRoom", "nonProfit", "trial", "free", "update", "audit", "docsEdition", "ldap", "sso", "statistic", "branding", "customization", "lifetime", "automationApi", "custom", "restore", "oauth", "contentSearch", "thirdParty", "year", "countFreeBackup", "backup", "countAIAgent", "aiTools", "aiSearch", "docsCloud", "docsCloudDevPack", "docsCloudTrial"]
 
     model_config = ConfigDict(

@@ -30,11 +30,11 @@ from typing_extensions import Self
 
 class UpdateRoomGroupRequest(BaseModel):
     """
-    The changes to apply to a room group: its name and the rooms to add or remove.
+    The changes to apply to a room group: a new name, rooms to attach and rooms to detach, in any combination.
     """ # noqa: E501
-    rooms_to_add: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs to add to the group.", alias="roomsToAdd", json_schema_extra={"examples": [[1, 2, 3]]})
-    rooms_to_remove: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The list of room IDs to remove from the group.", alias="roomsToRemove", json_schema_extra={"examples": [[1, 2, 3]]})
-    group_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The group name.", alias="groupName", json_schema_extra={"examples": ["New Group Name"]})
+    rooms_to_add: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The rooms to attach to the group, each given as a number for a room stored in the portal or as a string for a  room on a connected third-party account. Every identifier has to name a room the caller can read; repeats and  rooms the group already holds are collapsed rather than refused.", alias="roomsToAdd", json_schema_extra={"examples": [[12, 15]]})
+    rooms_to_remove: Optional[List[DuplicateRequestDtoAllOfFileIds]] = Field(default=None, description="The rooms to detach from the group, in the same two forms. Detaching leaves the room and its content  untouched, and a room the group already holds can be detached even when the caller has lost access to it in  the meantime.", alias="roomsToRemove", json_schema_extra={"examples": [[7]]})
+    group_name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=128)]] = Field(default=None, description="The new name of the group, trimmed of surrounding spaces before it is stored. Leaving the member out keeps the  current name, and a name that is blank once trimmed is refused.", alias="groupName", json_schema_extra={"examples": ["Client projects"]})
     __properties: ClassVar[List[str]] = ["roomsToAdd", "roomsToRemove", "groupName"]
 
     model_config = ConfigDict(

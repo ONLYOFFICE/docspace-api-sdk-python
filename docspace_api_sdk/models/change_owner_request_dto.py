@@ -30,11 +30,11 @@ from typing_extensions import Self
 
 class ChangeOwnerRequestDto(BaseModel):
     """
-    The request parameters for changing the file owner.
+    The rooms and files to hand over, together with the account that takes them.
     """ # noqa: E501
-    folder_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of folder IDs to change the owner.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
-    file_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The list of file IDs to change the owner.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
-    user_id: UUID = Field(description="The new file owner ID.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    folder_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The rooms to hand over, identified as `GET api/2.0/files/rooms` returns them - a number for a room stored on  the portal and a string for one that lives on a connected third-party account. Only rooms belong here; a  folder inside a room is refused.", alias="folderIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[BatchRequestDtoAllOfFileIds]] = Field(default=None, description="The files to hand over, identified as a listing operation returns them - a number for a file stored on the  portal and a string for one on a connected third-party account. Only a file kept in the portal's common  section is accepted.", alias="fileIds", json_schema_extra={"examples": [[7, 8]]})
+    user_id: UUID = Field(description="The account that becomes the owner of every listed entry. It has to be an active member allowed to manage  rooms, so a deactivated account, a guest or a plain member is rejected, and for a private room the account  must have set up its encryption keys beforehand.", alias="userId", json_schema_extra={"examples": ["9924256a-739c-462b-af15-e652a3b1b6eb"]})
     __properties: ClassVar[List[str]] = ["folderIds", "fileIds", "userId"]
 
     model_config = ConfigDict(

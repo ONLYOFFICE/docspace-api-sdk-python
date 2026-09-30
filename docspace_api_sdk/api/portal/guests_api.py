@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field
@@ -48,7 +48,7 @@ class GuestsApi:
     @validate_call
     def get_guest_sharing_link(
         self,
-        userid: Annotated[UUID, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,9 +64,9 @@ class GuestsApi:
     ) -> StringWrapper:
         """Get a guest sharing link
 
-        Returns a link to share a guest with another user.
+        Builds a link that lets another member of the portal take over the caller's guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
 
-        :param userid: The user ID. (required)
+        :param userid: The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. (required)
         :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -100,12 +100,12 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '404': None,
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -124,7 +124,7 @@ class GuestsApi:
     @validate_call
     def get_guest_sharing_link_with_http_info(
         self,
-        userid: Annotated[UUID, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -140,9 +140,9 @@ class GuestsApi:
     ) -> ApiResponse[StringWrapper]:
         """Get a guest sharing link
 
-        Returns a link to share a guest with another user.
+        Builds a link that lets another member of the portal take over the caller's guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
 
-        :param userid: The user ID. (required)
+        :param userid: The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. (required)
         :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -176,12 +176,12 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '404': None,
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -200,7 +200,7 @@ class GuestsApi:
     @validate_call
     def get_guest_sharing_link_without_preload_content(
         self,
-        userid: Annotated[UUID, Field(description="The user ID.")],
+        userid: Annotated[UUID, Field(description="The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -216,9 +216,9 @@ class GuestsApi:
     ) -> RESTResponseType:
         """Get a guest sharing link
 
-        Returns a link to share a guest with another user.
+        Builds a link that lets another member of the portal take over the caller's guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
 
-        :param userid: The user ID. (required)
+        :param userid: The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. (required)
         :type userid: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -252,12 +252,12 @@ class GuestsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '404': None,
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

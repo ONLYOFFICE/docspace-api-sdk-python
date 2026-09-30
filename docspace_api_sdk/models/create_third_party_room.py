@@ -30,18 +30,18 @@ from typing_extensions import Self
 
 class CreateThirdPartyRoom(BaseModel):
     """
-    The parameters for creating a third-party room.
+    The room to be created out of a folder of a connected third-party storage account.
     """ # noqa: E501
-    create_as_new_folder: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a third-party room as a new folder or not.", alias="createAsNewFolder", json_schema_extra={"examples": [False]})
-    title: Optional[StrictStr] = Field(description="The third-party room name to be created.", json_schema_extra={"examples": ["My Third-Party Room"]})
-    room_type: RoomType = Field(description="The third-party room type to be created.", alias="roomType")
-    private: Optional[StrictBool] = Field(default=None, description="Specifies whether to create the private third-party room or not.", json_schema_extra={"examples": [False]})
-    indexing: Optional[StrictBool] = Field(default=None, description="Specifies whether to create the third-party room with indexing.", json_schema_extra={"examples": [True]})
-    deny_download: Optional[StrictBool] = Field(default=None, description="Specifies whether to deny downloads from the third-party room.", alias="denyDownload", json_schema_extra={"examples": [False]})
-    color: Optional[StrictStr] = Field(default=None, description="The color of the third-party room.", json_schema_extra={"examples": ["#FF0000"]})
-    cover: Optional[StrictStr] = Field(default=None, description="The cover of the third-party room.", json_schema_extra={"examples": ["cover1.jpg"]})
-    tags: Optional[List[StrictStr]] = Field(default=None, description="The list of tags of the third-party room.", json_schema_extra={"examples": [["tag1", "tag2", "tag3"]]})
-    logo: Optional[LogoRequest] = Field(default=None, description="The logo request parameters of the third-party room.")
+    create_as_new_folder: Optional[StrictBool] = Field(default=None, description="Creates a new folder named after `title` inside the folder named in the path and turns that subfolder into the  room, leaving the named folder itself untouched. When omitted, the named folder becomes the room and keeps  everything it already holds.", alias="createAsNewFolder", json_schema_extra={"examples": [False]})
+    title: Optional[StrictStr] = Field(description="The name the room is shown under. It is stored on the connected account, so it does not have to match the name  of the folder in the storage; with `createAsNewFolder` it is also the name given to the created subfolder.", json_schema_extra={"examples": ["Third-party project room"]})
+    room_type: RoomType = Field(description="The kind of room the folder becomes, which decides the default access rules of its members and cannot be  changed afterwards.", alias="roomType")
+    private: Optional[StrictBool] = Field(default=None, description="Restricts the room to the members explicitly invited into it. The flag is kept on the connected storage  account rather than on the folder, so every folder read through that account reports the same value.", json_schema_extra={"examples": [False]})
+    indexing: Optional[StrictBool] = Field(default=None, description="Keeps the contents of the room in an explicit numbered order, the one reported as `order` on every entry,  instead of leaving the order to the reader.", json_schema_extra={"examples": [True]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Forbids downloading and printing the contents of the room, which leaves the members with viewing and editing  in the editor only.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    color: Optional[StrictStr] = Field(default=None, description="The background colour drawn behind the cover of the room, as six hexadecimal digits without a leading number  sign. An empty value restores the colour the portal picks by default.", json_schema_extra={"examples": ["FF5733"]})
+    cover: Optional[StrictStr] = Field(default=None, description="The drawing shown on the room tile, named by one of the built-in cover identifiers returned by  `GET api/2.0/files/rooms/covers`. An empty value leaves the room without a cover, and any other unknown value  is rejected as an invalid request.", json_schema_extra={"examples": ["bookmark"]})
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The tags to attach to the room, named by their text. A name that is not in the portal tag catalogue yet is  added to it, and `GET api/2.0/files/tags` lists the names already there.", json_schema_extra={"examples": [["Marketing", "Q3"]]})
+    logo: Optional[LogoRequest] = Field(default=None, description="The picture to use as the room logo, which has to be uploaded with `POST api/2.0/files/logos` first; leaving  it out keeps the room on its cover and colour.")
     __properties: ClassVar[List[str]] = ["createAsNewFolder", "title", "roomType", "private", "indexing", "denyDownload", "color", "cover", "tags", "logo"]
 
     model_config = ConfigDict(

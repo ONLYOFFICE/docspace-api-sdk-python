@@ -29,9 +29,9 @@ from typing_extensions import Self
 
 class ActionLinkConfig(BaseModel):
     """
-    The config parameter which contains the information about the action in the document that will be scrolled to.
+    The place inside a document that a link should open at.
     """ # noqa: E501
-    action: Optional[ActionConfig] = Field(default=None, description="The information about the action in the document that will be scrolled to.")
+    action: Optional[ActionConfig] = Field(default=None, description="The anchor itself. It is passed on to the editor unchanged, so it has to be the value the editor produced for  the comment or the mention it points at.")
     __properties: ClassVar[List[str]] = ["action"]
 
     model_config = ConfigDict(

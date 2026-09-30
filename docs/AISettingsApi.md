@@ -14,7 +14,7 @@ Method | HTTP request | Description
 # **ai_settings_get**
 > AiAiSettingsWrapper ai_settings_get()
 
-Reports the portal's combined AI configuration and readiness.
+Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -28,7 +28,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -43,6 +43,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -68,15 +77,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
+**200** | The portal's AI configuration and whether AI is usable at all. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_settings_get_user**
 > AiAiUserSettingsWrapper ai_settings_get_user()
 
-Returns the current user's AI settings.
+Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -90,7 +101,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -105,6 +116,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -130,15 +150,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
+**200** | The calling user's AI settings. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_settings_get_vectorization**
 > AiVectorizationSettingsWrapper ai_settings_get_vectorization()
 
-Returns the portal's vectorization settings.
+Returns the portal's vectorization settings - the embedding provider and the options used when portal content is indexed for retrieval. It takes no parameters and is proxied unchanged to the DocSpace AI service. Vectorization is a portal-wide setting, so there is no room-scoped form of it. Change it with `PUT api/2.0/ai/config/vectorization`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -152,7 +174,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -167,6 +189,15 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -192,15 +223,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
+**200** | The portal's vectorization settings. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_settings_set_user**
 > AiAiUserSettingsWrapper ai_settings_set_user(request_body)
 
-Updates the current user's AI settings.
+Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -209,7 +242,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**Dict[str, object]**](object.md)|  | 
+ **request_body** | [**Dict[str, Optional[object]]**](object.md)| The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. | 
 
 ### Return type
 
@@ -217,7 +250,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -232,11 +265,20 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SettingsApi(api_client)
-    request_body = None # Dict[str, object] | 
+    request_body = None # Dict[str, Optional[object]] | The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
 
     try:
         # Update user AI settings
@@ -258,15 +300,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
+**200** | The calling user's stored AI settings. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_settings_set_vectorization**
 > AiVectorizationSettingsWrapper ai_settings_set_vectorization(request_body)
 
-Updates the portal's vectorization settings.
+Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -275,7 +320,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**Dict[str, Optional[object]]**](object.md)|  | 
+ **request_body** | [**Dict[str, Optional[object]]**](object.md)| The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. | 
 
 ### Return type
 
@@ -283,7 +328,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -298,11 +343,20 @@ configuration = docspace_api_sdk.Configuration(
     host = "https://your-docspace.onlyoffice.com"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 # Enter a context with an instance of the API client
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SettingsApi(api_client)
-    request_body = None # Dict[str, Optional[object]] | 
+    request_body = None # Dict[str, Optional[object]] | The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
 
     try:
         # Update vectorization settings
@@ -324,8 +378,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
+**200** | The stored vectorization settings. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

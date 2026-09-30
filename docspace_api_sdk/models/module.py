@@ -29,17 +29,17 @@ from typing_extensions import Self
 
 class Module(BaseModel):
     """
-    The module information.
+    The descriptor of a portal module: what it is called, where it starts and how it is pictured.
     """ # noqa: E501
-    id: Optional[UUID] = Field(default=None, description="The module ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    app_name: Optional[StrictStr] = Field(default=None, description="The module product class name.", alias="appName", json_schema_extra={"examples": ["files"]})
-    title: Optional[StrictStr] = Field(default=None, description="The module product class name.", json_schema_extra={"examples": ["Documents"]})
-    link: Optional[StrictStr] = Field(default=None, description="The URL to the module start page.", json_schema_extra={"examples": ["https://example.com"]})
-    icon_url: Optional[StrictStr] = Field(default=None, description="The module icon URL.", alias="iconUrl", json_schema_extra={"examples": ["https://example.com/icon.svg"]})
-    image_url: Optional[StrictStr] = Field(default=None, description="The module large image URL.", alias="imageUrl", json_schema_extra={"examples": ["https://example.com/image.png"]})
-    help_url: Optional[StrictStr] = Field(default=None, description="The module help URL.", alias="helpUrl", json_schema_extra={"examples": ["https://example.com/help"]})
-    description: Optional[StrictStr] = Field(default=None, description="The module description.", json_schema_extra={"examples": ["File management"]})
-    is_primary: Optional[StrictBool] = Field(default=None, description="Specifies if the module is primary or not.", alias="isPrimary", json_schema_extra={"examples": [True]})
+    id: Optional[UUID] = Field(default=None, description="The identifier of the module. It is the same in every portal and in every language, so use it rather than the  title to tell modules apart.", json_schema_extra={"examples": ["e67be73d-f9ae-4ce1-8fec-1880cb518cb4"]})
+    app_name: Optional[StrictStr] = Field(default=None, description="The short system name of the module, the one that appears in its addresses and in the portal configuration.  Unlike the title it is not translated.", alias="appName", json_schema_extra={"examples": ["files"]})
+    title: Optional[StrictStr] = Field(default=None, description="The display name of the module, already translated for the calling account, so it changes with the language  and must not be compared against a fixed string.", json_schema_extra={"examples": ["Documents"]})
+    link: Optional[StrictStr] = Field(default=None, description="The address of the start page of the module, to be opened in a browser rather than called as an API.", json_schema_extra={"examples": ["https://example.com"]})
+    icon_url: Optional[StrictStr] = Field(default=None, description="The address of the small icon of the module, meant for a menu entry.", alias="iconUrl", json_schema_extra={"examples": ["https://example.com/icon.svg"]})
+    image_url: Optional[StrictStr] = Field(default=None, description="The address of the large image of the module, meant for a tile or a start screen.", alias="imageUrl", json_schema_extra={"examples": ["https://example.com/image.png"]})
+    help_url: Optional[StrictStr] = Field(default=None, description="The address of the help section of the module. It is empty when the portal publishes no help for it.", alias="helpUrl", json_schema_extra={"examples": ["https://example.com/help"]})
+    description: Optional[StrictStr] = Field(default=None, description="The one-line description of the module shown next to its title, translated for the calling account.", json_schema_extra={"examples": ["File management"]})
+    is_primary: Optional[StrictBool] = Field(default=None, description="Whether the portal opens this module first when no other destination is given.", alias="isPrimary", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["id", "appName", "title", "link", "iconUrl", "imageUrl", "helpUrl", "description", "isPrimary"]
 
     model_config = ConfigDict(

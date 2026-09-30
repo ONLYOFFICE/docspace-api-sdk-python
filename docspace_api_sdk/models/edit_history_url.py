@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class EditHistoryUrl(BaseModel):
     """
-    The file editing history URL parameters.
+    The address, document key and format of the revision a comparison is made against.
     """ # noqa: E501
-    key: Optional[StrictStr] = Field(default=None, description="The document identifier of the previous version of the document.", json_schema_extra={"examples": ["doc_v2_20260101"]})
-    url: Optional[StrictStr] = Field(default=None, description="The url address of the previous version of the document.", json_schema_extra={"examples": ["https://files.example.com/history/doc_v2_20260101.docx"]})
-    file_type: Optional[StrictStr] = Field(default=None, description="The document extension.", alias="fileType", json_schema_extra={"examples": [".docx"]})
+    key: Optional[StrictStr] = Field(default=None, description="The document key of that revision. When the file has no earlier revision the portal generates a fresh key for  the template it falls back to, so the value is not always one an earlier revision ever had.", json_schema_extra={"examples": ["doc_v2_20260101"]})
+    url: Optional[StrictStr] = Field(default=None, description="The address that revision's content is served from. It is meant for the editing service and carries its own  key, which is valid for a limited time.", json_schema_extra={"examples": ["https://files.example.com/history/doc_v2_20260101.docx"]})
+    file_type: Optional[StrictStr] = Field(default=None, description="The format of that revision, as an extension without the leading dot.", alias="fileType", json_schema_extra={"examples": ["docx"]})
     __properties: ClassVar[List[str]] = ["key", "url", "fileType"]
 
     model_config = ConfigDict(

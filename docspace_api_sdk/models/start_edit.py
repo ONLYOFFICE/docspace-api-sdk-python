@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class StartEdit(BaseModel):
     """
-    The parameters for starting file editing.
+    The body of an editing session request.
     """ # noqa: E501
-    editing_alone: Optional[StrictBool] = Field(default=None, description="Specifies whether to share the file with other users for editing or not.", alias="editingAlone", json_schema_extra={"examples": [False]})
+    editing_alone: Optional[StrictBool] = Field(default=None, description="Claims the file for this caller alone: the session is opened without asking the document service to track  co-editing, and the call is refused when anybody else already has the file open. Left off, an ordinary  co-editing session is opened and others may join it.", alias="editingAlone", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["editingAlone"]
 
     model_config = ConfigDict(

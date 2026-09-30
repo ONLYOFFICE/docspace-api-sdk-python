@@ -19,19 +19,21 @@
 from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_open_or_create_result import AiOpenOrCreateResult
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 from docspace_api_sdk.models.ai_thread import AiThread
 from docspace_api_sdk.models.ai_thread_message_like import AiThreadMessageLike
+from docspace_api_sdk.models.ai_threads_append_user_message200_response import AiThreadsAppendUserMessage200Response
 from docspace_api_sdk.models.ai_threads_append_user_message_request import AiThreadsAppendUserMessageRequest
 from docspace_api_sdk.models.ai_threads_create_request import AiThreadsCreateRequest
 from docspace_api_sdk.models.ai_threads_open_or_create_request import AiThreadsOpenOrCreateRequest
+from docspace_api_sdk.models.ai_threads_regenerate_title200_response import AiThreadsRegenerateTitle200Response
 from docspace_api_sdk.models.ai_threads_regenerate_title_request import AiThreadsRegenerateTitleRequest
 from docspace_api_sdk.models.ai_threads_rename_request import AiThreadsRenameRequest
 from docspace_api_sdk.models.ai_threads_touch_request import AiThreadsTouchRequest
@@ -76,10 +78,10 @@ class ThreadsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiThreadMessageLike:
+    ) -> AiThreadsAppendUserMessage200Response:
         """Append user message
 
-        Persists a user message in a thread and bumps the thread's last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
+        Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
 
         :param ai_threads_append_user_message_request: (required)
         :type ai_threads_append_user_message_request: AiThreadsAppendUserMessageRequest
@@ -114,8 +116,12 @@ class ThreadsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiThreadMessageLike",
+            '200': "AiThreadsAppendUserMessage200Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -145,10 +151,10 @@ class ThreadsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiThreadMessageLike]:
+    ) -> ApiResponse[AiThreadsAppendUserMessage200Response]:
         """Append user message
 
-        Persists a user message in a thread and bumps the thread's last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
+        Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
 
         :param ai_threads_append_user_message_request: (required)
         :type ai_threads_append_user_message_request: AiThreadsAppendUserMessageRequest
@@ -183,8 +189,12 @@ class ThreadsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiThreadMessageLike",
+            '200': "AiThreadsAppendUserMessage200Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -217,7 +227,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Append user message
 
-        Persists a user message in a thread and bumps the thread's last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
+        Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
 
         :param ai_threads_append_user_message_request: (required)
         :type ai_threads_append_user_message_request: AiThreadsAppendUserMessageRequest
@@ -252,8 +262,12 @@ class ThreadsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiThreadMessageLike",
+            '200': "AiThreadsAppendUserMessage200Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -319,6 +333,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -345,7 +361,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_clear_messages(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the thread to empty, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -361,9 +377,9 @@ class ThreadsApi:
     ) -> AiSuccessResponse:
         """Clear messages
 
-        Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
+        Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
 
-        :param body: (required)
+        :param body: The ID of the thread to empty, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -397,7 +413,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -414,7 +434,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_clear_messages_with_http_info(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the thread to empty, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -430,9 +450,9 @@ class ThreadsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Clear messages
 
-        Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
+        Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
 
-        :param body: (required)
+        :param body: The ID of the thread to empty, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -466,7 +486,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -483,7 +507,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_clear_messages_without_preload_content(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the thread to empty, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -499,9 +523,9 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Clear messages
 
-        Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
+        Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
 
-        :param body: (required)
+        :param body: The ID of the thread to empty, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -535,7 +559,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -601,6 +629,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -641,9 +671,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiThread:
-        """Create
+        """Create a chat thread
 
-        Creates a chat thread with a caller-supplied title. Use `open-or-create` instead when the title should be generated from the first user message.
+        Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room's `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent's own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent's model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
 
         :param ai_threads_create_request: (required)
         :type ai_threads_create_request: AiThreadsCreateRequest
@@ -680,6 +710,10 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThread",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -710,9 +744,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiThread]:
-        """Create
+        """Create a chat thread
 
-        Creates a chat thread with a caller-supplied title. Use `open-or-create` instead when the title should be generated from the first user message.
+        Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room's `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent's own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent's model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
 
         :param ai_threads_create_request: (required)
         :type ai_threads_create_request: AiThreadsCreateRequest
@@ -749,6 +783,10 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThread",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -779,9 +817,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create
+        """Create a chat thread
 
-        Creates a chat thread with a caller-supplied title. Use `open-or-create` instead when the title should be generated from the first user message.
+        Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room's `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent's own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent's model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
 
         :param ai_threads_create_request: (required)
         :type ai_threads_create_request: AiThreadsCreateRequest
@@ -818,6 +856,10 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThread",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -883,6 +925,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -909,7 +953,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the thread to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -923,11 +967,11 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiSuccessResponse:
-        """Delete
+        """Delete a chat thread
 
-        Deletes a chat thread together with its messages.
+        Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
 
-        :param body: (required)
+        :param body: The ID of the thread to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -961,7 +1005,12 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -978,7 +1027,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete_with_http_info(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the thread to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -992,11 +1041,11 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiSuccessResponse]:
-        """Delete
+        """Delete a chat thread
 
-        Deletes a chat thread together with its messages.
+        Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
 
-        :param body: (required)
+        :param body: The ID of the thread to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1030,7 +1079,12 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1047,7 +1101,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete_without_preload_content(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the thread to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1061,11 +1115,11 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete
+        """Delete a chat thread
 
-        Deletes a chat thread together with its messages.
+        Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
 
-        :param body: (required)
+        :param body: The ID of the thread to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1099,7 +1153,12 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1165,6 +1224,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1191,7 +1252,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete_message(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the message to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1207,9 +1268,9 @@ class ThreadsApi:
     ) -> AiSuccessResponse:
         """Delete message
 
-        Deletes one chat message, leaving the rest of the thread untouched.
+        Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
 
-        :param body: (required)
+        :param body: The ID of the message to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1243,7 +1304,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1260,7 +1325,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete_message_with_http_info(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the message to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1276,9 +1341,9 @@ class ThreadsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Delete message
 
-        Deletes one chat message, leaving the rest of the thread untouched.
+        Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
 
-        :param body: (required)
+        :param body: The ID of the message to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1312,7 +1377,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1329,7 +1398,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete_message_without_preload_content(
         self,
-        body: StrictStr,
+        body: Annotated[StrictStr, Field(description="The ID of the message to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1345,9 +1414,9 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Delete message
 
-        Deletes one chat message, leaving the rest of the thread untouched.
+        Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
 
-        :param body: (required)
+        :param body: The ID of the message to delete, as a bare JSON string. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1381,7 +1450,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1447,6 +1520,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1487,9 +1562,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiThread:
-        """Get by id
+        """Get a chat thread
 
-        Returns one chat thread, or an empty result when the identifier is unknown.
+        Returns one thread by its ID, without its messages - read those with `GET api/2.0/ai/threads/read-messages`. `threadId` is required and an unknown one answers 404, so the result is never an empty body. The answer carries the thread's title, its model binding and its last-edit date. This is a read-only operation and does not bump that date.
 
         :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
@@ -1525,7 +1600,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThread",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1556,9 +1635,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiThread]:
-        """Get by id
+        """Get a chat thread
 
-        Returns one chat thread, or an empty result when the identifier is unknown.
+        Returns one thread by its ID, without its messages - read those with `GET api/2.0/ai/threads/read-messages`. `threadId` is required and an unknown one answers 404, so the result is never an empty body. The answer carries the thread's title, its model binding and its last-edit date. This is a read-only operation and does not bump that date.
 
         :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
@@ -1594,7 +1673,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThread",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1625,9 +1708,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get by id
+        """Get a chat thread
 
-        Returns one chat thread, or an empty result when the identifier is unknown.
+        Returns one thread by its ID, without its messages - read those with `GET api/2.0/ai/threads/read-messages`. `threadId` is required and an unknown one answers 404, so the result is never an empty body. The answer carries the thread's title, its model binding and its last-edit date. This is a read-only operation and does not bump that date.
 
         :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
@@ -1663,7 +1746,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThread",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1718,6 +1805,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1758,9 +1847,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiThreadMessageLike:
-        """Get message by id
+        """Get one chat message
 
-        Returns one chat message by its globally unique identifier.
+        Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
 
         :param message_id: The globally unique chat message identifier. (required)
         :type message_id: str
@@ -1796,7 +1885,10 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThreadMessageLike",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1827,9 +1919,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiThreadMessageLike]:
-        """Get message by id
+        """Get one chat message
 
-        Returns one chat message by its globally unique identifier.
+        Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
 
         :param message_id: The globally unique chat message identifier. (required)
         :type message_id: str
@@ -1865,7 +1957,10 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThreadMessageLike",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1896,9 +1991,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get message by id
+        """Get one chat message
 
-        Returns one chat message by its globally unique identifier.
+        Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
 
         :param message_id: The globally unique chat message identifier. (required)
         :type message_id: str
@@ -1934,7 +2029,10 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThreadMessageLike",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -1989,6 +2087,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -2016,7 +2116,7 @@ class ThreadsApi:
     def ai_threads_list(
         self,
         entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
-        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        count: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return in one page.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
         query: Annotated[Optional[StrictStr], Field(description="The full-text query the thread list is filtered by.")] = None,
         _request_timeout: Union[
@@ -2032,14 +2132,14 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AiThread]:
-        """List
+        """List chat threads
 
-        Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
+        Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param count: The maximum number of items to return in one page.
-        :type count: str
+        :type count: int
         :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
         :param query: The full-text query the thread list is filtered by.
@@ -2080,6 +2180,8 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiThread]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2097,7 +2199,7 @@ class ThreadsApi:
     def ai_threads_list_with_http_info(
         self,
         entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
-        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        count: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return in one page.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
         query: Annotated[Optional[StrictStr], Field(description="The full-text query the thread list is filtered by.")] = None,
         _request_timeout: Union[
@@ -2113,14 +2215,14 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[AiThread]]:
-        """List
+        """List chat threads
 
-        Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
+        Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param count: The maximum number of items to return in one page.
-        :type count: str
+        :type count: int
         :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
         :param query: The full-text query the thread list is filtered by.
@@ -2161,6 +2263,8 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiThread]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2178,7 +2282,7 @@ class ThreadsApi:
     def ai_threads_list_without_preload_content(
         self,
         entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
-        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        count: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return in one page.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
         query: Annotated[Optional[StrictStr], Field(description="The full-text query the thread list is filtered by.")] = None,
         _request_timeout: Union[
@@ -2194,14 +2298,14 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List
+        """List chat threads
 
-        Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
+        Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
         :param count: The maximum number of items to return in one page.
-        :type count: str
+        :type count: int
         :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
         :param query: The full-text query the thread list is filtered by.
@@ -2242,6 +2346,8 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiThread]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2313,6 +2419,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -2355,7 +2463,7 @@ class ThreadsApi:
     ) -> AiOpenOrCreateResult:
         """Open or create
 
-        Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with `append-user-message`.
+        Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
 
         :param ai_threads_open_or_create_request: (required)
         :type ai_threads_open_or_create_request: AiThreadsOpenOrCreateRequest
@@ -2392,6 +2500,10 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiOpenOrCreateResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2424,7 +2536,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiOpenOrCreateResult]:
         """Open or create
 
-        Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with `append-user-message`.
+        Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
 
         :param ai_threads_open_or_create_request: (required)
         :type ai_threads_open_or_create_request: AiThreadsOpenOrCreateRequest
@@ -2461,6 +2573,10 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiOpenOrCreateResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2493,7 +2609,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Open or create
 
-        Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with `append-user-message`.
+        Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
 
         :param ai_threads_open_or_create_request: (required)
         :type ai_threads_open_or_create_request: AiThreadsOpenOrCreateRequest
@@ -2530,6 +2646,10 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiOpenOrCreateResult",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2595,6 +2715,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -2622,7 +2744,7 @@ class ThreadsApi:
     def ai_threads_read_messages(
         self,
         thread_id: Annotated[StrictStr, Field(description="The chat thread identifier.")],
-        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        count: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return in one page.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
         direction: Annotated[Optional[StrictStr], Field(description="The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.")] = None,
         _request_timeout: Union[
@@ -2640,12 +2762,12 @@ class ThreadsApi:
     ) -> List[AiThreadMessageLike]:
         """Read messages
 
-        Reads the messages of a thread, with the same cursor pagination as the thread list.
+        Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
 
         :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
         :param count: The maximum number of items to return in one page.
-        :type count: str
+        :type count: int
         :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
         :param direction: The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.
@@ -2686,6 +2808,8 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiThreadMessageLike]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2703,7 +2827,7 @@ class ThreadsApi:
     def ai_threads_read_messages_with_http_info(
         self,
         thread_id: Annotated[StrictStr, Field(description="The chat thread identifier.")],
-        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        count: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return in one page.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
         direction: Annotated[Optional[StrictStr], Field(description="The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.")] = None,
         _request_timeout: Union[
@@ -2721,12 +2845,12 @@ class ThreadsApi:
     ) -> ApiResponse[List[AiThreadMessageLike]]:
         """Read messages
 
-        Reads the messages of a thread, with the same cursor pagination as the thread list.
+        Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
 
         :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
         :param count: The maximum number of items to return in one page.
-        :type count: str
+        :type count: int
         :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
         :param direction: The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.
@@ -2767,6 +2891,8 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiThreadMessageLike]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2784,7 +2910,7 @@ class ThreadsApi:
     def ai_threads_read_messages_without_preload_content(
         self,
         thread_id: Annotated[StrictStr, Field(description="The chat thread identifier.")],
-        count: Annotated[Optional[StrictStr], Field(description="The maximum number of items to return in one page.")] = None,
+        count: Annotated[Optional[StrictInt], Field(description="The maximum number of items to return in one page.")] = None,
         cursor: Annotated[Optional[StrictStr], Field(description="The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.")] = None,
         direction: Annotated[Optional[StrictStr], Field(description="The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.")] = None,
         _request_timeout: Union[
@@ -2802,12 +2928,12 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Read messages
 
-        Reads the messages of a thread, with the same cursor pagination as the thread list.
+        Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
 
         :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
         :param count: The maximum number of items to return in one page.
-        :type count: str
+        :type count: int
         :param cursor: The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
         :type cursor: str
         :param direction: The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.
@@ -2848,6 +2974,8 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiThreadMessageLike]",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -2919,6 +3047,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -2958,10 +3088,10 @@ class ThreadsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> str:
+    ) -> AiThreadsRegenerateTitle200Response:
         """Regenerate title
 
-        Generates a fresh title from the thread's first user message and persists it. Fails when the thread has no user message yet.
+        Asks the model to produce a title from the thread's first user message, stores it, and returns the new title. Both `threadId` and a resolved `profile` object are required; a thread with no user message yet has nothing to title and fails. This costs a model call, unlike `POST api/2.0/ai/threads/rename`, which just stores the string it is given. An `entityMeta` sent with the request is only read for its `entityId` hint - the source itself is resolved server-side under the caller's credentials, so a client cannot attribute the call to somebody else's room.
 
         :param ai_threads_regenerate_title_request: (required)
         :type ai_threads_regenerate_title_request: AiThreadsRegenerateTitleRequest
@@ -2996,8 +3126,12 @@ class ThreadsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "str",
+            '200': "AiThreadsRegenerateTitle200Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3027,10 +3161,10 @@ class ThreadsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[str]:
+    ) -> ApiResponse[AiThreadsRegenerateTitle200Response]:
         """Regenerate title
 
-        Generates a fresh title from the thread's first user message and persists it. Fails when the thread has no user message yet.
+        Asks the model to produce a title from the thread's first user message, stores it, and returns the new title. Both `threadId` and a resolved `profile` object are required; a thread with no user message yet has nothing to title and fails. This costs a model call, unlike `POST api/2.0/ai/threads/rename`, which just stores the string it is given. An `entityMeta` sent with the request is only read for its `entityId` hint - the source itself is resolved server-side under the caller's credentials, so a client cannot attribute the call to somebody else's room.
 
         :param ai_threads_regenerate_title_request: (required)
         :type ai_threads_regenerate_title_request: AiThreadsRegenerateTitleRequest
@@ -3065,8 +3199,12 @@ class ThreadsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "str",
+            '200': "AiThreadsRegenerateTitle200Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3099,7 +3237,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Regenerate title
 
-        Generates a fresh title from the thread's first user message and persists it. Fails when the thread has no user message yet.
+        Asks the model to produce a title from the thread's first user message, stores it, and returns the new title. Both `threadId` and a resolved `profile` object are required; a thread with no user message yet has nothing to title and fails. This costs a model call, unlike `POST api/2.0/ai/threads/rename`, which just stores the string it is given. An `entityMeta` sent with the request is only read for its `entityId` hint - the source itself is resolved server-side under the caller's credentials, so a client cannot attribute the call to somebody else's room.
 
         :param ai_threads_regenerate_title_request: (required)
         :type ai_threads_regenerate_title_request: AiThreadsRegenerateTitleRequest
@@ -3134,8 +3272,12 @@ class ThreadsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "str",
+            '200': "AiThreadsRegenerateTitle200Response",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3201,6 +3343,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -3241,9 +3385,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiSuccessResponse:
-        """Rename
+        """Rename a chat thread
 
-        Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
+        Replaces a thread's title with the one supplied and bumps its last-edit date. Both `threadId` and a title with at least one non-whitespace character are required - a blank title is rejected rather than silently stored, so a thread cannot end up nameless. The answer only confirms the write. To have the model produce a title instead of supplying one, use `POST api/2.0/ai/threads/regenerate-title`.
 
         :param ai_threads_rename_request: (required)
         :type ai_threads_rename_request: AiThreadsRenameRequest
@@ -3279,7 +3423,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3310,9 +3458,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiSuccessResponse]:
-        """Rename
+        """Rename a chat thread
 
-        Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
+        Replaces a thread's title with the one supplied and bumps its last-edit date. Both `threadId` and a title with at least one non-whitespace character are required - a blank title is rejected rather than silently stored, so a thread cannot end up nameless. The answer only confirms the write. To have the model produce a title instead of supplying one, use `POST api/2.0/ai/threads/regenerate-title`.
 
         :param ai_threads_rename_request: (required)
         :type ai_threads_rename_request: AiThreadsRenameRequest
@@ -3348,7 +3496,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3379,9 +3531,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Rename
+        """Rename a chat thread
 
-        Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
+        Replaces a thread's title with the one supplied and bumps its last-edit date. Both `threadId` and a title with at least one non-whitespace character are required - a blank title is rejected rather than silently stored, so a thread cannot end up nameless. The answer only confirms the write. To have the model produce a title instead of supplying one, use `POST api/2.0/ai/threads/regenerate-title`.
 
         :param ai_threads_rename_request: (required)
         :type ai_threads_rename_request: AiThreadsRenameRequest
@@ -3417,7 +3569,11 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3483,6 +3639,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -3523,9 +3681,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AiSuccessResponse:
-        """Touch
+        """Bump a thread's activity
 
-        Bumps a thread's last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
+        Bumps a thread's last-edit date without adding a message, which resurfaces it in the list. Passing `profileId` also rebinds the thread to another model, so this is the operation to call when a model switch alone should count as activity. Nothing else about the thread changes and the answer only confirms the write. It is idempotent: repeating it simply moves the date forward again.
 
         :param ai_threads_touch_request: (required)
         :type ai_threads_touch_request: AiThreadsTouchRequest
@@ -3562,6 +3720,9 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3592,9 +3753,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[AiSuccessResponse]:
-        """Touch
+        """Bump a thread's activity
 
-        Bumps a thread's last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
+        Bumps a thread's last-edit date without adding a message, which resurfaces it in the list. Passing `profileId` also rebinds the thread to another model, so this is the operation to call when a model switch alone should count as activity. Nothing else about the thread changes and the answer only confirms the write. It is idempotent: repeating it simply moves the date forward again.
 
         :param ai_threads_touch_request: (required)
         :type ai_threads_touch_request: AiThreadsTouchRequest
@@ -3631,6 +3792,9 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3661,9 +3825,9 @@ class ThreadsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Touch
+        """Bump a thread's activity
 
-        Bumps a thread's last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
+        Bumps a thread's last-edit date without adding a message, which resurfaces it in the list. Passing `profileId` also rebinds the thread to another model, so this is the operation to call when a model switch alone should count as activity. Nothing else about the thread changes and the answer only confirms the write. It is idempotent: repeating it simply moves the date forward again.
 
         :param ai_threads_touch_request: (required)
         :type ai_threads_touch_request: AiThreadsTouchRequest
@@ -3700,6 +3864,9 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3765,6 +3932,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -3807,7 +3976,7 @@ class ThreadsApi:
     ) -> AiSuccessResponse:
         """Update message
 
-        Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
+        Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
 
         :param ai_threads_update_message_request: (required)
         :type ai_threads_update_message_request: AiThreadsUpdateMessageRequest
@@ -3844,6 +4013,9 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3876,7 +4048,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Update message
 
-        Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
+        Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
 
         :param ai_threads_update_message_request: (required)
         :type ai_threads_update_message_request: AiThreadsUpdateMessageRequest
@@ -3913,6 +4085,9 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -3945,7 +4120,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Update message
 
-        Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
+        Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
 
         :param ai_threads_update_message_request: (required)
         :type ai_threads_update_message_request: AiThreadsUpdateMessageRequest
@@ -3982,6 +4157,9 @@ class ThreadsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
 
         response_data = self.api_client.call_api(
@@ -4047,6 +4225,8 @@ class ThreadsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 

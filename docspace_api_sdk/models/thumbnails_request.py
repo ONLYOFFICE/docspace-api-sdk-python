@@ -28,13 +28,13 @@ from typing_extensions import Self
 
 class ThumbnailsRequest(BaseModel):
     """
-    The thumbnail request.
+    The crop rectangle to apply to an avatar image.
     """ # noqa: E501
-    tmp_file: Optional[StrictStr] = Field(default=None, description="The path to the temporary thumbnail file.", alias="tmpFile", json_schema_extra={"examples": ["/tmp/photo_temp_123.jpg"]})
-    x: Optional[StrictInt] = Field(default=None, description="The thumbnail horizontal coordinate.", json_schema_extra={"examples": [100]})
-    y: Optional[StrictInt] = Field(default=None, description="The thumbnail vertical coordinate.", json_schema_extra={"examples": [50]})
-    width: Optional[StrictInt] = Field(default=None, description="The thumbnail width.", json_schema_extra={"examples": [200]})
-    height: Optional[StrictInt] = Field(default=None, description="The thumbnail height.", json_schema_extra={"examples": [200]})
+    tmp_file: Optional[StrictStr] = Field(default=None, description="The temporary image to crop, as returned in the `data` of an upload made with `autosave` off. Only the file  name part of the value is used. Omit it to re-crop the photo the profile already has.", alias="tmpFile", json_schema_extra={"examples": ["photo_temp_123.jpg"]})
+    x: Optional[StrictInt] = Field(default=None, description="The distance in pixels from the left edge of the original image to the left edge of the crop rectangle.", json_schema_extra={"examples": [100]})
+    y: Optional[StrictInt] = Field(default=None, description="The distance in pixels from the top edge of the original image to the top edge of the crop rectangle.", json_schema_extra={"examples": [50]})
+    width: Optional[StrictInt] = Field(default=None, description="The width of the crop rectangle in pixels. Passing 0 together with `height` and `tmpFile` keeps the whole  uploaded image instead of cropping it.", json_schema_extra={"examples": [200]})
+    height: Optional[StrictInt] = Field(default=None, description="The height of the crop rectangle in pixels. Passing 0 together with `width` and `tmpFile` keeps the whole  uploaded image instead of cropping it.", json_schema_extra={"examples": [200]})
     __properties: ClassVar[List[str]] = ["tmpFile", "x", "y", "width", "height"]
 
     model_config = ConfigDict(

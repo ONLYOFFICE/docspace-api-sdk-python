@@ -1,11 +1,11 @@
 # QuotaSettingsRequestsDto
-The request parameters for managing the user storage quota configurations.
+The default storage limit given to newly created users, rooms or AI agents, and whether it is enforced.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enable_quota** | **bool** | Specifies whether the storage quota restrictions are enabled. | [optional] 
+**enable_quota** | **bool** | Whether the limit is enforced at all. While it is false the size is ignored and nothing created afterwards  carries a limit; objects that already have one keep it either way. | [optional] 
 **default_quota** | [**QuotaSettingsRequestsDtoDefaultQuota**](QuotaSettingsRequestsDtoDefaultQuota.md) |  | 
 
 ## Example

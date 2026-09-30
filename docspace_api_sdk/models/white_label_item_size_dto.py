@@ -28,19 +28,19 @@ from typing_extensions import Self
 
 class WhiteLabelItemSizeDto(BaseModel):
     """
-    The white label logo size parameters.
+    The pixel box a logo slot is drawn in, in the shape the imaging library reports a geometry.
     """ # noqa: E501
-    aspect_ratio: Optional[StrictBool] = Field(default=None, description="Specifies whether the size is an aspect ratio.", alias="aspectRatio", json_schema_extra={"examples": [False]})
-    fill_area: Optional[StrictBool] = Field(default=None, description="Specifies whether the logo is resized based on the smallest fitting dimension.", alias="fillArea", json_schema_extra={"examples": [False]})
-    greater: Optional[StrictBool] = Field(default=None, description="Specifies whether the logo is resized only if it is greater than the size.", json_schema_extra={"examples": [False]})
-    height: Optional[StrictInt] = Field(default=None, description="The logo height, in pixels.", json_schema_extra={"examples": [48]})
-    ignore_aspect_ratio: Optional[StrictBool] = Field(default=None, description="Specifies whether the logo is resized without preserving the aspect ratio.", alias="ignoreAspectRatio", json_schema_extra={"examples": [False]})
-    is_percentage: Optional[StrictBool] = Field(default=None, description="Specifies whether the width and height are expressed as percentages.", alias="isPercentage", json_schema_extra={"examples": [False]})
-    less: Optional[StrictBool] = Field(default=None, description="Specifies whether the logo is resized only if it is less than the size.", json_schema_extra={"examples": [False]})
-    limit_pixels: Optional[StrictBool] = Field(default=None, description="Specifies whether the logo is resized using a pixel area count limit.", alias="limitPixels", json_schema_extra={"examples": [False]})
-    width: Optional[StrictInt] = Field(default=None, description="The logo width, in pixels.", json_schema_extra={"examples": [422]})
-    x: Optional[StrictInt] = Field(default=None, description="The X offset from the origin, in pixels.", json_schema_extra={"examples": [0]})
-    y: Optional[StrictInt] = Field(default=None, description="The Y offset from the origin, in pixels.", json_schema_extra={"examples": [0]})
+    aspect_ratio: Optional[StrictBool] = Field(default=None, description="Whether the numbers are to be read as an aspect ratio rather than as pixels. Always `false` on the sizes  this API reports.", alias="aspectRatio", json_schema_extra={"examples": [False]})
+    fill_area: Optional[StrictBool] = Field(default=None, description="Whether an image would be scaled to cover the box rather than to fit inside it. Always `false` here.", alias="fillArea", json_schema_extra={"examples": [False]})
+    greater: Optional[StrictBool] = Field(default=None, description="Whether scaling would apply only to an image larger than the box. Always `false` here.", json_schema_extra={"examples": [False]})
+    height: Optional[StrictInt] = Field(default=None, description="The height of the box in pixels - one of the two fields of this object that carry information.", json_schema_extra={"examples": [48]})
+    ignore_aspect_ratio: Optional[StrictBool] = Field(default=None, description="Whether scaling would be allowed to distort the image. Always `false` here.", alias="ignoreAspectRatio", json_schema_extra={"examples": [False]})
+    is_percentage: Optional[StrictBool] = Field(default=None, description="Whether `width` and `height` are to be read as percentages. Always `false` here, so both are pixels.", alias="isPercentage", json_schema_extra={"examples": [False]})
+    less: Optional[StrictBool] = Field(default=None, description="Whether scaling would apply only to an image smaller than the box. Always `false` here.", json_schema_extra={"examples": [False]})
+    limit_pixels: Optional[StrictBool] = Field(default=None, description="Whether the box is to be read as a total pixel-area budget instead of as two dimensions. Always `false`  here.", alias="limitPixels", json_schema_extra={"examples": [False]})
+    width: Optional[StrictInt] = Field(default=None, description="The width of the box in pixels - the other field of this object that carries information.", json_schema_extra={"examples": [422]})
+    x: Optional[StrictInt] = Field(default=None, description="The horizontal offset of the box from the origin. Always `0` here.", json_schema_extra={"examples": [0]})
+    y: Optional[StrictInt] = Field(default=None, description="The vertical offset of the box from the origin. Always `0` here.", json_schema_extra={"examples": [0]})
     __properties: ClassVar[List[str]] = ["aspectRatio", "fillArea", "greater", "height", "ignoreAspectRatio", "isPercentage", "less", "limitPixels", "width", "x", "y"]
 
     model_config = ConfigDict(

@@ -28,12 +28,12 @@ from typing_extensions import Self
 
 class ExternalDbSyncFormResultDto(BaseModel):
     """
-    The result of an external DB synchronization for a single form.
+    What happened to one original form while the room was being exported to the external database.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The form file ID.", json_schema_extra={"examples": [42]})
-    title: Optional[StrictStr] = Field(default=None, description="The form file title.", json_schema_extra={"examples": ["Application.pdf"]})
-    success: Optional[StrictBool] = Field(default=None, description="Specifies whether the synchronization succeeded for this form.", json_schema_extra={"examples": [True]})
-    error: Optional[StrictStr] = Field(default=None, description="The error message if the synchronization failed for this form.", json_schema_extra={"examples": ["Connection refused"]})
+    id: Optional[StrictInt] = Field(default=None, description="The file of the original form whose collected data was exported. It is the form itself, not one of the filled  copies, so the same id can be read with the file operations of the portal.", json_schema_extra={"examples": [42]})
+    title: Optional[StrictStr] = Field(default=None, description="The name of that form file at the moment of the export. It is empty when the form file no longer exists, which  is also the case in which the export of that entry fails.", json_schema_extra={"examples": ["Application.pdf"]})
+    success: Optional[StrictBool] = Field(default=None, description="Whether the data of this form reached the external database. One rejected form does not stop the others, so a  finished job can hold both successful and failed entries.", json_schema_extra={"examples": [True]})
+    error: Optional[StrictStr] = Field(default=None, description="Why this form was not exported. It is empty for a successful entry, and for a failed one it carries either the  message of the underlying failure or the generic export error of the portal.", json_schema_extra={"examples": ["Connection refused"]})
     __properties: ClassVar[List[str]] = ["id", "title", "success", "error"]
 
     model_config = ConfigDict(

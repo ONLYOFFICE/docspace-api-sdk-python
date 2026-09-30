@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
@@ -48,10 +48,10 @@ class AuthorizationApi:
     @validate_call
     def authorize_o_auth(
         self,
-        response_type: Annotated[StrictStr, Field(description="The OAuth 2.0 response type, must be 'code' for authorization code flow.")],
-        client_id: Annotated[StrictStr, Field(description="The client identifier issued to the client during registration.")],
-        redirect_uri: Annotated[StrictStr, Field(description="The URL to redirect to after authorization is complete.")],
-        scope: Annotated[StrictStr, Field(description="The space-separated list of requested scope permissions.")],
+        response_type: Annotated[StrictStr, Field(description="The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint.")],
+        client_id: Annotated[StrictStr, Field(description="The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against.")],
+        redirect_uri: Annotated[StrictStr, Field(description="Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused.")],
+        scope: Annotated[StrictStr, Field(description="The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -65,17 +65,17 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """OAuth2 Authorization Endpoint
+        """Start the authorization flow
 
-        Initiates the OAuth2 authorization flow.
+        Starts the OAuth2 authorization code flow for the client named by client_id. The caller has to present the portal signature cookie, and a request without a valid one is not refused with 401 or 403 but redirected to the portal login page, carrying the client ID so the flow can resume after signing in. When the user has not yet consented to the requested scopes the browser is redirected to the consent page; once the consent exists the browser is redirected to the client's redirect URI with the authorization code and, when one was sent, the original state. A caller that cannot follow redirects may send the X-Disable-Redirect header, and then the response is 200 with an empty body and the target URL in the X-Redirect-URI header. The code returned here is exchanged for tokens at the token endpoint.
 
-        :param response_type: The OAuth 2.0 response type, must be 'code' for authorization code flow. (required)
+        :param response_type: The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint. (required)
         :type response_type: str
-        :param client_id: The client identifier issued to the client during registration. (required)
+        :param client_id: The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against. (required)
         :type client_id: str
-        :param redirect_uri: The URL to redirect to after authorization is complete. (required)
+        :param redirect_uri: Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused. (required)
         :type redirect_uri: str
-        :param scope: The space-separated list of requested scope permissions. (required)
+        :param scope: The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these. (required)
         :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -111,6 +111,7 @@ class AuthorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            '302': None,
             '200': None,
             '400': None,
         }
@@ -129,10 +130,10 @@ class AuthorizationApi:
     @validate_call
     def authorize_o_auth_with_http_info(
         self,
-        response_type: Annotated[StrictStr, Field(description="The OAuth 2.0 response type, must be 'code' for authorization code flow.")],
-        client_id: Annotated[StrictStr, Field(description="The client identifier issued to the client during registration.")],
-        redirect_uri: Annotated[StrictStr, Field(description="The URL to redirect to after authorization is complete.")],
-        scope: Annotated[StrictStr, Field(description="The space-separated list of requested scope permissions.")],
+        response_type: Annotated[StrictStr, Field(description="The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint.")],
+        client_id: Annotated[StrictStr, Field(description="The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against.")],
+        redirect_uri: Annotated[StrictStr, Field(description="Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused.")],
+        scope: Annotated[StrictStr, Field(description="The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -146,17 +147,17 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """OAuth2 Authorization Endpoint
+        """Start the authorization flow
 
-        Initiates the OAuth2 authorization flow.
+        Starts the OAuth2 authorization code flow for the client named by client_id. The caller has to present the portal signature cookie, and a request without a valid one is not refused with 401 or 403 but redirected to the portal login page, carrying the client ID so the flow can resume after signing in. When the user has not yet consented to the requested scopes the browser is redirected to the consent page; once the consent exists the browser is redirected to the client's redirect URI with the authorization code and, when one was sent, the original state. A caller that cannot follow redirects may send the X-Disable-Redirect header, and then the response is 200 with an empty body and the target URL in the X-Redirect-URI header. The code returned here is exchanged for tokens at the token endpoint.
 
-        :param response_type: The OAuth 2.0 response type, must be 'code' for authorization code flow. (required)
+        :param response_type: The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint. (required)
         :type response_type: str
-        :param client_id: The client identifier issued to the client during registration. (required)
+        :param client_id: The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against. (required)
         :type client_id: str
-        :param redirect_uri: The URL to redirect to after authorization is complete. (required)
+        :param redirect_uri: Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused. (required)
         :type redirect_uri: str
-        :param scope: The space-separated list of requested scope permissions. (required)
+        :param scope: The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these. (required)
         :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -192,6 +193,7 @@ class AuthorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            '302': None,
             '200': None,
             '400': None,
         }
@@ -210,10 +212,10 @@ class AuthorizationApi:
     @validate_call
     def authorize_o_auth_without_preload_content(
         self,
-        response_type: Annotated[StrictStr, Field(description="The OAuth 2.0 response type, must be 'code' for authorization code flow.")],
-        client_id: Annotated[StrictStr, Field(description="The client identifier issued to the client during registration.")],
-        redirect_uri: Annotated[StrictStr, Field(description="The URL to redirect to after authorization is complete.")],
-        scope: Annotated[StrictStr, Field(description="The space-separated list of requested scope permissions.")],
+        response_type: Annotated[StrictStr, Field(description="The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint.")],
+        client_id: Annotated[StrictStr, Field(description="The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against.")],
+        redirect_uri: Annotated[StrictStr, Field(description="Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused.")],
+        scope: Annotated[StrictStr, Field(description="The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -227,17 +229,17 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """OAuth2 Authorization Endpoint
+        """Start the authorization flow
 
-        Initiates the OAuth2 authorization flow.
+        Starts the OAuth2 authorization code flow for the client named by client_id. The caller has to present the portal signature cookie, and a request without a valid one is not refused with 401 or 403 but redirected to the portal login page, carrying the client ID so the flow can resume after signing in. When the user has not yet consented to the requested scopes the browser is redirected to the consent page; once the consent exists the browser is redirected to the client's redirect URI with the authorization code and, when one was sent, the original state. A caller that cannot follow redirects may send the X-Disable-Redirect header, and then the response is 200 with an empty body and the target URL in the X-Redirect-URI header. The code returned here is exchanged for tokens at the token endpoint.
 
-        :param response_type: The OAuth 2.0 response type, must be 'code' for authorization code flow. (required)
+        :param response_type: The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint. (required)
         :type response_type: str
-        :param client_id: The client identifier issued to the client during registration. (required)
+        :param client_id: The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against. (required)
         :type client_id: str
-        :param redirect_uri: The URL to redirect to after authorization is complete. (required)
+        :param redirect_uri: Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused. (required)
         :type redirect_uri: str
-        :param scope: The space-separated list of requested scope permissions. (required)
+        :param scope: The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these. (required)
         :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -273,6 +275,7 @@ class AuthorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            '302': None,
             '200': None,
             '400': None,
         }
@@ -364,11 +367,11 @@ class AuthorizationApi:
     @validate_call
     def exchange_token(
         self,
-        grant_type: Annotated[Optional[StrictStr], Field(description="The OAuth2 grant type, must be 'authorization_code' for the authorization code flow.")] = None,
-        code: Annotated[Optional[StrictStr], Field(description="A temporary authorization code that is sent to the client to be exchanged for a token.")] = None,
-        redirect_uri: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after successful or unsuccessful authentication.")] = None,
-        client_id: Annotated[Optional[StrictStr], Field(description="The client identifier issued to the client during registration.")] = None,
-        client_secret: Annotated[Optional[StrictStr], Field(description="The client secret issued to the client during registration.")] = None,
+        grant_type: Annotated[Optional[StrictStr], Field(description="Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token.")] = None,
+        code: Annotated[Optional[StrictStr], Field(description="The authorization code returned by the authorization endpoint. It may be redeemed once.")] = None,
+        redirect_uri: Annotated[Optional[StrictStr], Field(description="The same redirect URI that was used to obtain the code. The exchange fails when it differs.")] = None,
+        client_id: Annotated[Optional[StrictStr], Field(description="The identifier of the client redeeming the code.")] = None,
+        client_secret: Annotated[Optional[StrictStr], Field(description="The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -382,19 +385,19 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ExchangeToken200Response:
-        """OAuth2 Token Endpoint
+        """Exchange the authorization code
 
-        Exchange authorization code for access token
+        Exchanges an authorization code for an access token. The request is form-encoded and has to carry the grant type, the code, the same redirect URI that was used to obtain the code, and the client credentials: the client authenticates itself here rather than through the portal signature cookie the authorization endpoint uses. The response carries the access token, its type and its lifetime in seconds, plus a refresh token when the client is configured for the refresh token grant. Client authentication that fails is answered with 401, while a malformed, unknown or expired code is answered with 400. The code is single use, so replaying it fails.
 
-        :param grant_type: The OAuth2 grant type, must be 'authorization_code' for the authorization code flow.
+        :param grant_type: Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token.
         :type grant_type: str
-        :param code: A temporary authorization code that is sent to the client to be exchanged for a token.
+        :param code: The authorization code returned by the authorization endpoint. It may be redeemed once.
         :type code: str
-        :param redirect_uri: The URL where the user will be redirected after successful or unsuccessful authentication.
+        :param redirect_uri: The same redirect URI that was used to obtain the code. The exchange fails when it differs.
         :type redirect_uri: str
-        :param client_id: The client identifier issued to the client during registration.
+        :param client_id: The identifier of the client redeeming the code.
         :type client_id: str
-        :param client_secret: The client secret issued to the client during registration.
+        :param client_secret: The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead.
         :type client_secret: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -433,6 +436,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExchangeToken200Response",
             '400': None,
+            '401': None,
         }
 
         response_data = self.api_client.call_api(
@@ -449,11 +453,11 @@ class AuthorizationApi:
     @validate_call
     def exchange_token_with_http_info(
         self,
-        grant_type: Annotated[Optional[StrictStr], Field(description="The OAuth2 grant type, must be 'authorization_code' for the authorization code flow.")] = None,
-        code: Annotated[Optional[StrictStr], Field(description="A temporary authorization code that is sent to the client to be exchanged for a token.")] = None,
-        redirect_uri: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after successful or unsuccessful authentication.")] = None,
-        client_id: Annotated[Optional[StrictStr], Field(description="The client identifier issued to the client during registration.")] = None,
-        client_secret: Annotated[Optional[StrictStr], Field(description="The client secret issued to the client during registration.")] = None,
+        grant_type: Annotated[Optional[StrictStr], Field(description="Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token.")] = None,
+        code: Annotated[Optional[StrictStr], Field(description="The authorization code returned by the authorization endpoint. It may be redeemed once.")] = None,
+        redirect_uri: Annotated[Optional[StrictStr], Field(description="The same redirect URI that was used to obtain the code. The exchange fails when it differs.")] = None,
+        client_id: Annotated[Optional[StrictStr], Field(description="The identifier of the client redeeming the code.")] = None,
+        client_secret: Annotated[Optional[StrictStr], Field(description="The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -467,19 +471,19 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ExchangeToken200Response]:
-        """OAuth2 Token Endpoint
+        """Exchange the authorization code
 
-        Exchange authorization code for access token
+        Exchanges an authorization code for an access token. The request is form-encoded and has to carry the grant type, the code, the same redirect URI that was used to obtain the code, and the client credentials: the client authenticates itself here rather than through the portal signature cookie the authorization endpoint uses. The response carries the access token, its type and its lifetime in seconds, plus a refresh token when the client is configured for the refresh token grant. Client authentication that fails is answered with 401, while a malformed, unknown or expired code is answered with 400. The code is single use, so replaying it fails.
 
-        :param grant_type: The OAuth2 grant type, must be 'authorization_code' for the authorization code flow.
+        :param grant_type: Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token.
         :type grant_type: str
-        :param code: A temporary authorization code that is sent to the client to be exchanged for a token.
+        :param code: The authorization code returned by the authorization endpoint. It may be redeemed once.
         :type code: str
-        :param redirect_uri: The URL where the user will be redirected after successful or unsuccessful authentication.
+        :param redirect_uri: The same redirect URI that was used to obtain the code. The exchange fails when it differs.
         :type redirect_uri: str
-        :param client_id: The client identifier issued to the client during registration.
+        :param client_id: The identifier of the client redeeming the code.
         :type client_id: str
-        :param client_secret: The client secret issued to the client during registration.
+        :param client_secret: The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead.
         :type client_secret: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -518,6 +522,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExchangeToken200Response",
             '400': None,
+            '401': None,
         }
 
         response_data = self.api_client.call_api(
@@ -534,11 +539,11 @@ class AuthorizationApi:
     @validate_call
     def exchange_token_without_preload_content(
         self,
-        grant_type: Annotated[Optional[StrictStr], Field(description="The OAuth2 grant type, must be 'authorization_code' for the authorization code flow.")] = None,
-        code: Annotated[Optional[StrictStr], Field(description="A temporary authorization code that is sent to the client to be exchanged for a token.")] = None,
-        redirect_uri: Annotated[Optional[StrictStr], Field(description="The URL where the user will be redirected after successful or unsuccessful authentication.")] = None,
-        client_id: Annotated[Optional[StrictStr], Field(description="The client identifier issued to the client during registration.")] = None,
-        client_secret: Annotated[Optional[StrictStr], Field(description="The client secret issued to the client during registration.")] = None,
+        grant_type: Annotated[Optional[StrictStr], Field(description="Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token.")] = None,
+        code: Annotated[Optional[StrictStr], Field(description="The authorization code returned by the authorization endpoint. It may be redeemed once.")] = None,
+        redirect_uri: Annotated[Optional[StrictStr], Field(description="The same redirect URI that was used to obtain the code. The exchange fails when it differs.")] = None,
+        client_id: Annotated[Optional[StrictStr], Field(description="The identifier of the client redeeming the code.")] = None,
+        client_secret: Annotated[Optional[StrictStr], Field(description="The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -552,19 +557,19 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """OAuth2 Token Endpoint
+        """Exchange the authorization code
 
-        Exchange authorization code for access token
+        Exchanges an authorization code for an access token. The request is form-encoded and has to carry the grant type, the code, the same redirect URI that was used to obtain the code, and the client credentials: the client authenticates itself here rather than through the portal signature cookie the authorization endpoint uses. The response carries the access token, its type and its lifetime in seconds, plus a refresh token when the client is configured for the refresh token grant. Client authentication that fails is answered with 401, while a malformed, unknown or expired code is answered with 400. The code is single use, so replaying it fails.
 
-        :param grant_type: The OAuth2 grant type, must be 'authorization_code' for the authorization code flow.
+        :param grant_type: Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token.
         :type grant_type: str
-        :param code: A temporary authorization code that is sent to the client to be exchanged for a token.
+        :param code: The authorization code returned by the authorization endpoint. It may be redeemed once.
         :type code: str
-        :param redirect_uri: The URL where the user will be redirected after successful or unsuccessful authentication.
+        :param redirect_uri: The same redirect URI that was used to obtain the code. The exchange fails when it differs.
         :type redirect_uri: str
-        :param client_id: The client identifier issued to the client during registration.
+        :param client_id: The identifier of the client redeeming the code.
         :type client_id: str
-        :param client_secret: The client secret issued to the client during registration.
+        :param client_secret: The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead.
         :type client_secret: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -603,6 +608,7 @@ class AuthorizationApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExchangeToken200Response",
             '400': None,
+            '401': None,
         }
 
         response_data = self.api_client.call_api(
@@ -706,9 +712,9 @@ class AuthorizationApi:
     @validate_call
     def submit_consent(
         self,
-        client_id: Annotated[Optional[StrictStr], Field(description="The client identifier issued to the client during registration.")] = None,
-        state: Annotated[Optional[StrictStr], Field(description="The random string used to solve the CSRF vulnerability problem.")] = None,
-        scope: Annotated[Optional[StrictStr], Field(description="The space-separated list of requested scope permissions.")] = None,
+        client_id: Annotated[Optional[StrictStr], Field(description="The client the consent is being given to. It has to be the same client the authorization request named.")] = None,
+        state: Annotated[Optional[StrictStr], Field(description="The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request.")] = None,
+        scope: Annotated[Optional[StrictStr], Field(description="The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -722,15 +728,15 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """OAuth2 consent endpoint
+        """Submit the consent decision
 
-        Sends consent approval
+        Submits the user's consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client's redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
 
-        :param client_id: The client identifier issued to the client during registration.
+        :param client_id: The client the consent is being given to. It has to be the same client the authorization request named.
         :type client_id: str
-        :param state: The random string used to solve the CSRF vulnerability problem.
+        :param state: The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request.
         :type state: str
-        :param scope: The space-separated list of requested scope permissions.
+        :param scope: The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested.
         :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -766,6 +772,7 @@ class AuthorizationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '302': None,
+            '200': None,
             '400': None,
         }
 
@@ -783,9 +790,9 @@ class AuthorizationApi:
     @validate_call
     def submit_consent_with_http_info(
         self,
-        client_id: Annotated[Optional[StrictStr], Field(description="The client identifier issued to the client during registration.")] = None,
-        state: Annotated[Optional[StrictStr], Field(description="The random string used to solve the CSRF vulnerability problem.")] = None,
-        scope: Annotated[Optional[StrictStr], Field(description="The space-separated list of requested scope permissions.")] = None,
+        client_id: Annotated[Optional[StrictStr], Field(description="The client the consent is being given to. It has to be the same client the authorization request named.")] = None,
+        state: Annotated[Optional[StrictStr], Field(description="The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request.")] = None,
+        scope: Annotated[Optional[StrictStr], Field(description="The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -799,15 +806,15 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """OAuth2 consent endpoint
+        """Submit the consent decision
 
-        Sends consent approval
+        Submits the user's consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client's redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
 
-        :param client_id: The client identifier issued to the client during registration.
+        :param client_id: The client the consent is being given to. It has to be the same client the authorization request named.
         :type client_id: str
-        :param state: The random string used to solve the CSRF vulnerability problem.
+        :param state: The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request.
         :type state: str
-        :param scope: The space-separated list of requested scope permissions.
+        :param scope: The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested.
         :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -843,6 +850,7 @@ class AuthorizationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '302': None,
+            '200': None,
             '400': None,
         }
 
@@ -860,9 +868,9 @@ class AuthorizationApi:
     @validate_call
     def submit_consent_without_preload_content(
         self,
-        client_id: Annotated[Optional[StrictStr], Field(description="The client identifier issued to the client during registration.")] = None,
-        state: Annotated[Optional[StrictStr], Field(description="The random string used to solve the CSRF vulnerability problem.")] = None,
-        scope: Annotated[Optional[StrictStr], Field(description="The space-separated list of requested scope permissions.")] = None,
+        client_id: Annotated[Optional[StrictStr], Field(description="The client the consent is being given to. It has to be the same client the authorization request named.")] = None,
+        state: Annotated[Optional[StrictStr], Field(description="The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request.")] = None,
+        scope: Annotated[Optional[StrictStr], Field(description="The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -876,15 +884,15 @@ class AuthorizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """OAuth2 consent endpoint
+        """Submit the consent decision
 
-        Sends consent approval
+        Submits the user's consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client's redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
 
-        :param client_id: The client identifier issued to the client during registration.
+        :param client_id: The client the consent is being given to. It has to be the same client the authorization request named.
         :type client_id: str
-        :param state: The random string used to solve the CSRF vulnerability problem.
+        :param state: The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request.
         :type state: str
-        :param scope: The space-separated list of requested scope permissions.
+        :param scope: The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested.
         :type scope: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -920,6 +928,7 @@ class AuthorizationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '302': None,
+            '200': None,
             '400': None,
         }
 

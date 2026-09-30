@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class ChatSettingsDto(BaseModel):
     """
-    The chat settings parameters.
+    The chat configuration of an AI room.
     """ # noqa: E501
-    prompt: Optional[StrictStr] = Field(default=None, description="The system prompt for the chat.", json_schema_extra={"examples": ["You are a helpful assistant."]})
+    prompt: Optional[StrictStr] = Field(default=None, description="The instruction put in front of every conversation held in the room, which sets the role the assistant takes  and the way it answers. Empty when the room was left on the behaviour the portal provides by default.", json_schema_extra={"examples": ["You are a helpful assistant for project documentation."]})
     __properties: ClassVar[List[str]] = ["prompt"]
 
     model_config = ConfigDict(

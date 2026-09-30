@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class DeleteFolder(BaseModel):
     """
-    The parameters for deleting a folder.
+    How a folder is to be deleted.
     """ # noqa: E501
-    delete_after: Optional[StrictBool] = Field(default=None, description="Specifies whether to delete a folder after the editing session is finished or not.", alias="deleteAfter", json_schema_extra={"examples": [False]})
-    immediately: Optional[StrictBool] = Field(default=None, description="Specifies whether to move a folder to the \\Trash\\ folder or delete it immediately.", json_schema_extra={"examples": [False]})
+    delete_after: Optional[StrictBool] = Field(default=None, description="Whether the deletion waits for the editing sessions on the contents to end: with true a folder somebody is  working in is removed once they are done, with false the deletion starts at once.", alias="deleteAfter", json_schema_extra={"examples": [False]})
+    immediately: Optional[StrictBool] = Field(default=None, description="Whether the folder is discarded for good instead of being moved to the Trash section: with false it can be  restored from Trash, with true it cannot be recovered. Inside a room there is no Trash and the deletion is  final either way.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["deleteAfter", "immediately"]
 
     model_config = ConfigDict(

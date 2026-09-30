@@ -28,11 +28,11 @@ from typing_extensions import Self
 
 class WebhookTriggerDto(BaseModel):
     """
-    The webhook trigger with its availability for the current user.
+    One event a webhook can listen to, with the bit that selects it and whether the caller may subscribe to it.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The trigger name.", json_schema_extra={"examples": ["file.created"]})
-    id: Optional[StrictInt] = Field(default=None, description="The trigger bit value.", json_schema_extra={"examples": [128]})
-    available: Optional[StrictBool] = Field(default=None, description="Specifies whether this trigger is available for the current user's role.", json_schema_extra={"examples": [True]})
+    name: Optional[StrictStr] = Field(default=None, description="The event name exactly as it appears in a delivered payload, so a receiver can match on it. The entry  named `*` is not an event but the catch-all.", json_schema_extra={"examples": ["file.created"]})
+    id: Optional[StrictInt] = Field(default=None, description="The bit that stands for this event in the `triggers` bitmask of a subscription. Add the bits of the wanted  events together; the catch-all entry has the value `0` and is used on its own rather than added to  anything.", json_schema_extra={"examples": [128]})
+    available: Optional[StrictBool] = Field(default=None, description="Whether the caller's own role may subscribe to this event - a plain member cannot subscribe to user, group  or room creation, where a room administrator can. An unavailable event is listed all the same, and sending  its bit to `POST api/2.0/settings/webhook` is refused as an invalid request.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["name", "id", "available"]
 
     model_config = ConfigDict(

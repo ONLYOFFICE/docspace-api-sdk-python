@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.payment_method_status import PaymentMethodStatus
@@ -30,13 +30,15 @@ from typing_extensions import Self
 
 class CustomerInfoDto(BaseModel):
     """
-    The customer information.
+    The billing customer behind the portal, and which portal member pays for it.
     """ # noqa: E501
-    portal_id: Optional[StrictStr] = Field(default=None, description="The portal ID.", alias="portalId", json_schema_extra={"examples": ["portal-001"]})
-    payment_method_status: Optional[PaymentMethodStatus] = Field(default=None, description="The customer's payment method.", alias="paymentMethodStatus")
-    email: Optional[StrictStr] = Field(default=None, description="The customer email address.", json_schema_extra={"examples": ["user@example.com"]})
-    payer: Optional[EmployeeDto] = Field(default=None, description="The paying user.")
-    __properties: ClassVar[List[str]] = ["portalId", "paymentMethodStatus", "email", "payer"]
+    portal_id: Optional[StrictStr] = Field(default=None, description="The portal's identifier in the billing system, which is what support and invoices refer to. It is not the  portal alias.", alias="portalId", json_schema_extra={"examples": ["portal-001"]})
+    payment_method_status: Optional[PaymentMethodStatus] = Field(default=None, description="Whether a payment method is stored for the account and usable. Without one the portal can hold a wallet  balance but cannot be charged automatically.", alias="paymentMethodStatus")
+    payment_method_type: Optional[StrictStr] = Field(default=None, description="The customer's payment method type.", alias="paymentMethodType", json_schema_extra={"examples": ["card"]})
+    is_delayed_payment_method: Optional[StrictBool] = Field(default=None, description="Indicates whether the customer's payment method is delayed, i.e. the money reaches the wallet only after  the transfer settles rather than immediately.", alias="isDelayedPaymentMethod", json_schema_extra={"examples": [False]})
+    email: Optional[StrictStr] = Field(default=None, description="The address the billing account is registered to, lower-cased. It need not belong to a portal member,  which is exactly when `payer` stays empty.", json_schema_extra={"examples": ["user@example.com"]})
+    payer: Optional[EmployeeDto] = Field(default=None, description="The portal member whose account is behind the billing address. It is empty when `email` matches no member  of this portal, and while it is empty every operation of this group that only the payer may call is out  of reach for everybody.")
+    __properties: ClassVar[List[str]] = ["portalId", "paymentMethodStatus", "paymentMethodType", "isDelayedPaymentMethod", "email", "payer"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -70,9 +72,13 @@ class CustomerInfoDto(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
             "portal_id",
+            "payment_method_type",
+            "is_delayed_payment_method",
             "email",
         ])
 
@@ -88,6 +94,11 @@ class CustomerInfoDto(BaseModel):
         # and model_fields_set contains the field
         if self.portal_id is None and "portal_id" in self.model_fields_set:
             _dict['portalId'] = None
+
+        # set to None if payment_method_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.payment_method_type is None and "payment_method_type" in self.model_fields_set:
+            _dict['paymentMethodType'] = None
 
         # set to None if email (nullable) is None
         # and model_fields_set contains the field
@@ -109,6 +120,8 @@ class CustomerInfoDto(BaseModel):
         _obj = cls.model_validate({
             "portalId": obj.get("portalId"),
             "paymentMethodStatus": obj.get("paymentMethodStatus"),
+            "paymentMethodType": obj.get("paymentMethodType"),
+            "isDelayedPaymentMethod": obj.get("isDelayedPaymentMethod"),
             "email": obj.get("email"),
             "payer": EmployeeDto.from_dict(obj["payer"]) if obj.get("payer") is not None else None
         })

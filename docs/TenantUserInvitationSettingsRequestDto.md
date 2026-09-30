@@ -1,12 +1,12 @@
 # TenantUserInvitationSettingsRequestDto
-The request parameters for updating the user invitation settings.
+Whether the portal still lets its members invite new members and new guests.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allow_inviting_members** | **bool** | Specifies whether to allow inviting new DocSpace members through the Contacts section. | [optional] 
-**allow_inviting_guests** | **bool** | Specifies whether to allow all DocSpace members to invite external guests to the rooms. | [optional] 
+**allow_inviting_members** | **bool** | Whether new DocSpace members may be invited through the Contacts section. Switching it off only stops new  invitations being created; links already issued keep working and members already invited stay. | [optional] 
+**allow_inviting_guests** | **bool** | Whether every DocSpace member, and not only an administrator, may invite external guests into rooms.  Switching it off leaves the guests already invited in place. | [optional] 
 
 ## Example
 

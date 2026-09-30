@@ -31,10 +31,10 @@ class SignupAccountRequestDto(BaseModel):
     """
     The request parameters for creating a third-party account.
     """ # noqa: E501
-    employee_type: Optional[EmployeeType] = Field(default=None, description="The user type.", alias="employeeType")
-    key: Optional[StrictStr] = Field(description="The user link key.", json_schema_extra={"examples": ["invite_key_123456"]})
-    culture: Optional[StrictStr] = Field(default=None, description="The user culture code.", json_schema_extra={"examples": ["en-US"]})
-    serialized_profile: Optional[StrictStr] = Field(description="The third-party profile in the serialized format", alias="serializedProfile", json_schema_extra={"examples": ["{\"provider\":\"Google\",\"id\":\"123456\"}"]})
+    employee_type: Optional[EmployeeType] = Field(default=None, description="The type the invitation link is looked up as, defaulting to `RoomAdmin`. It does not decide the resulting  type: the link itself does, and this value only has to match the kind of link that was issued.", alias="employeeType")
+    key: Optional[StrictStr] = Field(description="The key of the invitation link being accepted, taken from the link the invitation email or the room  invitation contains. An expired or already used key is rejected with 403.", json_schema_extra={"examples": ["invite_key_123456"]})
+    culture: Optional[StrictStr] = Field(default=None, description="The culture to set on the new profile, as a culture code. It is applied only when the portal has that culture  enabled, and otherwise the portal default is kept.", json_schema_extra={"examples": ["en-US"]})
+    serialized_profile: Optional[StrictStr] = Field(description="The profile a completed provider authorization produced, in the serialized form the login flow hands back.  Pass that value unchanged; the first name, the last name, the email and the avatar of the new profile are  taken from it.", alias="serializedProfile", json_schema_extra={"examples": ["{\"provider\":\"google\",\"id\":\"123456\"}"]})
     __properties: ClassVar[List[str]] = ["employeeType", "key", "culture", "serializedProfile"]
 
     model_config = ConfigDict(

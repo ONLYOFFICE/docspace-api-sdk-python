@@ -32,7 +32,7 @@ class AiWebSearchMutationResult(BaseModel):
     """
     Outcome of `WebSearchEngine.configure` — either the persisted config or a field-scoped error suitable for the settings form.
     """ # noqa: E501
-    success: StrictBool = Field(description="True when the configuration was persisted.")
+    success: StrictBool = Field(description="True when the configuration was persisted.", json_schema_extra={"examples": [True]})
     config: Optional[AiWebSearchConfig] = Field(default=None, description="The persisted web-search configuration. Present on success.")
     error: Optional[AiTErrorData] = Field(default=None, description="Why the configuration was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "config", "error"]

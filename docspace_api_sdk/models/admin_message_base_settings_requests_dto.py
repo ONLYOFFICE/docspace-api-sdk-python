@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class AdminMessageBaseSettingsRequestsDto(BaseModel):
     """
-    The request parameters for the administrator message configuration.
+    Who is invited to join the portal, and in which language the invitation is written.
     """ # noqa: E501
-    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The email address used for sending administrator messages.", json_schema_extra={"examples": ["admin@example.com"]})
-    culture: Optional[StrictStr] = Field(default=None, description="The locale identifier for message localization.", json_schema_extra={"examples": ["en-US"]})
+    email: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(description="The address the join link is sent to. It has to be a well-formed ASCII address rather than an  internationalized one, must not already belong to a member of the portal, and, where the portal trusts named  domains only, has to end with one of them; any of these faults is refused with 400.", json_schema_extra={"examples": ["admin@example.com"]})
+    culture: Optional[StrictStr] = Field(default=None, description="The language the letter is written in, as a culture name such as `en-US`. A culture the installation does not  have falls back to the portal language rather than failing the call.", json_schema_extra={"examples": ["en-US"]})
     __properties: ClassVar[List[str]] = ["email", "culture"]
 
     model_config = ConfigDict(

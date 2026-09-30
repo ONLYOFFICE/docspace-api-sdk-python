@@ -1,5 +1,5 @@
 # DocsCloudTenant
-Represents a DocsCloud tenant of a portal.
+Represents a Docs Connect tenant of a portal.
 
 ## Properties
 

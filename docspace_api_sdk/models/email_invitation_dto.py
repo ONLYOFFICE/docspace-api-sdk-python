@@ -31,7 +31,7 @@ class EmailInvitationDto(BaseModel):
     """
     The email invitation parameters.
     """ # noqa: E501
-    email: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The email address.", json_schema_extra={"examples": ["user@example.com"]})
+    email: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The address of somebody who has no portal account yet. An invitation is sent to it and an account is created  once it is accepted, so this is the field to use instead of an account identifier when the person is new to  the portal.", json_schema_extra={"examples": ["jane.doe@example.com"]})
     __properties: ClassVar[List[str]] = ["email"]
 
     model_config = ConfigDict(

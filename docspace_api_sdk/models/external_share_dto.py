@@ -31,21 +31,21 @@ from typing_extensions import Self
 
 class ExternalShareDto(BaseModel):
     """
-    The external sharing information and validation data.
+    The outcome of validating an external share link and the entry it points at.
     """ # noqa: E501
-    status: Status = Field(description="The external data status.")
-    id: Optional[StrictStr] = Field(default=None, description="The external data ID.", json_schema_extra={"examples": ["123"]})
-    title: Optional[StrictStr] = Field(default=None, description="The external data title.", json_schema_extra={"examples": ["Shared Document"]})
-    type: Optional[FileEntryType] = Field(default=None, description="The type of the external data.")
-    tenant_id: StrictInt = Field(description="The tenant ID.", alias="tenantId", json_schema_extra={"examples": [1]})
-    entity_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the shared entity.", alias="entityId", json_schema_extra={"examples": ["456"]})
-    entity_title: Optional[StrictStr] = Field(default=None, description="The title of the shared entity.", alias="entityTitle", json_schema_extra={"examples": ["Entity Title"]})
-    entity_type: Optional[FileEntryType] = Field(default=None, description="The entry type of the external data.", alias="entityType")
-    is_room: Optional[StrictBool] = Field(default=None, description="Indicates whether the entity represents a room.", alias="isRoom", json_schema_extra={"examples": [False]})
-    shared: StrictBool = Field(description="Specifies whether to share the external data or not.", json_schema_extra={"examples": [True]})
-    link_id: UUID = Field(description="The link ID of the external data.", alias="linkId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    is_authenticated: StrictBool = Field(description="Specifies whether the user is authenticated or not.", alias="isAuthenticated", json_schema_extra={"examples": [True]})
-    is_room_member: Optional[StrictBool] = Field(default=None, description="The room ID of the external data.", alias="isRoomMember", json_schema_extra={"examples": [False]})
+    status: Status = Field(description="How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty.")
+    id: Optional[StrictStr] = Field(default=None, description="The identifier of the room, folder or file the link points at, always rendered as a string even where the  portal stores it as a number. It is null when the link could not be resolved.", json_schema_extra={"examples": ["42"]})
+    title: Optional[StrictStr] = Field(default=None, description="The title of the entry the link points at, suitable for showing to the visitor before they are let in. It is  null when the link could not be resolved.", json_schema_extra={"examples": ["Project documents"]})
+    type: Optional[FileEntryType] = Field(default=None, description="Whether the link points at a folder - a room counts as one - or at a single file. It is null when the link  could not be resolved.")
+    tenant_id: StrictInt = Field(description="The portal the link belongs to, which matters for a client that works with more than one. It stays 0 for a  link that did not resolve.", alias="tenantId", json_schema_extra={"examples": [1]})
+    entity_id: Optional[StrictStr] = Field(default=None, description="The identifier of the entry that was asked about through the request's file or folder parameter, echoed back  once it was found under the link's target. It is null when nothing was asked about, or when the entry lies  outside what the link opens.", alias="entityId", json_schema_extra={"examples": ["9"]})
+    entity_title: Optional[StrictStr] = Field(default=None, description="The title of that entry, null under the same conditions as its identifier.", alias="entityTitle", json_schema_extra={"examples": ["Contract.docx"]})
+    entity_type: Optional[FileEntryType] = Field(default=None, description="Whether that entry is a folder or a file, null under the same conditions as its identifier.", alias="entityType")
+    is_room: Optional[StrictBool] = Field(default=None, description="True when the link opens a whole room rather than one entry inside it. It is null for a link to a file and for  a link that did not resolve.", alias="isRoom", json_schema_extra={"examples": [True]})
+    shared: StrictBool = Field(description="True when the entry now sits in the calling account's own lists - it was already shared with that account, or  resolving the link has just put it there. It stays false for a visitor browsing without an account, who  reaches the entry through the link alone.", json_schema_extra={"examples": [True]})
+    link_id: UUID = Field(description="The link the token belongs to, which is also the subject under which the link appears among the sharing rights  of the entry. It is an empty identifier when the link did not resolve.", alias="linkId", json_schema_extra={"examples": ["b3a1f0c7-5d2e-4a19-9f38-71c6e0d4b852"]})
+    is_authenticated: StrictBool = Field(description="Whether the request carried a signed-in account. It says nothing about that account's rights on the entry, so  it must not be read as permission - it is false for every anonymous visitor and true for any member, even one  who is a stranger to the room.", alias="isAuthenticated", json_schema_extra={"examples": [True]})
+    is_room_member: Optional[StrictBool] = Field(default=None, description="Whether the signed-in caller already has rights of their own on the room that holds the entry, as opposed to  reaching it through this link. It is false for an anonymous visitor and for a member who has never been  invited.", alias="isRoomMember", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["status", "id", "title", "type", "tenantId", "entityId", "entityTitle", "entityType", "isRoom", "shared", "linkId", "isAuthenticated", "isRoomMember"]
 
     model_config = ConfigDict(

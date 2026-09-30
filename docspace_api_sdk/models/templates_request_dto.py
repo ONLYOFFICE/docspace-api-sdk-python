@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class TemplatesRequestDto(BaseModel):
     """
-    The request parameters for adding files to the template list.
+    The files to put on the personal template list of the calling account.
     """ # noqa: E501
-    file_ids: Optional[List[StrictInt]] = Field(default=None, description="The list of file IDs.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
+    file_ids: Optional[List[StrictInt]] = Field(default=None, description="The files to put on the template list, by id, as reported by a folder listing such as  `GET api/2.0/files/{folderId}`. Only a file stored in the portal itself can become a template, which is why an  id here is always numeric.", alias="fileIds", json_schema_extra={"examples": [[1, 2, 3]]})
     __properties: ClassVar[List[str]] = ["fileIds"]
 
     model_config = ConfigDict(

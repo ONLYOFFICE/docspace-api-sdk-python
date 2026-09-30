@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class LoginSettingsRequestDto(BaseModel):
     """
-    The request parameters for configuring login security and performance settings.
+    The brute-force protection of the sign-in form: how many failures, over how long, cost how long a block.
     """ # noqa: E501
-    attempt_count: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="The maximum number of consecutive failed login attempts allowed before triggering account suspension.", alias="attemptCount", json_schema_extra={"examples": [1]})
-    block_time: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.", alias="blockTime", json_schema_extra={"examples": [1]})
-    check_period: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="The maximum time (in seconds) allowed for server to process and respond to login requests.", alias="checkPeriod", json_schema_extra={"examples": [1]})
+    attempt_count: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="How many failed sign-in attempts inside one window are tolerated before the offender is blocked. Attempts are  counted per user name and client address together, so one member being blocked leaves the rest of the portal  signing in normally.", alias="attemptCount", json_schema_extra={"examples": [1]})
+    block_time: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="How long, in seconds, a blocked user name and address pair stays refused. While the block lasts the sign-in  is refused even when the password is finally correct.", alias="blockTime", json_schema_extra={"examples": [1]})
+    check_period: Optional[Annotated[int, Field(le=9999, strict=True, ge=1)]] = Field(default=None, description="The length, in seconds, of the rolling window the failed attempts are counted over. A wider window makes the  same `attemptCount` stricter, because failures further apart still add up.", alias="checkPeriod", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["attemptCount", "blockTime", "checkPeriod"]
 
     model_config = ConfigDict(

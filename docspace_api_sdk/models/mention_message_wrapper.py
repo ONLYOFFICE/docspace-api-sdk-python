@@ -30,11 +30,11 @@ from typing_extensions import Self
 
 class MentionMessageWrapper(BaseModel):
     """
-    The mention message parameters.
+    The mention notification to send: what to say, whom to tell and where in the document the mention sits.
     """ # noqa: E501
-    action_link: Optional[ActionLinkConfig] = Field(default=None, description="The config parameter which contains the information about the action in the document that will be scrolled to.", alias="actionLink")
-    emails: Optional[List[StrictStr]] = Field(default=None, description="A list of emails that will receive the mention message.", json_schema_extra={"examples": [["user1@example.com", "user2@example.com"]]})
-    message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The mention message.", json_schema_extra={"examples": ["Hello"]})
+    action_link: Optional[ActionLinkConfig] = Field(default=None, description="The place in the document the notification link should open at, as the editor reports it when the mention is  made. Left out, the link opens the file at its beginning.", alias="actionLink")
+    emails: Optional[List[StrictStr]] = Field(default=None, description="The addresses to notify. Only an address that belongs to a portal account receives a mail; an unknown address  is skipped, and the answer then carries the access list of the file so that the client can invite its owner.", json_schema_extra={"examples": [["user1@example.com", "user2@example.com"]]})
+    message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The note shown next to the link in the mail. Only its first 200 characters are sent, and a value longer than  the field allows is refused.", json_schema_extra={"examples": ["Please take a look at the second paragraph"]})
     __properties: ClassVar[List[str]] = ["actionLink", "emails", "message"]
 
     model_config = ConfigDict(

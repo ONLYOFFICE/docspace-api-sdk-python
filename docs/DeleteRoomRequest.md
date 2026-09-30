@@ -1,11 +1,11 @@
 # DeleteRoomRequest
-The parameters for deleting a room.
+The body of a room deletion request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**delete_after** | **bool** | Specifies whether to delete a room after the editing session is finished or not. | [optional] 
+**delete_after** | **bool** | Carried by the contract but not acted upon: the deletion behaves the same either way, and the record of the  finished job is kept until it is read once. | [optional] 
 
 ## Example
 

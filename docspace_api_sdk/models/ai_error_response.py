@@ -30,7 +30,7 @@ class AiErrorResponse(BaseModel):
     """
     Error body — a single human-readable message.
     """ # noqa: E501
-    error: StrictStr = Field(description="The error message, ready to be shown to the caller.")
+    error: StrictStr = Field(description="The error message, ready to be shown to the caller.", json_schema_extra={"examples": ["threadId required"]})
     __properties: ClassVar[List[str]] = ["error"]
 
     model_config = ConfigDict(

@@ -1,11 +1,11 @@
 # MobileRequestsDto
-The parameters required for the mobile phone verification.
+The phone number a user going through phone activation registers for SMS codes.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**mobile_phone** | **str** | The user's mobile phone number. | [optional] 
+**mobile_phone** | **str** | The number the SMS codes are sent to, in international form with the leading `+` and no spaces. It is stored  as not yet activated and only becomes the confirmed number once a code sent to it is accepted; an already  activated number is not replaced this way and has to be erased first. | [optional] 
 
 ## Example
 

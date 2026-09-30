@@ -32,13 +32,13 @@ class AiAiToolCallData(BaseModel):
     """
     Identifies a pending tool call to resume — mirrors the library `ToolCallData` (its serializable fields).
     """ # noqa: E501
-    thread_id: StrictStr = Field(description="Thread the assistant message belongs to.", alias="threadId")
-    message_id: StrictStr = Field(description="Storage id of the assistant message holding the tool call.", alias="messageId")
-    idx: Union[StrictFloat, StrictInt] = Field(description="Index of the tool-call content part inside `message.content`.")
+    thread_id: StrictStr = Field(description="Thread the assistant message belongs to.", alias="threadId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
+    message_id: StrictStr = Field(description="Storage id of the assistant message holding the tool call.", alias="messageId", json_schema_extra={"examples": ["22222222-2222-2222-2222-222222222222"]})
+    idx: Union[StrictFloat, StrictInt] = Field(description="Index of the tool-call content part inside `message.content`.", json_schema_extra={"examples": [0]})
     message: AiThreadMessageLike = Field(description="Snapshot of the assistant message at the time the tool call surfaced.")
     action_args: Optional[AiAiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
-    entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId")
-    profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId")
+    entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId", json_schema_extra={"examples": ["1234"]})
+    profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     __properties: ClassVar[List[str]] = ["threadId", "messageId", "idx", "message", "actionArgs", "entityId", "profileId"]
 
     model_config = ConfigDict(

@@ -29,14 +29,14 @@ from typing_extensions import Self
 
 class PaymentSettingsDto(BaseModel):
     """
-    The payment settings parameters.
+    Where to buy or extend the portal's subscription, and what the subscription in force looks like.
     """ # noqa: E501
-    sales_email: Optional[StrictStr] = Field(description="The email address for sales inquiries and support.", alias="salesEmail", json_schema_extra={"examples": ["sales@example.com"]})
-    feedback_and_support_url: Optional[StrictStr] = Field(default=None, description="The URL for accessing the feedback and support resources.", alias="feedbackAndSupportUrl", json_schema_extra={"examples": ["https://example.com"]})
-    buy_url: Optional[StrictStr] = Field(description="The URL for purchasing or upgrading the product.", alias="buyUrl", json_schema_extra={"examples": ["https://example.com/buy"]})
-    standalone: StrictBool = Field(description="Indicates whether the system is running in standalone mode.", json_schema_extra={"examples": [False]})
-    current_license: CurrentLicenseInfo = Field(description="The current license information.", alias="currentLicense")
-    max: StrictInt = Field(description="The maximum quota quantity.", json_schema_extra={"examples": [1]})
+    sales_email: Optional[StrictStr] = Field(description="The vendor mailbox to write to about buying, extending or changing the subscription, picked for the portal  language. It is not the portal's own support address.", alias="salesEmail", json_schema_extra={"examples": ["sales@example.com"]})
+    feedback_and_support_url: Optional[StrictStr] = Field(default=None, description="Not populated: nothing fills this field in, so it always comes back empty. The help and support addresses  live in `externalResources` of `GET api/2.0/settings` instead.", alias="feedbackAndSupportUrl", json_schema_extra={"examples": ["https://example.com"]})
+    buy_url: Optional[StrictStr] = Field(description="The vendor page for buying or extending the subscription, chosen for the licence kind the installation was  built for and for the portal language. It is a page for a person to open, not an API to call.", alias="buyUrl", json_schema_extra={"examples": ["https://example.com/buy"]})
+    standalone: StrictBool = Field(description="Whether this is a server installation someone administers themselves rather than a portal in the cloud,  which decides whether payment means uploading a licence file or a subscription in the vendor's store.", json_schema_extra={"examples": [False]})
+    current_license: CurrentLicenseInfo = Field(description="The subscription in force, reduced to the two facts a payment page needs.", alias="currentLicense")
+    max: StrictInt = Field(description="The largest quantity of a paid item - members, storage - that may be bought in one go, `999` unless the  installation configures another cap. It bounds a single purchase, not the total a portal may hold.", json_schema_extra={"examples": [999]})
     __properties: ClassVar[List[str]] = ["salesEmail", "feedbackAndSupportUrl", "buyUrl", "standalone", "currentLicense", "max"]
 
     model_config = ConfigDict(

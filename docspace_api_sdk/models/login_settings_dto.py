@@ -28,12 +28,12 @@ from typing_extensions import Self
 
 class LoginSettingsDto(BaseModel):
     """
-    The login settings parameters.
+    The brute-force protection of the sign-in form: how many failures, over how long, cost how long a block.
     """ # noqa: E501
-    attempt_count: StrictInt = Field(description="The maximum number of consecutive failed login attempts allowed before triggering account suspension.", alias="attemptCount", json_schema_extra={"examples": [5]})
-    block_time: StrictInt = Field(description="The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.", alias="blockTime", json_schema_extra={"examples": [15]})
-    check_period: StrictInt = Field(description="The maximum time (in seconds) allowed for server to process and respond to login requests.", alias="checkPeriod", json_schema_extra={"examples": [60]})
-    is_default: StrictBool = Field(description="Specifies whether the login settings are default or not.", alias="isDefault", json_schema_extra={"examples": [False]})
+    attempt_count: StrictInt = Field(description="How many failed attempts inside one window are tolerated before the offender is blocked. Attempts are  counted per user name and client address together, so one member being blocked leaves the rest of the  portal signing in normally.", alias="attemptCount", json_schema_extra={"examples": [5]})
+    block_time: StrictInt = Field(description="How long, in seconds, a blocked user name and address pair stays refused. While the block lasts the  sign-in is refused even once the password is correct.", alias="blockTime", json_schema_extra={"examples": [15]})
+    check_period: StrictInt = Field(description="The length, in seconds, of the rolling window the failures are counted over. It is not a request timeout: a  wider window makes the same `attemptCount` stricter, because failures further apart still add up.", alias="checkPeriod", json_schema_extra={"examples": [60]})
+    is_default: StrictBool = Field(description="Whether the three numbers above still match the ones the installation ships with. It turns `false` as soon  as any of them is saved differently, and `true` again after  `DELETE api/2.0/settings/security/loginsettings`.", alias="isDefault", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["attemptCount", "blockTime", "checkPeriod", "isDefault"]
 
     model_config = ConfigDict(

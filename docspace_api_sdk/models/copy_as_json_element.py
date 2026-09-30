@@ -29,13 +29,13 @@ from typing_extensions import Self
 
 class CopyAsJsonElement(BaseModel):
     """
-    The parameters for copying a file.
+    The parameters of a file copy that may change the format on the way.
     """ # noqa: E501
-    dest_title: Optional[StrictStr] = Field(description="The copied file name.", alias="destTitle", json_schema_extra={"examples": ["Document Copy.docx"]})
+    dest_title: Optional[StrictStr] = Field(description="The title of the copy, extension included. That extension decides the format: the same one as the source  copies the content as it is, a different one has it converted first.", alias="destTitle", json_schema_extra={"examples": ["Document Copy.docx"]})
     dest_folder_id: CopyAsJsonElementDestFolderId = Field(alias="destFolderId")
-    enable_external_ext: Optional[StrictBool] = Field(default=None, description="Specifies whether to allow creating the copied file of an external extension or not.", alias="enableExternalExt", json_schema_extra={"examples": [False]})
-    password: Optional[StrictStr] = Field(default=None, description="The copied file password.", json_schema_extra={"examples": ["password123"]})
-    to_form: Optional[StrictBool] = Field(default=None, description="Specifies whether to convert the file to form or not.", alias="toForm", json_schema_extra={"examples": [False]})
+    enable_external_ext: Optional[StrictBool] = Field(default=None, description="Whether the extension of the new title may be one the portal does not edit itself.", alias="enableExternalExt", json_schema_extra={"examples": [False]})
+    password: Optional[StrictStr] = Field(default=None, description="The password that opens the source document, for a file that is protected by one.", json_schema_extra={"examples": ["password123"]})
+    to_form: Optional[StrictBool] = Field(default=None, description="Whether the copy is to become a PDF form rather than a plain document, which the conversion supports for the  text formats it can read.", alias="toForm", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["destTitle", "destFolderId", "enableExternalExt", "password", "toForm"]
 
     model_config = ConfigDict(

@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class LockFileParameters(BaseModel):
     """
-    The parameters for locking a file.
+    The lock state a file is to be put into.
     """ # noqa: E501
-    lock_file: Optional[StrictBool] = Field(default=None, description="Specifies whether to lock a file or not.", alias="lockFile", json_schema_extra={"examples": [True]})
+    lock_file: Optional[StrictBool] = Field(default=None, description="The state to reach: `true` locks the file, which blocks editing, renaming and deleting for everybody but the  account that locked it and the room admins, and drops the others out of a running editing session; `false`  releases the lock.", alias="lockFile", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["lockFile"]
 
     model_config = ConfigDict(

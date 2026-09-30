@@ -21,31 +21,31 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
+from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.message_action import MessageAction
 from typing import Optional, Set
 from typing_extensions import Self
 
 class LoginEventDto(BaseModel):
     """
-    The login event parameters.
+    One entry of the portal login history: a sign-in, a sign-out or a failed attempt, and where it came from.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The login event ID.", json_schema_extra={"examples": [1]})
-    var_date: Optional[datetime] = Field(default=None, description="The login event date.", alias="date", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
-    user: Optional[StrictStr] = Field(default=None, description="The user name of the login event.", json_schema_extra={"examples": ["John Doe"]})
-    user_id: Optional[UUID] = Field(default=None, description="The user ID of the login event.", alias="userId", json_schema_extra={"examples": ["{}"]})
-    login: Optional[StrictStr] = Field(default=None, description="The user login of the login event.", json_schema_extra={"examples": ["user@example.com"]})
-    action: Optional[StrictStr] = Field(default=None, description="The login event action.", json_schema_extra={"examples": ["User logged in"]})
-    action_id: Optional[MessageAction] = Field(default=None, description="The login-related action to filter events by.", alias="actionId")
-    ip: Optional[StrictStr] = Field(default=None, description="The login event IP.", json_schema_extra={"examples": ["192.0.2.1"]})
-    country: Optional[StrictStr] = Field(default=None, description="The login event country.", json_schema_extra={"examples": ["United States"]})
-    city: Optional[StrictStr] = Field(default=None, description="The login event city.", json_schema_extra={"examples": ["New York"]})
-    browser: Optional[StrictStr] = Field(default=None, description="The login event browser.", json_schema_extra={"examples": ["Chrome 120.0"]})
-    platform: Optional[StrictStr] = Field(default=None, description="The login event platform.", json_schema_extra={"examples": ["Windows"]})
-    page: Optional[StrictStr] = Field(default=None, description="The login event page.", json_schema_extra={"examples": ["/login"]})
+    id: Optional[StrictInt] = Field(default=None, description="The ID of the recorded sign-in. When the entry is a successful sign-in that is still open, this is also  the value `GET api/2.0/security/activeconnections` reports as the connection's `id`.", json_schema_extra={"examples": [1]})
+    var_date: Optional[ApiDateTime] = Field(default=None, description="When the attempt was made, in the portal time zone. The `from` and `to` filters are read as UTC instants,  so the two do not line up on a portal that is not on UTC.", alias="date")
+    user: Optional[StrictStr] = Field(default=None, description="The display name of the account the attempt was made against, taken from the account as it stands now  rather than as it stood at the time. A localised placeholder stands in when there is no account to read,  which is the usual case for a failed attempt on an address nobody owns.", json_schema_extra={"examples": ["John Doe"]})
+    user_id: Optional[UUID] = Field(default=None, description="The ID of that account, which is what the `userId` filter of this operation matches on. It is the empty  GUID when the attempt could not be tied to an account.", alias="userId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
+    login: Optional[StrictStr] = Field(default=None, description="The login string as it was typed - normally the email address. It is the only field that survives a failed  attempt against an unknown account, which makes it the one to read when `user` is a placeholder.", json_schema_extra={"examples": ["user@example.com"]})
+    action: Optional[StrictStr] = Field(default=None, description="The event as a readable sentence in the portal language. On `GET api/2.0/security/audit/login/last` each  substituted value is cut to 50 characters; the filtered operation substitutes them in full.", json_schema_extra={"examples": ["User logged in"]})
+    action_id: Optional[MessageAction] = Field(default=None, description="What happened, as the `action` filter of this operation spells it: a successful sign-in, a failed one, a  sign-out. Use this rather than parsing `action`, which is prose and changes with the portal language.", alias="actionId")
+    ip: Optional[StrictStr] = Field(default=None, description="The IP address the attempt came from, with the port stripped off.", json_schema_extra={"examples": ["192.0.2.1"]})
+    country: Optional[StrictStr] = Field(default=None, description="The English name of the country the IP address is located in, empty when the address cannot be located -  the normal outcome for private and loopback addresses.", json_schema_extra={"examples": ["United States"]})
+    city: Optional[StrictStr] = Field(default=None, description="The city the IP address is located in, empty under the same conditions as `country`.", json_schema_extra={"examples": ["New York"]})
+    browser: Optional[StrictStr] = Field(default=None, description="The browser and its version as parsed from the user agent of the attempt, empty when the client sent none  that could be parsed.", json_schema_extra={"examples": ["Chrome 120.0"]})
+    platform: Optional[StrictStr] = Field(default=None, description="The operating system as parsed from the same user agent, empty under the same conditions as `browser`.", json_schema_extra={"examples": ["Windows"]})
+    page: Optional[StrictStr] = Field(default=None, description="Where in the portal the attempt was made from: the referrer of the request, or that request's own path  when it carried no referrer. Long values are cut off at 512 characters.", json_schema_extra={"examples": ["/login"]})
     __properties: ClassVar[List[str]] = ["id", "date", "user", "userId", "login", "action", "actionId", "ip", "country", "city", "browser", "platform", "page"]
 
     model_config = ConfigDict(
@@ -87,11 +87,9 @@ class LoginEventDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if var_date (nullable) is None
-        # and model_fields_set contains the field
-        if self.var_date is None and "var_date" in self.model_fields_set:
-            _dict['date'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of var_date
+        if self.var_date:
+            _dict['date'] = self.var_date.to_dict()
         # set to None if user (nullable) is None
         # and model_fields_set contains the field
         if self.user is None and "user" in self.model_fields_set:
@@ -151,7 +149,7 @@ class LoginEventDto(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "date": obj.get("date"),
+            "date": ApiDateTime.from_dict(obj["date"]) if obj.get("date") is not None else None,
             "user": obj.get("user"),
             "userId": obj.get("userId"),
             "login": obj.get("login"),

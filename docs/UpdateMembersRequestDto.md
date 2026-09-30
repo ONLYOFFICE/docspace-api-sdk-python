@@ -5,8 +5,8 @@ The request parameters for updating the user information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_ids** | **List[UUID]** | The list of user IDs. | [optional] 
-**resend_all** | **bool** | Specifies whether to resend invitation letters to all the users or not. | [optional] 
+**user_ids** | **List[UUID]** | The accounts the operation applies to. System accounts are dropped from the list without an error, and the  remaining ones are processed in the order they are given. | [optional] 
+**resend_all** | **bool** | Reaches every pending account of the portal instead of the ones in `userIds`. It is read only by  `PUT api/2.0/people/invite` and is ignored by every other operation that binds this body. | [optional] 
 
 ## Example
 

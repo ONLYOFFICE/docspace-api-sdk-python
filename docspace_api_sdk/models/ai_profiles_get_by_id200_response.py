@@ -25,6 +25,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, Stri
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.ai_builtin_provider_type import AiBuiltinProviderType
 from docspace_api_sdk.models.ai_provider_type import AiProviderType
+from docspace_api_sdk.models.ai_reasoning_support import AiReasoningSupport
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -39,13 +40,14 @@ class AiProfilesGetById200Response(BaseModel):
     base_url: StrictStr = Field(description="Base URL of the provider API.", alias="baseUrl")
     model_id: StrictStr = Field(description="Selected model ID within this provider.", alias="modelId")
     reasoning: Optional[StrictBool] = Field(default=None, description="Whether extended thinking is enabled for this profile's model.")
+    reasoning_support: Optional[AiReasoningSupport] = Field(default=None, description="Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile.", alias="reasoningSupport")
     capabilities: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Bitmask of capabilities supported by the selected model.")
     can_use_tool: Optional[StrictBool] = Field(default=None, description="Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record).", alias="canUseTool")
     use_responses_api: Optional[StrictBool] = Field(default=None, description="Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`.", alias="useResponsesApi")
     is_cloud_provider: Optional[StrictBool] = Field(default=None, description="Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace).", alias="isCloudProvider")
     use_proxy: Optional[StrictBool] = Field(default=None, description="Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured.", alias="useProxy")
     created_at: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Creation timestamp (ms since epoch). Used to sort the AI models list newest-first.", alias="createdAt")
-    __properties: ClassVar[List[str]] = ["id", "name", "providerType", "basedOn", "baseUrl", "modelId", "reasoning", "capabilities", "canUseTool", "useResponsesApi", "isCloudProvider", "useProxy", "createdAt"]
+    __properties: ClassVar[List[str]] = ["id", "name", "providerType", "basedOn", "baseUrl", "modelId", "reasoning", "reasoningSupport", "capabilities", "canUseTool", "useResponsesApi", "isCloudProvider", "useProxy", "createdAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +91,9 @@ class AiProfilesGetById200Response(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of provider_type
         if self.provider_type:
             _dict['providerType'] = self.provider_type.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of reasoning_support
+        if self.reasoning_support:
+            _dict['reasoningSupport'] = self.reasoning_support.to_dict()
         return _dict
 
     @classmethod
@@ -109,6 +114,7 @@ class AiProfilesGetById200Response(BaseModel):
             "baseUrl": obj.get("baseUrl"),
             "modelId": obj.get("modelId"),
             "reasoning": obj.get("reasoning"),
+            "reasoningSupport": AiReasoningSupport.from_dict(obj["reasoningSupport"]) if obj.get("reasoningSupport") is not None else None,
             "capabilities": obj.get("capabilities"),
             "canUseTool": obj.get("canUseTool"),
             "useResponsesApi": obj.get("useResponsesApi"),

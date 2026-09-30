@@ -31,19 +31,19 @@ from typing_extensions import Self
 
 class RoomTemplateDto(BaseModel):
     """
-    The room template parameters.
+    The parameters of a room template built from an existing room.
     """ # noqa: E501
-    room_id: StrictInt = Field(description="The room template ID.", alias="roomId", json_schema_extra={"examples": [1]})
-    title: Annotated[str, Field(min_length=0, strict=True, max_length=400)] = Field(description="The room template title.", json_schema_extra={"examples": ["My Document"]})
-    logo: Optional[LogoRequest] = Field(default=None, description="The room template logo.")
-    copy_logo: Optional[StrictBool] = Field(default=None, description="Specifies whether to copy room logo or not.", alias="copyLogo", json_schema_extra={"examples": [True]})
-    share: Optional[List[StrictStr]] = Field(default=None, description="The collection of email addresses of users with whom to share a room.", json_schema_extra={"examples": [["user1@example.com", "user2@example.com"]]})
-    groups: Optional[List[UUID]] = Field(default=None, description="The collection of groups with whom to share a room.", json_schema_extra={"examples": [["00000000-0000-0000-0000-000000000000"]]})
-    public: Optional[StrictBool] = Field(default=None, description="Specifies whether the room template is public or not.", json_schema_extra={"examples": [True]})
-    tags: Optional[List[StrictStr]] = Field(default=None, description="The collection of tags.", json_schema_extra={"examples": [["tag1", "tag2"]]})
-    color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The color of the room template.", json_schema_extra={"examples": ["#FF0000"]})
-    cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The cover of the room template.", json_schema_extra={"examples": ["cover1"]})
-    quota: Optional[StrictInt] = Field(default=None, description="Room quota", json_schema_extra={"examples": [10485760]})
+    room_id: StrictInt = Field(description="The identifier of the room the template is built from. Take it from the room listing of  `GET api/2.0/files/rooms`; a folder identifier is not accepted.", alias="roomId", json_schema_extra={"examples": [1234]})
+    title: Annotated[str, Field(min_length=0, strict=True, max_length=400)] = Field(description="The title the template is saved under in the Templates section. Characters that a folder name cannot contain  are replaced with an underscore on save, and two templates may share a title.", json_schema_extra={"examples": ["Sales agreement room"]})
+    logo: Optional[LogoRequest] = Field(default=None, description="A picture of the caller's own for the template, cropped out of an image already placed in the temporary  storage.")
+    copy_logo: Optional[StrictBool] = Field(default=None, description="Whether the template takes over the picture already set on the source room. When false the template gets no  picture from that room.", alias="copyLogo", json_schema_extra={"examples": [True]})
+    share: Optional[List[StrictStr]] = Field(default=None, description="The email addresses of the portal members who are granted read access to the finished template.", json_schema_extra={"examples": [["user1@example.com", "user2@example.com"]]})
+    groups: Optional[List[UUID]] = Field(default=None, description="The identifiers of the portal groups whose members are granted read access to the finished template.", json_schema_extra={"examples": [["9924256a-739c-462b-af15-e652a3b1b6eb"]]})
+    public: Optional[StrictBool] = Field(default=None, description="Whether the finished template is shared with everyone allowed to create rooms. When false it stays reachable  only for the recipients named for it.", json_schema_extra={"examples": [True]})
+    tags: Optional[List[StrictStr]] = Field(default=None, description="The labels attached to the template and shown next to it in listings.", json_schema_extra={"examples": [["Contracts", "Sales"]]})
+    color: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=6)]] = Field(default=None, description="The accent colour of the generated cover, written as six hexadecimal digits with no leading hash sign. When it  is left empty a colour is picked at random.", json_schema_extra={"examples": ["FF5733"]})
+    cover: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The identifier of a built-in cover picture, as listed by `GET api/2.0/files/rooms/covers`. When it is left  empty the template gets no cover.", json_schema_extra={"examples": ["bookmark"]})
+    quota: Optional[StrictInt] = Field(default=None, description="The storage limit assigned to the template, in bytes. When it is not set the template keeps the limit of the  source room.", json_schema_extra={"examples": [10485760]})
     __properties: ClassVar[List[str]] = ["roomId", "title", "logo", "copyLogo", "share", "groups", "public", "tags", "color", "cover", "quota"]
 
     model_config = ConfigDict(

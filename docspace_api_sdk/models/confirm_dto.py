@@ -29,13 +29,13 @@ from typing_extensions import Self
 
 class ConfirmDto(BaseModel):
     """
-    The confirmation parameters.
+    Whether a confirmation link may still be used, and what it leads to when it invites into a room.
     """ # noqa: E501
-    result: ValidationResult = Field(description="The confirmation result.")
-    room_id: Optional[StrictStr] = Field(default=None, description="The confirmation room ID.", alias="roomId", json_schema_extra={"examples": ["1"]})
-    title: Optional[StrictStr] = Field(default=None, description="The confirmation title.", json_schema_extra={"examples": ["Conference Room"]})
-    email: Optional[StrictStr] = Field(default=None, description="The confirmation email.", json_schema_extra={"examples": ["user@example.com"]})
-    is_agent: Optional[StrictBool] = Field(default=None, description="The confirmation is agent.", alias="isAgent", json_schema_extra={"examples": [True]})
+    result: ValidationResult = Field(description="The outcome of the check. Only `Ok` means the action behind the link may be carried out: `Invalid` and  `Expired` fault the key itself, while `UserExisted`, `UserExcluded`, `TariffLimit` and `QuotaFailed` mean  the key is sound but the invitation behind it cannot be accepted as it stands.")
+    room_id: Optional[StrictStr] = Field(default=None, description="The room the invitation leads into - a numeric folder ID for a room of the portal, a provider-specific  string for a third-party one. It is empty for an invitation to the portal as a whole, for a room that has  been removed or that the invited account may not see, and whenever `result` is neither `Ok` nor  `UserExisted`.", alias="roomId", json_schema_extra={"examples": ["1"]})
+    title: Optional[StrictStr] = Field(default=None, description="The title of that room, present exactly when `roomId` is and meant to be shown on the confirmation page.", json_schema_extra={"examples": ["Conference Room"]})
+    email: Optional[StrictStr] = Field(default=None, description="The address the link was issued for, echoed back only when `result` is `Ok` so that a sign-up form can be  prefilled with it. Every other outcome leaves it empty, `UserExisted` included.", json_schema_extra={"examples": ["user@example.com"]})
+    is_agent: Optional[StrictBool] = Field(default=None, description="Whether the room behind the link is an AI room rather than an ordinary one, which decides where the invited  person is taken. It is `false` whenever `roomId` is empty.", alias="isAgent", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["result", "roomId", "title", "email", "isAgent"]
 
     model_config = ConfigDict(

@@ -23,15 +23,16 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.editor_tool_call_parameters_dto import EditorToolCallParametersDto
 from typing import Optional, Set
 from typing_extensions import Self
 
 class EditorToolCallStateDto(BaseModel):
     """
-    The editor tool call state. Used to run the agent flow in the editor.
+    A generation the editor is expected to run as soon as the document opens, left behind by an AI agent that created  the file but not its content.
     """ # noqa: E501
-    tool_name: Optional[StrictStr] = Field(description="The tool name.", alias="toolName", json_schema_extra={"examples": ["GenerateDocx"]})
-    parameters: Dict[str, Any] = Field(description="The tool call parameters.")
+    tool_name: Optional[StrictStr] = Field(description="Which generation to run, which also decides the shape of the parameters below.", alias="toolName", json_schema_extra={"examples": ["GenerateDocx"]})
+    parameters: EditorToolCallParametersDto = Field(description="The arguments of the generation named above.")
     __properties: ClassVar[List[str]] = ["toolName", "parameters"]
 
     model_config = ConfigDict(
@@ -73,6 +74,9 @@ class EditorToolCallStateDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of parameters
+        if self.parameters:
+            _dict['parameters'] = self.parameters.to_dict()
         # set to None if tool_name (nullable) is None
         # and model_fields_set contains the field
         if self.tool_name is None and "tool_name" in self.model_fields_set:
@@ -92,7 +96,7 @@ class EditorToolCallStateDto(BaseModel):
 
         _obj = cls.model_validate({
             "toolName": obj.get("toolName"),
-            "parameters": obj.get("parameters")
+            "parameters": EditorToolCallParametersDto.from_dict(obj["parameters"]) if obj.get("parameters") is not None else None
         })
         return _obj
 

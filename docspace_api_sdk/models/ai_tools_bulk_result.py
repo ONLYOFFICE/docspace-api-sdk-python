@@ -31,8 +31,8 @@ class AiToolsBulkResult(BaseModel):
     """
     Outcome of `ToolsEngine.replaceAllCustomServers` — either every entry persisted, or no entries persisted plus a per-key error report.
     """ # noqa: E501
-    success: StrictBool = Field(description="True when every custom MCP server was persisted.")
-    errors: Optional[List[AiToolsBulkResultErrorsInner]] = Field(default=None, description="What was rejected, per server. Present on failure - and then no server was persisted.")
+    success: StrictBool = Field(description="True when every custom MCP server was persisted.", json_schema_extra={"examples": [True]})
+    errors: Optional[List[AiToolsBulkResultErrorsInner]] = Field(default=None, description="What was rejected, per server. Present on failure - and then no server was persisted.", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["success", "errors"]
 
     model_config = ConfigDict(

@@ -33,21 +33,21 @@ from typing_extensions import Self
 
 class FileShareDto(BaseModel):
     """
-    The file sharing information and access rights.
+    One access entry on a file, a folder or a room: who holds it, at which level, and what the caller may change about  it.
     """ # noqa: E501
-    access: Optional[FileShare] = Field(default=None, description="The access rights type.")
+    access: Optional[FileShare] = Field(default=None, description="The level the subject holds on the entry. On a link entry it is the level the link hands to whoever opens it,  and in a batch answer `Varies` means the subject holds different levels on the listed entries.")
     shared_to: Optional[Any] = Field(default=None, alias="sharedTo")
-    shared_to_user: Optional[EmployeeFullDto] = Field(default=None, description="The user who has the access to the specified file.", alias="sharedToUser")
-    shared_to_group: Optional[GroupSummaryDto] = Field(default=None, description="The user who has the access to the specified file.", alias="sharedToGroup")
-    shared_link: Optional[FileShareLink] = Field(default=None, description="The user who has the access to the specified file.", alias="sharedLink")
-    is_locked: StrictBool = Field(description="Specifies if the access right is locked or not.", alias="isLocked", json_schema_extra={"examples": [False]})
-    is_owner: StrictBool = Field(description="Specifies if the user is an owner of the specified file or not.", alias="isOwner", json_schema_extra={"examples": [False]})
-    can_edit_access: StrictBool = Field(description="Specifies if the user can edit the access to the specified file or not.", alias="canEditAccess", json_schema_extra={"examples": [True]})
-    can_edit_internal: StrictBool = Field(description="Indicates whether internal editing permissions are granted.", alias="canEditInternal", json_schema_extra={"examples": [True]})
-    can_edit_deny_download: StrictBool = Field(description="Determines whether the user has permission to modify the deny download setting for the file share.", alias="canEditDenyDownload", json_schema_extra={"examples": [True]})
-    can_edit_expiration_date: StrictBool = Field(description="Indicates whether the expiration date of access permissions can be edited.", alias="canEditExpirationDate", json_schema_extra={"examples": [True]})
-    can_revoke: StrictBool = Field(description="Specifies whether the file sharing access can be revoked by the current user.", alias="canRevoke", json_schema_extra={"examples": [True]})
-    subject_type: SubjectType = Field(description="The subject type.", alias="subjectType")
+    shared_to_user: Optional[EmployeeFullDto] = Field(default=None, description="The account the entry belongs to. It is filled in only when `subjectType` says an account, and is null for a  group entry and for a link.", alias="sharedToUser")
+    shared_to_group: Optional[GroupSummaryDto] = Field(default=None, description="The portal group the entry belongs to, which hands the level to everybody in it. It is filled in only for a  group entry, and is null otherwise.", alias="sharedToGroup")
+    shared_link: Optional[FileShareLink] = Field(default=None, description="The sharing link the entry stands for, together with everything set on it. It is filled in only for a link  entry, and is null for an account or a group.", alias="sharedLink")
+    is_locked: StrictBool = Field(description="Whether this entry is the caller's own, which is why they cannot change its level. Link entries never report  it.", alias="isLocked", json_schema_extra={"examples": [False]})
+    is_owner: StrictBool = Field(description="Whether the subject created the entry the access is given on, and so cannot be removed from it.", alias="isOwner", json_schema_extra={"examples": [False]})
+    can_edit_access: StrictBool = Field(description="Whether the caller may change the level of this entry. It is false on the caller's own entry, on every link,  and whenever the caller may not hand out access at all.", alias="canEditAccess", json_schema_extra={"examples": [True]})
+    can_edit_internal: StrictBool = Field(description="Whether the caller may switch this link between being open to anybody and asking the visitor to sign in to the  portal first.", alias="canEditInternal", json_schema_extra={"examples": [True]})
+    can_edit_deny_download: StrictBool = Field(description="Whether the caller may forbid downloading through this link. Only a link of a virtual data room reports true,  and only while the room itself still allows downloads.", alias="canEditDenyDownload", json_schema_extra={"examples": [True]})
+    can_edit_expiration_date: StrictBool = Field(description="Whether the caller may move the moment this link stops working.", alias="canEditExpirationDate", json_schema_extra={"examples": [True]})
+    can_revoke: StrictBool = Field(description="Whether the caller may take this entry away altogether, which for a link means deleting the link.", alias="canRevoke", json_schema_extra={"examples": [True]})
+    subject_type: SubjectType = Field(description="What the entry was given to, which tells which of the three subject fields is filled in: an account, a group,  or one of the kinds of link.", alias="subjectType")
     __properties: ClassVar[List[str]] = ["access", "sharedTo", "sharedToUser", "sharedToGroup", "sharedLink", "isLocked", "isOwner", "canEditAccess", "canEditInternal", "canEditDenyDownload", "canEditExpirationDate", "canRevoke", "subjectType"]
 
     model_config = ConfigDict(

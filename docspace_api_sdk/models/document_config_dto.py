@@ -32,20 +32,20 @@ from typing_extensions import Self
 
 class DocumentConfigDto(BaseModel):
     """
-    The document config parameters.
+    The document itself as the editors address it: what to fetch, under which revision key, and what this caller may  do with it.
     """ # noqa: E501
-    file_type: Optional[StrictStr] = Field(default=None, description="The file type of the document.", alias="fileType", json_schema_extra={"examples": ["docx"]})
-    info: Optional[InfoConfigDto] = Field(default=None, description="The configuration information of the document.")
-    is_linked_for_me: Optional[StrictBool] = Field(default=None, description="Specifies if the documnet is linked for current user.", alias="isLinkedForMe", json_schema_extra={"examples": [False]})
-    key: Optional[StrictStr] = Field(default=None, description="The document key.", json_schema_extra={"examples": ["doc-key-123-abc"]})
-    permissions: Optional[PermissionsConfig] = Field(default=None, description="The document permissions.")
-    shared_link_param: Optional[StrictStr] = Field(default=None, description="The shared link parameter of the document.", alias="sharedLinkParam", json_schema_extra={"examples": ["share-param-123"]})
-    shared_link_key: Optional[StrictStr] = Field(default=None, description="The shared link key of the document.", alias="sharedLinkKey", json_schema_extra={"examples": ["share-key-abc"]})
-    reference_data: Optional[FileReferenceData] = Field(default=None, description="The reference data of the document.", alias="referenceData")
-    title: Optional[StrictStr] = Field(default=None, description="The document title.", json_schema_extra={"examples": ["Document Title"]})
-    url: Optional[StrictStr] = Field(default=None, description="The document url.", json_schema_extra={"examples": ["http://localhost/documents/doc.docx"]})
-    is_form: Optional[StrictBool] = Field(default=None, description="Indicates whether this is a form.", alias="isForm", json_schema_extra={"examples": [False]})
-    options: Optional[Options] = Field(default=None, description="The options of the document.")
+    file_type: Optional[StrictStr] = Field(default=None, description="The format the editors treat the content as, without the leading dot. For a file that had to be converted this  is the format it was converted to, not the one it is stored under.", alias="fileType", json_schema_extra={"examples": ["docx"]})
+    info: Optional[InfoConfigDto] = Field(default=None, description="The facts the editor information panel shows about the document.")
+    is_linked_for_me: Optional[StrictBool] = Field(default=None, description="Whether the caller opened the original document rather than a link pointing at it, which matters only for  formats whose editing is restricted through links.", alias="isLinkedForMe", json_schema_extra={"examples": [False]})
+    key: Optional[StrictStr] = Field(default=None, description="Identifies the exact revision to the editors: everyone who receives the same key joins the same co-editing  session, and the key changes as soon as the document is saved.", json_schema_extra={"examples": ["1_512_3"]})
+    permissions: Optional[PermissionsConfig] = Field(default=None, description="What this caller may do inside the editor - edit, comment, review, fill, download, print, copy and chat.")
+    shared_link_param: Optional[StrictStr] = Field(default=None, description="The name of the query parameter that carries the external share key. It is set only when the document was  opened through an external link.", alias="sharedLinkParam", json_schema_extra={"examples": ["share"]})
+    shared_link_key: Optional[StrictStr] = Field(default=None, description="The external share key this opening runs under, empty when the caller opened the document as a portal member.  The editors pass it back on every request they make for the document.", alias="sharedLinkKey", json_schema_extra={"examples": ["HkQd9nT2"]})
+    reference_data: Optional[FileReferenceData] = Field(default=None, description="How another spreadsheet names this document in a formula. Pass it to `POST api/2.0/files/file/referencedata`  to resolve such a reference.", alias="referenceData")
+    title: Optional[StrictStr] = Field(default=None, description="The name the editors display. When a past version was opened, the moment that version was created is appended  to it in brackets.", json_schema_extra={"examples": ["Budget 2026.xlsx"]})
+    url: Optional[StrictStr] = Field(default=None, description="Where the editors fetch the content. It is addressed to the host the document service can reach, which is not  necessarily the address a browser should follow.", json_schema_extra={"examples": ["https://portal.example.com/filehandler.ashx?action=download&fileid=512"]})
+    is_form: Optional[StrictBool] = Field(default=None, description="Whether the document is a fillable PDF form. A PDF that the portal has never classified is inspected while the  configuration is built, so the answer is trustworthy even for a freshly uploaded file.", alias="isForm", json_schema_extra={"examples": [False]})
+    options: Optional[Options] = Field(default=None, description="Extra instructions for the editors, currently the watermark to draw over the document. It is empty when the  room sets no watermark.")
     __properties: ClassVar[List[str]] = ["fileType", "info", "isLinkedForMe", "key", "permissions", "sharedLinkParam", "sharedLinkKey", "referenceData", "title", "url", "isForm", "options"]
 
     model_config = ConfigDict(

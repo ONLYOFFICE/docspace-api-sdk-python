@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class BackupsCountResultDto(BaseModel):
     """
-    The number of backups.
+    The backups of a portal, split by who paid for them.
     """ # noqa: E501
-    free: Optional[StrictInt] = Field(default=None, description="The number of free backups.", json_schema_extra={"examples": [3]})
-    paid: Optional[StrictInt] = Field(default=None, description="The number of paid backups.", json_schema_extra={"examples": [5]})
+    free: Optional[StrictInt] = Field(default=None, description="The number of backups covered by the free monthly allowance.", json_schema_extra={"examples": [3]})
+    paid: Optional[StrictInt] = Field(default=None, description="The number of backups charged to the portal wallet.", json_schema_extra={"examples": [5]})
     __properties: ClassVar[List[str]] = ["free", "paid"]
 
     model_config = ConfigDict(

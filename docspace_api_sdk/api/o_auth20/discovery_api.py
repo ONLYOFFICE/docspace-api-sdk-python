@@ -18,10 +18,9 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
-from typing import Any, Dict
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -57,9 +56,10 @@ class DiscoveryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
-        """handle_options
+    ) -> None:
+        """Probe the discovery endpoint
 
+        Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -91,7 +91,7 @@ class DiscoveryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
         }
 
         response_data = self.api_client.call_api(
@@ -120,9 +120,10 @@ class DiscoveryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
-        """handle_options
+    ) -> ApiResponse[None]:
+        """Probe the discovery endpoint
 
+        Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -154,7 +155,7 @@ class DiscoveryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
         }
 
         response_data = self.api_client.call_api(
@@ -184,8 +185,9 @@ class DiscoveryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """handle_options
+        """Probe the discovery endpoint
 
+        Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -217,7 +219,7 @@ class DiscoveryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': None,
         }
 
         response_data = self.api_client.call_api(
@@ -256,13 +258,6 @@ class DiscoveryApi:
         # process the body parameter
 
 
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    '*/*'
-                ]
-            )
 
 
         # authentication setting

@@ -1,16 +1,16 @@
 # AuthData
-The authentication data.
+The credentials of a third-party storage account. The portal takes them when an account is connected and does not  give them back afterwards.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**login** | **str** | The authentication login. | [optional] 
-**password** | **str** | The authentication password. | [optional] 
-**raw_token** | **str** | The authentication raw token. | [optional] 
-**url** | **str** | The authentication URL. | [optional] 
-**provider** | **str** | The authentication provider. | [optional] 
-**token** | [**OAuth20Token**](OAuth20Token.md) | The authentication token. | [optional] 
+**login** | **str** | The account name at the storage service. | [optional] 
+**password** | **str** | The password of the account at the storage service. | [optional] 
+**raw_token** | **str** | The token of the account, kept as the raw JSON document the storage service issued it in. | [optional] 
+**url** | **str** | The address of the storage server the account lives on. | [optional] 
+**provider** | **str** | The storage service the credentials belong to, as the provider key the account was connected with. | [optional] 
+**token** | [**OAuth20Token**](OAuth20Token.md) | The same token as in `rawToken`, parsed into its OAuth 2.0 fields. | [optional] 
 
 ## Example
 

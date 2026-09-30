@@ -29,7 +29,7 @@ BATCHREQUESTDTOALLOFDESTFOLDERID_ONE_OF_SCHEMAS = ["int", "str"]
 
 class BatchRequestDtoAllOfDestFolderId(BaseModel):
     """
-    The destination folder ID.
+    The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
     """
     # data type: int
     oneof_schema_1_validator: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [1234]})
