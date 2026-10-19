@@ -23,16 +23,16 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.encryption_settings import EncryptionSettings
+from docspace_api_sdk.models.encryption_settings_dto import EncryptionSettingsDto
 from docspace_api_sdk.models.get_portal_prices200_response_links_inner import GetPortalPrices200ResponseLinksInner
 from typing import Optional, Set
 from typing_extensions import Self
 
 class EncryptionSettingsWrapper(BaseModel):
     """
-    The successful API response containing the EncryptionSettings object.
+    The successful API response containing the EncryptionSettingsDto object.
     """ # noqa: E501
-    response: Optional[EncryptionSettings] = Field(default=None, description="The EncryptionSettings object returned by the operation.")
+    response: Optional[EncryptionSettingsDto] = Field(default=None, description="The EncryptionSettingsDto object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")
@@ -101,7 +101,7 @@ class EncryptionSettingsWrapper(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "response": EncryptionSettings.from_dict(obj["response"]) if obj.get("response") is not None else None,
+            "response": EncryptionSettingsDto.from_dict(obj["response"]) if obj.get("response") is not None else None,
             "count": obj.get("count"),
             "links": [GetPortalPrices200ResponseLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
             "status": obj.get("status"),

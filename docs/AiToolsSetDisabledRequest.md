@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **server_type** | **str** |  | 
 **tool_names** | **List[str]** | Tool names to disable. | 
 **entity_id** | **str** |  | [optional] 
+**scope** | [**AiChatToolPrefsScope**](AiChatToolPrefsScope.md) | The list the write lands in; omitted means the caller's own. | [optional] 
 
 ## Example
 

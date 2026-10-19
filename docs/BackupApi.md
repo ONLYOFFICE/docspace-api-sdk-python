@@ -103,7 +103,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_backup_schedule**
-> BooleanWrapper create_backup_schedule(backup_schedule_dto=backup_schedule_dto)
+> BooleanWrapper create_backup_schedule(create_backup_schedule_request_dto=create_backup_schedule_request_dto)
 
 Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces
 the existing one rather than adding a second, and `dump` writes the schedule of the whole server
@@ -113,8 +113,8 @@ installation.
 `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0
 to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with
 Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for
-`EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or
-monthly schedule sent without it fails instead of falling back to a default.
+`EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling
+back to a default.
 `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older
 copies are removed by a background cleaner, and only the ones this schedule created: archives made by
 `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops
@@ -131,7 +131,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **backup_schedule_dto** | [**BackupScheduleDto**](BackupScheduleDto.md)|  | [optional] 
+ **create_backup_schedule_request_dto** | [**CreateBackupScheduleRequestDto**](CreateBackupScheduleRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -146,8 +146,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.backup_schedule_dto import BackupScheduleDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.models.create_backup_schedule_request_dto import CreateBackupScheduleRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -168,11 +168,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.BackupApi(api_client)
-    backup_schedule_dto = docspace_api_sdk.BackupScheduleDto() # BackupScheduleDto |  (optional)
+    create_backup_schedule_request_dto = docspace_api_sdk.CreateBackupScheduleRequestDto() # CreateBackupScheduleRequestDto |  (optional)
 
     try:
         # Create the backup schedule
-        api_response = api_instance.create_backup_schedule(backup_schedule_dto=backup_schedule_dto)
+        api_response = api_instance.create_backup_schedule(create_backup_schedule_request_dto=create_backup_schedule_request_dto)
         print("The response of BackupApi->create_backup_schedule:\n")
         pprint(api_response)
     except Exception as e:
@@ -191,13 +191,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | True if the schedule was saved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The number of the stored copies is outside 1 - 30, or a dump was requested on a portal that is not a standalone installation |  -  |
+**400** | The request body cannot be read, `cronParams` is missing, its period is not a defined value, its hour or day is out of range for the period, which includes a weekly or monthly schedule sent without `day`, the number of the stored copies is outside 1-30, `storageType` is not a storage the backups can be written to, a `ThirdPartyConsumer` schedule has no known `module`, the `folderId` or `filePath` key the storage type needs is missing, the `folderId` of a `Documents` schedule is not a number, a dump was requested on a portal that is not a standalone installation, or `storageParams` repeats a key or, on a dump, contains `tenantId` |  -  |
 **402** | The portal subscription does not cover scheduled backups, has expired or has not been paid |  -  |
 **403** | No permissions to perform this action |  -  |
 **404** | The target folder was not found |  -  |
+**500** | A key or value of `storageParams` is null, or `Local` storage was requested on a portal that is not a standalone installation |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -214,7 +214,7 @@ access permission. A record that belongs to another portal is left untouched and
 answers true, so the result confirms that the request was accepted rather than that anything was
 deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.
 The record is removed before the archive, so when the storage can no longer be reached the archive
-stays behind with nothing pointing at it.
+stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -284,6 +284,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | True once the request has been accepted, whether or not a backup was deleted |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **402** | The portal subscription has expired or has not been paid |  -  |
 **403** | No permissions to perform this action |  -  |
+**404** | There is no backup record with this ID |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -829,7 +830,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The number of backups created within the period |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The start of the period is later than its end |  -  |
+**400** | The start of the period is later than its end, or `from`, `to` or `paid` cannot be parsed |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -921,7 +922,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The number of free and of paid backups created within the period |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The start of the period is later than its end |  -  |
+**400** | The start of the period is later than its end, or `from`, `to` or `paid` cannot be parsed |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -1105,7 +1106,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **start_backup**
-> BackupProgressWrapper start_backup(backup_dto=backup_dto)
+> BackupProgressWrapper start_backup(start_backup_request_dto=start_backup_request_dto)
 
 Queues a backup of the current portal and returns straight away: the archive itself is written by the
 separate backup worker service, which picks the job up from an integration event, so the response
@@ -1128,7 +1129,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **backup_dto** | [**BackupDto**](BackupDto.md)|  | [optional] 
+ **start_backup_request_dto** | [**StartBackupRequestDto**](StartBackupRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1143,8 +1144,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.backup_dto import BackupDto
 from docspace_api_sdk.models.backup_progress_wrapper import BackupProgressWrapper
+from docspace_api_sdk.models.start_backup_request_dto import StartBackupRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1165,11 +1166,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.BackupApi(api_client)
-    backup_dto = docspace_api_sdk.BackupDto() # BackupDto |  (optional)
+    start_backup_request_dto = docspace_api_sdk.StartBackupRequestDto() # StartBackupRequestDto |  (optional)
 
     try:
         # Start the backup
-        api_response = api_instance.start_backup(backup_dto=backup_dto)
+        api_response = api_instance.start_backup(start_backup_request_dto=start_backup_request_dto)
         print("The response of BackupApi->start_backup:\n")
         pprint(api_response)
     except Exception as e:
@@ -1188,20 +1189,20 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The state of the queued backup job |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The folder ID does not match the storage type, or a dump was requested on a portal that is not a standalone installation |  -  |
-**402** | The free backups of the current month are used up and the paid backup service is not available to this portal |  -  |
+**400** | The request body cannot be read, the folder ID does not match the storage type or is missing, an item of `storageParams` is null, has no key or no value, or repeats a key, or a dump was requested on a portal that is not a standalone installation |  -  |
+**402** | The portal already uses more storage than its plan allows and the backup goes to `Documents`, or the free backups of the current month are used up and the paid backup service is not available to this portal or cannot be charged |  -  |
 **403** | No permissions to perform this action |  -  |
 **404** | The target folder or the backup quota was not found |  -  |
+**500** | `Local` storage has no `filePath` or was requested on a portal that is not a standalone installation |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **start_backup_restore**
-> BackupProgressWrapper start_backup_restore(backup_restore_dto=backup_restore_dto)
+> BackupProgressWrapper start_backup_restore(start_backup_restore_request_dto=start_backup_restore_request_dto)
 
 Queues the restoring of the current portal from a backup and returns straight away: the work itself is
 done by the separate backup worker service, which picks the job up from an integration event, so the
@@ -1223,7 +1224,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **backup_restore_dto** | [**BackupRestoreDto**](BackupRestoreDto.md)|  | [optional] 
+ **start_backup_restore_request_dto** | [**StartBackupRestoreRequestDto**](StartBackupRestoreRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1239,7 +1240,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.backup_progress_wrapper import BackupProgressWrapper
-from docspace_api_sdk.models.backup_restore_dto import BackupRestoreDto
+from docspace_api_sdk.models.start_backup_restore_request_dto import StartBackupRestoreRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1260,11 +1261,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.BackupApi(api_client)
-    backup_restore_dto = docspace_api_sdk.BackupRestoreDto() # BackupRestoreDto |  (optional)
+    start_backup_restore_request_dto = docspace_api_sdk.StartBackupRestoreRequestDto() # StartBackupRestoreRequestDto |  (optional)
 
     try:
         # Start the restoring process
-        api_response = api_instance.start_backup_restore(backup_restore_dto=backup_restore_dto)
+        api_response = api_instance.start_backup_restore(start_backup_restore_request_dto=start_backup_restore_request_dto)
         print("The response of BackupApi->start_backup_restore:\n")
         pprint(api_response)
     except Exception as e:
@@ -1283,13 +1284,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The state of the queued restoring job |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `backupId`, `backupId` is not a GUID and `storageParams` has no `filePath`, or an item of `storageParams` is null, has no key or no value, or repeats a key |  -  |
 **402** | The pricing plan of this portal does not allow restoring |  -  |
 **403** | No permissions to perform this action |  -  |
-**404** | The backup record was not found, or the file it points to is missing |  -  |
+**404** | The backup record was not found, the file given in `filePath` or its folder was not found, or, for `Local` storage, no backup archive has been uploaded to the portal |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

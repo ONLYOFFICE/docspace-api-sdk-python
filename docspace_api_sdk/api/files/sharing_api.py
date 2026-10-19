@@ -25,7 +25,7 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from uuid import UUID
-from docspace_api_sdk.models.ace_short_wrapper_array_wrapper import AceShortWrapperArrayWrapper
+from docspace_api_sdk.models.ace_short_array_wrapper import AceShortArrayWrapper
 from docspace_api_sdk.models.base_batch_request_dto import BaseBatchRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.change_owner_request_dto import ChangeOwnerRequestDto
@@ -34,9 +34,9 @@ from docspace_api_sdk.models.external_share_request_param import ExternalShareRe
 from docspace_api_sdk.models.external_share_wrapper import ExternalShareWrapper
 from docspace_api_sdk.models.file_entry_base_array_wrapper import FileEntryBaseArrayWrapper
 from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
-from docspace_api_sdk.models.group_member_security_request_array_wrapper import GroupMemberSecurityRequestArrayWrapper
-from docspace_api_sdk.models.mention_message_wrapper import MentionMessageWrapper
-from docspace_api_sdk.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
+from docspace_api_sdk.models.group_member_security_array_wrapper import GroupMemberSecurityArrayWrapper
+from docspace_api_sdk.models.mention_array_wrapper import MentionArrayWrapper
+from docspace_api_sdk.models.mention_message_request import MentionMessageRequest
 from docspace_api_sdk.models.security_info_request_dto import SecurityInfoRequestDto
 from docspace_api_sdk.models.security_info_simple_request_dto import SecurityInfoSimpleRequestDto
 from docspace_api_sdk.models.error_api_response import ErrorApiResponse
@@ -119,6 +119,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
+            '403': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -196,6 +197,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
+            '403': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -273,6 +275,7 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
+            '403': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -430,10 +433,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -504,10 +508,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -578,10 +583,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -734,6 +740,8 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -809,6 +817,8 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -884,6 +894,8 @@ class SharingApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1355,10 +1367,12 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1437,10 +1451,12 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1519,10 +1535,12 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1679,10 +1697,12 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1761,10 +1781,12 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1843,10 +1865,12 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1960,7 +1984,7 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GroupMemberSecurityRequestArrayWrapper:
+    ) -> GroupMemberSecurityArrayWrapper:
         """Get file access of group members
 
         Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member's level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
@@ -2010,11 +2034,12 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2050,7 +2075,7 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GroupMemberSecurityRequestArrayWrapper]:
+    ) -> ApiResponse[GroupMemberSecurityArrayWrapper]:
         """Get file access of group members
 
         Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member's level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
@@ -2100,11 +2125,12 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2190,11 +2216,12 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2316,7 +2343,7 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GroupMemberSecurityRequestArrayWrapper:
+    ) -> GroupMemberSecurityArrayWrapper:
         """Get folder access of group members
 
         Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member's level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
@@ -2366,11 +2393,12 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2406,7 +2434,7 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GroupMemberSecurityRequestArrayWrapper]:
+    ) -> ApiResponse[GroupMemberSecurityArrayWrapper]:
         """Get folder access of group members
 
         Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member's level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
@@ -2456,11 +2484,12 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2546,11 +2575,12 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2707,9 +2737,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -2781,9 +2812,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -2855,9 +2887,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -2971,7 +3004,7 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> MentionWrapperArrayWrapper:
+    ) -> MentionArrayWrapper:
         """Get users to mention in a file
 
         Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
@@ -3009,7 +3042,9 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MentionWrapperArrayWrapper",
+            '200': "MentionArrayWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -3045,7 +3080,7 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[MentionWrapperArrayWrapper]:
+    ) -> ApiResponse[MentionArrayWrapper]:
         """Get users to mention in a file
 
         Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
@@ -3083,7 +3118,9 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MentionWrapperArrayWrapper",
+            '200': "MentionArrayWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -3157,7 +3194,9 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MentionWrapperArrayWrapper",
+            '200': "MentionArrayWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -3300,9 +3339,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -3374,9 +3414,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -3448,9 +3489,10 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -3552,7 +3594,7 @@ class SharingApi:
     def send_editor_notify(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
-        mention_message_wrapper: Annotated[Optional[MentionMessageWrapper], Field(description="The notification to send.")] = None,
+        mention_message_request: Annotated[Optional[MentionMessageRequest], Field(description="The notification to send.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3565,15 +3607,15 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AceShortWrapperArrayWrapper:
+    ) -> AceShortArrayWrapper:
         """Notify mentioned users
 
         Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
 
         :param file_id: The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
         :type file_id: Union[int, str]
-        :param mention_message_wrapper: The notification to send.
-        :type mention_message_wrapper: MentionMessageWrapper
+        :param mention_message_request: The notification to send.
+        :type mention_message_request: MentionMessageRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3598,7 +3640,7 @@ class SharingApi:
 
         _param = self._send_editor_notify_serialize(
             file_id=file_id,
-            mention_message_wrapper=mention_message_wrapper,
+            mention_message_request=mention_message_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3606,7 +3648,7 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AceShortWrapperArrayWrapper",
+            '200': "AceShortArrayWrapper",
             '400': None,
             '403': None,
             '404': None,
@@ -3632,7 +3674,7 @@ class SharingApi:
     def send_editor_notify_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
-        mention_message_wrapper: Annotated[Optional[MentionMessageWrapper], Field(description="The notification to send.")] = None,
+        mention_message_request: Annotated[Optional[MentionMessageRequest], Field(description="The notification to send.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3645,15 +3687,15 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AceShortWrapperArrayWrapper]:
+    ) -> ApiResponse[AceShortArrayWrapper]:
         """Notify mentioned users
 
         Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
 
         :param file_id: The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
         :type file_id: Union[int, str]
-        :param mention_message_wrapper: The notification to send.
-        :type mention_message_wrapper: MentionMessageWrapper
+        :param mention_message_request: The notification to send.
+        :type mention_message_request: MentionMessageRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3678,7 +3720,7 @@ class SharingApi:
 
         _param = self._send_editor_notify_serialize(
             file_id=file_id,
-            mention_message_wrapper=mention_message_wrapper,
+            mention_message_request=mention_message_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3686,7 +3728,7 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AceShortWrapperArrayWrapper",
+            '200': "AceShortArrayWrapper",
             '400': None,
             '403': None,
             '404': None,
@@ -3712,7 +3754,7 @@ class SharingApi:
     def send_editor_notify_without_preload_content(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
-        mention_message_wrapper: Annotated[Optional[MentionMessageWrapper], Field(description="The notification to send.")] = None,
+        mention_message_request: Annotated[Optional[MentionMessageRequest], Field(description="The notification to send.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3732,8 +3774,8 @@ class SharingApi:
 
         :param file_id: The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
         :type file_id: Union[int, str]
-        :param mention_message_wrapper: The notification to send.
-        :type mention_message_wrapper: MentionMessageWrapper
+        :param mention_message_request: The notification to send.
+        :type mention_message_request: MentionMessageRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3758,7 +3800,7 @@ class SharingApi:
 
         _param = self._send_editor_notify_serialize(
             file_id=file_id,
-            mention_message_wrapper=mention_message_wrapper,
+            mention_message_request=mention_message_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3766,7 +3808,7 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AceShortWrapperArrayWrapper",
+            '200': "AceShortArrayWrapper",
             '400': None,
             '403': None,
             '404': None,
@@ -3787,7 +3829,7 @@ class SharingApi:
     def _send_editor_notify_serialize(
         self,
         file_id,
-        mention_message_wrapper,
+        mention_message_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3815,8 +3857,8 @@ class SharingApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if mention_message_wrapper is not None:
-            _body_params = mention_message_wrapper
+        if mention_message_request is not None:
+            _body_params = mention_message_request
 
 
         # set the HTTP header `Accept`
@@ -3931,10 +3973,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4009,10 +4052,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4087,10 +4131,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4249,10 +4294,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4327,10 +4373,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4405,10 +4452,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4563,10 +4611,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4637,10 +4686,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4711,10 +4761,11 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

@@ -100,6 +100,7 @@ class StatisticsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UsageSpaceStatItemArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -174,6 +175,7 @@ class StatisticsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UsageSpaceStatItemArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -248,6 +250,7 @@ class StatisticsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UsageSpaceStatItemArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",

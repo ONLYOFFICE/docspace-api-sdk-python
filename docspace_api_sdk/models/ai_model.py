@@ -38,7 +38,8 @@ class AiModel(BaseModel):
     reasoning: Optional[StrictBool] = Field(default=None, description="Whether this model supports extended thinking / chain-of-thought reasoning.", json_schema_extra={"examples": [False]})
     reasoning_support: Optional[AiReasoningSupport] = Field(default=None, description="What the model can do with extended thinking, when the provider's catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider's id-based table.", alias="reasoningSupport")
     capabilities: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`.", json_schema_extra={"examples": [7]})
-    __properties: ClassVar[List[str]] = ["id", "name", "provider", "reasoning", "reasoningSupport", "capabilities"]
+    created: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Release date as a Unix timestamp in **seconds**, when the provider's catalogue reports one (OpenAI-shaped `/models` responses and OpenRouter carry `created`; Anthropic carries an ISO `created_at`). The model picker sorts on it so the newest releases come first; entries without it fall back to alphabetical order.")
+    __properties: ClassVar[List[str]] = ["id", "name", "provider", "reasoning", "reasoningSupport", "capabilities", "created"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,7 +104,8 @@ class AiModel(BaseModel):
             "provider": AiProviderType.from_dict(obj["provider"]) if obj.get("provider") is not None else None,
             "reasoning": obj.get("reasoning"),
             "reasoningSupport": AiReasoningSupport.from_dict(obj["reasoningSupport"]) if obj.get("reasoningSupport") is not None else None,
-            "capabilities": obj.get("capabilities")
+            "capabilities": obj.get("capabilities"),
+            "created": obj.get("created")
         })
         return _obj
 

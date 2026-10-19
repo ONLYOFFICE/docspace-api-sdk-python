@@ -29,15 +29,15 @@ from uuid import UUID
 from docspace_api_sdk.models.access_request_key_dto import AccessRequestKeyDto
 from docspace_api_sdk.models.base_batch_request_dto import BaseBatchRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.change_history import ChangeHistory
-from docspace_api_sdk.models.check_fill_form_draft import CheckFillFormDraft
-from docspace_api_sdk.models.chunked_upload_session_response_wrapper_wrapper import ChunkedUploadSessionResponseWrapperWrapper
+from docspace_api_sdk.models.change_history_request import ChangeHistoryRequest
+from docspace_api_sdk.models.check_fill_form_draft_request import CheckFillFormDraftRequest
+from docspace_api_sdk.models.chunked_upload_session_result_wrapper import ChunkedUploadSessionResultWrapper
 from docspace_api_sdk.models.configuration_wrapper import ConfigurationWrapper
-from docspace_api_sdk.models.copy_as_json_element import CopyAsJsonElement
-from docspace_api_sdk.models.create_file_json_element import CreateFileJsonElement
-from docspace_api_sdk.models.create_text_or_html_file import CreateTextOrHtmlFile
-from docspace_api_sdk.models.custom_filter_parameters import CustomFilterParameters
-from docspace_api_sdk.models.delete import Delete
+from docspace_api_sdk.models.copy_as_request import CopyAsRequest
+from docspace_api_sdk.models.create_file_request import CreateFileRequest
+from docspace_api_sdk.models.create_text_or_html_file_request import CreateTextOrHtmlFileRequest
+from docspace_api_sdk.models.custom_filter_request import CustomFilterRequest
+from docspace_api_sdk.models.delete_file_request import DeleteFileRequest
 from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.models.edit_history_array_wrapper import EditHistoryArrayWrapper
 from docspace_api_sdk.models.edit_history_data_wrapper import EditHistoryDataWrapper
@@ -59,25 +59,25 @@ from docspace_api_sdk.models.form_submissions_wrapper import FormSubmissionsWrap
 from docspace_api_sdk.models.get_reference_data_dto import GetReferenceDataDto
 from docspace_api_sdk.models.history_array_wrapper import HistoryArrayWrapper
 from docspace_api_sdk.models.item_key_value_pair_boolean_string_wrapper import ItemKeyValuePairBooleanStringWrapper
-from docspace_api_sdk.models.lock_file_parameters import LockFileParameters
+from docspace_api_sdk.models.lock_file_request import LockFileRequest
 from docspace_api_sdk.models.manage_form_filling_dto import ManageFormFillingDto
-from docspace_api_sdk.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
+from docspace_api_sdk.models.mention_array_wrapper import MentionArrayWrapper
 from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper
 from docspace_api_sdk.models.order_request_dto import OrderRequestDto
 from docspace_api_sdk.models.orders_request_dto import OrdersRequestDto
-from docspace_api_sdk.models.save_as_pdf import SaveAsPdf
+from docspace_api_sdk.models.save_as_pdf_request import SaveAsPdfRequest
 from docspace_api_sdk.models.save_form_role_mapping_dto import SaveFormRoleMappingDto
-from docspace_api_sdk.models.start_edit import StartEdit
+from docspace_api_sdk.models.start_edit_request import StartEditRequest
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.templates_request_dto import TemplatesRequestDto
-from docspace_api_sdk.models.update_file import UpdateFile
+from docspace_api_sdk.models.update_file_request import UpdateFileRequest
 from docspace_api_sdk.models.xlsx_report_response_wrapper import XlsxReportResponseWrapper
 from docspace_api_sdk.models.error_api_response import ErrorApiResponse
 from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
 from docspace_api_sdk.models.third_party_file_array_wrapper import ThirdPartyFileArrayWrapper
-from docspace_api_sdk.models.third_party_chunked_upload_session_response_wrapper_wrapper import ThirdPartyChunkedUploadSessionResponseWrapperWrapper
+from docspace_api_sdk.models.third_party_chunked_upload_session_result_wrapper import ThirdPartyChunkedUploadSessionResultWrapper
 from docspace_api_sdk.models.third_party_configuration_wrapper import ThirdPartyConfigurationWrapper
-from docspace_api_sdk.models.third_party_save_as_pdf import ThirdPartySaveAsPdf
+from docspace_api_sdk.models.third_party_save_as_pdf_request import ThirdPartySaveAsPdfRequest
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -207,12 +207,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -337,12 +337,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -413,12 +413,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -557,6 +557,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -631,6 +632,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -705,6 +707,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -809,7 +812,7 @@ class FilesApi:
     def change_version_history(
         self,
         file_id: Annotated[StrictInt, Field(description="The file whose version history is changed.")],
-        change_history: Annotated[ChangeHistory, Field(description="The change to make to the revision group.")],
+        change_history_request: Annotated[ChangeHistoryRequest, Field(description="The change to make to the revision group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -828,7 +831,7 @@ class FilesApi:
     def change_version_history(
         self,
         file_id: Annotated[StrictStr, Field(description="The file whose version history is changed.")],
-        change_history: Annotated[ChangeHistory, Field(description="The change to make to the revision group.")],
+        change_history_request: Annotated[ChangeHistoryRequest, Field(description="The change to make to the revision group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -847,7 +850,7 @@ class FilesApi:
     def change_version_history(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file whose version history is changed.")], Annotated[StrictStr, Field(description="The file whose version history is changed.")]],
-        change_history: Annotated[ChangeHistory, Field(description="The change to make to the revision group.")],
+        change_history_request: Annotated[ChangeHistoryRequest, Field(description="The change to make to the revision group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -866,7 +869,7 @@ class FilesApi:
     def change_version_history(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file whose version history is changed.")], Annotated[StrictStr, Field(description="The file whose version history is changed.")]],
-        change_history: Annotated[ChangeHistory, Field(description="The change to make to the revision group.")],
+        change_history_request: Annotated[ChangeHistoryRequest, Field(description="The change to make to the revision group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -886,8 +889,8 @@ class FilesApi:
 
         :param file_id: The file whose version history is changed. (required)
         :type file_id: Union[int, str]
-        :param change_history: The change to make to the revision group. (required)
-        :type change_history: ChangeHistory
+        :param change_history_request: The change to make to the revision group. (required)
+        :type change_history_request: ChangeHistoryRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -912,7 +915,7 @@ class FilesApi:
 
         _param = self._change_version_history_serialize(
             file_id=file_id,
-            change_history=change_history,
+            change_history_request=change_history_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -921,11 +924,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileArrayWrapper" if isinstance(file_id, str) else "FileArrayWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -945,7 +950,7 @@ class FilesApi:
     def change_version_history_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The file whose version history is changed.")],
-        change_history: Annotated[ChangeHistory, Field(description="The change to make to the revision group.")],
+        change_history_request: Annotated[ChangeHistoryRequest, Field(description="The change to make to the revision group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -964,7 +969,7 @@ class FilesApi:
     def change_version_history_with_http_info(
         self,
         file_id: Annotated[StrictStr, Field(description="The file whose version history is changed.")],
-        change_history: Annotated[ChangeHistory, Field(description="The change to make to the revision group.")],
+        change_history_request: Annotated[ChangeHistoryRequest, Field(description="The change to make to the revision group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -983,7 +988,7 @@ class FilesApi:
     def change_version_history_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file whose version history is changed.")], Annotated[StrictStr, Field(description="The file whose version history is changed.")]],
-        change_history: Annotated[ChangeHistory, Field(description="The change to make to the revision group.")],
+        change_history_request: Annotated[ChangeHistoryRequest, Field(description="The change to make to the revision group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1002,7 +1007,7 @@ class FilesApi:
     def change_version_history_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file whose version history is changed.")], Annotated[StrictStr, Field(description="The file whose version history is changed.")]],
-        change_history: Annotated[ChangeHistory, Field(description="The change to make to the revision group.")],
+        change_history_request: Annotated[ChangeHistoryRequest, Field(description="The change to make to the revision group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1022,8 +1027,8 @@ class FilesApi:
 
         :param file_id: The file whose version history is changed. (required)
         :type file_id: Union[int, str]
-        :param change_history: The change to make to the revision group. (required)
-        :type change_history: ChangeHistory
+        :param change_history_request: The change to make to the revision group. (required)
+        :type change_history_request: ChangeHistoryRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1048,7 +1053,7 @@ class FilesApi:
 
         _param = self._change_version_history_serialize(
             file_id=file_id,
-            change_history=change_history,
+            change_history_request=change_history_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1057,11 +1062,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileArrayWrapper" if isinstance(file_id, str) else "FileArrayWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1081,7 +1088,7 @@ class FilesApi:
     def change_version_history_without_preload_content(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file whose version history is changed.")], Annotated[StrictStr, Field(description="The file whose version history is changed.")]],
-        change_history: Annotated[ChangeHistory, Field(description="The change to make to the revision group.")],
+        change_history_request: Annotated[ChangeHistoryRequest, Field(description="The change to make to the revision group.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1101,8 +1108,8 @@ class FilesApi:
 
         :param file_id: The file whose version history is changed. (required)
         :type file_id: Union[int, str]
-        :param change_history: The change to make to the revision group. (required)
-        :type change_history: ChangeHistory
+        :param change_history_request: The change to make to the revision group. (required)
+        :type change_history_request: ChangeHistoryRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1127,7 +1134,7 @@ class FilesApi:
 
         _param = self._change_version_history_serialize(
             file_id=file_id,
-            change_history=change_history,
+            change_history_request=change_history_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1136,11 +1143,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileArrayWrapper" if isinstance(file_id, str) else "FileArrayWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1155,7 +1164,7 @@ class FilesApi:
     def _change_version_history_serialize(
         self,
         file_id,
-        change_history,
+        change_history_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1183,8 +1192,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if change_history is not None:
-            _body_params = change_history
+        if change_history_request is not None:
+            _body_params = change_history_request
 
 
         # set the HTTP header `Accept`
@@ -1244,7 +1253,7 @@ class FilesApi:
     def check_fill_form_draft(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.")], Annotated[StrictStr, Field(description="The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.")]],
-        check_fill_form_draft: Annotated[CheckFillFormDraft, Field(description="The revision of the form to open and what the caller intends to do with it.")],
+        check_fill_form_draft_request: Annotated[CheckFillFormDraftRequest, Field(description="The revision of the form to open and what the caller intends to do with it.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1264,8 +1273,8 @@ class FilesApi:
 
         :param file_id: The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. (required)
         :type file_id: Union[int, str]
-        :param check_fill_form_draft: The revision of the form to open and what the caller intends to do with it. (required)
-        :type check_fill_form_draft: CheckFillFormDraft
+        :param check_fill_form_draft_request: The revision of the form to open and what the caller intends to do with it. (required)
+        :type check_fill_form_draft_request: CheckFillFormDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1290,7 +1299,7 @@ class FilesApi:
 
         _param = self._check_fill_form_draft_serialize(
             file_id=file_id,
-            check_fill_form_draft=check_fill_form_draft,
+            check_fill_form_draft_request=check_fill_form_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1299,10 +1308,14 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '401': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1322,7 +1335,7 @@ class FilesApi:
     def check_fill_form_draft_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.")], Annotated[StrictStr, Field(description="The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.")]],
-        check_fill_form_draft: Annotated[CheckFillFormDraft, Field(description="The revision of the form to open and what the caller intends to do with it.")],
+        check_fill_form_draft_request: Annotated[CheckFillFormDraftRequest, Field(description="The revision of the form to open and what the caller intends to do with it.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1342,8 +1355,8 @@ class FilesApi:
 
         :param file_id: The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. (required)
         :type file_id: Union[int, str]
-        :param check_fill_form_draft: The revision of the form to open and what the caller intends to do with it. (required)
-        :type check_fill_form_draft: CheckFillFormDraft
+        :param check_fill_form_draft_request: The revision of the form to open and what the caller intends to do with it. (required)
+        :type check_fill_form_draft_request: CheckFillFormDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1368,7 +1381,7 @@ class FilesApi:
 
         _param = self._check_fill_form_draft_serialize(
             file_id=file_id,
-            check_fill_form_draft=check_fill_form_draft,
+            check_fill_form_draft_request=check_fill_form_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1377,10 +1390,14 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '401': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1400,7 +1417,7 @@ class FilesApi:
     def check_fill_form_draft_without_preload_content(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.")], Annotated[StrictStr, Field(description="The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.")]],
-        check_fill_form_draft: Annotated[CheckFillFormDraft, Field(description="The revision of the form to open and what the caller intends to do with it.")],
+        check_fill_form_draft_request: Annotated[CheckFillFormDraftRequest, Field(description="The revision of the form to open and what the caller intends to do with it.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1420,8 +1437,8 @@ class FilesApi:
 
         :param file_id: The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. (required)
         :type file_id: Union[int, str]
-        :param check_fill_form_draft: The revision of the form to open and what the caller intends to do with it. (required)
-        :type check_fill_form_draft: CheckFillFormDraft
+        :param check_fill_form_draft_request: The revision of the form to open and what the caller intends to do with it. (required)
+        :type check_fill_form_draft_request: CheckFillFormDraftRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1446,7 +1463,7 @@ class FilesApi:
 
         _param = self._check_fill_form_draft_serialize(
             file_id=file_id,
-            check_fill_form_draft=check_fill_form_draft,
+            check_fill_form_draft_request=check_fill_form_draft_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1455,10 +1472,14 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '401': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1473,7 +1494,7 @@ class FilesApi:
     def _check_fill_form_draft_serialize(
         self,
         file_id,
-        check_fill_form_draft,
+        check_fill_form_draft_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1501,8 +1522,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if check_fill_form_draft is not None:
-            _body_params = check_fill_form_draft
+        if check_fill_form_draft_request is not None:
+            _body_params = check_fill_form_draft_request
 
 
         # set the HTTP header `Accept`
@@ -1562,7 +1583,7 @@ class FilesApi:
     def copy_file_as(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to copy.")], Annotated[StrictStr, Field(description="The file to copy.")]],
-        copy_as_json_element: Annotated[CopyAsJsonElement, Field(description="The title, the destination and the conversion options of the copy.")],
+        copy_as_request: Annotated[CopyAsRequest, Field(description="The title, the destination and the conversion options of the copy.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1582,8 +1603,8 @@ class FilesApi:
 
         :param file_id: The file to copy. (required)
         :type file_id: Union[int, str]
-        :param copy_as_json_element: The title, the destination and the conversion options of the copy. (required)
-        :type copy_as_json_element: CopyAsJsonElement
+        :param copy_as_request: The title, the destination and the conversion options of the copy. (required)
+        :type copy_as_request: CopyAsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1608,7 +1629,7 @@ class FilesApi:
 
         _param = self._copy_file_as_serialize(
             file_id=file_id,
-            copy_as_json_element=copy_as_json_element,
+            copy_as_request=copy_as_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1618,11 +1639,13 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseWrapper",
             '400': None,
+            '402': None,
             '403': None,
             '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1642,7 +1665,7 @@ class FilesApi:
     def copy_file_as_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to copy.")], Annotated[StrictStr, Field(description="The file to copy.")]],
-        copy_as_json_element: Annotated[CopyAsJsonElement, Field(description="The title, the destination and the conversion options of the copy.")],
+        copy_as_request: Annotated[CopyAsRequest, Field(description="The title, the destination and the conversion options of the copy.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1662,8 +1685,8 @@ class FilesApi:
 
         :param file_id: The file to copy. (required)
         :type file_id: Union[int, str]
-        :param copy_as_json_element: The title, the destination and the conversion options of the copy. (required)
-        :type copy_as_json_element: CopyAsJsonElement
+        :param copy_as_request: The title, the destination and the conversion options of the copy. (required)
+        :type copy_as_request: CopyAsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1688,7 +1711,7 @@ class FilesApi:
 
         _param = self._copy_file_as_serialize(
             file_id=file_id,
-            copy_as_json_element=copy_as_json_element,
+            copy_as_request=copy_as_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1698,11 +1721,13 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseWrapper",
             '400': None,
+            '402': None,
             '403': None,
             '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1722,7 +1747,7 @@ class FilesApi:
     def copy_file_as_without_preload_content(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to copy.")], Annotated[StrictStr, Field(description="The file to copy.")]],
-        copy_as_json_element: Annotated[CopyAsJsonElement, Field(description="The title, the destination and the conversion options of the copy.")],
+        copy_as_request: Annotated[CopyAsRequest, Field(description="The title, the destination and the conversion options of the copy.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1742,8 +1767,8 @@ class FilesApi:
 
         :param file_id: The file to copy. (required)
         :type file_id: Union[int, str]
-        :param copy_as_json_element: The title, the destination and the conversion options of the copy. (required)
-        :type copy_as_json_element: CopyAsJsonElement
+        :param copy_as_request: The title, the destination and the conversion options of the copy. (required)
+        :type copy_as_request: CopyAsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1768,7 +1793,7 @@ class FilesApi:
 
         _param = self._copy_file_as_serialize(
             file_id=file_id,
-            copy_as_json_element=copy_as_json_element,
+            copy_as_request=copy_as_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1778,11 +1803,13 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseWrapper",
             '400': None,
+            '402': None,
             '403': None,
             '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1797,7 +1824,7 @@ class FilesApi:
     def _copy_file_as_serialize(
         self,
         file_id,
-        copy_as_json_element,
+        copy_as_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1825,8 +1852,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if copy_as_json_element is not None:
-            _body_params = copy_as_json_element
+        if copy_as_request is not None:
+            _body_params = copy_as_request
 
 
         # set the HTTP header `Accept`
@@ -1899,7 +1926,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ChunkedUploadSessionResponseWrapperWrapper: ...
+    ) -> ChunkedUploadSessionResultWrapper: ...
 
     @overload
     def create_edit_session(
@@ -1918,7 +1945,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ThirdPartyChunkedUploadSessionResponseWrapperWrapper: ...
+    ) -> ThirdPartyChunkedUploadSessionResultWrapper: ...
 
     @overload
     def create_edit_session(
@@ -1937,7 +1964,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Union[ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]: ...
+    ) -> Union[ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]: ...
 
     @validate_call
     def create_edit_session(
@@ -1956,7 +1983,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Union[ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]:
+    ) -> Union[ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]:
         """Create the editing session
 
         Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
@@ -1997,8 +2024,10 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseWrapperWrapper" if isinstance(file_id, str) else "ChunkedUploadSessionResponseWrapperWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionResultWrapper" if isinstance(file_id, str) else "ChunkedUploadSessionResultWrapper"),
+            '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2035,7 +2064,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ChunkedUploadSessionResponseWrapperWrapper]: ...
+    ) -> ApiResponse[ChunkedUploadSessionResultWrapper]: ...
 
     @overload
     def create_edit_session_with_http_info(
@@ -2054,7 +2083,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ThirdPartyChunkedUploadSessionResponseWrapperWrapper]: ...
+    ) -> ApiResponse[ThirdPartyChunkedUploadSessionResultWrapper]: ...
 
     @overload
     def create_edit_session_with_http_info(
@@ -2073,7 +2102,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Union[ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]]: ...
+    ) -> ApiResponse[Union[ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]]: ...
 
     @validate_call
     def create_edit_session_with_http_info(
@@ -2092,7 +2121,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Union[ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]]:
+    ) -> ApiResponse[Union[ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]]:
         """Create the editing session
 
         Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
@@ -2133,8 +2162,10 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseWrapperWrapper" if isinstance(file_id, str) else "ChunkedUploadSessionResponseWrapperWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionResultWrapper" if isinstance(file_id, str) else "ChunkedUploadSessionResultWrapper"),
+            '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2212,8 +2243,10 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseWrapperWrapper" if isinstance(file_id, str) else "ChunkedUploadSessionResponseWrapperWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionResultWrapper" if isinstance(file_id, str) else "ChunkedUploadSessionResultWrapper"),
+            '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2310,7 +2343,7 @@ class FilesApi:
     def create_file(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder the file is created in.")],
-        create_file_json_element: Annotated[CreateFileJsonElement, Field(description="The title of the new file and the source of its content.")],
+        create_file_request: Annotated[CreateFileRequest, Field(description="The title of the new file and the source of its content.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2329,7 +2362,7 @@ class FilesApi:
     def create_file(
         self,
         folder_id: Annotated[StrictStr, Field(description="The folder the file is created in.")],
-        create_file_json_element: Annotated[CreateFileJsonElement, Field(description="The title of the new file and the source of its content.")],
+        create_file_request: Annotated[CreateFileRequest, Field(description="The title of the new file and the source of its content.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2348,7 +2381,7 @@ class FilesApi:
     def create_file(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_file_json_element: Annotated[CreateFileJsonElement, Field(description="The title of the new file and the source of its content.")],
+        create_file_request: Annotated[CreateFileRequest, Field(description="The title of the new file and the source of its content.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2367,7 +2400,7 @@ class FilesApi:
     def create_file(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_file_json_element: Annotated[CreateFileJsonElement, Field(description="The title of the new file and the source of its content.")],
+        create_file_request: Annotated[CreateFileRequest, Field(description="The title of the new file and the source of its content.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2387,8 +2420,8 @@ class FilesApi:
 
         :param folder_id: The folder the file is created in. (required)
         :type folder_id: Union[int, str]
-        :param create_file_json_element: The title of the new file and the source of its content. (required)
-        :type create_file_json_element: CreateFileJsonElement
+        :param create_file_request: The title of the new file and the source of its content. (required)
+        :type create_file_request: CreateFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2413,7 +2446,7 @@ class FilesApi:
 
         _param = self._create_file_serialize(
             folder_id=folder_id,
-            create_file_json_element=create_file_json_element,
+            create_file_request=create_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2422,10 +2455,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2445,7 +2481,7 @@ class FilesApi:
     def create_file_with_http_info(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder the file is created in.")],
-        create_file_json_element: Annotated[CreateFileJsonElement, Field(description="The title of the new file and the source of its content.")],
+        create_file_request: Annotated[CreateFileRequest, Field(description="The title of the new file and the source of its content.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2464,7 +2500,7 @@ class FilesApi:
     def create_file_with_http_info(
         self,
         folder_id: Annotated[StrictStr, Field(description="The folder the file is created in.")],
-        create_file_json_element: Annotated[CreateFileJsonElement, Field(description="The title of the new file and the source of its content.")],
+        create_file_request: Annotated[CreateFileRequest, Field(description="The title of the new file and the source of its content.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2483,7 +2519,7 @@ class FilesApi:
     def create_file_with_http_info(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_file_json_element: Annotated[CreateFileJsonElement, Field(description="The title of the new file and the source of its content.")],
+        create_file_request: Annotated[CreateFileRequest, Field(description="The title of the new file and the source of its content.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2502,7 +2538,7 @@ class FilesApi:
     def create_file_with_http_info(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_file_json_element: Annotated[CreateFileJsonElement, Field(description="The title of the new file and the source of its content.")],
+        create_file_request: Annotated[CreateFileRequest, Field(description="The title of the new file and the source of its content.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2522,8 +2558,8 @@ class FilesApi:
 
         :param folder_id: The folder the file is created in. (required)
         :type folder_id: Union[int, str]
-        :param create_file_json_element: The title of the new file and the source of its content. (required)
-        :type create_file_json_element: CreateFileJsonElement
+        :param create_file_request: The title of the new file and the source of its content. (required)
+        :type create_file_request: CreateFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2548,7 +2584,7 @@ class FilesApi:
 
         _param = self._create_file_serialize(
             folder_id=folder_id,
-            create_file_json_element=create_file_json_element,
+            create_file_request=create_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2557,10 +2593,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2580,7 +2619,7 @@ class FilesApi:
     def create_file_without_preload_content(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_file_json_element: Annotated[CreateFileJsonElement, Field(description="The title of the new file and the source of its content.")],
+        create_file_request: Annotated[CreateFileRequest, Field(description="The title of the new file and the source of its content.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2600,8 +2639,8 @@ class FilesApi:
 
         :param folder_id: The folder the file is created in. (required)
         :type folder_id: Union[int, str]
-        :param create_file_json_element: The title of the new file and the source of its content. (required)
-        :type create_file_json_element: CreateFileJsonElement
+        :param create_file_request: The title of the new file and the source of its content. (required)
+        :type create_file_request: CreateFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2626,7 +2665,7 @@ class FilesApi:
 
         _param = self._create_file_serialize(
             folder_id=folder_id,
-            create_file_json_element=create_file_json_element,
+            create_file_request=create_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2635,10 +2674,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2653,7 +2695,7 @@ class FilesApi:
     def _create_file_serialize(
         self,
         folder_id,
-        create_file_json_element,
+        create_file_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2681,8 +2723,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_file_json_element is not None:
-            _body_params = create_file_json_element
+        if create_file_request is not None:
+            _body_params = create_file_request
 
 
         # set the HTTP header `Accept`
@@ -2741,7 +2783,7 @@ class FilesApi:
     @validate_call
     def create_file_in_my_documents(
         self,
-        create_file_json_element: Optional[CreateFileJsonElement] = None,
+        create_file_request: Optional[CreateFileRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2759,8 +2801,8 @@ class FilesApi:
 
         Creates a file in the caller's own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal's own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  `formId` copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal's blank template for that format and the caller's language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  `POST api/2.0/files/{folderId}/file`.
 
-        :param create_file_json_element:
-        :type create_file_json_element: CreateFileJsonElement
+        :param create_file_request:
+        :type create_file_request: CreateFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2784,7 +2826,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._create_file_in_my_documents_serialize(
-            create_file_json_element=create_file_json_element,
+            create_file_request=create_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2793,10 +2835,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2815,7 +2860,7 @@ class FilesApi:
     @validate_call
     def create_file_in_my_documents_with_http_info(
         self,
-        create_file_json_element: Optional[CreateFileJsonElement] = None,
+        create_file_request: Optional[CreateFileRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2833,8 +2878,8 @@ class FilesApi:
 
         Creates a file in the caller's own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal's own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  `formId` copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal's blank template for that format and the caller's language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  `POST api/2.0/files/{folderId}/file`.
 
-        :param create_file_json_element:
-        :type create_file_json_element: CreateFileJsonElement
+        :param create_file_request:
+        :type create_file_request: CreateFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2858,7 +2903,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._create_file_in_my_documents_serialize(
-            create_file_json_element=create_file_json_element,
+            create_file_request=create_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2867,10 +2912,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2889,7 +2937,7 @@ class FilesApi:
     @validate_call
     def create_file_in_my_documents_without_preload_content(
         self,
-        create_file_json_element: Optional[CreateFileJsonElement] = None,
+        create_file_request: Optional[CreateFileRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2907,8 +2955,8 @@ class FilesApi:
 
         Creates a file in the caller's own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal's own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  `formId` copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal's blank template for that format and the caller's language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  `POST api/2.0/files/{folderId}/file`.
 
-        :param create_file_json_element:
-        :type create_file_json_element: CreateFileJsonElement
+        :param create_file_request:
+        :type create_file_request: CreateFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2932,7 +2980,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._create_file_in_my_documents_serialize(
-            create_file_json_element=create_file_json_element,
+            create_file_request=create_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2941,10 +2989,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2958,7 +3009,7 @@ class FilesApi:
 
     def _create_file_in_my_documents_serialize(
         self,
-        create_file_json_element,
+        create_file_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2984,8 +3035,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_file_json_element is not None:
-            _body_params = create_file_json_element
+        if create_file_request is not None:
+            _body_params = create_file_request
 
 
         # set the HTTP header `Accept`
@@ -3100,12 +3151,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3180,12 +3231,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3260,12 +3311,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3369,7 +3420,7 @@ class FilesApi:
     def create_html_file(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder the file is created in.")],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3388,7 +3439,7 @@ class FilesApi:
     def create_html_file(
         self,
         folder_id: Annotated[StrictStr, Field(description="The folder the file is created in.")],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3407,7 +3458,7 @@ class FilesApi:
     def create_html_file(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3426,7 +3477,7 @@ class FilesApi:
     def create_html_file(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3446,8 +3497,8 @@ class FilesApi:
 
         :param folder_id: The folder the file is created in. (required)
         :type folder_id: Union[int, str]
-        :param create_text_or_html_file: The title, the content and the collision behaviour of the new file. (required)
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request: The title, the content and the collision behaviour of the new file. (required)
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3472,7 +3523,7 @@ class FilesApi:
 
         _param = self._create_html_file_serialize(
             folder_id=folder_id,
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3481,11 +3532,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3505,7 +3558,7 @@ class FilesApi:
     def create_html_file_with_http_info(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder the file is created in.")],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3524,7 +3577,7 @@ class FilesApi:
     def create_html_file_with_http_info(
         self,
         folder_id: Annotated[StrictStr, Field(description="The folder the file is created in.")],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3543,7 +3596,7 @@ class FilesApi:
     def create_html_file_with_http_info(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3562,7 +3615,7 @@ class FilesApi:
     def create_html_file_with_http_info(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3582,8 +3635,8 @@ class FilesApi:
 
         :param folder_id: The folder the file is created in. (required)
         :type folder_id: Union[int, str]
-        :param create_text_or_html_file: The title, the content and the collision behaviour of the new file. (required)
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request: The title, the content and the collision behaviour of the new file. (required)
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3608,7 +3661,7 @@ class FilesApi:
 
         _param = self._create_html_file_serialize(
             folder_id=folder_id,
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3617,11 +3670,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3641,7 +3696,7 @@ class FilesApi:
     def create_html_file_without_preload_content(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3661,8 +3716,8 @@ class FilesApi:
 
         :param folder_id: The folder the file is created in. (required)
         :type folder_id: Union[int, str]
-        :param create_text_or_html_file: The title, the content and the collision behaviour of the new file. (required)
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request: The title, the content and the collision behaviour of the new file. (required)
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3687,7 +3742,7 @@ class FilesApi:
 
         _param = self._create_html_file_serialize(
             folder_id=folder_id,
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3696,11 +3751,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3715,7 +3772,7 @@ class FilesApi:
     def _create_html_file_serialize(
         self,
         folder_id,
-        create_text_or_html_file,
+        create_text_or_html_file_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3743,8 +3800,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_text_or_html_file is not None:
-            _body_params = create_text_or_html_file
+        if create_text_or_html_file_request is not None:
+            _body_params = create_text_or_html_file_request
 
 
         # set the HTTP header `Accept`
@@ -3803,7 +3860,7 @@ class FilesApi:
     @validate_call
     def create_html_file_in_my_documents(
         self,
-        create_text_or_html_file: Optional[CreateTextOrHtmlFile] = None,
+        create_text_or_html_file_request: Optional[CreateTextOrHtmlFileRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3821,8 +3878,8 @@ class FilesApi:
 
         Creates an HTML file in the caller's own My documents section out of the markup passed as the content, and  answers with the stored file. The `.html` extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than  its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with `true` keeps a single file and grows  its history, repeating it with `false` fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  `POST api/2.0/files/{folderId}/html`.
 
-        :param create_text_or_html_file:
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request:
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3846,7 +3903,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._create_html_file_in_my_documents_serialize(
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3855,11 +3912,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileWrapper",
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3878,7 +3937,7 @@ class FilesApi:
     @validate_call
     def create_html_file_in_my_documents_with_http_info(
         self,
-        create_text_or_html_file: Optional[CreateTextOrHtmlFile] = None,
+        create_text_or_html_file_request: Optional[CreateTextOrHtmlFileRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3896,8 +3955,8 @@ class FilesApi:
 
         Creates an HTML file in the caller's own My documents section out of the markup passed as the content, and  answers with the stored file. The `.html` extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than  its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with `true` keeps a single file and grows  its history, repeating it with `false` fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  `POST api/2.0/files/{folderId}/html`.
 
-        :param create_text_or_html_file:
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request:
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3921,7 +3980,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._create_html_file_in_my_documents_serialize(
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3930,11 +3989,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileWrapper",
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3953,7 +4014,7 @@ class FilesApi:
     @validate_call
     def create_html_file_in_my_documents_without_preload_content(
         self,
-        create_text_or_html_file: Optional[CreateTextOrHtmlFile] = None,
+        create_text_or_html_file_request: Optional[CreateTextOrHtmlFileRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3971,8 +4032,8 @@ class FilesApi:
 
         Creates an HTML file in the caller's own My documents section out of the markup passed as the content, and  answers with the stored file. The `.html` extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than  its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with `true` keeps a single file and grows  its history, repeating it with `false` fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  `POST api/2.0/files/{folderId}/html`.
 
-        :param create_text_or_html_file:
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request:
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3996,7 +4057,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._create_html_file_in_my_documents_serialize(
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4005,11 +4066,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileWrapper",
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4023,7 +4086,7 @@ class FilesApi:
 
     def _create_html_file_in_my_documents_serialize(
         self,
-        create_text_or_html_file,
+        create_text_or_html_file_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4049,8 +4112,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_text_or_html_file is not None:
-            _body_params = create_text_or_html_file
+        if create_text_or_html_file_request is not None:
+            _body_params = create_text_or_html_file_request
 
 
         # set the HTTP header `Accept`
@@ -4110,7 +4173,7 @@ class FilesApi:
     def create_text_file(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder the file is created in.")],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4129,7 +4192,7 @@ class FilesApi:
     def create_text_file(
         self,
         folder_id: Annotated[StrictStr, Field(description="The folder the file is created in.")],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4148,7 +4211,7 @@ class FilesApi:
     def create_text_file(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4167,7 +4230,7 @@ class FilesApi:
     def create_text_file(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4187,8 +4250,8 @@ class FilesApi:
 
         :param folder_id: The folder the file is created in. (required)
         :type folder_id: Union[int, str]
-        :param create_text_or_html_file: The title, the content and the collision behaviour of the new file. (required)
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request: The title, the content and the collision behaviour of the new file. (required)
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4213,7 +4276,7 @@ class FilesApi:
 
         _param = self._create_text_file_serialize(
             folder_id=folder_id,
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4222,10 +4285,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4245,7 +4311,7 @@ class FilesApi:
     def create_text_file_with_http_info(
         self,
         folder_id: Annotated[StrictInt, Field(description="The folder the file is created in.")],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4264,7 +4330,7 @@ class FilesApi:
     def create_text_file_with_http_info(
         self,
         folder_id: Annotated[StrictStr, Field(description="The folder the file is created in.")],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4283,7 +4349,7 @@ class FilesApi:
     def create_text_file_with_http_info(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4302,7 +4368,7 @@ class FilesApi:
     def create_text_file_with_http_info(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4322,8 +4388,8 @@ class FilesApi:
 
         :param folder_id: The folder the file is created in. (required)
         :type folder_id: Union[int, str]
-        :param create_text_or_html_file: The title, the content and the collision behaviour of the new file. (required)
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request: The title, the content and the collision behaviour of the new file. (required)
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4348,7 +4414,7 @@ class FilesApi:
 
         _param = self._create_text_file_serialize(
             folder_id=folder_id,
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4357,10 +4423,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4380,7 +4449,7 @@ class FilesApi:
     def create_text_file_without_preload_content(
         self,
         folder_id: Union[Annotated[StrictInt, Field(description="The folder the file is created in.")], Annotated[StrictStr, Field(description="The folder the file is created in.")]],
-        create_text_or_html_file: Annotated[CreateTextOrHtmlFile, Field(description="The title, the content and the collision behaviour of the new file.")],
+        create_text_or_html_file_request: Annotated[CreateTextOrHtmlFileRequest, Field(description="The title, the content and the collision behaviour of the new file.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4400,8 +4469,8 @@ class FilesApi:
 
         :param folder_id: The folder the file is created in. (required)
         :type folder_id: Union[int, str]
-        :param create_text_or_html_file: The title, the content and the collision behaviour of the new file. (required)
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request: The title, the content and the collision behaviour of the new file. (required)
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4426,7 +4495,7 @@ class FilesApi:
 
         _param = self._create_text_file_serialize(
             folder_id=folder_id,
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4435,10 +4504,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4453,7 +4525,7 @@ class FilesApi:
     def _create_text_file_serialize(
         self,
         folder_id,
-        create_text_or_html_file,
+        create_text_or_html_file_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4481,8 +4553,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_text_or_html_file is not None:
-            _body_params = create_text_or_html_file
+        if create_text_or_html_file_request is not None:
+            _body_params = create_text_or_html_file_request
 
 
         # set the HTTP header `Accept`
@@ -4541,7 +4613,7 @@ class FilesApi:
     @validate_call
     def create_text_file_in_my_documents(
         self,
-        create_text_or_html_file: Optional[CreateTextOrHtmlFile] = None,
+        create_text_or_html_file_request: Optional[CreateTextOrHtmlFileRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4559,8 +4631,8 @@ class FilesApi:
 
         Creates a text file in the caller's own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but  `.html` as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
 
-        :param create_text_or_html_file:
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request:
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4584,7 +4656,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._create_text_file_in_my_documents_serialize(
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4593,10 +4665,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4615,7 +4690,7 @@ class FilesApi:
     @validate_call
     def create_text_file_in_my_documents_with_http_info(
         self,
-        create_text_or_html_file: Optional[CreateTextOrHtmlFile] = None,
+        create_text_or_html_file_request: Optional[CreateTextOrHtmlFileRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4633,8 +4708,8 @@ class FilesApi:
 
         Creates a text file in the caller's own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but  `.html` as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
 
-        :param create_text_or_html_file:
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request:
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4658,7 +4733,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._create_text_file_in_my_documents_serialize(
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4667,10 +4742,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4689,7 +4767,7 @@ class FilesApi:
     @validate_call
     def create_text_file_in_my_documents_without_preload_content(
         self,
-        create_text_or_html_file: Optional[CreateTextOrHtmlFile] = None,
+        create_text_or_html_file_request: Optional[CreateTextOrHtmlFileRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4707,8 +4785,8 @@ class FilesApi:
 
         Creates a text file in the caller's own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but  `.html` as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
 
-        :param create_text_or_html_file:
-        :type create_text_or_html_file: CreateTextOrHtmlFile
+        :param create_text_or_html_file_request:
+        :type create_text_or_html_file_request: CreateTextOrHtmlFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4732,7 +4810,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._create_text_file_in_my_documents_serialize(
-            create_text_or_html_file=create_text_or_html_file,
+            create_text_or_html_file_request=create_text_or_html_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4741,10 +4819,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4758,7 +4839,7 @@ class FilesApi:
 
     def _create_text_file_in_my_documents_serialize(
         self,
-        create_text_or_html_file,
+        create_text_or_html_file_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4784,8 +4865,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_text_or_html_file is not None:
-            _body_params = create_text_or_html_file
+        if create_text_or_html_file_request is not None:
+            _body_params = create_text_or_html_file_request
 
 
         # set the HTTP header `Accept`
@@ -4896,6 +4977,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
+            '401': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -4969,6 +5051,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
+            '401': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -5042,6 +5125,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ObjectArrayWrapper",
+            '401': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -5145,7 +5229,7 @@ class FilesApi:
     def delete_file(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to delete.")], Annotated[StrictStr, Field(description="The file to delete.")]],
-        delete: Annotated[Delete, Field(description="When and how the file is deleted.")],
+        delete_file_request: Annotated[DeleteFileRequest, Field(description="When and how the file is deleted.")],
         return_single_operation: Annotated[Optional[StrictBool], Field(description="Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.")] = None,
         _request_timeout: Union[
             None,
@@ -5166,8 +5250,8 @@ class FilesApi:
 
         :param file_id: The file to delete. (required)
         :type file_id: Union[int, str]
-        :param delete: When and how the file is deleted. (required)
-        :type delete: Delete
+        :param delete_file_request: When and how the file is deleted. (required)
+        :type delete_file_request: DeleteFileRequest
         :param return_single_operation: Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
         :type return_single_operation: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -5194,7 +5278,7 @@ class FilesApi:
 
         _param = self._delete_file_serialize(
             file_id=file_id,
-            delete=delete,
+            delete_file_request=delete_file_request,
             return_single_operation=return_single_operation,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5204,6 +5288,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5227,7 +5313,7 @@ class FilesApi:
     def delete_file_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to delete.")], Annotated[StrictStr, Field(description="The file to delete.")]],
-        delete: Annotated[Delete, Field(description="When and how the file is deleted.")],
+        delete_file_request: Annotated[DeleteFileRequest, Field(description="When and how the file is deleted.")],
         return_single_operation: Annotated[Optional[StrictBool], Field(description="Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.")] = None,
         _request_timeout: Union[
             None,
@@ -5248,8 +5334,8 @@ class FilesApi:
 
         :param file_id: The file to delete. (required)
         :type file_id: Union[int, str]
-        :param delete: When and how the file is deleted. (required)
-        :type delete: Delete
+        :param delete_file_request: When and how the file is deleted. (required)
+        :type delete_file_request: DeleteFileRequest
         :param return_single_operation: Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
         :type return_single_operation: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -5276,7 +5362,7 @@ class FilesApi:
 
         _param = self._delete_file_serialize(
             file_id=file_id,
-            delete=delete,
+            delete_file_request=delete_file_request,
             return_single_operation=return_single_operation,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5286,6 +5372,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5309,7 +5397,7 @@ class FilesApi:
     def delete_file_without_preload_content(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to delete.")], Annotated[StrictStr, Field(description="The file to delete.")]],
-        delete: Annotated[Delete, Field(description="When and how the file is deleted.")],
+        delete_file_request: Annotated[DeleteFileRequest, Field(description="When and how the file is deleted.")],
         return_single_operation: Annotated[Optional[StrictBool], Field(description="Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.")] = None,
         _request_timeout: Union[
             None,
@@ -5330,8 +5418,8 @@ class FilesApi:
 
         :param file_id: The file to delete. (required)
         :type file_id: Union[int, str]
-        :param delete: When and how the file is deleted. (required)
-        :type delete: Delete
+        :param delete_file_request: When and how the file is deleted. (required)
+        :type delete_file_request: DeleteFileRequest
         :param return_single_operation: Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
         :type return_single_operation: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -5358,7 +5446,7 @@ class FilesApi:
 
         _param = self._delete_file_serialize(
             file_id=file_id,
-            delete=delete,
+            delete_file_request=delete_file_request,
             return_single_operation=return_single_operation,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5368,6 +5456,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5386,7 +5476,7 @@ class FilesApi:
     def _delete_file_serialize(
         self,
         file_id,
-        delete,
+        delete_file_request,
         return_single_operation,
         _request_auth,
         _content_type,
@@ -5414,13 +5504,13 @@ class FilesApi:
         # process the query parameters
         if return_single_operation is not None:
             
-            _query_params.append(('ReturnSingleOperation', return_single_operation))
+            _query_params.append(('returnSingleOperation', return_single_operation))
             
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if delete is not None:
-            _body_params = delete
+        if delete_file_request is not None:
+            _body_params = delete_file_request
 
 
         # set the HTTP header `Accept`
@@ -5495,7 +5585,7 @@ class FilesApi:
     ) -> None:
         """Delete recent files
 
-        Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section  instead, call `PUT api/2.0/files/displayrecent`.
+        Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. A file on a connected third-party account is cleared by its string id too, but only while  the storage can still find it: the entry of a file removed from the storage stays in the history. Folder ids  are accepted but change nothing because the section lists files only. The answer carries no body and reports  nothing about how many entries were found: an empty request and an id that was never in the section are  accepted alike. Repeating the call is safe, but an entry returns the next time the file is opened or  `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section instead, call  `PUT api/2.0/files/displayrecent`.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -5531,10 +5621,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5569,7 +5660,7 @@ class FilesApi:
     ) -> ApiResponse[None]:
         """Delete recent files
 
-        Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section  instead, call `PUT api/2.0/files/displayrecent`.
+        Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. A file on a connected third-party account is cleared by its string id too, but only while  the storage can still find it: the entry of a file removed from the storage stays in the history. Folder ids  are accepted but change nothing because the section lists files only. The answer carries no body and reports  nothing about how many entries were found: an empty request and an id that was never in the section are  accepted alike. Repeating the call is safe, but an entry returns the next time the file is opened or  `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section instead, call  `PUT api/2.0/files/displayrecent`.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -5605,10 +5696,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5643,7 +5735,7 @@ class FilesApi:
     ) -> RESTResponseType:
         """Delete recent files
 
-        Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section  instead, call `PUT api/2.0/files/displayrecent`.
+        Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. A file on a connected third-party account is cleared by its string id too, but only while  the storage can still find it: the entry of a file removed from the storage stays in the history. Folder ids  are accepted but change nothing because the section lists files only. The answer carries no body and reports  nothing about how many entries were found: an empty request and an id that was never in the section are  accepted alike. Repeating the call is safe, but an entry returns the next time the file is opened or  `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section instead, call  `PUT api/2.0/files/displayrecent`.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -5679,10 +5771,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5782,7 +5875,7 @@ class FilesApi:
     @validate_call
     def delete_templates(
         self,
-        request_body: Annotated[Optional[List[StrictInt]], Field(description="The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.")] = None,
+        delete_template_files_request_dto: Annotated[Optional[List[StrictInt]], Field(description="The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5800,8 +5893,8 @@ class FilesApi:
 
         Takes the listed files off the personal template list of the calling account, leaving the files themselves  untouched: only the template mark is dropped. The body of this request is a bare JSON array of numeric file  ids rather than an object with a field, and a request that carries no array at all is rejected as an invalid  request. Every authenticated member type may manage their own list, a guest is refused, and read access to a  file is required for its mark to be dropped. The answer is `true` whenever the array was understood, which an  empty array, an id that does not exist and a file that was never a template all achieve, so it confirms  nothing about what was removed. Repeating the call is safe. Use `POST api/2.0/files/templates` to put a file  back on the list; that operation expects an object with a `fileIds` field, so the two bodies are not  interchangeable.
 
-        :param request_body: The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
-        :type request_body: List[int]
+        :param delete_template_files_request_dto: The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
+        :type delete_template_files_request_dto: List[int]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5825,7 +5918,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._delete_templates_serialize(
-            request_body=request_body,
+            delete_template_files_request_dto=delete_template_files_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5834,6 +5927,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5856,7 +5950,7 @@ class FilesApi:
     @validate_call
     def delete_templates_with_http_info(
         self,
-        request_body: Annotated[Optional[List[StrictInt]], Field(description="The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.")] = None,
+        delete_template_files_request_dto: Annotated[Optional[List[StrictInt]], Field(description="The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5874,8 +5968,8 @@ class FilesApi:
 
         Takes the listed files off the personal template list of the calling account, leaving the files themselves  untouched: only the template mark is dropped. The body of this request is a bare JSON array of numeric file  ids rather than an object with a field, and a request that carries no array at all is rejected as an invalid  request. Every authenticated member type may manage their own list, a guest is refused, and read access to a  file is required for its mark to be dropped. The answer is `true` whenever the array was understood, which an  empty array, an id that does not exist and a file that was never a template all achieve, so it confirms  nothing about what was removed. Repeating the call is safe. Use `POST api/2.0/files/templates` to put a file  back on the list; that operation expects an object with a `fileIds` field, so the two bodies are not  interchangeable.
 
-        :param request_body: The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
-        :type request_body: List[int]
+        :param delete_template_files_request_dto: The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
+        :type delete_template_files_request_dto: List[int]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5899,7 +5993,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._delete_templates_serialize(
-            request_body=request_body,
+            delete_template_files_request_dto=delete_template_files_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5908,6 +6002,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5930,7 +6025,7 @@ class FilesApi:
     @validate_call
     def delete_templates_without_preload_content(
         self,
-        request_body: Annotated[Optional[List[StrictInt]], Field(description="The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.")] = None,
+        delete_template_files_request_dto: Annotated[Optional[List[StrictInt]], Field(description="The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5948,8 +6043,8 @@ class FilesApi:
 
         Takes the listed files off the personal template list of the calling account, leaving the files themselves  untouched: only the template mark is dropped. The body of this request is a bare JSON array of numeric file  ids rather than an object with a field, and a request that carries no array at all is rejected as an invalid  request. Every authenticated member type may manage their own list, a guest is refused, and read access to a  file is required for its mark to be dropped. The answer is `true` whenever the array was understood, which an  empty array, an id that does not exist and a file that was never a template all achieve, so it confirms  nothing about what was removed. Repeating the call is safe. Use `POST api/2.0/files/templates` to put a file  back on the list; that operation expects an object with a `fileIds` field, so the two bodies are not  interchangeable.
 
-        :param request_body: The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
-        :type request_body: List[int]
+        :param delete_template_files_request_dto: The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
+        :type delete_template_files_request_dto: List[int]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5973,7 +6068,7 @@ class FilesApi:
         """ # noqa: E501
 
         _param = self._delete_templates_serialize(
-            request_body=request_body,
+            delete_template_files_request_dto=delete_template_files_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5982,6 +6077,7 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5999,7 +6095,7 @@ class FilesApi:
 
     def _delete_templates_serialize(
         self,
-        request_body,
+        delete_template_files_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -6009,7 +6105,7 @@ class FilesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'request_body': '',
+            'DeleteTemplateFilesRequestDto': '',
         }
 
         _path_params: Dict[str, str] = {}
@@ -6026,8 +6122,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if delete_template_files_request_dto is not None:
+            _body_params = delete_template_files_request_dto
 
 
         # set the HTTP header `Accept`
@@ -6734,6 +6830,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryDataWrapper",
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -6811,6 +6909,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryDataWrapper",
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -6888,6 +6988,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryDataWrapper",
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -7034,6 +7136,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -7107,6 +7211,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -7180,6 +7286,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -7633,12 +7741,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7725,12 +7833,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7817,12 +7925,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8060,6 +8168,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '401': None,
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -8194,6 +8305,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '401': None,
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -8271,6 +8385,9 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '401': None,
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -8425,10 +8542,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8507,10 +8626,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8589,10 +8710,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8749,11 +8872,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '401': None,
             '403': None,
             '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8832,11 +8956,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '401': None,
             '403': None,
             '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8915,11 +9040,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '401': None,
             '403': None,
             '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9122,6 +9248,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileArrayWrapper" if isinstance(file_id, str) else "FileArrayWrapper"),
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -9249,6 +9377,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileArrayWrapper" if isinstance(file_id, str) else "FileArrayWrapper"),
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -9322,6 +9452,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileArrayWrapper" if isinstance(file_id, str) else "FileArrayWrapper"),
+            '403': None,
+            '404': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
@@ -9463,9 +9595,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FillingFormResultWrapper",
+            '400': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9536,9 +9669,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FillingFormResultWrapper",
+            '400': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9609,9 +9743,10 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FillingFormResultWrapper",
+            '400': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10045,6 +10180,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -10119,6 +10256,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -10193,6 +10332,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileLinkWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -10335,10 +10476,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10409,10 +10552,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10483,10 +10628,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10586,7 +10733,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> MentionWrapperArrayWrapper:
+    ) -> MentionArrayWrapper:
         """Get users for document protection
 
         Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
@@ -10624,7 +10771,8 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MentionWrapperArrayWrapper",
+            '200': "MentionArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -10660,7 +10808,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[MentionWrapperArrayWrapper]:
+    ) -> ApiResponse[MentionArrayWrapper]:
         """Get users for document protection
 
         Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
@@ -10698,7 +10846,8 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MentionWrapperArrayWrapper",
+            '200': "MentionArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -10772,7 +10921,8 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MentionWrapperArrayWrapper",
+            '200': "MentionArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -10915,10 +11065,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10989,10 +11140,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11063,10 +11215,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileReferenceWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11508,9 +11661,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -11582,9 +11737,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -11656,9 +11813,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -11747,7 +11906,7 @@ class FilesApi:
     def lock_file(
         self,
         file_id: Annotated[StrictInt, Field(description="The file to lock or unlock.")],
-        lock_file_parameters: Annotated[LockFileParameters, Field(description="The lock state to reach.")],
+        lock_file_request: Annotated[LockFileRequest, Field(description="The lock state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11766,7 +11925,7 @@ class FilesApi:
     def lock_file(
         self,
         file_id: Annotated[StrictStr, Field(description="The file to lock or unlock.")],
-        lock_file_parameters: Annotated[LockFileParameters, Field(description="The lock state to reach.")],
+        lock_file_request: Annotated[LockFileRequest, Field(description="The lock state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11785,7 +11944,7 @@ class FilesApi:
     def lock_file(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to lock or unlock.")], Annotated[StrictStr, Field(description="The file to lock or unlock.")]],
-        lock_file_parameters: Annotated[LockFileParameters, Field(description="The lock state to reach.")],
+        lock_file_request: Annotated[LockFileRequest, Field(description="The lock state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11804,7 +11963,7 @@ class FilesApi:
     def lock_file(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to lock or unlock.")], Annotated[StrictStr, Field(description="The file to lock or unlock.")]],
-        lock_file_parameters: Annotated[LockFileParameters, Field(description="The lock state to reach.")],
+        lock_file_request: Annotated[LockFileRequest, Field(description="The lock state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11824,8 +11983,8 @@ class FilesApi:
 
         :param file_id: The file to lock or unlock. (required)
         :type file_id: Union[int, str]
-        :param lock_file_parameters: The lock state to reach. (required)
-        :type lock_file_parameters: LockFileParameters
+        :param lock_file_request: The lock state to reach. (required)
+        :type lock_file_request: LockFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11850,7 +12009,7 @@ class FilesApi:
 
         _param = self._lock_file_serialize(
             file_id=file_id,
-            lock_file_parameters=lock_file_parameters,
+            lock_file_request=lock_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -11859,6 +12018,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -11882,7 +12043,7 @@ class FilesApi:
     def lock_file_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The file to lock or unlock.")],
-        lock_file_parameters: Annotated[LockFileParameters, Field(description="The lock state to reach.")],
+        lock_file_request: Annotated[LockFileRequest, Field(description="The lock state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11901,7 +12062,7 @@ class FilesApi:
     def lock_file_with_http_info(
         self,
         file_id: Annotated[StrictStr, Field(description="The file to lock or unlock.")],
-        lock_file_parameters: Annotated[LockFileParameters, Field(description="The lock state to reach.")],
+        lock_file_request: Annotated[LockFileRequest, Field(description="The lock state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11920,7 +12081,7 @@ class FilesApi:
     def lock_file_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to lock or unlock.")], Annotated[StrictStr, Field(description="The file to lock or unlock.")]],
-        lock_file_parameters: Annotated[LockFileParameters, Field(description="The lock state to reach.")],
+        lock_file_request: Annotated[LockFileRequest, Field(description="The lock state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11939,7 +12100,7 @@ class FilesApi:
     def lock_file_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to lock or unlock.")], Annotated[StrictStr, Field(description="The file to lock or unlock.")]],
-        lock_file_parameters: Annotated[LockFileParameters, Field(description="The lock state to reach.")],
+        lock_file_request: Annotated[LockFileRequest, Field(description="The lock state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11959,8 +12120,8 @@ class FilesApi:
 
         :param file_id: The file to lock or unlock. (required)
         :type file_id: Union[int, str]
-        :param lock_file_parameters: The lock state to reach. (required)
-        :type lock_file_parameters: LockFileParameters
+        :param lock_file_request: The lock state to reach. (required)
+        :type lock_file_request: LockFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11985,7 +12146,7 @@ class FilesApi:
 
         _param = self._lock_file_serialize(
             file_id=file_id,
-            lock_file_parameters=lock_file_parameters,
+            lock_file_request=lock_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -11994,6 +12155,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -12017,7 +12180,7 @@ class FilesApi:
     def lock_file_without_preload_content(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to lock or unlock.")], Annotated[StrictStr, Field(description="The file to lock or unlock.")]],
-        lock_file_parameters: Annotated[LockFileParameters, Field(description="The lock state to reach.")],
+        lock_file_request: Annotated[LockFileRequest, Field(description="The lock state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -12037,8 +12200,8 @@ class FilesApi:
 
         :param file_id: The file to lock or unlock. (required)
         :type file_id: Union[int, str]
-        :param lock_file_parameters: The lock state to reach. (required)
-        :type lock_file_parameters: LockFileParameters
+        :param lock_file_request: The lock state to reach. (required)
+        :type lock_file_request: LockFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -12063,7 +12226,7 @@ class FilesApi:
 
         _param = self._lock_file_serialize(
             file_id=file_id,
-            lock_file_parameters=lock_file_parameters,
+            lock_file_request=lock_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -12072,6 +12235,8 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -12090,7 +12255,7 @@ class FilesApi:
     def _lock_file_serialize(
         self,
         file_id,
-        lock_file_parameters,
+        lock_file_request,
         _request_auth,
         _content_type,
         _headers,
@@ -12118,8 +12283,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if lock_file_parameters is not None:
-            _body_params = lock_file_parameters
+        if lock_file_request is not None:
+            _body_params = lock_file_request
 
 
         # set the HTTP header `Accept`
@@ -12234,11 +12399,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12313,11 +12478,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12392,11 +12557,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12641,8 +12806,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyConfigurationWrapper" if isinstance(file_id, str) else "ConfigurationWrapper"),
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -12804,8 +12971,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyConfigurationWrapper" if isinstance(file_id, str) else "ConfigurationWrapper"),
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -12898,8 +13067,10 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyConfigurationWrapper" if isinstance(file_id, str) else "ConfigurationWrapper"),
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -13073,9 +13244,11 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
             '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13155,9 +13328,11 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
             '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13237,9 +13412,11 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EditHistoryArrayWrapper",
             '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13471,10 +13648,12 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
             '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13628,10 +13807,12 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
             '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13719,10 +13900,12 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
             '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13767,16 +13950,16 @@ class FilesApi:
         # process the query parameters
         if download_uri is not None:
             
-            _query_params.append(('DownloadUri', download_uri))
+            _query_params.append(('downloadUri', download_uri))
             
         # process the header parameters
         # process the form parameters
         if file_extension is not None:
-            _form_params.append(('FileExtension', file_extension))
+            _form_params.append(('fileExtension', file_extension))
         if file is not None:
-            _files['File'] = file
+            _files['file'] = file
         if forcesave is not None:
-            _form_params.append(('Forcesave', forcesave))
+            _form_params.append(('forcesave', forcesave))
         # process the body parameter
 
 
@@ -13837,7 +14020,7 @@ class FilesApi:
     def save_file_as_pdf(
         self,
         id: Annotated[StrictInt, Field(description="The file to convert; it is left untouched.")],
-        save_as_pdf: Annotated[SaveAsPdf, Field(description="The destination folder and the name of the PDF.")],
+        save_as_pdf_request: Annotated[SaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13856,7 +14039,7 @@ class FilesApi:
     def save_file_as_pdf(
         self,
         id: Annotated[StrictStr, Field(description="The file to convert; it is left untouched.")],
-        save_as_pdf: Annotated[ThirdPartySaveAsPdf, Field(description="The destination folder and the name of the PDF.")],
+        save_as_pdf_request: Annotated[ThirdPartySaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13875,7 +14058,7 @@ class FilesApi:
     def save_file_as_pdf(
         self,
         id: Union[Annotated[StrictInt, Field(description="The file to convert; it is left untouched.")], Annotated[StrictStr, Field(description="The file to convert; it is left untouched.")]],
-        save_as_pdf: Union[Annotated[SaveAsPdf, Field(description="The destination folder and the name of the PDF.")], Annotated[ThirdPartySaveAsPdf, Field(description="The destination folder and the name of the PDF.")]],
+        save_as_pdf_request: Union[Annotated[SaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")], Annotated[ThirdPartySaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13894,7 +14077,7 @@ class FilesApi:
     def save_file_as_pdf(
         self,
         id: Union[Annotated[StrictInt, Field(description="The file to convert; it is left untouched.")], Annotated[StrictStr, Field(description="The file to convert; it is left untouched.")]],
-        save_as_pdf: Union[Annotated[SaveAsPdf, Field(description="The destination folder and the name of the PDF.")], Annotated[ThirdPartySaveAsPdf, Field(description="The destination folder and the name of the PDF.")]],
+        save_as_pdf_request: Union[Annotated[SaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")], Annotated[ThirdPartySaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13914,8 +14097,8 @@ class FilesApi:
 
         :param id: The file to convert; it is left untouched. (required)
         :type id: Union[int, str]
-        :param save_as_pdf: The destination folder and the name of the PDF. (required)
-        :type save_as_pdf: Union[SaveAsPdf, ThirdPartySaveAsPdf]
+        :param save_as_pdf_request: The destination folder and the name of the PDF. (required)
+        :type save_as_pdf_request: Union[SaveAsPdfRequest, ThirdPartySaveAsPdfRequest]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -13940,7 +14123,7 @@ class FilesApi:
 
         _param = self._save_file_as_pdf_serialize(
             id=id,
-            save_as_pdf=save_as_pdf,
+            save_as_pdf_request=save_as_pdf_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -13949,11 +14132,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13973,7 +14158,7 @@ class FilesApi:
     def save_file_as_pdf_with_http_info(
         self,
         id: Annotated[StrictInt, Field(description="The file to convert; it is left untouched.")],
-        save_as_pdf: Annotated[SaveAsPdf, Field(description="The destination folder and the name of the PDF.")],
+        save_as_pdf_request: Annotated[SaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13992,7 +14177,7 @@ class FilesApi:
     def save_file_as_pdf_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The file to convert; it is left untouched.")],
-        save_as_pdf: Annotated[ThirdPartySaveAsPdf, Field(description="The destination folder and the name of the PDF.")],
+        save_as_pdf_request: Annotated[ThirdPartySaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14011,7 +14196,7 @@ class FilesApi:
     def save_file_as_pdf_with_http_info(
         self,
         id: Union[Annotated[StrictInt, Field(description="The file to convert; it is left untouched.")], Annotated[StrictStr, Field(description="The file to convert; it is left untouched.")]],
-        save_as_pdf: Union[Annotated[SaveAsPdf, Field(description="The destination folder and the name of the PDF.")], Annotated[ThirdPartySaveAsPdf, Field(description="The destination folder and the name of the PDF.")]],
+        save_as_pdf_request: Union[Annotated[SaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")], Annotated[ThirdPartySaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14030,7 +14215,7 @@ class FilesApi:
     def save_file_as_pdf_with_http_info(
         self,
         id: Union[Annotated[StrictInt, Field(description="The file to convert; it is left untouched.")], Annotated[StrictStr, Field(description="The file to convert; it is left untouched.")]],
-        save_as_pdf: Union[Annotated[SaveAsPdf, Field(description="The destination folder and the name of the PDF.")], Annotated[ThirdPartySaveAsPdf, Field(description="The destination folder and the name of the PDF.")]],
+        save_as_pdf_request: Union[Annotated[SaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")], Annotated[ThirdPartySaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14050,8 +14235,8 @@ class FilesApi:
 
         :param id: The file to convert; it is left untouched. (required)
         :type id: Union[int, str]
-        :param save_as_pdf: The destination folder and the name of the PDF. (required)
-        :type save_as_pdf: Union[SaveAsPdf, ThirdPartySaveAsPdf]
+        :param save_as_pdf_request: The destination folder and the name of the PDF. (required)
+        :type save_as_pdf_request: Union[SaveAsPdfRequest, ThirdPartySaveAsPdfRequest]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14076,7 +14261,7 @@ class FilesApi:
 
         _param = self._save_file_as_pdf_serialize(
             id=id,
-            save_as_pdf=save_as_pdf,
+            save_as_pdf_request=save_as_pdf_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -14085,11 +14270,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14109,7 +14296,7 @@ class FilesApi:
     def save_file_as_pdf_without_preload_content(
         self,
         id: Union[Annotated[StrictInt, Field(description="The file to convert; it is left untouched.")], Annotated[StrictStr, Field(description="The file to convert; it is left untouched.")]],
-        save_as_pdf: Union[Annotated[SaveAsPdf, Field(description="The destination folder and the name of the PDF.")], Annotated[ThirdPartySaveAsPdf, Field(description="The destination folder and the name of the PDF.")]],
+        save_as_pdf_request: Union[Annotated[SaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")], Annotated[ThirdPartySaveAsPdfRequest, Field(description="The destination folder and the name of the PDF.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14129,8 +14316,8 @@ class FilesApi:
 
         :param id: The file to convert; it is left untouched. (required)
         :type id: Union[int, str]
-        :param save_as_pdf: The destination folder and the name of the PDF. (required)
-        :type save_as_pdf: Union[SaveAsPdf, ThirdPartySaveAsPdf]
+        :param save_as_pdf_request: The destination folder and the name of the PDF. (required)
+        :type save_as_pdf_request: Union[SaveAsPdfRequest, ThirdPartySaveAsPdfRequest]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14155,7 +14342,7 @@ class FilesApi:
 
         _param = self._save_file_as_pdf_serialize(
             id=id,
-            save_as_pdf=save_as_pdf,
+            save_as_pdf_request=save_as_pdf_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -14164,11 +14351,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(id, str) else "FileWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14183,7 +14372,7 @@ class FilesApi:
     def _save_file_as_pdf_serialize(
         self,
         id,
-        save_as_pdf,
+        save_as_pdf_request,
         _request_auth,
         _content_type,
         _headers,
@@ -14211,8 +14400,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if save_as_pdf is not None:
-            _body_params = save_as_pdf
+        if save_as_pdf_request is not None:
+            _body_params = save_as_pdf_request
 
 
         # set the HTTP header `Accept`
@@ -14327,11 +14516,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14406,11 +14595,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14485,11 +14674,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14593,7 +14782,7 @@ class FilesApi:
     def set_custom_filter_tag(
         self,
         file_id: Annotated[StrictInt, Field(description="The spreadsheet whose Custom Filter mode is switched.")],
-        custom_filter_parameters: Annotated[CustomFilterParameters, Field(description="The Custom Filter state to reach.")],
+        custom_filter_request: Annotated[CustomFilterRequest, Field(description="The Custom Filter state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14612,7 +14801,7 @@ class FilesApi:
     def set_custom_filter_tag(
         self,
         file_id: Annotated[StrictStr, Field(description="The spreadsheet whose Custom Filter mode is switched.")],
-        custom_filter_parameters: Annotated[CustomFilterParameters, Field(description="The Custom Filter state to reach.")],
+        custom_filter_request: Annotated[CustomFilterRequest, Field(description="The Custom Filter state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14631,7 +14820,7 @@ class FilesApi:
     def set_custom_filter_tag(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The spreadsheet whose Custom Filter mode is switched.")], Annotated[StrictStr, Field(description="The spreadsheet whose Custom Filter mode is switched.")]],
-        custom_filter_parameters: Annotated[CustomFilterParameters, Field(description="The Custom Filter state to reach.")],
+        custom_filter_request: Annotated[CustomFilterRequest, Field(description="The Custom Filter state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14650,7 +14839,7 @@ class FilesApi:
     def set_custom_filter_tag(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The spreadsheet whose Custom Filter mode is switched.")], Annotated[StrictStr, Field(description="The spreadsheet whose Custom Filter mode is switched.")]],
-        custom_filter_parameters: Annotated[CustomFilterParameters, Field(description="The Custom Filter state to reach.")],
+        custom_filter_request: Annotated[CustomFilterRequest, Field(description="The Custom Filter state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14670,8 +14859,8 @@ class FilesApi:
 
         :param file_id: The spreadsheet whose Custom Filter mode is switched. (required)
         :type file_id: Union[int, str]
-        :param custom_filter_parameters: The Custom Filter state to reach. (required)
-        :type custom_filter_parameters: CustomFilterParameters
+        :param custom_filter_request: The Custom Filter state to reach. (required)
+        :type custom_filter_request: CustomFilterRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14696,7 +14885,7 @@ class FilesApi:
 
         _param = self._set_custom_filter_tag_serialize(
             file_id=file_id,
-            custom_filter_parameters=custom_filter_parameters,
+            custom_filter_request=custom_filter_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -14705,10 +14894,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14728,7 +14919,7 @@ class FilesApi:
     def set_custom_filter_tag_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The spreadsheet whose Custom Filter mode is switched.")],
-        custom_filter_parameters: Annotated[CustomFilterParameters, Field(description="The Custom Filter state to reach.")],
+        custom_filter_request: Annotated[CustomFilterRequest, Field(description="The Custom Filter state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14747,7 +14938,7 @@ class FilesApi:
     def set_custom_filter_tag_with_http_info(
         self,
         file_id: Annotated[StrictStr, Field(description="The spreadsheet whose Custom Filter mode is switched.")],
-        custom_filter_parameters: Annotated[CustomFilterParameters, Field(description="The Custom Filter state to reach.")],
+        custom_filter_request: Annotated[CustomFilterRequest, Field(description="The Custom Filter state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14766,7 +14957,7 @@ class FilesApi:
     def set_custom_filter_tag_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The spreadsheet whose Custom Filter mode is switched.")], Annotated[StrictStr, Field(description="The spreadsheet whose Custom Filter mode is switched.")]],
-        custom_filter_parameters: Annotated[CustomFilterParameters, Field(description="The Custom Filter state to reach.")],
+        custom_filter_request: Annotated[CustomFilterRequest, Field(description="The Custom Filter state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14785,7 +14976,7 @@ class FilesApi:
     def set_custom_filter_tag_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The spreadsheet whose Custom Filter mode is switched.")], Annotated[StrictStr, Field(description="The spreadsheet whose Custom Filter mode is switched.")]],
-        custom_filter_parameters: Annotated[CustomFilterParameters, Field(description="The Custom Filter state to reach.")],
+        custom_filter_request: Annotated[CustomFilterRequest, Field(description="The Custom Filter state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14805,8 +14996,8 @@ class FilesApi:
 
         :param file_id: The spreadsheet whose Custom Filter mode is switched. (required)
         :type file_id: Union[int, str]
-        :param custom_filter_parameters: The Custom Filter state to reach. (required)
-        :type custom_filter_parameters: CustomFilterParameters
+        :param custom_filter_request: The Custom Filter state to reach. (required)
+        :type custom_filter_request: CustomFilterRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14831,7 +15022,7 @@ class FilesApi:
 
         _param = self._set_custom_filter_tag_serialize(
             file_id=file_id,
-            custom_filter_parameters=custom_filter_parameters,
+            custom_filter_request=custom_filter_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -14840,10 +15031,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14863,7 +15056,7 @@ class FilesApi:
     def set_custom_filter_tag_without_preload_content(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The spreadsheet whose Custom Filter mode is switched.")], Annotated[StrictStr, Field(description="The spreadsheet whose Custom Filter mode is switched.")]],
-        custom_filter_parameters: Annotated[CustomFilterParameters, Field(description="The Custom Filter state to reach.")],
+        custom_filter_request: Annotated[CustomFilterRequest, Field(description="The Custom Filter state to reach.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14883,8 +15076,8 @@ class FilesApi:
 
         :param file_id: The spreadsheet whose Custom Filter mode is switched. (required)
         :type file_id: Union[int, str]
-        :param custom_filter_parameters: The Custom Filter state to reach. (required)
-        :type custom_filter_parameters: CustomFilterParameters
+        :param custom_filter_request: The Custom Filter state to reach. (required)
+        :type custom_filter_request: CustomFilterRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14909,7 +15102,7 @@ class FilesApi:
 
         _param = self._set_custom_filter_tag_serialize(
             file_id=file_id,
-            custom_filter_parameters=custom_filter_parameters,
+            custom_filter_request=custom_filter_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -14918,10 +15111,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -14936,7 +15131,7 @@ class FilesApi:
     def _set_custom_filter_tag_serialize(
         self,
         file_id,
-        custom_filter_parameters,
+        custom_filter_request,
         _request_auth,
         _content_type,
         _headers,
@@ -14964,8 +15159,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if custom_filter_parameters is not None:
-            _body_params = custom_filter_parameters
+        if custom_filter_request is not None:
+            _body_params = custom_filter_request
 
 
         # set the HTTP header `Accept`
@@ -15405,10 +15600,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15483,10 +15680,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15561,10 +15760,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15780,12 +15981,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15917,12 +16118,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -15997,12 +16198,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -16157,10 +16358,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -16231,10 +16434,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -16305,10 +16510,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -16409,7 +16616,7 @@ class FilesApi:
     def start_edit_file(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to open the editing session on. The caller needs edit access to it.")], Annotated[StrictStr, Field(description="The file to open the editing session on. The caller needs edit access to it.")]],
-        start_edit: Annotated[StartEdit, Field(description="The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.")],
+        start_edit_request: Annotated[StartEditRequest, Field(description="The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -16429,8 +16636,8 @@ class FilesApi:
 
         :param file_id: The file to open the editing session on. The caller needs edit access to it. (required)
         :type file_id: Union[int, str]
-        :param start_edit: The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. (required)
-        :type start_edit: StartEdit
+        :param start_edit_request: The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. (required)
+        :type start_edit_request: StartEditRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -16455,7 +16662,7 @@ class FilesApi:
 
         _param = self._start_edit_file_serialize(
             file_id=file_id,
-            start_edit=start_edit,
+            start_edit_request=start_edit_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -16464,9 +16671,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -16487,7 +16697,7 @@ class FilesApi:
     def start_edit_file_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to open the editing session on. The caller needs edit access to it.")], Annotated[StrictStr, Field(description="The file to open the editing session on. The caller needs edit access to it.")]],
-        start_edit: Annotated[StartEdit, Field(description="The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.")],
+        start_edit_request: Annotated[StartEditRequest, Field(description="The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -16507,8 +16717,8 @@ class FilesApi:
 
         :param file_id: The file to open the editing session on. The caller needs edit access to it. (required)
         :type file_id: Union[int, str]
-        :param start_edit: The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. (required)
-        :type start_edit: StartEdit
+        :param start_edit_request: The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. (required)
+        :type start_edit_request: StartEditRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -16533,7 +16743,7 @@ class FilesApi:
 
         _param = self._start_edit_file_serialize(
             file_id=file_id,
-            start_edit=start_edit,
+            start_edit_request=start_edit_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -16542,9 +16752,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -16565,7 +16778,7 @@ class FilesApi:
     def start_edit_file_without_preload_content(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to open the editing session on. The caller needs edit access to it.")], Annotated[StrictStr, Field(description="The file to open the editing session on. The caller needs edit access to it.")]],
-        start_edit: Annotated[StartEdit, Field(description="The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.")],
+        start_edit_request: Annotated[StartEditRequest, Field(description="The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -16585,8 +16798,8 @@ class FilesApi:
 
         :param file_id: The file to open the editing session on. The caller needs edit access to it. (required)
         :type file_id: Union[int, str]
-        :param start_edit: The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. (required)
-        :type start_edit: StartEdit
+        :param start_edit_request: The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. (required)
+        :type start_edit_request: StartEditRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -16611,7 +16824,7 @@ class FilesApi:
 
         _param = self._start_edit_file_serialize(
             file_id=file_id,
-            start_edit=start_edit,
+            start_edit_request=start_edit_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -16620,9 +16833,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '401': None,
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -16638,7 +16854,7 @@ class FilesApi:
     def _start_edit_file_serialize(
         self,
         file_id,
-        start_edit,
+        start_edit_request,
         _request_auth,
         _content_type,
         _headers,
@@ -16666,8 +16882,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if start_edit is not None:
-            _body_params = start_edit
+        if start_edit_request is not None:
+            _body_params = start_edit_request
 
 
         # set the HTTP header `Accept`
@@ -16833,6 +17049,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -16962,6 +17179,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -17037,6 +17255,7 @@ class FilesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -17183,11 +17402,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -17262,11 +17482,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -17341,11 +17562,12 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -17501,9 +17723,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ItemKeyValuePairBooleanStringWrapper",
+            '401': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -17587,9 +17811,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ItemKeyValuePairBooleanStringWrapper",
+            '401': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -17673,9 +17899,11 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ItemKeyValuePairBooleanStringWrapper",
+            '401': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -17779,7 +18007,7 @@ class FilesApi:
     def update_file(
         self,
         file_id: Annotated[StrictInt, Field(description="The file to update.")],
-        update_file: Annotated[UpdateFile, Field(description="The new title and the version to restore.")],
+        update_file_request: Annotated[UpdateFileRequest, Field(description="The new title and the version to restore.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -17798,7 +18026,7 @@ class FilesApi:
     def update_file(
         self,
         file_id: Annotated[StrictStr, Field(description="The file to update.")],
-        update_file: Annotated[UpdateFile, Field(description="The new title and the version to restore.")],
+        update_file_request: Annotated[UpdateFileRequest, Field(description="The new title and the version to restore.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -17817,7 +18045,7 @@ class FilesApi:
     def update_file(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to update.")], Annotated[StrictStr, Field(description="The file to update.")]],
-        update_file: Annotated[UpdateFile, Field(description="The new title and the version to restore.")],
+        update_file_request: Annotated[UpdateFileRequest, Field(description="The new title and the version to restore.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -17836,7 +18064,7 @@ class FilesApi:
     def update_file(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to update.")], Annotated[StrictStr, Field(description="The file to update.")]],
-        update_file: Annotated[UpdateFile, Field(description="The new title and the version to restore.")],
+        update_file_request: Annotated[UpdateFileRequest, Field(description="The new title and the version to restore.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -17856,8 +18084,8 @@ class FilesApi:
 
         :param file_id: The file to update. (required)
         :type file_id: Union[int, str]
-        :param update_file: The new title and the version to restore. (required)
-        :type update_file: UpdateFile
+        :param update_file_request: The new title and the version to restore. (required)
+        :type update_file_request: UpdateFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -17882,7 +18110,7 @@ class FilesApi:
 
         _param = self._update_file_serialize(
             file_id=file_id,
-            update_file=update_file,
+            update_file_request=update_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -17891,10 +18119,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
+            '401': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -17914,7 +18145,7 @@ class FilesApi:
     def update_file_with_http_info(
         self,
         file_id: Annotated[StrictInt, Field(description="The file to update.")],
-        update_file: Annotated[UpdateFile, Field(description="The new title and the version to restore.")],
+        update_file_request: Annotated[UpdateFileRequest, Field(description="The new title and the version to restore.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -17933,7 +18164,7 @@ class FilesApi:
     def update_file_with_http_info(
         self,
         file_id: Annotated[StrictStr, Field(description="The file to update.")],
-        update_file: Annotated[UpdateFile, Field(description="The new title and the version to restore.")],
+        update_file_request: Annotated[UpdateFileRequest, Field(description="The new title and the version to restore.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -17952,7 +18183,7 @@ class FilesApi:
     def update_file_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to update.")], Annotated[StrictStr, Field(description="The file to update.")]],
-        update_file: Annotated[UpdateFile, Field(description="The new title and the version to restore.")],
+        update_file_request: Annotated[UpdateFileRequest, Field(description="The new title and the version to restore.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -17971,7 +18202,7 @@ class FilesApi:
     def update_file_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to update.")], Annotated[StrictStr, Field(description="The file to update.")]],
-        update_file: Annotated[UpdateFile, Field(description="The new title and the version to restore.")],
+        update_file_request: Annotated[UpdateFileRequest, Field(description="The new title and the version to restore.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -17991,8 +18222,8 @@ class FilesApi:
 
         :param file_id: The file to update. (required)
         :type file_id: Union[int, str]
-        :param update_file: The new title and the version to restore. (required)
-        :type update_file: UpdateFile
+        :param update_file_request: The new title and the version to restore. (required)
+        :type update_file_request: UpdateFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -18017,7 +18248,7 @@ class FilesApi:
 
         _param = self._update_file_serialize(
             file_id=file_id,
-            update_file=update_file,
+            update_file_request=update_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -18026,10 +18257,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
+            '401': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -18049,7 +18283,7 @@ class FilesApi:
     def update_file_without_preload_content(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file to update.")], Annotated[StrictStr, Field(description="The file to update.")]],
-        update_file: Annotated[UpdateFile, Field(description="The new title and the version to restore.")],
+        update_file_request: Annotated[UpdateFileRequest, Field(description="The new title and the version to restore.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -18069,8 +18303,8 @@ class FilesApi:
 
         :param file_id: The file to update. (required)
         :type file_id: Union[int, str]
-        :param update_file: The new title and the version to restore. (required)
-        :type update_file: UpdateFile
+        :param update_file_request: The new title and the version to restore. (required)
+        :type update_file_request: UpdateFileRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -18095,7 +18329,7 @@ class FilesApi:
 
         _param = self._update_file_serialize(
             file_id=file_id,
-            update_file=update_file,
+            update_file_request=update_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -18104,10 +18338,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFileWrapper" if isinstance(file_id, str) else "FileWrapper"),
+            '400': None,
+            '401': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -18122,7 +18359,7 @@ class FilesApi:
     def _update_file_serialize(
         self,
         file_id,
-        update_file,
+        update_file_request,
         _request_auth,
         _content_type,
         _headers,
@@ -18150,8 +18387,8 @@ class FilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_file is not None:
-            _body_params = update_file
+        if update_file_request is not None:
+            _body_params = update_file_request
 
 
         # set the HTTP header `Accept`

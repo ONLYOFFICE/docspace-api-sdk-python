@@ -24,7 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.api_date_time import ApiDateTime
-from docspace_api_sdk.models.operation_token_usage import OperationTokenUsage
+from docspace_api_sdk.models.operation_token_usage_dto import OperationTokenUsageDto
 from docspace_api_sdk.models.operation_type import OperationType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -42,14 +42,15 @@ class OperationDto(BaseModel):
     currency: Optional[StrictStr] = Field(default=None, description="The currency `credit` and `debit` are expressed in, as a three-letter ISO 4217 code. It is the accounting  currency of the wallet, which need not be the currency the subscription is priced in.", json_schema_extra={"examples": ["USD"]})
     credit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount that went into the wallet. It is `0` on a movement that only took money out, so the pair of  `credit` and `debit` is what shows which way the money went; the `credit` and `debit` filters of the  operation select the two directions by exactly this.", json_schema_extra={"examples": [99.99]})
     debit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount that was taken out of the wallet, `0` on a movement that put money in.", json_schema_extra={"examples": [99.99]})
+    cost: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="What the AI provider charged for the whole `quantity` of an AI tools or AI search charge, as the billing  service recorded it - the provider's side of the same operation `debit` bills the portal for. It is `null`  on any other movement, and on an AI charge recorded without a provider cost.", json_schema_extra={"examples": [0.007]})
     participant_name: Optional[StrictStr] = Field(default=None, description="Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead.", alias="participantName", json_schema_extra={"examples": ["john.doe@example.com"]})
     participant_display_name: Optional[StrictStr] = Field(default=None, description="The same person as their portal display name. It falls back to `participantName` when the name belongs to  no portal account, so it is never empty while `participantName` is filled.", alias="participantDisplayName", json_schema_extra={"examples": ["John Doe"]})
     source_type: Optional[StrictStr] = Field(default=None, description="What kind of thing an AI operation was run on - an agent, a file, a folder, a room or a form. It is empty  on any movement that is not an AI charge.", alias="sourceType", json_schema_extra={"examples": ["Agent"]})
     source_title: Optional[StrictStr] = Field(default=None, description="The title that thing had when the operation ran, kept as recorded, so it does not follow a later rename.  Empty under the same conditions as `sourceType`.", alias="sourceTitle", json_schema_extra={"examples": ["My AI Agent"]})
     source_id: Optional[StrictStr] = Field(default=None, description="The identifier of that thing, to look it up in the module it belongs to. Empty under the same conditions  as `sourceType`.", alias="sourceId", json_schema_extra={"examples": ["123"]})
-    token_usage: Optional[OperationTokenUsage] = Field(default=None, description="The tokens an AI operation consumed, broken down by kind - prompt, completion, cache reads and writes,  reasoning, images. It is `null` on any movement that is not an AI charge, and on an AI charge the billing  service recorded without token counts.", alias="tokenUsage")
+    token_usage: Optional[OperationTokenUsageDto] = Field(default=None, description="The tokens an AI operation consumed, broken down by kind - prompt, completion, cache reads and writes,  reasoning, images. It is `null` on any movement that is not an AI charge, and on an AI charge the billing  service recorded without token counts.", alias="tokenUsage")
     type: Optional[OperationType] = Field(default=None, description="What kind of movement this is - a payment, a charge, a refund, a correction. It is what the `type` filter  matches on, and `Unknown` covers a movement the billing service reported under a kind this build does not  recognise.")
-    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "participantName", "participantDisplayName", "sourceType", "sourceTitle", "sourceId", "tokenUsage", "type"]
+    __properties: ClassVar[List[str]] = ["date", "service", "description", "details", "serviceUnit", "quantity", "currency", "credit", "debit", "cost", "participantName", "participantDisplayName", "sourceType", "sourceTitle", "sourceId", "tokenUsage", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -121,6 +122,11 @@ class OperationDto(BaseModel):
         if self.currency is None and "currency" in self.model_fields_set:
             _dict['currency'] = None
 
+        # set to None if cost (nullable) is None
+        # and model_fields_set contains the field
+        if self.cost is None and "cost" in self.model_fields_set:
+            _dict['cost'] = None
+
         # set to None if participant_name (nullable) is None
         # and model_fields_set contains the field
         if self.participant_name is None and "participant_name" in self.model_fields_set:
@@ -168,12 +174,13 @@ class OperationDto(BaseModel):
             "currency": obj.get("currency"),
             "credit": obj.get("credit"),
             "debit": obj.get("debit"),
+            "cost": obj.get("cost"),
             "participantName": obj.get("participantName"),
             "participantDisplayName": obj.get("participantDisplayName"),
             "sourceType": obj.get("sourceType"),
             "sourceTitle": obj.get("sourceTitle"),
             "sourceId": obj.get("sourceId"),
-            "tokenUsage": OperationTokenUsage.from_dict(obj["tokenUsage"]) if obj.get("tokenUsage") is not None else None,
+            "tokenUsage": OperationTokenUsageDto.from_dict(obj["tokenUsage"]) if obj.get("tokenUsage") is not None else None,
             "type": obj.get("type")
         })
         return _obj

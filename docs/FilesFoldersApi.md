@@ -30,6 +30,7 @@ Method | HTTP request | Description
 [**insert_file**](#insert_file) | **POST** /api/2.0/files/{folderId}/insert | Insert a file
 [**insert_file_to_my_from_body**](#insert_file_to_my_from_body) | **POST** /api/2.0/files/@my/insert | Insert a file into My documents
 [**rename_folder**](#rename_folder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder
+[**search_folder**](#search_folder) | **POST** /api/2.0/files/{folderId}/search | Search a folder by metadata
 [**set_folder_order**](#set_folder_order) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order
 [**set_folder_primary_external_link**](#set_folder_primary_external_link) | **PUT** /api/2.0/files/folder/{id}/links | Set the folder external link
 [**terminate_report_folder_history**](#terminate_report_folder_history) | **DELETE** /api/2.0/files/folder/{folderId}/log/report | Terminate the folder history report generation
@@ -38,7 +39,7 @@ Method | HTTP request | Description
 
 
 # **check_upload**
-> STRINGArrayWrapper check_upload(folder_id, check_upload_request)
+> StringArrayWrapper check_upload(folder_id, check_upload_request)
 
 Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in
 advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and
@@ -62,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**STRINGArrayWrapper**](STRINGArrayWrapper.md)
+[**StringArrayWrapper**](StringArrayWrapper.md)
 
 ### Third-party storage
 
@@ -78,7 +79,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.check_upload_request import CheckUploadRequest
-from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
+from docspace_api_sdk.models.string_array_wrapper import StringArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -123,17 +124,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The submitted titles that already belong to a file in the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `filesTitle` |  -  |
+**403** | The caller cannot add content to the folder, or a title that is not a PDF is checked against a form-filling room template |  -  |
+**404** | No folder with the specified ID |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_folder**
-> FolderWrapper create_folder(folder_id, create_folder)
+> FolderWrapper create_folder(folder_id, create_folder_request)
 
 Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title
 is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not
@@ -153,7 +156,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **Union[int, str]**| The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | 
- **create_folder** | [**CreateFolder**](CreateFolder.md)| The title carried by the request body. | 
+ **create_folder_request** | [**CreateFolderRequest**](CreateFolderRequest.md)| The title carried by the request body. | 
 
 ### Return type
 
@@ -172,7 +175,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_folder import CreateFolder
+from docspace_api_sdk.models.create_folder_request import CreateFolderRequest
 from docspace_api_sdk.models.folder_wrapper import FolderWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -195,11 +198,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
     folder_id = 1 # int | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
-    create_folder = docspace_api_sdk.CreateFolder() # CreateFolder | The title carried by the request body.
+    create_folder_request = docspace_api_sdk.CreateFolderRequest() # CreateFolderRequest | The title carried by the request body.
 
     try:
         # Create a folder
-        api_response = api_instance.create_folder(folder_id, create_folder)
+        api_response = api_instance.create_folder(folder_id, create_folder_request)
         print("The response of FoldersApi->create_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -218,10 +221,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The folder that was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `title`, or the title is empty, blank or longer than 165 characters |  -  |
+**403** | The caller may not create content in the parent folder, or the parent does not exist, lies in the archive or is a section root that holds only rooms |  -  |
+**404** | The parent folder id is a string that is not the id of a folder in a known third-party storage |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -315,12 +320,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The primary external link of the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not manage the links of this folder |  -  |
-**404** | The folder does not exist |  -  |
+**400** | The title or password is longer than 255 characters, the password does not meet the portal password policy, or `expirationDate` lies more than 10 years ahead |  -  |
+**403** | The caller may not manage the links of this folder, the access level is not available for links to this folder, the link limit is reached, or the admin restricts external links to public rooms |  -  |
+**404** | The folder does not exist, or its primary link was revoked |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -332,12 +337,15 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when
 `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not
 the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the
-file from `resultFileId`, `resultFileName` and `resultFileUrl`, of which a CSV report fills only the last two.
-`from` and `to` limit the exported period; leaving both out exports the whole history. While a report for the
-same folder and caller is still running, this call joins it and answers with the running task instead of
-starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,
-and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access
-rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and
+file from `resultFileId`, `resultFileName` and `resultFileUrl`; the URL of a CSV file too large for the editor
+downloads it instead of opening it. An XLSX report keeps only the most recent events, at most 200,000 by default
+and fewer when the events are long, and its header says how many were left out; `format=Csv` exports every event
+of the period. `from` and `to` limit the exported period; leaving both out exports the whole history. While a
+report for the same folder and caller is still running, this call joins it and answers with the running task
+instead of starting a second one, so retrying is safe. The caller needs read access to the folder and may not be
+a guest - otherwise the call is refused with 403, and a folder that does not exist with 404; the report is
+available on every pricing plan, and 402 comes only when the login history and audit trail section is turned
+off for the portal. Only a portal administrator gets the address, browser and
 platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
 
 For more information, see [api.onlyoffice.com]().
@@ -348,7 +356,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **int**| The folder whose history is exported; the report covers the folder itself and the entries inside it. | 
- **format** | [**AuditReportFormat**](.md)| The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. | [optional] 
+ **format** | [**AuditReportFormat**](.md)| The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents. | [optional] 
  **var_from** | **datetime**| The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps. | [optional] 
  **to** | **datetime**| The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry. | [optional] 
 
@@ -388,7 +396,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
     folder_id = 1 # int | The folder whose history is exported; the report covers the folder itself and the entries inside it.
-    format = docspace_api_sdk.AuditReportFormat() # AuditReportFormat | The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. (optional)
+    format = docspace_api_sdk.AuditReportFormat() # AuditReportFormat | The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents. (optional)
     var_from = '2025-01-01T00:00:00' # datetime | The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps. (optional)
     to = '2025-12-31T23:59:59' # datetime | The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry. (optional)
 
@@ -413,6 +421,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The queued report task |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The login history and audit trail section is turned off for this portal |  -  |
 **403** | The caller may not export the history of this folder |  -  |
 **404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
@@ -425,7 +434,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_folder**
-> FileOperationArrayWrapper delete_folder(folder_id, delete_folder)
+> FileOperationArrayWrapper delete_folder(folder_id, delete_folder_request)
 
 Queues the deletion of one folder together with everything inside it, and answers with the file operations of
 the caller, the one just created among them. The folder is not gone when the response arrives: poll
@@ -446,7 +455,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **Union[int, str]**| The folder to delete, together with everything it holds. | 
- **delete_folder** | [**DeleteFolder**](DeleteFolder.md)| How the deletion is to be carried out. | 
+ **delete_folder_request** | [**DeleteFolderRequest**](DeleteFolderRequest.md)| How the deletion is to be carried out. | 
 
 ### Return type
 
@@ -465,7 +474,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.delete_folder import DeleteFolder
+from docspace_api_sdk.models.delete_folder_request import DeleteFolderRequest
 from docspace_api_sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -488,11 +497,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
     folder_id = 10 # int | The folder to delete, together with everything it holds.
-    delete_folder = docspace_api_sdk.DeleteFolder() # DeleteFolder | How the deletion is to be carried out.
+    delete_folder_request = docspace_api_sdk.DeleteFolderRequest() # DeleteFolderRequest | How the deletion is to be carried out.
 
     try:
         # Delete a folder
-        api_response = api_instance.delete_folder(folder_id, delete_folder)
+        api_response = api_instance.delete_folder(folder_id, delete_folder_request)
         print("The response of FoldersApi->delete_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -511,6 +520,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file operations of the caller, including the deletion just queued |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller may not delete the folder, or the folder is a room and `immediately` is not set |  -  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -599,7 +610,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The queued report task together with the form the answers belong to |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The folder is not a completed-forms folder, or the caller may not maintain the form |  -  |
+**403** | The folder is not a completed-forms folder, the room of the submitted copy is not a form-filling room, the caller may not maintain the form, or the filling of the form is not started |  -  |
 **404** | The folder, the submitted copy or the original form was not found |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -611,7 +622,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_favorites_folder**
-> FolderContentWrapper get_favorites_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentWrapper get_favorites_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
 
 Returns the caller's own Favorites section: the files and folders this account has marked as favorite,
 together with the section folder itself. Favorites are per-account, so the entries another member marked are
@@ -638,6 +649,9 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] 
  **filter_value** | **str**| The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | [optional] 
+ **metadata_template_id** | **int**| The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. | [optional] 
+ **metadata_filters** | **str**| The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | [optional] 
+ **include_hidden_metadata** | **bool**| Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | [optional] 
 
 ### Return type
 
@@ -682,10 +696,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     sort_by = 'DateAndTime' # str | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional)
     filter_value = 'My Document' # str | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. (optional)
+    metadata_template_id = 1 # int | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. (optional)
+    metadata_filters = '[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]' # str | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional)
+    include_hidden_metadata = false # bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
     try:
         # Get the Favorites section
-        api_response = api_instance.get_favorites_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_favorites_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
         print("The response of FoldersApi->get_favorites_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -704,12 +721,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Favorites section with one page of the entries the caller marked as favorite |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 **403** | The caller is not allowed to read the Favorites section |  -  |
 **404** | The Favorites section could not be resolved for this account |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -789,6 +806,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The space taken by documents in each section, in bytes |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -884,7 +902,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_folder_by_folder_id**
-> FolderContentWrapper get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, shared_by=shared_by, filter_type=filter_type, room_id=room_id, folder_type=folder_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, with_sub_folders=with_sub_folders, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
+> FolderContentWrapper get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, shared_by=shared_by, filter_type=filter_type, room_id=room_id, folder_type=folder_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, with_sub_folders=with_sub_folders, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
 
 Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder
 itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file
@@ -923,7 +941,10 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] 
  **filter_value** | **str**| The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. | [optional] 
- **location** | [**Location**](.md)| Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | [optional] 
+ **location** | [**RequestLocation**](.md)| Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | [optional] 
+ **metadata_template_id** | **int**| The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400. | [optional] 
+ **metadata_filters** | **str**| The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search. | [optional] 
+ **include_hidden_metadata** | **bool**| Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | [optional] 
 
 ### Return type
 
@@ -945,7 +966,7 @@ import docspace_api_sdk
 from docspace_api_sdk.models.apply_filter_option import ApplyFilterOption
 from docspace_api_sdk.models.filter_type import FilterType
 from docspace_api_sdk.models.folder_content_wrapper import FolderContentWrapper
-from docspace_api_sdk.models.location import Location
+from docspace_api_sdk.models.request_location import RequestLocation
 from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.rest import ApiException
@@ -986,11 +1007,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     sort_by = 'DateAndTime' # str | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional)
     filter_value = 'My Document' # str | The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. (optional)
-    location = docspace_api_sdk.Location() # Location | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. (optional)
+    location = docspace_api_sdk.RequestLocation() # RequestLocation | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. (optional)
+    metadata_template_id = 1 # int | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400. (optional)
+    metadata_filters = '[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]' # str | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search. (optional)
+    include_hidden_metadata = false # bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
     try:
         # Get a folder by ID
-        api_response = api_instance.get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, shared_by=shared_by, filter_type=filter_type, room_id=room_id, folder_type=folder_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, with_sub_folders=with_sub_folders, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location)
+        api_response = api_instance.get_folder_by_folder_id(folder_id, user_id_or_group_id=user_id_or_group_id, shared_by=shared_by, filter_type=filter_type, room_id=room_id, folder_type=folder_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, with_sub_folders=with_sub_folders, extension=extension, search_area=search_area, forms_item_key=forms_item_key, forms_item_type=forms_item_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, location=location, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
         print("The response of FoldersApi->get_folder_by_folder_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -1009,11 +1033,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | One page of the folder contents, with the folder itself and the chain of its parents |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not read this folder |  -  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, the `startIndex` is negative, or the `roomId` is not a number while the folder id is one |  -  |
+**403** | The caller may not read this folder, the folder lies inside Trash, or an anonymous caller asks for a folder that does not exist |  -  |
 **404** | The folder does not exist |  -  |
+**500** | The folder lies in a third-party storage that cannot deliver it |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1107,12 +1131,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | One page of the folder history, the most recent record first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, or `fromDate` or `toDate` is not a date and time ending in `Z` or a UTC offset |  -  |
 **403** | The caller may not read this folder |  -  |
 **404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1200,6 +1224,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The folder itself - its title, its parent, the moments it was created and changed, the access the caller has to it, how many items in it are new for them, and the room settings when the folder is a room; nothing about the items it holds |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**401** | An anonymous caller has no external link that grants access to the folder |  -  |
+**403** | The caller may not read this folder |  -  |
+**404** | The folder does not exist |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
@@ -1291,6 +1318,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The external links of the folder the caller may manage |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1383,6 +1411,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The chain of folders leading to the folder, the section root first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | The caller may not read this folder |  -  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1480,11 +1509,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The primary external link of the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
+**401** | An anonymous caller has no external link |  -  |
 **403** | The caller may not manage the links of this folder |  -  |
 **404** | The folder does not exist, or its primary link was revoked |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1573,6 +1603,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The direct subfolders of the folder, ordered by title |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | The caller may not read this folder |  -  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1583,7 +1614,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_forms_folder**
-> FolderContentWrapper get_forms_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentWrapper get_forms_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
 
 Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored
 under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active
@@ -1591,9 +1622,10 @@ area and lists them when `searchArea` names the forms area instead. The section 
 content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,
 call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`
 saves the requested order as the default order for this account. `filterType`, `filterValue`,
-`userIdOrGroupId` and the sorting parameters narrow and order the room list, `count` and `startIndex` page
-through it, `total` reports how many rooms match the request in full, and `current` describes the section
-folder itself.
+`userIdOrGroupId` and the sorting parameters narrow and order the room list, `metadataTemplateId` and
+`metadataFilters` keep only the rooms carrying the template and matching the conditions (an unknown template
+or field, or a malformed condition, is refused with 400), `count` and `startIndex` page through it, `total`
+reports how many rooms match the request in full, and `current` describes the section folder itself.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1609,6 +1641,9 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] 
  **filter_value** | **str**| The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | [optional] 
+ **metadata_template_id** | **int**| The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. | [optional] 
+ **metadata_filters** | **str**| The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | [optional] 
+ **include_hidden_metadata** | **bool**| Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | [optional] 
 
 ### Return type
 
@@ -1653,10 +1688,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     sort_by = 'DateAndTime' # str | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional)
     filter_value = 'My Document' # str | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. (optional)
+    metadata_template_id = 1 # int | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. (optional)
+    metadata_filters = '[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]' # str | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional)
+    include_hidden_metadata = false # bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
     try:
         # Get the Forms section
-        api_response = api_instance.get_forms_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_forms_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
         print("The response of FoldersApi->get_forms_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -1675,31 +1713,33 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Forms section with one page of the form-filling rooms available to the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, the `startIndex` is negative, or the metadata filter names an unknown template or field |  -  |
 **403** | The caller is not allowed to read the Forms section |  -  |
 **404** | The Forms section could not be resolved for this account |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_my_folder**
-> FolderContentWrapper get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentWrapper get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
 
 Returns the contents of the caller's My documents section, the personal storage that belongs to this account
 alone and stays invisible to other members until something in it is shared explicitly. Any authenticated
 member that has a personal section can read it; guest accounts are not given one, and the call then answers
 404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default
 order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,
-`userIdOrGroupId` or `filterValue` narrows the request, the search descends through the whole subtree.
-`filterValue` is matched against titles and against indexed document content, and the index is written
-asynchronously, so a file uploaded a moment ago can be missing from a search for a short while. `folders` and
-`files` hold one page of the result, `total` counts everything that matches before `count` and `startIndex`
-are applied, and `current` describes the section folder. To open a folder inside the section, call
-`GET api/2.0/files/{folderId}` with its identifier.
+`userIdOrGroupId`, `filterValue` or a metadata filter narrows the request, the search descends through the whole
+subtree. `filterValue` is matched against titles and against indexed document content, and the index is written
+asynchronously, so a file uploaded a moment ago can be missing from a search for a short while.
+`metadataTemplateId` and `metadataFilters` keep only the entries carrying the template and matching the
+conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or field, or a malformed
+condition, is refused with 400. `folders` and `files` hold one page of the result, `total` counts everything
+that matches before `count` and `startIndex` are applied, and `current` describes the section folder. To open
+a folder inside the section, call `GET api/2.0/files/{folderId}` with its identifier.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1716,6 +1756,9 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] 
  **filter_value** | **str**| The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. | [optional] 
+ **metadata_template_id** | **int**| The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. | [optional] 
+ **metadata_filters** | **str**| The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | [optional] 
+ **include_hidden_metadata** | **bool**| Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | [optional] 
 
 ### Return type
 
@@ -1762,10 +1805,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     sort_by = 'DateAndTime' # str | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional)
     filter_value = 'My Document' # str | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. (optional)
+    metadata_template_id = 1 # int | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. (optional)
+    metadata_filters = '[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]' # str | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional)
+    include_hidden_metadata = false # bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
     try:
         # Get the My documents section
-        api_response = api_instance.get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_my_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
         print("The response of FoldersApi->get_my_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -1784,12 +1830,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The My documents section with one page of its contents |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, the `startIndex` is negative, or the metadata filter names an unknown template or field |  -  |
 **403** | The caller is not allowed to read the My documents section |  -  |
 **404** | This account has no personal section |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1877,7 +1923,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The entries of the folder that are new for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not read this folder |  -  |
+**403** | The caller may not read this folder, or the folder lies inside Trash |  -  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1888,7 +1935,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_recent_folder**
-> FolderContentWrapper get_recent_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentWrapper get_recent_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
 
 Returns the Recent section: the files the calling account has opened lately. The section holds files only,
 so `folders` comes back empty, and it is personal, so another member's history is not visible here. A file is
@@ -1918,6 +1965,9 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing. | [optional] 
  **filter_value** | **str**| The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history. | [optional] 
+ **metadata_template_id** | **int**| The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set. | [optional] 
+ **metadata_filters** | **str**| The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | [optional] 
+ **include_hidden_metadata** | **bool**| Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | [optional] 
 
 ### Return type
 
@@ -1968,10 +2018,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     sort_by = 'DateAndTime' # str | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing. (optional)
     filter_value = 'My Document' # str | The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history. (optional)
+    metadata_template_id = 1 # int | The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set. (optional)
+    metadata_filters = '[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]' # str | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional)
+    include_hidden_metadata = false # bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
     try:
         # Get the Recent section
-        api_response = api_instance.get_recent_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_recent_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, exclude_subject=exclude_subject, apply_filter_option=apply_filter_option, search_area=search_area, extension=extension, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
         print("The response of FoldersApi->get_recent_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -1990,12 +2043,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Recent section with one page of the files the caller opened lately |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 **403** | The caller is not allowed to read the Recent section |  -  |
 **404** | The Recent section could not be resolved for this account |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2006,13 +2059,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 Reports how far the history report of a folder has got, and is the operation to poll after
 `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`
-turns true when the job is over however it ended, `error` carries the reason when it failed, and
-`resultFileId`, `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My
-documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this
-folder and caller, either because none was started or because a finished one has already been picked up by an
-earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to
-include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not
-exist with 404. The call is read-only, and each caller sees only their own report.
+turns true when the job is over however it ended, `error` carries the reason when it failed, and `resultFileId`,
+`resultFileName` and `resultFileUrl` name the file that was saved in the caller's My documents. An empty
+answer means there is no report for this folder and caller, either because none was started or because a
+finished one has already been picked up by an earlier poll. The caller needs read access to the folder and may
+not be a guest; a caller who fails the access rule is answered with 403, a folder that does not exist with 404,
+and a portal with the login history and audit trail section turned off with 402. The call is read-only, and each caller sees only
+their own report.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2080,6 +2133,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The state of the report task, or nothing when there is none |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The login history and audit trail section is turned off for this portal |  -  |
 **403** | The caller may not export the history of this folder |  -  |
 **404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
@@ -2188,19 +2242,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The sections available to the caller, each with one page of its content |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 **403** | The caller is not allowed to read one of the sections |  -  |
 **404** | One of the sections could not be resolved for this account |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_trash_folder**
-> FolderContentWrapper get_trash_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+> FolderContentWrapper get_trash_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
 
 Returns the caller's Trash section: the files and folders this account has deleted, kept there until they
 are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.
@@ -2209,9 +2263,11 @@ Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or dis
 `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested
 order as the default order for this account. Only the top level of the section is listed, so the contents of a
 deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than
-against document content. `folders` and `files` hold one page of the result, `total` counts everything that
-matches before `count` and `startIndex` are applied, and `current` describes the section folder. An account
-that is given no Trash of its own, an outsider for instance, receives 404.
+against document content. `metadataTemplateId` and `metadataFilters` keep only the deleted entries carrying the
+template and matching the conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or
+field, or a malformed condition, is refused with 400. `folders` and `files` hold one page of the result,
+`total` counts everything that matches before `count` and `startIndex` are applied, and `current` describes
+the section folder. An account that is given no Trash of its own, an outsider for instance, receives 404.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2228,6 +2284,9 @@ Name | Type | Description  | Notes
  **sort_by** | **str**| The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | [optional] 
  **filter_value** | **str**| The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. | [optional] 
+ **metadata_template_id** | **int**| The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. | [optional] 
+ **metadata_filters** | **str**| The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | [optional] 
+ **include_hidden_metadata** | **bool**| Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | [optional] 
 
 ### Return type
 
@@ -2274,10 +2333,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     sort_by = 'DateAndTime' # str | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional)
     filter_value = 'My Document' # str | The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered. (optional)
+    metadata_template_id = 1 # int | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. (optional)
+    metadata_filters = '[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]' # str | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional)
+    include_hidden_metadata = false # bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
     try:
         # Get the Trash section
-        api_response = api_instance.get_trash_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        api_response = api_instance.get_trash_folder(user_id_or_group_id=user_id_or_group_id, filter_type=filter_type, apply_filter_option=apply_filter_option, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
         print("The response of FoldersApi->get_trash_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -2296,12 +2358,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Trash section with one page of the entries the caller deleted |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, the `startIndex` is negative, or the metadata filter names an unknown template or field |  -  |
 **403** | The caller is not allowed to read the Trash section |  -  |
 **404** | This account has no Trash section |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2415,11 +2477,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The stored file with its id and the title it was actually saved under; a `version` above 1 means the content was added to a file that already carried this name instead of creating a new one |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit |  -  |
 **403** | The caller cannot add content to this folder |  -  |
 **404** | No folder with the specified ID |  -  |
+**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
+**500** | A file that is not a PDF is stored in a form-filling room |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -2531,8 +2595,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The stored file, with the identifier, version and title it was saved under |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit |  -  |
 **403** | Creating a file in the personal section is not allowed for this account |  -  |
 **404** | The caller has no personal section, so there is nothing to store the file in |  -  |
+**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -2543,7 +2609,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rename_folder**
-> FolderWrapper rename_folder(folder_id, create_folder)
+> FolderWrapper rename_folder(folder_id, create_folder_request)
 
 Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be
 blank and is refused when it is longer than the limit the schema prints; a title that matches the current one
@@ -2564,7 +2630,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **Union[int, str]**| The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | 
- **create_folder** | [**CreateFolder**](CreateFolder.md)| The title carried by the request body. | 
+ **create_folder_request** | [**CreateFolderRequest**](CreateFolderRequest.md)| The title carried by the request body. | 
 
 ### Return type
 
@@ -2583,7 +2649,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_folder import CreateFolder
+from docspace_api_sdk.models.create_folder_request import CreateFolderRequest
 from docspace_api_sdk.models.folder_wrapper import FolderWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -2606,11 +2672,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
     folder_id = 1 # int | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
-    create_folder = docspace_api_sdk.CreateFolder() # CreateFolder | The title carried by the request body.
+    create_folder_request = docspace_api_sdk.CreateFolderRequest() # CreateFolderRequest | The title carried by the request body.
 
     try:
         # Rename a folder
-        api_response = api_instance.rename_folder(folder_id, create_folder)
+        api_response = api_instance.rename_folder(folder_id, create_folder_request)
         print("The response of FoldersApi->rename_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -2629,11 +2695,102 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The folder with its new title |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not rename this folder |  -  |
+**400** | The request body cannot be read or has no `title`, or the title is empty, blank or longer than 165 characters |  -  |
+**403** | The caller may not rename this folder, or the folder lies in Trash or in the archive |  -  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **search_folder**
+> FolderContentWrapper search_folder(folder_id, folder_metadata_search)
+
+Searches the folder by metadata. The same filter the folder listing takes in the metadataTemplateId and metadataFilters
+query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **Union[int, str]**| The folder ID. | 
+ **folder_metadata_search** | [**FolderMetadataSearch**](FolderMetadataSearch.md)| The search parameters. | 
+
+### Return type
+
+[**FolderContentWrapper**](FolderContentWrapper.md)
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyFolderContentWrapper**](ThirdPartyFolderContentWrapper.md).
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.folder_content_wrapper import FolderContentWrapper
+from docspace_api_sdk.models.folder_metadata_search import FolderMetadataSearch
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.FoldersApi(api_client)
+    folder_id = 1 # int | The folder ID.
+    folder_metadata_search = docspace_api_sdk.FolderMetadataSearch() # FolderMetadataSearch | The search parameters.
+
+    try:
+        # Search a folder by metadata
+        api_response = api_instance.search_folder(folder_id, folder_metadata_search)
+        print("The response of FoldersApi->search_folder:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FoldersApi->search_folder: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Folder contents |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | Invalid metadata filter, or a metadata filter on a section that cannot apply it |  -  |
+**403** | You don't have enough permission to view the folder content |  -  |
+**404** | The required folder was not found |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2725,10 +2882,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The folder with the position it now holds |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, or `order` is below 1 or is neither a number nor a dotted path ending in one |  -  |
+**403** | The caller may not reorder this folder |  -  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2822,10 +2981,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The link as it now stands, or nothing when it was revoked |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The title or password is longer than 255 characters, the password does not meet the portal password policy, or `expirationDate` lies more than 10 years ahead |  -  |
+**403** | The caller may not manage the links of this folder, the access level is not available for links to this folder, the link limit is reached, or the admin's restriction on external links forbids the change |  -  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2839,9 +3000,9 @@ Gives up the history report the caller has started for a folder with
 the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the
 task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which
 makes the call safe to repeat. A report that has already finished is not undone by this call and its file
-stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal
-plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder
-that does not exist with 404. Each caller can only terminate their own report.
+stays in My documents. The caller needs read access to the folder and may not be a guest; a caller who fails
+the access rule is answered with 403, a folder that does not exist with 404, and a portal with the login history
+and audit trail section turned off with 402. Each caller can only terminate their own report.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2906,6 +3067,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The request to stop the report was accepted |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The login history and audit trail section is turned off for this portal |  -  |
 **403** | The caller may not export the history of this folder |  -  |
 **404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
@@ -3008,12 +3170,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The stored file, as a list with one element |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request has no file part |  -  |
+**402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit |  -  |
 **403** | The caller cannot add content to this folder |  -  |
 **404** | No folder with the specified ID |  -  |
+**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
+**500** | A file that is not a PDF is stored in a form-filling room |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3108,12 +3272,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | An array holding the single uploaded file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request has no file part |  -  |
+**402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit |  -  |
 **403** | Uploading a file to the personal section is not allowed for this account |  -  |
 **404** | The caller has no personal section, so there is nothing to store the file in |  -  |
+**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

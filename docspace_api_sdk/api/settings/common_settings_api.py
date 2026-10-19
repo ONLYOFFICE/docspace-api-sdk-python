@@ -24,27 +24,27 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
-from docspace_api_sdk.models.custom_color_themes_settings_requests_dto import CustomColorThemesSettingsRequestsDto
+from docspace_api_sdk.models.custom_color_themes_settings_request_dto import CustomColorThemesSettingsRequestDto
 from docspace_api_sdk.models.custom_color_themes_settings_wrapper import CustomColorThemesSettingsWrapper
-from docspace_api_sdk.models.deep_link_configuration_requests_dto import DeepLinkConfigurationRequestsDto
+from docspace_api_sdk.models.deep_link_configuration_request_dto import DeepLinkConfigurationRequestDto
 from docspace_api_sdk.models.default_product_request_dto import DefaultProductRequestDto
-from docspace_api_sdk.models.dns_settings_requests_dto import DnsSettingsRequestsDto
-from docspace_api_sdk.models.email_activation_settings import EmailActivationSettings
+from docspace_api_sdk.models.dns_settings_request_dto import DnsSettingsRequestDto
+from docspace_api_sdk.models.email_activation_settings_request_dto import EmailActivationSettingsRequestDto
 from docspace_api_sdk.models.email_activation_settings_wrapper import EmailActivationSettingsWrapper
-from docspace_api_sdk.models.mail_domain_settings_requests_dto import MailDomainSettingsRequestsDto
+from docspace_api_sdk.models.mail_domain_settings_request_dto import MailDomainSettingsRequestDto
 from docspace_api_sdk.models.payment_settings_wrapper import PaymentSettingsWrapper
-from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
 from docspace_api_sdk.models.settings_wrapper import SettingsWrapper
 from docspace_api_sdk.models.socket_settings_wrapper import SocketSettingsWrapper
+from docspace_api_sdk.models.string_array_wrapper import StringArrayWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.studio_default_page_settings_wrapper import StudioDefaultPageSettingsWrapper
-from docspace_api_sdk.models.tenant_ai_access_settings_dto import TenantAiAccessSettingsDto
+from docspace_api_sdk.models.tenant_ai_access_settings_request_dto import TenantAiAccessSettingsRequestDto
 from docspace_api_sdk.models.tenant_ai_access_settings_wrapper import TenantAiAccessSettingsWrapper
 from docspace_api_sdk.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
 from docspace_api_sdk.models.tenant_user_invitation_settings_request_dto import TenantUserInvitationSettingsRequestDto
 from docspace_api_sdk.models.tenant_user_invitation_settings_wrapper import TenantUserInvitationSettingsWrapper
-from docspace_api_sdk.models.timezones_requests_array_wrapper import TimezonesRequestsArrayWrapper
-from docspace_api_sdk.models.wizard_requests_dto import WizardRequestsDto
+from docspace_api_sdk.models.timezone_array_wrapper import TimezoneArrayWrapper
+from docspace_api_sdk.models.wizard_request_dto import WizardRequestDto
 from docspace_api_sdk.models.wizard_settings_wrapper import WizardSettingsWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -117,7 +117,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '405': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -187,7 +187,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '405': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -257,7 +257,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '405': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -344,7 +344,7 @@ class CommonSettingsApi:
     @validate_call
     def complete_wizard(
         self,
-        wizard_requests_dto: Optional[WizardRequestsDto] = None,
+        wizard_request_dto: Optional[WizardRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -362,8 +362,8 @@ class CommonSettingsApi:
 
         Finishes the initial portal setup wizard: sets the owner's password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
 
-        :param wizard_requests_dto:
-        :type wizard_requests_dto: WizardRequestsDto
+        :param wizard_request_dto:
+        :type wizard_request_dto: WizardRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -387,7 +387,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._complete_wizard_serialize(
-            wizard_requests_dto=wizard_requests_dto,
+            wizard_request_dto=wizard_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -397,10 +397,10 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WizardSettingsWrapper",
             '400': None,
-            '402': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -419,7 +419,7 @@ class CommonSettingsApi:
     @validate_call
     def complete_wizard_with_http_info(
         self,
-        wizard_requests_dto: Optional[WizardRequestsDto] = None,
+        wizard_request_dto: Optional[WizardRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -437,8 +437,8 @@ class CommonSettingsApi:
 
         Finishes the initial portal setup wizard: sets the owner's password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
 
-        :param wizard_requests_dto:
-        :type wizard_requests_dto: WizardRequestsDto
+        :param wizard_request_dto:
+        :type wizard_request_dto: WizardRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -462,7 +462,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._complete_wizard_serialize(
-            wizard_requests_dto=wizard_requests_dto,
+            wizard_request_dto=wizard_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -472,10 +472,10 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WizardSettingsWrapper",
             '400': None,
-            '402': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -494,7 +494,7 @@ class CommonSettingsApi:
     @validate_call
     def complete_wizard_without_preload_content(
         self,
-        wizard_requests_dto: Optional[WizardRequestsDto] = None,
+        wizard_request_dto: Optional[WizardRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -512,8 +512,8 @@ class CommonSettingsApi:
 
         Finishes the initial portal setup wizard: sets the owner's password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
 
-        :param wizard_requests_dto:
-        :type wizard_requests_dto: WizardRequestsDto
+        :param wizard_request_dto:
+        :type wizard_request_dto: WizardRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -537,7 +537,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._complete_wizard_serialize(
-            wizard_requests_dto=wizard_requests_dto,
+            wizard_request_dto=wizard_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -547,10 +547,10 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WizardSettingsWrapper",
             '400': None,
-            '402': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -564,7 +564,7 @@ class CommonSettingsApi:
 
     def _complete_wizard_serialize(
         self,
-        wizard_requests_dto,
+        wizard_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -590,8 +590,8 @@ class CommonSettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if wizard_requests_dto is not None:
-            _body_params = wizard_requests_dto
+        if wizard_request_dto is not None:
+            _body_params = wizard_request_dto
 
 
         # set the HTTP header `Accept`
@@ -650,7 +650,7 @@ class CommonSettingsApi:
     @validate_call
     def configure_deep_link(
         self,
-        deep_link_configuration_requests_dto: Optional[DeepLinkConfigurationRequestsDto] = None,
+        deep_link_configuration_request_dto: Optional[DeepLinkConfigurationRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -668,8 +668,8 @@ class CommonSettingsApi:
 
         Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
 
-        :param deep_link_configuration_requests_dto:
-        :type deep_link_configuration_requests_dto: DeepLinkConfigurationRequestsDto
+        :param deep_link_configuration_request_dto:
+        :type deep_link_configuration_request_dto: DeepLinkConfigurationRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -693,7 +693,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._configure_deep_link_serialize(
-            deep_link_configuration_requests_dto=deep_link_configuration_requests_dto,
+            deep_link_configuration_request_dto=deep_link_configuration_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -703,9 +703,10 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -724,7 +725,7 @@ class CommonSettingsApi:
     @validate_call
     def configure_deep_link_with_http_info(
         self,
-        deep_link_configuration_requests_dto: Optional[DeepLinkConfigurationRequestsDto] = None,
+        deep_link_configuration_request_dto: Optional[DeepLinkConfigurationRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -742,8 +743,8 @@ class CommonSettingsApi:
 
         Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
 
-        :param deep_link_configuration_requests_dto:
-        :type deep_link_configuration_requests_dto: DeepLinkConfigurationRequestsDto
+        :param deep_link_configuration_request_dto:
+        :type deep_link_configuration_request_dto: DeepLinkConfigurationRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -767,7 +768,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._configure_deep_link_serialize(
-            deep_link_configuration_requests_dto=deep_link_configuration_requests_dto,
+            deep_link_configuration_request_dto=deep_link_configuration_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -777,9 +778,10 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -798,7 +800,7 @@ class CommonSettingsApi:
     @validate_call
     def configure_deep_link_without_preload_content(
         self,
-        deep_link_configuration_requests_dto: Optional[DeepLinkConfigurationRequestsDto] = None,
+        deep_link_configuration_request_dto: Optional[DeepLinkConfigurationRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -816,8 +818,8 @@ class CommonSettingsApi:
 
         Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
 
-        :param deep_link_configuration_requests_dto:
-        :type deep_link_configuration_requests_dto: DeepLinkConfigurationRequestsDto
+        :param deep_link_configuration_request_dto:
+        :type deep_link_configuration_request_dto: DeepLinkConfigurationRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -841,7 +843,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._configure_deep_link_serialize(
-            deep_link_configuration_requests_dto=deep_link_configuration_requests_dto,
+            deep_link_configuration_request_dto=deep_link_configuration_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -851,9 +853,10 @@ class CommonSettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
             '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -867,7 +870,7 @@ class CommonSettingsApi:
 
     def _configure_deep_link_serialize(
         self,
-        deep_link_configuration_requests_dto,
+        deep_link_configuration_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -893,8 +896,8 @@ class CommonSettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if deep_link_configuration_requests_dto is not None:
-            _body_params = deep_link_configuration_requests_dto
+        if deep_link_configuration_request_dto is not None:
+            _body_params = deep_link_configuration_request_dto
 
 
         # set the HTTP header `Accept`
@@ -1005,6 +1008,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1079,6 +1083,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1153,6 +1158,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1293,6 +1299,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -1361,6 +1368,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -1429,6 +1437,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDeepLinkSettingsWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -1562,6 +1571,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1631,6 +1641,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1700,6 +1711,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1834,6 +1846,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -1902,6 +1915,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -1970,6 +1984,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -2375,6 +2390,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '304': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2444,6 +2460,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '304': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2513,6 +2530,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '304': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -3172,7 +3190,7 @@ class CommonSettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> STRINGArrayWrapper:
+    ) -> StringArrayWrapper:
         """Get supported languages
 
         Returns the two- or four-letter language codes of every culture currently enabled on the portal (for example  `en-US`), used to populate a language picker before or after login. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call, and the list is not paginated. The response  supports conditional requests: an unchanged result is signaled instead of resending the same list. The set of  enabled cultures is a portal-wide configuration value, not a per-user preference.
@@ -3207,7 +3225,8 @@ class CommonSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
+            '200': "StringArrayWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -3240,7 +3259,7 @@ class CommonSettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[STRINGArrayWrapper]:
+    ) -> ApiResponse[StringArrayWrapper]:
         """Get supported languages
 
         Returns the two- or four-letter language codes of every culture currently enabled on the portal (for example  `en-US`), used to populate a language picker before or after login. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call, and the list is not paginated. The response  supports conditional requests: an unchanged result is signaled instead of resending the same list. The set of  enabled cultures is a portal-wide configuration value, not a per-user preference.
@@ -3275,7 +3294,8 @@ class CommonSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
+            '200': "StringArrayWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -3343,7 +3363,8 @@ class CommonSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
+            '200': "StringArrayWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -3749,6 +3770,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -3817,6 +3839,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -3885,6 +3908,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -3982,7 +4006,7 @@ class CommonSettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TimezonesRequestsArrayWrapper:
+    ) -> TimezoneArrayWrapper:
         """Get time zones
 
         Returns every time zone known to the host machine, each with its IANA identifier and a human-readable display  name, ordered from the most negative to the most positive UTC offset. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard or Administrators claim, of the kind generated  during initial portal setup or issued by an administrator, and the link is consumed as part of authenticating  the request. This is a read-only, idempotent call, and the list is not paginated. Use the returned `id` values  wherever the portal expects a time zone identifier; an unrecognized value is rejected there, not here.
@@ -4017,7 +4041,7 @@ class CommonSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TimezonesRequestsArrayWrapper",
+            '200': "TimezoneArrayWrapper",
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -4051,7 +4075,7 @@ class CommonSettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TimezonesRequestsArrayWrapper]:
+    ) -> ApiResponse[TimezoneArrayWrapper]:
         """Get time zones
 
         Returns every time zone known to the host machine, each with its IANA identifier and a human-readable display  name, ordered from the most negative to the most positive UTC offset. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard or Administrators claim, of the kind generated  during initial portal setup or issued by an administrator, and the link is consumed as part of authenticating  the request. This is a read-only, idempotent call, and the list is not paginated. Use the returned `id` values  wherever the portal expects a time zone identifier; an unrecognized value is rejected there, not here.
@@ -4086,7 +4110,7 @@ class CommonSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TimezonesRequestsArrayWrapper",
+            '200': "TimezoneArrayWrapper",
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -4155,7 +4179,7 @@ class CommonSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TimezonesRequestsArrayWrapper",
+            '200': "TimezoneArrayWrapper",
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -4294,10 +4318,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StudioDefaultPageSettingsWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4368,10 +4392,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StudioDefaultPageSettingsWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4442,10 +4466,10 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StudioDefaultPageSettingsWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4545,7 +4569,7 @@ class CommonSettingsApi:
     @validate_call
     def save_dns_settings(
         self,
-        dns_settings_requests_dto: Optional[DnsSettingsRequestsDto] = None,
+        dns_settings_request_dto: Optional[DnsSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4563,8 +4587,8 @@ class CommonSettingsApi:
 
         Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller's own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal's reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
 
-        :param dns_settings_requests_dto:
-        :type dns_settings_requests_dto: DnsSettingsRequestsDto
+        :param dns_settings_request_dto:
+        :type dns_settings_request_dto: DnsSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4588,7 +4612,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._save_dns_settings_serialize(
-            dns_settings_requests_dto=dns_settings_requests_dto,
+            dns_settings_request_dto=dns_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4597,12 +4621,12 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '400': None,
-            '402': None,
-            '405': None,
+            '403': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4621,7 +4645,7 @@ class CommonSettingsApi:
     @validate_call
     def save_dns_settings_with_http_info(
         self,
-        dns_settings_requests_dto: Optional[DnsSettingsRequestsDto] = None,
+        dns_settings_request_dto: Optional[DnsSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4639,8 +4663,8 @@ class CommonSettingsApi:
 
         Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller's own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal's reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
 
-        :param dns_settings_requests_dto:
-        :type dns_settings_requests_dto: DnsSettingsRequestsDto
+        :param dns_settings_request_dto:
+        :type dns_settings_request_dto: DnsSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4664,7 +4688,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._save_dns_settings_serialize(
-            dns_settings_requests_dto=dns_settings_requests_dto,
+            dns_settings_request_dto=dns_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4673,12 +4697,12 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '400': None,
-            '402': None,
-            '405': None,
+            '403': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4697,7 +4721,7 @@ class CommonSettingsApi:
     @validate_call
     def save_dns_settings_without_preload_content(
         self,
-        dns_settings_requests_dto: Optional[DnsSettingsRequestsDto] = None,
+        dns_settings_request_dto: Optional[DnsSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4715,8 +4739,8 @@ class CommonSettingsApi:
 
         Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller's own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal's reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
 
-        :param dns_settings_requests_dto:
-        :type dns_settings_requests_dto: DnsSettingsRequestsDto
+        :param dns_settings_request_dto:
+        :type dns_settings_request_dto: DnsSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4740,7 +4764,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._save_dns_settings_serialize(
-            dns_settings_requests_dto=dns_settings_requests_dto,
+            dns_settings_request_dto=dns_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4749,12 +4773,12 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '400': None,
-            '402': None,
-            '405': None,
+            '403': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4768,7 +4792,7 @@ class CommonSettingsApi:
 
     def _save_dns_settings_serialize(
         self,
-        dns_settings_requests_dto,
+        dns_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -4794,8 +4818,8 @@ class CommonSettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if dns_settings_requests_dto is not None:
-            _body_params = dns_settings_requests_dto
+        if dns_settings_request_dto is not None:
+            _body_params = dns_settings_request_dto
 
 
         # set the HTTP header `Accept`
@@ -4854,7 +4878,7 @@ class CommonSettingsApi:
     @validate_call
     def save_mail_domain_settings(
         self,
-        mail_domain_settings_requests_dto: Optional[MailDomainSettingsRequestsDto] = None,
+        mail_domain_settings_request_dto: Optional[MailDomainSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4872,8 +4896,8 @@ class CommonSettingsApi:
 
         Overwrites the portal's trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
 
-        :param mail_domain_settings_requests_dto:
-        :type mail_domain_settings_requests_dto: MailDomainSettingsRequestsDto
+        :param mail_domain_settings_request_dto:
+        :type mail_domain_settings_request_dto: MailDomainSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4897,7 +4921,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._save_mail_domain_settings_serialize(
-            mail_domain_settings_requests_dto=mail_domain_settings_requests_dto,
+            mail_domain_settings_request_dto=mail_domain_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4906,10 +4930,11 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4928,7 +4953,7 @@ class CommonSettingsApi:
     @validate_call
     def save_mail_domain_settings_with_http_info(
         self,
-        mail_domain_settings_requests_dto: Optional[MailDomainSettingsRequestsDto] = None,
+        mail_domain_settings_request_dto: Optional[MailDomainSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4946,8 +4971,8 @@ class CommonSettingsApi:
 
         Overwrites the portal's trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
 
-        :param mail_domain_settings_requests_dto:
-        :type mail_domain_settings_requests_dto: MailDomainSettingsRequestsDto
+        :param mail_domain_settings_request_dto:
+        :type mail_domain_settings_request_dto: MailDomainSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4971,7 +4996,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._save_mail_domain_settings_serialize(
-            mail_domain_settings_requests_dto=mail_domain_settings_requests_dto,
+            mail_domain_settings_request_dto=mail_domain_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4980,10 +5005,11 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5002,7 +5028,7 @@ class CommonSettingsApi:
     @validate_call
     def save_mail_domain_settings_without_preload_content(
         self,
-        mail_domain_settings_requests_dto: Optional[MailDomainSettingsRequestsDto] = None,
+        mail_domain_settings_request_dto: Optional[MailDomainSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5020,8 +5046,8 @@ class CommonSettingsApi:
 
         Overwrites the portal's trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
 
-        :param mail_domain_settings_requests_dto:
-        :type mail_domain_settings_requests_dto: MailDomainSettingsRequestsDto
+        :param mail_domain_settings_request_dto:
+        :type mail_domain_settings_request_dto: MailDomainSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5045,7 +5071,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._save_mail_domain_settings_serialize(
-            mail_domain_settings_requests_dto=mail_domain_settings_requests_dto,
+            mail_domain_settings_request_dto=mail_domain_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5054,10 +5080,11 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5071,7 +5098,7 @@ class CommonSettingsApi:
 
     def _save_mail_domain_settings_serialize(
         self,
-        mail_domain_settings_requests_dto,
+        mail_domain_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -5097,8 +5124,8 @@ class CommonSettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if mail_domain_settings_requests_dto is not None:
-            _body_params = mail_domain_settings_requests_dto
+        if mail_domain_settings_request_dto is not None:
+            _body_params = mail_domain_settings_request_dto
 
 
         # set the HTTP header `Accept`
@@ -5157,7 +5184,7 @@ class CommonSettingsApi:
     @validate_call
     def save_portal_color_theme(
         self,
-        custom_color_themes_settings_requests_dto: Optional[CustomColorThemesSettingsRequestsDto] = None,
+        custom_color_themes_settings_request_dto: Optional[CustomColorThemesSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5175,8 +5202,8 @@ class CommonSettingsApi:
 
         Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan's  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
 
-        :param custom_color_themes_settings_requests_dto:
-        :type custom_color_themes_settings_requests_dto: CustomColorThemesSettingsRequestsDto
+        :param custom_color_themes_settings_request_dto:
+        :type custom_color_themes_settings_request_dto: CustomColorThemesSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5200,7 +5227,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._save_portal_color_theme_serialize(
-            custom_color_themes_settings_requests_dto=custom_color_themes_settings_requests_dto,
+            custom_color_themes_settings_request_dto=custom_color_themes_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5209,6 +5236,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5231,7 +5259,7 @@ class CommonSettingsApi:
     @validate_call
     def save_portal_color_theme_with_http_info(
         self,
-        custom_color_themes_settings_requests_dto: Optional[CustomColorThemesSettingsRequestsDto] = None,
+        custom_color_themes_settings_request_dto: Optional[CustomColorThemesSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5249,8 +5277,8 @@ class CommonSettingsApi:
 
         Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan's  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
 
-        :param custom_color_themes_settings_requests_dto:
-        :type custom_color_themes_settings_requests_dto: CustomColorThemesSettingsRequestsDto
+        :param custom_color_themes_settings_request_dto:
+        :type custom_color_themes_settings_request_dto: CustomColorThemesSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5274,7 +5302,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._save_portal_color_theme_serialize(
-            custom_color_themes_settings_requests_dto=custom_color_themes_settings_requests_dto,
+            custom_color_themes_settings_request_dto=custom_color_themes_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5283,6 +5311,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5305,7 +5334,7 @@ class CommonSettingsApi:
     @validate_call
     def save_portal_color_theme_without_preload_content(
         self,
-        custom_color_themes_settings_requests_dto: Optional[CustomColorThemesSettingsRequestsDto] = None,
+        custom_color_themes_settings_request_dto: Optional[CustomColorThemesSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5323,8 +5352,8 @@ class CommonSettingsApi:
 
         Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan's  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
 
-        :param custom_color_themes_settings_requests_dto:
-        :type custom_color_themes_settings_requests_dto: CustomColorThemesSettingsRequestsDto
+        :param custom_color_themes_settings_request_dto:
+        :type custom_color_themes_settings_request_dto: CustomColorThemesSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5348,7 +5377,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._save_portal_color_theme_serialize(
-            custom_color_themes_settings_requests_dto=custom_color_themes_settings_requests_dto,
+            custom_color_themes_settings_request_dto=custom_color_themes_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5357,6 +5386,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CustomColorThemesSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5374,7 +5404,7 @@ class CommonSettingsApi:
 
     def _save_portal_color_theme_serialize(
         self,
-        custom_color_themes_settings_requests_dto,
+        custom_color_themes_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -5400,8 +5430,8 @@ class CommonSettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if custom_color_themes_settings_requests_dto is not None:
-            _body_params = custom_color_themes_settings_requests_dto
+        if custom_color_themes_settings_request_dto is not None:
+            _body_params = custom_color_themes_settings_request_dto
 
 
         # set the HTTP header `Accept`
@@ -5460,7 +5490,7 @@ class CommonSettingsApi:
     @validate_call
     def set_tenant_ai_access_settings(
         self,
-        tenant_ai_access_settings_dto: Optional[TenantAiAccessSettingsDto] = None,
+        tenant_ai_access_settings_request_dto: Optional[TenantAiAccessSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5478,8 +5508,8 @@ class CommonSettingsApi:
 
         Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
 
-        :param tenant_ai_access_settings_dto:
-        :type tenant_ai_access_settings_dto: TenantAiAccessSettingsDto
+        :param tenant_ai_access_settings_request_dto:
+        :type tenant_ai_access_settings_request_dto: TenantAiAccessSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5503,7 +5533,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._set_tenant_ai_access_settings_serialize(
-            tenant_ai_access_settings_dto=tenant_ai_access_settings_dto,
+            tenant_ai_access_settings_request_dto=tenant_ai_access_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5535,7 +5565,7 @@ class CommonSettingsApi:
     @validate_call
     def set_tenant_ai_access_settings_with_http_info(
         self,
-        tenant_ai_access_settings_dto: Optional[TenantAiAccessSettingsDto] = None,
+        tenant_ai_access_settings_request_dto: Optional[TenantAiAccessSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5553,8 +5583,8 @@ class CommonSettingsApi:
 
         Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
 
-        :param tenant_ai_access_settings_dto:
-        :type tenant_ai_access_settings_dto: TenantAiAccessSettingsDto
+        :param tenant_ai_access_settings_request_dto:
+        :type tenant_ai_access_settings_request_dto: TenantAiAccessSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5578,7 +5608,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._set_tenant_ai_access_settings_serialize(
-            tenant_ai_access_settings_dto=tenant_ai_access_settings_dto,
+            tenant_ai_access_settings_request_dto=tenant_ai_access_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5610,7 +5640,7 @@ class CommonSettingsApi:
     @validate_call
     def set_tenant_ai_access_settings_without_preload_content(
         self,
-        tenant_ai_access_settings_dto: Optional[TenantAiAccessSettingsDto] = None,
+        tenant_ai_access_settings_request_dto: Optional[TenantAiAccessSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5628,8 +5658,8 @@ class CommonSettingsApi:
 
         Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
 
-        :param tenant_ai_access_settings_dto:
-        :type tenant_ai_access_settings_dto: TenantAiAccessSettingsDto
+        :param tenant_ai_access_settings_request_dto:
+        :type tenant_ai_access_settings_request_dto: TenantAiAccessSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5653,7 +5683,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._set_tenant_ai_access_settings_serialize(
-            tenant_ai_access_settings_dto=tenant_ai_access_settings_dto,
+            tenant_ai_access_settings_request_dto=tenant_ai_access_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5680,7 +5710,7 @@ class CommonSettingsApi:
 
     def _set_tenant_ai_access_settings_serialize(
         self,
-        tenant_ai_access_settings_dto,
+        tenant_ai_access_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -5706,8 +5736,8 @@ class CommonSettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if tenant_ai_access_settings_dto is not None:
-            _body_params = tenant_ai_access_settings_dto
+        if tenant_ai_access_settings_request_dto is not None:
+            _body_params = tenant_ai_access_settings_request_dto
 
 
         # set the HTTP header `Accept`
@@ -5766,7 +5796,7 @@ class CommonSettingsApi:
     @validate_call
     def update_email_activation_settings(
         self,
-        email_activation_settings: Optional[EmailActivationSettings] = None,
+        email_activation_settings_request_dto: Optional[EmailActivationSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5784,8 +5814,8 @@ class CommonSettingsApi:
 
         Updates the current user's own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account's actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
 
-        :param email_activation_settings:
-        :type email_activation_settings: EmailActivationSettings
+        :param email_activation_settings_request_dto:
+        :type email_activation_settings_request_dto: EmailActivationSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5809,7 +5839,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._update_email_activation_settings_serialize(
-            email_activation_settings=email_activation_settings,
+            email_activation_settings_request_dto=email_activation_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5840,7 +5870,7 @@ class CommonSettingsApi:
     @validate_call
     def update_email_activation_settings_with_http_info(
         self,
-        email_activation_settings: Optional[EmailActivationSettings] = None,
+        email_activation_settings_request_dto: Optional[EmailActivationSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5858,8 +5888,8 @@ class CommonSettingsApi:
 
         Updates the current user's own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account's actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
 
-        :param email_activation_settings:
-        :type email_activation_settings: EmailActivationSettings
+        :param email_activation_settings_request_dto:
+        :type email_activation_settings_request_dto: EmailActivationSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5883,7 +5913,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._update_email_activation_settings_serialize(
-            email_activation_settings=email_activation_settings,
+            email_activation_settings_request_dto=email_activation_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5914,7 +5944,7 @@ class CommonSettingsApi:
     @validate_call
     def update_email_activation_settings_without_preload_content(
         self,
-        email_activation_settings: Optional[EmailActivationSettings] = None,
+        email_activation_settings_request_dto: Optional[EmailActivationSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5932,8 +5962,8 @@ class CommonSettingsApi:
 
         Updates the current user's own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account's actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
 
-        :param email_activation_settings:
-        :type email_activation_settings: EmailActivationSettings
+        :param email_activation_settings_request_dto:
+        :type email_activation_settings_request_dto: EmailActivationSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5957,7 +5987,7 @@ class CommonSettingsApi:
         """ # noqa: E501
 
         _param = self._update_email_activation_settings_serialize(
-            email_activation_settings=email_activation_settings,
+            email_activation_settings_request_dto=email_activation_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5983,7 +6013,7 @@ class CommonSettingsApi:
 
     def _update_email_activation_settings_serialize(
         self,
-        email_activation_settings,
+        email_activation_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -6009,8 +6039,8 @@ class CommonSettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if email_activation_settings is not None:
-            _body_params = email_activation_settings
+        if email_activation_settings_request_dto is not None:
+            _body_params = email_activation_settings_request_dto
 
 
         # set the HTTP header `Accept`
@@ -6121,6 +6151,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -6195,6 +6226,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -6269,6 +6301,7 @@ class CommonSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantUserInvitationSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",

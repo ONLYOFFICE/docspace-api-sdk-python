@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_user_type_update_progress**](#get_user_type_update_progress) | **GET** /api/2.0/people/type/progress/{userid} | Get the user type change progress
+[**get_user_type_update_progress**](#get_user_type_update_progress) | **GET** /api/2.0/people/type/progress/{userId} | Get the user type change progress
 [**start_user_type_update**](#start_user_type_update) | **POST** /api/2.0/people/type | Start updating user type
 [**terminate_user_type_update**](#terminate_user_type_update) | **PUT** /api/2.0/people/type/terminate | Terminate updating user type
 [**update_user_type**](#update_user_type) | **PUT** /api/2.0/people/type/{type} | Change a user type
 
 
 # **get_user_type_update_progress**
-> TaskProgressResponseWrapper get_user_type_update_progress(userid)
+> TaskProgressResponseWrapper get_user_type_update_progress(user_id)
 
 Returns the current state of the user type change queued for the user with the ID specified in the request.
 A conversion must have been queued by `POST api/2.0/people/type` first: when nothing is queued for that user
@@ -28,7 +28,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **UUID**| The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
+ **user_id** | **UUID**| The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | 
 
 ### Return type
 
@@ -64,11 +64,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.UserTypeApi(api_client)
-    userid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
+    user_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.
 
     try:
         # Get the user type change progress
-        api_response = api_instance.get_user_type_update_progress(userid)
+        api_response = api_instance.get_user_type_update_progress(user_id)
         print("The response of UserTypeApi->get_user_type_update_progress:\n")
         pprint(api_response)
     except Exception as e:
@@ -108,7 +108,7 @@ The caller needs the permission to add and remove users of the requested type, h
 convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.
 The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,
 or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.
-The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userid}` with the
+The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userId}` with the
 converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.
 A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
 
@@ -267,11 +267,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The state of the cancelled user type change, or an empty body when nothing was queued for the user |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `userId` |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -364,12 +364,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The converted users with their detailed information |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `userIds` |  -  |
 **402** | The tariff or the paid-user quota does not allow one more paid user |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

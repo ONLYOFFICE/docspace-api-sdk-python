@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **authenticate_me**
-> AuthenticationTokenWrapper authenticate_me(auth_requests_dto=auth_requests_dto)
+> AuthenticationTokenWrapper authenticate_me(auth_request_dto=auth_request_dto)
 
 Signs a user in to the current portal and either issues the authentication token or reports which second
 factor is still missing. Credentials go in the body as `userName` with `password` or `passwordHash`, as the
@@ -36,7 +36,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **auth_requests_dto** | [**AuthRequestsDto**](AuthRequestsDto.md)|  | [optional] 
+ **auth_request_dto** | [**AuthRequestDto**](AuthRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -51,7 +51,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace_api_sdk.models.auth_request_dto import AuthRequestDto
 from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -73,11 +73,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuthenticationApi(api_client)
-    auth_requests_dto = docspace_api_sdk.AuthRequestsDto() # AuthRequestsDto |  (optional)
+    auth_request_dto = docspace_api_sdk.AuthRequestDto() # AuthRequestDto |  (optional)
 
     try:
         # Authenticate a user
-        api_response = api_instance.authenticate_me(auth_requests_dto=auth_requests_dto)
+        api_response = api_instance.authenticate_me(auth_request_dto=auth_request_dto)
         print("The response of AuthenticationApi->authenticate_me:\n")
         pprint(api_response)
     except Exception as e:
@@ -108,7 +108,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authenticate_me_from_body_with_code**
-> AuthenticationTokenWrapper authenticate_me_from_body_with_code(code, auth_with_code_requests_dto=auth_with_code_requests_dto)
+> AuthenticationTokenWrapper authenticate_me_from_body_with_code(code, auth_with_code_request_dto=auth_with_code_request_dto)
 
 Finishes a two-factor sign-in: checks the one-time code and, when it matches, issues the authentication token.
 Call it only after `POST api/2.0/authentication` answered with `sms` or `tfa` set, and repeat the same
@@ -129,7 +129,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **code** | **str**| The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads. | 
- **auth_with_code_requests_dto** | [**AuthWithCodeRequestsDto**](AuthWithCodeRequestsDto.md)|  | [optional] 
+ **auth_with_code_request_dto** | [**AuthWithCodeRequestDto**](AuthWithCodeRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.auth_with_code_requests_dto import AuthWithCodeRequestsDto
+from docspace_api_sdk.models.auth_with_code_request_dto import AuthWithCodeRequestDto
 from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -167,11 +167,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuthenticationApi(api_client)
     code = 'code_example' # str | The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.
-    auth_with_code_requests_dto = docspace_api_sdk.AuthWithCodeRequestsDto() # AuthWithCodeRequestsDto |  (optional)
+    auth_with_code_request_dto = docspace_api_sdk.AuthWithCodeRequestDto() # AuthWithCodeRequestDto |  (optional)
 
     try:
         # Authenticate a user by code
-        api_response = api_instance.authenticate_me_from_body_with_code(code, auth_with_code_requests_dto=auth_with_code_requests_dto)
+        api_response = api_instance.authenticate_me_from_body_with_code(code, auth_with_code_request_dto=auth_with_code_request_dto)
         print("The response of AuthenticationApi->authenticate_me_from_body_with_code:\n")
         pprint(api_response)
     except Exception as e:
@@ -202,7 +202,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **check_confirm**
-> ConfirmWrapper check_confirm(email_validation_key_model=email_validation_key_model)
+> ConfirmWrapper check_confirm(check_confirm_request_dto=check_confirm_request_dto)
 
 Checks the key of a confirmation link that the portal sent by email and reports whether the action behind that
 link can still be carried out - an employee invitation, phone activation, a password change, portal removal
@@ -222,7 +222,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **email_validation_key_model** | [**EmailValidationKeyModel**](EmailValidationKeyModel.md)|  | [optional] 
+ **check_confirm_request_dto** | [**CheckConfirmRequestDto**](CheckConfirmRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -237,8 +237,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
+from docspace_api_sdk.models.check_confirm_request_dto import CheckConfirmRequestDto
 from docspace_api_sdk.models.confirm_wrapper import ConfirmWrapper
-from docspace_api_sdk.models.email_validation_key_model import EmailValidationKeyModel
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -259,11 +259,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuthenticationApi(api_client)
-    email_validation_key_model = docspace_api_sdk.EmailValidationKeyModel() # EmailValidationKeyModel |  (optional)
+    check_confirm_request_dto = docspace_api_sdk.CheckConfirmRequestDto() # CheckConfirmRequestDto |  (optional)
 
     try:
         # Check a confirmation link
-        api_response = api_instance.check_confirm(email_validation_key_model=email_validation_key_model)
+        api_response = api_instance.check_confirm(check_confirm_request_dto=check_confirm_request_dto)
         print("The response of AuthenticationApi->check_confirm:\n")
         pprint(api_response)
     except Exception as e:
@@ -282,10 +282,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Whether the confirmation link may be used, with the room and the email it was issued for when it is an invitation |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, or `email` is sent but empty or not a valid email address |  -  |
 **403** | The portal's IP restrictions do not allow this address to check an invitation link |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -454,7 +454,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_mobile_phone**
-> AuthenticationTokenWrapper save_mobile_phone(mobile_requests_dto=mobile_requests_dto)
+> AuthenticationTokenWrapper save_mobile_phone(mobile_request_dto=mobile_request_dto)
 
 Stores the mobile phone number of a user who is going through phone activation and sends the first SMS
 authentication code to it. It is reachable only with the phone-activation confirmation link that
@@ -473,7 +473,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **mobile_requests_dto** | [**MobileRequestsDto**](MobileRequestsDto.md)|  | [optional] 
+ **mobile_request_dto** | [**MobileRequestDto**](MobileRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -489,7 +489,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
-from docspace_api_sdk.models.mobile_requests_dto import MobileRequestsDto
+from docspace_api_sdk.models.mobile_request_dto import MobileRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -510,11 +510,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuthenticationApi(api_client)
-    mobile_requests_dto = docspace_api_sdk.MobileRequestsDto() # MobileRequestsDto |  (optional)
+    mobile_request_dto = docspace_api_sdk.MobileRequestDto() # MobileRequestDto |  (optional)
 
     try:
         # Set a mobile phone
-        api_response = api_instance.save_mobile_phone(mobile_requests_dto=mobile_requests_dto)
+        api_response = api_instance.save_mobile_phone(mobile_request_dto=mobile_request_dto)
         print("The response of AuthenticationApi->save_mobile_phone:\n")
         pprint(api_response)
     except Exception as e:
@@ -543,7 +543,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **send_sms_code**
-> AuthenticationTokenWrapper send_sms_code(auth_requests_dto=auth_requests_dto)
+> AuthenticationTokenWrapper send_sms_code(auth_request_dto=auth_request_dto)
 
 Sends a new SMS authentication code to the phone number stored for the user and reports when that code
 expires. The credentials in the body are checked exactly as by `POST api/2.0/authentication`, so use this
@@ -562,7 +562,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **auth_requests_dto** | [**AuthRequestsDto**](AuthRequestsDto.md)|  | [optional] 
+ **auth_request_dto** | [**AuthRequestDto**](AuthRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -577,7 +577,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto
+from docspace_api_sdk.models.auth_request_dto import AuthRequestDto
 from docspace_api_sdk.models.authentication_token_wrapper import AuthenticationTokenWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -599,11 +599,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuthenticationApi(api_client)
-    auth_requests_dto = docspace_api_sdk.AuthRequestsDto() # AuthRequestsDto |  (optional)
+    auth_request_dto = docspace_api_sdk.AuthRequestDto() # AuthRequestDto |  (optional)
 
     try:
         # Send SMS code
-        api_response = api_instance.send_sms_code(auth_requests_dto=auth_requests_dto)
+        api_response = api_instance.send_sms_code(auth_request_dto=auth_request_dto)
         print("The response of AuthenticationApi->send_sms_code:\n")
         pprint(api_response)
     except Exception as e:

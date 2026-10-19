@@ -103,6 +103,7 @@ class PrivacyRoomApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
             '400': None,
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -178,6 +179,7 @@ class PrivacyRoomApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
             '400': None,
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -253,6 +255,7 @@ class PrivacyRoomApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '204': None,
             '400': None,
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -667,10 +670,12 @@ class PrivacyRoomApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -741,10 +746,12 @@ class PrivacyRoomApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -815,10 +822,12 @@ class PrivacyRoomApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -958,6 +967,7 @@ class PrivacyRoomApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
             '400': None,
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1033,6 +1043,7 @@ class PrivacyRoomApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
             '400': None,
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1108,6 +1119,7 @@ class PrivacyRoomApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionKeyArrayWrapper",
             '400': None,
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1264,6 +1276,7 @@ class PrivacyRoomApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "EncryptionKeyArrayWrapper",
             '400': None,
+            '403': None,
             '409': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1339,6 +1352,7 @@ class PrivacyRoomApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "EncryptionKeyArrayWrapper",
             '400': None,
+            '403': None,
             '409': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1414,6 +1428,7 @@ class PrivacyRoomApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "EncryptionKeyArrayWrapper",
             '400': None,
+            '403': None,
             '409': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",

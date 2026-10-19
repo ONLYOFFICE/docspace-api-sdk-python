@@ -31,8 +31,8 @@ from docspace_api_sdk.models.invitation_link_create_request_dto import Invitatio
 from docspace_api_sdk.models.invitation_link_delete_request_dto import InvitationLinkDeleteRequestDto
 from docspace_api_sdk.models.invitation_link_update_request_dto import InvitationLinkUpdateRequestDto
 from docspace_api_sdk.models.invitation_link_wrapper import InvitationLinkWrapper
+from docspace_api_sdk.models.portal_user_wrapper import PortalUserWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.models.user_info_wrapper import UserInfoWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -72,7 +72,7 @@ class UsersApi:
     ) -> InvitationLinkWrapper:
         """Create an invitation link
 
-        Creates the portal's invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role additionally needs a free paid seat in the portal quota. The call is mutating and not  idempotent. The answer carries the `id` needed to update or delete the link, the shortened `url`,  `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty for a link that never  expires - and `isExpired`.
+        Creates the portal's invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role is refused while the portal payment is overdue or the portal quota has no free paid  seat left. The call is mutating and not idempotent. The answer carries the `id` needed to update or delete the  link, the shortened `url`, `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty  for a link that never expires - and `isExpired`.
 
         :param invitation_link_create_request_dto:
         :type invitation_link_create_request_dto: InvitationLinkCreateRequestDto
@@ -108,10 +108,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "InvitationLinkWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -146,7 +148,7 @@ class UsersApi:
     ) -> ApiResponse[InvitationLinkWrapper]:
         """Create an invitation link
 
-        Creates the portal's invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role additionally needs a free paid seat in the portal quota. The call is mutating and not  idempotent. The answer carries the `id` needed to update or delete the link, the shortened `url`,  `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty for a link that never  expires - and `isExpired`.
+        Creates the portal's invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role is refused while the portal payment is overdue or the portal quota has no free paid  seat left. The call is mutating and not idempotent. The answer carries the `id` needed to update or delete the  link, the shortened `url`, `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty  for a link that never expires - and `isExpired`.
 
         :param invitation_link_create_request_dto:
         :type invitation_link_create_request_dto: InvitationLinkCreateRequestDto
@@ -182,10 +184,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "InvitationLinkWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -220,7 +224,7 @@ class UsersApi:
     ) -> RESTResponseType:
         """Create an invitation link
 
-        Creates the portal's invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role additionally needs a free paid seat in the portal quota. The call is mutating and not  idempotent. The answer carries the `id` needed to update or delete the link, the shortened `url`,  `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty for a link that never  expires - and `isExpired`.
+        Creates the portal's invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role is refused while the portal payment is overdue or the portal quota has no free paid  seat left. The call is mutating and not idempotent. The answer carries the `id` needed to update or delete the  link, the shortened `url`, `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty  for a link that never expires - and `isExpired`.
 
         :param invitation_link_create_request_dto:
         :type invitation_link_create_request_dto: InvitationLinkCreateRequestDto
@@ -256,10 +260,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "InvitationLinkWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -411,10 +417,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -485,10 +493,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -559,10 +569,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -715,6 +727,7 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -790,6 +803,7 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -865,6 +879,7 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -971,7 +986,7 @@ class UsersApi:
     ) -> InvitationLinkWrapper:
         """Get an invitation link by role
 
-        Returns the portal's invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and a link for a paying role is shown only while the portal quota still has a free paid  seat. The call is read-only and idempotent, but the `url` it returns is signed for the calling account, so two  administrators are handed two different URLs for one and the same link. A role that has no link yet is  answered with an empty body and 200 rather than a 404 - create the link with  `POST api/2.0/portal/users/invitationlink`. `expiration` is in the portal time zone and empty for a link  without a deadline, `isExpired` says whether that deadline has passed, and `currentUseCount` counts how many  accounts have already joined through the link.
+        Returns the portal's invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and for a paying role (`DocSpaceAdmin` or `RoomAdmin`) the call is refused while the  portal payment is overdue or the portal quota has no free paid seat left. The call is read-only and  idempotent, but the `url` it returns is signed for the calling account, so two administrators are handed two  different URLs for one and the same link. A role that has no link yet is answered with an empty body and 200  rather than a 404 - create the link with `POST api/2.0/portal/users/invitationlink`. `expiration` is in the  portal time zone and empty for a link without a deadline, `isExpired` says whether that deadline has passed,  and `currentUseCount` counts how many accounts have already joined through the link.
 
         :param employee_type: The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it. (required)
         :type employee_type: EmployeeType
@@ -1007,10 +1022,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "InvitationLinkWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1045,7 +1062,7 @@ class UsersApi:
     ) -> ApiResponse[InvitationLinkWrapper]:
         """Get an invitation link by role
 
-        Returns the portal's invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and a link for a paying role is shown only while the portal quota still has a free paid  seat. The call is read-only and idempotent, but the `url` it returns is signed for the calling account, so two  administrators are handed two different URLs for one and the same link. A role that has no link yet is  answered with an empty body and 200 rather than a 404 - create the link with  `POST api/2.0/portal/users/invitationlink`. `expiration` is in the portal time zone and empty for a link  without a deadline, `isExpired` says whether that deadline has passed, and `currentUseCount` counts how many  accounts have already joined through the link.
+        Returns the portal's invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and for a paying role (`DocSpaceAdmin` or `RoomAdmin`) the call is refused while the  portal payment is overdue or the portal quota has no free paid seat left. The call is read-only and  idempotent, but the `url` it returns is signed for the calling account, so two administrators are handed two  different URLs for one and the same link. A role that has no link yet is answered with an empty body and 200  rather than a 404 - create the link with `POST api/2.0/portal/users/invitationlink`. `expiration` is in the  portal time zone and empty for a link without a deadline, `isExpired` says whether that deadline has passed,  and `currentUseCount` counts how many accounts have already joined through the link.
 
         :param employee_type: The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it. (required)
         :type employee_type: EmployeeType
@@ -1081,10 +1098,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "InvitationLinkWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1119,7 +1138,7 @@ class UsersApi:
     ) -> RESTResponseType:
         """Get an invitation link by role
 
-        Returns the portal's invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and a link for a paying role is shown only while the portal quota still has a free paid  seat. The call is read-only and idempotent, but the `url` it returns is signed for the calling account, so two  administrators are handed two different URLs for one and the same link. A role that has no link yet is  answered with an empty body and 200 rather than a 404 - create the link with  `POST api/2.0/portal/users/invitationlink`. `expiration` is in the portal time zone and empty for a link  without a deadline, `isExpired` says whether that deadline has passed, and `currentUseCount` counts how many  accounts have already joined through the link.
+        Returns the portal's invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and for a paying role (`DocSpaceAdmin` or `RoomAdmin`) the call is refused while the  portal payment is overdue or the portal quota has no free paid seat left. The call is read-only and  idempotent, but the `url` it returns is signed for the calling account, so two administrators are handed two  different URLs for one and the same link. A role that has no link yet is answered with an empty body and 200  rather than a 404 - create the link with `POST api/2.0/portal/users/invitationlink`. `expiration` is in the  portal time zone and empty for a link without a deadline, `isExpired` says whether that deadline has passed,  and `currentUseCount` counts how many accounts have already joined through the link.
 
         :param employee_type: The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it. (required)
         :type employee_type: EmployeeType
@@ -1155,10 +1174,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "InvitationLinkWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1293,6 +1314,7 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Int64Wrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1362,6 +1384,7 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Int64Wrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1431,6 +1454,7 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Int64Wrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1530,10 +1554,10 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserInfoWrapper:
+    ) -> PortalUserWrapper:
         """Get a portal user
 
-        Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userID` in the path has to be a GUID; the calling user's own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userid}` for the same user in the People format, with the group, quota and access  information a client usually needs.
+        Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userId` in the path has to be a GUID; the calling user's own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userId}` for the same user in the People format, with the group, quota and access  information a client usually needs.
 
         :param user_id: The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. (required)
         :type user_id: UUID
@@ -1568,7 +1592,8 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UserInfoWrapper",
+            '200': "PortalUserWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1605,10 +1630,10 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UserInfoWrapper]:
+    ) -> ApiResponse[PortalUserWrapper]:
         """Get a portal user
 
-        Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userID` in the path has to be a GUID; the calling user's own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userid}` for the same user in the People format, with the group, quota and access  information a client usually needs.
+        Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userId` in the path has to be a GUID; the calling user's own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userId}` for the same user in the People format, with the group, quota and access  information a client usually needs.
 
         :param user_id: The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. (required)
         :type user_id: UUID
@@ -1643,7 +1668,8 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UserInfoWrapper",
+            '200': "PortalUserWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1683,7 +1709,7 @@ class UsersApi:
     ) -> RESTResponseType:
         """Get a portal user
 
-        Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userID` in the path has to be a GUID; the calling user's own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userid}` for the same user in the People format, with the group, quota and access  information a client usually needs.
+        Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userId` in the path has to be a GUID; the calling user's own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userId}` for the same user in the People format, with the group, quota and access  information a client usually needs.
 
         :param user_id: The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. (required)
         :type user_id: UUID
@@ -1718,7 +1744,8 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UserInfoWrapper",
+            '200': "PortalUserWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1760,7 +1787,7 @@ class UsersApi:
 
         # process the path parameters
         if user_id is not None:
-            _path_params['userID'] = user_id
+            _path_params['userId'] = user_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1787,7 +1814,7 @@ class UsersApi:
         ]
 
 
-        resource_path = "/api/2.0/portal/users/{userID}"
+        resource_path = "/api/2.0/portal/users/{userId}"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -2337,11 +2364,11 @@ class UsersApi:
         # process the query parameters
         if userid is not None:
             
-            _query_params.append(('Userid', userid))
+            _query_params.append(('userid', userid))
             
         if key is not None:
             
-            _query_params.append(('Key', key))
+            _query_params.append(('key', key))
             
         # process the header parameters
         # process the form parameters
@@ -2443,10 +2470,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "InvitationLinkWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2517,10 +2546,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "InvitationLinkWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2591,10 +2622,12 @@ class UsersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "InvitationLinkWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

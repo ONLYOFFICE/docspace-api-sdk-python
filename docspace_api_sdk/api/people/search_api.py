@@ -26,14 +26,14 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from uuid import UUID
+from docspace_api_sdk.models.account_entry_array_wrapper import AccountEntryArrayWrapper
 from docspace_api_sdk.models.account_login_type import AccountLoginType
-from docspace_api_sdk.models.area import Area
+from docspace_api_sdk.models.account_search_area import AccountSearchArea
 from docspace_api_sdk.models.employee_activation_status import EmployeeActivationStatus
 from docspace_api_sdk.models.employee_array_wrapper import EmployeeArrayWrapper
 from docspace_api_sdk.models.employee_full_array_wrapper import EmployeeFullArrayWrapper
 from docspace_api_sdk.models.employee_status import EmployeeStatus
 from docspace_api_sdk.models.employee_type import EmployeeType
-from docspace_api_sdk.models.i_account_entry_array_wrapper import IAccountEntryArrayWrapper
 from docspace_api_sdk.models.payments import Payments
 from docspace_api_sdk.models.quota_filter import QuotaFilter
 from docspace_api_sdk.models.sort_order import SortOrder
@@ -72,7 +72,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.")] = None,
@@ -90,7 +90,7 @@ class SearchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IAccountEntryArrayWrapper:
+    ) -> AccountEntryArrayWrapper:
         """Search accounts for a file
 
         Searches the portal users and groups that can be given access to the file with the ID given in the route, and  reports for each of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
@@ -110,7 +110,7 @@ class SearchApi:
         :param inviter_id: Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
@@ -164,13 +164,13 @@ class SearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IAccountEntryArrayWrapper",
+            '200': "AccountEntryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -196,7 +196,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.")] = None,
@@ -214,7 +214,7 @@ class SearchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IAccountEntryArrayWrapper]:
+    ) -> ApiResponse[AccountEntryArrayWrapper]:
         """Search accounts for a file
 
         Searches the portal users and groups that can be given access to the file with the ID given in the route, and  reports for each of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
@@ -234,7 +234,7 @@ class SearchApi:
         :param inviter_id: Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
@@ -288,13 +288,13 @@ class SearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IAccountEntryArrayWrapper",
+            '200': "AccountEntryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -320,7 +320,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.")] = None,
@@ -358,7 +358,7 @@ class SearchApi:
         :param inviter_id: Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
@@ -412,13 +412,13 @@ class SearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IAccountEntryArrayWrapper",
+            '200': "AccountEntryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -573,7 +573,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.")] = None,
@@ -591,7 +591,7 @@ class SearchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IAccountEntryArrayWrapper:
+    ) -> AccountEntryArrayWrapper:
         """Search accounts for a folder
 
         Searches the portal users and groups that can be given access to the folder with the ID given in the route,  and reports for each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
@@ -611,7 +611,7 @@ class SearchApi:
         :param inviter_id: Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
@@ -665,13 +665,13 @@ class SearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IAccountEntryArrayWrapper",
+            '200': "AccountEntryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -697,7 +697,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.")] = None,
@@ -715,7 +715,7 @@ class SearchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IAccountEntryArrayWrapper]:
+    ) -> ApiResponse[AccountEntryArrayWrapper]:
         """Search accounts for a folder
 
         Searches the portal users and groups that can be given access to the folder with the ID given in the route,  and reports for each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
@@ -735,7 +735,7 @@ class SearchApi:
         :param inviter_id: Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
@@ -789,13 +789,13 @@ class SearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IAccountEntryArrayWrapper",
+            '200': "AccountEntryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -821,7 +821,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.")] = None,
@@ -859,7 +859,7 @@ class SearchApi:
         :param inviter_id: Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
@@ -913,13 +913,13 @@ class SearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IAccountEntryArrayWrapper",
+            '200': "AccountEntryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1074,7 +1074,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.")] = None,
@@ -1092,7 +1092,7 @@ class SearchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IAccountEntryArrayWrapper:
+    ) -> AccountEntryArrayWrapper:
         """Search accounts for a room
 
         Searches the portal users and groups that can be given access to the room with the ID given in the route, and  reports for each of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
@@ -1112,7 +1112,7 @@ class SearchApi:
         :param inviter_id: Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
@@ -1166,13 +1166,13 @@ class SearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IAccountEntryArrayWrapper",
+            '200': "AccountEntryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1198,7 +1198,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.")] = None,
@@ -1216,7 +1216,7 @@ class SearchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IAccountEntryArrayWrapper]:
+    ) -> ApiResponse[AccountEntryArrayWrapper]:
         """Search accounts for a room
 
         Searches the portal users and groups that can be given access to the room with the ID given in the route, and  reports for each of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
@@ -1236,7 +1236,7 @@ class SearchApi:
         :param inviter_id: Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
@@ -1290,13 +1290,13 @@ class SearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IAccountEntryArrayWrapper",
+            '200': "AccountEntryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1322,7 +1322,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.")] = None,
@@ -1360,7 +1360,7 @@ class SearchApi:
         :param inviter_id: Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
@@ -1414,13 +1414,13 @@ class SearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IAccountEntryArrayWrapper",
+            '200': "AccountEntryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1908,7 +1908,7 @@ class SearchApi:
         exclude_group: Annotated[Optional[StrictBool], Field(description="Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.")] = None,
@@ -1959,7 +1959,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
-        :type area: Area
+        :type area: AccountSearchArea
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
         :param start_index: The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -2023,11 +2023,11 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2059,7 +2059,7 @@ class SearchApi:
         exclude_group: Annotated[Optional[StrictBool], Field(description="Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.")] = None,
@@ -2110,7 +2110,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
-        :type area: Area
+        :type area: AccountSearchArea
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
         :param start_index: The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -2174,11 +2174,11 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2210,7 +2210,7 @@ class SearchApi:
         exclude_group: Annotated[Optional[StrictBool], Field(description="Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.")] = None,
@@ -2261,7 +2261,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
-        :type area: Area
+        :type area: AccountSearchArea
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
         :param start_index: The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -2325,11 +2325,11 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2523,7 +2523,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
@@ -2561,7 +2561,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
@@ -2616,12 +2616,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2647,7 +2647,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
@@ -2685,7 +2685,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
@@ -2740,12 +2740,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2771,7 +2771,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
@@ -2809,7 +2809,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
@@ -2864,12 +2864,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3024,7 +3024,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
@@ -3062,7 +3062,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
@@ -3117,12 +3117,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3148,7 +3148,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
@@ -3186,7 +3186,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
@@ -3241,12 +3241,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3272,7 +3272,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
@@ -3310,7 +3310,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
@@ -3365,12 +3365,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3525,7 +3525,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
@@ -3563,7 +3563,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
@@ -3618,12 +3618,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3649,7 +3649,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
@@ -3687,7 +3687,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
@@ -3742,12 +3742,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3773,7 +3773,7 @@ class SearchApi:
         include_shared: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.")] = None,
         employee_types: Annotated[Optional[List[EmployeeType]], Field(description="Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
@@ -3811,7 +3811,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-        :type area: Area
+        :type area: AccountSearchArea
         :param employee_types: Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
         :type employee_types: List[EmployeeType]
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
@@ -3866,12 +3866,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4032,7 +4032,7 @@ class SearchApi:
         exclude_group: Annotated[Optional[StrictBool], Field(description="Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.")] = None,
@@ -4083,7 +4083,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
-        :type area: Area
+        :type area: AccountSearchArea
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
         :param start_index: The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -4147,11 +4147,11 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4183,7 +4183,7 @@ class SearchApi:
         exclude_group: Annotated[Optional[StrictBool], Field(description="Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.")] = None,
@@ -4234,7 +4234,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
-        :type area: Area
+        :type area: AccountSearchArea
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
         :param start_index: The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -4298,11 +4298,11 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4334,7 +4334,7 @@ class SearchApi:
         exclude_group: Annotated[Optional[StrictBool], Field(description="Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.")] = None,
         invited_by_me: Annotated[Optional[StrictBool], Field(description="Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.")] = None,
         inviter_id: Annotated[Optional[UUID], Field(description="Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.")] = None,
-        area: Annotated[Optional[Area], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
+        area: Annotated[Optional[AccountSearchArea], Field(description="The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.")] = None,
@@ -4385,7 +4385,7 @@ class SearchApi:
         :param inviter_id: Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
         :type inviter_id: UUID
         :param area: The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
-        :type area: Area
+        :type area: AccountSearchArea
         :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
         :param start_index: The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -4449,11 +4449,11 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4999,11 +4999,11 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5086,11 +5086,11 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5173,11 +5173,11 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

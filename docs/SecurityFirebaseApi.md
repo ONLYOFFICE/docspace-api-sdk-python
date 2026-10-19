@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **doc_register_pusn_notification_device**
-> FireBaseUserWrapper doc_register_pusn_notification_device(firebase_requests_dto=firebase_requests_dto)
+> FirebaseDeviceWrapper doc_register_pusn_notification_device(firebase_request_dto=firebase_request_dto)
 
 Registers one mobile device of the calling user for the push notifications of the Documents application, by
 storing the Firebase token that device was issued together with the initial `isSubscribed` state. The token is
@@ -31,11 +31,11 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **firebase_requests_dto** | [**FirebaseRequestsDto**](FirebaseRequestsDto.md)|  | [optional] 
+ **firebase_request_dto** | [**FirebaseRequestDto**](FirebaseRequestDto.md)|  | [optional] 
 
 ### Return type
 
-[**FireBaseUserWrapper**](FireBaseUserWrapper.md)
+[**FirebaseDeviceWrapper**](FirebaseDeviceWrapper.md)
 
 ### Authorization
 
@@ -46,8 +46,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.fire_base_user_wrapper import FireBaseUserWrapper
-from docspace_api_sdk.models.firebase_requests_dto import FirebaseRequestsDto
+from docspace_api_sdk.models.firebase_device_wrapper import FirebaseDeviceWrapper
+from docspace_api_sdk.models.firebase_request_dto import FirebaseRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -68,11 +68,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FirebaseApi(api_client)
-    firebase_requests_dto = docspace_api_sdk.FirebaseRequestsDto() # FirebaseRequestsDto |  (optional)
+    firebase_request_dto = docspace_api_sdk.FirebaseRequestDto() # FirebaseRequestDto |  (optional)
 
     try:
         # Register a push device
-        api_response = api_instance.doc_register_pusn_notification_device(firebase_requests_dto=firebase_requests_dto)
+        api_response = api_instance.doc_register_pusn_notification_device(firebase_request_dto=firebase_request_dto)
         print("The response of FirebaseApi->doc_register_pusn_notification_device:\n")
         pprint(api_response)
     except Exception as e:
@@ -91,9 +91,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The stored device registration of the calling user, with the Firebase token, the `doc` application and the subscription state as they are kept |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**500** | The Firebase token is longer than 255 characters and the database refuses to store it, as PostgreSQL and MySQL in strict mode do |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -101,7 +101,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **subscribe_documents_push_notification**
-> FireBaseUserWrapper subscribe_documents_push_notification(firebase_requests_dto=firebase_requests_dto)
+> FirebaseDeviceWrapper subscribe_documents_push_notification(firebase_request_dto=firebase_request_dto)
 
 Switches the push notifications of the Documents application on or off for one already registered device of
 the calling user: send that device's Firebase token together with `isSubscribed` true to let the messages
@@ -123,11 +123,11 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **firebase_requests_dto** | [**FirebaseRequestsDto**](FirebaseRequestsDto.md)|  | [optional] 
+ **firebase_request_dto** | [**FirebaseRequestDto**](FirebaseRequestDto.md)|  | [optional] 
 
 ### Return type
 
-[**FireBaseUserWrapper**](FireBaseUserWrapper.md)
+[**FirebaseDeviceWrapper**](FirebaseDeviceWrapper.md)
 
 ### Authorization
 
@@ -138,8 +138,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.fire_base_user_wrapper import FireBaseUserWrapper
-from docspace_api_sdk.models.firebase_requests_dto import FirebaseRequestsDto
+from docspace_api_sdk.models.firebase_device_wrapper import FirebaseDeviceWrapper
+from docspace_api_sdk.models.firebase_request_dto import FirebaseRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -160,11 +160,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FirebaseApi(api_client)
-    firebase_requests_dto = docspace_api_sdk.FirebaseRequestsDto() # FirebaseRequestsDto |  (optional)
+    firebase_request_dto = docspace_api_sdk.FirebaseRequestDto() # FirebaseRequestDto |  (optional)
 
     try:
         # Set push subscription
-        api_response = api_instance.subscribe_documents_push_notification(firebase_requests_dto=firebase_requests_dto)
+        api_response = api_instance.subscribe_documents_push_notification(firebase_request_dto=firebase_request_dto)
         print("The response of FirebaseApi->subscribe_documents_push_notification:\n")
         pprint(api_response)
     except Exception as e:

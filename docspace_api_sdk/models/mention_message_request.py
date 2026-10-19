@@ -1,0 +1,111 @@
+#
+# (c) Copyright Ascensio System SIA 2026
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+
+
+from __future__ import annotations
+import pprint
+import re  # noqa: F401
+import json
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
+from docspace_api_sdk.models.action_link_request import ActionLinkRequest
+from typing import Optional, Set
+from typing_extensions import Self
+
+class MentionMessageRequest(BaseModel):
+    """
+    The mention notification to send: what to say, whom to tell and where in the document the mention sits.
+    """ # noqa: E501
+    action_link: Optional[ActionLinkRequest] = Field(default=None, description="The place in the document the notification link should open at, as the editor reports it when the mention is  made. Left out, the link opens the file at its beginning.", alias="actionLink")
+    emails: Optional[List[StrictStr]] = Field(default=None, description="The addresses to notify. Only an address that belongs to a portal account receives a mail; an unknown address  is skipped, and the answer then carries the access list of the file so that the client can invite its owner.", json_schema_extra={"examples": [["user1@example.com", "user2@example.com"]]})
+    message: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The note shown next to the link in the mail. Only its first 200 characters are sent, and a value longer than  the field allows is refused.", json_schema_extra={"examples": ["Please take a look at the second paragraph"]})
+    __properties: ClassVar[List[str]] = ["actionLink", "emails", "message"]
+
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
+
+
+    def to_str(self) -> str:
+        """Returns the string representation of the model using alias"""
+        return pprint.pformat(self.model_dump(by_alias=True))
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_json(cls, json_str: str) -> Optional[Self]:
+        """Create an instance of MentionMessageRequest from a JSON string"""
+        return cls.from_dict(json.loads(json_str))
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([
+        ])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
+        # override the default output from pydantic by calling `to_dict()` of action_link
+        if self.action_link:
+            _dict['actionLink'] = self.action_link.to_dict()
+        # set to None if emails (nullable) is None
+        # and model_fields_set contains the field
+        if self.emails is None and "emails" in self.model_fields_set:
+            _dict['emails'] = None
+
+        # set to None if message (nullable) is None
+        # and model_fields_set contains the field
+        if self.message is None and "message" in self.model_fields_set:
+            _dict['message'] = None
+
+        return _dict
+
+    @classmethod
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+        """Create an instance of MentionMessageRequest from a dict"""
+        if obj is None:
+            return None
+
+
+        if not isinstance(obj, dict):
+            return cls.model_validate(obj)
+
+        _obj = cls.model_validate({
+            "actionLink": ActionLinkRequest.from_dict(obj["actionLink"]) if obj.get("actionLink") is not None else None,
+            "emails": obj.get("emails"),
+            "message": obj.get("message")
+        })
+        return _obj
+
+

@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
-from docspace_api_sdk.models.ai_tmcp_item import AiTMCPItem
+from docspace_api_sdk.models.ai_mcp_item import AiMCPItem
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +31,7 @@ class AiToolsListSystemTools200Response(BaseModel):
     """
     AiToolsListSystemTools200Response
     """ # noqa: E501
-    groups: Dict[str, List[AiTMCPItem]] = Field(description="Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope.")
+    groups: Dict[str, List[AiMCPItem]] = Field(description="Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope.")
     errors: Dict[str, StrictStr] = Field(description="Why a registered custom server could not be reached, keyed by server name. A server that answered is absent from this map.")
     system: List[StrictStr] = Field(description="Names of the host-configured system servers among the keys of `groups`; everything else there was registered as a custom server.")
     __properties: ClassVar[List[str]] = ["groups", "errors", "system"]
@@ -99,7 +99,7 @@ class AiToolsListSystemTools200Response(BaseModel):
         _obj = cls.model_validate({
             "groups": dict(
                 (_k,
-                        [AiTMCPItem.from_dict(_item) for _item in _v]
+                        [AiMCPItem.from_dict(_item) for _item in _v]
                         if _v is not None
                         else None
                 )

@@ -1,11 +1,11 @@
 # FileLinkWrapper
-The successful API response containing the FileLink object.
+The successful API response containing the FileLinkDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**FileLink**](FileLink.md) | The FileLink object returned by the operation. | [optional] 
+**response** | [**FileLinkDto**](FileLinkDto.md) | The FileLinkDto object returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

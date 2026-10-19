@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **get_ip_restrictions**
-> IPRestrictionArrayWrapper get_ip_restrictions()
+> IpRestrictionArrayWrapper get_ip_restrictions()
 
 Returns the IP restriction list of the current portal - the addresses allowed to reach it, each with its `id`
 and the `forAdmin` flag that narrows the entry to DocSpace administrators. The caller needs the
@@ -32,7 +32,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**IPRestrictionArrayWrapper**](IPRestrictionArrayWrapper.md)
+[**IpRestrictionArrayWrapper**](IpRestrictionArrayWrapper.md)
 
 ### Authorization
 
@@ -43,7 +43,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapper
+from docspace_api_sdk.models.ip_restriction_array_wrapper import IpRestrictionArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -86,6 +86,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The IP addresses allowed to reach the portal, each with its ID and administrators-only flag; an empty list when the portal has no restrictions |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The addresses have not changed since the `ETag` sent back in `If-None-Match`, which ignores the administrators-only flags; the body is empty |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -95,7 +97,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **read_ip_restrictions_settings**
-> IPRestrictionsSettingsWrapper read_ip_restrictions_settings()
+> IpRestrictionsSettingsWrapper read_ip_restrictions_settings()
 
 Reports whether the IP restrictions of the current portal are enforced, as the `enable` flag together with the
 `lastModified` stamp of the setting. The caller needs the portal-settings right of a DocSpace administrator,
@@ -116,7 +118,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**IPRestrictionsSettingsWrapper**](IPRestrictionsSettingsWrapper.md)
+[**IpRestrictionsSettingsWrapper**](IpRestrictionsSettingsWrapper.md)
 
 ### Authorization
 
@@ -127,7 +129,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.ip_restrictions_settings_wrapper import IPRestrictionsSettingsWrapper
+from docspace_api_sdk.models.ip_restrictions_settings_wrapper import IpRestrictionsSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -170,6 +172,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The enforcement flag of the IP restrictions and the date the setting was last modified |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The enforcement flag has not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -260,10 +264,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The saved addresses and enforcement flag echoed back exactly as sent, without the IDs of the stored entries |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `ipRestrictions`, an entry is not a single IPv4 or IPv6 address, or `enable` is `true` with an empty list |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -351,10 +356,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The stored enforcement flag and addresses echoed back exactly as sent, without the IDs of the stored entries |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `ipRestrictions`, an entry is not a single IPv4 or IPv6 address, or `enable` is `true` with an empty list |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

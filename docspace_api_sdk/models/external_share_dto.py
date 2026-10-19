@@ -24,8 +24,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
+from docspace_api_sdk.models.external_share_status import ExternalShareStatus
 from docspace_api_sdk.models.file_entry_type import FileEntryType
-from docspace_api_sdk.models.status import Status
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +33,7 @@ class ExternalShareDto(BaseModel):
     """
     The outcome of validating an external share link and the entry it points at.
     """ # noqa: E501
-    status: Status = Field(description="How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty.")
+    status: ExternalShareStatus = Field(description="How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty.")
     id: Optional[StrictStr] = Field(default=None, description="The identifier of the room, folder or file the link points at, always rendered as a string even where the  portal stores it as a number. It is null when the link could not be resolved.", json_schema_extra={"examples": ["42"]})
     title: Optional[StrictStr] = Field(default=None, description="The title of the entry the link points at, suitable for showing to the visitor before they are let in. It is  null when the link could not be resolved.", json_schema_extra={"examples": ["Project documents"]})
     type: Optional[FileEntryType] = Field(default=None, description="Whether the link points at a folder - a room counts as one - or at a single file. It is null when the link  could not be resolved.")

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**groups** | **Dict[str, List[AiTMCPItem]]** | Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope. | 
+**groups** | **Dict[str, List[AiMCPItem]]** | Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope. | 
 **errors** | **Dict[str, str]** | Why a registered custom server could not be reached, keyed by server name. A server that answered is absent from this map. | 
 **system** | **List[str]** | Names of the host-configured system servers among the keys of `groups`; everything else there was registered as a custom server. | 
 

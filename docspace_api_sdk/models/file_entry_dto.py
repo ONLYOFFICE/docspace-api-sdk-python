@@ -31,6 +31,7 @@ from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.file_share import FileShare
 from docspace_api_sdk.models.folder_type import FolderType
+from docspace_api_sdk.models.metadata_match_dto import MetadataMatchDto
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
@@ -55,6 +56,8 @@ class FileEntryDto(FileEntryBaseDto):
     external: Optional[StrictBool] = Field(default=None, description="Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved.", json_schema_extra={"examples": [False]})
     expiration_date: Optional[ApiDateTime] = Field(default=None, description="When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved.", alias="expirationDate")
     is_link_expired: Optional[StrictBool] = Field(default=None, description="Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved.", alias="isLinkExpired", json_schema_extra={"examples": [False]})
+    assigned_metadata_templates: Optional[List[StrictInt]] = Field(default=None, description="The IDs of the metadata templates assigned to the file entry.", alias="assignedMetadataTemplates")
+    metadata_matches: Optional[List[MetadataMatchDto]] = Field(default=None, description="Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.", alias="metadataMatches")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -127,6 +130,13 @@ class FileEntryDto(FileEntryBaseDto):
         # override the default output from pydantic by calling `to_dict()` of expiration_date
         if self.expiration_date:
             _dict['expirationDate'] = self.expiration_date.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in metadata_matches (list)
+        _items = []
+        if self.metadata_matches:
+            for _item_metadata_matches in self.metadata_matches:
+                if _item_metadata_matches:
+                    _items.append(_item_metadata_matches.to_dict())
+            _dict['metadataMatches'] = _items
         # set to None if origin_title (nullable) is None
         # and model_fields_set contains the field
         if self.origin_title is None and "origin_title" in self.model_fields_set:
@@ -167,6 +177,16 @@ class FileEntryDto(FileEntryBaseDto):
         if self.is_link_expired is None and "is_link_expired" in self.model_fields_set:
             _dict['isLinkExpired'] = None
 
+        # set to None if assigned_metadata_templates (nullable) is None
+        # and model_fields_set contains the field
+        if self.assigned_metadata_templates is None and "assigned_metadata_templates" in self.model_fields_set:
+            _dict['assignedMetadataTemplates'] = None
+
+        # set to None if metadata_matches (nullable) is None
+        # and model_fields_set contains the field
+        if self.metadata_matches is None and "metadata_matches" in self.model_fields_set:
+            _dict['metadataMatches'] = None
+
         return _dict
 
     @classmethod
@@ -194,7 +214,9 @@ class FileEntryDto(FileEntryBaseDto):
             "requestToken": obj.get("requestToken"),
             "external": obj.get("external"),
             "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
-            "isLinkExpired": obj.get("isLinkExpired")
+            "isLinkExpired": obj.get("isLinkExpired"),
+            "assignedMetadataTemplates": obj.get("assignedMetadataTemplates"),
+            "metadataMatches": [MetadataMatchDto.from_dict(_item) for _item in obj["metadataMatches"]] if obj.get("metadataMatches") is not None else None
         }
         all_fields = {**base_dict, **extra_fields}
         return cls.model_validate(all_fields)

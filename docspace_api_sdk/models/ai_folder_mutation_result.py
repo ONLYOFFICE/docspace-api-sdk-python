@@ -23,8 +23,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.ai_error_data import AiErrorData
 from docspace_api_sdk.models.ai_prompt_folder import AiPromptFolder
-from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +34,7 @@ class AiFolderMutationResult(BaseModel):
     """ # noqa: E501
     success: StrictBool = Field(description="True when the folder was persisted.", json_schema_extra={"examples": [True]})
     folder: Optional[AiPromptFolder] = Field(default=None, description="The persisted folder. Present on success.")
-    error: Optional[AiTErrorData] = Field(default=None, description="Why the folder was rejected. Present on failure.")
+    error: Optional[AiErrorData] = Field(default=None, description="Why the folder was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "folder", "error"]
 
     model_config = ConfigDict(
@@ -97,7 +97,7 @@ class AiFolderMutationResult(BaseModel):
         _obj = cls.model_validate({
             "success": obj.get("success"),
             "folder": AiPromptFolder.from_dict(obj["folder"]) if obj.get("folder") is not None else None,
-            "error": AiTErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
+            "error": AiErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
 

@@ -84,6 +84,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The authentication session lifetime of the portal in minutes together with the flag that says whether that limit is applied |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -93,7 +94,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_cookie_settings**
-> StringWrapper update_cookie_settings(cookie_settings_requests_dto=cookie_settings_requests_dto)
+> StringWrapper update_cookie_settings(cookie_settings_request_dto=cookie_settings_request_dto)
 
 Stores how long an authentication session of this portal stays valid: `lifeTime` in minutes together with the
 `enabled` flag that switches the limit on. The caller needs the portal-settings right of a DocSpace
@@ -114,7 +115,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cookie_settings_requests_dto** | [**CookieSettingsRequestsDto**](CookieSettingsRequestsDto.md)|  | [optional] 
+ **cookie_settings_request_dto** | [**CookieSettingsRequestDto**](CookieSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -129,7 +130,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.cookie_settings_requests_dto import CookieSettingsRequestsDto
+from docspace_api_sdk.models.cookie_settings_request_dto import CookieSettingsRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -151,11 +152,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CookiesApi(api_client)
-    cookie_settings_requests_dto = docspace_api_sdk.CookieSettingsRequestsDto() # CookieSettingsRequestsDto |  (optional)
+    cookie_settings_request_dto = docspace_api_sdk.CookieSettingsRequestDto() # CookieSettingsRequestDto |  (optional)
 
     try:
         # Update the cookie lifetime settings
-        api_response = api_instance.update_cookie_settings(cookie_settings_requests_dto=cookie_settings_requests_dto)
+        api_response = api_instance.update_cookie_settings(cookie_settings_request_dto=cookie_settings_request_dto)
         print("The response of CookiesApi->update_cookie_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -175,6 +176,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | A localized message confirming that the session lifetime has been saved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **402** | The installation hides the cookie lifetime section, or the portal's payment has lapsed |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |

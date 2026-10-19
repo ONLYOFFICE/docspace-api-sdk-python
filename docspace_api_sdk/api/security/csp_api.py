@@ -22,7 +22,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
-from docspace_api_sdk.models.csp_requests_dto import CspRequestsDto
+from docspace_api_sdk.models.csp_request_dto import CspRequestDto
 from docspace_api_sdk.models.csp_wrapper import CspWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -47,7 +47,7 @@ class CSPApi:
     @validate_call
     def configure_csp(
         self,
-        csp_requests_dto: Optional[CspRequestsDto] = None,
+        csp_request_dto: Optional[CspRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -65,8 +65,8 @@ class CSPApi:
 
         Replaces the list of external domains the portal's Content Security Policy trusts and returns the policy  header the portal serves to browsers from that moment on. The list in `domains` replaces the stored one, so an  omitted or empty list falls back to the portal's built-in policy, and every entry that is sent becomes an  allowed source for scripts, styles, images, fonts, frames, media and connections at once. An entry may be a  host, a host with a scheme, or a wildcard host such as `*.example.com`; it has to form a valid absolute  address and may contain ASCII characters only, and an entry that does not is refused with 400 before anything  is saved. The caller needs the portal-settings right of a DocSpace administrator, and the request is also  refused with 403 when the header built from the list grows past the size configured for the installation, 15  KB by default. The change applies to the whole portal at once and is idempotent. Read the current state with  `GET api/2.0/security/csp`.
 
-        :param csp_requests_dto:
-        :type csp_requests_dto: CspRequestsDto
+        :param csp_request_dto:
+        :type csp_request_dto: CspRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -90,7 +90,7 @@ class CSPApi:
         """ # noqa: E501
 
         _param = self._configure_csp_serialize(
-            csp_requests_dto=csp_requests_dto,
+            csp_request_dto=csp_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -101,9 +101,9 @@ class CSPApi:
             '200': "CspWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -122,7 +122,7 @@ class CSPApi:
     @validate_call
     def configure_csp_with_http_info(
         self,
-        csp_requests_dto: Optional[CspRequestsDto] = None,
+        csp_request_dto: Optional[CspRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -140,8 +140,8 @@ class CSPApi:
 
         Replaces the list of external domains the portal's Content Security Policy trusts and returns the policy  header the portal serves to browsers from that moment on. The list in `domains` replaces the stored one, so an  omitted or empty list falls back to the portal's built-in policy, and every entry that is sent becomes an  allowed source for scripts, styles, images, fonts, frames, media and connections at once. An entry may be a  host, a host with a scheme, or a wildcard host such as `*.example.com`; it has to form a valid absolute  address and may contain ASCII characters only, and an entry that does not is refused with 400 before anything  is saved. The caller needs the portal-settings right of a DocSpace administrator, and the request is also  refused with 403 when the header built from the list grows past the size configured for the installation, 15  KB by default. The change applies to the whole portal at once and is idempotent. Read the current state with  `GET api/2.0/security/csp`.
 
-        :param csp_requests_dto:
-        :type csp_requests_dto: CspRequestsDto
+        :param csp_request_dto:
+        :type csp_request_dto: CspRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -165,7 +165,7 @@ class CSPApi:
         """ # noqa: E501
 
         _param = self._configure_csp_serialize(
-            csp_requests_dto=csp_requests_dto,
+            csp_request_dto=csp_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -176,9 +176,9 @@ class CSPApi:
             '200': "CspWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -197,7 +197,7 @@ class CSPApi:
     @validate_call
     def configure_csp_without_preload_content(
         self,
-        csp_requests_dto: Optional[CspRequestsDto] = None,
+        csp_request_dto: Optional[CspRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -215,8 +215,8 @@ class CSPApi:
 
         Replaces the list of external domains the portal's Content Security Policy trusts and returns the policy  header the portal serves to browsers from that moment on. The list in `domains` replaces the stored one, so an  omitted or empty list falls back to the portal's built-in policy, and every entry that is sent becomes an  allowed source for scripts, styles, images, fonts, frames, media and connections at once. An entry may be a  host, a host with a scheme, or a wildcard host such as `*.example.com`; it has to form a valid absolute  address and may contain ASCII characters only, and an entry that does not is refused with 400 before anything  is saved. The caller needs the portal-settings right of a DocSpace administrator, and the request is also  refused with 403 when the header built from the list grows past the size configured for the installation, 15  KB by default. The change applies to the whole portal at once and is idempotent. Read the current state with  `GET api/2.0/security/csp`.
 
-        :param csp_requests_dto:
-        :type csp_requests_dto: CspRequestsDto
+        :param csp_request_dto:
+        :type csp_request_dto: CspRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -240,7 +240,7 @@ class CSPApi:
         """ # noqa: E501
 
         _param = self._configure_csp_serialize(
-            csp_requests_dto=csp_requests_dto,
+            csp_request_dto=csp_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -251,9 +251,9 @@ class CSPApi:
             '200': "CspWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -267,7 +267,7 @@ class CSPApi:
 
     def _configure_csp_serialize(
         self,
-        csp_requests_dto,
+        csp_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -293,8 +293,8 @@ class CSPApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if csp_requests_dto is not None:
-            _body_params = csp_requests_dto
+        if csp_request_dto is not None:
+            _body_params = csp_request_dto
 
 
         # set the HTTP header `Accept`
@@ -401,6 +401,7 @@ class CSPApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CspWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -469,6 +470,7 @@ class CSPApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CspWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -537,6 +539,7 @@ class CSPApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CspWrapper",
+            '304': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,

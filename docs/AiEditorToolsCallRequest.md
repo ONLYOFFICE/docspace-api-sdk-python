@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Name of the tool to run, as listed by the tools endpoint. A name that is unknown or excluded from the editor is rejected with 400. | 
-**arguments** | **Dict[str, Optional[object]]** | Arguments for the tool, shaped by that tool's own input schema. Treated as empty when it is not an object. | [optional] 
+**arguments** | **Dict[str, object]** | Arguments for the tool, shaped by that tool's own input schema. Treated as empty when it is not an object. | [optional] 
 **entity_id** | **str** | Room the call is scoped to. Left out for a portal-wide call. | [optional] 
 
 ## Example

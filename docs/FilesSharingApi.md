@@ -104,6 +104,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The entry the token points at, with the status the link reached after the password was checked |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | Too many attempts were made for this link from the calling address, and the block has not expired yet |  -  |
 **429** | Too many requests |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
@@ -195,10 +196,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The rooms and files whose owner has been changed, as folder and file objects |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `userId` |  -  |
+**403** | The new owner is not an active account allowed to manage rooms or has not set up encryption keys for a listed private room, the caller may not change the owner of a listed entry, a listed folder lies outside the rooms and common sections, or a listed file is locked, being edited or lies outside the common section |  -  |
+**500** | An id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -289,6 +291,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The keys of the members who can open the file, the private half only for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | The caller may not read the file |  -  |
+**404** | The file does not exist |  -  |
+**415** | The file lies neither in a private room nor in the encrypted section |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -482,10 +486,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The accounts and groups that hold rights on the file, the owner first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
+**403** | The caller is a guest or may not read the file |  -  |
+**404** | The file does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -581,17 +587,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The accounts and groups that hold rights on the folder, the owner first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
+**403** | The caller is a guest or may not read the folder |  -  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_groups_members_with_file_security**
-> GroupMemberSecurityRequestArrayWrapper get_groups_members_with_file_security(file_id, group_id, count=count, start_index=start_index, filter_value=filter_value)
+> GroupMemberSecurityArrayWrapper get_groups_members_with_file_security(file_id, group_id, count=count, start_index=start_index, filter_value=filter_value)
 
 Lists the members of one portal group together with the access each of them has on a file that group was
 granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that
@@ -620,7 +628,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GroupMemberSecurityRequestArrayWrapper**](GroupMemberSecurityRequestArrayWrapper.md)
+[**GroupMemberSecurityArrayWrapper**](GroupMemberSecurityArrayWrapper.md)
 
 ### Third-party storage
 
@@ -635,7 +643,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.group_member_security_request_array_wrapper import GroupMemberSecurityRequestArrayWrapper
+from docspace_api_sdk.models.group_member_security_array_wrapper import GroupMemberSecurityArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -683,17 +691,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The members of the group with the access each of them has on the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
+**403** | The caller is a guest |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_groups_members_with_folder_security**
-> GroupMemberSecurityRequestArrayWrapper get_groups_members_with_folder_security(folder_id, group_id, count=count, start_index=start_index, filter_value=filter_value)
+> GroupMemberSecurityArrayWrapper get_groups_members_with_folder_security(folder_id, group_id, count=count, start_index=start_index, filter_value=filter_value)
 
 Lists the members of one portal group together with the access each of them has on a folder or room that group
 was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on
@@ -722,7 +731,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GroupMemberSecurityRequestArrayWrapper**](GroupMemberSecurityRequestArrayWrapper.md)
+[**GroupMemberSecurityArrayWrapper**](GroupMemberSecurityArrayWrapper.md)
 
 ### Third-party storage
 
@@ -737,7 +746,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.group_member_security_request_array_wrapper import GroupMemberSecurityRequestArrayWrapper
+from docspace_api_sdk.models.group_member_security_array_wrapper import GroupMemberSecurityArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -785,10 +794,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The members of the group with the access each of them has on the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
+**403** | The caller is a guest |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -876,9 +886,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The merged sharing rights of the listed files and folders, one record per account or group |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller may not read one of the listed files or folders |  -  |
+**500** | An id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -886,7 +897,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shared_users**
-> MentionWrapperArrayWrapper get_shared_users(file_id)
+> MentionArrayWrapper get_shared_users(file_id)
 
 Lists the portal members who can read the file, which is what an editor client offers when somebody types a
 mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the
@@ -909,7 +920,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
+[**MentionArrayWrapper**](MentionArrayWrapper.md)
 
 ### Third-party storage
 
@@ -924,7 +935,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
+from docspace_api_sdk.models.mention_array_wrapper import MentionArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -968,6 +979,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The portal members who can read the file, ordered by display name |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller cannot read the file |  -  |
+**404** | The file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1059,9 +1072,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Always true: the accounts and groups that had access to the listed entries no longer have it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller may not change the access of a listed entry and may not drop it from their own list either, because it was shared with them directly or they cannot read it |  -  |
+**500** | An id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1069,7 +1083,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **send_editor_notify**
-> AceShortWrapperArrayWrapper send_editor_notify(file_id, mention_message_wrapper=mention_message_wrapper)
+> AceShortArrayWrapper send_editor_notify(file_id, mention_message_request=mention_message_request)
 
 Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the
 place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to
@@ -1091,11 +1105,11 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **Union[int, str]**| The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. | 
- **mention_message_wrapper** | [**MentionMessageWrapper**](MentionMessageWrapper.md)| The notification to send. | [optional] 
+ **mention_message_request** | [**MentionMessageRequest**](MentionMessageRequest.md)| The notification to send. | [optional] 
 
 ### Return type
 
-[**AceShortWrapperArrayWrapper**](AceShortWrapperArrayWrapper.md)
+[**AceShortArrayWrapper**](AceShortArrayWrapper.md)
 
 ### Third-party storage
 
@@ -1110,8 +1124,8 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.ace_short_wrapper_array_wrapper import AceShortWrapperArrayWrapper
-from docspace_api_sdk.models.mention_message_wrapper import MentionMessageWrapper
+from docspace_api_sdk.models.ace_short_array_wrapper import AceShortArrayWrapper
+from docspace_api_sdk.models.mention_message_request import MentionMessageRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1133,11 +1147,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SharingApi(api_client)
     file_id = 10 # int | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-    mention_message_wrapper = docspace_api_sdk.MentionMessageWrapper() # MentionMessageWrapper | The notification to send. (optional)
+    mention_message_request = docspace_api_sdk.MentionMessageRequest() # MentionMessageRequest | The notification to send. (optional)
 
     try:
         # Notify mentioned users
-        api_response = api_instance.send_editor_notify(file_id, mention_message_wrapper=mention_message_wrapper)
+        api_response = api_instance.send_editor_notify(file_id, mention_message_request=mention_message_request)
         print("The response of SharingApi->send_editor_notify:\n")
         pprint(api_response)
     except Exception as e:
@@ -1255,10 +1269,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The rights the listed subjects hold on the file after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, an `email` in `share` is malformed or longer than 255 characters, `share` invites more addresses by email than the portal allows at once, or `sharingMessage` is longer than 255 characters |  -  |
+**403** | The caller may not change the sharing of the file, or a listed subject cannot be given the requested access on it |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1351,10 +1366,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The rights the listed subjects hold on the folder after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, an `email` in `share` is malformed or longer than 255 characters, `share` invites more addresses by email than the portal allows at once, or `sharingMessage` is longer than 255 characters |  -  |
+**403** | The caller may not change the sharing of the folder, a listed subject cannot be given the requested access on it, or the folder is a private room and a listed account has not set up its encryption keys |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1442,10 +1458,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The rights of the listed accounts and groups on every entry that was processed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, an `email` in `share` is malformed or longer than 255 characters, `share` invites more addresses by email than the portal allows at once, or `sharingMessage` is longer than 255 characters |  -  |
+**403** | The caller may not change the sharing of a listed entry, a listed subject cannot be given the requested access on it, or a listed private room has an account in `share` that has not set up its encryption keys |  -  |
+**500** | An id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

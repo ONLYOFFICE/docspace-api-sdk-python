@@ -1,5 +1,5 @@
 # TenantStatus
-[0 - Active, 1 - Suspended, 2 - Remove pending, 3 - Transfering, 4 - Restoring, 5 - Migrating, 6 - Encryption]
+[0 - Active, 1 - Suspended, 2 - Remove pending, 3 - Transfering, 4 - Restoring, 5 - Migrating, 6 - Encryption, 7 - Blocked]
 
 ## Enum
 
@@ -16,6 +16,8 @@
 * `Migrating` (value: `5`)
 
 * `Encryption` (value: `6`)
+
+* `Blocked` (value: `7`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

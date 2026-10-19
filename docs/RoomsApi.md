@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**get_external_db_sync_status**](#get_external_db_sync_status) | **GET** /api/2.0/files/rooms/{id}/externaldbsync | Get external DB sync status
 [**get_new_room_items**](#get_new_room_items) | **GET** /api/2.0/files/rooms/{id}/news | Get new items in a room
 [**get_public_settings**](#get_public_settings) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get room template public access
+[**get_room_ai_folder**](#get_room_ai_folder) | **GET** /api/2.0/files/rooms/{id}/ai | Get the .ai folder of a room
 [**get_room_covers**](#get_room_covers) | **GET** /api/2.0/files/rooms/covers | Get room cover gallery
 [**get_room_creating_status**](#get_room_creating_status) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress
 [**get_room_index_export**](#get_room_index_export) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export
@@ -35,6 +36,7 @@ Method | HTTP request | Description
 [**pin_room**](#pin_room) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room
 [**reorder_room**](#reorder_room) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder room contents
 [**resend_email_invitations**](#resend_email_invitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations
+[**search_rooms**](#search_rooms) | **POST** /api/2.0/files/rooms/search | Search the rooms by metadata
 [**set_public_settings**](#set_public_settings) | **PUT** /api/2.0/files/roomtemplate/public | Set room template public access
 [**set_room_link**](#set_room_link) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link
 [**set_room_security**](#set_room_security) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights
@@ -134,11 +136,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room with its tag set after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `names`, a name is null, blank or longer than 255 characters, or a third-party identifier refers to a storage account that is not connected |  -  |
 **403** | The caller may not edit this room, or the room is archived |  -  |
+**404** | The room does not exist, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -230,10 +233,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The queued archive operation to poll |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller may not read or archive this room, the id names a folder that is not a room, or a file in the room is locked or being edited |  -  |
+**404** | The room does not exist or is a room template, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -325,12 +330,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room as it is after the cover change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, `color` is not six hexadecimal digits, `cover` is not an identifier from the cover gallery, or a third-party identifier refers to a storage account that is not connected |  -  |
 **403** | The caller may not edit this room, or the room is archived |  -  |
-**404** | No room with this ID is visible to the caller |  -  |
+**404** | No room with this ID exists, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -418,10 +423,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created room with its id, type, settings, logo and tags |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `title` or `roomType`, `title` is blank or longer than 170 characters, `roomType` is not a known room type, `color` is not six hexadecimal digits, `cover` is longer than 50 characters or not a known cover, `share` is not empty, `lifetime` has an unknown `period` or a `value` outside 1-999, the `watermark` text is longer than 255 characters, `logo` has no `tmpFile`, a position outside 0-1280, a size outside 1-1280 or a position outside the uploaded picture, or a tag name is empty |  -  |
+**402** | The portal has reached the room limit of its pricing plan or its payment is overdue, or the logo does not fit into the portal storage quota |  -  |
+**403** | The caller is a user or a guest, `roomType` is a public room while the portal forbids external sharing, `private` is set while the caller has no encryption keys, `quota` is set while the storage quota for rooms is turned off or exceeds the portal storage limit, or `logo.tmpFile` is not a picture the caller uploaded |  -  |
+**404** | `logo.tmpFile` names no uploaded picture, or one already used |  -  |
+**500** | `logo.width` or `logo.height` is larger than 2147483647 |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -508,10 +516,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The progress record of the room creation job |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `templateId` or `title`, `title` is blank or longer than 170 characters, `color` is longer than 6 or `cover` longer than 50 characters, `logo` has no `tmpFile`, a position outside 0-1280 or a size outside 1-1280, `lifetime` has an unknown `period` or a `value` outside 1-999, or the `watermark` text is longer than 255 characters |  -  |
+**403** | The caller cannot read the template or is a user or a guest, or `quota` is set while the storage quota for rooms (for an AI agent template, for agents) is turned off |  -  |
+**404** | No room template with `templateId` exists |  -  |
+**500** | `logo.width` or `logo.height` is larger than 2147483647 |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -603,11 +613,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room with the addresses of its new logo |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**404** | No room with this ID is visible to the caller |  -  |
+**400** | The request body cannot be read or has no `tmpFile`, `x` or `y` is outside 0-1280, `width` or `height` is missing or outside 1-1280, the crop position lies outside the uploaded picture, or a third-party identifier refers to a storage account that is not connected |  -  |
+**402** | The logo does not fit into the portal storage quota |  -  |
+**403** | The caller may not edit this room, the room is archived, or `tmpFile` is not a picture the caller uploaded |  -  |
+**404** | No room with this ID exists, `tmpFile` names no uploaded picture or one already used, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | `width` or `height` is larger than 2147483647, or a third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -693,11 +705,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The name of the created tag, or of the tag that already carried this name |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `name`, or the name is empty, blank or longer than 255 characters |  -  |
 **403** | Only a room manager or a portal administrator can create tags |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -786,17 +798,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The state of the template creation just queued: `isCompleted` is still false, so the job has to be polled for its result |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `roomId`, `title` is empty or longer than 400 characters, `color` is longer than 6 or `cover` longer than 50 characters, or `logo` has no `tmpFile` or a position or size outside 0-1280 |  -  |
+**403** | The source room is archived, the caller cannot edit it, or `quota` is set while the storage quota for rooms (for an AI agent, for agents) is turned off |  -  |
+**404** | No room with `roomId` exists in the Rooms section |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_room_third_party**
-> ThirdPartyFolderWrapper create_room_third_party(id, create_third_party_room)
+> ThirdPartyFolderWrapper create_room_third_party(id, create_third_party_room_request)
 
 Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the
 files of the room keep living in that storage instead of the portal. Connect the account first with
@@ -806,7 +820,9 @@ second call over the same account is refused, and so is an account that was not 
 The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is
 refused while the administrator restricts external access, and reaching the room limit of the tariff is
 refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder
-from the path becomes the room itself and `indexing`, `denyDownload`, `tags` and `logo` are then dropped. The
+from the path becomes the room itself and `tags` and `logo` are then dropped. A third-party room keeps neither
+`indexing` nor `denyDownload` in either mode: both are accepted and ignored, and the room reads back with them
+off. The
 answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary
 link, readable with `GET api/2.0/files/rooms/{id}/link`.
 
@@ -818,7 +834,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. | 
- **create_third_party_room** | [**CreateThirdPartyRoom**](CreateThirdPartyRoom.md)| The settings of the room to be created out of the folder. | 
+ **create_third_party_room_request** | [**CreateThirdPartyRoomRequest**](CreateThirdPartyRoomRequest.md)| The settings of the room to be created out of the folder. | 
 
 ### Return type
 
@@ -833,7 +849,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_third_party_room import CreateThirdPartyRoom
+from docspace_api_sdk.models.create_third_party_room_request import CreateThirdPartyRoomRequest
 from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -856,11 +872,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RoomsApi(api_client)
     id = 'box-12-|280143035119' # str | The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.
-    create_third_party_room = docspace_api_sdk.CreateThirdPartyRoom() # CreateThirdPartyRoom | The settings of the room to be created out of the folder.
+    create_third_party_room_request = docspace_api_sdk.CreateThirdPartyRoomRequest() # CreateThirdPartyRoomRequest | The settings of the room to be created out of the folder.
 
     try:
         # Create a third-party room
-        api_response = api_instance.create_room_third_party(id, create_third_party_room)
+        api_response = api_instance.create_room_third_party(id, create_third_party_room_request)
         print("The response of RoomsApi->create_room_third_party:\n")
         pprint(api_response)
     except Exception as e:
@@ -879,10 +895,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room created out of the third-party folder, with string identifiers |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `title` or `roomType`, `roomType` is not a known room type, `logo` has no `tmpFile`, a position outside 0-1280 or a size outside 1-1280, or the identifier refers to a storage account that is not connected |  -  |
+**402** | The portal has reached the room limit of its pricing plan or its payment is overdue |  -  |
+**403** | The caller is not the account that connected the storage or may not create rooms, the storage account was not connected for room storage or already backs a room, the room would be public while the portal forbids external sharing, or, with `createAsNewFolder`, the subfolder cannot be created, as when `title` is blank, `cover` is not a known cover, a tag name is empty or the logo cannot be applied |  -  |
+**404** | `id` is not a folder of a connected third-party storage: a plain number, an identifier with a storage type the portal does not know, or a folder the storage does not have |  -  |
+**500** | The identifier carries a storage account number beyond the 32-bit range, or `logo.width` or `logo.height` is larger than 2147483647 |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -965,11 +984,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The tags were removed from the catalog and from every room |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `names`, or a name is empty, blank or longer than 255 characters |  -  |
 **403** | Only a portal administrator can delete tags |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1061,10 +1080,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The queued delete operation to poll |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller may not delete this room |  -  |
+**404** | The room does not exist, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1152,10 +1173,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room with its logo removed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The room has a logo and the caller may not edit it, or the room is archived |  -  |
+**404** | No room with this ID exists, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1246,11 +1269,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room with its tag set after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `names`, a name is null, blank or longer than 255 characters, or a third-party identifier refers to a storage account that is not connected |  -  |
 **403** | The caller may not edit this room, or the room is archived |  -  |
+**404** | The room does not exist, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1335,7 +1359,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The synchronization job record, or an empty body when the room has no job |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**404** | No room with this ID is visible to the caller |  -  |
+**403** | The room is not a form filling room, or the caller cannot edit it |  -  |
+**404** | No folder with this ID exists |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1428,10 +1453,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The new files of the room, grouped by day |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller cannot read this room, or the id names a folder in the Trash |  -  |
+**404** | No room with this ID exists, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1516,10 +1543,112 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | True when the template is shared with everyone, false when only its owner and the accounts it was shared with can reach it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or `id` is less than 1 |  -  |
+**403** | The caller has no read access to the template |  -  |
+**404** | `id` does not identify a room template |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_room_ai_folder**
+> FolderContentWrapper get_room_ai_folder(id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+
+Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as
+`GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with
+`GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot
+is refused, and a room that does not exist is answered as not found. A room that holds no .ai folder is
+answered with an empty page: no files and folders, a zero `total`, no `current` folder and empty `pathParts`.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | 
+ **filter_type** | [**FilterType**](.md)| Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds. | [optional] 
+ **count** | **int**| The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. | [optional] 
+ **start_index** | **int**| The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | [optional] 
+ **sort_by** | **str**| The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`. | [optional] 
+ **sort_order** | [**SortOrder**](.md)| The direction in which the `sortBy` field is ordered. | [optional] 
+ **filter_value** | **str**| The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered. | [optional] 
+
+### Return type
+
+[**FolderContentWrapper**](FolderContentWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.filter_type import FilterType
+from docspace_api_sdk.models.folder_content_wrapper import FolderContentWrapper
+from docspace_api_sdk.models.sort_order import SortOrder
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.RoomsApi(api_client)
+    id = 1 # int | The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    filter_type = docspace_api_sdk.FilterType() # FilterType | Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds. (optional)
+    count = 25 # int | The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. (optional)
+    start_index = 0 # int | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. (optional)
+    sort_by = 'DateAndTime' # str | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`. (optional)
+    sort_order = docspace_api_sdk.SortOrder() # SortOrder | The direction in which the `sortBy` field is ordered. (optional)
+    filter_value = 'skill' # str | The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered. (optional)
+
+    try:
+        # Get the .ai folder of a room
+        api_response = api_instance.get_room_ai_folder(id, filter_type=filter_type, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+        print("The response of RoomsApi->get_room_ai_folder:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling RoomsApi->get_room_ai_folder: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | One page of the .ai folder contents, with the folder itself and the chain of its parents, or an empty page without `current` when the room holds no .ai folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
+**403** | The caller may not read this room |  -  |
+**404** | The room does not exist |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1600,6 +1729,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The built-in room covers with their identifiers and vector markup |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller is a guest with whom nothing on the portal has been shared |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1860,9 +1990,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room with its settings and the access level of the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A third-party identifier refers to a storage account that is not connected |  -  |
+**401** | An anonymous caller has no external link that grants access to the room |  -  |
+**403** | The caller may not read this room |  -  |
+**404** | The room does not exist, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1955,10 +2088,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The sharing links of the room |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or a third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller may not read the room |  -  |
+**404** | The room does not exist, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2057,17 +2192,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | One page of the room access entries, ordered by role and then by name |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, or a third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller may not read the room |  -  |
+**404** | The room does not exist, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_room_tags_info**
-> STRINGArrayWrapper get_room_tags_info(count=count, start_index=start_index, filter_value=filter_value)
+> StringArrayWrapper get_room_tags_info(count=count, start_index=start_index, filter_value=filter_value)
 
 Returns the custom room tags available to the caller as a flat array of names, not of objects. What the array
 holds depends on the account: a portal administrator gets the whole catalog, including tags that no room uses
@@ -2092,7 +2229,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**STRINGArrayWrapper**](STRINGArrayWrapper.md)
+[**StringArrayWrapper**](StringArrayWrapper.md)
 
 ### Authorization
 
@@ -2103,7 +2240,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
+from docspace_api_sdk.models.string_array_wrapper import StringArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -2149,10 +2286,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The tag names available to the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2242,7 +2379,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_rooms_folder**
-> FolderContentWrapper get_rooms_folder(type=type, subject_id=subject_id, subject_owner_id=subject_owner_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, quota_filter=quota_filter, storage_filter=storage_filter, privacy_filter=privacy_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id)
+> FolderContentWrapper get_rooms_folder(type=type, subject_id=subject_id, subject_owner_id=subject_owner_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, quota_filter=quota_filter, storage_filter=storage_filter, privacy_filter=privacy_filter, with_ai_folder=with_ai_folder, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
 
 Lists the rooms of one section of the portal: the active rooms by default, or the archive, the form-filling
 section or the room templates, chosen with `searchArea`. The rooms arrive in `folders` while `files` stays
@@ -2273,12 +2410,16 @@ Name | Type | Description  | Notes
  **quota_filter** | [**QuotaFilter**](.md)| Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. | [optional] 
  **storage_filter** | [**StorageFilter**](.md)| Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. | [optional] 
  **privacy_filter** | [**RoomPrivacyFilter**](.md)| Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. | [optional] 
+ **with_ai_folder** | **bool**| Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder. | [optional] 
  **count** | **int**| How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. | [optional] 
  **start_index** | **int**| How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. | [optional] 
  **sort_by** | **str**| The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order. | [optional] 
  **sort_order** | [**SortOrder**](.md)| The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used. | [optional] 
  **filter_value** | **str**| Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched. | [optional] 
  **group_id** | **int**| Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here. | [optional] 
+ **metadata_template_id** | **int**| The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to. | [optional] 
+ **metadata_filters** | **str**| The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search. | [optional] 
+ **include_hidden_metadata** | **bool**| Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | [optional] 
 
 ### Return type
 
@@ -2332,16 +2473,20 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     quota_filter = docspace_api_sdk.QuotaFilter() # QuotaFilter | Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. (optional)
     storage_filter = docspace_api_sdk.StorageFilter() # StorageFilter | Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. (optional)
     privacy_filter = docspace_api_sdk.RoomPrivacyFilter() # RoomPrivacyFilter | Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. (optional)
+    with_ai_folder = true # bool | Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder. (optional)
     count = 25 # int | How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. (optional)
     start_index = 0 # int | How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. (optional)
     sort_by = 'DateAndTime' # str | The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order. (optional)
     sort_order = docspace_api_sdk.SortOrder() # SortOrder | The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used. (optional)
     filter_value = 'Sales' # str | Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched. (optional)
     group_id = 1 # int | Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here. (optional)
+    metadata_template_id = 1 # int | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to. (optional)
+    metadata_filters = '[{\"fieldId\":1,\"op\":\"eq\",\"value\":\"ACME\"}]' # str | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search. (optional)
+    include_hidden_metadata = false # bool | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional)
 
     try:
         # Get rooms
-        api_response = api_instance.get_rooms_folder(type=type, subject_id=subject_id, subject_owner_id=subject_owner_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, quota_filter=quota_filter, storage_filter=storage_filter, privacy_filter=privacy_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id)
+        api_response = api_instance.get_rooms_folder(type=type, subject_id=subject_id, subject_owner_id=subject_owner_id, search_area=search_area, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, provider=provider, quota_filter=quota_filter, storage_filter=storage_filter, privacy_filter=privacy_filter, with_ai_folder=with_ai_folder, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value, group_id=group_id, metadata_template_id=metadata_template_id, metadata_filters=metadata_filters, include_hidden_metadata=include_hidden_metadata)
         print("The response of RoomsApi->get_rooms_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -2360,11 +2505,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The rooms of the selected section with the paging counters |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, the `startIndex` is negative, or `tags` is not a JSON array of strings |  -  |
 **403** | The caller cannot read the selected section |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2536,12 +2681,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The primary external link of the room |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not see the links of this room |  -  |
-**404** | No room with this ID is visible to the caller, or its primary link was revoked |  -  |
+**400** | A third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller may not read the room, or the room has no primary link yet and the caller may not manage its links, its type takes no external links, or the admin restricts external links to public rooms |  -  |
+**404** | The room does not exist or its primary link was revoked, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2627,7 +2772,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | True when at least one room still carries the tag |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**404** | No tag with this name exists in the catalog |  -  |
+**403** | Only a portal administrator can check tag usage |  -  |
+**404** | No tag with this name exists in the catalog, or the `tagName` query parameter is missing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -2721,10 +2867,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room with its pinned flag set for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller cannot read this room, the room is archived or is not a room, or the caller already has the maximum number of pinned rooms (AI agents are counted separately) |  -  |
+**404** | No room with this ID exists, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2813,10 +2961,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room whose contents were renumbered |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller may not edit this room, or the room is archived |  -  |
+**404** | No room with this ID exists, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2905,10 +3055,95 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The invitations that were still pending have been sent again |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, or a third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller is not a manager of the room, or the room is archived |  -  |
+**404** | The room does not exist or is a room template, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **search_rooms**
+> FolderContentWrapper search_rooms(rooms_metadata_search_request_dto=rooms_metadata_search_request_dto)
+
+Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters
+query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **rooms_metadata_search_request_dto** | [**RoomsMetadataSearchRequestDto**](RoomsMetadataSearchRequestDto.md)|  | [optional] 
+
+### Return type
+
+[**FolderContentWrapper**](FolderContentWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.folder_content_wrapper import FolderContentWrapper
+from docspace_api_sdk.models.rooms_metadata_search_request_dto import RoomsMetadataSearchRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.RoomsApi(api_client)
+    rooms_metadata_search_request_dto = docspace_api_sdk.RoomsMetadataSearchRequestDto() # RoomsMetadataSearchRequestDto |  (optional)
+
+    try:
+        # Search the rooms by metadata
+        api_response = api_instance.search_rooms(rooms_metadata_search_request_dto=rooms_metadata_search_request_dto)
+        print("The response of RoomsApi->search_rooms:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling RoomsApi->search_rooms: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Returns the matching rooms of the section |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | Invalid metadata filter |  -  |
+**403** | You don't have enough permission to view the room content |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2992,10 +3227,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The recipient list of the template has been rewritten to match the requested access; nothing is returned |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `id`, or `id` is less than 1 |  -  |
+**403** | The caller is not allowed to change who the template is shared with |  -  |
+**404** | `id` does not identify a room template |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3088,10 +3325,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The link as it is after the change, or an empty body when nothing was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, `linkType` or `access` is not a known value, the title or password is longer than 255 characters, `maxUseCount` is outside 1-1000 or below the number of times the invitation link was already used, the password does not meet the portal password policy, `expirationDate` lies more than 10 years ahead or, for an invitation link, in the past, or a third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller may not manage the links of this room, the access level is not available for this kind of link in this room, the room already has its invitation link or the link limit is reached, or the admin's restriction on external links forbids the change |  -  |
+**404** | The room does not exist, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | `linkType` is `Invitation` and `linkId` is the id of the room owner's account, or a third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3184,9 +3423,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The access entries of the named subjects, plus a warning or an error when something was not applied |  -  |
+**400** | The request body cannot be read, an `email` in `invitations` is malformed or longer than 255 characters, `invitations` invites more addresses by email than the portal allows at once, `culture` is not a valid culture name while an invitation email is sent, or a third-party identifier refers to a storage account that is not connected |  -  |
+**403** | Email invitations are sent while the portal forbids inviting guests, the caller may not read the room or change its members, a listed subject cannot be given the requested access in this room, or the room is private and a listed account or invited address has no encryption keys |  -  |
+**404** | The room does not exist, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3272,12 +3513,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The synchronization job record to poll |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The portal has no external database configured |  -  |
 **403** | The room is not a form filling room, or the caller cannot edit it |  -  |
-**404** | No room with this ID is visible to the caller |  -  |
+**404** | No folder with this ID exists |  -  |
+**500** | The portal has no external database configured |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
+**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3363,7 +3604,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The queued export job to poll |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**501** | Folder indexing is turned off |  -  |
+**403** | The caller may not read the folder, the folder lies in the archive or is not a room with indexing turned on, or the caller is neither its room manager nor a portal administrator |  -  |
+**404** | The folder does not exist or lies in the room templates section |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -3539,10 +3781,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The queued unarchive operation to poll |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller may not read or unarchive this room, the id names a folder that is not a room, or a file in the room is locked or being edited |  -  |
+**404** | The room does not exist or is a room template, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3630,10 +3874,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room with its pinned flag cleared for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A third-party identifier refers to a storage account that is not connected |  -  |
+**403** | The caller cannot read this room, or the room is archived or is not a room |  -  |
+**404** | No room with this ID exists, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3726,10 +3972,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room as it is after the update |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or holds a property the room update does not define, `title` is longer than 170 characters, `color` is not six hexadecimal digits, `cover` is longer than 50 characters or not a known cover, `lifetime` has an unknown `period` or a `value` outside 1-999, `logo` has no `tmpFile`, a position outside 0-1280, a size outside 1-1280 or a position outside the uploaded picture, the `watermark` text is longer than 255 characters, a tag name is empty, `chatSettings` is sent for a room that is not an AI room, or a third-party identifier refers to a storage account that is not connected |  -  |
+**402** | The new logo or watermark image does not fit into the portal storage quota |  -  |
+**403** | The caller may not edit this room, the room lies in Trash or in the archive, `quota` exceeds the storage limit of the portal, or `logo.tmpFile` or a relative `watermark.imageUrl` is not an image the caller uploaded |  -  |
+**404** | No room has this id, the uploaded image named by `logo.tmpFile` or `watermark.imageUrl` no longer exists, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
+**500** | A third-party identifier carries a storage account number beyond the 32-bit range, or `logo.width` or `logo.height` is larger than 2147483647 |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3815,11 +4064,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The new name of the renamed tag |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `oldName` or `newName`, a name is empty, blank or longer than 255 characters, or a tag with the new name already exists |  -  |
 **403** | Only a portal administrator can rename a tag |  -  |
+**404** | No tag with the old name exists in the catalog |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3904,7 +4154,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The path of the stored temporary image |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The request carries no image, or the image cannot be used as a logo |  -  |
+**400** | The request is not a multipart form or carries no file, or the first file is empty, larger than the portal limit for uploaded images, or not a readable PNG or JPEG image |  -  |
 **403** | Only a room manager or a portal administrator can upload a logo |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |

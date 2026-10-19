@@ -406,10 +406,10 @@ class OwnerApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '400': None,
-            '409': None,
+            '402': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -481,10 +481,10 @@ class OwnerApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '400': None,
-            '409': None,
+            '402': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -556,10 +556,10 @@ class OwnerApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '400': None,
-            '409': None,
+            '402': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

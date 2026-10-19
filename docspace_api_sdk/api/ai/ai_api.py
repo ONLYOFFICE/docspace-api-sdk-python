@@ -21,15 +21,15 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
-from docspace_api_sdk.models.ai_ai_approve_tool_call_request import AiAiApproveToolCallRequest
-from docspace_api_sdk.models.ai_ai_regenerate_stream_request import AiAiRegenerateStreamRequest
-from docspace_api_sdk.models.ai_ai_send_custom_request import AiAiSendCustomRequest
-from docspace_api_sdk.models.ai_ai_send_request import AiAiSendRequest
-from docspace_api_sdk.models.ai_ai_send_stream_body import AiAiSendStreamBody
-from docspace_api_sdk.models.ai_ai_tool_call_data import AiAiToolCallData
+from docspace_api_sdk.models.ai_approve_tool_call_request import AiApproveToolCallRequest
 from docspace_api_sdk.models.ai_chat_event import AiChatEvent
 from docspace_api_sdk.models.ai_open_ai_stream_chunk import AiOpenAIStreamChunk
+from docspace_api_sdk.models.ai_regenerate_stream_request import AiRegenerateStreamRequest
+from docspace_api_sdk.models.ai_send_custom_request import AiSendCustomRequest
+from docspace_api_sdk.models.ai_send_request import AiSendRequest
+from docspace_api_sdk.models.ai_send_stream_body import AiSendStreamBody
 from docspace_api_sdk.models.ai_thread_message_like import AiThreadMessageLike
+from docspace_api_sdk.models.ai_tool_call_data import AiToolCallData
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -51,9 +51,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_approve_tool_call(
+    def ai_approve_tool_call(
         self,
-        ai_ai_approve_tool_call_request: AiAiApproveToolCallRequest,
+        ai_approve_tool_call_request: AiApproveToolCallRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -71,8 +71,8 @@ class AIApi:
 
         Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited `ChatEvent` objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call `POST api/2.0/ai/ai/deny-tool-call` instead to refuse the call and let the model answer without it.
 
-        :param ai_ai_approve_tool_call_request: (required)
-        :type ai_ai_approve_tool_call_request: AiAiApproveToolCallRequest
+        :param ai_approve_tool_call_request: (required)
+        :type ai_approve_tool_call_request: AiApproveToolCallRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -95,8 +95,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_approve_tool_call_serialize(
-            ai_ai_approve_tool_call_request=ai_ai_approve_tool_call_request,
+        _param = self._ai_approve_tool_call_serialize(
+            ai_approve_tool_call_request=ai_approve_tool_call_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -123,9 +123,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_approve_tool_call_with_http_info(
+    def ai_approve_tool_call_with_http_info(
         self,
-        ai_ai_approve_tool_call_request: AiAiApproveToolCallRequest,
+        ai_approve_tool_call_request: AiApproveToolCallRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -143,8 +143,8 @@ class AIApi:
 
         Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited `ChatEvent` objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call `POST api/2.0/ai/ai/deny-tool-call` instead to refuse the call and let the model answer without it.
 
-        :param ai_ai_approve_tool_call_request: (required)
-        :type ai_ai_approve_tool_call_request: AiAiApproveToolCallRequest
+        :param ai_approve_tool_call_request: (required)
+        :type ai_approve_tool_call_request: AiApproveToolCallRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -167,8 +167,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_approve_tool_call_serialize(
-            ai_ai_approve_tool_call_request=ai_ai_approve_tool_call_request,
+        _param = self._ai_approve_tool_call_serialize(
+            ai_approve_tool_call_request=ai_approve_tool_call_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -195,9 +195,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_approve_tool_call_without_preload_content(
+    def ai_approve_tool_call_without_preload_content(
         self,
-        ai_ai_approve_tool_call_request: AiAiApproveToolCallRequest,
+        ai_approve_tool_call_request: AiApproveToolCallRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -215,8 +215,8 @@ class AIApi:
 
         Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited `ChatEvent` objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call `POST api/2.0/ai/ai/deny-tool-call` instead to refuse the call and let the model answer without it.
 
-        :param ai_ai_approve_tool_call_request: (required)
-        :type ai_ai_approve_tool_call_request: AiAiApproveToolCallRequest
+        :param ai_approve_tool_call_request: (required)
+        :type ai_approve_tool_call_request: AiApproveToolCallRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -239,8 +239,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_approve_tool_call_serialize(
-            ai_ai_approve_tool_call_request=ai_ai_approve_tool_call_request,
+        _param = self._ai_approve_tool_call_serialize(
+            ai_approve_tool_call_request=ai_approve_tool_call_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -262,9 +262,9 @@ class AIApi:
         return response_data.response
 
 
-    def _ai_ai_approve_tool_call_serialize(
+    def _ai_approve_tool_call_serialize(
         self,
-        ai_ai_approve_tool_call_request,
+        ai_approve_tool_call_request,
         _request_auth,
         _content_type,
         _headers,
@@ -290,8 +290,8 @@ class AIApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if ai_ai_approve_tool_call_request is not None:
-            _body_params = ai_ai_approve_tool_call_request
+        if ai_approve_tool_call_request is not None:
+            _body_params = ai_approve_tool_call_request
 
 
         # set the HTTP header `Accept`
@@ -345,9 +345,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_deny_tool_call(
+    def ai_deny_tool_call(
         self,
-        ai_ai_tool_call_data: AiAiToolCallData,
+        ai_tool_call_data: AiToolCallData,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -365,8 +365,8 @@ class AIApi:
 
         Refuses the tool call a chat round is paused on and resumes it immediately, streaming the continuation as newline-delimited `ChatEvent` objects. The literal `User deny tool call` is persisted in place of the tool result, so the model sees an explicit refusal rather than a missing answer and may reply without the tool or ask for something else. Nothing is executed and no result is accepted from the caller. Use `POST api/2.0/ai/ai/approve-tool-call` to supply a result instead.
 
-        :param ai_ai_tool_call_data: (required)
-        :type ai_ai_tool_call_data: AiAiToolCallData
+        :param ai_tool_call_data: (required)
+        :type ai_tool_call_data: AiToolCallData
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -389,8 +389,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_deny_tool_call_serialize(
-            ai_ai_tool_call_data=ai_ai_tool_call_data,
+        _param = self._ai_deny_tool_call_serialize(
+            ai_tool_call_data=ai_tool_call_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -417,9 +417,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_deny_tool_call_with_http_info(
+    def ai_deny_tool_call_with_http_info(
         self,
-        ai_ai_tool_call_data: AiAiToolCallData,
+        ai_tool_call_data: AiToolCallData,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -437,8 +437,8 @@ class AIApi:
 
         Refuses the tool call a chat round is paused on and resumes it immediately, streaming the continuation as newline-delimited `ChatEvent` objects. The literal `User deny tool call` is persisted in place of the tool result, so the model sees an explicit refusal rather than a missing answer and may reply without the tool or ask for something else. Nothing is executed and no result is accepted from the caller. Use `POST api/2.0/ai/ai/approve-tool-call` to supply a result instead.
 
-        :param ai_ai_tool_call_data: (required)
-        :type ai_ai_tool_call_data: AiAiToolCallData
+        :param ai_tool_call_data: (required)
+        :type ai_tool_call_data: AiToolCallData
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -461,8 +461,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_deny_tool_call_serialize(
-            ai_ai_tool_call_data=ai_ai_tool_call_data,
+        _param = self._ai_deny_tool_call_serialize(
+            ai_tool_call_data=ai_tool_call_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -489,9 +489,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_deny_tool_call_without_preload_content(
+    def ai_deny_tool_call_without_preload_content(
         self,
-        ai_ai_tool_call_data: AiAiToolCallData,
+        ai_tool_call_data: AiToolCallData,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -509,8 +509,8 @@ class AIApi:
 
         Refuses the tool call a chat round is paused on and resumes it immediately, streaming the continuation as newline-delimited `ChatEvent` objects. The literal `User deny tool call` is persisted in place of the tool result, so the model sees an explicit refusal rather than a missing answer and may reply without the tool or ask for something else. Nothing is executed and no result is accepted from the caller. Use `POST api/2.0/ai/ai/approve-tool-call` to supply a result instead.
 
-        :param ai_ai_tool_call_data: (required)
-        :type ai_ai_tool_call_data: AiAiToolCallData
+        :param ai_tool_call_data: (required)
+        :type ai_tool_call_data: AiToolCallData
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -533,8 +533,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_deny_tool_call_serialize(
-            ai_ai_tool_call_data=ai_ai_tool_call_data,
+        _param = self._ai_deny_tool_call_serialize(
+            ai_tool_call_data=ai_tool_call_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -556,9 +556,9 @@ class AIApi:
         return response_data.response
 
 
-    def _ai_ai_deny_tool_call_serialize(
+    def _ai_deny_tool_call_serialize(
         self,
-        ai_ai_tool_call_data,
+        ai_tool_call_data,
         _request_auth,
         _content_type,
         _headers,
@@ -584,8 +584,8 @@ class AIApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if ai_ai_tool_call_data is not None:
-            _body_params = ai_ai_tool_call_data
+        if ai_tool_call_data is not None:
+            _body_params = ai_tool_call_data
 
 
         # set the HTTP header `Accept`
@@ -639,9 +639,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_regenerate_stream(
+    def ai_regenerate_stream(
         self,
-        ai_ai_regenerate_stream_request: AiAiRegenerateStreamRequest,
+        ai_regenerate_stream_request: AiRegenerateStreamRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -659,8 +659,8 @@ class AIApi:
 
         Re-rolls the last assistant reply of an existing thread: every message after the last user message - the previous reply and any tool-call hops - is dropped, and a fresh reply is streamed as newline-delimited `ChatEvent` objects against the unchanged prompt. The thread has to exist already, `threadId` is required, and no title is generated. The dropped messages are gone for good, so this is a destructive operation on the thread's tail rather than a retry that keeps both answers. Unlike `send-with-stream` the profile is not verified before the stream opens, so an unusable model surfaces as an error frame inside the 200 rather than as a 4xx.
 
-        :param ai_ai_regenerate_stream_request: (required)
-        :type ai_ai_regenerate_stream_request: AiAiRegenerateStreamRequest
+        :param ai_regenerate_stream_request: (required)
+        :type ai_regenerate_stream_request: AiRegenerateStreamRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -683,8 +683,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_regenerate_stream_serialize(
-            ai_ai_regenerate_stream_request=ai_ai_regenerate_stream_request,
+        _param = self._ai_regenerate_stream_serialize(
+            ai_regenerate_stream_request=ai_regenerate_stream_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -711,9 +711,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_regenerate_stream_with_http_info(
+    def ai_regenerate_stream_with_http_info(
         self,
-        ai_ai_regenerate_stream_request: AiAiRegenerateStreamRequest,
+        ai_regenerate_stream_request: AiRegenerateStreamRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -731,8 +731,8 @@ class AIApi:
 
         Re-rolls the last assistant reply of an existing thread: every message after the last user message - the previous reply and any tool-call hops - is dropped, and a fresh reply is streamed as newline-delimited `ChatEvent` objects against the unchanged prompt. The thread has to exist already, `threadId` is required, and no title is generated. The dropped messages are gone for good, so this is a destructive operation on the thread's tail rather than a retry that keeps both answers. Unlike `send-with-stream` the profile is not verified before the stream opens, so an unusable model surfaces as an error frame inside the 200 rather than as a 4xx.
 
-        :param ai_ai_regenerate_stream_request: (required)
-        :type ai_ai_regenerate_stream_request: AiAiRegenerateStreamRequest
+        :param ai_regenerate_stream_request: (required)
+        :type ai_regenerate_stream_request: AiRegenerateStreamRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -755,8 +755,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_regenerate_stream_serialize(
-            ai_ai_regenerate_stream_request=ai_ai_regenerate_stream_request,
+        _param = self._ai_regenerate_stream_serialize(
+            ai_regenerate_stream_request=ai_regenerate_stream_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -783,9 +783,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_regenerate_stream_without_preload_content(
+    def ai_regenerate_stream_without_preload_content(
         self,
-        ai_ai_regenerate_stream_request: AiAiRegenerateStreamRequest,
+        ai_regenerate_stream_request: AiRegenerateStreamRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -803,8 +803,8 @@ class AIApi:
 
         Re-rolls the last assistant reply of an existing thread: every message after the last user message - the previous reply and any tool-call hops - is dropped, and a fresh reply is streamed as newline-delimited `ChatEvent` objects against the unchanged prompt. The thread has to exist already, `threadId` is required, and no title is generated. The dropped messages are gone for good, so this is a destructive operation on the thread's tail rather than a retry that keeps both answers. Unlike `send-with-stream` the profile is not verified before the stream opens, so an unusable model surfaces as an error frame inside the 200 rather than as a 4xx.
 
-        :param ai_ai_regenerate_stream_request: (required)
-        :type ai_ai_regenerate_stream_request: AiAiRegenerateStreamRequest
+        :param ai_regenerate_stream_request: (required)
+        :type ai_regenerate_stream_request: AiRegenerateStreamRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -827,8 +827,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_regenerate_stream_serialize(
-            ai_ai_regenerate_stream_request=ai_ai_regenerate_stream_request,
+        _param = self._ai_regenerate_stream_serialize(
+            ai_regenerate_stream_request=ai_regenerate_stream_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -850,9 +850,9 @@ class AIApi:
         return response_data.response
 
 
-    def _ai_ai_regenerate_stream_serialize(
+    def _ai_regenerate_stream_serialize(
         self,
-        ai_ai_regenerate_stream_request,
+        ai_regenerate_stream_request,
         _request_auth,
         _content_type,
         _headers,
@@ -878,8 +878,8 @@ class AIApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if ai_ai_regenerate_stream_request is not None:
-            _body_params = ai_ai_regenerate_stream_request
+        if ai_regenerate_stream_request is not None:
+            _body_params = ai_regenerate_stream_request
 
 
         # set the HTTP header `Accept`
@@ -933,9 +933,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send(
+    def ai_send(
         self,
-        ai_ai_send_request: AiAiSendRequest,
+        ai_send_request: AiSendRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -951,10 +951,10 @@ class AIApi:
     ) -> AiThreadMessageLike:
         """Run an AI action
 
-        Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
+        Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. `actionType` has to be a known action and `userMessage` has to carry text or an attachment, or the call answers 400 before anything runs. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
 
-        :param ai_ai_send_request: (required)
-        :type ai_ai_send_request: AiAiSendRequest
+        :param ai_send_request: (required)
+        :type ai_send_request: AiSendRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -977,8 +977,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_serialize(
-            ai_ai_send_request=ai_ai_send_request,
+        _param = self._ai_send_serialize(
+            ai_send_request=ai_send_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -987,6 +987,7 @@ class AIApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThreadMessageLike",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1005,9 +1006,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_with_http_info(
+    def ai_send_with_http_info(
         self,
-        ai_ai_send_request: AiAiSendRequest,
+        ai_send_request: AiSendRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1023,10 +1024,10 @@ class AIApi:
     ) -> ApiResponse[AiThreadMessageLike]:
         """Run an AI action
 
-        Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
+        Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. `actionType` has to be a known action and `userMessage` has to carry text or an attachment, or the call answers 400 before anything runs. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
 
-        :param ai_ai_send_request: (required)
-        :type ai_ai_send_request: AiAiSendRequest
+        :param ai_send_request: (required)
+        :type ai_send_request: AiSendRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1049,8 +1050,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_serialize(
-            ai_ai_send_request=ai_ai_send_request,
+        _param = self._ai_send_serialize(
+            ai_send_request=ai_send_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1059,6 +1060,7 @@ class AIApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThreadMessageLike",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1077,9 +1079,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_without_preload_content(
+    def ai_send_without_preload_content(
         self,
-        ai_ai_send_request: AiAiSendRequest,
+        ai_send_request: AiSendRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1095,10 +1097,10 @@ class AIApi:
     ) -> RESTResponseType:
         """Run an AI action
 
-        Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
+        Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. `actionType` has to be a known action and `userMessage` has to carry text or an attachment, or the call answers 400 before anything runs. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
 
-        :param ai_ai_send_request: (required)
-        :type ai_ai_send_request: AiAiSendRequest
+        :param ai_send_request: (required)
+        :type ai_send_request: AiSendRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1121,8 +1123,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_serialize(
-            ai_ai_send_request=ai_ai_send_request,
+        _param = self._ai_send_serialize(
+            ai_send_request=ai_send_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1131,6 +1133,7 @@ class AIApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThreadMessageLike",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1144,9 +1147,9 @@ class AIApi:
         return response_data.response
 
 
-    def _ai_ai_send_serialize(
+    def _ai_send_serialize(
         self,
-        ai_ai_send_request,
+        ai_send_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1172,8 +1175,8 @@ class AIApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if ai_ai_send_request is not None:
-            _body_params = ai_ai_send_request
+        if ai_send_request is not None:
+            _body_params = ai_send_request
 
 
         # set the HTTP header `Accept`
@@ -1226,9 +1229,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_custom(
+    def ai_send_custom(
         self,
-        ai_ai_send_custom_request: AiAiSendCustomRequest,
+        ai_send_custom_request: AiSendCustomRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1244,10 +1247,10 @@ class AIApi:
     ) -> AiThreadMessageLike:
         """Send custom
 
-        Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. The shape of the answer depends on the body rather than on the route: with `isStream` set it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal's own action configuration instead of from the caller.
+        Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. `systemPrompt` is required and `userMessage` has to carry text or an attachment, or the call answers 400 before anything runs. The shape of the answer depends on the body rather than on the route: with `isStream: true` it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both; `isStream` has to be a real boolean when sent, a string is refused. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal's own action configuration instead of from the caller.
 
-        :param ai_ai_send_custom_request: (required)
-        :type ai_ai_send_custom_request: AiAiSendCustomRequest
+        :param ai_send_custom_request: (required)
+        :type ai_send_custom_request: AiSendCustomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1270,8 +1273,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_custom_serialize(
-            ai_ai_send_custom_request=ai_ai_send_custom_request,
+        _param = self._ai_send_custom_serialize(
+            ai_send_custom_request=ai_send_custom_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1280,6 +1283,7 @@ class AIApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThreadMessageLike",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1298,9 +1302,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_custom_with_http_info(
+    def ai_send_custom_with_http_info(
         self,
-        ai_ai_send_custom_request: AiAiSendCustomRequest,
+        ai_send_custom_request: AiSendCustomRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1316,10 +1320,10 @@ class AIApi:
     ) -> ApiResponse[AiThreadMessageLike]:
         """Send custom
 
-        Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. The shape of the answer depends on the body rather than on the route: with `isStream` set it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal's own action configuration instead of from the caller.
+        Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. `systemPrompt` is required and `userMessage` has to carry text or an attachment, or the call answers 400 before anything runs. The shape of the answer depends on the body rather than on the route: with `isStream: true` it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both; `isStream` has to be a real boolean when sent, a string is refused. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal's own action configuration instead of from the caller.
 
-        :param ai_ai_send_custom_request: (required)
-        :type ai_ai_send_custom_request: AiAiSendCustomRequest
+        :param ai_send_custom_request: (required)
+        :type ai_send_custom_request: AiSendCustomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1342,8 +1346,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_custom_serialize(
-            ai_ai_send_custom_request=ai_ai_send_custom_request,
+        _param = self._ai_send_custom_serialize(
+            ai_send_custom_request=ai_send_custom_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1352,6 +1356,7 @@ class AIApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThreadMessageLike",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1370,9 +1375,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_custom_without_preload_content(
+    def ai_send_custom_without_preload_content(
         self,
-        ai_ai_send_custom_request: AiAiSendCustomRequest,
+        ai_send_custom_request: AiSendCustomRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1388,10 +1393,10 @@ class AIApi:
     ) -> RESTResponseType:
         """Send custom
 
-        Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. The shape of the answer depends on the body rather than on the route: with `isStream` set it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal's own action configuration instead of from the caller.
+        Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. `systemPrompt` is required and `userMessage` has to carry text or an attachment, or the call answers 400 before anything runs. The shape of the answer depends on the body rather than on the route: with `isStream: true` it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both; `isStream` has to be a real boolean when sent, a string is refused. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal's own action configuration instead of from the caller.
 
-        :param ai_ai_send_custom_request: (required)
-        :type ai_ai_send_custom_request: AiAiSendCustomRequest
+        :param ai_send_custom_request: (required)
+        :type ai_send_custom_request: AiSendCustomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1414,8 +1419,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_custom_serialize(
-            ai_ai_send_custom_request=ai_ai_send_custom_request,
+        _param = self._ai_send_custom_serialize(
+            ai_send_custom_request=ai_send_custom_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1424,6 +1429,7 @@ class AIApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiThreadMessageLike",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1437,9 +1443,9 @@ class AIApi:
         return response_data.response
 
 
-    def _ai_ai_send_custom_serialize(
+    def _ai_send_custom_serialize(
         self,
-        ai_ai_send_custom_request,
+        ai_send_custom_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1465,8 +1471,8 @@ class AIApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if ai_ai_send_custom_request is not None:
-            _body_params = ai_ai_send_custom_request
+        if ai_send_custom_request is not None:
+            _body_params = ai_send_custom_request
 
 
         # set the HTTP header `Accept`
@@ -1519,9 +1525,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_with_stream(
+    def ai_send_with_stream(
         self,
-        ai_ai_send_stream_body: AiAiSendStreamBody,
+        ai_send_stream_body: AiSendStreamBody,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1539,8 +1545,8 @@ class AIApi:
 
         Runs one chat round and streams it back as newline-delimited `ChatEvent` objects. Omitting `threadId` opens a new thread, which requires that `entityId` names a room the caller can open and that a profile resolves for it; the user message and the reply are persisted either way, and a new thread also gets a generated title. The model is settled in a fixed order - an agent's assignment in scope overrides everything, then the explicit `profileId`, then the one stored on the thread, then the `Chat` assignment - and the effective profile is checked before the stream opens, so an unknown one fails with 400 rather than as an error buried in a 200. A tool call pauses the round and ends the stream; resume it with `POST api/2.0/ai/ai/approve-tool-call` or `POST api/2.0/ai/ai/deny-tool-call`.
 
-        :param ai_ai_send_stream_body: (required)
-        :type ai_ai_send_stream_body: AiAiSendStreamBody
+        :param ai_send_stream_body: (required)
+        :type ai_send_stream_body: AiSendStreamBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1563,8 +1569,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_with_stream_serialize(
-            ai_ai_send_stream_body=ai_ai_send_stream_body,
+        _param = self._ai_send_with_stream_serialize(
+            ai_send_stream_body=ai_send_stream_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1594,9 +1600,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_with_stream_with_http_info(
+    def ai_send_with_stream_with_http_info(
         self,
-        ai_ai_send_stream_body: AiAiSendStreamBody,
+        ai_send_stream_body: AiSendStreamBody,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1614,8 +1620,8 @@ class AIApi:
 
         Runs one chat round and streams it back as newline-delimited `ChatEvent` objects. Omitting `threadId` opens a new thread, which requires that `entityId` names a room the caller can open and that a profile resolves for it; the user message and the reply are persisted either way, and a new thread also gets a generated title. The model is settled in a fixed order - an agent's assignment in scope overrides everything, then the explicit `profileId`, then the one stored on the thread, then the `Chat` assignment - and the effective profile is checked before the stream opens, so an unknown one fails with 400 rather than as an error buried in a 200. A tool call pauses the round and ends the stream; resume it with `POST api/2.0/ai/ai/approve-tool-call` or `POST api/2.0/ai/ai/deny-tool-call`.
 
-        :param ai_ai_send_stream_body: (required)
-        :type ai_ai_send_stream_body: AiAiSendStreamBody
+        :param ai_send_stream_body: (required)
+        :type ai_send_stream_body: AiSendStreamBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1638,8 +1644,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_with_stream_serialize(
-            ai_ai_send_stream_body=ai_ai_send_stream_body,
+        _param = self._ai_send_with_stream_serialize(
+            ai_send_stream_body=ai_send_stream_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1669,9 +1675,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_with_stream_without_preload_content(
+    def ai_send_with_stream_without_preload_content(
         self,
-        ai_ai_send_stream_body: AiAiSendStreamBody,
+        ai_send_stream_body: AiSendStreamBody,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1689,8 +1695,8 @@ class AIApi:
 
         Runs one chat round and streams it back as newline-delimited `ChatEvent` objects. Omitting `threadId` opens a new thread, which requires that `entityId` names a room the caller can open and that a profile resolves for it; the user message and the reply are persisted either way, and a new thread also gets a generated title. The model is settled in a fixed order - an agent's assignment in scope overrides everything, then the explicit `profileId`, then the one stored on the thread, then the `Chat` assignment - and the effective profile is checked before the stream opens, so an unknown one fails with 400 rather than as an error buried in a 200. A tool call pauses the round and ends the stream; resume it with `POST api/2.0/ai/ai/approve-tool-call` or `POST api/2.0/ai/ai/deny-tool-call`.
 
-        :param ai_ai_send_stream_body: (required)
-        :type ai_ai_send_stream_body: AiAiSendStreamBody
+        :param ai_send_stream_body: (required)
+        :type ai_send_stream_body: AiSendStreamBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1713,8 +1719,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_with_stream_serialize(
-            ai_ai_send_stream_body=ai_ai_send_stream_body,
+        _param = self._ai_send_with_stream_serialize(
+            ai_send_stream_body=ai_send_stream_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1739,9 +1745,9 @@ class AIApi:
         return response_data.response
 
 
-    def _ai_ai_send_with_stream_serialize(
+    def _ai_send_with_stream_serialize(
         self,
-        ai_ai_send_stream_body,
+        ai_send_stream_body,
         _request_auth,
         _content_type,
         _headers,
@@ -1767,8 +1773,8 @@ class AIApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if ai_ai_send_stream_body is not None:
-            _body_params = ai_ai_send_stream_body
+        if ai_send_stream_body is not None:
+            _body_params = ai_send_stream_body
 
 
         # set the HTTP header `Accept`
@@ -1822,9 +1828,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_with_stream_open_ai(
+    def ai_send_with_stream_open_ai(
         self,
-        ai_ai_send_stream_body: AiAiSendStreamBody,
+        ai_send_stream_body: AiSendStreamBody,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1842,8 +1848,8 @@ class AIApi:
 
         The same chat round as `send-with-stream`, re-encoded as a server-sent-events stream of OpenAI `chat.completion.chunk` objects terminated by a `[DONE]` sentinel. Thread handling, persistence, title generation and the profile pre-flight are identical, and a tool call ends the stream with `finish_reason: tool_calls` instead of a pause event - resume it through the same approve and deny operations. Unlike `send-with-stream` it does not reject an empty user message and does not enforce the per-kind attachment cap, so validate both before calling. Choose this route only for a client that already speaks the OpenAI wire format; `POST api/2.0/ai/ai/send-with-stream` is the native one.
 
-        :param ai_ai_send_stream_body: (required)
-        :type ai_ai_send_stream_body: AiAiSendStreamBody
+        :param ai_send_stream_body: (required)
+        :type ai_send_stream_body: AiSendStreamBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1866,8 +1872,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_with_stream_open_ai_serialize(
-            ai_ai_send_stream_body=ai_ai_send_stream_body,
+        _param = self._ai_send_with_stream_open_ai_serialize(
+            ai_send_stream_body=ai_send_stream_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1896,9 +1902,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_with_stream_open_ai_with_http_info(
+    def ai_send_with_stream_open_ai_with_http_info(
         self,
-        ai_ai_send_stream_body: AiAiSendStreamBody,
+        ai_send_stream_body: AiSendStreamBody,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1916,8 +1922,8 @@ class AIApi:
 
         The same chat round as `send-with-stream`, re-encoded as a server-sent-events stream of OpenAI `chat.completion.chunk` objects terminated by a `[DONE]` sentinel. Thread handling, persistence, title generation and the profile pre-flight are identical, and a tool call ends the stream with `finish_reason: tool_calls` instead of a pause event - resume it through the same approve and deny operations. Unlike `send-with-stream` it does not reject an empty user message and does not enforce the per-kind attachment cap, so validate both before calling. Choose this route only for a client that already speaks the OpenAI wire format; `POST api/2.0/ai/ai/send-with-stream` is the native one.
 
-        :param ai_ai_send_stream_body: (required)
-        :type ai_ai_send_stream_body: AiAiSendStreamBody
+        :param ai_send_stream_body: (required)
+        :type ai_send_stream_body: AiSendStreamBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1940,8 +1946,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_with_stream_open_ai_serialize(
-            ai_ai_send_stream_body=ai_ai_send_stream_body,
+        _param = self._ai_send_with_stream_open_ai_serialize(
+            ai_send_stream_body=ai_send_stream_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1970,9 +1976,9 @@ class AIApi:
 
 
     @validate_call
-    def ai_ai_send_with_stream_open_ai_without_preload_content(
+    def ai_send_with_stream_open_ai_without_preload_content(
         self,
-        ai_ai_send_stream_body: AiAiSendStreamBody,
+        ai_send_stream_body: AiSendStreamBody,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1990,8 +1996,8 @@ class AIApi:
 
         The same chat round as `send-with-stream`, re-encoded as a server-sent-events stream of OpenAI `chat.completion.chunk` objects terminated by a `[DONE]` sentinel. Thread handling, persistence, title generation and the profile pre-flight are identical, and a tool call ends the stream with `finish_reason: tool_calls` instead of a pause event - resume it through the same approve and deny operations. Unlike `send-with-stream` it does not reject an empty user message and does not enforce the per-kind attachment cap, so validate both before calling. Choose this route only for a client that already speaks the OpenAI wire format; `POST api/2.0/ai/ai/send-with-stream` is the native one.
 
-        :param ai_ai_send_stream_body: (required)
-        :type ai_ai_send_stream_body: AiAiSendStreamBody
+        :param ai_send_stream_body: (required)
+        :type ai_send_stream_body: AiSendStreamBody
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2014,8 +2020,8 @@ class AIApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_ai_send_with_stream_open_ai_serialize(
-            ai_ai_send_stream_body=ai_ai_send_stream_body,
+        _param = self._ai_send_with_stream_open_ai_serialize(
+            ai_send_stream_body=ai_send_stream_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2039,9 +2045,9 @@ class AIApi:
         return response_data.response
 
 
-    def _ai_ai_send_with_stream_open_ai_serialize(
+    def _ai_send_with_stream_open_ai_serialize(
         self,
-        ai_ai_send_stream_body,
+        ai_send_stream_body,
         _request_auth,
         _content_type,
         _headers,
@@ -2067,8 +2073,8 @@ class AIApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if ai_ai_send_stream_body is not None:
-            _body_params = ai_ai_send_stream_body
+        if ai_send_stream_body is not None:
+            _body_params = ai_send_stream_body
 
 
         # set the HTTP header `Accept`

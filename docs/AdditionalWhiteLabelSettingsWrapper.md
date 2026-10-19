@@ -1,11 +1,15 @@
 # AdditionalWhiteLabelSettingsWrapper
-The additional white label settings wrapper.
+The successful API response containing the AdditionalWhiteLabelSettingsDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**AdditionalWhiteLabelSettings**](AdditionalWhiteLabelSettings.md) | The additional white label settings. | [optional] 
+**response** | [**AdditionalWhiteLabelSettingsDto**](AdditionalWhiteLabelSettingsDto.md) | The AdditionalWhiteLabelSettingsDto object returned by the operation. | [optional] 
+**count** | **int** | The total number of items in the response | [optional] 
+**links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
+**status** | **int** | HTTP status code of the response | [optional] 
+**status_code** | **int** | HTTP status code of the response (duplicate of status) | [optional] 
 
 ## Example
 

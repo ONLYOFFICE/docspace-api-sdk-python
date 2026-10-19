@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -31,10 +31,20 @@ class UpdateApiKeyRequest(BaseModel):
     """
     The request parameters for updating an existing API key.
     """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=30)]] = Field(default=None, description="The new label of the key, up to 30 characters. Omit it to keep the current name.", json_schema_extra={"examples": ["Updated API Key"]})
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=30)]] = Field(default=None, description="The new label of the key, up to 30 characters, neither empty nor made of whitespace only. Omit it to keep the  current name.", json_schema_extra={"examples": ["Updated API Key"]})
     permissions: Optional[List[StrictStr]] = Field(default=None, description="The scopes that replace the current ones. Every value has to come from `GET api/2.0/keys/permissions`, an  unknown value or an empty array is rejected, and omitting the field keeps the current scopes.", json_schema_extra={"examples": [["rooms:read", "files:write"]]})
     is_active: Optional[StrictBool] = Field(default=None, description="Whether the key may authenticate requests. Set it to false to stop the key without deleting it and to true to  let it work again; omit it to keep the current state.", alias="isActive", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["name", "permissions", "isActive"]
+
+    @field_validator('name')
+    def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"[\s\S]*\S[\s\S]*", value):
+            raise ValueError(r"must validate the regular expression /[\s\S]*\S[\s\S]*/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

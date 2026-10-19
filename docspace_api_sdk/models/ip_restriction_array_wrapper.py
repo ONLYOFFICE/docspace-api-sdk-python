@@ -24,15 +24,15 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.get_portal_prices200_response_links_inner import GetPortalPrices200ResponseLinksInner
-from docspace_api_sdk.models.ip_restriction import IPRestriction
+from docspace_api_sdk.models.ip_restriction_dto import IpRestrictionDto
 from typing import Optional, Set
 from typing_extensions import Self
 
-class IPRestrictionArrayWrapper(BaseModel):
+class IpRestrictionArrayWrapper(BaseModel):
     """
-    The successful API response containing the list of IPRestriction objects.
+    The successful API response containing the list of IpRestrictionDto objects.
     """ # noqa: E501
-    response: Optional[List[IPRestriction]] = Field(default=None, description="The list of IPRestriction objects returned by the operation.")
+    response: Optional[List[IpRestrictionDto]] = Field(default=None, description="The list of IpRestrictionDto objects returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")
@@ -57,7 +57,7 @@ class IPRestrictionArrayWrapper(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of IPRestrictionArrayWrapper from a JSON string"""
+        """Create an instance of IpRestrictionArrayWrapper from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -96,7 +96,7 @@ class IPRestrictionArrayWrapper(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of IPRestrictionArrayWrapper from a dict"""
+        """Create an instance of IpRestrictionArrayWrapper from a dict"""
         if obj is None:
             return None
 
@@ -105,7 +105,7 @@ class IPRestrictionArrayWrapper(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "response": [IPRestriction.from_dict(_item) for _item in obj["response"]] if obj.get("response") is not None else None,
+            "response": [IpRestrictionDto.from_dict(_item) for _item in obj["response"]] if obj.get("response") is not None else None,
             "count": obj.get("count"),
             "links": [GetPortalPrices200ResponseLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
             "status": obj.get("status"),

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
-**error** | [**AiTErrorData**](AiTErrorData.md) |  | 
+**error** | [**AiErrorData**](AiErrorData.md) |  | 
 
 ## Example
 

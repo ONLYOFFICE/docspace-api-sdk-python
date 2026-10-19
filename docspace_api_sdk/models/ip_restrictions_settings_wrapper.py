@@ -24,15 +24,15 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.get_portal_prices200_response_links_inner import GetPortalPrices200ResponseLinksInner
-from docspace_api_sdk.models.ip_restrictions_settings import IPRestrictionsSettings
+from docspace_api_sdk.models.ip_restrictions_settings_dto import IpRestrictionsSettingsDto
 from typing import Optional, Set
 from typing_extensions import Self
 
-class IPRestrictionsSettingsWrapper(BaseModel):
+class IpRestrictionsSettingsWrapper(BaseModel):
     """
-    The successful API response containing the IPRestrictionsSettings object.
+    The successful API response containing the IpRestrictionsSettingsDto object.
     """ # noqa: E501
-    response: Optional[IPRestrictionsSettings] = Field(default=None, description="The IPRestrictionsSettings object returned by the operation.")
+    response: Optional[IpRestrictionsSettingsDto] = Field(default=None, description="The IpRestrictionsSettingsDto object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")
@@ -57,7 +57,7 @@ class IPRestrictionsSettingsWrapper(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of IPRestrictionsSettingsWrapper from a JSON string"""
+        """Create an instance of IpRestrictionsSettingsWrapper from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -92,7 +92,7 @@ class IPRestrictionsSettingsWrapper(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of IPRestrictionsSettingsWrapper from a dict"""
+        """Create an instance of IpRestrictionsSettingsWrapper from a dict"""
         if obj is None:
             return None
 
@@ -101,7 +101,7 @@ class IPRestrictionsSettingsWrapper(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "response": IPRestrictionsSettings.from_dict(obj["response"]) if obj.get("response") is not None else None,
+            "response": IpRestrictionsSettingsDto.from_dict(obj["response"]) if obj.get("response") is not None else None,
             "count": obj.get("count"),
             "links": [GetPortalPrices200ResponseLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
             "status": obj.get("status"),

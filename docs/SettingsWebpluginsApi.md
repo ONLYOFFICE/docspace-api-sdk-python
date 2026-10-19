@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete_web_plugin**](#delete_web_plugin) | **DELETE** /api/2.0/settings/webplugins/{name} | Delete a web plugin
 [**get_web_plugin**](#get_web_plugin) | **GET** /api/2.0/settings/webplugins/{name} | Get a web plugin by name
 [**get_web_plugins**](#get_web_plugins) | **GET** /api/2.0/settings/webplugins | Get web plugins
+[**refresh_web_plugin**](#refresh_web_plugin) | **PUT** /api/2.0/settings/webplugins/{name}/refresh | Refresh a web plugin
 [**update_web_plugin**](#update_web_plugin) | **PUT** /api/2.0/settings/webplugins/{name} | Update a web plugin
 
 
@@ -93,8 +94,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The installed web plugin, enabled, with the `url` its script is served from |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The uploaded package is missing, of the wrong type, too large, or its manifest is rejected |  -  |
-**403** | Web plugins or plugin uploads are switched off for the installation, or `system` was requested outside a standalone installation |  -  |
+**400** | The uploaded package is missing, more than one file was sent, the package is of the wrong type, empty or too large, the archive or its manifest is rejected, or the portal already holds the maximum number of plugins |  -  |
+**403** | The caller has no portal-settings right, the request is not a form, web plugins or plugin uploads are switched off for the installation, `system` was requested outside a standalone installation, or the domains the plugin declares would push the Content Security Policy header over its size limit |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -181,7 +182,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The web plugin and the files of its package are removed from the portal |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | Web plugins or plugin deletion are switched off, the caller may not edit the portal settings, or the plugin is installation-wide outside a standalone installation |  -  |
+**403** | Web plugins or plugin deletion are switched off, the caller has no portal-settings right, or the plugin is installation-wide outside a standalone installation |  -  |
+**404** | No web plugin with this manifest name is available in the portal, or the files of its package are missing from storage |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -272,6 +274,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The requested web plugin with the state the portal stored for it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | Web plugins are switched off for the installation |  -  |
+**404** | No web plugin with this manifest name is available in the portal |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -371,8 +374,100 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **refresh_web_plugin**
+> WebPluginWrapper refresh_web_plugin(name)
+
+Picks up a web plugin whose files were replaced in storage without an upload, for example a new version of an
+installation-wide plugin put in place during a deployment. The `name` is the manifest name published by
+`GET api/2.0/settings/webplugins`, matched without regard to case. Editing the portal settings is required, so
+a portal owner or administrator, and the installation has to have web plugins enabled in its configuration.
+The server compares the version of the plugin it serves with the `version` of the manifest in storage and,
+only when they differ or the plugin appeared in or vanished from storage, re-reads the plugin list on every
+server: for all portals when the plugin is installation-wide, for this portal alone otherwise, and notifies
+the connected clients of this portal. The call is idempotent: with matching versions nothing changes, so a
+repeat is safe. The response is the plugin as served after the check. The stored state, the settings and the
+Content Security Policy of the portal are left as they are. To install a new version use
+`POST api/2.0/settings/webplugins` instead.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. | 
+
+### Return type
+
+[**WebPluginWrapper**](WebPluginWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.web_plugin_wrapper import WebPluginWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.WebpluginsApi(api_client)
+    name = 'example-plugin' # str | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.
+
+    try:
+        # Refresh a web plugin
+        api_response = api_instance.refresh_web_plugin(name)
+        print("The response of WebpluginsApi->refresh_web_plugin:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WebpluginsApi->refresh_web_plugin: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The web plugin as served after the version check |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right, or web plugins are switched off for the installation |  -  |
+**404** | No web plugin with this manifest name is available in the portal after the check |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**400** | Bad Request. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_web_plugin**
-> update_web_plugin(name, web_plugin_requests)
+> update_web_plugin(name, web_plugin_request)
 
 Switches a web plugin of the current portal on or off and stores the settings string the portal keeps for it.
 The plugin has to be installed already, so upload its package with `POST api/2.0/settings/webplugins` first,
@@ -394,7 +489,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **str**| The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404. | 
- **web_plugin_requests** | [**WebPluginRequests**](WebPluginRequests.md)| The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time. | 
+ **web_plugin_request** | [**WebPluginRequest**](WebPluginRequest.md)| The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time. | 
 
 ### Return type
 
@@ -409,7 +504,7 @@ void (empty response body)
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.web_plugin_requests import WebPluginRequests
+from docspace_api_sdk.models.web_plugin_request import WebPluginRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -431,11 +526,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebpluginsApi(api_client)
     name = 'example-plugin' # str | The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404.
-    web_plugin_requests = docspace_api_sdk.WebPluginRequests() # WebPluginRequests | The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
+    web_plugin_request = docspace_api_sdk.WebPluginRequest() # WebPluginRequest | The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
 
     try:
         # Update a web plugin
-        api_instance.update_web_plugin(name, web_plugin_requests)
+        api_instance.update_web_plugin(name, web_plugin_request)
     except Exception as e:
         print("Exception when calling WebpluginsApi->update_web_plugin: %s\n" % e)
 ```
@@ -452,11 +547,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The state and the settings of the web plugin are saved for the portal |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | Web plugins are switched off for the installation, or the caller may not edit the portal settings |  -  |
+**400** | The request body cannot be read or has no `settings`, or `settings` is longer than 255 characters |  -  |
+**403** | The caller has no portal-settings right, web plugins are switched off for the installation, or switching the plugin on would push the Content Security Policy header over its size limit |  -  |
+**404** | No web plugin with this manifest name is available in the portal |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

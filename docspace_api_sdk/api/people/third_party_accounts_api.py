@@ -445,9 +445,9 @@ class ThirdPartyAccountsApi:
             '200': None,
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -520,9 +520,9 @@ class ThirdPartyAccountsApi:
             '200': None,
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -595,9 +595,9 @@ class ThirdPartyAccountsApi:
             '200': None,
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -749,10 +749,10 @@ class ThirdPartyAccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -823,10 +823,10 @@ class ThirdPartyAccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -897,10 +897,10 @@ class ThirdPartyAccountsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

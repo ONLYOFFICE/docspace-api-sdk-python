@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**add_members_to**](#add_members_to) | **PUT** /api/2.0/group/{id}/members | Add group members
 [**delete_group**](#delete_group) | **DELETE** /api/2.0/group/{id} | Delete a group
 [**get_group**](#get_group) | **GET** /api/2.0/group/{id} | Get a group
-[**get_group_by_user_id**](#get_group_by_user_id) | **GET** /api/2.0/group/user/{userid} | Get user groups
+[**get_group_by_user_id**](#get_group_by_user_id) | **GET** /api/2.0/group/user/{userId} | Get user groups
 [**get_groups**](#get_groups) | **GET** /api/2.0/group | Get groups
 [**move_members_to**](#move_members_to) | **PUT** /api/2.0/group/{fromId}/members/{toId} | Move group members
 [**remove_members_from**](#remove_members_from) | **DELETE** /api/2.0/group/{id}/members | Remove group members
@@ -97,7 +97,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The new group, with its members |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The group name is empty, or one of the listed accounts is a guest, is disabled or does not exist |  -  |
+**400** | The request body cannot be read or has no `groupName`, the group name is `null`, blank or longer than 128 characters, or one of the listed members or the manager is a guest, is disabled or does not exist |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -380,7 +380,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_group_by_user_id**
-> GroupSummaryArrayWrapper get_group_by_user_id(userid)
+> GroupSummaryArrayWrapper get_group_by_user_id(user_id)
 
 Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.
 The caller needs the permission to read groups.
@@ -396,7 +396,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **UUID**| The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. | 
+ **user_id** | **UUID**| The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. | 
 
 ### Return type
 
@@ -432,11 +432,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.GroupApi(api_client)
-    userid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
+    user_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
 
     try:
         # Get user groups
-        api_response = api_instance.get_group_by_user_id(userid)
+        api_response = api_instance.get_group_by_user_id(user_id)
         print("The response of GroupApi->get_group_by_user_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -477,7 +477,7 @@ Narrow the result with `filterValue` on the group name, with `userId` to keep on
 belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and
 `sortOrder`, and an unknown `sortBy` falls back to sorting by title.
 The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or
-`GET api/2.0/group/user/{userid}` to find the groups of a single account.
+`GET api/2.0/group/user/{userId}` to find the groups of a single account.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -558,11 +558,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The matching groups, with their summary information |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 **403** | No permissions to perform this action |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -838,12 +838,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The group with its new manager |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `userId` |  -  |
 **403** | No permissions to perform this action |  -  |
 **404** | No group has the specified ID, or no account has the specified userId |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -935,7 +935,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The group with the members it ends up with |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | None of the listed accounts can be a group member |  -  |
+**400** | The request body cannot be read or has no `members` list, or none of the listed accounts can be a group member |  -  |
 **403** | No permissions to perform this action |  -  |
 **404** | No group has the specified ID |  -  |
 **401** | Unauthorized |  -  |
@@ -1030,12 +1030,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The group as it is after the update |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, or `groupName` is longer than 128 characters |  -  |
 **403** | No permissions to perform this action |  -  |
 **404** | No group has the specified ID |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

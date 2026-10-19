@@ -112,6 +112,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The session and the parts received so far have been discarded |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The session was opened by another account |  -  |
+**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -202,11 +204,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Always true: the request was understood, which does not mean that anything was marked |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, or a third-party identifier refers to a storage account that is not connected |  -  |
 **403** | Marking favorites is refused for the caller |  -  |
+**404** | A third-party identifier names a storage type the portal does not know |  -  |
+**500** | An id is a number that is not a 32-bit integer, or a third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -293,10 +296,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The download operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | An item in the selection cannot be read by the caller, or another download of theirs is still running |  -  |
+**400** | The request body cannot be read, or an item of `fileConvertIds` has no `key` or `value` |  -  |
+**401** | The caller is not signed in and holds no external link |  -  |
+**403** | None of the listed items that exist can be read by the caller, or another download of theirs is still running |  -  |
+**404** | None of the listed items exists, counted separately for the portal's own items and for those on third-party accounts |  -  |
+**500** | An id is a number that is not a 32-bit integer |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -388,6 +393,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The conversion entry of the file, or an empty list when the portal has none |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller cannot read the file, or, with `start=true`, may not convert it |  -  |
+**404** | The file id is neither a number nor the id of a file in a known third-party storage |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -398,7 +405,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **check_move_or_copy_batch_items**
-> FileEntryBaseArrayWrapper check_move_or_copy_batch_items(in_dto=in_dto)
+> FileEntryBaseArrayWrapper check_move_or_copy_batch_items(return_single_operation=return_single_operation, folder_ids=folder_ids, file_ids=file_ids, dest_folder_id=dest_folder_id, conflict_resolve_type=conflict_resolve_type, delete_after=delete_after, content=content, to_fill_out=to_fill_out)
 
 Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that
 the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the
@@ -418,7 +425,14 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **in_dto** | [**BatchRequestDto**](.md)| The files and folders to move or copy, the folder they go to, and the way name clashes are settled. | [optional] 
+ **return_single_operation** | **bool**| Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] 
+ **folder_ids** | [**List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md)| The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. | [optional] 
+ **file_ids** | [**List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md)| The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. | [optional] 
+ **dest_folder_id** | [**CheckMoveOrCopyBatchItemsDestFolderIdParameter**](.md)| The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. | [optional] 
+ **conflict_resolve_type** | [**FileConflictResolveType**](.md)| What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | [optional] 
+ **delete_after** | **bool**| Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | [optional] 
+ **content** | **bool**| What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | [optional] 
+ **to_fill_out** | **bool**| Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. | [optional] 
 
 ### Return type
 
@@ -433,6 +447,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
+from docspace_api_sdk.models.check_move_or_copy_batch_items_folder_ids_parameter_inner import CheckMoveOrCopyBatchItemsFolderIdsParameterInner
 from docspace_api_sdk.models.file_entry_base_array_wrapper import FileEntryBaseArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -454,11 +469,18 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    in_dto = docspace_api_sdk.BatchRequestDto() # BatchRequestDto | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. (optional)
+    return_single_operation = false # bool | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional)
+    folder_ids = [docspace_api_sdk.CheckMoveOrCopyBatchItemsFolderIdsParameterInner()] # List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner] | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. (optional)
+    file_ids = [docspace_api_sdk.CheckMoveOrCopyBatchItemsFolderIdsParameterInner()] # List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner] | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. (optional)
+    dest_folder_id = docspace_api_sdk.CheckMoveOrCopyBatchItemsDestFolderIdParameter() # CheckMoveOrCopyBatchItemsDestFolderIdParameter | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. (optional)
+    conflict_resolve_type = docspace_api_sdk.FileConflictResolveType() # FileConflictResolveType | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. (optional)
+    delete_after = false # bool | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. (optional)
+    content = false # bool | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. (optional)
+    to_fill_out = false # bool | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. (optional)
 
     try:
         # Check move or copy conflicts
-        api_response = api_instance.check_move_or_copy_batch_items(in_dto=in_dto)
+        api_response = api_instance.check_move_or_copy_batch_items(return_single_operation=return_single_operation, folder_ids=folder_ids, file_ids=file_ids, dest_folder_id=dest_folder_id, conflict_resolve_type=conflict_resolve_type, delete_after=delete_after, content=content, to_fill_out=to_fill_out)
         print("The response of OperationsApi->check_move_or_copy_batch_items:\n")
         pprint(api_response)
     except Exception as e:
@@ -477,18 +499,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The listed items that already have a same-named entry in the destination folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot create items in the destination folder |  -  |
+**400** | `destFolderId` is not given |  -  |
+**403** | The caller cannot create items in the destination folder, or the destination is a listed folder or lies inside one |  -  |
+**404** | The destination folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **check_move_or_copy_dest_folder**
-> CheckDestFolderWrapper check_move_or_copy_dest_folder(in_dto=in_dto)
+> CheckDestFolderWrapper check_move_or_copy_dest_folder(return_single_operation=return_single_operation, folder_ids=folder_ids, file_ids=file_ids, dest_folder_id=dest_folder_id, conflict_resolve_type=conflict_resolve_type, delete_after=delete_after, content=content, to_fill_out=to_fill_out)
 
 Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only
 `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,
@@ -508,7 +531,14 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **in_dto** | [**BatchRequestDto**](.md)| The files and folders to move or copy, the folder they go to, and the way name clashes are settled. | [optional] 
+ **return_single_operation** | **bool**| Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] 
+ **folder_ids** | [**List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md)| The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. | [optional] 
+ **file_ids** | [**List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md)| The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. | [optional] 
+ **dest_folder_id** | [**CheckMoveOrCopyBatchItemsDestFolderIdParameter**](.md)| The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. | [optional] 
+ **conflict_resolve_type** | [**FileConflictResolveType**](.md)| What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | [optional] 
+ **delete_after** | **bool**| Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | [optional] 
+ **content** | **bool**| What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | [optional] 
+ **to_fill_out** | **bool**| Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. | [optional] 
 
 ### Return type
 
@@ -524,6 +554,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.check_dest_folder_wrapper import CheckDestFolderWrapper
+from docspace_api_sdk.models.check_move_or_copy_batch_items_folder_ids_parameter_inner import CheckMoveOrCopyBatchItemsFolderIdsParameterInner
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -544,11 +575,18 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
-    in_dto = docspace_api_sdk.BatchRequestDto() # BatchRequestDto | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. (optional)
+    return_single_operation = false # bool | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional)
+    folder_ids = [docspace_api_sdk.CheckMoveOrCopyBatchItemsFolderIdsParameterInner()] # List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner] | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. (optional)
+    file_ids = [docspace_api_sdk.CheckMoveOrCopyBatchItemsFolderIdsParameterInner()] # List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner] | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. (optional)
+    dest_folder_id = docspace_api_sdk.CheckMoveOrCopyBatchItemsDestFolderIdParameter() # CheckMoveOrCopyBatchItemsDestFolderIdParameter | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. (optional)
+    conflict_resolve_type = docspace_api_sdk.FileConflictResolveType() # FileConflictResolveType | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. (optional)
+    delete_after = false # bool | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. (optional)
+    content = false # bool | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. (optional)
+    to_fill_out = false # bool | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. (optional)
 
     try:
         # Check the destination folder
-        api_response = api_instance.check_move_or_copy_dest_folder(in_dto=in_dto)
+        api_response = api_instance.check_move_or_copy_dest_folder(return_single_operation=return_single_operation, folder_ids=folder_ids, file_ids=file_ids, dest_folder_id=dest_folder_id, conflict_resolve_type=conflict_resolve_type, delete_after=delete_after, content=content, to_fill_out=to_fill_out)
         print("The response of OperationsApi->check_move_or_copy_dest_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -567,11 +605,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Whether the destination accepts all of the listed files, some of them or none, and which ones it accepts |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | `destFolderId` is not given |  -  |
 **403** | The caller cannot create items in the destination folder |  -  |
+**404** | The destination folder does not exist |  -  |
+**500** | A listed file is on a third-party account and the destination accepts it, or a listed file does not exist while the destination is a form-filling room |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -659,10 +698,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The move and copy operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot create items in the destination folder, or cannot read one of the listed items |  -  |
+**403** | The caller cannot create items in the destination folder or cannot read one of the listed items, the destination is a listed folder or lies inside one, the room or user quota would be exceeded, a file that is not a PDF form goes to a form-filling room, or a file to overwrite is locked or cannot be edited by the caller |  -  |
+**404** | The destination folder, a listed file or a listed folder other than the first one does not exist |  -  |
+**415** | A listed file has a format the portal does not accept for upload, or one a knowledge folder cannot index |  -  |
+**500** | The first listed folder does not exist, or an id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -670,7 +711,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_upload_session**
-> ChunkedUploadSessionResponseWrapperWrapper create_upload_session(folder_id, session_request)
+> ChunkedUploadSessionResultWrapper create_upload_session(folder_id, session_request)
 
 Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it
 without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in
@@ -696,11 +737,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChunkedUploadSessionResponseWrapperWrapper**](ChunkedUploadSessionResponseWrapperWrapper.md)
+[**ChunkedUploadSessionResultWrapper**](ChunkedUploadSessionResultWrapper.md)
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md).
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyChunkedUploadSessionResultWrapper**](ThirdPartyChunkedUploadSessionResultWrapper.md).
 
 ### Authorization
 
@@ -711,7 +752,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.chunked_upload_session_response_wrapper_wrapper import ChunkedUploadSessionResponseWrapperWrapper
+from docspace_api_sdk.models.chunked_upload_session_result_wrapper import ChunkedUploadSessionResultWrapper
 from docspace_api_sdk.models.session_request import SessionRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -757,18 +798,21 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created session, wrapped in the success envelope |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot add content to the target folder |  -  |
+**400** | The request body cannot be read or has no `fileName` |  -  |
+**402** | The declared `fileSize` exceeds the portal limit for chunked uploads or the size allowed in a knowledge folder |  -  |
+**403** | The caller cannot add content to the target folder, the folder is a section root, or a knowledge folder does not accept this format |  -  |
+**404** | No folder with the specified ID |  -  |
+**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_upload_session_in_folder**
-> ChunkedUploadSessionResponseResponseWrapper create_upload_session_in_folder(folder_id, session_request)
+> ChunkedUploadSessionWrapper create_upload_session_in_folder(folder_id, session_request)
 
 Opens a chunked upload session for a file in the folder named by the path and returns the session itself,
 which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its
@@ -795,11 +839,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
+[**ChunkedUploadSessionWrapper**](ChunkedUploadSessionWrapper.md)
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md).
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyChunkedUploadSessionWrapper**](ThirdPartyChunkedUploadSessionWrapper.md).
 
 ### Authorization
 
@@ -810,7 +854,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.chunked_upload_session_response_response_wrapper import ChunkedUploadSessionResponseResponseWrapper
+from docspace_api_sdk.models.chunked_upload_session_wrapper import ChunkedUploadSessionWrapper
 from docspace_api_sdk.models.session_request import SessionRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -856,10 +900,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created upload session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `fileName` |  -  |
+**402** | The declared `fileSize` exceeds the portal limit for chunked uploads or the size allowed in a knowledge folder |  -  |
+**403** | The caller cannot add content to the target folder, the folder is a section root, or a knowledge folder does not accept this format |  -  |
+**404** | No folder with the specified ID |  -  |
+**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -946,10 +994,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The delete operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller does not have the rights to delete one of the listed items |  -  |
+**403** | The caller does not have the rights to delete one of the listed items, one of them is locked by another user or open for editing, or a room is sent to Trash without `immediately` |  -  |
+**404** | A listed file or folder does not exist |  -  |
+**500** | An id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1038,10 +1087,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Always true: the marks named in the request are gone or were never there |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, or a third-party identifier refers to a storage account that is not connected |  -  |
+**404** | A third-party identifier names a storage type the portal does not know |  -  |
+**500** | An id is a number that is not a 32-bit integer, or a third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1129,10 +1179,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The delete operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `fileId` or `versions` |  -  |
+**403** | The caller cannot delete the file, the file is locked by another user, open for editing, in an archived room or in Trash, or `versions` includes the current version |  -  |
+**404** | The file does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1218,10 +1270,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The duplicate operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot create items in the folder that holds one of the listed items |  -  |
+**403** | The caller cannot create items in the folder that holds one of the listed items, or cannot copy that item |  -  |
+**404** | A listed file or folder does not exist |  -  |
+**415** | A listed file has a format the portal does not accept for upload |  -  |
+**500** | An id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1309,10 +1363,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The delete operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | `folderType` holds a value that is not a folder type |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1404,10 +1458,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The assembled file and the identifiers of the closed session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The parts received so far do not add up to the size the session was opened for |  -  |
+**402** | Storing the file would exceed a storage quota or size limit |  -  |
+**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
+**500** | A file that is not a PDF is stored in a form-filling room |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1417,8 +1473,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 > FileOperationArrayWrapper get_operation_statuses(id=id)
 
 Returns the background file operations of the caller that are still running or whose finished result has not
-been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and
-mark-as-read. This is the polling target for every operation in this section — an operation appears here as
+been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads, mark-as-read
+and builder runs. This is the polling target for every operation in this section — an operation appears here as
 soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a
 download, the address of the archive in `url`. A record is dropped once its finished state has been handed
 out, so a completed operation is reported once and an empty array means there is nothing left to report rather
@@ -1504,15 +1560,15 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_operation_statuses_by_type**
 > FileOperationArrayWrapper get_operation_statuses_by_type(operation_type, id=id)
 
-Returns the background file operations of the caller that are of one kind, named by the number in the route:
-`1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The
-answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation
-is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot
-be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read
-moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue
-of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a
-number outside the operation type is rejected as an invalid request. The call changes nothing and never shows
-another account's operations.
+Returns the background file operations of the caller that are of one kind, named by the number in the route: `1`
+for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read, `7` for a duplication and `8` for a
+document builder run. The answer carries the same records as `GET api/2.0/files/fileops`, with the same rule
+that a finished operation is reported once and then dropped, and `id` narrows it further to a single operation.
+Moves, kind `0`, cannot be read through this route: the address `api/2.0/files/fileops/move` belongs to another
+operation, so read moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind
+that has no queue of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty
+array, while a number outside the operation type is rejected as an invalid request. The call changes nothing and
+never shows another account's operations.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1583,9 +1639,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The operations of the caller that are of the requested kind |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | `operationType` is neither the number nor the name of an operation type |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1671,9 +1727,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The mark-as-read operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**500** | An id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1761,10 +1817,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The move and copy operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot create items in the destination folder, or cannot take one of the items out of its source |  -  |
+**403** | The caller cannot create items in the destination folder or cannot take one of the items out of its source, the destination is a listed folder or lies inside one, a folder or several files are moved into a form-filling room from outside it, the room or user quota would be exceeded, a file that is not a PDF form goes to a form-filling room, or a file to overwrite is locked or cannot be edited by the caller |  -  |
+**404** | The destination folder, a listed file or a listed folder other than the first one does not exist |  -  |
+**415** | A listed file has a format the portal does not accept for upload, or one a knowledge folder cannot index |  -  |
+**500** | The first listed folder does not exist, or an id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1956,7 +2014,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_file_comment**
-> StringWrapper update_file_comment(file_id, update_comment)
+> StringWrapper update_file_comment(file_id, update_comment_request)
 
 Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers
 with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the
@@ -1976,7 +2034,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **Union[int, str]**| The file whose version comment is replaced. | 
- **update_comment** | [**UpdateComment**](UpdateComment.md)| The version and the comment to store on it. | 
+ **update_comment_request** | [**UpdateCommentRequest**](UpdateCommentRequest.md)| The version and the comment to store on it. | 
 
 ### Return type
 
@@ -1996,7 +2054,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.models.update_comment import UpdateComment
+from docspace_api_sdk.models.update_comment_request import UpdateCommentRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -2018,11 +2076,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.OperationsApi(api_client)
     file_id = 1 # int | The file whose version comment is replaced.
-    update_comment = docspace_api_sdk.UpdateComment() # UpdateComment | The version and the comment to store on it.
+    update_comment_request = docspace_api_sdk.UpdateCommentRequest() # UpdateCommentRequest | The version and the comment to store on it.
 
     try:
         # Update a comment
-        api_response = api_instance.update_file_comment(file_id, update_comment)
+        api_response = api_instance.update_file_comment(file_id, update_comment_request)
         print("The response of OperationsApi->update_file_comment:\n")
         pprint(api_response)
     except Exception as e:
@@ -2041,17 +2099,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The comment as it was stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `version`, the version is below 1 or does not exist, or the comment is longer than 255 characters |  -  |
+**403** | The caller may not change the version history of the file, or the file is locked by somebody else |  -  |
+**404** | The file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_async_session**
-> ChunkedUploadSessionResponseResponseWrapper upload_async_session(folder_id, session_id, chunk_number=chunk_number, file=file)
+> ChunkedUploadSessionWrapper upload_async_session(folder_id, session_id, chunk_number=chunk_number, file=file)
 
 Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow
 uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the
@@ -2078,11 +2138,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
+[**ChunkedUploadSessionWrapper**](ChunkedUploadSessionWrapper.md)
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md).
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id: str` and the answer is [**ThirdPartyChunkedUploadSessionWrapper**](ThirdPartyChunkedUploadSessionWrapper.md).
 
 ### Authorization
 
@@ -2093,7 +2153,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.chunked_upload_session_response_response_wrapper import ChunkedUploadSessionResponseResponseWrapper
+from docspace_api_sdk.models.chunked_upload_session_wrapper import ChunkedUploadSessionWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -2140,9 +2200,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The session with its progress after the part was stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The part is larger than `chunkUploadSize`, or a session below that size would exceed a storage quota or size limit when storing the file |  -  |
+**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
+**500** | The request has no `File` part, or a session below `chunkUploadSize` stores a file that is not a PDF in a form-filling room |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -2236,9 +2298,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The progress of the session, or the stored file once the last part has arrived |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The part is larger than `chunkUploadSize`, or storing the file would exceed a storage quota or size limit |  -  |
+**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
+**500** | The request has no `File` part, or a file that is not a PDF is stored in a form-filling room |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

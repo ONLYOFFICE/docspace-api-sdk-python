@@ -52,7 +52,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the attachment to delete, as a bare JSON string.")],
+        ai_attachments_delete_request: Annotated[StrictStr, Field(description="The ID of the attachment to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -70,8 +70,8 @@ class AttachmentsApi:
 
         Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
 
-        :param body: The ID of the attachment to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_attachments_delete_request: The ID of the attachment to delete, as a bare JSON string. (required)
+        :type ai_attachments_delete_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -95,7 +95,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_delete_serialize(
-            body=body,
+            ai_attachments_delete_request=ai_attachments_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -124,7 +124,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete_with_http_info(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the attachment to delete, as a bare JSON string.")],
+        ai_attachments_delete_request: Annotated[StrictStr, Field(description="The ID of the attachment to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -142,8 +142,8 @@ class AttachmentsApi:
 
         Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
 
-        :param body: The ID of the attachment to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_attachments_delete_request: The ID of the attachment to delete, as a bare JSON string. (required)
+        :type ai_attachments_delete_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -167,7 +167,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_delete_serialize(
-            body=body,
+            ai_attachments_delete_request=ai_attachments_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -196,7 +196,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete_without_preload_content(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the attachment to delete, as a bare JSON string.")],
+        ai_attachments_delete_request: Annotated[StrictStr, Field(description="The ID of the attachment to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -214,8 +214,8 @@ class AttachmentsApi:
 
         Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
 
-        :param body: The ID of the attachment to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_attachments_delete_request: The ID of the attachment to delete, as a bare JSON string. (required)
+        :type ai_attachments_delete_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -239,7 +239,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_delete_serialize(
-            body=body,
+            ai_attachments_delete_request=ai_attachments_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -263,7 +263,7 @@ class AttachmentsApi:
 
     def _ai_attachments_delete_serialize(
         self,
-        body,
+        ai_attachments_delete_request,
         _request_auth,
         _content_type,
         _headers,
@@ -289,8 +289,8 @@ class AttachmentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_attachments_delete_request is not None:
+            _body_params = ai_attachments_delete_request
 
 
         # set the HTTP header `Accept`
@@ -345,7 +345,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete_many(
         self,
-        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to delete, as a bare JSON array of strings.")],
+        ai_attachments_delete_many_request: Annotated[List[StrictStr], Field(description="The IDs of the attachments to delete, as a bare JSON array of strings.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -363,8 +363,8 @@ class AttachmentsApi:
 
         Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
 
-        :param request_body: The IDs of the attachments to delete, as a bare JSON array of strings. (required)
-        :type request_body: List[str]
+        :param ai_attachments_delete_many_request: The IDs of the attachments to delete, as a bare JSON array of strings. (required)
+        :type ai_attachments_delete_many_request: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -388,7 +388,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_delete_many_serialize(
-            request_body=request_body,
+            ai_attachments_delete_many_request=ai_attachments_delete_many_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -417,7 +417,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete_many_with_http_info(
         self,
-        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to delete, as a bare JSON array of strings.")],
+        ai_attachments_delete_many_request: Annotated[List[StrictStr], Field(description="The IDs of the attachments to delete, as a bare JSON array of strings.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -435,8 +435,8 @@ class AttachmentsApi:
 
         Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
 
-        :param request_body: The IDs of the attachments to delete, as a bare JSON array of strings. (required)
-        :type request_body: List[str]
+        :param ai_attachments_delete_many_request: The IDs of the attachments to delete, as a bare JSON array of strings. (required)
+        :type ai_attachments_delete_many_request: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -460,7 +460,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_delete_many_serialize(
-            request_body=request_body,
+            ai_attachments_delete_many_request=ai_attachments_delete_many_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -489,7 +489,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_delete_many_without_preload_content(
         self,
-        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to delete, as a bare JSON array of strings.")],
+        ai_attachments_delete_many_request: Annotated[List[StrictStr], Field(description="The IDs of the attachments to delete, as a bare JSON array of strings.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -507,8 +507,8 @@ class AttachmentsApi:
 
         Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
 
-        :param request_body: The IDs of the attachments to delete, as a bare JSON array of strings. (required)
-        :type request_body: List[str]
+        :param ai_attachments_delete_many_request: The IDs of the attachments to delete, as a bare JSON array of strings. (required)
+        :type ai_attachments_delete_many_request: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -532,7 +532,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_delete_many_serialize(
-            request_body=request_body,
+            ai_attachments_delete_many_request=ai_attachments_delete_many_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -556,7 +556,7 @@ class AttachmentsApi:
 
     def _ai_attachments_delete_many_serialize(
         self,
-        request_body,
+        ai_attachments_delete_many_request,
         _request_auth,
         _content_type,
         _headers,
@@ -566,7 +566,7 @@ class AttachmentsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'request_body': '',
+            'AiAttachmentsDeleteManyRequest': '',
         }
 
         _path_params: Dict[str, str] = {}
@@ -583,8 +583,8 @@ class AttachmentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_attachments_delete_many_request is not None:
+            _body_params = ai_attachments_delete_many_request
 
 
         # set the HTTP header `Accept`
@@ -639,7 +639,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the attachment to read, as a bare JSON string.")],
+        ai_attachments_get_request: Annotated[StrictStr, Field(description="The ID of the attachment to read, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -657,8 +657,8 @@ class AttachmentsApi:
 
         Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
 
-        :param body: The ID of the attachment to read, as a bare JSON string. (required)
-        :type body: str
+        :param ai_attachments_get_request: The ID of the attachment to read, as a bare JSON string. (required)
+        :type ai_attachments_get_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -682,7 +682,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_get_serialize(
-            body=body,
+            ai_attachments_get_request=ai_attachments_get_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -712,7 +712,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_with_http_info(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the attachment to read, as a bare JSON string.")],
+        ai_attachments_get_request: Annotated[StrictStr, Field(description="The ID of the attachment to read, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -730,8 +730,8 @@ class AttachmentsApi:
 
         Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
 
-        :param body: The ID of the attachment to read, as a bare JSON string. (required)
-        :type body: str
+        :param ai_attachments_get_request: The ID of the attachment to read, as a bare JSON string. (required)
+        :type ai_attachments_get_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -755,7 +755,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_get_serialize(
-            body=body,
+            ai_attachments_get_request=ai_attachments_get_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -785,7 +785,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_without_preload_content(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the attachment to read, as a bare JSON string.")],
+        ai_attachments_get_request: Annotated[StrictStr, Field(description="The ID of the attachment to read, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -803,8 +803,8 @@ class AttachmentsApi:
 
         Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
 
-        :param body: The ID of the attachment to read, as a bare JSON string. (required)
-        :type body: str
+        :param ai_attachments_get_request: The ID of the attachment to read, as a bare JSON string. (required)
+        :type ai_attachments_get_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -828,7 +828,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_get_serialize(
-            body=body,
+            ai_attachments_get_request=ai_attachments_get_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -853,7 +853,7 @@ class AttachmentsApi:
 
     def _ai_attachments_get_serialize(
         self,
-        body,
+        ai_attachments_get_request,
         _request_auth,
         _content_type,
         _headers,
@@ -879,8 +879,8 @@ class AttachmentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_attachments_get_request is not None:
+            _body_params = ai_attachments_get_request
 
 
         # set the HTTP header `Accept`
@@ -935,7 +935,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_many(
         self,
-        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.")],
+        ai_attachments_get_many_request: Annotated[List[StrictStr], Field(description="The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -953,8 +953,8 @@ class AttachmentsApi:
 
         Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
 
-        :param request_body: The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. (required)
-        :type request_body: List[str]
+        :param ai_attachments_get_many_request: The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. (required)
+        :type ai_attachments_get_many_request: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -978,7 +978,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_get_many_serialize(
-            request_body=request_body,
+            ai_attachments_get_many_request=ai_attachments_get_many_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1008,7 +1008,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_many_with_http_info(
         self,
-        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.")],
+        ai_attachments_get_many_request: Annotated[List[StrictStr], Field(description="The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1026,8 +1026,8 @@ class AttachmentsApi:
 
         Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
 
-        :param request_body: The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. (required)
-        :type request_body: List[str]
+        :param ai_attachments_get_many_request: The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. (required)
+        :type ai_attachments_get_many_request: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1051,7 +1051,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_get_many_serialize(
-            request_body=request_body,
+            ai_attachments_get_many_request=ai_attachments_get_many_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1081,7 +1081,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_many_without_preload_content(
         self,
-        request_body: Annotated[List[StrictStr], Field(description="The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.")],
+        ai_attachments_get_many_request: Annotated[List[StrictStr], Field(description="The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1099,8 +1099,8 @@ class AttachmentsApi:
 
         Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
 
-        :param request_body: The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. (required)
-        :type request_body: List[str]
+        :param ai_attachments_get_many_request: The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. (required)
+        :type ai_attachments_get_many_request: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1124,7 +1124,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_get_many_serialize(
-            request_body=request_body,
+            ai_attachments_get_many_request=ai_attachments_get_many_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1149,7 +1149,7 @@ class AttachmentsApi:
 
     def _ai_attachments_get_many_serialize(
         self,
-        request_body,
+        ai_attachments_get_many_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1159,7 +1159,7 @@ class AttachmentsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'request_body': '',
+            'AiAttachmentsGetManyRequest': '',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1176,8 +1176,8 @@ class AttachmentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_attachments_get_many_request is not None:
+            _body_params = ai_attachments_get_many_request
 
 
         # set the HTTP header `Accept`
@@ -1232,7 +1232,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_suggested_questions(
         self,
-        request_body: Dict[str, Any],
+        ai_attachments_get_suggested_questions_request: Dict[str, Any],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1249,8 +1249,8 @@ class AttachmentsApi:
         """Get suggested questions
 
 
-        :param request_body: (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_attachments_get_suggested_questions_request: (required)
+        :type ai_attachments_get_suggested_questions_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1274,7 +1274,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_get_suggested_questions_serialize(
-            request_body=request_body,
+            ai_attachments_get_suggested_questions_request=ai_attachments_get_suggested_questions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1303,7 +1303,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_suggested_questions_with_http_info(
         self,
-        request_body: Dict[str, Any],
+        ai_attachments_get_suggested_questions_request: Dict[str, Any],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1320,8 +1320,8 @@ class AttachmentsApi:
         """Get suggested questions
 
 
-        :param request_body: (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_attachments_get_suggested_questions_request: (required)
+        :type ai_attachments_get_suggested_questions_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1345,7 +1345,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_get_suggested_questions_serialize(
-            request_body=request_body,
+            ai_attachments_get_suggested_questions_request=ai_attachments_get_suggested_questions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1374,7 +1374,7 @@ class AttachmentsApi:
     @validate_call
     def ai_attachments_get_suggested_questions_without_preload_content(
         self,
-        request_body: Dict[str, Any],
+        ai_attachments_get_suggested_questions_request: Dict[str, Any],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1391,8 +1391,8 @@ class AttachmentsApi:
         """Get suggested questions
 
 
-        :param request_body: (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_attachments_get_suggested_questions_request: (required)
+        :type ai_attachments_get_suggested_questions_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1416,7 +1416,7 @@ class AttachmentsApi:
         """ # noqa: E501
 
         _param = self._ai_attachments_get_suggested_questions_serialize(
-            request_body=request_body,
+            ai_attachments_get_suggested_questions_request=ai_attachments_get_suggested_questions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1440,7 +1440,7 @@ class AttachmentsApi:
 
     def _ai_attachments_get_suggested_questions_serialize(
         self,
-        request_body,
+        ai_attachments_get_suggested_questions_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1466,8 +1466,8 @@ class AttachmentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_attachments_get_suggested_questions_request is not None:
+            _body_params = ai_attachments_get_suggested_questions_request
 
 
         # set the HTTP header `Accept`

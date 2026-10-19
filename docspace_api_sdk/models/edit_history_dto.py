@@ -24,8 +24,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.api_date_time import ApiDateTime
-from docspace_api_sdk.models.edit_history_author import EditHistoryAuthor
-from docspace_api_sdk.models.edit_history_changes_wrapper import EditHistoryChangesWrapper
+from docspace_api_sdk.models.edit_history_author_dto import EditHistoryAuthorDto
+from docspace_api_sdk.models.edit_history_changes_dto import EditHistoryChangesDto
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -37,10 +37,10 @@ class EditHistoryDto(BaseModel):
     key: Optional[StrictStr] = Field(default=None, description="The document key of this revision, which the editing service uses to tell the revisions of a file apart and to  reuse the copy it has cached. Hand it back unchanged when asking the editor for this revision.", json_schema_extra={"examples": ["doc-key-abc123"]})
     version: Optional[StrictInt] = Field(default=None, description="The number of the revision, counting up from 1 in the order the revisions were saved. It is the value the  operations that show the changes of a revision or restore it expect.", json_schema_extra={"examples": [2]})
     version_group: Optional[StrictInt] = Field(default=None, description="Groups the revisions written by one editing session: entries sharing this number were saved while the same  session was open, which is how a client collapses a long list of revisions into the versions a person would  recognise.", alias="versionGroup", json_schema_extra={"examples": [1]})
-    user: Optional[EditHistoryAuthor] = Field(default=None, description="The account that saved the revision. A revision saved by an account that no longer exists, or through an  anonymous link, is reported as a guest.")
+    user: Optional[EditHistoryAuthorDto] = Field(default=None, description="The account that saved the revision. A revision saved by an account that no longer exists, or through an  anonymous link, is reported as a guest.")
     created: Optional[ApiDateTime] = Field(default=None, description="When the revision was saved, written with the offset of the portal's time zone rather than as plain UTC. The  times of one history are consistent with each other, so order and display the revisions by them.")
     changes_history: Optional[StrictStr] = Field(default=None, description="The change record the editing service stored for this revision, as the raw JSON it was written in, and empty  for a revision the portal has no record for - one uploaded as a whole file, for instance. `changes` is the  same record already parsed.", alias="changesHistory", json_schema_extra={"examples": ["Changes history text"]})
-    changes: Optional[List[EditHistoryChangesWrapper]] = Field(default=None, description="The single changes this revision introduced - who made each of them and when - taken from the stored change  record. It comes back empty both for a revision whose changes were never recorded and for one whose record is  in a format the portal no longer reads, so an empty list is not proof that nothing changed.", json_schema_extra={"examples": [[{"user": {"id": "123", "name": "John Doe"}, "created": "2021-01-01T00:00:00Z"}]]})
+    changes: Optional[List[EditHistoryChangesDto]] = Field(default=None, description="The single changes this revision introduced - who made each of them and when - taken from the stored change  record. It comes back empty both for a revision whose changes were never recorded and for one whose record is  in a format the portal no longer reads, so an empty list is not proof that nothing changed.", json_schema_extra={"examples": [[{"user": {"id": "123", "name": "John Doe"}, "created": "2021-01-01T00:00:00Z"}]]})
     server_version: Optional[StrictStr] = Field(default=None, description="The build of the editing service that wrote the change record of this revision, taken from the record itself;  empty when the portal holds no record for the revision.", alias="serverVersion", json_schema_extra={"examples": ["8.0.1"]})
     __properties: ClassVar[List[str]] = ["id", "key", "version", "versionGroup", "user", "created", "changesHistory", "changes", "serverVersion"]
 
@@ -133,10 +133,10 @@ class EditHistoryDto(BaseModel):
             "key": obj.get("key"),
             "version": obj.get("version"),
             "versionGroup": obj.get("versionGroup"),
-            "user": EditHistoryAuthor.from_dict(obj["user"]) if obj.get("user") is not None else None,
+            "user": EditHistoryAuthorDto.from_dict(obj["user"]) if obj.get("user") is not None else None,
             "created": ApiDateTime.from_dict(obj["created"]) if obj.get("created") is not None else None,
             "changesHistory": obj.get("changesHistory"),
-            "changes": [EditHistoryChangesWrapper.from_dict(_item) for _item in obj["changes"]] if obj.get("changes") is not None else None,
+            "changes": [EditHistoryChangesDto.from_dict(_item) for _item in obj["changes"]] if obj.get("changes") is not None else None,
             "serverVersion": obj.get("serverVersion")
         })
         return _obj

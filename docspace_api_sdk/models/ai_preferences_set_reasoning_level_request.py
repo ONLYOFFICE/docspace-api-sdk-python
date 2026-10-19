@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.ai_ai_reasoning_level import AiAiReasoningLevel
+from docspace_api_sdk.models.ai_reasoning_level import AiReasoningLevel
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +31,7 @@ class AiPreferencesSetReasoningLevelRequest(BaseModel):
     """
     AiPreferencesSetReasoningLevelRequest
     """ # noqa: E501
-    value: AiAiReasoningLevel = Field(description="New extended-thinking depth; `off` turns deep mode off.")
+    value: AiReasoningLevel = Field(description="New extended-thinking depth; `off` turns deep mode off.")
     entity_id: Optional[StrictStr] = Field(default=None, alias="entityId")
     __properties: ClassVar[List[str]] = ["value", "entityId"]
 

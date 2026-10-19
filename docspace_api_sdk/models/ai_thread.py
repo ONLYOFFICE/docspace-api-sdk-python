@@ -24,7 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.ai_model import AiModel
-from docspace_api_sdk.models.ai_t_provider import AiTProvider
+from docspace_api_sdk.models.ai_provider import AiProvider
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -35,7 +35,7 @@ class AiThread(BaseModel):
     thread_id: StrictStr = Field(description="Unique thread identifier (UUID).", alias="threadId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
     title: Optional[StrictStr] = Field(default=None, description="Optional thread title. Auto-generated from the first message if not set.", json_schema_extra={"examples": ["Contract review"]})
     last_edit_date: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Timestamp (ms since epoch) of the last message in this thread. Used for sorting.", alias="lastEditDate", json_schema_extra={"examples": [1767225600000]})
-    provider: Optional[AiTProvider] = Field(default=None, description="Provider configuration at the time of last message. Used for thread-level provider display.")
+    provider: Optional[AiProvider] = Field(default=None, description="Provider configuration at the time of last message. Used for thread-level provider display.")
     model: Optional[AiModel] = Field(default=None, description="Model info at the time of last message.")
     profile_id: Optional[StrictStr] = Field(default=None, description="ID of the profile used for this thread. Links to `Profile.id`.", alias="profileId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
     __properties: ClassVar[List[str]] = ["threadId", "title", "lastEditDate", "provider", "model", "profileId"]
@@ -101,7 +101,7 @@ class AiThread(BaseModel):
             "threadId": obj.get("threadId"),
             "title": obj.get("title"),
             "lastEditDate": obj.get("lastEditDate"),
-            "provider": AiTProvider.from_dict(obj["provider"]) if obj.get("provider") is not None else None,
+            "provider": AiProvider.from_dict(obj["provider"]) if obj.get("provider") is not None else None,
             "model": AiModel.from_dict(obj["model"]) if obj.get("model") is not None else None,
             "profileId": obj.get("profileId")
         })

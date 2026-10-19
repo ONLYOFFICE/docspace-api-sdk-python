@@ -27,7 +27,7 @@ from typing_extensions import Annotated
 from docspace_api_sdk.models.finish_dto import FinishDto
 from docspace_api_sdk.models.migration_api_info import MigrationApiInfo
 from docspace_api_sdk.models.migration_status_wrapper import MigrationStatusWrapper
-from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
+from docspace_api_sdk.models.string_array_wrapper import StringArrayWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -653,11 +653,11 @@ class MigrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -728,11 +728,11 @@ class MigrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -803,11 +803,11 @@ class MigrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1472,7 +1472,7 @@ class MigrationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> STRINGArrayWrapper:
+    ) -> StringArrayWrapper:
         """Get available migrators
 
         Lists the source products this installation can import a portal from, as the migrator names every other  operation in this group expects. Nothing has to be called first, a DocSpace administrator is required as  everywhere here, and the call is read-only and idempotent. The answer is a plain list of names such as  `GoogleWorkspace`, `Nextcloud` or `Workspace`, never localized and ordered as the migrators are registered;  pass one of them as `migratorName` to `POST api/2.0/migration/init/{migratorName}`, where the match ignores  case. The list depends on the installation rather than on the portal, so it does not change while the portal  runs, and a name that is not in it is not rejected by the operation that takes it - the queued job ends with  the failure reported in `error` of `GET api/2.0/migration/status`.
@@ -1507,7 +1507,7 @@ class MigrationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
+            '200': "StringArrayWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1542,7 +1542,7 @@ class MigrationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[STRINGArrayWrapper]:
+    ) -> ApiResponse[StringArrayWrapper]:
         """Get available migrators
 
         Lists the source products this installation can import a portal from, as the migrator names every other  operation in this group expects. Nothing has to be called first, a DocSpace administrator is required as  everywhere here, and the call is read-only and idempotent. The answer is a plain list of names such as  `GoogleWorkspace`, `Nextcloud` or `Workspace`, never localized and ordered as the migrators are registered;  pass one of them as `migratorName` to `POST api/2.0/migration/init/{migratorName}`, where the match ignores  case. The list depends on the installation rather than on the portal, so it does not change while the portal  runs, and a name that is not in it is not rejected by the operation that takes it - the queued job ends with  the failure reported in `error` of `GET api/2.0/migration/status`.
@@ -1577,7 +1577,7 @@ class MigrationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
+            '200': "StringArrayWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1647,7 +1647,7 @@ class MigrationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
+            '200': "StringArrayWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",

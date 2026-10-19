@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **create_webhook**
-> WebhooksConfigWrapper create_webhook(create_webhooks_config_requests_dto=create_webhooks_config_requests_dto)
+> WebhooksConfigWrapper create_webhook(create_webhooks_config_request_dto=create_webhooks_config_request_dto)
 
 Creates a webhook subscription for the current portal: a target URL that the portal calls with a signed JSON
 payload whenever one of the subscribed events happens. The target is checked before anything is stored, so it
@@ -38,7 +38,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_webhooks_config_requests_dto** | [**CreateWebhooksConfigRequestsDto**](CreateWebhooksConfigRequestsDto.md)|  | [optional] 
+ **create_webhooks_config_request_dto** | [**CreateWebhooksConfigRequestDto**](CreateWebhooksConfigRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -53,7 +53,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_webhooks_config_requests_dto import CreateWebhooksConfigRequestsDto
+from docspace_api_sdk.models.create_webhooks_config_request_dto import CreateWebhooksConfigRequestDto
 from docspace_api_sdk.models.webhooks_config_wrapper import WebhooksConfigWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -75,11 +75,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebhooksApi(api_client)
-    create_webhooks_config_requests_dto = docspace_api_sdk.CreateWebhooksConfigRequestsDto() # CreateWebhooksConfigRequestsDto |  (optional)
+    create_webhooks_config_request_dto = docspace_api_sdk.CreateWebhooksConfigRequestDto() # CreateWebhooksConfigRequestDto |  (optional)
 
     try:
         # Create a webhook
-        api_response = api_instance.create_webhook(create_webhooks_config_requests_dto=create_webhooks_config_requests_dto)
+        api_response = api_instance.create_webhook(create_webhooks_config_request_dto=create_webhooks_config_request_dto)
         print("The response of WebhooksApi->create_webhook:\n")
         pprint(api_response)
     except Exception as e:
@@ -98,18 +98,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created webhook subscription, without its secret key |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The target URL is unusable or unreachable, or the secret key or a trigger flag was rejected |  -  |
+**400** | The request body cannot be read, `name` or `uri` is missing or empty, `name` or `secretKey` is longer than 50 characters or `targetId` longer than 255, the target URL is unusable or answers the HEAD request with a non-success code, or the secret key or a trigger flag was rejected |  -  |
 **403** | The caller is a `Guest`, or a non-admin caller while the developer tools are restricted |  -  |
+**500** | The target URL gives no answer to the HEAD request: the connection fails or times out, or the certificate is not valid while `ssl` is `true` |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **enable_webhook**
-> WebhooksConfigWrapper enable_webhook(update_webhooks_config_requests_dto=update_webhooks_config_requests_dto)
+> WebhooksConfigWrapper enable_webhook(update_webhooks_config_request_dto=update_webhooks_config_request_dto)
 
 Switches one webhook subscription on or off, leaving the rest of its parameters as they are. Only `id` and
 `enabled` are read from the body: `name`, `uri`, `secretKey`, `ssl`, `triggers` and `targetId` are demanded by
@@ -130,7 +130,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_webhooks_config_requests_dto** | [**UpdateWebhooksConfigRequestsDto**](UpdateWebhooksConfigRequestsDto.md)|  | [optional] 
+ **update_webhooks_config_request_dto** | [**UpdateWebhooksConfigRequestDto**](UpdateWebhooksConfigRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
+from docspace_api_sdk.models.update_webhooks_config_request_dto import UpdateWebhooksConfigRequestDto
 from docspace_api_sdk.models.webhooks_config_wrapper import WebhooksConfigWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -167,11 +167,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebhooksApi(api_client)
-    update_webhooks_config_requests_dto = docspace_api_sdk.UpdateWebhooksConfigRequestsDto() # UpdateWebhooksConfigRequestsDto |  (optional)
+    update_webhooks_config_request_dto = docspace_api_sdk.UpdateWebhooksConfigRequestDto() # UpdateWebhooksConfigRequestDto |  (optional)
 
     try:
         # Switch a webhook on or off
-        api_response = api_instance.enable_webhook(update_webhooks_config_requests_dto=update_webhooks_config_requests_dto)
+        api_response = api_instance.enable_webhook(update_webhooks_config_request_dto=update_webhooks_config_request_dto)
         print("The response of WebhooksApi->enable_webhook:\n")
         pprint(api_response)
     except Exception as e:
@@ -190,12 +190,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The webhook subscription in its new state, without its secret key |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The saved target no longer answers, or the saved secret no longer passes the password rules |  -  |
+**400** | The request body cannot be read or has no `id`, `name` or `uri` is missing or empty, `name` or `secretKey` is longer than 50 characters or `targetId` longer than 255, although this call reads only `id` and `enabled`, or on switching on the saved target answers the HEAD request with a non-success code or the saved secret no longer passes the password rules |  -  |
 **403** | The subscription belongs to another member, or the caller may not use webhooks at all |  -  |
 **404** | No webhook subscription with this ID exists in the portal |  -  |
+**500** | On switching on, the saved target URL gives no answer to the HEAD request: the connection fails or times out, or the certificate is not valid while the subscription has `ssl` set |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -471,11 +471,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The matching delivery records, newest first, with the total count reported beside them |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The `count` is outside its allowed range |  -  |
 **403** | The caller is a `Guest`, or a non-admin caller while the developer tools are restricted |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -665,7 +665,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **retry_webhooks**
-> WebhooksLogArrayWrapper retry_webhooks(webhook_retry_requests_dto=webhook_retry_requests_dto)
+> WebhooksLogArrayWrapper retry_webhooks(webhook_retry_request_dto=webhook_retry_request_dto)
 
 Sends a batch of past webhook deliveries again. `ids` holds the identifiers of delivery records from
 `GET api/2.0/settings/webhooks/log`; each of them is sent once more to the subscription it belongs to as a
@@ -686,7 +686,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webhook_retry_requests_dto** | [**WebhookRetryRequestsDto**](WebhookRetryRequestsDto.md)|  | [optional] 
+ **webhook_retry_request_dto** | [**WebhookRetryRequestDto**](WebhookRetryRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -701,7 +701,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.webhook_retry_requests_dto import WebhookRetryRequestsDto
+from docspace_api_sdk.models.webhook_retry_request_dto import WebhookRetryRequestDto
 from docspace_api_sdk.models.webhooks_log_array_wrapper import WebhooksLogArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -723,11 +723,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebhooksApi(api_client)
-    webhook_retry_requests_dto = docspace_api_sdk.WebhookRetryRequestsDto() # WebhookRetryRequestsDto |  (optional)
+    webhook_retry_request_dto = docspace_api_sdk.WebhookRetryRequestDto() # WebhookRetryRequestDto |  (optional)
 
     try:
         # Retry webhook deliveries
-        api_response = api_instance.retry_webhooks(webhook_retry_requests_dto=webhook_retry_requests_dto)
+        api_response = api_instance.retry_webhooks(webhook_retry_request_dto=webhook_retry_request_dto)
         print("The response of WebhooksApi->retry_webhooks:\n")
         pprint(api_response)
     except Exception as e:
@@ -757,7 +757,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_webhook**
-> WebhooksConfigWrapper update_webhook(update_webhooks_config_requests_dto=update_webhooks_config_requests_dto)
+> WebhooksConfigWrapper update_webhook(update_webhooks_config_request_dto=update_webhooks_config_request_dto)
 
 Replaces the stored parameters of one webhook subscription, which is addressed by `id` in the body rather than
 in the path. Every field of the request overwrites the stored one, so a payload that leaves out `enabled`,
@@ -778,7 +778,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_webhooks_config_requests_dto** | [**UpdateWebhooksConfigRequestsDto**](UpdateWebhooksConfigRequestsDto.md)|  | [optional] 
+ **update_webhooks_config_request_dto** | [**UpdateWebhooksConfigRequestDto**](UpdateWebhooksConfigRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -793,7 +793,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.update_webhooks_config_requests_dto import UpdateWebhooksConfigRequestsDto
+from docspace_api_sdk.models.update_webhooks_config_request_dto import UpdateWebhooksConfigRequestDto
 from docspace_api_sdk.models.webhooks_config_wrapper import WebhooksConfigWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -815,11 +815,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebhooksApi(api_client)
-    update_webhooks_config_requests_dto = docspace_api_sdk.UpdateWebhooksConfigRequestsDto() # UpdateWebhooksConfigRequestsDto |  (optional)
+    update_webhooks_config_request_dto = docspace_api_sdk.UpdateWebhooksConfigRequestDto() # UpdateWebhooksConfigRequestDto |  (optional)
 
     try:
         # Update a webhook
-        api_response = api_instance.update_webhook(update_webhooks_config_requests_dto=update_webhooks_config_requests_dto)
+        api_response = api_instance.update_webhook(update_webhooks_config_request_dto=update_webhooks_config_request_dto)
         print("The response of WebhooksApi->update_webhook:\n")
         pprint(api_response)
     except Exception as e:
@@ -838,12 +838,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated webhook subscription, without its secret key |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The target URL is unusable or unreachable, or the secret key or a trigger flag was rejected |  -  |
+**400** | The request body cannot be read or has no `id`, `name` or `uri` is missing or empty, `name` or `secretKey` is longer than 50 characters or `targetId` longer than 255, the target URL is unusable or answers the HEAD request with a non-success code, or the secret key or a trigger flag was rejected |  -  |
 **403** | The subscription belongs to another member, or the caller may not use webhooks at all |  -  |
 **404** | No webhook subscription with this ID exists in the portal |  -  |
+**500** | The target URL gives no answer to the HEAD request: the connection fails or times out, or the certificate is not valid while `ssl` is `true` |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

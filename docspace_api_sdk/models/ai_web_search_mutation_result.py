@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
+from docspace_api_sdk.models.ai_error_data import AiErrorData
 from docspace_api_sdk.models.ai_web_search_config import AiWebSearchConfig
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,7 +34,7 @@ class AiWebSearchMutationResult(BaseModel):
     """ # noqa: E501
     success: StrictBool = Field(description="True when the configuration was persisted.", json_schema_extra={"examples": [True]})
     config: Optional[AiWebSearchConfig] = Field(default=None, description="The persisted web-search configuration. Present on success.")
-    error: Optional[AiTErrorData] = Field(default=None, description="Why the configuration was rejected. Present on failure.")
+    error: Optional[AiErrorData] = Field(default=None, description="Why the configuration was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "config", "error"]
 
     model_config = ConfigDict(
@@ -97,7 +97,7 @@ class AiWebSearchMutationResult(BaseModel):
         _obj = cls.model_validate({
             "success": obj.get("success"),
             "config": AiWebSearchConfig.from_dict(obj["config"]) if obj.get("config") is not None else None,
-            "error": AiTErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
+            "error": AiErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
 

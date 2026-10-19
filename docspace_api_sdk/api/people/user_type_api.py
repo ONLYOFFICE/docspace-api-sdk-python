@@ -54,7 +54,7 @@ class UserTypeApi:
     @validate_call
     def get_user_type_update_progress(
         self,
-        userid: Annotated[UUID, Field(description="The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.")],
+        user_id: Annotated[UUID, Field(description="The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -72,8 +72,8 @@ class UserTypeApi:
 
         Returns the current state of the user type change queued for the user with the ID specified in the request.  A conversion must have been queued by `POST api/2.0/people/type` first: when nothing is queued for that user  the operation answers 200 with an empty body.  The caller needs the permission to add and remove users.  The call is read-only and is the polling operation of this flow - repeat it until `isCompleted` is true,  reading `percentage` for the 0 to 100 progress and `error` for the message left by a failed job.  Use `PUT api/2.0/people/type/terminate` to cancel a conversion that is still running.
 
-        :param userid: The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. (required)
-        :type userid: UUID
+        :param user_id: The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. (required)
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -97,7 +97,7 @@ class UserTypeApi:
         """ # noqa: E501
 
         _param = self._get_user_type_update_progress_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -129,7 +129,7 @@ class UserTypeApi:
     @validate_call
     def get_user_type_update_progress_with_http_info(
         self,
-        userid: Annotated[UUID, Field(description="The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.")],
+        user_id: Annotated[UUID, Field(description="The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -147,8 +147,8 @@ class UserTypeApi:
 
         Returns the current state of the user type change queued for the user with the ID specified in the request.  A conversion must have been queued by `POST api/2.0/people/type` first: when nothing is queued for that user  the operation answers 200 with an empty body.  The caller needs the permission to add and remove users.  The call is read-only and is the polling operation of this flow - repeat it until `isCompleted` is true,  reading `percentage` for the 0 to 100 progress and `error` for the message left by a failed job.  Use `PUT api/2.0/people/type/terminate` to cancel a conversion that is still running.
 
-        :param userid: The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. (required)
-        :type userid: UUID
+        :param user_id: The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. (required)
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -172,7 +172,7 @@ class UserTypeApi:
         """ # noqa: E501
 
         _param = self._get_user_type_update_progress_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -204,7 +204,7 @@ class UserTypeApi:
     @validate_call
     def get_user_type_update_progress_without_preload_content(
         self,
-        userid: Annotated[UUID, Field(description="The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.")],
+        user_id: Annotated[UUID, Field(description="The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -222,8 +222,8 @@ class UserTypeApi:
 
         Returns the current state of the user type change queued for the user with the ID specified in the request.  A conversion must have been queued by `POST api/2.0/people/type` first: when nothing is queued for that user  the operation answers 200 with an empty body.  The caller needs the permission to add and remove users.  The call is read-only and is the polling operation of this flow - repeat it until `isCompleted` is true,  reading `percentage` for the 0 to 100 progress and `error` for the message left by a failed job.  Use `PUT api/2.0/people/type/terminate` to cancel a conversion that is still running.
 
-        :param userid: The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. (required)
-        :type userid: UUID
+        :param user_id: The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. (required)
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -247,7 +247,7 @@ class UserTypeApi:
         """ # noqa: E501
 
         _param = self._get_user_type_update_progress_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -274,7 +274,7 @@ class UserTypeApi:
 
     def _get_user_type_update_progress_serialize(
         self,
-        userid,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -296,8 +296,8 @@ class UserTypeApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if userid is not None:
-            _path_params['userid'] = userid
+        if user_id is not None:
+            _path_params['userId'] = user_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -324,7 +324,7 @@ class UserTypeApi:
         ]
 
 
-        resource_path = "/api/2.0/people/type/progress/{userid}"
+        resource_path = "/api/2.0/people/type/progress/{userId}"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -363,7 +363,7 @@ class UserTypeApi:
     ) -> TaskProgressResponseWrapper:
         """Start updating user type
 
-        Queues an asynchronous job that converts one account to `Guest` or `User` and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only `Guest` and `User` are accepted here, because they are the types that cannot own rooms; for any other  type use `PUT api/2.0/people/type/{type}`, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userid}` with the  converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.  A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
+        Queues an asynchronous job that converts one account to `Guest` or `User` and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only `Guest` and `User` are accepted here, because they are the types that cannot own rooms; for any other  type use `PUT api/2.0/people/type/{type}`, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userId}` with the  converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.  A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
 
         :param start_update_user_type_dto:
         :type start_update_user_type_dto: StartUpdateUserTypeDto
@@ -438,7 +438,7 @@ class UserTypeApi:
     ) -> ApiResponse[TaskProgressResponseWrapper]:
         """Start updating user type
 
-        Queues an asynchronous job that converts one account to `Guest` or `User` and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only `Guest` and `User` are accepted here, because they are the types that cannot own rooms; for any other  type use `PUT api/2.0/people/type/{type}`, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userid}` with the  converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.  A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
+        Queues an asynchronous job that converts one account to `Guest` or `User` and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only `Guest` and `User` are accepted here, because they are the types that cannot own rooms; for any other  type use `PUT api/2.0/people/type/{type}`, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userId}` with the  converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.  A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
 
         :param start_update_user_type_dto:
         :type start_update_user_type_dto: StartUpdateUserTypeDto
@@ -513,7 +513,7 @@ class UserTypeApi:
     ) -> RESTResponseType:
         """Start updating user type
 
-        Queues an asynchronous job that converts one account to `Guest` or `User` and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only `Guest` and `User` are accepted here, because they are the types that cannot own rooms; for any other  type use `PUT api/2.0/people/type/{type}`, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userid}` with the  converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.  A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
+        Queues an asynchronous job that converts one account to `Guest` or `User` and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only `Guest` and `User` are accepted here, because they are the types that cannot own rooms; for any other  type use `PUT api/2.0/people/type/{type}`, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userId}` with the  converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.  A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
 
         :param start_update_user_type_dto:
         :type start_update_user_type_dto: StartUpdateUserTypeDto
@@ -705,11 +705,11 @@ class UserTypeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -780,11 +780,11 @@ class UserTypeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -855,11 +855,11 @@ class UserTypeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaskProgressResponseWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1015,12 +1015,12 @@ class UserTypeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1095,12 +1095,12 @@ class UserTypeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1175,12 +1175,12 @@ class UserTypeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

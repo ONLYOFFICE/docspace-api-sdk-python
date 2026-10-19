@@ -26,16 +26,16 @@ from pydantic import Field, StrictBool
 from typing import Optional
 from typing_extensions import Annotated
 from uuid import UUID
-from docspace_api_sdk.models.backup_dto import BackupDto
 from docspace_api_sdk.models.backup_history_record_array_wrapper import BackupHistoryRecordArrayWrapper
 from docspace_api_sdk.models.backup_progress_wrapper import BackupProgressWrapper
-from docspace_api_sdk.models.backup_restore_dto import BackupRestoreDto
-from docspace_api_sdk.models.backup_schedule_dto import BackupScheduleDto
 from docspace_api_sdk.models.backup_service_state_wrapper import BackupServiceStateWrapper
 from docspace_api_sdk.models.backups_count_result_wrapper import BackupsCountResultWrapper
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.models.create_backup_schedule_request_dto import CreateBackupScheduleRequestDto
 from docspace_api_sdk.models.int32_wrapper import Int32Wrapper
 from docspace_api_sdk.models.schedule_wrapper import ScheduleWrapper
+from docspace_api_sdk.models.start_backup_request_dto import StartBackupRequestDto
+from docspace_api_sdk.models.start_backup_restore_request_dto import StartBackupRestoreRequestDto
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -334,7 +334,7 @@ class BackupApi:
     @validate_call
     def create_backup_schedule(
         self,
-        backup_schedule_dto: Optional[BackupScheduleDto] = None,
+        create_backup_schedule_request_dto: Optional[CreateBackupScheduleRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -350,10 +350,10 @@ class BackupApi:
     ) -> BooleanWrapper:
         """Create the backup schedule
 
-        Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
+        Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling  back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
 
-        :param backup_schedule_dto:
-        :type backup_schedule_dto: BackupScheduleDto
+        :param create_backup_schedule_request_dto:
+        :type create_backup_schedule_request_dto: CreateBackupScheduleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -377,7 +377,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._create_backup_schedule_serialize(
-            backup_schedule_dto=backup_schedule_dto,
+            create_backup_schedule_request_dto=create_backup_schedule_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -390,9 +390,9 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -411,7 +411,7 @@ class BackupApi:
     @validate_call
     def create_backup_schedule_with_http_info(
         self,
-        backup_schedule_dto: Optional[BackupScheduleDto] = None,
+        create_backup_schedule_request_dto: Optional[CreateBackupScheduleRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -427,10 +427,10 @@ class BackupApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Create the backup schedule
 
-        Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
+        Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling  back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
 
-        :param backup_schedule_dto:
-        :type backup_schedule_dto: BackupScheduleDto
+        :param create_backup_schedule_request_dto:
+        :type create_backup_schedule_request_dto: CreateBackupScheduleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -454,7 +454,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._create_backup_schedule_serialize(
-            backup_schedule_dto=backup_schedule_dto,
+            create_backup_schedule_request_dto=create_backup_schedule_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -467,9 +467,9 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -488,7 +488,7 @@ class BackupApi:
     @validate_call
     def create_backup_schedule_without_preload_content(
         self,
-        backup_schedule_dto: Optional[BackupScheduleDto] = None,
+        create_backup_schedule_request_dto: Optional[CreateBackupScheduleRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -504,10 +504,10 @@ class BackupApi:
     ) -> RESTResponseType:
         """Create the backup schedule
 
-        Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
+        Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling  back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
 
-        :param backup_schedule_dto:
-        :type backup_schedule_dto: BackupScheduleDto
+        :param create_backup_schedule_request_dto:
+        :type create_backup_schedule_request_dto: CreateBackupScheduleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -531,7 +531,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._create_backup_schedule_serialize(
-            backup_schedule_dto=backup_schedule_dto,
+            create_backup_schedule_request_dto=create_backup_schedule_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -544,9 +544,9 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -560,7 +560,7 @@ class BackupApi:
 
     def _create_backup_schedule_serialize(
         self,
-        backup_schedule_dto,
+        create_backup_schedule_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -586,8 +586,8 @@ class BackupApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if backup_schedule_dto is not None:
-            _body_params = backup_schedule_dto
+        if create_backup_schedule_request_dto is not None:
+            _body_params = create_backup_schedule_request_dto
 
 
         # set the HTTP header `Accept`
@@ -662,7 +662,7 @@ class BackupApi:
     ) -> BooleanWrapper:
         """Delete the backup
 
-        Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
+        Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
 
         :param id: The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. (required)
         :type id: UUID
@@ -700,6 +700,7 @@ class BackupApi:
             '200': "BooleanWrapper",
             '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -738,7 +739,7 @@ class BackupApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Delete the backup
 
-        Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
+        Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
 
         :param id: The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. (required)
         :type id: UUID
@@ -776,6 +777,7 @@ class BackupApi:
             '200': "BooleanWrapper",
             '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -814,7 +816,7 @@ class BackupApi:
     ) -> RESTResponseType:
         """Delete the backup
 
-        Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
+        Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
 
         :param id: The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. (required)
         :type id: UUID
@@ -852,6 +854,7 @@ class BackupApi:
             '200': "BooleanWrapper",
             '402': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1190,7 +1193,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -1488,7 +1491,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -1786,7 +1789,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -2081,7 +2084,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -2379,7 +2382,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -3637,7 +3640,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -3687,7 +3690,7 @@ class BackupApi:
     @validate_call
     def start_backup(
         self,
-        backup_dto: Optional[BackupDto] = None,
+        start_backup_request_dto: Optional[StartBackupRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3705,8 +3708,8 @@ class BackupApi:
 
         Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
 
-        :param backup_dto:
-        :type backup_dto: BackupDto
+        :param start_backup_request_dto:
+        :type start_backup_request_dto: StartBackupRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3730,7 +3733,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_serialize(
-            backup_dto=backup_dto,
+            start_backup_request_dto=start_backup_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3743,9 +3746,9 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3764,7 +3767,7 @@ class BackupApi:
     @validate_call
     def start_backup_with_http_info(
         self,
-        backup_dto: Optional[BackupDto] = None,
+        start_backup_request_dto: Optional[StartBackupRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3782,8 +3785,8 @@ class BackupApi:
 
         Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
 
-        :param backup_dto:
-        :type backup_dto: BackupDto
+        :param start_backup_request_dto:
+        :type start_backup_request_dto: StartBackupRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3807,7 +3810,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_serialize(
-            backup_dto=backup_dto,
+            start_backup_request_dto=start_backup_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3820,9 +3823,9 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3841,7 +3844,7 @@ class BackupApi:
     @validate_call
     def start_backup_without_preload_content(
         self,
-        backup_dto: Optional[BackupDto] = None,
+        start_backup_request_dto: Optional[StartBackupRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3859,8 +3862,8 @@ class BackupApi:
 
         Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
 
-        :param backup_dto:
-        :type backup_dto: BackupDto
+        :param start_backup_request_dto:
+        :type start_backup_request_dto: StartBackupRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3884,7 +3887,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_serialize(
-            backup_dto=backup_dto,
+            start_backup_request_dto=start_backup_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3897,9 +3900,9 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3913,7 +3916,7 @@ class BackupApi:
 
     def _start_backup_serialize(
         self,
-        backup_dto,
+        start_backup_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -3939,8 +3942,8 @@ class BackupApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if backup_dto is not None:
-            _body_params = backup_dto
+        if start_backup_request_dto is not None:
+            _body_params = start_backup_request_dto
 
 
         # set the HTTP header `Accept`
@@ -3999,7 +4002,7 @@ class BackupApi:
     @validate_call
     def start_backup_restore(
         self,
-        backup_restore_dto: Optional[BackupRestoreDto] = None,
+        start_backup_restore_request_dto: Optional[StartBackupRestoreRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4017,8 +4020,8 @@ class BackupApi:
 
         Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
 
-        :param backup_restore_dto:
-        :type backup_restore_dto: BackupRestoreDto
+        :param start_backup_restore_request_dto:
+        :type start_backup_restore_request_dto: StartBackupRestoreRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4042,7 +4045,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_restore_serialize(
-            backup_restore_dto=backup_restore_dto,
+            start_backup_restore_request_dto=start_backup_restore_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4051,13 +4054,13 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4076,7 +4079,7 @@ class BackupApi:
     @validate_call
     def start_backup_restore_with_http_info(
         self,
-        backup_restore_dto: Optional[BackupRestoreDto] = None,
+        start_backup_restore_request_dto: Optional[StartBackupRestoreRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4094,8 +4097,8 @@ class BackupApi:
 
         Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
 
-        :param backup_restore_dto:
-        :type backup_restore_dto: BackupRestoreDto
+        :param start_backup_restore_request_dto:
+        :type start_backup_restore_request_dto: StartBackupRestoreRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4119,7 +4122,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_restore_serialize(
-            backup_restore_dto=backup_restore_dto,
+            start_backup_restore_request_dto=start_backup_restore_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4128,13 +4131,13 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4153,7 +4156,7 @@ class BackupApi:
     @validate_call
     def start_backup_restore_without_preload_content(
         self,
-        backup_restore_dto: Optional[BackupRestoreDto] = None,
+        start_backup_restore_request_dto: Optional[StartBackupRestoreRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4171,8 +4174,8 @@ class BackupApi:
 
         Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
 
-        :param backup_restore_dto:
-        :type backup_restore_dto: BackupRestoreDto
+        :param start_backup_restore_request_dto:
+        :type start_backup_restore_request_dto: StartBackupRestoreRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4196,7 +4199,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_restore_serialize(
-            backup_restore_dto=backup_restore_dto,
+            start_backup_restore_request_dto=start_backup_restore_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4205,13 +4208,13 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4225,7 +4228,7 @@ class BackupApi:
 
     def _start_backup_restore_serialize(
         self,
-        backup_restore_dto,
+        start_backup_restore_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -4251,8 +4254,8 @@ class BackupApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if backup_restore_dto is not None:
-            _body_params = backup_restore_dto
+        if start_backup_restore_request_dto is not None:
+            _body_params = start_backup_restore_request_dto
 
 
         # set the HTTP header `Accept`

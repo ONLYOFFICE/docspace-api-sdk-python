@@ -24,7 +24,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
 from docspace_api_sdk.models.ai_action_type import AiActionType
-from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
+from docspace_api_sdk.models.ai_error_data import AiErrorData
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +33,7 @@ class AiBulkAssignmentResultErrorsInner(BaseModel):
     AiBulkAssignmentResultErrorsInner
     """ # noqa: E501
     action_type: AiActionType = Field(alias="actionType")
-    error: AiTErrorData
+    error: AiErrorData
     __properties: ClassVar[List[str]] = ["actionType", "error"]
 
     model_config = ConfigDict(
@@ -92,7 +92,7 @@ class AiBulkAssignmentResultErrorsInner(BaseModel):
 
         _obj = cls.model_validate({
             "actionType": obj.get("actionType"),
-            "error": AiTErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
+            "error": AiErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
 

@@ -28,13 +28,13 @@ from uuid import UUID
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.employee_array_wrapper import EmployeeArrayWrapper
 from docspace_api_sdk.models.enabled_module_array_wrapper import EnabledModuleArrayWrapper
-from docspace_api_sdk.models.password_settings_requests_dto import PasswordSettingsRequestsDto
+from docspace_api_sdk.models.password_settings_request_dto import PasswordSettingsRequestDto
 from docspace_api_sdk.models.password_settings_wrapper import PasswordSettingsWrapper
 from docspace_api_sdk.models.product_administrator_wrapper import ProductAdministratorWrapper
 from docspace_api_sdk.models.security_array_wrapper import SecurityArrayWrapper
-from docspace_api_sdk.models.security_requests_dto import SecurityRequestsDto
-from docspace_api_sdk.models.web_item_security_requests_dto import WebItemSecurityRequestsDto
-from docspace_api_sdk.models.web_items_security_requests_dto import WebItemsSecurityRequestsDto
+from docspace_api_sdk.models.security_request_dto import SecurityRequestDto
+from docspace_api_sdk.models.web_item_security_request_dto import WebItemSecurityRequestDto
+from docspace_api_sdk.models.web_items_security_request_dto import WebItemsSecurityRequestDto
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -330,8 +330,8 @@ class SecurityApi:
     @validate_call
     def get_is_product_administrator(
         self,
-        productid: Annotated[UUID, Field(description="The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.")],
-        userid: Annotated[UUID, Field(description="The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.")],
+        product_id: Annotated[UUID, Field(description="The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.")],
+        user_id: Annotated[UUID, Field(description="The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -347,12 +347,12 @@ class SecurityApi:
     ) -> ProductAdministratorWrapper:
         """Check product administrator
 
-        Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module's own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productid}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
+        Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module's own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
 
-        :param productid: The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. (required)
-        :type productid: UUID
-        :param userid: The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. (required)
-        :type userid: UUID
+        :param product_id: The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. (required)
+        :type product_id: UUID
+        :param user_id: The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. (required)
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -376,8 +376,8 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._get_is_product_administrator_serialize(
-            productid=productid,
-            userid=userid,
+            product_id=product_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -386,6 +386,7 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -408,8 +409,8 @@ class SecurityApi:
     @validate_call
     def get_is_product_administrator_with_http_info(
         self,
-        productid: Annotated[UUID, Field(description="The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.")],
-        userid: Annotated[UUID, Field(description="The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.")],
+        product_id: Annotated[UUID, Field(description="The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.")],
+        user_id: Annotated[UUID, Field(description="The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -425,12 +426,12 @@ class SecurityApi:
     ) -> ApiResponse[ProductAdministratorWrapper]:
         """Check product administrator
 
-        Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module's own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productid}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
+        Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module's own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
 
-        :param productid: The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. (required)
-        :type productid: UUID
-        :param userid: The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. (required)
-        :type userid: UUID
+        :param product_id: The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. (required)
+        :type product_id: UUID
+        :param user_id: The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. (required)
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -454,8 +455,8 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._get_is_product_administrator_serialize(
-            productid=productid,
-            userid=userid,
+            product_id=product_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -464,6 +465,7 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -486,8 +488,8 @@ class SecurityApi:
     @validate_call
     def get_is_product_administrator_without_preload_content(
         self,
-        productid: Annotated[UUID, Field(description="The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.")],
-        userid: Annotated[UUID, Field(description="The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.")],
+        product_id: Annotated[UUID, Field(description="The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.")],
+        user_id: Annotated[UUID, Field(description="The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -503,12 +505,12 @@ class SecurityApi:
     ) -> RESTResponseType:
         """Check product administrator
 
-        Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module's own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productid}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
+        Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module's own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
 
-        :param productid: The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. (required)
-        :type productid: UUID
-        :param userid: The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. (required)
-        :type userid: UUID
+        :param product_id: The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. (required)
+        :type product_id: UUID
+        :param user_id: The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. (required)
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -532,8 +534,8 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._get_is_product_administrator_serialize(
-            productid=productid,
-            userid=userid,
+            product_id=product_id,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -542,6 +544,7 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -559,8 +562,8 @@ class SecurityApi:
 
     def _get_is_product_administrator_serialize(
         self,
-        productid,
-        userid,
+        product_id,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -583,13 +586,13 @@ class SecurityApi:
 
         # process the path parameters
         # process the query parameters
-        if productid is not None:
+        if product_id is not None:
             
-            _query_params.append(('productid', productid))
+            _query_params.append(('productId', product_id))
             
-        if userid is not None:
+        if user_id is not None:
             
-            _query_params.append(('userid', userid))
+            _query_params.append(('userId', user_id))
             
         # process the header parameters
         # process the form parameters
@@ -687,6 +690,7 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
+            '304': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -756,6 +760,7 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
+            '304': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -825,6 +830,7 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
+            '304': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -911,7 +917,7 @@ class SecurityApi:
     @validate_call
     def get_product_administrators(
         self,
-        productid: Annotated[UUID, Field(description="The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.")],
+        product_id: Annotated[UUID, Field(description="The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -929,8 +935,8 @@ class SecurityApi:
 
         Lists the users who administer the portal module identified by `productid` in the path. The all-zero GUID  stands for the portal itself: the answer then covers the DocSpace administrator group together with every  product group, and includes the portal owner, who administers everything by default. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. `productid` has to be a  GUID, and one that names no group is answered with an empty list rather than a failure. The operation is  read-only and returns whole user profiles, a heavier answer than a membership check, and a user who belongs to  more than one of the groups asked about is listed once per group. Entries arrive in group order, the DocSpace  administrator group first, the list is neither paged nor filterable, and a promotion made through the sibling  `PUT` shows up here at once. Use `GET api/2.0/settings/security/administrator` to test a single user against a  single module, and `PUT api/2.0/settings/security/administrator` to promote or demote somebody.
 
-        :param productid: The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. (required)
-        :type productid: UUID
+        :param product_id: The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. (required)
+        :type product_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -954,7 +960,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._get_product_administrators_serialize(
-            productid=productid,
+            product_id=product_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -963,6 +969,7 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -985,7 +992,7 @@ class SecurityApi:
     @validate_call
     def get_product_administrators_with_http_info(
         self,
-        productid: Annotated[UUID, Field(description="The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.")],
+        product_id: Annotated[UUID, Field(description="The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1003,8 +1010,8 @@ class SecurityApi:
 
         Lists the users who administer the portal module identified by `productid` in the path. The all-zero GUID  stands for the portal itself: the answer then covers the DocSpace administrator group together with every  product group, and includes the portal owner, who administers everything by default. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. `productid` has to be a  GUID, and one that names no group is answered with an empty list rather than a failure. The operation is  read-only and returns whole user profiles, a heavier answer than a membership check, and a user who belongs to  more than one of the groups asked about is listed once per group. Entries arrive in group order, the DocSpace  administrator group first, the list is neither paged nor filterable, and a promotion made through the sibling  `PUT` shows up here at once. Use `GET api/2.0/settings/security/administrator` to test a single user against a  single module, and `PUT api/2.0/settings/security/administrator` to promote or demote somebody.
 
-        :param productid: The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. (required)
-        :type productid: UUID
+        :param product_id: The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. (required)
+        :type product_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1028,7 +1035,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._get_product_administrators_serialize(
-            productid=productid,
+            product_id=product_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1037,6 +1044,7 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1059,7 +1067,7 @@ class SecurityApi:
     @validate_call
     def get_product_administrators_without_preload_content(
         self,
-        productid: Annotated[UUID, Field(description="The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.")],
+        product_id: Annotated[UUID, Field(description="The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1077,8 +1085,8 @@ class SecurityApi:
 
         Lists the users who administer the portal module identified by `productid` in the path. The all-zero GUID  stands for the portal itself: the answer then covers the DocSpace administrator group together with every  product group, and includes the portal owner, who administers everything by default. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. `productid` has to be a  GUID, and one that names no group is answered with an empty list rather than a failure. The operation is  read-only and returns whole user profiles, a heavier answer than a membership check, and a user who belongs to  more than one of the groups asked about is listed once per group. Entries arrive in group order, the DocSpace  administrator group first, the list is neither paged nor filterable, and a promotion made through the sibling  `PUT` shows up here at once. Use `GET api/2.0/settings/security/administrator` to test a single user against a  single module, and `PUT api/2.0/settings/security/administrator` to promote or demote somebody.
 
-        :param productid: The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. (required)
-        :type productid: UUID
+        :param product_id: The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. (required)
+        :type product_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1102,7 +1110,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._get_product_administrators_serialize(
-            productid=productid,
+            product_id=product_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1111,6 +1119,7 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1128,7 +1137,7 @@ class SecurityApi:
 
     def _get_product_administrators_serialize(
         self,
-        productid,
+        product_id,
         _request_auth,
         _content_type,
         _headers,
@@ -1150,8 +1159,8 @@ class SecurityApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if productid is not None:
-            _path_params['productid'] = productid
+        if product_id is not None:
+            _path_params['productId'] = product_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1178,7 +1187,7 @@ class SecurityApi:
         ]
 
 
-        resource_path = "/api/2.0/settings/security/administrator/{productid}"
+        resource_path = "/api/2.0/settings/security/administrator/{productId}"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -1543,10 +1552,10 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1617,10 +1626,10 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1691,10 +1700,10 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1784,7 +1793,7 @@ class SecurityApi:
     @validate_call
     def set_access_to_web_items(
         self,
-        web_items_security_requests_dto: Optional[WebItemsSecurityRequestsDto] = None,
+        web_items_security_request_dto: Optional[WebItemsSecurityRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1802,8 +1811,8 @@ class SecurityApi:
 
         Switches several portal modules on or off in one call: `items` carries an entry per module, its `key` the  module GUID and its `value` the new enabled flag. The caller needs the portal-settings right of a DocSpace  administrator, and the call is answered with 403 on an open portal, where everyone is admitted and per-module  rules would mean nothing. Every key has to be a GUID; anything else is rejected as an invalid request, and a  module listed twice is applied once, from its first entry. This operation carries no subject list of its own:  switching a product module on restores the users and groups it was last restricted to, while every other case  is stored as a plain allow or deny for everyone, so use `PUT api/2.0/settings/security` when the allow-list  itself has to change. The batch is recorded in the audit trail as one list update rather than module by  module. The answer is the resulting configuration of every module listed, in the shape  `GET api/2.0/settings/security` returns.
 
-        :param web_items_security_requests_dto:
-        :type web_items_security_requests_dto: WebItemsSecurityRequestsDto
+        :param web_items_security_request_dto:
+        :type web_items_security_request_dto: WebItemsSecurityRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1827,7 +1836,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._set_access_to_web_items_serialize(
-            web_items_security_requests_dto=web_items_security_requests_dto,
+            web_items_security_request_dto=web_items_security_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1836,11 +1845,11 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1859,7 +1868,7 @@ class SecurityApi:
     @validate_call
     def set_access_to_web_items_with_http_info(
         self,
-        web_items_security_requests_dto: Optional[WebItemsSecurityRequestsDto] = None,
+        web_items_security_request_dto: Optional[WebItemsSecurityRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1877,8 +1886,8 @@ class SecurityApi:
 
         Switches several portal modules on or off in one call: `items` carries an entry per module, its `key` the  module GUID and its `value` the new enabled flag. The caller needs the portal-settings right of a DocSpace  administrator, and the call is answered with 403 on an open portal, where everyone is admitted and per-module  rules would mean nothing. Every key has to be a GUID; anything else is rejected as an invalid request, and a  module listed twice is applied once, from its first entry. This operation carries no subject list of its own:  switching a product module on restores the users and groups it was last restricted to, while every other case  is stored as a plain allow or deny for everyone, so use `PUT api/2.0/settings/security` when the allow-list  itself has to change. The batch is recorded in the audit trail as one list update rather than module by  module. The answer is the resulting configuration of every module listed, in the shape  `GET api/2.0/settings/security` returns.
 
-        :param web_items_security_requests_dto:
-        :type web_items_security_requests_dto: WebItemsSecurityRequestsDto
+        :param web_items_security_request_dto:
+        :type web_items_security_request_dto: WebItemsSecurityRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1902,7 +1911,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._set_access_to_web_items_serialize(
-            web_items_security_requests_dto=web_items_security_requests_dto,
+            web_items_security_request_dto=web_items_security_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1911,11 +1920,11 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1934,7 +1943,7 @@ class SecurityApi:
     @validate_call
     def set_access_to_web_items_without_preload_content(
         self,
-        web_items_security_requests_dto: Optional[WebItemsSecurityRequestsDto] = None,
+        web_items_security_request_dto: Optional[WebItemsSecurityRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1952,8 +1961,8 @@ class SecurityApi:
 
         Switches several portal modules on or off in one call: `items` carries an entry per module, its `key` the  module GUID and its `value` the new enabled flag. The caller needs the portal-settings right of a DocSpace  administrator, and the call is answered with 403 on an open portal, where everyone is admitted and per-module  rules would mean nothing. Every key has to be a GUID; anything else is rejected as an invalid request, and a  module listed twice is applied once, from its first entry. This operation carries no subject list of its own:  switching a product module on restores the users and groups it was last restricted to, while every other case  is stored as a plain allow or deny for everyone, so use `PUT api/2.0/settings/security` when the allow-list  itself has to change. The batch is recorded in the audit trail as one list update rather than module by  module. The answer is the resulting configuration of every module listed, in the shape  `GET api/2.0/settings/security` returns.
 
-        :param web_items_security_requests_dto:
-        :type web_items_security_requests_dto: WebItemsSecurityRequestsDto
+        :param web_items_security_request_dto:
+        :type web_items_security_request_dto: WebItemsSecurityRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1977,7 +1986,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._set_access_to_web_items_serialize(
-            web_items_security_requests_dto=web_items_security_requests_dto,
+            web_items_security_request_dto=web_items_security_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1986,11 +1995,11 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2004,7 +2013,7 @@ class SecurityApi:
 
     def _set_access_to_web_items_serialize(
         self,
-        web_items_security_requests_dto,
+        web_items_security_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -2030,8 +2039,8 @@ class SecurityApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if web_items_security_requests_dto is not None:
-            _body_params = web_items_security_requests_dto
+        if web_items_security_request_dto is not None:
+            _body_params = web_items_security_request_dto
 
 
         # set the HTTP header `Accept`
@@ -2090,7 +2099,7 @@ class SecurityApi:
     @validate_call
     def set_product_administrator(
         self,
-        security_requests_dto: Optional[SecurityRequestsDto] = None,
+        security_request_dto: Optional[SecurityRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2108,8 +2117,8 @@ class SecurityApi:
 
         Promotes a portal member to administrator of one module, or takes that role away, according to the  `administrator` flag; the all-zero product GUID targets the DocSpace administrator role, which covers the  whole portal. The caller needs the portal-settings right of a DocSpace administrator, and granting the  portal-wide role additionally requires being the portal owner - anyone else is refused with 403. A free cloud  plan does not offer the option at all and answers 402, as does a promotion for which no paid seat is left,  since promoting a guest or a plain member turns them into a paid one. Taking the portal-wide role away also  removes the member from every product group. The change is immediate, portal-wide, recorded in the audit  trail, and sending the same body twice changes nothing further; it never creates a user, so invite the member  first. The answer echoes the identifiers and the flag as stored - re-read membership with  `GET api/2.0/settings/security/administrator`.
 
-        :param security_requests_dto:
-        :type security_requests_dto: SecurityRequestsDto
+        :param security_request_dto:
+        :type security_request_dto: SecurityRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2133,7 +2142,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._set_product_administrator_serialize(
-            security_requests_dto=security_requests_dto,
+            security_request_dto=security_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2142,12 +2151,12 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2166,7 +2175,7 @@ class SecurityApi:
     @validate_call
     def set_product_administrator_with_http_info(
         self,
-        security_requests_dto: Optional[SecurityRequestsDto] = None,
+        security_request_dto: Optional[SecurityRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2184,8 +2193,8 @@ class SecurityApi:
 
         Promotes a portal member to administrator of one module, or takes that role away, according to the  `administrator` flag; the all-zero product GUID targets the DocSpace administrator role, which covers the  whole portal. The caller needs the portal-settings right of a DocSpace administrator, and granting the  portal-wide role additionally requires being the portal owner - anyone else is refused with 403. A free cloud  plan does not offer the option at all and answers 402, as does a promotion for which no paid seat is left,  since promoting a guest or a plain member turns them into a paid one. Taking the portal-wide role away also  removes the member from every product group. The change is immediate, portal-wide, recorded in the audit  trail, and sending the same body twice changes nothing further; it never creates a user, so invite the member  first. The answer echoes the identifiers and the flag as stored - re-read membership with  `GET api/2.0/settings/security/administrator`.
 
-        :param security_requests_dto:
-        :type security_requests_dto: SecurityRequestsDto
+        :param security_request_dto:
+        :type security_request_dto: SecurityRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2209,7 +2218,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._set_product_administrator_serialize(
-            security_requests_dto=security_requests_dto,
+            security_request_dto=security_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2218,12 +2227,12 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2242,7 +2251,7 @@ class SecurityApi:
     @validate_call
     def set_product_administrator_without_preload_content(
         self,
-        security_requests_dto: Optional[SecurityRequestsDto] = None,
+        security_request_dto: Optional[SecurityRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2260,8 +2269,8 @@ class SecurityApi:
 
         Promotes a portal member to administrator of one module, or takes that role away, according to the  `administrator` flag; the all-zero product GUID targets the DocSpace administrator role, which covers the  whole portal. The caller needs the portal-settings right of a DocSpace administrator, and granting the  portal-wide role additionally requires being the portal owner - anyone else is refused with 403. A free cloud  plan does not offer the option at all and answers 402, as does a promotion for which no paid seat is left,  since promoting a guest or a plain member turns them into a paid one. Taking the portal-wide role away also  removes the member from every product group. The change is immediate, portal-wide, recorded in the audit  trail, and sending the same body twice changes nothing further; it never creates a user, so invite the member  first. The answer echoes the identifiers and the flag as stored - re-read membership with  `GET api/2.0/settings/security/administrator`.
 
-        :param security_requests_dto:
-        :type security_requests_dto: SecurityRequestsDto
+        :param security_request_dto:
+        :type security_request_dto: SecurityRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2285,7 +2294,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._set_product_administrator_serialize(
-            security_requests_dto=security_requests_dto,
+            security_request_dto=security_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2294,12 +2303,12 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductAdministratorWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2313,7 +2322,7 @@ class SecurityApi:
 
     def _set_product_administrator_serialize(
         self,
-        security_requests_dto,
+        security_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -2339,8 +2348,8 @@ class SecurityApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if security_requests_dto is not None:
-            _body_params = security_requests_dto
+        if security_request_dto is not None:
+            _body_params = security_request_dto
 
 
         # set the HTTP header `Accept`
@@ -2399,7 +2408,7 @@ class SecurityApi:
     @validate_call
     def set_web_item_security(
         self,
-        web_item_security_requests_dto: Optional[WebItemSecurityRequestsDto] = None,
+        web_item_security_request_dto: Optional[WebItemSecurityRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2417,8 +2426,8 @@ class SecurityApi:
 
         Replaces the access rules of one portal module: `id` names the module, `enabled` says whether it may be  opened, and `subjects` lists the users and groups the rule is stored for. The caller needs the portal-settings  right of a DocSpace administrator, and the call is answered with 403 on an open portal, where everyone is  admitted and per-module rules would mean nothing. `id` has to be a GUID; anything else is rejected as an  invalid request. The rules stored before are dropped rather than extended, so send the full list of subjects  every time. Watch the empty cases: leaving `subjects` out applies `enabled` to everyone, while an empty  `subjects` array is stored as access for everyone whatever `enabled` says. The change is recorded in the audit  trail unless `subjects` was left out entirely. The answer is the module's resulting configuration as a  single-entry list, in the shape `GET api/2.0/settings/security` returns. To switch several modules at once use  `PUT api/2.0/settings/security/access`.
 
-        :param web_item_security_requests_dto:
-        :type web_item_security_requests_dto: WebItemSecurityRequestsDto
+        :param web_item_security_request_dto:
+        :type web_item_security_request_dto: WebItemSecurityRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2442,7 +2451,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._set_web_item_security_serialize(
-            web_item_security_requests_dto=web_item_security_requests_dto,
+            web_item_security_request_dto=web_item_security_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2451,11 +2460,11 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2474,7 +2483,7 @@ class SecurityApi:
     @validate_call
     def set_web_item_security_with_http_info(
         self,
-        web_item_security_requests_dto: Optional[WebItemSecurityRequestsDto] = None,
+        web_item_security_request_dto: Optional[WebItemSecurityRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2492,8 +2501,8 @@ class SecurityApi:
 
         Replaces the access rules of one portal module: `id` names the module, `enabled` says whether it may be  opened, and `subjects` lists the users and groups the rule is stored for. The caller needs the portal-settings  right of a DocSpace administrator, and the call is answered with 403 on an open portal, where everyone is  admitted and per-module rules would mean nothing. `id` has to be a GUID; anything else is rejected as an  invalid request. The rules stored before are dropped rather than extended, so send the full list of subjects  every time. Watch the empty cases: leaving `subjects` out applies `enabled` to everyone, while an empty  `subjects` array is stored as access for everyone whatever `enabled` says. The change is recorded in the audit  trail unless `subjects` was left out entirely. The answer is the module's resulting configuration as a  single-entry list, in the shape `GET api/2.0/settings/security` returns. To switch several modules at once use  `PUT api/2.0/settings/security/access`.
 
-        :param web_item_security_requests_dto:
-        :type web_item_security_requests_dto: WebItemSecurityRequestsDto
+        :param web_item_security_request_dto:
+        :type web_item_security_request_dto: WebItemSecurityRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2517,7 +2526,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._set_web_item_security_serialize(
-            web_item_security_requests_dto=web_item_security_requests_dto,
+            web_item_security_request_dto=web_item_security_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2526,11 +2535,11 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2549,7 +2558,7 @@ class SecurityApi:
     @validate_call
     def set_web_item_security_without_preload_content(
         self,
-        web_item_security_requests_dto: Optional[WebItemSecurityRequestsDto] = None,
+        web_item_security_request_dto: Optional[WebItemSecurityRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2567,8 +2576,8 @@ class SecurityApi:
 
         Replaces the access rules of one portal module: `id` names the module, `enabled` says whether it may be  opened, and `subjects` lists the users and groups the rule is stored for. The caller needs the portal-settings  right of a DocSpace administrator, and the call is answered with 403 on an open portal, where everyone is  admitted and per-module rules would mean nothing. `id` has to be a GUID; anything else is rejected as an  invalid request. The rules stored before are dropped rather than extended, so send the full list of subjects  every time. Watch the empty cases: leaving `subjects` out applies `enabled` to everyone, while an empty  `subjects` array is stored as access for everyone whatever `enabled` says. The change is recorded in the audit  trail unless `subjects` was left out entirely. The answer is the module's resulting configuration as a  single-entry list, in the shape `GET api/2.0/settings/security` returns. To switch several modules at once use  `PUT api/2.0/settings/security/access`.
 
-        :param web_item_security_requests_dto:
-        :type web_item_security_requests_dto: WebItemSecurityRequestsDto
+        :param web_item_security_request_dto:
+        :type web_item_security_request_dto: WebItemSecurityRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2592,7 +2601,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._set_web_item_security_serialize(
-            web_item_security_requests_dto=web_item_security_requests_dto,
+            web_item_security_request_dto=web_item_security_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2601,11 +2610,11 @@ class SecurityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SecurityArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2619,7 +2628,7 @@ class SecurityApi:
 
     def _set_web_item_security_serialize(
         self,
-        web_item_security_requests_dto,
+        web_item_security_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -2645,8 +2654,8 @@ class SecurityApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if web_item_security_requests_dto is not None:
-            _body_params = web_item_security_requests_dto
+        if web_item_security_request_dto is not None:
+            _body_params = web_item_security_request_dto
 
 
         # set the HTTP header `Accept`
@@ -2705,7 +2714,7 @@ class SecurityApi:
     @validate_call
     def update_password_settings(
         self,
-        password_settings_requests_dto: Optional[PasswordSettingsRequestsDto] = None,
+        password_settings_request_dto: Optional[PasswordSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2723,8 +2732,8 @@ class SecurityApi:
 
         Replaces the password policy of the whole portal with the four values sent: `minLength` and the three flags  that demand an uppercase letter, a digit and a special symbol. There is no partial update - a flag left out of  the body is stored as `false` - so read the current policy with `GET api/2.0/settings/security/password` and  send it back with your change applied. The caller needs the portal-settings right of a DocSpace administrator,  otherwise the call is refused. `minLength` has to sit between the floor the installation is configured with, 8  characters unless it was changed, and the ceiling of 30; anything outside is rejected as an invalid request.  The new policy applies to passwords set from now on: existing passwords keep working until their owners change  them, and nobody is asked to renew. The change is portal-wide, recorded in the audit trail, and sending the  same body twice changes nothing further. The answer is the stored policy with its regular expressions.
 
-        :param password_settings_requests_dto:
-        :type password_settings_requests_dto: PasswordSettingsRequestsDto
+        :param password_settings_request_dto:
+        :type password_settings_request_dto: PasswordSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2748,7 +2757,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._update_password_settings_serialize(
-            password_settings_requests_dto=password_settings_requests_dto,
+            password_settings_request_dto=password_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2758,6 +2767,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2779,7 +2789,7 @@ class SecurityApi:
     @validate_call
     def update_password_settings_with_http_info(
         self,
-        password_settings_requests_dto: Optional[PasswordSettingsRequestsDto] = None,
+        password_settings_request_dto: Optional[PasswordSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2797,8 +2807,8 @@ class SecurityApi:
 
         Replaces the password policy of the whole portal with the four values sent: `minLength` and the three flags  that demand an uppercase letter, a digit and a special symbol. There is no partial update - a flag left out of  the body is stored as `false` - so read the current policy with `GET api/2.0/settings/security/password` and  send it back with your change applied. The caller needs the portal-settings right of a DocSpace administrator,  otherwise the call is refused. `minLength` has to sit between the floor the installation is configured with, 8  characters unless it was changed, and the ceiling of 30; anything outside is rejected as an invalid request.  The new policy applies to passwords set from now on: existing passwords keep working until their owners change  them, and nobody is asked to renew. The change is portal-wide, recorded in the audit trail, and sending the  same body twice changes nothing further. The answer is the stored policy with its regular expressions.
 
-        :param password_settings_requests_dto:
-        :type password_settings_requests_dto: PasswordSettingsRequestsDto
+        :param password_settings_request_dto:
+        :type password_settings_request_dto: PasswordSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2822,7 +2832,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._update_password_settings_serialize(
-            password_settings_requests_dto=password_settings_requests_dto,
+            password_settings_request_dto=password_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2832,6 +2842,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2853,7 +2864,7 @@ class SecurityApi:
     @validate_call
     def update_password_settings_without_preload_content(
         self,
-        password_settings_requests_dto: Optional[PasswordSettingsRequestsDto] = None,
+        password_settings_request_dto: Optional[PasswordSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2871,8 +2882,8 @@ class SecurityApi:
 
         Replaces the password policy of the whole portal with the four values sent: `minLength` and the three flags  that demand an uppercase letter, a digit and a special symbol. There is no partial update - a flag left out of  the body is stored as `false` - so read the current policy with `GET api/2.0/settings/security/password` and  send it back with your change applied. The caller needs the portal-settings right of a DocSpace administrator,  otherwise the call is refused. `minLength` has to sit between the floor the installation is configured with, 8  characters unless it was changed, and the ceiling of 30; anything outside is rejected as an invalid request.  The new policy applies to passwords set from now on: existing passwords keep working until their owners change  them, and nobody is asked to renew. The change is portal-wide, recorded in the audit trail, and sending the  same body twice changes nothing further. The answer is the stored policy with its regular expressions.
 
-        :param password_settings_requests_dto:
-        :type password_settings_requests_dto: PasswordSettingsRequestsDto
+        :param password_settings_request_dto:
+        :type password_settings_request_dto: PasswordSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2896,7 +2907,7 @@ class SecurityApi:
         """ # noqa: E501
 
         _param = self._update_password_settings_serialize(
-            password_settings_requests_dto=password_settings_requests_dto,
+            password_settings_request_dto=password_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2906,6 +2917,7 @@ class SecurityApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PasswordSettingsWrapper",
             '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2922,7 +2934,7 @@ class SecurityApi:
 
     def _update_password_settings_serialize(
         self,
-        password_settings_requests_dto,
+        password_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -2948,8 +2960,8 @@ class SecurityApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if password_settings_requests_dto is not None:
-            _body_params = password_settings_requests_dto
+        if password_settings_request_dto is not None:
+            _body_params = password_settings_request_dto
 
 
         # set the HTTP header `Accept`

@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **ai_attachments_delete**
-> AiSuccessResponse ai_attachments_delete(body)
+> AiSuccessResponse ai_attachments_delete(ai_attachments_delete_request)
 
 Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
 
@@ -26,7 +26,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| The ID of the attachment to delete, as a bare JSON string. | 
+ **ai_attachments_delete_request** | **str**| The ID of the attachment to delete, as a bare JSON string. | 
 
 ### Return type
 
@@ -62,11 +62,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AttachmentsApi(api_client)
-    body = 'body_example' # str | The ID of the attachment to delete, as a bare JSON string.
+    ai_attachments_delete_request = 'ai_attachments_delete_request_example' # str | The ID of the attachment to delete, as a bare JSON string.
 
     try:
         # Delete one attachment
-        api_response = api_instance.ai_attachments_delete(body)
+        api_response = api_instance.ai_attachments_delete(ai_attachments_delete_request)
         print("The response of AttachmentsApi->ai_attachments_delete:\n")
         pprint(api_response)
     except Exception as e:
@@ -86,14 +86,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Confirms the request was accepted, whether or not anything was deleted. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_attachments_delete_many**
-> AiSuccessResponse ai_attachments_delete_many(request_body)
+> AiSuccessResponse ai_attachments_delete_many(ai_attachments_delete_many_request)
 
 Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
 
@@ -104,7 +104,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**List[str]**](str.md)| The IDs of the attachments to delete, as a bare JSON array of strings. | 
+ **ai_attachments_delete_many_request** | [**List[str]**](str.md)| The IDs of the attachments to delete, as a bare JSON array of strings. | 
 
 ### Return type
 
@@ -140,11 +140,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AttachmentsApi(api_client)
-    request_body = ['request_body_example'] # List[str] | The IDs of the attachments to delete, as a bare JSON array of strings.
+    ai_attachments_delete_many_request = ['ai_attachments_delete_many_request_example'] # List[str] | The IDs of the attachments to delete, as a bare JSON array of strings.
 
     try:
         # Delete many
-        api_response = api_instance.ai_attachments_delete_many(request_body)
+        api_response = api_instance.ai_attachments_delete_many(ai_attachments_delete_many_request)
         print("The response of AttachmentsApi->ai_attachments_delete_many:\n")
         pprint(api_response)
     except Exception as e:
@@ -164,14 +164,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Confirms the request was accepted, whether or not anything was deleted. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_attachments_get**
-> AiAttachment ai_attachments_get(body)
+> AiAttachment ai_attachments_get(ai_attachments_get_request)
 
 Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
 
@@ -182,7 +182,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| The ID of the attachment to read, as a bare JSON string. | 
+ **ai_attachments_get_request** | **str**| The ID of the attachment to read, as a bare JSON string. | 
 
 ### Return type
 
@@ -218,11 +218,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AttachmentsApi(api_client)
-    body = 'body_example' # str | The ID of the attachment to read, as a bare JSON string.
+    ai_attachments_get_request = 'ai_attachments_get_request_example' # str | The ID of the attachment to read, as a bare JSON string.
 
     try:
         # Get one attachment
-        api_response = api_instance.ai_attachments_get(body)
+        api_response = api_instance.ai_attachments_get(ai_attachments_get_request)
         print("The response of AttachmentsApi->ai_attachments_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -243,14 +243,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | The attachment, or a null body when no attachment has that ID. |  -  |
 **400** | The attachment ID is missing. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_attachments_get_many**
-> List[Optional[AiAttachment]] ai_attachments_get_many(request_body)
+> List[Optional[AiAttachment]] ai_attachments_get_many(ai_attachments_get_many_request)
 
 Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
 
@@ -261,7 +261,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**List[str]**](str.md)| The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. | 
+ **ai_attachments_get_many_request** | [**List[str]**](str.md)| The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. | 
 
 ### Return type
 
@@ -297,11 +297,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AttachmentsApi(api_client)
-    request_body = ['request_body_example'] # List[str] | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
+    ai_attachments_get_many_request = ['ai_attachments_get_many_request_example'] # List[str] | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
 
     try:
         # Get many
-        api_response = api_instance.ai_attachments_get_many(request_body)
+        api_response = api_instance.ai_attachments_get_many(ai_attachments_get_many_request)
         print("The response of AttachmentsApi->ai_attachments_get_many:\n")
         pprint(api_response)
     except Exception as e:
@@ -322,14 +322,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | The attachments, aligned by position with the IDs that were sent. A missing one leaves its slot empty. |  -  |
 **400** | The list of attachment IDs is malformed. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_attachments_get_suggested_questions**
-> AiSuccessResponse ai_attachments_get_suggested_questions(request_body)
+> AiSuccessResponse ai_attachments_get_suggested_questions(ai_attachments_get_suggested_questions_request)
 
 
 
@@ -340,7 +340,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**Dict[str, Optional[object]]**](object.md)|  | 
+ **ai_attachments_get_suggested_questions_request** | [**Dict[str, Optional[object]]**](object.md)|  | 
 
 ### Return type
 
@@ -376,11 +376,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AttachmentsApi(api_client)
-    request_body = None # Dict[str, Optional[object]] | 
+    ai_attachments_get_suggested_questions_request = None # Dict[str, Optional[object]] | 
 
     try:
         # Get suggested questions
-        api_response = api_instance.ai_attachments_get_suggested_questions(request_body)
+        api_response = api_instance.ai_attachments_get_suggested_questions(ai_attachments_get_suggested_questions_request)
         print("The response of AttachmentsApi->ai_attachments_get_suggested_questions:\n")
         pprint(api_response)
     except Exception as e:
@@ -400,7 +400,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -480,7 +480,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | Confirms the attachments are now bound to the message. |  -  |
 **400** | The attachment or message reference is malformed. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **404** | The message or the attachment does not exist. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
@@ -559,9 +559,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The stored draft, whose ID links it to a message later. |  -  |
-**400** | The attachment payload is malformed. |  -  |
+**400** | The attachment payload is malformed, or `input.path` is missing or empty. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -641,7 +641,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | The stored drafts, in the order they were sent. |  -  |
 **400** | `inputs` is not an array, or one of its entries is malformed. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 

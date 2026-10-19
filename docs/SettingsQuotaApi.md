@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **get_user_quota_settings**
-> TenantUserQuotaSettingsWrapper get_user_quota_settings()
+> EntityQuotaSettingsWrapper get_user_quota_settings()
 
 Returns the portal's per-user default storage quota: whether it is enabled and, if so, its size in bytes.
 Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other authenticated role, and an
@@ -28,7 +28,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**TenantUserQuotaSettingsWrapper**](TenantUserQuotaSettingsWrapper.md)
+[**EntityQuotaSettingsWrapper**](EntityQuotaSettingsWrapper.md)
 
 ### Authorization
 
@@ -39,7 +39,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.tenant_user_quota_settings_wrapper import TenantUserQuotaSettingsWrapper
+from docspace_api_sdk.models.entity_quota_settings_wrapper import EntityQuotaSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -82,6 +82,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Current per-user default storage quota settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The per-user quota settings have not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -91,7 +93,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_ai_agent_quota_settings**
-> TenantAiAgentQuotaSettingsWrapper save_ai_agent_quota_settings(quota_settings_requests_dto=quota_settings_requests_dto)
+> EntityQuotaSettingsWrapper save_ai_agent_quota_settings(quota_settings_request_dto=quota_settings_request_dto)
 
 Sets the portal's default storage quota for AI agents, applied as the starting limit for newly created agents.
 Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's
@@ -108,11 +110,11 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quota_settings_requests_dto** | [**QuotaSettingsRequestsDto**](QuotaSettingsRequestsDto.md)|  | [optional] 
+ **quota_settings_request_dto** | [**QuotaSettingsRequestDto**](QuotaSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
-[**TenantAiAgentQuotaSettingsWrapper**](TenantAiAgentQuotaSettingsWrapper.md)
+[**EntityQuotaSettingsWrapper**](EntityQuotaSettingsWrapper.md)
 
 ### Authorization
 
@@ -123,8 +125,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.quota_settings_requests_dto import QuotaSettingsRequestsDto
-from docspace_api_sdk.models.tenant_ai_agent_quota_settings_wrapper import TenantAiAgentQuotaSettingsWrapper
+from docspace_api_sdk.models.entity_quota_settings_wrapper import EntityQuotaSettingsWrapper
+from docspace_api_sdk.models.quota_settings_request_dto import QuotaSettingsRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -145,11 +147,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.QuotaApi(api_client)
-    quota_settings_requests_dto = docspace_api_sdk.QuotaSettingsRequestsDto() # QuotaSettingsRequestsDto |  (optional)
+    quota_settings_request_dto = docspace_api_sdk.QuotaSettingsRequestDto() # QuotaSettingsRequestDto |  (optional)
 
     try:
         # Save the AI Agent quota settings
-        api_response = api_instance.save_ai_agent_quota_settings(quota_settings_requests_dto=quota_settings_requests_dto)
+        api_response = api_instance.save_ai_agent_quota_settings(quota_settings_request_dto=quota_settings_request_dto)
         print("The response of QuotaApi->save_ai_agent_quota_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -168,18 +170,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Saved default AI agent storage quota settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `defaultQuota` |  -  |
 **402** | The portal's pricing plan does not include the statistics feature required for AI agent quotas |  -  |
+**403** | The caller has no portal-settings right, or `defaultQuota` is not a JSON number |  -  |
+**500** | The `defaultQuota` is not a whole number within the 64-bit range, or exceeds the portal's total storage quota or, on a Standalone installation with a portal-wide quota enabled, that quota |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_room_quota_settings**
-> TenantRoomQuotaSettingsWrapper save_room_quota_settings(quota_settings_requests_dto=quota_settings_requests_dto)
+> EntityQuotaSettingsWrapper save_room_quota_settings(quota_settings_request_dto=quota_settings_request_dto)
 
 Sets the portal's default per-room storage quota, applied to newly created rooms as their starting limit.
 Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's
@@ -196,11 +199,11 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quota_settings_requests_dto** | [**QuotaSettingsRequestsDto**](QuotaSettingsRequestsDto.md)|  | [optional] 
+ **quota_settings_request_dto** | [**QuotaSettingsRequestDto**](QuotaSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
-[**TenantRoomQuotaSettingsWrapper**](TenantRoomQuotaSettingsWrapper.md)
+[**EntityQuotaSettingsWrapper**](EntityQuotaSettingsWrapper.md)
 
 ### Authorization
 
@@ -211,8 +214,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.quota_settings_requests_dto import QuotaSettingsRequestsDto
-from docspace_api_sdk.models.tenant_room_quota_settings_wrapper import TenantRoomQuotaSettingsWrapper
+from docspace_api_sdk.models.entity_quota_settings_wrapper import EntityQuotaSettingsWrapper
+from docspace_api_sdk.models.quota_settings_request_dto import QuotaSettingsRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -233,11 +236,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.QuotaApi(api_client)
-    quota_settings_requests_dto = docspace_api_sdk.QuotaSettingsRequestsDto() # QuotaSettingsRequestsDto |  (optional)
+    quota_settings_request_dto = docspace_api_sdk.QuotaSettingsRequestDto() # QuotaSettingsRequestDto |  (optional)
 
     try:
         # Save the room quota settings
-        api_response = api_instance.save_room_quota_settings(quota_settings_requests_dto=quota_settings_requests_dto)
+        api_response = api_instance.save_room_quota_settings(quota_settings_request_dto=quota_settings_request_dto)
         print("The response of QuotaApi->save_room_quota_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -256,18 +259,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Saved default per-room storage quota settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `defaultQuota` |  -  |
 **402** | The portal's pricing plan does not include the statistics feature required for room quotas |  -  |
+**403** | The caller has no portal-settings right, or `defaultQuota` is not a JSON number |  -  |
+**500** | The `defaultQuota` is not a whole number within the 64-bit range, or exceeds the portal's total storage quota or, on a Standalone installation with a portal-wide quota enabled, that quota |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_tenant_quota_settings**
-> TenantQuotaSettingsWrapper set_tenant_quota_settings(tenant_quota_settings_requests_dto=tenant_quota_settings_requests_dto)
+> TenantQuotaSettingsWrapper set_tenant_quota_settings(tenant_quota_settings_request_dto=tenant_quota_settings_request_dto)
 
 Sets or removes the storage quota for a given tenant. Available only on a Standalone (self-hosted)
 installation; on SaaS the call is always refused. Requires a DocSpace administrator, and the portal's plan
@@ -283,7 +287,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_quota_settings_requests_dto** | [**TenantQuotaSettingsRequestsDto**](TenantQuotaSettingsRequestsDto.md)|  | [optional] 
+ **tenant_quota_settings_request_dto** | [**TenantQuotaSettingsRequestDto**](TenantQuotaSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -298,7 +302,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.tenant_quota_settings_requests_dto import TenantQuotaSettingsRequestsDto
+from docspace_api_sdk.models.tenant_quota_settings_request_dto import TenantQuotaSettingsRequestDto
 from docspace_api_sdk.models.tenant_quota_settings_wrapper import TenantQuotaSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -320,11 +324,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.QuotaApi(api_client)
-    tenant_quota_settings_requests_dto = docspace_api_sdk.TenantQuotaSettingsRequestsDto() # TenantQuotaSettingsRequestsDto |  (optional)
+    tenant_quota_settings_request_dto = docspace_api_sdk.TenantQuotaSettingsRequestDto() # TenantQuotaSettingsRequestDto |  (optional)
 
     try:
         # Save the tenant quota settings
-        api_response = api_instance.set_tenant_quota_settings(tenant_quota_settings_requests_dto=tenant_quota_settings_requests_dto)
+        api_response = api_instance.set_tenant_quota_settings(tenant_quota_settings_request_dto=tenant_quota_settings_request_dto)
         print("The response of QuotaApi->set_tenant_quota_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -343,12 +347,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Saved tenant storage quota settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `tenantId` |  -  |
 **402** | The portal's pricing plan does not include the statistics feature required for tenant quotas |  -  |
-**405** | The caller is not a DocSpace administrator, or the portal is not a Standalone installation |  -  |
+**403** | The caller has no portal-settings right |  -  |
+**415** | The caller is not a DocSpace administrator, or the portal is not a Standalone installation |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

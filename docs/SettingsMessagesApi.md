@@ -91,6 +91,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A localized message confirming that the administrator message setting has been saved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -101,7 +102,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **send_admin_mail**
-> StringWrapper send_admin_mail(admin_message_settings_requests_dto=admin_message_settings_requests_dto)
+> StringWrapper send_admin_mail(admin_message_settings_request_dto=admin_message_settings_request_dto)
 
 Sends a message from someone who cannot get into the portal to its administrators - the contact form the
 sign-in page offers unauthenticated visitors. No token is needed. The form has to be published first with
@@ -123,7 +124,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **admin_message_settings_requests_dto** | [**AdminMessageSettingsRequestsDto**](AdminMessageSettingsRequestsDto.md)|  | [optional] 
+ **admin_message_settings_request_dto** | [**AdminMessageSettingsRequestDto**](AdminMessageSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -138,7 +139,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.admin_message_settings_requests_dto import AdminMessageSettingsRequestsDto
+from docspace_api_sdk.models.admin_message_settings_request_dto import AdminMessageSettingsRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -160,11 +161,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.MessagesApi(api_client)
-    admin_message_settings_requests_dto = docspace_api_sdk.AdminMessageSettingsRequestsDto() # AdminMessageSettingsRequestsDto |  (optional)
+    admin_message_settings_request_dto = docspace_api_sdk.AdminMessageSettingsRequestDto() # AdminMessageSettingsRequestDto |  (optional)
 
     try:
         # Send a message to the administrator
-        api_response = api_instance.send_admin_mail(admin_message_settings_requests_dto=admin_message_settings_requests_dto)
+        api_response = api_instance.send_admin_mail(admin_message_settings_request_dto=admin_message_settings_request_dto)
         print("The response of MessagesApi->send_admin_mail:\n")
         pprint(api_response)
     except Exception as e:
@@ -183,16 +184,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A localized message confirming that the message has been queued for the portal administrators |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The email address is malformed, or the message is empty once its markup is stripped |  -  |
+**400** | The request body cannot be read or has no `email` or `message`, the email address is malformed or longer than 255 characters, or the message is longer than 255 characters or empty once its markup is stripped |  -  |
+**403** | The caller is not signed in, the installation has a CAPTCHA configured, and `recaptchaResponse` is missing or not accepted |  -  |
 **429** | Too many contact attempts came from the same address within the rate-limit window |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
-**500** | Internal Server Error. |  -  |
+**500** | The contact form is switched off and the portal's payment has not lapsed |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **send_join_invite_mail**
-> StringWrapper send_join_invite_mail(admin_message_base_settings_requests_dto=admin_message_base_settings_requests_dto)
+> StringWrapper send_join_invite_mail(admin_message_base_settings_request_dto=admin_message_base_settings_request_dto)
 
 Sends an invitation email with a join link to the address in the request - the self-registration the sign-in
 page's register link performs. No token is needed. The portal has to publish a trusted-domain policy first,
@@ -214,7 +216,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **admin_message_base_settings_requests_dto** | [**AdminMessageBaseSettingsRequestsDto**](AdminMessageBaseSettingsRequestsDto.md)|  | [optional] 
+ **admin_message_base_settings_request_dto** | [**AdminMessageBaseSettingsRequestDto**](AdminMessageBaseSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -229,7 +231,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto
+from docspace_api_sdk.models.admin_message_base_settings_request_dto import AdminMessageBaseSettingsRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -251,11 +253,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.MessagesApi(api_client)
-    admin_message_base_settings_requests_dto = docspace_api_sdk.AdminMessageBaseSettingsRequestsDto() # AdminMessageBaseSettingsRequestsDto |  (optional)
+    admin_message_base_settings_request_dto = docspace_api_sdk.AdminMessageBaseSettingsRequestDto() # AdminMessageBaseSettingsRequestDto |  (optional)
 
     try:
         # Send an invitation email
-        api_response = api_instance.send_join_invite_mail(admin_message_base_settings_requests_dto=admin_message_base_settings_requests_dto)
+        api_response = api_instance.send_join_invite_mail(admin_message_base_settings_request_dto=admin_message_base_settings_request_dto)
         print("The response of MessagesApi->send_join_invite_mail:\n")
         pprint(api_response)
     except Exception as e:
@@ -274,11 +276,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A localized message confirming that the invitation with the join link has been sent |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The email address is malformed or internationalized, lies outside the trusted domains, or already belongs to a member of the portal |  -  |
+**400** | The request body cannot be read or has no `email`, the email address is malformed, internationalized or longer than 255 characters, lies outside the trusted domains, or already belongs to a member of the portal |  -  |
 **403** | The portal is not accepting requests while it is being restored, transferred or encrypted |  -  |
 **405** | The portal publishes no trusted-domain policy, so it has nothing to join |  -  |
-**429** | Too many invitation requests came from the same network address |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
+**500** | Eleven invitation requests from the same network address have already been counted, each less than two minutes after the one before |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

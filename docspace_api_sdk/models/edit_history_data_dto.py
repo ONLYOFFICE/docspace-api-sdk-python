@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.edit_history_url import EditHistoryUrl
+from docspace_api_sdk.models.edit_history_url_dto import EditHistoryUrlDto
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +33,7 @@ class EditHistoryDataDto(BaseModel):
     """ # noqa: E501
     changes_url: Optional[StrictStr] = Field(default=None, description="The address the editor downloads the recorded changes of this revision from. It is filled in only when the  portal has a change record for the revision; without it the revision can be shown as a whole document but not  as a set of changes.", alias="changesUrl", json_schema_extra={"examples": ["https://example.com/changes"]})
     key: Optional[StrictStr] = Field(description="The document key of the revision being shown, which the editing service uses to identify it and to reuse the  copy it has cached.", json_schema_extra={"examples": ["doc1"]})
-    previous: Optional[EditHistoryUrl] = Field(default=None, description="The revision this one is compared against. It arrives together with `changesUrl`, and when the revision shown  is the first one the file ever had, it points at the blank template the file was created from instead of at an  earlier revision.")
+    previous: Optional[EditHistoryUrlDto] = Field(default=None, description="The revision this one is compared against. It arrives together with `changesUrl`, and when the revision shown  is the first one the file ever had, it points at the blank template the file was created from instead of at an  earlier revision.")
     token: Optional[StrictStr] = Field(default=None, description="The signature over the whole answer, as a JSON Web Token that the editing service verifies before it accepts  the addresses in it. Empty when the portal runs without a document-service secret.", json_schema_extra={"examples": ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXJzaW9uIjoxfQ.7HxQ0Zx1"]})
     url: Optional[StrictStr] = Field(description="The address the content of this revision is served from. It is meant for the editing service and carries its  own key, which is valid for a limited time.", json_schema_extra={"examples": ["https://example.com/file.docx"]})
     version: StrictInt = Field(description="Echoes the revision that was asked for, so it reports 0 when the request named no version and the current  revision was taken.", json_schema_extra={"examples": [1]})
@@ -122,7 +122,7 @@ class EditHistoryDataDto(BaseModel):
         _obj = cls.model_validate({
             "changesUrl": obj.get("changesUrl"),
             "key": obj.get("key"),
-            "previous": EditHistoryUrl.from_dict(obj["previous"]) if obj.get("previous") is not None else None,
+            "previous": EditHistoryUrlDto.from_dict(obj["previous"]) if obj.get("previous") is not None else None,
             "token": obj.get("token"),
             "url": obj.get("url"),
             "version": obj.get("version"),

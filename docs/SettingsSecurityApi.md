@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**get_enabled_modules**](#get_enabled_modules) | **GET** /api/2.0/settings/security/modules | Get enabled modules
 [**get_is_product_administrator**](#get_is_product_administrator) | **GET** /api/2.0/settings/security/administrator | Check product administrator
 [**get_password_settings**](#get_password_settings) | **GET** /api/2.0/settings/security/password | Get password settings
-[**get_product_administrators**](#get_product_administrators) | **GET** /api/2.0/settings/security/administrator/{productid} | Get product administrators
+[**get_product_administrators**](#get_product_administrators) | **GET** /api/2.0/settings/security/administrator/{productId} | Get product administrators
 [**get_web_item_security_info**](#get_web_item_security_info) | **GET** /api/2.0/settings/security/{id} | Check module availability
 [**get_web_item_settings_security_info**](#get_web_item_settings_security_info) | **GET** /api/2.0/settings/security | Get module access settings
 [**set_access_to_web_items**](#set_access_to_web_items) | **PUT** /api/2.0/settings/security/access | Set access to modules in bulk
@@ -100,7 +100,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_is_product_administrator**
-> ProductAdministratorWrapper get_is_product_administrator(productid, userid)
+> ProductAdministratorWrapper get_is_product_administrator(product_id, user_id)
 
 Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`
 flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks
@@ -111,7 +111,7 @@ is reported as an administrator of every module, whatever the module identifier 
 user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.
 The verdict is read out of group membership alone and says nothing about whether the module is enabled for
 this portal, which `GET api/2.0/settings/security/{id}` reports. Use
-`GET api/2.0/settings/security/administrator/{productid}` to list everyone who administers a module, and
+`GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and
 `PUT api/2.0/settings/security/administrator` to change the membership.
 
 For more information, see [api.onlyoffice.com]().
@@ -121,8 +121,8 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **productid** | **UUID**| The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | 
- **userid** | **UUID**| The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | 
+ **product_id** | **UUID**| The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | 
+ **user_id** | **UUID**| The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | 
 
 ### Return type
 
@@ -158,12 +158,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SecurityApi(api_client)
-    productid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
-    userid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
+    product_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
+    user_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
 
     try:
         # Check product administrator
-        api_response = api_instance.get_is_product_administrator(productid, userid)
+        api_response = api_instance.get_is_product_administrator(product_id, user_id)
         print("The response of SecurityApi->get_is_product_administrator:\n")
         pprint(api_response)
     except Exception as e:
@@ -182,6 +182,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The module and the user asked about together with the flag that says whether that user administers the module |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -267,6 +268,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The portal password policy: the minimum length, the uppercase, digit and special-symbol requirements, and the regular expressions a client can validate against |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The password policy has not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -276,7 +278,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_product_administrators**
-> EmployeeArrayWrapper get_product_administrators(productid)
+> EmployeeArrayWrapper get_product_administrators(product_id)
 
 Lists the users who administer the portal module identified by `productid` in the path. The all-zero GUID
 stands for the portal itself: the answer then covers the DocSpace administrator group together with every
@@ -296,7 +298,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **productid** | **UUID**| The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | 
+ **product_id** | **UUID**| The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | 
 
 ### Return type
 
@@ -332,11 +334,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SecurityApi(api_client)
-    productid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
+    product_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
 
     try:
         # Get product administrators
-        api_response = api_instance.get_product_administrators(productid)
+        api_response = api_instance.get_product_administrators(product_id)
         print("The response of SecurityApi->get_product_administrators:\n")
         pprint(api_response)
     except Exception as e:
@@ -355,6 +357,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The users who administer the module asked about, or the portal-wide administrators when the all-zero identifier is used |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -533,17 +536,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The access configuration of every module identifier asked about: the enabled flag, the allowed groups, the allowed users the caller may see, and the sub-module flag |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | An `ids` value is not a GUID |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_access_to_web_items**
-> SecurityArrayWrapper set_access_to_web_items(web_items_security_requests_dto=web_items_security_requests_dto)
+> SecurityArrayWrapper set_access_to_web_items(web_items_security_request_dto=web_items_security_request_dto)
 
 Switches several portal modules on or off in one call: `items` carries an entry per module, its `key` the
 module GUID and its `value` the new enabled flag. The caller needs the portal-settings right of a DocSpace
@@ -563,7 +566,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **web_items_security_requests_dto** | [**WebItemsSecurityRequestsDto**](WebItemsSecurityRequestsDto.md)|  | [optional] 
+ **web_items_security_request_dto** | [**WebItemsSecurityRequestDto**](WebItemsSecurityRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -579,7 +582,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.security_array_wrapper import SecurityArrayWrapper
-from docspace_api_sdk.models.web_items_security_requests_dto import WebItemsSecurityRequestsDto
+from docspace_api_sdk.models.web_items_security_request_dto import WebItemsSecurityRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -600,11 +603,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SecurityApi(api_client)
-    web_items_security_requests_dto = docspace_api_sdk.WebItemsSecurityRequestsDto() # WebItemsSecurityRequestsDto |  (optional)
+    web_items_security_request_dto = docspace_api_sdk.WebItemsSecurityRequestDto() # WebItemsSecurityRequestDto |  (optional)
 
     try:
         # Set access to modules in bulk
-        api_response = api_instance.set_access_to_web_items(web_items_security_requests_dto=web_items_security_requests_dto)
+        api_response = api_instance.set_access_to_web_items(web_items_security_request_dto=web_items_security_request_dto)
         print("The response of SecurityApi->set_access_to_web_items:\n")
         pprint(api_response)
     except Exception as e:
@@ -623,18 +626,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The resulting access configuration of every module listed in the request |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, or a `key` in `items` is not a GUID |  -  |
 **403** | Per-module access cannot be configured on an open portal, or the caller lacks the portal-settings right of a DocSpace administrator |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_product_administrator**
-> ProductAdministratorWrapper set_product_administrator(security_requests_dto=security_requests_dto)
+> ProductAdministratorWrapper set_product_administrator(security_request_dto=security_request_dto)
 
 Promotes a portal member to administrator of one module, or takes that role away, according to the
 `administrator` flag; the all-zero product GUID targets the DocSpace administrator role, which covers the
@@ -654,7 +657,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **security_requests_dto** | [**SecurityRequestsDto**](SecurityRequestsDto.md)|  | [optional] 
+ **security_request_dto** | [**SecurityRequestDto**](SecurityRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -670,7 +673,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.product_administrator_wrapper import ProductAdministratorWrapper
-from docspace_api_sdk.models.security_requests_dto import SecurityRequestsDto
+from docspace_api_sdk.models.security_request_dto import SecurityRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -691,11 +694,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SecurityApi(api_client)
-    security_requests_dto = docspace_api_sdk.SecurityRequestsDto() # SecurityRequestsDto |  (optional)
+    security_request_dto = docspace_api_sdk.SecurityRequestDto() # SecurityRequestDto |  (optional)
 
     try:
         # Set product administrator
-        api_response = api_instance.set_product_administrator(security_requests_dto=security_requests_dto)
+        api_response = api_instance.set_product_administrator(security_request_dto=security_request_dto)
         print("The response of SecurityApi->set_product_administrator:\n")
         pprint(api_response)
     except Exception as e:
@@ -714,19 +717,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The module, the user and the administrator flag as they were stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `productId` or `userId` |  -  |
 **402** | The portal plan does not offer product administrators, or no paid seat is left for the member being promoted |  -  |
-**403** | Only the portal owner can grant or revoke the portal-wide administrator role |  -  |
+**403** | The caller has no portal-settings right, or is not the portal owner and grants the portal-wide administrator role or takes a role away from a DocSpace administrator |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_web_item_security**
-> SecurityArrayWrapper set_web_item_security(web_item_security_requests_dto=web_item_security_requests_dto)
+> SecurityArrayWrapper set_web_item_security(web_item_security_request_dto=web_item_security_request_dto)
 
 Replaces the access rules of one portal module: `id` names the module, `enabled` says whether it may be
 opened, and `subjects` lists the users and groups the rule is stored for. The caller needs the portal-settings
@@ -746,7 +749,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **web_item_security_requests_dto** | [**WebItemSecurityRequestsDto**](WebItemSecurityRequestsDto.md)|  | [optional] 
+ **web_item_security_request_dto** | [**WebItemSecurityRequestDto**](WebItemSecurityRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -762,7 +765,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.security_array_wrapper import SecurityArrayWrapper
-from docspace_api_sdk.models.web_item_security_requests_dto import WebItemSecurityRequestsDto
+from docspace_api_sdk.models.web_item_security_request_dto import WebItemSecurityRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -783,11 +786,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SecurityApi(api_client)
-    web_item_security_requests_dto = docspace_api_sdk.WebItemSecurityRequestsDto() # WebItemSecurityRequestsDto |  (optional)
+    web_item_security_request_dto = docspace_api_sdk.WebItemSecurityRequestDto() # WebItemSecurityRequestDto |  (optional)
 
     try:
         # Set module access
-        api_response = api_instance.set_web_item_security(web_item_security_requests_dto=web_item_security_requests_dto)
+        api_response = api_instance.set_web_item_security(web_item_security_request_dto=web_item_security_request_dto)
         print("The response of SecurityApi->set_web_item_security:\n")
         pprint(api_response)
     except Exception as e:
@@ -806,18 +809,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The resulting access configuration of the module, as a single-entry list |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `id`, or the `id` is not a GUID |  -  |
 **403** | Per-module access cannot be configured on an open portal, or the caller lacks the portal-settings right of a DocSpace administrator |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_password_settings**
-> PasswordSettingsWrapper update_password_settings(password_settings_requests_dto=password_settings_requests_dto)
+> PasswordSettingsWrapper update_password_settings(password_settings_request_dto=password_settings_request_dto)
 
 Replaces the password policy of the whole portal with the four values sent: `minLength` and the three flags
 that demand an uppercase letter, a digit and a special symbol. There is no partial update - a flag left out of
@@ -836,7 +839,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **password_settings_requests_dto** | [**PasswordSettingsRequestsDto**](PasswordSettingsRequestsDto.md)|  | [optional] 
+ **password_settings_request_dto** | [**PasswordSettingsRequestDto**](PasswordSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -851,7 +854,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.password_settings_requests_dto import PasswordSettingsRequestsDto
+from docspace_api_sdk.models.password_settings_request_dto import PasswordSettingsRequestDto
 from docspace_api_sdk.models.password_settings_wrapper import PasswordSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -873,11 +876,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SecurityApi(api_client)
-    password_settings_requests_dto = docspace_api_sdk.PasswordSettingsRequestsDto() # PasswordSettingsRequestsDto |  (optional)
+    password_settings_request_dto = docspace_api_sdk.PasswordSettingsRequestDto() # PasswordSettingsRequestDto |  (optional)
 
     try:
         # Update password settings
-        api_response = api_instance.update_password_settings(password_settings_requests_dto=password_settings_requests_dto)
+        api_response = api_instance.update_password_settings(password_settings_request_dto=password_settings_request_dto)
         print("The response of SecurityApi->update_password_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -896,7 +899,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The password policy as it was stored, including the regular expressions a client can validate against |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The requested minimum length is outside the range the installation allows |  -  |
+**400** | The request body cannot be read or has no `minLength`, or the minimum length is outside the range the installation allows |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |

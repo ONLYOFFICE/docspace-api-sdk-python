@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.form_role import FormRole
+from docspace_api_sdk.models.form_role_request import FormRoleRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +32,7 @@ class SaveFormRoleMappingDto(BaseModel):
     The people who are to fill in the roles of a PDF form.
     """ # noqa: E501
     form_id: StrictInt = Field(description="The PDF form the roles belong to. This is the value the operation reads, rather than the identifier in its  route, and the two are to be sent the same.", alias="formId", json_schema_extra={"examples": [1]})
-    roles: Optional[List[FormRole]] = Field(description="The roles with the account taking each of them and the sequence number that decides the turn: the same number  means the roles may be filled in parallel, different ones make a queue. The whole set is replaced on every  call, and an empty set resets the filling.", json_schema_extra={"examples": [[{"roleName": "Approver", "userId": "00000000-0000-0000-0000-000000000000"}]]})
+    roles: Optional[List[FormRoleRequest]] = Field(description="The roles with the account taking each of them and the sequence number that decides the turn: the same number  means the roles may be filled in parallel, different ones make a queue. The whole set is replaced on every  call, and an empty set resets the filling.", json_schema_extra={"examples": [[{"roleName": "Approver", "userId": "00000000-0000-0000-0000-000000000000"}]]})
     __properties: ClassVar[List[str]] = ["formId", "roles"]
 
     model_config = ConfigDict(
@@ -100,7 +100,7 @@ class SaveFormRoleMappingDto(BaseModel):
 
         _obj = cls.model_validate({
             "formId": obj.get("formId"),
-            "roles": [FormRole.from_dict(_item) for _item in obj["roles"]] if obj.get("roles") is not None else None
+            "roles": [FormRoleRequest.from_dict(_item) for _item in obj["roles"]] if obj.get("roles") is not None else None
         })
         return _obj
 

@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.ai_chat_tool_prefs_scope import AiChatToolPrefsScope
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +34,8 @@ class AiToolsSetDisabledRequest(BaseModel):
     server_type: StrictStr = Field(alias="serverType")
     tool_names: List[StrictStr] = Field(description="Tool names to disable.", alias="toolNames")
     entity_id: Optional[StrictStr] = Field(default=None, alias="entityId")
-    __properties: ClassVar[List[str]] = ["serverType", "toolNames", "entityId"]
+    scope: Optional[AiChatToolPrefsScope] = Field(default=None, description="The list the write lands in; omitted means the caller's own.")
+    __properties: ClassVar[List[str]] = ["serverType", "toolNames", "entityId", "scope"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,7 +91,8 @@ class AiToolsSetDisabledRequest(BaseModel):
         _obj = cls.model_validate({
             "serverType": obj.get("serverType"),
             "toolNames": obj.get("toolNames"),
-            "entityId": obj.get("entityId")
+            "entityId": obj.get("entityId"),
+            "scope": obj.get("scope")
         })
         return _obj
 

@@ -48,7 +48,7 @@ class OpenAIPassthroughApi:
     def ai_openai_chat_completions(
         self,
         profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
-        request_body: Annotated[Dict[str, Any], Field(description="An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here.")],
+        ai_openai_chat_completions_request: Annotated[Dict[str, Any], Field(description="An OpenAI Chat Completions request, forwarded to the provider as sent. The shape is the provider's, not this API's, so consult the provider's own reference. The credentials come from the profile in the path and must not be sent here; the profile's model is used when the body names none, and a `model` in the body takes precedence.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,12 +64,12 @@ class OpenAIPassthroughApi:
     ) -> Dict[str, Optional[object]]:
         """OpenAI chat completions passthrough
 
-        OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin's SDK on one end and the provider on the other. A client disconnect cancels the provider call.
+        OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider as sent - the payload is owned by the plugin's SDK on one end and the provider on the other - except that a JSON body which names no `model` gets the profile's model filled in; a `model` the body carries wins. The provider's 4xx answers are relayed with their status and body, so a 429 and the provider's own error envelope surface as they stand; a 5xx from the provider or from the hop in front of it is not relayed - its detail stays in the server log and the call answers a fixed 502 envelope. A client disconnect cancels the provider call.
 
         :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
-        :param request_body: An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_openai_chat_completions_request: An OpenAI Chat Completions request, forwarded to the provider as sent. The shape is the provider's, not this API's, so consult the provider's own reference. The credentials come from the profile in the path and must not be sent here; the profile's model is used when the body names none, and a `model` in the body takes precedence. (required)
+        :type ai_openai_chat_completions_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -94,7 +94,7 @@ class OpenAIPassthroughApi:
 
         _param = self._ai_openai_chat_completions_serialize(
             profile_id=profile_id,
-            request_body=request_body,
+            ai_openai_chat_completions_request=ai_openai_chat_completions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -127,7 +127,7 @@ class OpenAIPassthroughApi:
     def ai_openai_chat_completions_with_http_info(
         self,
         profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
-        request_body: Annotated[Dict[str, Any], Field(description="An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here.")],
+        ai_openai_chat_completions_request: Annotated[Dict[str, Any], Field(description="An OpenAI Chat Completions request, forwarded to the provider as sent. The shape is the provider's, not this API's, so consult the provider's own reference. The credentials come from the profile in the path and must not be sent here; the profile's model is used when the body names none, and a `model` in the body takes precedence.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -143,12 +143,12 @@ class OpenAIPassthroughApi:
     ) -> ApiResponse[Dict[str, Optional[object]]]:
         """OpenAI chat completions passthrough
 
-        OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin's SDK on one end and the provider on the other. A client disconnect cancels the provider call.
+        OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider as sent - the payload is owned by the plugin's SDK on one end and the provider on the other - except that a JSON body which names no `model` gets the profile's model filled in; a `model` the body carries wins. The provider's 4xx answers are relayed with their status and body, so a 429 and the provider's own error envelope surface as they stand; a 5xx from the provider or from the hop in front of it is not relayed - its detail stays in the server log and the call answers a fixed 502 envelope. A client disconnect cancels the provider call.
 
         :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
-        :param request_body: An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_openai_chat_completions_request: An OpenAI Chat Completions request, forwarded to the provider as sent. The shape is the provider's, not this API's, so consult the provider's own reference. The credentials come from the profile in the path and must not be sent here; the profile's model is used when the body names none, and a `model` in the body takes precedence. (required)
+        :type ai_openai_chat_completions_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -173,7 +173,7 @@ class OpenAIPassthroughApi:
 
         _param = self._ai_openai_chat_completions_serialize(
             profile_id=profile_id,
-            request_body=request_body,
+            ai_openai_chat_completions_request=ai_openai_chat_completions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -206,7 +206,7 @@ class OpenAIPassthroughApi:
     def ai_openai_chat_completions_without_preload_content(
         self,
         profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
-        request_body: Annotated[Dict[str, Any], Field(description="An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here.")],
+        ai_openai_chat_completions_request: Annotated[Dict[str, Any], Field(description="An OpenAI Chat Completions request, forwarded to the provider as sent. The shape is the provider's, not this API's, so consult the provider's own reference. The credentials come from the profile in the path and must not be sent here; the profile's model is used when the body names none, and a `model` in the body takes precedence.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -222,12 +222,12 @@ class OpenAIPassthroughApi:
     ) -> RESTResponseType:
         """OpenAI chat completions passthrough
 
-        OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin's SDK on one end and the provider on the other. A client disconnect cancels the provider call.
+        OpenAI-compatible chat completions for the document editor's AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider as sent - the payload is owned by the plugin's SDK on one end and the provider on the other - except that a JSON body which names no `model` gets the profile's model filled in; a `model` the body carries wins. The provider's 4xx answers are relayed with their status and body, so a 429 and the provider's own error envelope surface as they stand; a 5xx from the provider or from the hop in front of it is not relayed - its detail stays in the server log and the call answers a fixed 502 envelope. A client disconnect cancels the provider call.
 
         :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
-        :param request_body: An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, so consult the provider's own reference; the model and the credentials come from the profile in the path and must not be sent here. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_openai_chat_completions_request: An OpenAI Chat Completions request, forwarded to the provider as sent. The shape is the provider's, not this API's, so consult the provider's own reference. The credentials come from the profile in the path and must not be sent here; the profile's model is used when the body names none, and a `model` in the body takes precedence. (required)
+        :type ai_openai_chat_completions_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -252,7 +252,7 @@ class OpenAIPassthroughApi:
 
         _param = self._ai_openai_chat_completions_serialize(
             profile_id=profile_id,
-            request_body=request_body,
+            ai_openai_chat_completions_request=ai_openai_chat_completions_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -280,7 +280,7 @@ class OpenAIPassthroughApi:
     def _ai_openai_chat_completions_serialize(
         self,
         profile_id,
-        request_body,
+        ai_openai_chat_completions_request,
         _request_auth,
         _content_type,
         _headers,
@@ -308,8 +308,8 @@ class OpenAIPassthroughApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_openai_chat_completions_request is not None:
+            _body_params = ai_openai_chat_completions_request
 
 
         # set the HTTP header `Accept`
@@ -365,7 +365,7 @@ class OpenAIPassthroughApi:
     def ai_openai_images_generations(
         self,
         profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
-        request_body: Annotated[Dict[str, Any], Field(description="An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path.")],
+        ai_openai_images_generations_request: Annotated[Dict[str, Any], Field(description="An OpenAI image-generation request, forwarded to the provider as sent once its documented fields pass a type check. The shape is the provider's, not this API's, and the credentials come from the profile in the path.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -378,15 +378,15 @@ class OpenAIPassthroughApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Dict[str, Optional[object]]:
+    ) -> Dict[str, object]:
         """OpenAI image generation passthrough
 
-        OpenAI-compatible image generation for the document editor's AI plugin, working exactly as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider unchanged. The provider's status and body are relayed verbatim, so its 429 and its own error envelope surface as they stand. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
+        OpenAI-compatible image generation for the document editor's AI plugin, working as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider as sent. The documented OpenAI fields are checked first - `prompt` has to be a non-empty string, `n` a positive integer, `model`, `size`, `quality`, `style` and `response_format` strings when present - and a body failing that answers 400 instead of whatever the provider would have made of it; fields outside that set are passed on untouched. The provider's 4xx status and body are relayed, so its 429 and its own error envelope surface as they stand; a 5xx is replaced by a fixed 502 envelope with the detail kept in the server log. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
 
         :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
-        :param request_body: An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_openai_images_generations_request: An OpenAI image-generation request, forwarded to the provider as sent once its documented fields pass a type check. The shape is the provider's, not this API's, and the credentials come from the profile in the path. (required)
+        :type ai_openai_images_generations_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -411,7 +411,7 @@ class OpenAIPassthroughApi:
 
         _param = self._ai_openai_images_generations_serialize(
             profile_id=profile_id,
-            request_body=request_body,
+            ai_openai_images_generations_request=ai_openai_images_generations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -419,14 +419,15 @@ class OpenAIPassthroughApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, Optional[object]]",
+            '200': "Dict[str, object]",
+            '400': "AiOpenaiChatCompletions403Response",
             '401': "AiErrorResponse",
-            '403': "AiOpenaiChatCompletions403Response",
-            '404': "AiOpenaiChatCompletions403Response",
-            '413': "AiOpenaiChatCompletions403Response",
-            '429': "AiOpenaiChatCompletions403Response",
-            '500': "AiOpenaiChatCompletions403Response",
-            '502': "AiOpenaiChatCompletions403Response",
+            '403': "AiOpenaiImagesGenerations403Response",
+            '404': "AiOpenaiImagesGenerations403Response",
+            '413': "AiOpenaiImagesGenerations403Response",
+            '429': "AiOpenaiImagesGenerations403Response",
+            '500': "AiOpenaiImagesGenerations403Response",
+            '502': "AiOpenaiImagesGenerations403Response",
         }
 
         response_data = self.api_client.call_api(
@@ -444,7 +445,7 @@ class OpenAIPassthroughApi:
     def ai_openai_images_generations_with_http_info(
         self,
         profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
-        request_body: Annotated[Dict[str, Any], Field(description="An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path.")],
+        ai_openai_images_generations_request: Annotated[Dict[str, Any], Field(description="An OpenAI image-generation request, forwarded to the provider as sent once its documented fields pass a type check. The shape is the provider's, not this API's, and the credentials come from the profile in the path.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -457,15 +458,15 @@ class OpenAIPassthroughApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Dict[str, Optional[object]]]:
+    ) -> ApiResponse[Dict[str, object]]:
         """OpenAI image generation passthrough
 
-        OpenAI-compatible image generation for the document editor's AI plugin, working exactly as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider unchanged. The provider's status and body are relayed verbatim, so its 429 and its own error envelope surface as they stand. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
+        OpenAI-compatible image generation for the document editor's AI plugin, working as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider as sent. The documented OpenAI fields are checked first - `prompt` has to be a non-empty string, `n` a positive integer, `model`, `size`, `quality`, `style` and `response_format` strings when present - and a body failing that answers 400 instead of whatever the provider would have made of it; fields outside that set are passed on untouched. The provider's 4xx status and body are relayed, so its 429 and its own error envelope surface as they stand; a 5xx is replaced by a fixed 502 envelope with the detail kept in the server log. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
 
         :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
-        :param request_body: An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_openai_images_generations_request: An OpenAI image-generation request, forwarded to the provider as sent once its documented fields pass a type check. The shape is the provider's, not this API's, and the credentials come from the profile in the path. (required)
+        :type ai_openai_images_generations_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -490,7 +491,7 @@ class OpenAIPassthroughApi:
 
         _param = self._ai_openai_images_generations_serialize(
             profile_id=profile_id,
-            request_body=request_body,
+            ai_openai_images_generations_request=ai_openai_images_generations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -498,14 +499,15 @@ class OpenAIPassthroughApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, Optional[object]]",
+            '200': "Dict[str, object]",
+            '400': "AiOpenaiChatCompletions403Response",
             '401': "AiErrorResponse",
-            '403': "AiOpenaiChatCompletions403Response",
-            '404': "AiOpenaiChatCompletions403Response",
-            '413': "AiOpenaiChatCompletions403Response",
-            '429': "AiOpenaiChatCompletions403Response",
-            '500': "AiOpenaiChatCompletions403Response",
-            '502': "AiOpenaiChatCompletions403Response",
+            '403': "AiOpenaiImagesGenerations403Response",
+            '404': "AiOpenaiImagesGenerations403Response",
+            '413': "AiOpenaiImagesGenerations403Response",
+            '429': "AiOpenaiImagesGenerations403Response",
+            '500': "AiOpenaiImagesGenerations403Response",
+            '502': "AiOpenaiImagesGenerations403Response",
         }
 
         response_data = self.api_client.call_api(
@@ -523,7 +525,7 @@ class OpenAIPassthroughApi:
     def ai_openai_images_generations_without_preload_content(
         self,
         profile_id: Annotated[StrictStr, Field(description="The AI provider profile identifier.")],
-        request_body: Annotated[Dict[str, Any], Field(description="An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path.")],
+        ai_openai_images_generations_request: Annotated[Dict[str, Any], Field(description="An OpenAI image-generation request, forwarded to the provider as sent once its documented fields pass a type check. The shape is the provider's, not this API's, and the credentials come from the profile in the path.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -539,12 +541,12 @@ class OpenAIPassthroughApi:
     ) -> RESTResponseType:
         """OpenAI image generation passthrough
 
-        OpenAI-compatible image generation for the document editor's AI plugin, working exactly as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider unchanged. The provider's status and body are relayed verbatim, so its 429 and its own error envelope surface as they stand. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
+        OpenAI-compatible image generation for the document editor's AI plugin, working as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider as sent. The documented OpenAI fields are checked first - `prompt` has to be a non-empty string, `n` a positive integer, `model`, `size`, `quality`, `style` and `response_format` strings when present - and a body failing that answers 400 instead of whatever the provider would have made of it; fields outside that set are passed on untouched. The provider's 4xx status and body are relayed, so its 429 and its own error envelope surface as they stand; a 5xx is replaced by a fixed 502 envelope with the detail kept in the server log. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
 
         :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
-        :param request_body: An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider's, not this API's, and the credentials come from the profile in the path. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_openai_images_generations_request: An OpenAI image-generation request, forwarded to the provider as sent once its documented fields pass a type check. The shape is the provider's, not this API's, and the credentials come from the profile in the path. (required)
+        :type ai_openai_images_generations_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -569,7 +571,7 @@ class OpenAIPassthroughApi:
 
         _param = self._ai_openai_images_generations_serialize(
             profile_id=profile_id,
-            request_body=request_body,
+            ai_openai_images_generations_request=ai_openai_images_generations_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -577,14 +579,15 @@ class OpenAIPassthroughApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, Optional[object]]",
+            '200': "Dict[str, object]",
+            '400': "AiOpenaiChatCompletions403Response",
             '401': "AiErrorResponse",
-            '403': "AiOpenaiChatCompletions403Response",
-            '404': "AiOpenaiChatCompletions403Response",
-            '413': "AiOpenaiChatCompletions403Response",
-            '429': "AiOpenaiChatCompletions403Response",
-            '500': "AiOpenaiChatCompletions403Response",
-            '502': "AiOpenaiChatCompletions403Response",
+            '403': "AiOpenaiImagesGenerations403Response",
+            '404': "AiOpenaiImagesGenerations403Response",
+            '413': "AiOpenaiImagesGenerations403Response",
+            '429': "AiOpenaiImagesGenerations403Response",
+            '500': "AiOpenaiImagesGenerations403Response",
+            '502': "AiOpenaiImagesGenerations403Response",
         }
 
         response_data = self.api_client.call_api(
@@ -597,7 +600,7 @@ class OpenAIPassthroughApi:
     def _ai_openai_images_generations_serialize(
         self,
         profile_id,
-        request_body,
+        ai_openai_images_generations_request,
         _request_auth,
         _content_type,
         _headers,
@@ -625,8 +628,8 @@ class OpenAIPassthroughApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_openai_images_generations_request is not None:
+            _body_params = ai_openai_images_generations_request
 
 
         # set the HTTP header `Accept`

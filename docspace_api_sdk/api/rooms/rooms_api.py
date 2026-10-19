@@ -34,13 +34,14 @@ from docspace_api_sdk.models.covers_result_array_wrapper import CoversResultArra
 from docspace_api_sdk.models.create_room_from_template_dto import CreateRoomFromTemplateDto
 from docspace_api_sdk.models.create_room_request_dto import CreateRoomRequestDto
 from docspace_api_sdk.models.create_tag_request_dto import CreateTagRequestDto
-from docspace_api_sdk.models.create_third_party_room import CreateThirdPartyRoom
+from docspace_api_sdk.models.create_third_party_room_request import CreateThirdPartyRoomRequest
 from docspace_api_sdk.models.delete_room_request import DeleteRoomRequest
 from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.models.external_db_sync_task_wrapper import ExternalDbSyncTaskWrapper
 from docspace_api_sdk.models.file_operation_wrapper import FileOperationWrapper
 from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
 from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper
+from docspace_api_sdk.models.filter_type import FilterType
 from docspace_api_sdk.models.folder_content_wrapper import FolderContentWrapper
 from docspace_api_sdk.models.folder_wrapper import FolderWrapper
 from docspace_api_sdk.models.link_type import LinkType
@@ -57,12 +58,13 @@ from docspace_api_sdk.models.room_security_wrapper import RoomSecurityWrapper
 from docspace_api_sdk.models.room_template_dto import RoomTemplateDto
 from docspace_api_sdk.models.room_template_status_wrapper import RoomTemplateStatusWrapper
 from docspace_api_sdk.models.room_type import RoomType
-from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
+from docspace_api_sdk.models.rooms_metadata_search_request_dto import RoomsMetadataSearchRequestDto
 from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.models.set_public_dto import SetPublicDto
 from docspace_api_sdk.models.share_filter_type import ShareFilterType
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.models.storage_filter import StorageFilter
+from docspace_api_sdk.models.string_array_wrapper import StringArrayWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
 from docspace_api_sdk.models.update_room_request import UpdateRoomRequest
@@ -210,11 +212,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -346,11 +349,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -425,11 +429,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -588,10 +593,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -666,10 +673,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -744,10 +753,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -963,12 +974,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1100,12 +1111,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1180,12 +1191,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1340,10 +1351,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1414,10 +1428,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1488,10 +1505,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1643,10 +1663,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1717,10 +1739,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1791,10 +1815,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2007,11 +2033,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2143,11 +2171,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2222,11 +2252,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2381,11 +2413,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2456,11 +2488,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2531,11 +2563,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2687,10 +2719,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2761,10 +2795,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2835,10 +2871,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2939,7 +2977,7 @@ class RoomsApi:
     def create_room_third_party(
         self,
         id: Annotated[StrictStr, Field(description="The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.")],
-        create_third_party_room: Annotated[CreateThirdPartyRoom, Field(description="The settings of the room to be created out of the folder.")],
+        create_third_party_room_request: Annotated[CreateThirdPartyRoomRequest, Field(description="The settings of the room to be created out of the folder.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2955,12 +2993,12 @@ class RoomsApi:
     ) -> ThirdPartyFolderWrapper:
         """Create a third-party room
 
-        Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `indexing`, `denyDownload`, `tags` and `logo` are then dropped. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
+        Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `tags` and `logo` are then dropped. A third-party room keeps neither  `indexing` nor `denyDownload` in either mode: both are accepted and ignored, and the room reads back with them  off. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
 
         :param id: The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. (required)
         :type id: str
-        :param create_third_party_room: The settings of the room to be created out of the folder. (required)
-        :type create_third_party_room: CreateThirdPartyRoom
+        :param create_third_party_room_request: The settings of the room to be created out of the folder. (required)
+        :type create_third_party_room_request: CreateThirdPartyRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2985,7 +3023,7 @@ class RoomsApi:
 
         _param = self._create_room_third_party_serialize(
             id=id,
-            create_third_party_room=create_third_party_room,
+            create_third_party_room_request=create_third_party_room_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2994,10 +3032,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3017,7 +3058,7 @@ class RoomsApi:
     def create_room_third_party_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.")],
-        create_third_party_room: Annotated[CreateThirdPartyRoom, Field(description="The settings of the room to be created out of the folder.")],
+        create_third_party_room_request: Annotated[CreateThirdPartyRoomRequest, Field(description="The settings of the room to be created out of the folder.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3033,12 +3074,12 @@ class RoomsApi:
     ) -> ApiResponse[ThirdPartyFolderWrapper]:
         """Create a third-party room
 
-        Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `indexing`, `denyDownload`, `tags` and `logo` are then dropped. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
+        Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `tags` and `logo` are then dropped. A third-party room keeps neither  `indexing` nor `denyDownload` in either mode: both are accepted and ignored, and the room reads back with them  off. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
 
         :param id: The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. (required)
         :type id: str
-        :param create_third_party_room: The settings of the room to be created out of the folder. (required)
-        :type create_third_party_room: CreateThirdPartyRoom
+        :param create_third_party_room_request: The settings of the room to be created out of the folder. (required)
+        :type create_third_party_room_request: CreateThirdPartyRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3063,7 +3104,7 @@ class RoomsApi:
 
         _param = self._create_room_third_party_serialize(
             id=id,
-            create_third_party_room=create_third_party_room,
+            create_third_party_room_request=create_third_party_room_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3072,10 +3113,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3095,7 +3139,7 @@ class RoomsApi:
     def create_room_third_party_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.")],
-        create_third_party_room: Annotated[CreateThirdPartyRoom, Field(description="The settings of the room to be created out of the folder.")],
+        create_third_party_room_request: Annotated[CreateThirdPartyRoomRequest, Field(description="The settings of the room to be created out of the folder.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3111,12 +3155,12 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Create a third-party room
 
-        Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `indexing`, `denyDownload`, `tags` and `logo` are then dropped. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
+        Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `tags` and `logo` are then dropped. A third-party room keeps neither  `indexing` nor `denyDownload` in either mode: both are accepted and ignored, and the room reads back with them  off. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
 
         :param id: The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. (required)
         :type id: str
-        :param create_third_party_room: The settings of the room to be created out of the folder. (required)
-        :type create_third_party_room: CreateThirdPartyRoom
+        :param create_third_party_room_request: The settings of the room to be created out of the folder. (required)
+        :type create_third_party_room_request: CreateThirdPartyRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3141,7 +3185,7 @@ class RoomsApi:
 
         _param = self._create_room_third_party_serialize(
             id=id,
-            create_third_party_room=create_third_party_room,
+            create_third_party_room_request=create_third_party_room_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3150,10 +3194,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3168,7 +3215,7 @@ class RoomsApi:
     def _create_room_third_party_serialize(
         self,
         id,
-        create_third_party_room,
+        create_third_party_room_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3196,8 +3243,8 @@ class RoomsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_third_party_room is not None:
-            _body_params = create_third_party_room
+        if create_third_party_room_request is not None:
+            _body_params = create_third_party_room_request
 
 
         # set the HTTP header `Accept`
@@ -3308,11 +3355,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3383,11 +3430,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3458,11 +3505,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3618,10 +3665,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3696,10 +3745,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3774,10 +3825,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3986,10 +4039,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4114,10 +4169,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4188,10 +4245,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4391,11 +4450,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4527,11 +4587,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4606,11 +4667,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4765,6 +4827,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -4840,6 +4903,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -4915,6 +4979,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -5058,10 +5123,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5132,10 +5199,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5206,10 +5275,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5348,10 +5419,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5422,10 +5495,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5496,10 +5571,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5584,6 +5661,404 @@ class RoomsApi:
 
 
     @validate_call
+    def get_room_ai_folder(
+        self,
+        id: Annotated[StrictInt, Field(description="The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FolderContentWrapper:
+        """Get the .ai folder of a room
+
+        Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist is answered as not found. A room that holds no .ai folder is  answered with an empty page: no files and folders, a zero `total`, no `current` folder and empty `pathParts`.
+
+        :param id: The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: int
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+        :type filter_type: FilterType
+        :param count: The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+        :type count: int
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+        :type start_index: int
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+        :type sort_by: str
+        :param sort_order: The direction in which the `sortBy` field is ordered.
+        :type sort_order: SortOrder
+        :param filter_value: The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_room_ai_folder_serialize(
+            id=id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_room_ai_folder_with_http_info(
+        self,
+        id: Annotated[StrictInt, Field(description="The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FolderContentWrapper]:
+        """Get the .ai folder of a room
+
+        Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist is answered as not found. A room that holds no .ai folder is  answered with an empty page: no files and folders, a zero `total`, no `current` folder and empty `pathParts`.
+
+        :param id: The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: int
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+        :type filter_type: FilterType
+        :param count: The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+        :type count: int
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+        :type start_index: int
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+        :type sort_by: str
+        :param sort_order: The direction in which the `sortBy` field is ordered.
+        :type sort_order: SortOrder
+        :param filter_value: The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_room_ai_folder_serialize(
+            id=id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_room_ai_folder_without_preload_content(
+        self,
+        id: Annotated[StrictInt, Field(description="The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the .ai folder of a room
+
+        Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist is answered as not found. A room that holds no .ai folder is  answered with an empty page: no files and folders, a zero `total`, no `current` folder and empty `pathParts`.
+
+        :param id: The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: int
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+        :type filter_type: FilterType
+        :param count: The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+        :type count: int
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+        :type start_index: int
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+        :type sort_by: str
+        :param sort_order: The direction in which the `sortBy` field is ordered.
+        :type sort_order: SortOrder
+        :param filter_value: The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_room_ai_folder_serialize(
+            id=id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_room_ai_folder_serialize(
+        self,
+        id,
+        filter_type,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        if filter_type is not None:
+            
+            _query_params.append(('filterType', filter_type.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/ai"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_room_covers(
         self,
         _request_timeout: Union[
@@ -5634,6 +6109,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5703,6 +6179,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -5772,6 +6249,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -6508,9 +6986,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '401': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6635,9 +7116,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '401': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6708,9 +7192,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '401': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6853,10 +7340,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6931,10 +7420,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7009,10 +7500,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7172,10 +7665,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7262,10 +7757,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7352,10 +7849,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7477,7 +7976,7 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> STRINGArrayWrapper:
+    ) -> StringArrayWrapper:
         """Get available room tags
 
         Returns the custom room tags available to the caller as a flat array of names, not of objects. What the array  holds depends on the account: a portal administrator gets the whole catalog, including tags that no room uses  yet, while every other account gets only the tags attached to rooms it can see, with duplicates removed. An  empty answer therefore means that this caller sees no tagged room, not that the portal has no tags.  `filterValue` keeps the names that contain the given text, ignoring case, while `count` and `startIndex` page  the result; no total is returned, so a page shorter than `count` is the signal that the list is exhausted. The  names are exactly the values accepted by the `tags` filter of `GET api/2.0/files/rooms` and by the room tag  calls, which makes this the call to fill a tag picker with. Add a tag with `POST api/2.0/files/tags` and check  whether one is still in use with `GET api/2.0/files/tags/{tagName}/haslinks`.
@@ -7521,11 +8020,11 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
+            '200': "StringArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7559,7 +8058,7 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[STRINGArrayWrapper]:
+    ) -> ApiResponse[StringArrayWrapper]:
         """Get available room tags
 
         Returns the custom room tags available to the caller as a flat array of names, not of objects. What the array  holds depends on the account: a portal administrator gets the whole catalog, including tags that no room uses  yet, while every other account gets only the tags attached to rooms it can see, with duplicates removed. An  empty answer therefore means that this caller sees no tagged room, not that the portal has no tags.  `filterValue` keeps the names that contain the given text, ignoring case, while `count` and `startIndex` page  the result; no total is returned, so a page shorter than `count` is the signal that the list is exhausted. The  names are exactly the values accepted by the `tags` filter of `GET api/2.0/files/rooms` and by the room tag  calls, which makes this the call to fill a tag picker with. Add a tag with `POST api/2.0/files/tags` and check  whether one is still in use with `GET api/2.0/files/tags/{tagName}/haslinks`.
@@ -7603,11 +8102,11 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
+            '200': "StringArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7685,11 +8184,11 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
+            '200': "StringArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8073,12 +8572,16 @@ class RoomsApi:
         quota_filter: Annotated[Optional[QuotaFilter], Field(description="Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.")] = None,
         storage_filter: Annotated[Optional[StorageFilter], Field(description="Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.")] = None,
         privacy_filter: Annotated[Optional[RoomPrivacyFilter], Field(description="Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.")] = None,
+        with_ai_folder: Annotated[Optional[StrictBool], Field(description="Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.")] = None,
         group_id: Annotated[Optional[StrictInt], Field(description="Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8118,6 +8621,8 @@ class RoomsApi:
         :type storage_filter: StorageFilter
         :param privacy_filter: Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.
         :type privacy_filter: RoomPrivacyFilter
+        :param with_ai_folder: Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
+        :type with_ai_folder: bool
         :param count: How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
         :type count: int
         :param start_index: How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.
@@ -8130,6 +8635,12 @@ class RoomsApi:
         :type filter_value: str
         :param group_id: Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.
         :type group_id: int
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8164,12 +8675,16 @@ class RoomsApi:
             quota_filter=quota_filter,
             storage_filter=storage_filter,
             privacy_filter=privacy_filter,
+            with_ai_folder=with_ai_folder,
             count=count,
             start_index=start_index,
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
             group_id=group_id,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8178,11 +8693,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8212,12 +8727,16 @@ class RoomsApi:
         quota_filter: Annotated[Optional[QuotaFilter], Field(description="Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.")] = None,
         storage_filter: Annotated[Optional[StorageFilter], Field(description="Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.")] = None,
         privacy_filter: Annotated[Optional[RoomPrivacyFilter], Field(description="Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.")] = None,
+        with_ai_folder: Annotated[Optional[StrictBool], Field(description="Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.")] = None,
         group_id: Annotated[Optional[StrictInt], Field(description="Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8257,6 +8776,8 @@ class RoomsApi:
         :type storage_filter: StorageFilter
         :param privacy_filter: Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.
         :type privacy_filter: RoomPrivacyFilter
+        :param with_ai_folder: Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
+        :type with_ai_folder: bool
         :param count: How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
         :type count: int
         :param start_index: How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.
@@ -8269,6 +8790,12 @@ class RoomsApi:
         :type filter_value: str
         :param group_id: Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.
         :type group_id: int
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8303,12 +8830,16 @@ class RoomsApi:
             quota_filter=quota_filter,
             storage_filter=storage_filter,
             privacy_filter=privacy_filter,
+            with_ai_folder=with_ai_folder,
             count=count,
             start_index=start_index,
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
             group_id=group_id,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8317,11 +8848,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8351,12 +8882,16 @@ class RoomsApi:
         quota_filter: Annotated[Optional[QuotaFilter], Field(description="Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.")] = None,
         storage_filter: Annotated[Optional[StorageFilter], Field(description="Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.")] = None,
         privacy_filter: Annotated[Optional[RoomPrivacyFilter], Field(description="Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.")] = None,
+        with_ai_folder: Annotated[Optional[StrictBool], Field(description="Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.")] = None,
         count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.")] = None,
         start_index: Annotated[Optional[StrictInt], Field(description="How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.")] = None,
         sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.")] = None,
         filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.")] = None,
         group_id: Annotated[Optional[StrictInt], Field(description="Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8396,6 +8931,8 @@ class RoomsApi:
         :type storage_filter: StorageFilter
         :param privacy_filter: Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.
         :type privacy_filter: RoomPrivacyFilter
+        :param with_ai_folder: Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
+        :type with_ai_folder: bool
         :param count: How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
         :type count: int
         :param start_index: How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.
@@ -8408,6 +8945,12 @@ class RoomsApi:
         :type filter_value: str
         :param group_id: Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.
         :type group_id: int
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8442,12 +8985,16 @@ class RoomsApi:
             quota_filter=quota_filter,
             storage_filter=storage_filter,
             privacy_filter=privacy_filter,
+            with_ai_folder=with_ai_folder,
             count=count,
             start_index=start_index,
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
             group_id=group_id,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8456,11 +9003,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8485,12 +9032,16 @@ class RoomsApi:
         quota_filter,
         storage_filter,
         privacy_filter,
+        with_ai_folder,
         count,
         start_index,
         sort_by,
         sort_order,
         filter_value,
         group_id,
+        metadata_template_id,
+        metadata_filters,
+        include_hidden_metadata,
         _request_auth,
         _content_type,
         _headers,
@@ -8558,6 +9109,10 @@ class RoomsApi:
             
             _query_params.append(('privacyFilter', privacy_filter.value))
             
+        if with_ai_folder is not None:
+            
+            _query_params.append(('withAiFolder', with_ai_folder))
+            
         if count is not None:
             
             _query_params.append(('count', count))
@@ -8581,6 +9136,18 @@ class RoomsApi:
         if group_id is not None:
             
             _query_params.append(('groupId', group_id))
+            
+        if metadata_template_id is not None:
+            
+            _query_params.append(('metadataTemplateId', metadata_template_id))
+            
+        if metadata_filters is not None:
+            
+            _query_params.append(('metadataFilters', metadata_filters))
+            
+        if include_hidden_metadata is not None:
+            
+            _query_params.append(('includeHiddenMetadata', include_hidden_metadata))
             
         # process the header parameters
         if self._fields is not None:
@@ -8956,12 +9523,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9032,12 +9599,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9108,12 +9675,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9256,6 +9823,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -9335,6 +9903,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -9414,6 +9983,7 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -9616,10 +10186,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9744,10 +10316,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9818,10 +10392,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10014,10 +10590,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10142,10 +10720,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10216,10 +10796,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10362,10 +10944,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10440,10 +11024,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10518,10 +11104,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10622,6 +11210,312 @@ class RoomsApi:
 
 
     @validate_call
+    def search_rooms(
+        self,
+        rooms_metadata_search_request_dto: Optional[RoomsMetadataSearchRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FolderContentWrapper:
+        """Search the rooms by metadata
+
+        Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+        :param rooms_metadata_search_request_dto:
+        :type rooms_metadata_search_request_dto: RoomsMetadataSearchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_rooms_serialize(
+            rooms_metadata_search_request_dto=rooms_metadata_search_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def search_rooms_with_http_info(
+        self,
+        rooms_metadata_search_request_dto: Optional[RoomsMetadataSearchRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FolderContentWrapper]:
+        """Search the rooms by metadata
+
+        Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+        :param rooms_metadata_search_request_dto:
+        :type rooms_metadata_search_request_dto: RoomsMetadataSearchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_rooms_serialize(
+            rooms_metadata_search_request_dto=rooms_metadata_search_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def search_rooms_without_preload_content(
+        self,
+        rooms_metadata_search_request_dto: Optional[RoomsMetadataSearchRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Search the rooms by metadata
+
+        Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+        :param rooms_metadata_search_request_dto:
+        :type rooms_metadata_search_request_dto: RoomsMetadataSearchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_rooms_serialize(
+            rooms_metadata_search_request_dto=rooms_metadata_search_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _search_rooms_serialize(
+        self,
+        rooms_metadata_search_request_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if rooms_metadata_search_request_dto is not None:
+            _body_params = rooms_metadata_search_request_dto
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/rooms/search"
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def set_public_settings(
         self,
         set_public_dto: Optional[SetPublicDto] = None,
@@ -10676,10 +11570,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10750,10 +11646,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10824,10 +11722,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10983,10 +11883,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11061,10 +11963,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11139,10 +12043,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11301,9 +12207,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11378,9 +12286,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11455,9 +12365,11 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11612,12 +12524,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
-            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11688,12 +12600,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
-            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11764,12 +12676,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
-            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -11908,7 +12820,8 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '501': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -11983,7 +12896,8 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '501': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -12058,7 +12972,8 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '501': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -12477,10 +13392,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12555,10 +13472,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12633,10 +13552,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12845,10 +13766,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -12973,10 +13896,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13047,10 +13972,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13250,10 +14177,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13385,10 +14315,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13463,10 +14396,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13621,11 +14557,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13696,11 +14633,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -13771,11 +14709,12 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

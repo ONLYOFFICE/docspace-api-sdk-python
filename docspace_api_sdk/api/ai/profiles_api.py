@@ -107,7 +107,7 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiProfileMutationResult",
-            '400': "AiErrorResponse",
+            '400': "AiProfilesCreate400Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -180,7 +180,7 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiProfileMutationResult",
-            '400': "AiErrorResponse",
+            '400': "AiProfilesCreate400Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -253,7 +253,7 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiProfileMutationResult",
-            '400': "AiErrorResponse",
+            '400': "AiProfilesCreate400Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -351,7 +351,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_delete(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the profile to delete, as a bare JSON string.")],
+        ai_profiles_delete_request: Annotated[StrictStr, Field(description="The ID of the profile to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -369,8 +369,8 @@ class ProfilesApi:
 
         Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
 
-        :param body: The ID of the profile to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_profiles_delete_request: The ID of the profile to delete, as a bare JSON string. (required)
+        :type ai_profiles_delete_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -394,7 +394,7 @@ class ProfilesApi:
         """ # noqa: E501
 
         _param = self._ai_profiles_delete_serialize(
-            body=body,
+            ai_profiles_delete_request=ai_profiles_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -424,7 +424,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_delete_with_http_info(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the profile to delete, as a bare JSON string.")],
+        ai_profiles_delete_request: Annotated[StrictStr, Field(description="The ID of the profile to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -442,8 +442,8 @@ class ProfilesApi:
 
         Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
 
-        :param body: The ID of the profile to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_profiles_delete_request: The ID of the profile to delete, as a bare JSON string. (required)
+        :type ai_profiles_delete_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -467,7 +467,7 @@ class ProfilesApi:
         """ # noqa: E501
 
         _param = self._ai_profiles_delete_serialize(
-            body=body,
+            ai_profiles_delete_request=ai_profiles_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -497,7 +497,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_delete_without_preload_content(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the profile to delete, as a bare JSON string.")],
+        ai_profiles_delete_request: Annotated[StrictStr, Field(description="The ID of the profile to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -515,8 +515,8 @@ class ProfilesApi:
 
         Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
 
-        :param body: The ID of the profile to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_profiles_delete_request: The ID of the profile to delete, as a bare JSON string. (required)
+        :type ai_profiles_delete_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -540,7 +540,7 @@ class ProfilesApi:
         """ # noqa: E501
 
         _param = self._ai_profiles_delete_serialize(
-            body=body,
+            ai_profiles_delete_request=ai_profiles_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -565,7 +565,7 @@ class ProfilesApi:
 
     def _ai_profiles_delete_serialize(
         self,
-        body,
+        ai_profiles_delete_request,
         _request_auth,
         _content_type,
         _headers,
@@ -591,8 +591,8 @@ class ProfilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_profiles_delete_request is not None:
+            _body_params = ai_profiles_delete_request
 
 
         # set the HTTP header `Accept`
@@ -947,7 +947,7 @@ class ProfilesApi:
     ) -> List[AiProfile]:
         """List provider profiles
 
-        Lists the portal's AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
+        Lists the portal's AI provider profiles. A portal administrator receives each profile in full, `key` and `headers` included, because the settings page edits them; every other caller gets them with those secrets stripped, as the single-profile read always does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1014,7 +1014,7 @@ class ProfilesApi:
     ) -> ApiResponse[List[AiProfile]]:
         """List provider profiles
 
-        Lists the portal's AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
+        Lists the portal's AI provider profiles. A portal administrator receives each profile in full, `key` and `headers` included, because the settings page edits them; every other caller gets them with those secrets stripped, as the single-profile read always does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1081,7 +1081,7 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """List provider profiles
 
-        Lists the portal's AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
+        Lists the portal's AI provider profiles. A portal administrator receives each profile in full, `key` and `headers` included, because the settings page edits them; every other caller gets them with those secrets stripped, as the single-profile read always does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1210,7 +1210,7 @@ class ProfilesApi:
     ) -> List[AiModel]:
         """List models
 
-        Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
+        Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a profile the caller cannot see answers 404 before the provider is asked and a caller without access keeps the 403 the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
 
         :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
@@ -1249,6 +1249,7 @@ class ProfilesApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
             '502': "AiErrorResponse",
         }
@@ -1283,7 +1284,7 @@ class ProfilesApi:
     ) -> ApiResponse[List[AiModel]]:
         """List models
 
-        Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
+        Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a profile the caller cannot see answers 404 before the provider is asked and a caller without access keeps the 403 the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
 
         :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
@@ -1322,6 +1323,7 @@ class ProfilesApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
             '502': "AiErrorResponse",
         }
@@ -1356,7 +1358,7 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """List models
 
-        Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
+        Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a profile the caller cannot see answers 404 before the provider is asked and a caller without access keeps the 403 the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
 
         :param profile_id: The AI provider profile identifier. (required)
         :type profile_id: str
@@ -1395,6 +1397,7 @@ class ProfilesApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
             '502': "AiErrorResponse",
         }
@@ -1495,7 +1498,7 @@ class ProfilesApi:
     ) -> List[AiModel]:
         """List provider models
 
-        Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
+        Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well, and so is an `apiKey` with characters that cannot travel in an HTTP header (anything outside printable ASCII), since no provider could ever accept it. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
 
         :param ai_profiles_list_provider_models_request: (required)
         :type ai_profiles_list_provider_models_request: AiProfilesListProviderModelsRequest
@@ -1569,7 +1572,7 @@ class ProfilesApi:
     ) -> ApiResponse[List[AiModel]]:
         """List provider models
 
-        Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
+        Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well, and so is an `apiKey` with characters that cannot travel in an HTTP header (anything outside printable ASCII), since no provider could ever accept it. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
 
         :param ai_profiles_list_provider_models_request: (required)
         :type ai_profiles_list_provider_models_request: AiProfilesListProviderModelsRequest
@@ -1643,7 +1646,7 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """List provider models
 
-        Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
+        Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well, and so is an `apiKey` with characters that cannot travel in an HTTP header (anything outside printable ASCII), since no provider could ever accept it. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
 
         :param ai_profiles_list_provider_models_request: (required)
         :type ai_profiles_list_provider_models_request: AiProfilesListProviderModelsRequest
@@ -1778,7 +1781,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_test_connection(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the profile to probe, as a bare JSON string.")],
+        ai_profiles_test_connection_request: Annotated[StrictStr, Field(description="The ID of the profile to probe, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1794,10 +1797,10 @@ class ProfilesApi:
     ) -> AiProfilesTestConnection200Response:
         """Test a profile's provider
 
-        Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
+        Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter, and a profile the caller cannot see answers 404 before anything is probed. The result of the probe itself is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
 
-        :param body: The ID of the profile to probe, as a bare JSON string. (required)
-        :type body: str
+        :param ai_profiles_test_connection_request: The ID of the profile to probe, as a bare JSON string. (required)
+        :type ai_profiles_test_connection_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1821,7 +1824,7 @@ class ProfilesApi:
         """ # noqa: E501
 
         _param = self._ai_profiles_test_connection_serialize(
-            body=body,
+            ai_profiles_test_connection_request=ai_profiles_test_connection_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1833,6 +1836,7 @@ class ProfilesApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '413': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
@@ -1851,7 +1855,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_test_connection_with_http_info(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the profile to probe, as a bare JSON string.")],
+        ai_profiles_test_connection_request: Annotated[StrictStr, Field(description="The ID of the profile to probe, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1867,10 +1871,10 @@ class ProfilesApi:
     ) -> ApiResponse[AiProfilesTestConnection200Response]:
         """Test a profile's provider
 
-        Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
+        Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter, and a profile the caller cannot see answers 404 before anything is probed. The result of the probe itself is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
 
-        :param body: The ID of the profile to probe, as a bare JSON string. (required)
-        :type body: str
+        :param ai_profiles_test_connection_request: The ID of the profile to probe, as a bare JSON string. (required)
+        :type ai_profiles_test_connection_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1894,7 +1898,7 @@ class ProfilesApi:
         """ # noqa: E501
 
         _param = self._ai_profiles_test_connection_serialize(
-            body=body,
+            ai_profiles_test_connection_request=ai_profiles_test_connection_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1906,6 +1910,7 @@ class ProfilesApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '413': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
@@ -1924,7 +1929,7 @@ class ProfilesApi:
     @validate_call
     def ai_profiles_test_connection_without_preload_content(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the profile to probe, as a bare JSON string.")],
+        ai_profiles_test_connection_request: Annotated[StrictStr, Field(description="The ID of the profile to probe, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1940,10 +1945,10 @@ class ProfilesApi:
     ) -> RESTResponseType:
         """Test a profile's provider
 
-        Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
+        Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter, and a profile the caller cannot see answers 404 before anything is probed. The result of the probe itself is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
 
-        :param body: The ID of the profile to probe, as a bare JSON string. (required)
-        :type body: str
+        :param ai_profiles_test_connection_request: The ID of the profile to probe, as a bare JSON string. (required)
+        :type ai_profiles_test_connection_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1967,7 +1972,7 @@ class ProfilesApi:
         """ # noqa: E501
 
         _param = self._ai_profiles_test_connection_serialize(
-            body=body,
+            ai_profiles_test_connection_request=ai_profiles_test_connection_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1979,6 +1984,7 @@ class ProfilesApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '413': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
@@ -1992,7 +1998,7 @@ class ProfilesApi:
 
     def _ai_profiles_test_connection_serialize(
         self,
-        body,
+        ai_profiles_test_connection_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2018,8 +2024,8 @@ class ProfilesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_profiles_test_connection_request is not None:
+            _body_params = ai_profiles_test_connection_request
 
 
         # set the HTTP header `Accept`
@@ -2126,7 +2132,7 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiProfileMutationResult",
-            '400': "AiErrorResponse",
+            '400': "AiProfilesCreate400Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -2199,7 +2205,7 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiProfileMutationResult",
-            '400': "AiErrorResponse",
+            '400': "AiProfilesCreate400Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -2272,7 +2278,7 @@ class ProfilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiProfileMutationResult",
-            '400': "AiErrorResponse",
+            '400': "AiProfilesCreate400Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",

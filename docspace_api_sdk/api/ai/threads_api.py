@@ -81,7 +81,7 @@ class ThreadsApi:
     ) -> AiThreadsAppendUserMessage200Response:
         """Append user message
 
-        Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
+        Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. `threadId` is required, the message has to carry `role: user` and a content that is a non-blank string or a part list with at least one real part - text, a file or image attachment - so an empty or role-less body is rejected rather than stored. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
 
         :param ai_threads_append_user_message_request: (required)
         :type ai_threads_append_user_message_request: AiThreadsAppendUserMessageRequest
@@ -154,7 +154,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiThreadsAppendUserMessage200Response]:
         """Append user message
 
-        Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
+        Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. `threadId` is required, the message has to carry `role: user` and a content that is a non-blank string or a part list with at least one real part - text, a file or image attachment - so an empty or role-less body is rejected rather than stored. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
 
         :param ai_threads_append_user_message_request: (required)
         :type ai_threads_append_user_message_request: AiThreadsAppendUserMessageRequest
@@ -227,7 +227,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Append user message
 
-        Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
+        Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. `threadId` is required, the message has to carry `role: user` and a content that is a non-blank string or a part list with at least one real part - text, a file or image attachment - so an empty or role-less body is rejected rather than stored. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
 
         :param ai_threads_append_user_message_request: (required)
         :type ai_threads_append_user_message_request: AiThreadsAppendUserMessageRequest
@@ -361,7 +361,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_clear_messages(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the thread to empty, as a bare JSON string.")],
+        ai_threads_clear_messages_request: Annotated[StrictStr, Field(description="The ID of the thread to empty, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -379,8 +379,8 @@ class ThreadsApi:
 
         Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
 
-        :param body: The ID of the thread to empty, as a bare JSON string. (required)
-        :type body: str
+        :param ai_threads_clear_messages_request: The ID of the thread to empty, as a bare JSON string. (required)
+        :type ai_threads_clear_messages_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -404,7 +404,7 @@ class ThreadsApi:
         """ # noqa: E501
 
         _param = self._ai_threads_clear_messages_serialize(
-            body=body,
+            ai_threads_clear_messages_request=ai_threads_clear_messages_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -434,7 +434,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_clear_messages_with_http_info(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the thread to empty, as a bare JSON string.")],
+        ai_threads_clear_messages_request: Annotated[StrictStr, Field(description="The ID of the thread to empty, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -452,8 +452,8 @@ class ThreadsApi:
 
         Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
 
-        :param body: The ID of the thread to empty, as a bare JSON string. (required)
-        :type body: str
+        :param ai_threads_clear_messages_request: The ID of the thread to empty, as a bare JSON string. (required)
+        :type ai_threads_clear_messages_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -477,7 +477,7 @@ class ThreadsApi:
         """ # noqa: E501
 
         _param = self._ai_threads_clear_messages_serialize(
-            body=body,
+            ai_threads_clear_messages_request=ai_threads_clear_messages_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -507,7 +507,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_clear_messages_without_preload_content(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the thread to empty, as a bare JSON string.")],
+        ai_threads_clear_messages_request: Annotated[StrictStr, Field(description="The ID of the thread to empty, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -525,8 +525,8 @@ class ThreadsApi:
 
         Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
 
-        :param body: The ID of the thread to empty, as a bare JSON string. (required)
-        :type body: str
+        :param ai_threads_clear_messages_request: The ID of the thread to empty, as a bare JSON string. (required)
+        :type ai_threads_clear_messages_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -550,7 +550,7 @@ class ThreadsApi:
         """ # noqa: E501
 
         _param = self._ai_threads_clear_messages_serialize(
-            body=body,
+            ai_threads_clear_messages_request=ai_threads_clear_messages_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -575,7 +575,7 @@ class ThreadsApi:
 
     def _ai_threads_clear_messages_serialize(
         self,
-        body,
+        ai_threads_clear_messages_request,
         _request_auth,
         _content_type,
         _headers,
@@ -601,8 +601,8 @@ class ThreadsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_threads_clear_messages_request is not None:
+            _body_params = ai_threads_clear_messages_request
 
 
         # set the HTTP header `Accept`
@@ -953,7 +953,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the thread to delete, as a bare JSON string.")],
+        ai_threads_delete_request: Annotated[StrictStr, Field(description="The ID of the thread to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -971,8 +971,8 @@ class ThreadsApi:
 
         Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
 
-        :param body: The ID of the thread to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_threads_delete_request: The ID of the thread to delete, as a bare JSON string. (required)
+        :type ai_threads_delete_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -996,7 +996,7 @@ class ThreadsApi:
         """ # noqa: E501
 
         _param = self._ai_threads_delete_serialize(
-            body=body,
+            ai_threads_delete_request=ai_threads_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1027,7 +1027,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete_with_http_info(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the thread to delete, as a bare JSON string.")],
+        ai_threads_delete_request: Annotated[StrictStr, Field(description="The ID of the thread to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1045,8 +1045,8 @@ class ThreadsApi:
 
         Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
 
-        :param body: The ID of the thread to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_threads_delete_request: The ID of the thread to delete, as a bare JSON string. (required)
+        :type ai_threads_delete_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1070,7 +1070,7 @@ class ThreadsApi:
         """ # noqa: E501
 
         _param = self._ai_threads_delete_serialize(
-            body=body,
+            ai_threads_delete_request=ai_threads_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1101,7 +1101,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete_without_preload_content(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the thread to delete, as a bare JSON string.")],
+        ai_threads_delete_request: Annotated[StrictStr, Field(description="The ID of the thread to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1119,8 +1119,8 @@ class ThreadsApi:
 
         Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
 
-        :param body: The ID of the thread to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_threads_delete_request: The ID of the thread to delete, as a bare JSON string. (required)
+        :type ai_threads_delete_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1144,7 +1144,7 @@ class ThreadsApi:
         """ # noqa: E501
 
         _param = self._ai_threads_delete_serialize(
-            body=body,
+            ai_threads_delete_request=ai_threads_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1170,7 +1170,7 @@ class ThreadsApi:
 
     def _ai_threads_delete_serialize(
         self,
-        body,
+        ai_threads_delete_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1196,8 +1196,8 @@ class ThreadsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_threads_delete_request is not None:
+            _body_params = ai_threads_delete_request
 
 
         # set the HTTP header `Accept`
@@ -1252,7 +1252,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete_message(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the message to delete, as a bare JSON string.")],
+        ai_threads_delete_message_request: Annotated[StrictStr, Field(description="The ID of the message to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1270,8 +1270,8 @@ class ThreadsApi:
 
         Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
 
-        :param body: The ID of the message to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_threads_delete_message_request: The ID of the message to delete, as a bare JSON string. (required)
+        :type ai_threads_delete_message_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1295,7 +1295,7 @@ class ThreadsApi:
         """ # noqa: E501
 
         _param = self._ai_threads_delete_message_serialize(
-            body=body,
+            ai_threads_delete_message_request=ai_threads_delete_message_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1325,7 +1325,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete_message_with_http_info(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the message to delete, as a bare JSON string.")],
+        ai_threads_delete_message_request: Annotated[StrictStr, Field(description="The ID of the message to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1343,8 +1343,8 @@ class ThreadsApi:
 
         Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
 
-        :param body: The ID of the message to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_threads_delete_message_request: The ID of the message to delete, as a bare JSON string. (required)
+        :type ai_threads_delete_message_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1368,7 +1368,7 @@ class ThreadsApi:
         """ # noqa: E501
 
         _param = self._ai_threads_delete_message_serialize(
-            body=body,
+            ai_threads_delete_message_request=ai_threads_delete_message_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1398,7 +1398,7 @@ class ThreadsApi:
     @validate_call
     def ai_threads_delete_message_without_preload_content(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the message to delete, as a bare JSON string.")],
+        ai_threads_delete_message_request: Annotated[StrictStr, Field(description="The ID of the message to delete, as a bare JSON string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1416,8 +1416,8 @@ class ThreadsApi:
 
         Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
 
-        :param body: The ID of the message to delete, as a bare JSON string. (required)
-        :type body: str
+        :param ai_threads_delete_message_request: The ID of the message to delete, as a bare JSON string. (required)
+        :type ai_threads_delete_message_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1441,7 +1441,7 @@ class ThreadsApi:
         """ # noqa: E501
 
         _param = self._ai_threads_delete_message_serialize(
-            body=body,
+            ai_threads_delete_message_request=ai_threads_delete_message_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1466,7 +1466,7 @@ class ThreadsApi:
 
     def _ai_threads_delete_message_serialize(
         self,
-        body,
+        ai_threads_delete_message_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1492,8 +1492,8 @@ class ThreadsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_threads_delete_message_request is not None:
+            _body_params = ai_threads_delete_message_request
 
 
         # set the HTTP header `Accept`
@@ -1849,7 +1849,7 @@ class ThreadsApi:
     ) -> AiThreadMessageLike:
         """Get one chat message
 
-        Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+        Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required and, as with `GET api/2.0/ai/threads/get-by-id`, an unknown or deleted ID answers 404, so the result is never an empty body. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
 
         :param message_id: The globally unique chat message identifier. (required)
         :type message_id: str
@@ -1888,6 +1888,7 @@ class ThreadsApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -1921,7 +1922,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiThreadMessageLike]:
         """Get one chat message
 
-        Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+        Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required and, as with `GET api/2.0/ai/threads/get-by-id`, an unknown or deleted ID answers 404, so the result is never an empty body. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
 
         :param message_id: The globally unique chat message identifier. (required)
         :type message_id: str
@@ -1960,6 +1961,7 @@ class ThreadsApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -1993,7 +1995,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Get one chat message
 
-        Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+        Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required and, as with `GET api/2.0/ai/threads/get-by-id`, an unknown or deleted ID answers 404, so the result is never an empty body. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
 
         :param message_id: The globally unique chat message identifier. (required)
         :type message_id: str
@@ -2032,6 +2034,7 @@ class ThreadsApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -2762,7 +2765,7 @@ class ThreadsApi:
     ) -> List[AiThreadMessageLike]:
         """Read messages
 
-        Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
+        Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. `threadId` is required and a missing one answers 400, so an empty list always means a thread with no messages. A malformed cursor is ignored and the read starts from the beginning.
 
         :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
@@ -2807,6 +2810,7 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiThreadMessageLike]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -2845,7 +2849,7 @@ class ThreadsApi:
     ) -> ApiResponse[List[AiThreadMessageLike]]:
         """Read messages
 
-        Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
+        Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. `threadId` is required and a missing one answers 400, so an empty list always means a thread with no messages. A malformed cursor is ignored and the read starts from the beginning.
 
         :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
@@ -2890,6 +2894,7 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiThreadMessageLike]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -2928,7 +2933,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Read messages
 
-        Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
+        Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. `threadId` is required and a missing one answers 400, so an empty list always means a thread with no messages. A malformed cursor is ignored and the read starts from the beginning.
 
         :param thread_id: The chat thread identifier. (required)
         :type thread_id: str
@@ -2973,6 +2978,7 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "List[AiThreadMessageLike]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -3976,7 +3982,7 @@ class ThreadsApi:
     ) -> AiSuccessResponse:
         """Update message
 
-        Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
+        Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object with a known `role` and a content that is a non-blank string or a part list with at least one real part - a tool-call-only assistant message counts, an empty list does not. The role has to match the stored message's: a user message cannot be turned into an assistant one. An unknown `messageId` answers 404. The answer only confirms the write.
 
         :param ai_threads_update_message_request: (required)
         :type ai_threads_update_message_request: AiThreadsUpdateMessageRequest
@@ -4012,8 +4018,10 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '413': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
@@ -4048,7 +4056,7 @@ class ThreadsApi:
     ) -> ApiResponse[AiSuccessResponse]:
         """Update message
 
-        Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
+        Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object with a known `role` and a content that is a non-blank string or a part list with at least one real part - a tool-call-only assistant message counts, an empty list does not. The role has to match the stored message's: a user message cannot be turned into an assistant one. An unknown `messageId` answers 404. The answer only confirms the write.
 
         :param ai_threads_update_message_request: (required)
         :type ai_threads_update_message_request: AiThreadsUpdateMessageRequest
@@ -4084,8 +4092,10 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '413': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
@@ -4120,7 +4130,7 @@ class ThreadsApi:
     ) -> RESTResponseType:
         """Update message
 
-        Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
+        Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object with a known `role` and a content that is a non-blank string or a part list with at least one real part - a tool-call-only assistant message counts, an empty list does not. The role has to match the stored message's: a user message cannot be turned into an assistant one. An unknown `messageId` answers 404. The answer only confirms the write.
 
         :param ai_threads_update_message_request: (required)
         :type ai_threads_update_message_request: AiThreadsUpdateMessageRequest
@@ -4156,8 +4166,10 @@ class ThreadsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '413': "AiErrorResponse",
             '500': "AiErrorResponse",
         }

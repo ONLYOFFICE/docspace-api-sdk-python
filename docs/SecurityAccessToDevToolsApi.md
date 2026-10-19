@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **set_tenant_dev_tools_access_settings**
-> TenantDevToolsAccessSettingsWrapper set_tenant_dev_tools_access_settings(tenant_dev_tools_access_settings_dto=tenant_dev_tools_access_settings_dto)
+> TenantDevToolsAccessSettingsWrapper set_tenant_dev_tools_access_settings(tenant_dev_tools_access_settings_request_dto=tenant_dev_tools_access_settings_request_dto)
 
 Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,
 webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin
@@ -23,7 +23,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_dev_tools_access_settings_dto** | [**TenantDevToolsAccessSettingsDto**](TenantDevToolsAccessSettingsDto.md)|  | [optional] 
+ **tenant_dev_tools_access_settings_request_dto** | [**TenantDevToolsAccessSettingsRequestDto**](TenantDevToolsAccessSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -38,7 +38,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.tenant_dev_tools_access_settings_dto import TenantDevToolsAccessSettingsDto
+from docspace_api_sdk.models.tenant_dev_tools_access_settings_request_dto import TenantDevToolsAccessSettingsRequestDto
 from docspace_api_sdk.models.tenant_dev_tools_access_settings_wrapper import TenantDevToolsAccessSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -60,11 +60,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AccessToDevToolsApi(api_client)
-    tenant_dev_tools_access_settings_dto = docspace_api_sdk.TenantDevToolsAccessSettingsDto() # TenantDevToolsAccessSettingsDto |  (optional)
+    tenant_dev_tools_access_settings_request_dto = docspace_api_sdk.TenantDevToolsAccessSettingsRequestDto() # TenantDevToolsAccessSettingsRequestDto |  (optional)
 
     try:
         # Set the Developer Tools access settings
-        api_response = api_instance.set_tenant_dev_tools_access_settings(tenant_dev_tools_access_settings_dto=tenant_dev_tools_access_settings_dto)
+        api_response = api_instance.set_tenant_dev_tools_access_settings(tenant_dev_tools_access_settings_request_dto=tenant_dev_tools_access_settings_request_dto)
         print("The response of AccessToDevToolsApi->set_tenant_dev_tools_access_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -83,6 +83,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Saved developer tools access restriction for the `User` role |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |

@@ -65,7 +65,7 @@ class EditorToolsApi:
     ) -> AiEditorToolsCall200Response:
         """Call an editor tool
 
-        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be exactly one of the tools `GET api/2.0/ai/editor-tools/list` reports (surrounding whitespace is ignored, letter case is not); anything else, including a tool the editor is not allowed to reach, is refused with 400 before anything runs. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
 
         :param ai_editor_tools_call_request: The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in. (required)
         :type ai_editor_tools_call_request: AiEditorToolsCallRequest
@@ -138,7 +138,7 @@ class EditorToolsApi:
     ) -> ApiResponse[AiEditorToolsCall200Response]:
         """Call an editor tool
 
-        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be exactly one of the tools `GET api/2.0/ai/editor-tools/list` reports (surrounding whitespace is ignored, letter case is not); anything else, including a tool the editor is not allowed to reach, is refused with 400 before anything runs. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
 
         :param ai_editor_tools_call_request: The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in. (required)
         :type ai_editor_tools_call_request: AiEditorToolsCallRequest
@@ -211,7 +211,7 @@ class EditorToolsApi:
     ) -> RESTResponseType:
         """Call an editor tool
 
-        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+        Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be exactly one of the tools `GET api/2.0/ai/editor-tools/list` reports (surrounding whitespace is ignored, letter case is not); anything else, including a tool the editor is not allowed to reach, is refused with 400 before anything runs. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
 
         :param ai_editor_tools_call_request: The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in. (required)
         :type ai_editor_tools_call_request: AiEditorToolsCallRequest

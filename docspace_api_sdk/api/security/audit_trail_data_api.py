@@ -30,14 +30,14 @@ from uuid import UUID
 from docspace_api_sdk.models.action_type import ActionType
 from docspace_api_sdk.models.audit_event_array_wrapper import AuditEventArrayWrapper
 from docspace_api_sdk.models.audit_report_format import AuditReportFormat
-from docspace_api_sdk.models.audit_trail_product_mapper_array_wrapper import AuditTrailProductMapperArrayWrapper
+from docspace_api_sdk.models.audit_trail_product_array_wrapper import AuditTrailProductArrayWrapper
 from docspace_api_sdk.models.audit_trail_types_wrapper import AuditTrailTypesWrapper
 from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.models.entry_type import EntryType
 from docspace_api_sdk.models.location_type import LocationType
 from docspace_api_sdk.models.message_action import MessageAction
 from docspace_api_sdk.models.product_type import ProductType
-from docspace_api_sdk.models.tenant_audit_settings_response_wrapper import TenantAuditSettingsResponseWrapper
+from docspace_api_sdk.models.tenant_audit_settings_request_dto import TenantAuditSettingsRequestDto
 from docspace_api_sdk.models.tenant_audit_settings_wrapper import TenantAuditSettingsWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -66,7 +66,9 @@ class AuditTrailDataApi:
     @validate_call
     def create_audit_trail_report(
         self,
-        format: Annotated[Optional[AuditReportFormat], Field(description="The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.")] = None,
+        format: Annotated[Optional[AuditReportFormat], Field(description="The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The earliest moment a reported event may have been recorded at, read as a UTC instant.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -82,10 +84,14 @@ class AuditTrailDataApi:
     ) -> DocumentBuilderTaskWrapper:
         """Start audit trail report
 
-        Queues a report of the portal's audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller's My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+        Queues a report of the portal's audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal's pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller's My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
 
-        :param format: The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
+        :param format: The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.
         :type format: AuditReportFormat
+        :param var_from: The earliest moment a reported event may have been recorded at, read as a UTC instant.
+        :type var_from: datetime
+        :param to: The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.
+        :type to: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -110,6 +116,8 @@ class AuditTrailDataApi:
 
         _param = self._create_audit_trail_report_serialize(
             format=format,
+            var_from=var_from,
+            to=to,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -118,12 +126,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -142,7 +150,9 @@ class AuditTrailDataApi:
     @validate_call
     def create_audit_trail_report_with_http_info(
         self,
-        format: Annotated[Optional[AuditReportFormat], Field(description="The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.")] = None,
+        format: Annotated[Optional[AuditReportFormat], Field(description="The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The earliest moment a reported event may have been recorded at, read as a UTC instant.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -158,10 +168,14 @@ class AuditTrailDataApi:
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
         """Start audit trail report
 
-        Queues a report of the portal's audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller's My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+        Queues a report of the portal's audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal's pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller's My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
 
-        :param format: The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
+        :param format: The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.
         :type format: AuditReportFormat
+        :param var_from: The earliest moment a reported event may have been recorded at, read as a UTC instant.
+        :type var_from: datetime
+        :param to: The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.
+        :type to: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -186,6 +200,8 @@ class AuditTrailDataApi:
 
         _param = self._create_audit_trail_report_serialize(
             format=format,
+            var_from=var_from,
+            to=to,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -194,12 +210,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -218,7 +234,9 @@ class AuditTrailDataApi:
     @validate_call
     def create_audit_trail_report_without_preload_content(
         self,
-        format: Annotated[Optional[AuditReportFormat], Field(description="The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.")] = None,
+        format: Annotated[Optional[AuditReportFormat], Field(description="The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The earliest moment a reported event may have been recorded at, read as a UTC instant.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -234,10 +252,14 @@ class AuditTrailDataApi:
     ) -> RESTResponseType:
         """Start audit trail report
 
-        Queues a report of the portal's audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller's My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+        Queues a report of the portal's audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal's pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller's My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
 
-        :param format: The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
+        :param format: The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.
         :type format: AuditReportFormat
+        :param var_from: The earliest moment a reported event may have been recorded at, read as a UTC instant.
+        :type var_from: datetime
+        :param to: The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.
+        :type to: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -262,6 +284,8 @@ class AuditTrailDataApi:
 
         _param = self._create_audit_trail_report_serialize(
             format=format,
+            var_from=var_from,
+            to=to,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -270,12 +294,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -290,6 +314,8 @@ class AuditTrailDataApi:
     def _create_audit_trail_report_serialize(
         self,
         format,
+        var_from,
+        to,
         _request_auth,
         _content_type,
         _headers,
@@ -315,6 +341,32 @@ class AuditTrailDataApi:
         if format is not None:
             
             _query_params.append(('format', format.value))
+            
+        if var_from is not None:
+            if isinstance(var_from, datetime):
+                _query_params.append(
+                    (
+                        'from',
+                        var_from.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('from', var_from))
+            
+        if to is not None:
+            if isinstance(to, datetime):
+                _query_params.append(
+                    (
+                        'to',
+                        to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('to', to))
             
         # process the header parameters
         # process the form parameters
@@ -452,12 +504,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditEventArrayWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -564,12 +616,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditEventArrayWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -676,12 +728,12 @@ class AuditTrailDataApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AuditEventArrayWrapper",
+            '400': None,
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -847,7 +899,7 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantAuditSettingsResponseWrapper:
+    ) -> TenantAuditSettingsWrapper:
         """Get audit lifetime settings
 
         Returns how long this portal keeps its two security logs: `loginHistoryLifeTime` for login events and  `auditTrailLifeTime` for audit events, both counted in days, together with `lastModified`, the moment the pair  was last saved. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud  installation the login history and audit trail section must be enabled for the portal, otherwise the call is  answered with 402; the audit option of the pricing plan is not required to read the values. Both numbers lie  between 1 and 180 days, and a portal that never changed them reports the default of 180. They define the  window the rest of the audit operations work in: `GET api/2.0/security/audit/events/last` looks exactly this  far back, and the reports started by `POST api/2.0/security/audit/login/report` and  `POST api/2.0/security/audit/events/report` cover exactly this period. The operation is read-only; change the  values with `POST api/2.0/security/audit/settings/lifetime`.
@@ -882,7 +934,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsResponseWrapper",
+            '200': "TenantAuditSettingsWrapper",
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
@@ -918,7 +970,7 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantAuditSettingsResponseWrapper]:
+    ) -> ApiResponse[TenantAuditSettingsWrapper]:
         """Get audit lifetime settings
 
         Returns how long this portal keeps its two security logs: `loginHistoryLifeTime` for login events and  `auditTrailLifeTime` for audit events, both counted in days, together with `lastModified`, the moment the pair  was last saved. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud  installation the login history and audit trail section must be enabled for the portal, otherwise the call is  answered with 402; the audit option of the pricing plan is not required to read the values. Both numbers lie  between 1 and 180 days, and a portal that never changed them reports the default of 180. They define the  window the rest of the audit operations work in: `GET api/2.0/security/audit/events/last` looks exactly this  far back, and the reports started by `POST api/2.0/security/audit/login/report` and  `POST api/2.0/security/audit/events/report` cover exactly this period. The operation is read-only; change the  values with `POST api/2.0/security/audit/settings/lifetime`.
@@ -953,7 +1005,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsResponseWrapper",
+            '200': "TenantAuditSettingsWrapper",
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
@@ -1024,7 +1076,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsResponseWrapper",
+            '200': "TenantAuditSettingsWrapper",
             '402': None,
             '403': None,
             '401': "ErrorApiResponse",
@@ -1127,7 +1179,7 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuditTrailProductMapperArrayWrapper:
+    ) -> AuditTrailProductArrayWrapper:
         """Get audit trail mappers
 
         Returns the audit vocabulary as the tree it really is: every product, the modules inside it, and for each  module the actions it can record together with the type of change and the entity each of them applies to. Pass  `productType` to keep a single product and `moduleType` to keep a single module inside the products that  remain; omit both to get the whole tree. The caller needs the portal-settings right of a DocSpace  administrator; the audit option of the pricing plan is not required, and the call is read-only and safe to  repeat. Each action carries `messageAction`, the name to send as the `action` filter of  `GET api/2.0/security/audit/events/filter`, next to `actionType` and `entity`, the values its `actionType` and  `entryType` filters accept - this is where a caller learns which action belongs to which module instead of  guessing. A filter that matches nothing yields an empty list rather than an error. Use  `GET api/2.0/security/audit/types` for the flat lists of the same names.
@@ -1168,7 +1220,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AuditTrailProductMapperArrayWrapper",
+            '200': "AuditTrailProductArrayWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1206,7 +1258,7 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AuditTrailProductMapperArrayWrapper]:
+    ) -> ApiResponse[AuditTrailProductArrayWrapper]:
         """Get audit trail mappers
 
         Returns the audit vocabulary as the tree it really is: every product, the modules inside it, and for each  module the actions it can record together with the type of change and the entity each of them applies to. Pass  `productType` to keep a single product and `moduleType` to keep a single module inside the products that  remain; omit both to get the whole tree. The caller needs the portal-settings right of a DocSpace  administrator; the audit option of the pricing plan is not required, and the call is read-only and safe to  repeat. Each action carries `messageAction`, the name to send as the `action` filter of  `GET api/2.0/security/audit/events/filter`, next to `actionType` and `entity`, the values its `actionType` and  `entryType` filters accept - this is where a caller learns which action belongs to which module instead of  guessing. A filter that matches nothing yields an empty list rather than an error. Use  `GET api/2.0/security/audit/types` for the flat lists of the same names.
@@ -1247,7 +1299,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AuditTrailProductMapperArrayWrapper",
+            '200': "AuditTrailProductArrayWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1326,7 +1378,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AuditTrailProductMapperArrayWrapper",
+            '200': "AuditTrailProductArrayWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -1440,7 +1492,7 @@ class AuditTrailDataApi:
     ) -> DocumentBuilderTaskWrapper:
         """Get audit trail report status
 
-        Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator's report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+        Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator's report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1511,7 +1563,7 @@ class AuditTrailDataApi:
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
         """Get audit trail report status
 
-        Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator's report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+        Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator's report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1582,7 +1634,7 @@ class AuditTrailDataApi:
     ) -> RESTResponseType:
         """Get audit trail report status
 
-        Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator's report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+        Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator's report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2256,7 +2308,7 @@ class AuditTrailDataApi:
     @validate_call
     def set_audit_settings(
         self,
-        tenant_audit_settings_wrapper: Optional[TenantAuditSettingsWrapper] = None,
+        tenant_audit_settings_request_dto: Optional[TenantAuditSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2269,13 +2321,13 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantAuditSettingsResponseWrapper:
+    ) -> TenantAuditSettingsWrapper:
         """Set audit lifetime settings
 
         Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal's pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
 
-        :param tenant_audit_settings_wrapper:
-        :type tenant_audit_settings_wrapper: TenantAuditSettingsWrapper
+        :param tenant_audit_settings_request_dto:
+        :type tenant_audit_settings_request_dto: TenantAuditSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2299,7 +2351,7 @@ class AuditTrailDataApi:
         """ # noqa: E501
 
         _param = self._set_audit_settings_serialize(
-            tenant_audit_settings_wrapper=tenant_audit_settings_wrapper,
+            tenant_audit_settings_request_dto=tenant_audit_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2307,7 +2359,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsResponseWrapper",
+            '200': "TenantAuditSettingsWrapper",
             '400': None,
             '402': None,
             '403': None,
@@ -2332,7 +2384,7 @@ class AuditTrailDataApi:
     @validate_call
     def set_audit_settings_with_http_info(
         self,
-        tenant_audit_settings_wrapper: Optional[TenantAuditSettingsWrapper] = None,
+        tenant_audit_settings_request_dto: Optional[TenantAuditSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2345,13 +2397,13 @@ class AuditTrailDataApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantAuditSettingsResponseWrapper]:
+    ) -> ApiResponse[TenantAuditSettingsWrapper]:
         """Set audit lifetime settings
 
         Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal's pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
 
-        :param tenant_audit_settings_wrapper:
-        :type tenant_audit_settings_wrapper: TenantAuditSettingsWrapper
+        :param tenant_audit_settings_request_dto:
+        :type tenant_audit_settings_request_dto: TenantAuditSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2375,7 +2427,7 @@ class AuditTrailDataApi:
         """ # noqa: E501
 
         _param = self._set_audit_settings_serialize(
-            tenant_audit_settings_wrapper=tenant_audit_settings_wrapper,
+            tenant_audit_settings_request_dto=tenant_audit_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2383,7 +2435,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsResponseWrapper",
+            '200': "TenantAuditSettingsWrapper",
             '400': None,
             '402': None,
             '403': None,
@@ -2408,7 +2460,7 @@ class AuditTrailDataApi:
     @validate_call
     def set_audit_settings_without_preload_content(
         self,
-        tenant_audit_settings_wrapper: Optional[TenantAuditSettingsWrapper] = None,
+        tenant_audit_settings_request_dto: Optional[TenantAuditSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2426,8 +2478,8 @@ class AuditTrailDataApi:
 
         Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal's pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
 
-        :param tenant_audit_settings_wrapper:
-        :type tenant_audit_settings_wrapper: TenantAuditSettingsWrapper
+        :param tenant_audit_settings_request_dto:
+        :type tenant_audit_settings_request_dto: TenantAuditSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2451,7 +2503,7 @@ class AuditTrailDataApi:
         """ # noqa: E501
 
         _param = self._set_audit_settings_serialize(
-            tenant_audit_settings_wrapper=tenant_audit_settings_wrapper,
+            tenant_audit_settings_request_dto=tenant_audit_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2459,7 +2511,7 @@ class AuditTrailDataApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAuditSettingsResponseWrapper",
+            '200': "TenantAuditSettingsWrapper",
             '400': None,
             '402': None,
             '403': None,
@@ -2479,7 +2531,7 @@ class AuditTrailDataApi:
 
     def _set_audit_settings_serialize(
         self,
-        tenant_audit_settings_wrapper,
+        tenant_audit_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -2505,8 +2557,8 @@ class AuditTrailDataApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if tenant_audit_settings_wrapper is not None:
-            _body_params = tenant_audit_settings_wrapper
+        if tenant_audit_settings_request_dto is not None:
+            _body_params = tenant_audit_settings_request_dto
 
 
         # set the HTTP header `Accept`

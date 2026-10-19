@@ -29,6 +29,7 @@ from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 from docspace_api_sdk.models.ai_web_search_config import AiWebSearchConfig
 from docspace_api_sdk.models.ai_web_search_configure_request import AiWebSearchConfigureRequest
 from docspace_api_sdk.models.ai_web_search_mutation_result import AiWebSearchMutationResult
+from docspace_api_sdk.models.ai_web_search_set_active_config_request import AiWebSearchSetActiveConfigRequest
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -52,7 +53,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_clear(
         self,
-        body: Annotated[StrictStr, Field(description="Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.")],
+        ai_web_search_clear_request: Annotated[StrictStr, Field(description="Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -70,8 +71,8 @@ class WebSearchApi:
 
         Removes the portal's web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room's configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
 
-        :param body: Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. (required)
-        :type body: str
+        :param ai_web_search_clear_request: Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. (required)
+        :type ai_web_search_clear_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -95,7 +96,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_clear_serialize(
-            body=body,
+            ai_web_search_clear_request=ai_web_search_clear_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -124,7 +125,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_clear_with_http_info(
         self,
-        body: Annotated[StrictStr, Field(description="Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.")],
+        ai_web_search_clear_request: Annotated[StrictStr, Field(description="Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -142,8 +143,8 @@ class WebSearchApi:
 
         Removes the portal's web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room's configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
 
-        :param body: Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. (required)
-        :type body: str
+        :param ai_web_search_clear_request: Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. (required)
+        :type ai_web_search_clear_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -167,7 +168,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_clear_serialize(
-            body=body,
+            ai_web_search_clear_request=ai_web_search_clear_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -196,7 +197,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_clear_without_preload_content(
         self,
-        body: Annotated[StrictStr, Field(description="Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.")],
+        ai_web_search_clear_request: Annotated[StrictStr, Field(description="Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -214,8 +215,8 @@ class WebSearchApi:
 
         Removes the portal's web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room's configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
 
-        :param body: Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. (required)
-        :type body: str
+        :param ai_web_search_clear_request: Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. (required)
+        :type ai_web_search_clear_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -239,7 +240,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_clear_serialize(
-            body=body,
+            ai_web_search_clear_request=ai_web_search_clear_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -263,7 +264,7 @@ class WebSearchApi:
 
     def _ai_web_search_clear_serialize(
         self,
-        body,
+        ai_web_search_clear_request,
         _request_auth,
         _content_type,
         _headers,
@@ -289,8 +290,8 @@ class WebSearchApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_web_search_clear_request is not None:
+            _body_params = ai_web_search_clear_request
 
 
         # set the HTTP header `Accept`
@@ -397,7 +398,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiWebSearchMutationResult",
-            '400': "AiErrorResponse",
+            '400': "AiWebSearchConfigure400Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -471,7 +472,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiWebSearchMutationResult",
-            '400': "AiErrorResponse",
+            '400': "AiWebSearchConfigure400Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -545,7 +546,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiWebSearchMutationResult",
-            '400': "AiErrorResponse",
+            '400': "AiWebSearchConfigure400Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1214,7 +1215,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_passthrough_contents(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.")],
+        ai_web_search_passthrough_contents_request: Annotated[Dict[str, Any], Field(description="A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1230,10 +1231,10 @@ class WebSearchApi:
     ) -> Dict[str, object]:
         """Web page contents passthrough
 
-        Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+        Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider's 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
 
-        :param request_body: A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_web_search_passthrough_contents_request: A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration. (required)
+        :type ai_web_search_passthrough_contents_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1257,7 +1258,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_passthrough_contents_serialize(
-            request_body=request_body,
+            ai_web_search_passthrough_contents_request=ai_web_search_passthrough_contents_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1266,6 +1267,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Dict[str, object]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1289,7 +1291,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_passthrough_contents_with_http_info(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.")],
+        ai_web_search_passthrough_contents_request: Annotated[Dict[str, Any], Field(description="A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1305,10 +1307,10 @@ class WebSearchApi:
     ) -> ApiResponse[Dict[str, object]]:
         """Web page contents passthrough
 
-        Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+        Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider's 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
 
-        :param request_body: A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_web_search_passthrough_contents_request: A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration. (required)
+        :type ai_web_search_passthrough_contents_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1332,7 +1334,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_passthrough_contents_serialize(
-            request_body=request_body,
+            ai_web_search_passthrough_contents_request=ai_web_search_passthrough_contents_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1341,6 +1343,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Dict[str, object]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1364,7 +1367,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_passthrough_contents_without_preload_content(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.")],
+        ai_web_search_passthrough_contents_request: Annotated[Dict[str, Any], Field(description="A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1380,10 +1383,10 @@ class WebSearchApi:
     ) -> RESTResponseType:
         """Web page contents passthrough
 
-        Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+        Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider's 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
 
-        :param request_body: A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_web_search_passthrough_contents_request: A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration. (required)
+        :type ai_web_search_passthrough_contents_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1407,7 +1410,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_passthrough_contents_serialize(
-            request_body=request_body,
+            ai_web_search_passthrough_contents_request=ai_web_search_passthrough_contents_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1416,6 +1419,7 @@ class WebSearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "Dict[str, object]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1434,7 +1438,7 @@ class WebSearchApi:
 
     def _ai_web_search_passthrough_contents_serialize(
         self,
-        request_body,
+        ai_web_search_passthrough_contents_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1460,8 +1464,8 @@ class WebSearchApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_web_search_passthrough_contents_request is not None:
+            _body_params = ai_web_search_passthrough_contents_request
 
 
         # set the HTTP header `Accept`
@@ -1516,7 +1520,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_passthrough_search(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.")],
+        ai_web_search_passthrough_search_request: Annotated[Dict[str, Any], Field(description="A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1529,13 +1533,13 @@ class WebSearchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Dict[str, object]:
+    ) -> Dict[str, Optional[object]]:
         """Web search passthrough
 
-        Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+        Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider's own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
 
-        :param request_body: A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_web_search_passthrough_search_request: A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here. (required)
+        :type ai_web_search_passthrough_search_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1559,7 +1563,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_passthrough_search_serialize(
-            request_body=request_body,
+            ai_web_search_passthrough_search_request=ai_web_search_passthrough_search_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1567,7 +1571,8 @@ class WebSearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "Dict[str, Optional[object]]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1591,7 +1596,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_passthrough_search_with_http_info(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.")],
+        ai_web_search_passthrough_search_request: Annotated[Dict[str, Any], Field(description="A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1604,13 +1609,13 @@ class WebSearchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Dict[str, object]]:
+    ) -> ApiResponse[Dict[str, Optional[object]]]:
         """Web search passthrough
 
-        Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+        Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider's own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
 
-        :param request_body: A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_web_search_passthrough_search_request: A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here. (required)
+        :type ai_web_search_passthrough_search_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1634,7 +1639,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_passthrough_search_serialize(
-            request_body=request_body,
+            ai_web_search_passthrough_search_request=ai_web_search_passthrough_search_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1642,7 +1647,8 @@ class WebSearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "Dict[str, Optional[object]]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1666,7 +1672,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_passthrough_search_without_preload_content(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.")],
+        ai_web_search_passthrough_search_request: Annotated[Dict[str, Any], Field(description="A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1682,10 +1688,10 @@ class WebSearchApi:
     ) -> RESTResponseType:
         """Web search passthrough
 
-        Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+        Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider's own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
 
-        :param request_body: A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_web_search_passthrough_search_request: A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here. (required)
+        :type ai_web_search_passthrough_search_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1709,7 +1715,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_passthrough_search_serialize(
-            request_body=request_body,
+            ai_web_search_passthrough_search_request=ai_web_search_passthrough_search_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1717,7 +1723,8 @@ class WebSearchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, object]",
+            '200': "Dict[str, Optional[object]]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1736,7 +1743,7 @@ class WebSearchApi:
 
     def _ai_web_search_passthrough_search_serialize(
         self,
-        request_body,
+        ai_web_search_passthrough_search_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1762,8 +1769,8 @@ class WebSearchApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_web_search_passthrough_search_request is not None:
+            _body_params = ai_web_search_passthrough_search_request
 
 
         # set the HTTP header `Accept`
@@ -1818,7 +1825,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_set_active_config(
         self,
-        ai_web_search_configure_request: AiWebSearchConfigureRequest,
+        ai_web_search_set_active_config_request: AiWebSearchSetActiveConfigRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1836,8 +1843,8 @@ class WebSearchApi:
 
         Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
 
-        :param ai_web_search_configure_request: (required)
-        :type ai_web_search_configure_request: AiWebSearchConfigureRequest
+        :param ai_web_search_set_active_config_request: (required)
+        :type ai_web_search_set_active_config_request: AiWebSearchSetActiveConfigRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1861,7 +1868,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_set_active_config_serialize(
-            ai_web_search_configure_request=ai_web_search_configure_request,
+            ai_web_search_set_active_config_request=ai_web_search_set_active_config_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1892,7 +1899,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_set_active_config_with_http_info(
         self,
-        ai_web_search_configure_request: AiWebSearchConfigureRequest,
+        ai_web_search_set_active_config_request: AiWebSearchSetActiveConfigRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1910,8 +1917,8 @@ class WebSearchApi:
 
         Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
 
-        :param ai_web_search_configure_request: (required)
-        :type ai_web_search_configure_request: AiWebSearchConfigureRequest
+        :param ai_web_search_set_active_config_request: (required)
+        :type ai_web_search_set_active_config_request: AiWebSearchSetActiveConfigRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1935,7 +1942,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_set_active_config_serialize(
-            ai_web_search_configure_request=ai_web_search_configure_request,
+            ai_web_search_set_active_config_request=ai_web_search_set_active_config_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1966,7 +1973,7 @@ class WebSearchApi:
     @validate_call
     def ai_web_search_set_active_config_without_preload_content(
         self,
-        ai_web_search_configure_request: AiWebSearchConfigureRequest,
+        ai_web_search_set_active_config_request: AiWebSearchSetActiveConfigRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1984,8 +1991,8 @@ class WebSearchApi:
 
         Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
 
-        :param ai_web_search_configure_request: (required)
-        :type ai_web_search_configure_request: AiWebSearchConfigureRequest
+        :param ai_web_search_set_active_config_request: (required)
+        :type ai_web_search_set_active_config_request: AiWebSearchSetActiveConfigRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2009,7 +2016,7 @@ class WebSearchApi:
         """ # noqa: E501
 
         _param = self._ai_web_search_set_active_config_serialize(
-            ai_web_search_configure_request=ai_web_search_configure_request,
+            ai_web_search_set_active_config_request=ai_web_search_set_active_config_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2035,7 +2042,7 @@ class WebSearchApi:
 
     def _ai_web_search_set_active_config_serialize(
         self,
-        ai_web_search_configure_request,
+        ai_web_search_set_active_config_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2061,8 +2068,8 @@ class WebSearchApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if ai_web_search_configure_request is not None:
-            _body_params = ai_web_search_configure_request
+        if ai_web_search_set_active_config_request is not None:
+            _body_params = ai_web_search_set_active_config_request
 
 
         # set the HTTP header `Accept`

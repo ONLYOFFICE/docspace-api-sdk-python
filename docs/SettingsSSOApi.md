@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **get_default_sso_settings_v2**
-> SsoSettingsV2Wrapper get_default_sso_settings_v2()
+> SsoSettingsWrapper get_default_sso_settings_v2()
 
 Returns the built-in SSO configuration a portal starts from: empty identity provider and service provider
 sections with the stock SAML settings already filled in (HTTP-POST binding, transient name ID format, RSA-SHA1
@@ -34,7 +34,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 
@@ -45,7 +45,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
+from docspace_api_sdk.models.sso_settings_wrapper import SsoSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -88,6 +88,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The built-in SSO configuration a portal starts from |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The portal is a cloud one, and its pricing plan has no single sign-on option or the SSO section is not enabled for it |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -97,7 +99,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_sso_settings_v2**
-> SsoSettingsV2Wrapper get_sso_settings_v2()
+> SsoSettingsWrapper get_sso_settings_v2()
 
 Returns the SAML Single Sign-On configuration of the current portal: the identity provider endpoints and
 certificates, the service provider certificates, the attribute mapping, the login button label and the user
@@ -119,7 +121,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 
@@ -130,7 +132,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
+from docspace_api_sdk.models.sso_settings_wrapper import SsoSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -173,6 +175,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The current portal SSO settings; an anonymous caller gets only the hidden-login-form flag |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The caller is signed in, the portal is a cloud one, and its pricing plan has no single sign-on option or the SSO section is not enabled for it |  -  |
+**403** | The caller is signed in and has no portal-settings right |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -181,7 +185,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_sso_settings_v2_constants**
-> SsoSettingsV2ConstantsWrapper get_sso_settings_v2_constants()
+> SsoSettingsConstantsWrapper get_sso_settings_v2_constants()
 
 Returns every literal value the SAML fields of the SSO configuration accept, grouped by the field it belongs
 to: name ID formats, request bindings, signing and encryption algorithms, and what a service provider or
@@ -201,7 +205,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SsoSettingsV2ConstantsWrapper**](SsoSettingsV2ConstantsWrapper.md)
+[**SsoSettingsConstantsWrapper**](SsoSettingsConstantsWrapper.md)
 
 ### Authorization
 
@@ -212,7 +216,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.sso_settings_v2_constants_wrapper import SsoSettingsV2ConstantsWrapper
+from docspace_api_sdk.models.sso_settings_constants_wrapper import SsoSettingsConstantsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -264,7 +268,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reset_sso_settings_v2**
-> SsoSettingsV2Wrapper reset_sso_settings_v2()
+> SsoSettingsWrapper reset_sso_settings_v2()
 
 Discards the SAML Single Sign-On configuration of the current portal, stores the built-in default one in its
 place and returns what was stored, which is the same content as `GET api/2.0/settings/ssov2/default`. This is
@@ -286,7 +290,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 
@@ -297,7 +301,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
+from docspace_api_sdk.models.sso_settings_wrapper import SsoSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -340,6 +344,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The default SSO configuration that is now in effect |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The portal is a cloud one, and its pricing plan has no single sign-on option or the SSO section is not enabled for it |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -349,7 +355,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_sso_settings_v2**
-> SsoSettingsV2Wrapper save_sso_settings_v2(sso_settings_requests_dto=sso_settings_requests_dto)
+> SsoSettingsWrapper save_sso_settings_v2(sso_settings_request_dto=sso_settings_request_dto)
 
 Replaces the whole SAML Single Sign-On configuration of the current portal with the one passed as a JSON
 object in `serializeSettings`, and returns the configuration as it was stored. The payload is a complete
@@ -371,11 +377,11 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sso_settings_requests_dto** | [**SsoSettingsRequestsDto**](SsoSettingsRequestsDto.md)|  | [optional] 
+ **sso_settings_request_dto** | [**SsoSettingsRequestDto**](SsoSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 
@@ -386,8 +392,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.sso_settings_requests_dto import SsoSettingsRequestsDto
-from docspace_api_sdk.models.sso_settings_v2_wrapper import SsoSettingsV2Wrapper
+from docspace_api_sdk.models.sso_settings_request_dto import SsoSettingsRequestDto
+from docspace_api_sdk.models.sso_settings_wrapper import SsoSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -408,11 +414,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SSOApi(api_client)
-    sso_settings_requests_dto = docspace_api_sdk.SsoSettingsRequestsDto() # SsoSettingsRequestsDto |  (optional)
+    sso_settings_request_dto = docspace_api_sdk.SsoSettingsRequestDto() # SsoSettingsRequestDto |  (optional)
 
     try:
         # Save the SSO settings
-        api_response = api_instance.save_sso_settings_v2(sso_settings_requests_dto=sso_settings_requests_dto)
+        api_response = api_instance.save_sso_settings_v2(sso_settings_request_dto=sso_settings_request_dto)
         print("The response of SSOApi->save_sso_settings_v2:\n")
         pprint(api_response)
     except Exception as e:
@@ -432,9 +438,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The SSO settings as they were stored, with the login label and the user type normalised |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The serialized settings are empty or do not contain an SSO configuration object |  -  |
+**402** | The portal is a cloud one, and its pricing plan has no single sign-on option or the SSO section is not enabled for it |  -  |
+**403** | The caller has no portal-settings right |  -  |
+**500** | The serialized settings are not valid JSON, have a value of the wrong type or lack the `idpSettings` or `fieldMapping` object, the IdP entity ID is empty, the SSO URL is missing or the SSO or SLO URL is not an absolute HTTP or HTTPS address, or the first name, last name or email attribute mapping is empty |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

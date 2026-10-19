@@ -24,7 +24,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.forms_item_data import FormsItemData
+from docspace_api_sdk.models.forms_item_data_dto import FormsItemDataDto
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +33,7 @@ class FormResultsDto(BaseModel):
     One completed copy of a form, with the values that were entered into it.
     """ # noqa: E501
     create_on: Optional[datetime] = Field(default=None, description="When the portal recorded this copy, in UTC: the moment the filled copy was completed and its data indexed, not  the moment the form itself was made.", alias="createOn", json_schema_extra={"examples": ["2025-01-01T00:00:00"]})
-    forms_data: Optional[List[FormsItemData]] = Field(default=None, description="The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank.", alias="formsData", json_schema_extra={"examples": [[{"key": "field1", "value": "Answer"}]]})
+    forms_data: Optional[List[FormsItemDataDto]] = Field(default=None, description="The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank.", alias="formsData", json_schema_extra={"examples": [[{"key": "field1", "value": "Answer"}]]})
     __properties: ClassVar[List[str]] = ["createOn", "formsData"]
 
     model_config = ConfigDict(
@@ -101,7 +101,7 @@ class FormResultsDto(BaseModel):
 
         _obj = cls.model_validate({
             "createOn": obj.get("createOn"),
-            "formsData": [FormsItemData.from_dict(_item) for _item in obj["formsData"]] if obj.get("formsData") is not None else None
+            "formsData": [FormsItemDataDto.from_dict(_item) for _item in obj["formsData"]] if obj.get("formsData") is not None else None
         })
         return _obj
 

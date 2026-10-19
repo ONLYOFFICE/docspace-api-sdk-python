@@ -23,8 +23,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.ai_error_data import AiErrorData
 from docspace_api_sdk.models.ai_profile import AiProfile
-from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +34,7 @@ class AiProfileMutationResult(BaseModel):
     """ # noqa: E501
     success: StrictBool = Field(description="True when the profile was persisted.", json_schema_extra={"examples": [True]})
     profile: Optional[AiProfile] = Field(default=None, description="The persisted profile. Present on success.")
-    error: Optional[AiTErrorData] = Field(default=None, description="Why the profile was rejected - the name check or the provider credential check. Present on failure.")
+    error: Optional[AiErrorData] = Field(default=None, description="Why the profile was rejected - the name check or the provider credential check. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "profile", "error"]
 
     model_config = ConfigDict(
@@ -97,7 +97,7 @@ class AiProfileMutationResult(BaseModel):
         _obj = cls.model_validate({
             "success": obj.get("success"),
             "profile": AiProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None,
-            "error": AiTErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
+            "error": AiErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
 

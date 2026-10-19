@@ -5,6 +5,7 @@ from docspace_api_sdk.api.ai.ai_api import AIApi
 from docspace_api_sdk.api.ai.agents_api import AgentsApi
 from docspace_api_sdk.api.ai.assignments_api import AssignmentsApi
 from docspace_api_sdk.api.ai.attachments_api import AttachmentsApi
+from docspace_api_sdk.api.ai.context_api import ContextApi
 from docspace_api_sdk.api.ai.editor_tools_api import EditorToolsApi
 from docspace_api_sdk.api.ai.export_api import ExportApi
 from docspace_api_sdk.api.ai.open_ai_passthrough_api import OpenAIPassthroughApi
@@ -21,8 +22,10 @@ from docspace_api_sdk.api.apps.apps_api import AppsApi
 from docspace_api_sdk.api.authentication.authentication_api import AuthenticationApi
 from docspace_api_sdk.api.backup.backup_api import BackupApi
 from docspace_api_sdk.api.capabilities.capabilities_api import CapabilitiesApi
+from docspace_api_sdk.api.docs.docs_api import DocsApi
 from docspace_api_sdk.api.files.files_api import FilesApi
 from docspace_api_sdk.api.files.folders_api import FoldersApi
+from docspace_api_sdk.api.files.metadata_api import MetadataApi
 from docspace_api_sdk.api.files.operations_api import OperationsApi
 from docspace_api_sdk.api.files.quota_api import QuotaApi
 from docspace_api_sdk.api.files.settings_api import SettingsApi

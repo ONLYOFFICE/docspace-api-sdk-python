@@ -95,7 +95,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The admin helper tip was dismissed for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**405** | The caller is not a DocSpace administrator, or the portal is on SaaS, custom mode, or not Standalone |  -  |
+**415** | The caller is not a DocSpace administrator, or the portal is on SaaS, custom mode, or not Standalone |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -105,7 +105,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **complete_wizard**
-> WizardSettingsWrapper complete_wizard(wizard_requests_dto=wizard_requests_dto)
+> WizardSettingsWrapper complete_wizard(wizard_request_dto=wizard_request_dto)
 
 Finishes the initial portal setup wizard: sets the owner's password and locale, applies the supplied license
 if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal
@@ -124,7 +124,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **wizard_requests_dto** | [**WizardRequestsDto**](WizardRequestsDto.md)|  | [optional] 
+ **wizard_request_dto** | [**WizardRequestDto**](WizardRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.wizard_requests_dto import WizardRequestsDto
+from docspace_api_sdk.models.wizard_request_dto import WizardRequestDto
 from docspace_api_sdk.models.wizard_settings_wrapper import WizardSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -161,11 +161,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
-    wizard_requests_dto = docspace_api_sdk.WizardRequestsDto() # WizardRequestsDto |  (optional)
+    wizard_request_dto = docspace_api_sdk.WizardRequestDto() # WizardRequestDto |  (optional)
 
     try:
         # Complete the Wizard settings
-        api_response = api_instance.complete_wizard(wizard_requests_dto=wizard_requests_dto)
+        api_response = api_instance.complete_wizard(wizard_request_dto=wizard_request_dto)
         print("The response of CommonSettingsApi->complete_wizard:\n")
         pprint(api_response)
     except Exception as e:
@@ -184,18 +184,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Resulting wizard settings, including the completed flag |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The email address is malformed, or the password is empty |  -  |
-**402** | The supplied license is missing, invalid, expired, or its user quota does not cover the portal |  -  |
+**400** | The request body cannot be read or has no `email` or `passwordHash`, the email address is empty or malformed, or the license's start date is in the future |  -  |
+**403** | The account the confirmation link was issued for has no portal-settings right |  -  |
+**500** | The wizard is already completed, the AMI instance ID does not match, the email address fails the portal's check, the password is empty, or the license is missing, unreadable, rejected by validation or of the wrong type |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **configure_deep_link**
-> TenantDeepLinkSettingsWrapper configure_deep_link(deep_link_configuration_requests_dto=deep_link_configuration_requests_dto)
+> TenantDeepLinkSettingsWrapper configure_deep_link(deep_link_configuration_request_dto=deep_link_configuration_request_dto)
 
 Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,
 always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the
@@ -211,7 +211,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **deep_link_configuration_requests_dto** | [**DeepLinkConfigurationRequestsDto**](DeepLinkConfigurationRequestsDto.md)|  | [optional] 
+ **deep_link_configuration_request_dto** | [**DeepLinkConfigurationRequestDto**](DeepLinkConfigurationRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.deep_link_configuration_requests_dto import DeepLinkConfigurationRequestsDto
+from docspace_api_sdk.models.deep_link_configuration_request_dto import DeepLinkConfigurationRequestDto
 from docspace_api_sdk.models.tenant_deep_link_settings_wrapper import TenantDeepLinkSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -248,11 +248,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
-    deep_link_configuration_requests_dto = docspace_api_sdk.DeepLinkConfigurationRequestsDto() # DeepLinkConfigurationRequestsDto |  (optional)
+    deep_link_configuration_request_dto = docspace_api_sdk.DeepLinkConfigurationRequestDto() # DeepLinkConfigurationRequestDto |  (optional)
 
     try:
         # Configure the deep link settings
-        api_response = api_instance.configure_deep_link(deep_link_configuration_requests_dto=deep_link_configuration_requests_dto)
+        api_response = api_instance.configure_deep_link(deep_link_configuration_request_dto=deep_link_configuration_request_dto)
         print("The response of CommonSettingsApi->configure_deep_link:\n")
         pprint(api_response)
     except Exception as e:
@@ -272,9 +272,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Saved deep link handling settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The handling mode is not one of the supported deep link handling values |  -  |
+**403** | The caller has no portal-settings right |  -  |
+**500** | The request body has no `deepLinkSettings` |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -356,6 +357,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated color theme configuration: saved themes, selected theme, and plan limit |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -437,6 +439,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Current deep link handling settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The deep link settings have not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -515,6 +518,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Payment-related settings: sales contact, buy URL, Standalone flag, license, and quota cap |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -595,6 +599,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Current color theme configuration: saved themes, selected theme, and plan limit |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The color theme configuration has not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -754,6 +759,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Absolute URL of the portal's current logo image |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The portal logo has not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -930,7 +936,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_supported_cultures**
-> STRINGArrayWrapper get_supported_cultures()
+> StringArrayWrapper get_supported_cultures()
 
 Returns the two- or four-letter language codes of every culture currently enabled on the portal (for example
 `en-US`), used to populate a language picker before or after login. No permission is required; anonymous
@@ -946,7 +952,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**STRINGArrayWrapper**](STRINGArrayWrapper.md)
+[**StringArrayWrapper**](StringArrayWrapper.md)
 
 ### Authorization
 
@@ -957,7 +963,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
+from docspace_api_sdk.models.string_array_wrapper import StringArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1000,6 +1006,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Language codes of every culture currently enabled on the portal |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The list of enabled cultures has not changed since the `ETag` sent back in `If-None-Match`; the body is empty |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1156,6 +1163,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Whether inviting new members and new guests is currently allowed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The invitation settings have not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1164,7 +1172,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_time_zones**
-> TimezonesRequestsArrayWrapper get_time_zones()
+> TimezoneArrayWrapper get_time_zones()
 
 Returns every time zone known to the host machine, each with its IANA identifier and a human-readable display
 name, ordered from the most negative to the most positive UTC offset. This call is not for a normal logged-in
@@ -1181,7 +1189,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**TimezonesRequestsArrayWrapper**](TimezonesRequestsArrayWrapper.md)
+[**TimezoneArrayWrapper**](TimezoneArrayWrapper.md)
 
 ### Authorization
 
@@ -1192,7 +1200,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.timezones_requests_array_wrapper import TimezonesRequestsArrayWrapper
+from docspace_api_sdk.models.timezone_array_wrapper import TimezoneArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1319,17 +1327,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Saved default folder setting for the current user |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `defaultFolderType`, the folder is not one a start page can be set to, or a guest chooses My documents |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_dns_settings**
-> StringWrapper save_dns_settings(dns_settings_requests_dto=dns_settings_requests_dto)
+> StringWrapper save_dns_settings(dns_settings_request_dto=dns_settings_request_dto)
 
 Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable
 under the caller's own DNS name instead of only its default alias. Available only on a Standalone
@@ -1346,7 +1354,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dns_settings_requests_dto** | [**DnsSettingsRequestsDto**](DnsSettingsRequestsDto.md)|  | [optional] 
+ **dns_settings_request_dto** | [**DnsSettingsRequestDto**](DnsSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1361,7 +1369,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.dns_settings_requests_dto import DnsSettingsRequestsDto
+from docspace_api_sdk.models.dns_settings_request_dto import DnsSettingsRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -1383,11 +1391,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
-    dns_settings_requests_dto = docspace_api_sdk.DnsSettingsRequestsDto() # DnsSettingsRequestsDto |  (optional)
+    dns_settings_request_dto = docspace_api_sdk.DnsSettingsRequestDto() # DnsSettingsRequestDto |  (optional)
 
     try:
         # Save the DNS settings
-        api_response = api_instance.save_dns_settings(dns_settings_requests_dto=dns_settings_requests_dto)
+        api_response = api_instance.save_dns_settings(dns_settings_request_dto=dns_settings_request_dto)
         print("The response of CommonSettingsApi->save_dns_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -1406,19 +1414,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Confirmation that the DNS mapping was updated |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The domain name is invalid, or collides with the portal's reserved base domain |  -  |
-**402** | This option is not available under the portal's current pricing plan |  -  |
-**405** | The portal is not a Standalone installation, so a custom domain cannot be mapped |  -  |
+**403** | The caller has no portal-settings right |  -  |
+**415** | The portal is not a Standalone installation, so a custom domain cannot be mapped |  -  |
+**500** | The installation hides the DNS settings section, or the domain name is not a valid host name, lies under the portal's base domain, has a length outside the allowed range, is reserved, or is already the alias or mapped domain of a portal, this one included |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
+**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_mail_domain_settings**
-> StringWrapper save_mail_domain_settings(mail_domain_settings_requests_dto=mail_domain_settings_requests_dto)
+> StringWrapper save_mail_domain_settings(mail_domain_settings_request_dto=mail_domain_settings_request_dto)
 
 Overwrites the portal's trusted mail domain configuration, which controls which email domains are treated as
 already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the
@@ -1438,7 +1446,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **mail_domain_settings_requests_dto** | [**MailDomainSettingsRequestsDto**](MailDomainSettingsRequestsDto.md)|  | [optional] 
+ **mail_domain_settings_request_dto** | [**MailDomainSettingsRequestDto**](MailDomainSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1453,7 +1461,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.mail_domain_settings_requests_dto import MailDomainSettingsRequestsDto
+from docspace_api_sdk.models.mail_domain_settings_request_dto import MailDomainSettingsRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -1475,11 +1483,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
-    mail_domain_settings_requests_dto = docspace_api_sdk.MailDomainSettingsRequestsDto() # MailDomainSettingsRequestsDto |  (optional)
+    mail_domain_settings_request_dto = docspace_api_sdk.MailDomainSettingsRequestDto() # MailDomainSettingsRequestDto |  (optional)
 
     try:
         # Save the mail domain settings
-        api_response = api_instance.save_mail_domain_settings(mail_domain_settings_requests_dto=mail_domain_settings_requests_dto)
+        api_response = api_instance.save_mail_domain_settings(mail_domain_settings_request_dto=mail_domain_settings_request_dto)
         print("The response of CommonSettingsApi->save_mail_domain_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -1498,17 +1506,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Confirmation message that the trusted mail domain settings were saved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `type`, `domains` or `inviteUsersAsVisitors`, or the trust type is `Custom` and the domain list is empty or holds an empty or malformed domain |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_portal_color_theme**
-> CustomColorThemesSettingsWrapper save_portal_color_theme(custom_color_themes_settings_requests_dto=custom_color_themes_settings_requests_dto)
+> CustomColorThemesSettingsWrapper save_portal_color_theme(custom_color_themes_settings_request_dto=custom_color_themes_settings_request_dto)
 
 Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner
 or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is
@@ -1526,7 +1535,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **custom_color_themes_settings_requests_dto** | [**CustomColorThemesSettingsRequestsDto**](CustomColorThemesSettingsRequestsDto.md)|  | [optional] 
+ **custom_color_themes_settings_request_dto** | [**CustomColorThemesSettingsRequestDto**](CustomColorThemesSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1541,7 +1550,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.custom_color_themes_settings_requests_dto import CustomColorThemesSettingsRequestsDto
+from docspace_api_sdk.models.custom_color_themes_settings_request_dto import CustomColorThemesSettingsRequestDto
 from docspace_api_sdk.models.custom_color_themes_settings_wrapper import CustomColorThemesSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -1563,11 +1572,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
-    custom_color_themes_settings_requests_dto = docspace_api_sdk.CustomColorThemesSettingsRequestsDto() # CustomColorThemesSettingsRequestsDto |  (optional)
+    custom_color_themes_settings_request_dto = docspace_api_sdk.CustomColorThemesSettingsRequestDto() # CustomColorThemesSettingsRequestDto |  (optional)
 
     try:
         # Save a color theme
-        api_response = api_instance.save_portal_color_theme(custom_color_themes_settings_requests_dto=custom_color_themes_settings_requests_dto)
+        api_response = api_instance.save_portal_color_theme(custom_color_themes_settings_request_dto=custom_color_themes_settings_request_dto)
         print("The response of CommonSettingsApi->save_portal_color_theme:\n")
         pprint(api_response)
     except Exception as e:
@@ -1586,6 +1595,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Updated color theme configuration: saved themes, selected theme, and plan limit |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1596,7 +1606,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_tenant_ai_access_settings**
-> TenantAiAccessSettingsWrapper set_tenant_ai_access_settings(tenant_ai_access_settings_dto=tenant_ai_access_settings_dto)
+> TenantAiAccessSettingsWrapper set_tenant_ai_access_settings(tenant_ai_access_settings_request_dto=tenant_ai_access_settings_request_dto)
 
 Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.
 Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling
@@ -1612,7 +1622,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_ai_access_settings_dto** | [**TenantAiAccessSettingsDto**](TenantAiAccessSettingsDto.md)|  | [optional] 
+ **tenant_ai_access_settings_request_dto** | [**TenantAiAccessSettingsRequestDto**](TenantAiAccessSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1627,7 +1637,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.tenant_ai_access_settings_dto import TenantAiAccessSettingsDto
+from docspace_api_sdk.models.tenant_ai_access_settings_request_dto import TenantAiAccessSettingsRequestDto
 from docspace_api_sdk.models.tenant_ai_access_settings_wrapper import TenantAiAccessSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -1649,11 +1659,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
-    tenant_ai_access_settings_dto = docspace_api_sdk.TenantAiAccessSettingsDto() # TenantAiAccessSettingsDto |  (optional)
+    tenant_ai_access_settings_request_dto = docspace_api_sdk.TenantAiAccessSettingsRequestDto() # TenantAiAccessSettingsRequestDto |  (optional)
 
     try:
         # Set the AI access settings
-        api_response = api_instance.set_tenant_ai_access_settings(tenant_ai_access_settings_dto=tenant_ai_access_settings_dto)
+        api_response = api_instance.set_tenant_ai_access_settings(tenant_ai_access_settings_request_dto=tenant_ai_access_settings_request_dto)
         print("The response of CommonSettingsApi->set_tenant_ai_access_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -1683,7 +1693,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_email_activation_settings**
-> EmailActivationSettingsWrapper update_email_activation_settings(email_activation_settings=email_activation_settings)
+> EmailActivationSettingsWrapper update_email_activation_settings(email_activation_settings_request_dto=email_activation_settings_request_dto)
 
 Updates the current user's own preference for whether the email confirmation prompt is displayed on their
 account. Requires an authenticated session; every role may change its own setting, and the change never
@@ -1698,7 +1708,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **email_activation_settings** | [**EmailActivationSettings**](EmailActivationSettings.md)|  | [optional] 
+ **email_activation_settings_request_dto** | [**EmailActivationSettingsRequestDto**](EmailActivationSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1713,7 +1723,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.email_activation_settings import EmailActivationSettings
+from docspace_api_sdk.models.email_activation_settings_request_dto import EmailActivationSettingsRequestDto
 from docspace_api_sdk.models.email_activation_settings_wrapper import EmailActivationSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -1735,11 +1745,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CommonSettingsApi(api_client)
-    email_activation_settings = docspace_api_sdk.EmailActivationSettings() # EmailActivationSettings |  (optional)
+    email_activation_settings_request_dto = docspace_api_sdk.EmailActivationSettingsRequestDto() # EmailActivationSettingsRequestDto |  (optional)
 
     try:
         # Update the email activation settings
-        api_response = api_instance.update_email_activation_settings(email_activation_settings=email_activation_settings)
+        api_response = api_instance.update_email_activation_settings(email_activation_settings_request_dto=email_activation_settings_request_dto)
         print("The response of CommonSettingsApi->update_email_activation_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -1843,6 +1853,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Saved user invitation settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |

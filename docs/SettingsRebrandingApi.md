@@ -24,13 +24,13 @@ Method | HTTP request | Description
 
 
 # **delete_additional_white_label_settings**
-> AdditionalWhiteLabelSettingsResponseWrapper delete_additional_white_label_settings()
+> AdditionalResourcesWrapper delete_additional_white_label_settings()
 
 Discards the resource flags stored for the installation and brings back the built-in set, so the sample
 documents, the Help Center link, the Feedback and Support link, the user forum, the video guides and the
 license agreements are offered as they are out of the box. Requires a DocSpace administrator and a server
 installation with unrestricted space access; on a SaaS portal the call is refused. Unlike
-`POST api/2.0/settings/rebranding/additional` it does not need a plan that includes branding, so an
+`POST api/2.0/settings/rebranding/additional` it does not need a plan that includes customization, so an
 installation whose subscription no longer covers it can still be reset. The call is destructive for the stored
 flags, which have to be set again to come back, and it is idempotent. Instead of a flag it answers the set
 that is now in effect, so no follow-up read is needed. The reset is installation-wide and reaches every
@@ -45,7 +45,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**AdditionalWhiteLabelSettingsResponseWrapper**](AdditionalWhiteLabelSettingsResponseWrapper.md)
+[**AdditionalResourcesWrapper**](AdditionalResourcesWrapper.md)
 
 ### Authorization
 
@@ -56,7 +56,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.additional_white_label_settings_response_wrapper import AdditionalWhiteLabelSettingsResponseWrapper
+from docspace_api_sdk.models.additional_resources_wrapper import AdditionalResourcesWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -109,13 +109,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_company_white_label_settings**
-> CompanyWhiteLabelSettingsResponseWrapper delete_company_white_label_settings()
+> LicensorDetailsWrapper delete_company_white_label_settings()
 
 Discards the company details stored for the installation and brings back the built-in ONLYOFFICE name, site,
 email, address and phone, so the About page and the notification letters print the original vendor again.
 Requires a DocSpace administrator and a server installation with unrestricted space access; on a SaaS portal
 the call is refused. Unlike `POST api/2.0/settings/rebranding/company` it does not need a plan that includes
-branding, so an installation whose subscription no longer covers it can still be reset. The call is
+customization, so an installation whose subscription no longer covers it can still be reset. The call is
 destructive: the previous details are not kept anywhere and have to be entered again to come back. It is
 idempotent, and instead of a flag it answers the details that are now in effect, so no follow-up read is
 needed. The reset is installation-wide and reaches every portal. The help and support links are reset
@@ -130,7 +130,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CompanyWhiteLabelSettingsResponseWrapper**](CompanyWhiteLabelSettingsResponseWrapper.md)
+[**LicensorDetailsWrapper**](LicensorDetailsWrapper.md)
 
 ### Authorization
 
@@ -141,7 +141,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.company_white_label_settings_response_wrapper import CompanyWhiteLabelSettingsResponseWrapper
+from docspace_api_sdk.models.licensor_details_wrapper import LicensorDetailsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -194,7 +194,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_additional_white_label_settings**
-> AdditionalWhiteLabelSettingsDtoWrapper get_additional_white_label_settings()
+> AdditionalWhiteLabelSettingsWrapper get_additional_white_label_settings()
 
 Returns which of the ONLYOFFICE help and community resources the interface may offer - the sample documents,
 the Help Center link, the Feedback and Support link, the user forum, the video guides and the license
@@ -215,7 +215,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**AdditionalWhiteLabelSettingsDtoWrapper**](AdditionalWhiteLabelSettingsDtoWrapper.md)
+[**AdditionalWhiteLabelSettingsWrapper**](AdditionalWhiteLabelSettingsWrapper.md)
 
 ### Authorization
 
@@ -226,7 +226,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.additional_white_label_settings_dto_wrapper import AdditionalWhiteLabelSettingsDtoWrapper
+from docspace_api_sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -278,7 +278,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_company_white_label_settings**
-> CompanyWhiteLabelSettingsDtoWrapper get_company_white_label_settings()
+> CompanyWhiteLabelSettingsWrapper get_company_white_label_settings()
 
 Returns the company details that the About page and the notification letters print as the vendor, in the form
 the settings interface edits them. Any authenticated user may call it; no administrator permission is
@@ -299,7 +299,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CompanyWhiteLabelSettingsDtoWrapper**](CompanyWhiteLabelSettingsDtoWrapper.md)
+[**CompanyWhiteLabelSettingsWrapper**](CompanyWhiteLabelSettingsWrapper.md)
 
 ### Authorization
 
@@ -310,7 +310,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.company_white_label_settings_dto_wrapper import CompanyWhiteLabelSettingsDtoWrapper
+from docspace_api_sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -353,6 +353,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The company details in effect, with the licensor and default flags |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The company details have not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -368,8 +369,8 @@ Reports whether branding may be configured for the current portal at all, which 
 offering the rebranding interface or calling any of the save operations under `api/2.0/settings/whitelabel`.
 Requires a DocSpace administrator. The call is read-only and idempotent. The answer is `true` only when both
 conditions hold: the branding section is not switched off in the installation configuration, and the portal's
-current plan includes customization. It comes back as `false` on a plan without branding, which is exactly the
-case in which `POST api/2.0/settings/whitelabel/logos/save`,
+current plan includes customization. It comes back as `false` on a plan without customization, which is
+exactly the case in which `POST api/2.0/settings/whitelabel/logos/save`,
 `POST api/2.0/settings/whitelabel/logos/savefromfiles` and `POST api/2.0/settings/whitelabel/logotext/save`
 are refused as payment required. The restore operations do not depend on this flag and stay available, so a
 portal that loses branding can still be reset to the built-in logos and wordmark. The flag says nothing about
@@ -438,6 +439,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | `true` when branding is enabled in this installation and included in the portal's plan |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -529,6 +531,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A single `logotext` entry telling whether the portal still uses the built-in wordmark |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -620,6 +623,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | One entry per logo slot, telling whether the slot still holds the built-in image |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -630,7 +634,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_licensor_data**
-> CompanyWhiteLabelSettingsArrayWrapper get_licensor_data()
+> LicensorDetailsArrayWrapper get_licensor_data()
 
 Returns the licensor details - company name, site, support email, postal address and phone - that the About
 page and the notification letters print as the vendor of the installation. Any authenticated user may call it,
@@ -651,7 +655,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CompanyWhiteLabelSettingsArrayWrapper**](CompanyWhiteLabelSettingsArrayWrapper.md)
+[**LicensorDetailsArrayWrapper**](LicensorDetailsArrayWrapper.md)
 
 ### Authorization
 
@@ -662,7 +666,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.company_white_label_settings_array_wrapper import CompanyWhiteLabelSettingsArrayWrapper
+from docspace_api_sdk.models.licensor_details_array_wrapper import LicensorDetailsArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -797,6 +801,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The wordmark stored for the portal, or the built-in `ONLYOFFICE` when none is set |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -901,12 +906,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 Clears the wordmark stored for the current portal, so the built-in `ONLYOFFICE` is printed again next to or
 instead of the logo images. Requires a DocSpace administrator. Unlike
-`POST api/2.0/settings/whitelabel/logotext/save` it does not need a plan that includes branding, so a portal
-whose subscription no longer covers branding can still be reset. The call is destructive for the stored text,
-which is not kept anywhere and has to be typed again to come back, and it is idempotent: `true` comes back
-both when a text was cleared and when there was none. Logo images are left untouched and have their own
-`PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to reset the installation-wide default
-wordmark instead of this portal's, which only a server installation allows. After the call
+`POST api/2.0/settings/whitelabel/logotext/save` it does not need a plan that includes customization, so a
+portal whose subscription no longer covers customization can still be reset. The call is destructive for the
+stored text, which is not kept anywhere and has to be typed again to come back, and it is idempotent: `true`
+comes back both when a text was cleared and when there was none. Logo images are left untouched and have their
+own `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to reset the installation-wide
+default wordmark instead of this portal's, which only a server installation allows. After the call
 `GET api/2.0/settings/whitelabel/logotext` reports `ONLYOFFICE` and
 `GET api/2.0/settings/whitelabel/logotext/isdefault` reports `default` as `true`. The wordmark is the only
 setting this operation touches, so the company details and the help links of the installation are left as they
@@ -995,7 +1000,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 Drops every logo uploaded for the current portal and brings back the built-in images, so the portal looks
 unbranded again on the login page, in the left menu, in the editors and in letters. Requires a DocSpace
-administrator. Unlike the two save operations it does not need a plan that includes branding, so a portal
+administrator. Unlike the two save operations it does not need a plan that includes customization, so a portal
 whose subscription no longer covers it can still be reset. The call is destructive: the stored image files are
 deleted and cannot be recovered from the portal, only re-uploaded with
 `POST api/2.0/settings/whitelabel/logos/save`. It is idempotent and answers `true` both when logos were
@@ -1084,14 +1089,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_additional_white_label_settings**
-> BooleanWrapper save_additional_white_label_settings(additional_white_label_settings_wrapper=additional_white_label_settings_wrapper)
+> BooleanWrapper save_additional_white_label_settings(additional_white_label_settings_request_dto=additional_white_label_settings_request_dto)
 
 Stores which of the ONLYOFFICE help and community resources the interface offers: the sample documents, the
 Help Center link, the Feedback and Support link, the user forum, the video guides and the license agreements.
 The whole set is replaced by the `settings` object of the request, so send every flag, not only the changed
 ones - a flag left out is stored as off. A request without that object is rejected as an invalid request.
 Requires a DocSpace administrator, a server installation with unrestricted space access and a plan that
-includes branding, which `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is
+includes customization, which `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is
 refused. The flags are installation-wide, so the change reaches every portal of that installation. The call is
 mutating and idempotent, and answers `true`. Only the visibility of these entries is controlled here, not the
 addresses behind them. Read the result back with `GET api/2.0/settings/rebranding/additional` and undo it with
@@ -1104,7 +1109,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **additional_white_label_settings_wrapper** | [**AdditionalWhiteLabelSettingsWrapper**](AdditionalWhiteLabelSettingsWrapper.md)|  | [optional] 
+ **additional_white_label_settings_request_dto** | [**AdditionalWhiteLabelSettingsRequestDto**](AdditionalWhiteLabelSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1119,7 +1124,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.additional_white_label_settings_wrapper import AdditionalWhiteLabelSettingsWrapper
+from docspace_api_sdk.models.additional_white_label_settings_request_dto import AdditionalWhiteLabelSettingsRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -1141,11 +1146,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RebrandingApi(api_client)
-    additional_white_label_settings_wrapper = docspace_api_sdk.AdditionalWhiteLabelSettingsWrapper() # AdditionalWhiteLabelSettingsWrapper |  (optional)
+    additional_white_label_settings_request_dto = docspace_api_sdk.AdditionalWhiteLabelSettingsRequestDto() # AdditionalWhiteLabelSettingsRequestDto |  (optional)
 
     try:
         # Save the additional white label settings
-        api_response = api_instance.save_additional_white_label_settings(additional_white_label_settings_wrapper=additional_white_label_settings_wrapper)
+        api_response = api_instance.save_additional_white_label_settings(additional_white_label_settings_request_dto=additional_white_label_settings_request_dto)
         print("The response of RebrandingApi->save_additional_white_label_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -1165,6 +1170,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Always `true` once the resource flags have been stored for the installation |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The request carries no settings object |  -  |
+**402** | The portal's pricing plan has no customization option, or the branding section is switched off in the installation |  -  |
 **403** | The caller is not a DocSpace administrator, or the installation does not allow branding to be edited |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -1175,13 +1181,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_company_white_label_settings**
-> BooleanWrapper save_company_white_label_settings(company_white_label_settings_wrapper=company_white_label_settings_wrapper)
+> BooleanWrapper save_company_white_label_settings(company_white_label_settings_request_dto=company_white_label_settings_request_dto)
 
 Stores the company details - name, site, support email, postal address and phone - that the About page and the
 notification letters print as the vendor. The whole set is replaced by the `settings` object of the request,
 so send every field, not only the changed ones; a request without that object, or with an email or a site that
 is not a valid value, is rejected as an invalid request. Requires a DocSpace administrator, a server
-installation with unrestricted space access and a plan that includes branding, which
+installation with unrestricted space access and a plan that includes customization, which
 `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is refused. The values are
 installation-wide, so the change reaches every portal of that installation. Two fields are not taken from the
 request: the licensor flag is always stored as `false`, and hiding the About page is silently kept off unless
@@ -1195,7 +1201,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **company_white_label_settings_wrapper** | [**CompanyWhiteLabelSettingsWrapper**](CompanyWhiteLabelSettingsWrapper.md)|  | [optional] 
+ **company_white_label_settings_request_dto** | [**CompanyWhiteLabelSettingsRequestDto**](CompanyWhiteLabelSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1211,7 +1217,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.company_white_label_settings_wrapper import CompanyWhiteLabelSettingsWrapper
+from docspace_api_sdk.models.company_white_label_settings_request_dto import CompanyWhiteLabelSettingsRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1232,11 +1238,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.RebrandingApi(api_client)
-    company_white_label_settings_wrapper = docspace_api_sdk.CompanyWhiteLabelSettingsWrapper() # CompanyWhiteLabelSettingsWrapper |  (optional)
+    company_white_label_settings_request_dto = docspace_api_sdk.CompanyWhiteLabelSettingsRequestDto() # CompanyWhiteLabelSettingsRequestDto |  (optional)
 
     try:
         # Save the company white label settings
-        api_response = api_instance.save_company_white_label_settings(company_white_label_settings_wrapper=company_white_label_settings_wrapper)
+        api_response = api_instance.save_company_white_label_settings(company_white_label_settings_request_dto=company_white_label_settings_request_dto)
         print("The response of RebrandingApi->save_company_white_label_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -1256,6 +1262,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Always `true` once the company details have been stored for the installation |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The request carries no settings object, or the email or the site is not a valid value |  -  |
+**402** | The portal's pricing plan has no customization option, or the branding section is switched off in the installation |  -  |
 **403** | The caller is not a DocSpace administrator, or the installation does not allow branding to be edited |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -1266,14 +1273,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_white_label_logo_text**
-> BooleanWrapper save_white_label_logo_text(is_dark=is_dark, is_default=is_default, white_label_requests_dto=white_label_requests_dto)
+> BooleanWrapper save_white_label_logo_text(is_dark=is_dark, is_default=is_default, white_label_request_dto=white_label_request_dto)
 
 Sets the wordmark that the portal prints next to or instead of a logo image, on the login page, in the editors
 and in notification letters. Only `logoText` from the request body is used here, and it is limited to 40
 characters; a longer value is rejected as an invalid request. Sending an empty or blank text, or exactly the
 built-in `ONLYOFFICE`, clears the setting instead of storing it, which has the same effect as
 `PUT api/2.0/settings/whitelabel/logotext/restore`. Requires a DocSpace administrator and a plan that includes
-branding, which `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment
+customization, which `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment
 required. The call is mutating and idempotent: the previous text is overwritten and `true` comes back. Logo
 images are not touched - they are saved by `POST api/2.0/settings/whitelabel/logos/save` - and the text is not
 rendered into them. Pass `isDefault=true` to write the installation-wide default wordmark instead of this
@@ -1289,7 +1296,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **is_dark** | **bool**| Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] 
  **is_default** | **bool**| Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] 
- **white_label_requests_dto** | [**WhiteLabelRequestsDto**](WhiteLabelRequestsDto.md)|  | [optional] 
+ **white_label_request_dto** | [**WhiteLabelRequestDto**](WhiteLabelRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1305,7 +1312,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.white_label_requests_dto import WhiteLabelRequestsDto
+from docspace_api_sdk.models.white_label_request_dto import WhiteLabelRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1328,11 +1335,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
     is_default = true # bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
-    white_label_requests_dto = docspace_api_sdk.WhiteLabelRequestsDto() # WhiteLabelRequestsDto |  (optional)
+    white_label_request_dto = docspace_api_sdk.WhiteLabelRequestDto() # WhiteLabelRequestDto |  (optional)
 
     try:
         # Save the white label logo text
-        api_response = api_instance.save_white_label_logo_text(is_dark=is_dark, is_default=is_default, white_label_requests_dto=white_label_requests_dto)
+        api_response = api_instance.save_white_label_logo_text(is_dark=is_dark, is_default=is_default, white_label_request_dto=white_label_request_dto)
         print("The response of RebrandingApi->save_white_label_logo_text:\n")
         pprint(api_response)
     except Exception as e:
@@ -1351,18 +1358,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Always `true` once the logo text has been stored for the portal |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The `logoText` is longer than 40 characters |  -  |
+**402** | The portal's pricing plan has no customization option, or the branding section is switched off in the installation |  -  |
 **403** | The caller is not a DocSpace administrator, or the installation does not allow default branding to be edited |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_white_label_settings**
-> BooleanWrapper save_white_label_settings(is_dark=is_dark, is_default=is_default, white_label_requests_dto=white_label_requests_dto)
+> BooleanWrapper save_white_label_settings(is_dark=is_dark, is_default=is_default, white_label_request_dto=white_label_request_dto)
 
 Replaces the branding images of the current portal with the ones sent in the request, so that the logos on the
 login page, in the left menu, in the editors and in letters come from this portal. Every entry of `logo` names
@@ -1372,7 +1380,7 @@ the light-theme and the dark-theme image in `light` and `dark`. An image is eith
 uploaded to the temporary store; a slot left out of the request keeps its image. The dark image is stored only
 for the slots that have a dark variant, that is `1`, `2`, `6`, `7` and `8`, and is ignored for the favicon and
 the editor logos; saving slot `2` also rebuilds the notification logo `8` from it. Requires a DocSpace
-administrator and a plan that includes branding, which `GET api/2.0/settings/enablewhitelabel` reports;
+administrator and a plan that includes customization, which `GET api/2.0/settings/enablewhitelabel` reports;
 otherwise the call is refused as payment required. It answers `true` and is undone by
 `PUT api/2.0/settings/whitelabel/logos/restore`. With `isDefault=true` it writes the installation-wide default
 branding instead, which only a server installation allows. Uploaded files go to
@@ -1387,7 +1395,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **is_dark** | **bool**| Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. | [optional] 
  **is_default** | **bool**| Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. | [optional] 
- **white_label_requests_dto** | [**WhiteLabelRequestsDto**](WhiteLabelRequestsDto.md)|  | [optional] 
+ **white_label_request_dto** | [**WhiteLabelRequestDto**](WhiteLabelRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -1403,7 +1411,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.white_label_requests_dto import WhiteLabelRequestsDto
+from docspace_api_sdk.models.white_label_request_dto import WhiteLabelRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1426,11 +1434,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.RebrandingApi(api_client)
     is_dark = true # bool | Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image. (optional)
     is_default = true # bool | Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403. (optional)
-    white_label_requests_dto = docspace_api_sdk.WhiteLabelRequestsDto() # WhiteLabelRequestsDto |  (optional)
+    white_label_request_dto = docspace_api_sdk.WhiteLabelRequestDto() # WhiteLabelRequestDto |  (optional)
 
     try:
         # Save the white label logos
-        api_response = api_instance.save_white_label_settings(is_dark=is_dark, is_default=is_default, white_label_requests_dto=white_label_requests_dto)
+        api_response = api_instance.save_white_label_settings(is_dark=is_dark, is_default=is_default, white_label_request_dto=white_label_request_dto)
         print("The response of RebrandingApi->save_white_label_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -1449,11 +1457,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Always `true` once the submitted logos have been stored for the portal |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The `logoText` is longer than 40 characters, although this method does not store it |  -  |
+**402** | The portal's pricing plan has no customization option, or the branding section is switched off in the installation |  -  |
 **403** | The caller is not a DocSpace administrator, or the installation does not allow default branding to be edited |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1469,7 +1478,7 @@ own name, which has to start with the numeric logo slot published by `GET api/2.
 and end with the image extension, as in `2.png`; a name that also contains `dark`, as in `2.dark.png`, is
 stored as the dark-theme image of that slot. Slots that get no file keep the image they have, and a dark file
 is ignored for the favicon and the editor logos, which have no dark variant. A request that carries no file at
-all is rejected. Requires a DocSpace administrator and a plan that includes branding, which
+all is rejected. Requires a DocSpace administrator and a plan that includes customization, which
 `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment required. It answers
 `true`, overwrites in place and is undone by `PUT api/2.0/settings/whitelabel/logos/restore`. With
 `isDefault=true` it writes the installation-wide default branding, which only a server installation allows.
@@ -1542,8 +1551,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Always `true` once the uploaded files have been stored as the portal logos |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller is not a DocSpace administrator, or the installation does not allow default branding to be edited |  -  |
-**409** | The request carried no file to store as a logo |  -  |
+**402** | The portal's pricing plan has no customization option, or the branding section is switched off in the installation |  -  |
+**403** | The caller is not a DocSpace administrator, the request is not a form or carries no file, or the installation does not allow default branding to be edited |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |

@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.form_metadata import FormMetadata
+from docspace_api_sdk.models.form_metadata_dto import FormMetadataDto
 from docspace_api_sdk.models.form_results_dto import FormResultsDto
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,7 +32,7 @@ class FormSubmissionsDto(BaseModel):
     """
     All completed copies of a form, together with the description of the fields they were filled into.
     """ # noqa: E501
-    metadata: Optional[List[FormMetadata]] = Field(default=None, description="Describes the fields of the form version that is being filled - the key each value is stored under, the type  and format of the field and, where the field offers a fixed set of answers, those answers - in the order the  fields are laid out, which is the order to build a results table in. It comes back empty when the portal holds  no indexed description of that version.", json_schema_extra={"examples": [[]]})
+    metadata: Optional[List[FormMetadataDto]] = Field(default=None, description="Describes the fields of the form version that is being filled - the key each value is stored under, the type  and format of the field and, where the field offers a fixed set of answers, those answers - in the order the  fields are laid out, which is the order to build a results table in. It comes back empty when the portal holds  no indexed description of that version.", json_schema_extra={"examples": [[]]})
     submissions: Optional[List[FormResultsDto]] = Field(default=None, description="One entry per completed copy, ordered by the copy number that `formsData` carries. An empty list means nothing  has been completed for the version that is currently being filled; the copies of earlier versions of the form  are not reported here.", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["metadata", "submissions"]
 
@@ -112,7 +112,7 @@ class FormSubmissionsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "metadata": [FormMetadata.from_dict(_item) for _item in obj["metadata"]] if obj.get("metadata") is not None else None,
+            "metadata": [FormMetadataDto.from_dict(_item) for _item in obj["metadata"]] if obj.get("metadata") is not None else None,
             "submissions": [FormResultsDto.from_dict(_item) for _item in obj["submissions"]] if obj.get("submissions") is not None else None
         })
         return _obj

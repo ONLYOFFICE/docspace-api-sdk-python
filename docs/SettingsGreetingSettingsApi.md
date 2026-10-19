@@ -253,6 +253,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The greeting title in force after the restore, or the localized default caption when the installation configures none |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -262,7 +263,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_greeting_settings**
-> StringWrapper save_greeting_settings(greeting_settings_requests_dto=greeting_settings_requests_dto)
+> StringWrapper save_greeting_settings(greeting_settings_request_dto=greeting_settings_request_dto)
 
 Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal
 name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.
@@ -282,7 +283,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **greeting_settings_requests_dto** | [**GreetingSettingsRequestsDto**](GreetingSettingsRequestsDto.md)|  | [optional] 
+ **greeting_settings_request_dto** | [**GreetingSettingsRequestDto**](GreetingSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -297,7 +298,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.greeting_settings_requests_dto import GreetingSettingsRequestsDto
+from docspace_api_sdk.models.greeting_settings_request_dto import GreetingSettingsRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -319,11 +320,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.GreetingSettingsApi(api_client)
-    greeting_settings_requests_dto = docspace_api_sdk.GreetingSettingsRequestsDto() # GreetingSettingsRequestsDto |  (optional)
+    greeting_settings_request_dto = docspace_api_sdk.GreetingSettingsRequestDto() # GreetingSettingsRequestDto |  (optional)
 
     try:
         # Save the greeting settings
-        api_response = api_instance.save_greeting_settings(greeting_settings_requests_dto=greeting_settings_requests_dto)
+        api_response = api_instance.save_greeting_settings(greeting_settings_request_dto=greeting_settings_request_dto)
         print("The response of GreetingSettingsApi->save_greeting_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -342,10 +343,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A localized message confirming that the greeting title has been saved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `title`, the `title` is longer than 255 characters, or on a free or trial cloud plan it breaks the character rule of the installation |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

@@ -25,7 +25,7 @@ from pydantic import Field
 from typing import Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.notification_channel_status_wrapper import NotificationChannelStatusWrapper
-from docspace_api_sdk.models.notification_settings_requests_dto import NotificationSettingsRequestsDto
+from docspace_api_sdk.models.notification_settings_request_dto import NotificationSettingsRequestDto
 from docspace_api_sdk.models.notification_settings_wrapper import NotificationSettingsWrapper
 from docspace_api_sdk.models.notification_type import NotificationType
 from docspace_api_sdk.models.rooms_notification_settings_wrapper import RoomsNotificationSettingsWrapper
@@ -377,10 +377,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -451,10 +451,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -525,10 +525,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -887,7 +887,7 @@ class NotificationsApi:
     @validate_call
     def set_notification_settings(
         self,
-        notification_settings_requests_dto: Optional[NotificationSettingsRequestsDto] = None,
+        notification_settings_request_dto: Optional[NotificationSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -905,8 +905,8 @@ class NotificationsApi:
 
         Switches one kind of notification on or off for the calling user: send the kind as `type` - 0 the new-item  badges, 1 the room activity letters, 2 the daily feed digest, 3 the periodic tips letters - together with  `isEnabled`. The change touches the caller's own account only, and repeating the call with the same pair  leaves the account as it is. Every signed-in member configures its own settings: the portal owner, a DocSpace  administrator, a room administrator, a user and a guest are all accepted, and no permission is demanded. With  0 switched off the Files responses report `new` as 0 and mark files as muted; with 1 switched off both the  hourly room digest and the letters a room sends at once, such as an editor mention, stop; with 2 switched off  the daily digest stops; with 3 switched off the tips letters stop. What comes back is an echo of the request  rather than a re-read of the stored state, and a `type` outside 0-3 is echoed as well while nothing is stored,  so confirm the result with `GET api/2.0/settings/notification/{type}`. To silence a single room instead of a  whole kind use `POST api/2.0/settings/notification/rooms`.
 
-        :param notification_settings_requests_dto:
-        :type notification_settings_requests_dto: NotificationSettingsRequestsDto
+        :param notification_settings_request_dto:
+        :type notification_settings_request_dto: NotificationSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -930,7 +930,7 @@ class NotificationsApi:
         """ # noqa: E501
 
         _param = self._set_notification_settings_serialize(
-            notification_settings_requests_dto=notification_settings_requests_dto,
+            notification_settings_request_dto=notification_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -939,10 +939,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -961,7 +961,7 @@ class NotificationsApi:
     @validate_call
     def set_notification_settings_with_http_info(
         self,
-        notification_settings_requests_dto: Optional[NotificationSettingsRequestsDto] = None,
+        notification_settings_request_dto: Optional[NotificationSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -979,8 +979,8 @@ class NotificationsApi:
 
         Switches one kind of notification on or off for the calling user: send the kind as `type` - 0 the new-item  badges, 1 the room activity letters, 2 the daily feed digest, 3 the periodic tips letters - together with  `isEnabled`. The change touches the caller's own account only, and repeating the call with the same pair  leaves the account as it is. Every signed-in member configures its own settings: the portal owner, a DocSpace  administrator, a room administrator, a user and a guest are all accepted, and no permission is demanded. With  0 switched off the Files responses report `new` as 0 and mark files as muted; with 1 switched off both the  hourly room digest and the letters a room sends at once, such as an editor mention, stop; with 2 switched off  the daily digest stops; with 3 switched off the tips letters stop. What comes back is an echo of the request  rather than a re-read of the stored state, and a `type` outside 0-3 is echoed as well while nothing is stored,  so confirm the result with `GET api/2.0/settings/notification/{type}`. To silence a single room instead of a  whole kind use `POST api/2.0/settings/notification/rooms`.
 
-        :param notification_settings_requests_dto:
-        :type notification_settings_requests_dto: NotificationSettingsRequestsDto
+        :param notification_settings_request_dto:
+        :type notification_settings_request_dto: NotificationSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1004,7 +1004,7 @@ class NotificationsApi:
         """ # noqa: E501
 
         _param = self._set_notification_settings_serialize(
-            notification_settings_requests_dto=notification_settings_requests_dto,
+            notification_settings_request_dto=notification_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1013,10 +1013,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1035,7 +1035,7 @@ class NotificationsApi:
     @validate_call
     def set_notification_settings_without_preload_content(
         self,
-        notification_settings_requests_dto: Optional[NotificationSettingsRequestsDto] = None,
+        notification_settings_request_dto: Optional[NotificationSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1053,8 +1053,8 @@ class NotificationsApi:
 
         Switches one kind of notification on or off for the calling user: send the kind as `type` - 0 the new-item  badges, 1 the room activity letters, 2 the daily feed digest, 3 the periodic tips letters - together with  `isEnabled`. The change touches the caller's own account only, and repeating the call with the same pair  leaves the account as it is. Every signed-in member configures its own settings: the portal owner, a DocSpace  administrator, a room administrator, a user and a guest are all accepted, and no permission is demanded. With  0 switched off the Files responses report `new` as 0 and mark files as muted; with 1 switched off both the  hourly room digest and the letters a room sends at once, such as an editor mention, stop; with 2 switched off  the daily digest stops; with 3 switched off the tips letters stop. What comes back is an echo of the request  rather than a re-read of the stored state, and a `type` outside 0-3 is echoed as well while nothing is stored,  so confirm the result with `GET api/2.0/settings/notification/{type}`. To silence a single room instead of a  whole kind use `POST api/2.0/settings/notification/rooms`.
 
-        :param notification_settings_requests_dto:
-        :type notification_settings_requests_dto: NotificationSettingsRequestsDto
+        :param notification_settings_request_dto:
+        :type notification_settings_request_dto: NotificationSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1078,7 +1078,7 @@ class NotificationsApi:
         """ # noqa: E501
 
         _param = self._set_notification_settings_serialize(
-            notification_settings_requests_dto=notification_settings_requests_dto,
+            notification_settings_request_dto=notification_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1087,10 +1087,10 @@ class NotificationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NotificationSettingsWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1104,7 +1104,7 @@ class NotificationsApi:
 
     def _set_notification_settings_serialize(
         self,
-        notification_settings_requests_dto,
+        notification_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -1130,8 +1130,8 @@ class NotificationsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if notification_settings_requests_dto is not None:
-            _body_params = notification_settings_requests_dto
+        if notification_settings_request_dto is not None:
+            _body_params = notification_settings_request_dto
 
 
         # set the HTTP header `Accept`

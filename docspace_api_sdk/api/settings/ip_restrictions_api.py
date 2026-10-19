@@ -22,9 +22,9 @@ from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
-from docspace_api_sdk.models.ip_restriction_array_wrapper import IPRestrictionArrayWrapper
-from docspace_api_sdk.models.ip_restrictions_settings_wrapper import IPRestrictionsSettingsWrapper
+from docspace_api_sdk.models.ip_restriction_array_wrapper import IpRestrictionArrayWrapper
 from docspace_api_sdk.models.ip_restrictions_dto import IpRestrictionsDto
+from docspace_api_sdk.models.ip_restrictions_settings_wrapper import IpRestrictionsSettingsWrapper
 from docspace_api_sdk.models.ip_restrictions_wrapper import IpRestrictionsWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -61,7 +61,7 @@ class IPRestrictionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IPRestrictionArrayWrapper:
+    ) -> IpRestrictionArrayWrapper:
         """Get IP restrictions
 
         Returns the IP restriction list of the current portal - the addresses allowed to reach it, each with its `id`  and the `forAdmin` flag that narrows the entry to DocSpace administrators. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. The call is read-only and  honours `If-None-Match`: send back the `ETag` of an earlier answer and an unchanged list comes back as an  empty not-modified response rather than a body. The list has no defined order and is empty on a portal where  nobody has configured restrictions - and an empty list blocks nobody, whatever the enforcement flag says.  Whether the restrictions are enforced at all is not part of this answer: read that flag with  `GET api/2.0/settings/iprestrictions/settings`. The entries listed here apply to every user of the portal  except its owner. Replace the whole list with `PUT api/2.0/settings/iprestrictions`; single entries cannot be  added or deleted, and that update takes plain addresses rather than the IDs returned here.
@@ -96,7 +96,9 @@ class IPRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IPRestrictionArrayWrapper",
+            '200': "IpRestrictionArrayWrapper",
+            '304': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -130,7 +132,7 @@ class IPRestrictionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IPRestrictionArrayWrapper]:
+    ) -> ApiResponse[IpRestrictionArrayWrapper]:
         """Get IP restrictions
 
         Returns the IP restriction list of the current portal - the addresses allowed to reach it, each with its `id`  and the `forAdmin` flag that narrows the entry to DocSpace administrators. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. The call is read-only and  honours `If-None-Match`: send back the `ETag` of an earlier answer and an unchanged list comes back as an  empty not-modified response rather than a body. The list has no defined order and is empty on a portal where  nobody has configured restrictions - and an empty list blocks nobody, whatever the enforcement flag says.  Whether the restrictions are enforced at all is not part of this answer: read that flag with  `GET api/2.0/settings/iprestrictions/settings`. The entries listed here apply to every user of the portal  except its owner. Replace the whole list with `PUT api/2.0/settings/iprestrictions`; single entries cannot be  added or deleted, and that update takes plain addresses rather than the IDs returned here.
@@ -165,7 +167,9 @@ class IPRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IPRestrictionArrayWrapper",
+            '200': "IpRestrictionArrayWrapper",
+            '304': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -234,7 +238,9 @@ class IPRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IPRestrictionArrayWrapper",
+            '200': "IpRestrictionArrayWrapper",
+            '304': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -333,7 +339,7 @@ class IPRestrictionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IPRestrictionsSettingsWrapper:
+    ) -> IpRestrictionsSettingsWrapper:
         """Get IP restriction settings
 
         Reports whether the IP restrictions of the current portal are enforced, as the `enable` flag together with the  `lastModified` stamp of the setting. The caller needs the portal-settings right of a DocSpace administrator,  otherwise the call is refused. The call is read-only and honours `If-Modified-Since`: send back the  `Last-Modified` value of an earlier answer and an unchanged setting comes back as an empty not-modified  response rather than a body. The flag is `false` on a portal nobody has configured. A `true` flag on its own  blocks nothing: enforcement also needs at least one stored address, which this answer does not carry - read  the addresses with `GET api/2.0/settings/iprestrictions` - and it is skipped entirely on an installation whose  configuration hides the IP security section. Even when enforced, the portal owner and the installation's own  networks are let through. Change the flag with `PUT api/2.0/settings/iprestrictions/settings`, which replaces  the address list in the same call, so resend the addresses in force when all that changes is the flag.
@@ -368,7 +374,9 @@ class IPRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IPRestrictionsSettingsWrapper",
+            '200': "IpRestrictionsSettingsWrapper",
+            '304': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -402,7 +410,7 @@ class IPRestrictionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[IPRestrictionsSettingsWrapper]:
+    ) -> ApiResponse[IpRestrictionsSettingsWrapper]:
         """Get IP restriction settings
 
         Reports whether the IP restrictions of the current portal are enforced, as the `enable` flag together with the  `lastModified` stamp of the setting. The caller needs the portal-settings right of a DocSpace administrator,  otherwise the call is refused. The call is read-only and honours `If-Modified-Since`: send back the  `Last-Modified` value of an earlier answer and an unchanged setting comes back as an empty not-modified  response rather than a body. The flag is `false` on a portal nobody has configured. A `true` flag on its own  blocks nothing: enforcement also needs at least one stored address, which this answer does not carry - read  the addresses with `GET api/2.0/settings/iprestrictions` - and it is skipped entirely on an installation whose  configuration hides the IP security section. Even when enforced, the portal owner and the installation's own  networks are let through. Change the flag with `PUT api/2.0/settings/iprestrictions/settings`, which replaces  the address list in the same call, so resend the addresses in force when all that changes is the flag.
@@ -437,7 +445,9 @@ class IPRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IPRestrictionsSettingsWrapper",
+            '200': "IpRestrictionsSettingsWrapper",
+            '304': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -506,7 +516,9 @@ class IPRestrictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "IPRestrictionsSettingsWrapper",
+            '200': "IpRestrictionsSettingsWrapper",
+            '304': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -645,10 +657,11 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -719,10 +732,11 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -793,10 +807,11 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -948,10 +963,11 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1022,10 +1038,11 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1096,10 +1113,11 @@ class IPRestrictionsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "IpRestrictionsWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

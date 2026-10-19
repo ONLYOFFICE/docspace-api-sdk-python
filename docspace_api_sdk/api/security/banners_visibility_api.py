@@ -22,7 +22,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
-from docspace_api_sdk.models.tenant_banner_settings_dto import TenantBannerSettingsDto
+from docspace_api_sdk.models.tenant_banner_settings_request_dto import TenantBannerSettingsRequestDto
 from docspace_api_sdk.models.tenant_banner_settings_wrapper import TenantBannerSettingsWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -47,7 +47,7 @@ class BannersVisibilityApi:
     @validate_call
     def set_tenant_banner_settings(
         self,
-        tenant_banner_settings_dto: Optional[TenantBannerSettingsDto] = None,
+        tenant_banner_settings_request_dto: Optional[TenantBannerSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -65,8 +65,8 @@ class BannersVisibilityApi:
 
         Sets whether the portal's promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller's role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
 
-        :param tenant_banner_settings_dto:
-        :type tenant_banner_settings_dto: TenantBannerSettingsDto
+        :param tenant_banner_settings_request_dto:
+        :type tenant_banner_settings_request_dto: TenantBannerSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -90,7 +90,7 @@ class BannersVisibilityApi:
         """ # noqa: E501
 
         _param = self._set_tenant_banner_settings_serialize(
-            tenant_banner_settings_dto=tenant_banner_settings_dto,
+            tenant_banner_settings_request_dto=tenant_banner_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -99,6 +99,8 @@ class BannersVisibilityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantBannerSettingsWrapper",
+            '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -121,7 +123,7 @@ class BannersVisibilityApi:
     @validate_call
     def set_tenant_banner_settings_with_http_info(
         self,
-        tenant_banner_settings_dto: Optional[TenantBannerSettingsDto] = None,
+        tenant_banner_settings_request_dto: Optional[TenantBannerSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -139,8 +141,8 @@ class BannersVisibilityApi:
 
         Sets whether the portal's promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller's role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
 
-        :param tenant_banner_settings_dto:
-        :type tenant_banner_settings_dto: TenantBannerSettingsDto
+        :param tenant_banner_settings_request_dto:
+        :type tenant_banner_settings_request_dto: TenantBannerSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -164,7 +166,7 @@ class BannersVisibilityApi:
         """ # noqa: E501
 
         _param = self._set_tenant_banner_settings_serialize(
-            tenant_banner_settings_dto=tenant_banner_settings_dto,
+            tenant_banner_settings_request_dto=tenant_banner_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -173,6 +175,8 @@ class BannersVisibilityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantBannerSettingsWrapper",
+            '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -195,7 +199,7 @@ class BannersVisibilityApi:
     @validate_call
     def set_tenant_banner_settings_without_preload_content(
         self,
-        tenant_banner_settings_dto: Optional[TenantBannerSettingsDto] = None,
+        tenant_banner_settings_request_dto: Optional[TenantBannerSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -213,8 +217,8 @@ class BannersVisibilityApi:
 
         Sets whether the portal's promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller's role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
 
-        :param tenant_banner_settings_dto:
-        :type tenant_banner_settings_dto: TenantBannerSettingsDto
+        :param tenant_banner_settings_request_dto:
+        :type tenant_banner_settings_request_dto: TenantBannerSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -238,7 +242,7 @@ class BannersVisibilityApi:
         """ # noqa: E501
 
         _param = self._set_tenant_banner_settings_serialize(
-            tenant_banner_settings_dto=tenant_banner_settings_dto,
+            tenant_banner_settings_request_dto=tenant_banner_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -247,6 +251,8 @@ class BannersVisibilityApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantBannerSettingsWrapper",
+            '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -264,7 +270,7 @@ class BannersVisibilityApi:
 
     def _set_tenant_banner_settings_serialize(
         self,
-        tenant_banner_settings_dto,
+        tenant_banner_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -290,8 +296,8 @@ class BannersVisibilityApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if tenant_banner_settings_dto is not None:
-            _body_params = tenant_banner_settings_dto
+        if tenant_banner_settings_request_dto is not None:
+            _body_params = tenant_banner_settings_request_dto
 
 
         # set the HTTP header `Accept`

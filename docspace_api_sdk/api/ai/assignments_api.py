@@ -350,7 +350,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_bulk_assign(
         self,
-        request_body: Annotated[Dict[str, StrictStr], Field(description="A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.")],
+        ai_assignments_bulk_assign_request: Annotated[Dict[str, StrictStr], Field(description="A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -368,8 +368,8 @@ class AssignmentsApi:
 
         Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
 
-        :param request_body: A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. (required)
-        :type request_body: Dict[str, str]
+        :param ai_assignments_bulk_assign_request: A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. (required)
+        :type ai_assignments_bulk_assign_request: Dict[str, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -393,7 +393,7 @@ class AssignmentsApi:
         """ # noqa: E501
 
         _param = self._ai_assignments_bulk_assign_serialize(
-            request_body=request_body,
+            ai_assignments_bulk_assign_request=ai_assignments_bulk_assign_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -423,7 +423,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_bulk_assign_with_http_info(
         self,
-        request_body: Annotated[Dict[str, StrictStr], Field(description="A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.")],
+        ai_assignments_bulk_assign_request: Annotated[Dict[str, StrictStr], Field(description="A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -441,8 +441,8 @@ class AssignmentsApi:
 
         Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
 
-        :param request_body: A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. (required)
-        :type request_body: Dict[str, str]
+        :param ai_assignments_bulk_assign_request: A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. (required)
+        :type ai_assignments_bulk_assign_request: Dict[str, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -466,7 +466,7 @@ class AssignmentsApi:
         """ # noqa: E501
 
         _param = self._ai_assignments_bulk_assign_serialize(
-            request_body=request_body,
+            ai_assignments_bulk_assign_request=ai_assignments_bulk_assign_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -496,7 +496,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_bulk_assign_without_preload_content(
         self,
-        request_body: Annotated[Dict[str, StrictStr], Field(description="A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.")],
+        ai_assignments_bulk_assign_request: Annotated[Dict[str, StrictStr], Field(description="A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -514,8 +514,8 @@ class AssignmentsApi:
 
         Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
 
-        :param request_body: A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. (required)
-        :type request_body: Dict[str, str]
+        :param ai_assignments_bulk_assign_request: A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. (required)
+        :type ai_assignments_bulk_assign_request: Dict[str, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -539,7 +539,7 @@ class AssignmentsApi:
         """ # noqa: E501
 
         _param = self._ai_assignments_bulk_assign_serialize(
-            request_body=request_body,
+            ai_assignments_bulk_assign_request=ai_assignments_bulk_assign_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -564,7 +564,7 @@ class AssignmentsApi:
 
     def _ai_assignments_bulk_assign_serialize(
         self,
-        request_body,
+        ai_assignments_bulk_assign_request,
         _request_auth,
         _content_type,
         _headers,
@@ -590,8 +590,8 @@ class AssignmentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_assignments_bulk_assign_request is not None:
+            _body_params = ai_assignments_bulk_assign_request
 
 
         # set the HTTP header `Accept`
@@ -1523,7 +1523,7 @@ class AssignmentsApi:
     ) -> AiResolvedAssignment:
         """Resolve for action
 
-        Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
+        Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
@@ -1565,6 +1565,7 @@ class AssignmentsApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -1599,7 +1600,7 @@ class AssignmentsApi:
     ) -> ApiResponse[AiResolvedAssignment]:
         """Resolve for action
 
-        Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
+        Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
@@ -1641,6 +1642,7 @@ class AssignmentsApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -1675,7 +1677,7 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Resolve for action
 
-        Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
+        Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
@@ -1717,6 +1719,7 @@ class AssignmentsApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -1822,7 +1825,7 @@ class AssignmentsApi:
     ) -> AiResolvedAssignment:
         """Try resolve for action
 
-        Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+        Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
@@ -1864,6 +1867,7 @@ class AssignmentsApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -1898,7 +1902,7 @@ class AssignmentsApi:
     ) -> ApiResponse[AiResolvedAssignment]:
         """Try resolve for action
 
-        Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+        Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
@@ -1940,6 +1944,7 @@ class AssignmentsApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -1974,7 +1979,7 @@ class AssignmentsApi:
     ) -> RESTResponseType:
         """Try resolve for action
 
-        Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+        Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
         :param action_type: The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (required)
         :type action_type: str
@@ -2016,6 +2021,7 @@ class AssignmentsApi:
             '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -2104,7 +2110,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_unassign(
         self,
-        body: AiActionType,
+        ai_action_type: AiActionType,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2122,8 +2128,8 @@ class AssignmentsApi:
 
         Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
 
-        :param body: (required)
-        :type body: str
+        :param ai_action_type: (required)
+        :type ai_action_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2147,7 +2153,7 @@ class AssignmentsApi:
         """ # noqa: E501
 
         _param = self._ai_assignments_unassign_serialize(
-            body=body,
+            ai_action_type=ai_action_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2177,7 +2183,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_unassign_with_http_info(
         self,
-        body: AiActionType,
+        ai_action_type: AiActionType,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2195,8 +2201,8 @@ class AssignmentsApi:
 
         Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
 
-        :param body: (required)
-        :type body: str
+        :param ai_action_type: (required)
+        :type ai_action_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2220,7 +2226,7 @@ class AssignmentsApi:
         """ # noqa: E501
 
         _param = self._ai_assignments_unassign_serialize(
-            body=body,
+            ai_action_type=ai_action_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2250,7 +2256,7 @@ class AssignmentsApi:
     @validate_call
     def ai_assignments_unassign_without_preload_content(
         self,
-        body: AiActionType,
+        ai_action_type: AiActionType,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2268,8 +2274,8 @@ class AssignmentsApi:
 
         Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
 
-        :param body: (required)
-        :type body: str
+        :param ai_action_type: (required)
+        :type ai_action_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2293,7 +2299,7 @@ class AssignmentsApi:
         """ # noqa: E501
 
         _param = self._ai_assignments_unassign_serialize(
-            body=body,
+            ai_action_type=ai_action_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2318,7 +2324,7 @@ class AssignmentsApi:
 
     def _ai_assignments_unassign_serialize(
         self,
-        body,
+        ai_action_type,
         _request_auth,
         _content_type,
         _headers,
@@ -2344,8 +2350,8 @@ class AssignmentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_action_type is not None:
+            _body_params = ai_action_type
 
 
         # set the HTTP header `Accept`

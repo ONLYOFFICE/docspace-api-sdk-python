@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List
-from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
+from docspace_api_sdk.models.ai_error_data import AiErrorData
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +32,7 @@ class AiToolsBulkResultErrorsInner(BaseModel):
     AiToolsBulkResultErrorsInner
     """ # noqa: E501
     name: StrictStr
-    error: AiTErrorData
+    error: AiErrorData
     __properties: ClassVar[List[str]] = ["name", "error"]
 
     model_config = ConfigDict(
@@ -91,7 +91,7 @@ class AiToolsBulkResultErrorsInner(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "error": AiTErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
+            "error": AiErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
 

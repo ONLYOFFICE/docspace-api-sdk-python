@@ -24,11 +24,10 @@ when signing in, and every code works exactly once, so this list is what a membe
 access to their authenticator. Any authenticated member may call it, always for their own account: there is no
 way to read someone else's codes. The authenticator method has to be enabled on the portal and an application
 has to be linked to the account already, otherwise the call answers 405; link one through
-`GET api/2.0/settings/tfaapp/confirm` and `POST api/2.0/settings/tfaapp/validate`. Accounts flagged as
-outsiders are refused. This is a read-only, idempotent call: the codes are generated once, when the
-application is first linked, and the whole set is replaced by `PUT api/2.0/settings/tfaappnewcodes`. The
-default configuration issues five codes of six characters, and a portal may be configured for a different
-number and length.
+`GET api/2.0/settings/tfaapp/confirm` and `POST api/2.0/settings/tfaapp/validate`. This is a read-only,
+idempotent call: the codes are generated once, when the application is first linked, and the whole set is
+replaced by `PUT api/2.0/settings/tfaappnewcodes`. The default configuration issues five codes of six
+characters, and a portal may be configured for a different number and length.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -279,11 +278,10 @@ The call is reachable only with a confirmation token carrying the `TfaActivation
 `GET api/2.0/settings/tfaapp/confirm` or from the login flow; an ordinary bearer token is refused. The
 authenticator method has to be enabled on the portal and be its current policy, and the account must have no
 application linked yet: for an already-linked account the call answers 405, so reset the credential first with
-`PUT api/2.0/settings/tfaappnewapp`. Accounts flagged as outsiders are refused. Repeating the call is safe and
-hands back the same secret for the account, so the QR code and the manual key always describe one and the same
-credential. `qrCodeSetupImageUrl` is a base64 `data:` URL of a PNG image, and `account` is the label the
-application will show. Finish the setup by sending a code from the application to
-`POST api/2.0/settings/tfaapp/validate`.
+`PUT api/2.0/settings/tfaappnewapp`. Repeating the call is safe and hands back the same secret for the
+account, so the QR code and the manual key always describe one and the same credential. `qrCodeSetupImageUrl`
+is a base64 `data:` URL of a PNG image, and `account` is the label the application will show. Finish the setup
+by sending a code from the application to `POST api/2.0/settings/tfaapp/validate`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -357,7 +355,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **tfa_validate_auth_code**
-> BooleanWrapper tfa_validate_auth_code(tfa_validate_requests_dto=tfa_validate_requests_dto)
+> BooleanWrapper tfa_validate_auth_code(tfa_validate_request_dto=tfa_validate_request_dto)
 
 Verifies a two-factor authentication code for the account named in the confirmation link being used, and
 completes that account's pending TFA step. The call is reachable only with a confirmation token carrying the
@@ -378,7 +376,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tfa_validate_requests_dto** | [**TfaValidateRequestsDto**](TfaValidateRequestsDto.md)|  | [optional] 
+ **tfa_validate_request_dto** | [**TfaValidateRequestDto**](TfaValidateRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -394,7 +392,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.tfa_validate_requests_dto import TfaValidateRequestsDto
+from docspace_api_sdk.models.tfa_validate_request_dto import TfaValidateRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -415,11 +413,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.TFASettingsApi(api_client)
-    tfa_validate_requests_dto = docspace_api_sdk.TfaValidateRequestsDto() # TfaValidateRequestsDto |  (optional)
+    tfa_validate_request_dto = docspace_api_sdk.TfaValidateRequestDto() # TfaValidateRequestDto |  (optional)
 
     try:
         # Validate the TFA code
-        api_response = api_instance.tfa_validate_auth_code(tfa_validate_requests_dto=tfa_validate_requests_dto)
+        api_response = api_instance.tfa_validate_auth_code(tfa_validate_request_dto=tfa_validate_request_dto)
         print("The response of TFASettingsApi->tfa_validate_auth_code:\n")
         pprint(api_response)
     except Exception as e:
@@ -438,28 +436,30 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | `true` when the code completed a first activation and backup codes were generated, `false` when an application was already linked |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `code`, or the code matches neither the authenticator application nor an unused backup code |  -  |
+**403** | The account the confirmation link was issued for has used up the portal's login attempt limit for TFA codes |  -  |
+**500** | The code is `null`, empty or consists of whitespace only |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **unlink_tfa_app**
-> StringWrapper unlink_tfa_app(tfa_requests_dto=tfa_requests_dto)
+> StringWrapper unlink_tfa_app(tfa_request_dto=tfa_request_dto)
 
 Detaches the authenticator application from an account, so that the account has to link a new one before it
 can sign in again. `id` has to name an existing account: an empty or unknown value is refused. Passing the
 caller's own ID resets their own credential and returns the activation link they should follow next; passing
 another member's ID is allowed for the portal owner only, and every other caller, a DocSpace administrator
 included, is refused. The account has to have an application linked and the authenticator method has to be
-enabled on the portal, otherwise the call answers 405. The call is destructive: the account's backup codes are
-dropped together with the credential and all of its sessions are signed out. For another member the portal
-also emails them that their TFA was reset, and the answer is then an empty string. The portal-wide policy is
-not touched, so TFA stays required and the account sets up an application again through
-`GET api/2.0/settings/tfaapp/confirm`; lift the requirement for everyone with `PUT api/2.0/settings/tfaapp`.
+enabled on the portal, otherwise the call answers 405, and a terminated account is refused. The call is
+destructive: the account's backup codes are dropped together with the credential and all of its sessions are
+signed out. For another member the portal also emails them that their TFA was reset, and the answer is then an
+empty string. The portal-wide policy is not touched, so TFA stays required and the account sets up an
+application again through `GET api/2.0/settings/tfaapp/confirm`; lift the requirement for everyone with
+`PUT api/2.0/settings/tfaapp`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -468,7 +468,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tfa_requests_dto** | [**TfaRequestsDto**](TfaRequestsDto.md)|  | [optional] 
+ **tfa_request_dto** | [**TfaRequestDto**](TfaRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -484,7 +484,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.models.tfa_requests_dto import TfaRequestsDto
+from docspace_api_sdk.models.tfa_request_dto import TfaRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -505,11 +505,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.TFASettingsApi(api_client)
-    tfa_requests_dto = docspace_api_sdk.TfaRequestsDto() # TfaRequestsDto |  (optional)
+    tfa_request_dto = docspace_api_sdk.TfaRequestDto() # TfaRequestDto |  (optional)
 
     try:
         # Unlink the TFA application
-        api_response = api_instance.unlink_tfa_app(tfa_requests_dto=tfa_requests_dto)
+        api_response = api_instance.unlink_tfa_app(tfa_request_dto=tfa_request_dto)
         print("The response of TFASettingsApi->unlink_tfa_app:\n")
         pprint(api_response)
     except Exception as e:
@@ -528,12 +528,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The activation link when the caller reset their own application, or an empty string when another member's was reset |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller is not the portal owner, or the account cannot be resolved from `id` |  -  |
+**400** | The request body cannot be read, `type` is `null`, an empty string or a string that is neither a number nor built from the names `None`, `Sms` and `App`, or a `trustedIps` entry is not a single address, an inclusive range or a CIDR block, although this call reads only `id` |  -  |
+**403** | The caller is not the portal owner, the account cannot be resolved from `id`, or the account is terminated |  -  |
 **405** | The authenticator method is not enabled on this portal, or the account has no application linked |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -546,13 +546,12 @@ Replaces the current user's one-time backup codes with a freshly generated set a
 previous codes have been spent or may have leaked: the whole old set stops being accepted the moment this call
 succeeds, so store the new codes before leaving the response. Any authenticated member may call it, always for
 their own account. The authenticator method has to be enabled on the portal and an application has to be
-linked to the account already, otherwise the call answers 405, and accounts flagged as outsiders are refused.
-The call mutates state and is not idempotent: every invocation issues another set and discards the one before
-it, so a retry after a timeout returns codes different from those the first attempt generated. The codes come
-back unused, five of them of six characters with the default configuration, and a portal may be configured for
-a different number and length. Read the current set without changing it through
-`GET api/2.0/settings/tfaappcodes`. The authenticator secret itself is untouched, so the linked application
-keeps working.
+linked to the account already, otherwise the call answers 405. The call mutates state and is not idempotent:
+every invocation issues another set and discards the one before it, so a retry after a timeout returns codes
+different from those the first attempt generated. The codes come back unused, five of them of six characters
+with the default configuration, and a portal may be configured for a different number and length. Read the
+current set without changing it through `GET api/2.0/settings/tfaappcodes`. The authenticator secret itself is
+untouched, so the linked application keeps working.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -626,7 +625,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_tfa_settings**
-> BooleanWrapper update_tfa_settings(tfa_requests_dto=tfa_requests_dto)
+> BooleanWrapper update_tfa_settings(tfa_request_dto=tfa_request_dto)
 
 Sets the portal-wide two-factor authentication policy: `type` `1` switches on the SMS method, `2` switches on
 the authenticator application, and `0` turns TFA off, as does any unknown value. The two methods are mutually
@@ -647,7 +646,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tfa_requests_dto** | [**TfaRequestsDto**](TfaRequestsDto.md)|  | [optional] 
+ **tfa_request_dto** | [**TfaRequestDto**](TfaRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -663,7 +662,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.tfa_requests_dto import TfaRequestsDto
+from docspace_api_sdk.models.tfa_request_dto import TfaRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -684,11 +683,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.TFASettingsApi(api_client)
-    tfa_requests_dto = docspace_api_sdk.TfaRequestsDto() # TfaRequestsDto |  (optional)
+    tfa_request_dto = docspace_api_sdk.TfaRequestDto() # TfaRequestDto |  (optional)
 
     try:
         # Update the TFA settings
-        api_response = api_instance.update_tfa_settings(tfa_requests_dto=tfa_requests_dto)
+        api_response = api_instance.update_tfa_settings(tfa_request_dto=tfa_request_dto)
         print("The response of TFASettingsApi->update_tfa_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -707,18 +706,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | `true` when the SMS or the authenticator method was switched on, `false` when TFA was turned off |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, `type` is `null`, an empty string or a string that is neither a number nor built from the names `None`, `Sms` and `App`, or a `trustedIps` entry is not a single address, an inclusive range or a CIDR block |  -  |
+**403** | The caller has no portal-settings right, or names the owner's account in `id` or `mandatoryUsers` while `id` is not the caller's own |  -  |
 **405** | The requested method is not enabled on this portal, or the SMS method has no configured provider |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_tfa_settings_link**
-> StringWrapper update_tfa_settings_link(tfa_requests_dto=tfa_requests_dto)
+> StringWrapper update_tfa_settings_link(tfa_request_dto=tfa_request_dto)
 
 Applies the same portal-wide two-factor authentication change as `PUT api/2.0/settings/tfaapp` and
 additionally returns the confirmation link the caller needs to pass the new challenge, so an administrator who
@@ -739,7 +739,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tfa_requests_dto** | [**TfaRequestsDto**](TfaRequestsDto.md)|  | [optional] 
+ **tfa_request_dto** | [**TfaRequestDto**](TfaRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -755,7 +755,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.models.tfa_requests_dto import TfaRequestsDto
+from docspace_api_sdk.models.tfa_request_dto import TfaRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -776,11 +776,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.TFASettingsApi(api_client)
-    tfa_requests_dto = docspace_api_sdk.TfaRequestsDto() # TfaRequestsDto |  (optional)
+    tfa_request_dto = docspace_api_sdk.TfaRequestDto() # TfaRequestDto |  (optional)
 
     try:
         # Update TFA settings with a link
-        api_response = api_instance.update_tfa_settings_link(tfa_requests_dto=tfa_requests_dto)
+        api_response = api_instance.update_tfa_settings_link(tfa_request_dto=tfa_request_dto)
         print("The response of TFASettingsApi->update_tfa_settings_link:\n")
         pprint(api_response)
     except Exception as e:
@@ -799,12 +799,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The caller's own confirmation link, or an empty string when TFA was turned off or the caller is exempt |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller is neither the portal owner nor a DocSpace administrator, or is placing the owner under the policy |  -  |
+**400** | The request body cannot be read, `type` is `null`, an empty string or a string that is neither a number nor built from the names `None`, `Sms` and `App`, or a `trustedIps` entry is not a single address, an inclusive range or a CIDR block |  -  |
+**403** | The caller has no portal-settings right, or names the owner's account in `id` or `mandatoryUsers` while `id` is not the caller's own |  -  |
 **405** | The requested method is not enabled on this portal, or the SMS method has no configured provider |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

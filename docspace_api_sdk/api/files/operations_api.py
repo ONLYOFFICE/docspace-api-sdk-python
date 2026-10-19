@@ -29,8 +29,9 @@ from docspace_api_sdk.models.batch_request_dto import BatchRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.check_conversion_request_dto import CheckConversionRequestDto
 from docspace_api_sdk.models.check_dest_folder_wrapper import CheckDestFolderWrapper
-from docspace_api_sdk.models.chunked_upload_session_response_response_wrapper import ChunkedUploadSessionResponseResponseWrapper
-from docspace_api_sdk.models.chunked_upload_session_response_wrapper_wrapper import ChunkedUploadSessionResponseWrapperWrapper
+from docspace_api_sdk.models.check_move_or_copy_batch_items_folder_ids_parameter_inner import CheckMoveOrCopyBatchItemsFolderIdsParameterInner
+from docspace_api_sdk.models.chunked_upload_session_result_wrapper import ChunkedUploadSessionResultWrapper
+from docspace_api_sdk.models.chunked_upload_session_wrapper import ChunkedUploadSessionWrapper
 from docspace_api_sdk.models.conversation_result_array_wrapper import ConversationResultArrayWrapper
 from docspace_api_sdk.models.delete_batch_request_dto import DeleteBatchRequestDto
 from docspace_api_sdk.models.delete_version_batch_request_dto import DeleteVersionBatchRequestDto
@@ -41,11 +42,11 @@ from docspace_api_sdk.models.file_operation_array_wrapper import FileOperationAr
 from docspace_api_sdk.models.file_operation_type import FileOperationType
 from docspace_api_sdk.models.session_request import SessionRequest
 from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.models.update_comment import UpdateComment
+from docspace_api_sdk.models.update_comment_request import UpdateCommentRequest
 from docspace_api_sdk.models.upload_session_response_wrapper import UploadSessionResponseWrapper
 from docspace_api_sdk.models.error_api_response import ErrorApiResponse
-from docspace_api_sdk.models.third_party_chunked_upload_session_response_wrapper_wrapper import ThirdPartyChunkedUploadSessionResponseWrapperWrapper
-from docspace_api_sdk.models.third_party_chunked_upload_session_response_response_wrapper import ThirdPartyChunkedUploadSessionResponseResponseWrapper
+from docspace_api_sdk.models.third_party_chunked_upload_session_result_wrapper import ThirdPartyChunkedUploadSessionResultWrapper
+from docspace_api_sdk.models.third_party_chunked_upload_session_wrapper import ThirdPartyChunkedUploadSessionWrapper
 from docspace_api_sdk.models.third_party_upload_session_response_wrapper import ThirdPartyUploadSessionResponseWrapper
 from docspace_api_sdk.models.third_party_check_conversion_request_dto import ThirdPartyCheckConversionRequestDto
 
@@ -127,6 +128,8 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -205,6 +208,8 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -283,6 +288,8 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -428,11 +435,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -503,11 +511,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -578,11 +587,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -734,10 +744,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
+            '401': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -808,10 +820,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
+            '401': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -882,10 +896,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
+            '401': None,
             '403': None,
+            '404': None,
+            '500': None,
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1041,6 +1057,8 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1119,6 +1137,8 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1197,6 +1217,8 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConversationResultArrayWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1292,7 +1314,14 @@ class OperationsApi:
     @validate_call
     def check_move_or_copy_batch_items(
         self,
-        in_dto: Annotated[Optional[Any], Field(description="The files and folders to move or copy, the folder they go to, and the way name clashes are settled.")] = None,
+        return_single_operation: Annotated[Optional[StrictBool], Field(description="Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.")] = None,
+        folder_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        file_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        dest_folder_id: Annotated[Optional[Any], Field(description="The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.")] = None,
+        conflict_resolve_type: Annotated[Optional[Any], Field(description="What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.")] = None,
+        delete_after: Annotated[Optional[StrictBool], Field(description="Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.")] = None,
+        content: Annotated[Optional[StrictBool], Field(description="What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.")] = None,
+        to_fill_out: Annotated[Optional[StrictBool], Field(description="Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1310,8 +1339,22 @@ class OperationsApi:
 
         Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
 
-        :param in_dto: The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
-        :type in_dto: BatchRequestDto
+        :param return_single_operation: Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+        :type return_single_operation: bool
+        :param folder_ids: The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+        :type folder_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param file_ids: The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+        :type file_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param dest_folder_id: The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+        :type dest_folder_id: CheckMoveOrCopyBatchItemsDestFolderIdParameter
+        :param conflict_resolve_type: What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+        :type conflict_resolve_type: FileConflictResolveType
+        :param delete_after: Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+        :type delete_after: bool
+        :param content: What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+        :type content: bool
+        :param to_fill_out: Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
+        :type to_fill_out: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1335,7 +1378,14 @@ class OperationsApi:
         """ # noqa: E501
 
         _param = self._check_move_or_copy_batch_items_serialize(
-            in_dto=in_dto,
+            return_single_operation=return_single_operation,
+            folder_ids=folder_ids,
+            file_ids=file_ids,
+            dest_folder_id=dest_folder_id,
+            conflict_resolve_type=conflict_resolve_type,
+            delete_after=delete_after,
+            content=content,
+            to_fill_out=to_fill_out,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1344,11 +1394,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1367,7 +1418,14 @@ class OperationsApi:
     @validate_call
     def check_move_or_copy_batch_items_with_http_info(
         self,
-        in_dto: Annotated[Optional[Any], Field(description="The files and folders to move or copy, the folder they go to, and the way name clashes are settled.")] = None,
+        return_single_operation: Annotated[Optional[StrictBool], Field(description="Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.")] = None,
+        folder_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        file_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        dest_folder_id: Annotated[Optional[Any], Field(description="The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.")] = None,
+        conflict_resolve_type: Annotated[Optional[Any], Field(description="What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.")] = None,
+        delete_after: Annotated[Optional[StrictBool], Field(description="Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.")] = None,
+        content: Annotated[Optional[StrictBool], Field(description="What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.")] = None,
+        to_fill_out: Annotated[Optional[StrictBool], Field(description="Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1385,8 +1443,22 @@ class OperationsApi:
 
         Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
 
-        :param in_dto: The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
-        :type in_dto: BatchRequestDto
+        :param return_single_operation: Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+        :type return_single_operation: bool
+        :param folder_ids: The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+        :type folder_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param file_ids: The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+        :type file_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param dest_folder_id: The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+        :type dest_folder_id: CheckMoveOrCopyBatchItemsDestFolderIdParameter
+        :param conflict_resolve_type: What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+        :type conflict_resolve_type: FileConflictResolveType
+        :param delete_after: Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+        :type delete_after: bool
+        :param content: What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+        :type content: bool
+        :param to_fill_out: Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
+        :type to_fill_out: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1410,7 +1482,14 @@ class OperationsApi:
         """ # noqa: E501
 
         _param = self._check_move_or_copy_batch_items_serialize(
-            in_dto=in_dto,
+            return_single_operation=return_single_operation,
+            folder_ids=folder_ids,
+            file_ids=file_ids,
+            dest_folder_id=dest_folder_id,
+            conflict_resolve_type=conflict_resolve_type,
+            delete_after=delete_after,
+            content=content,
+            to_fill_out=to_fill_out,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1419,11 +1498,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1442,7 +1522,14 @@ class OperationsApi:
     @validate_call
     def check_move_or_copy_batch_items_without_preload_content(
         self,
-        in_dto: Annotated[Optional[Any], Field(description="The files and folders to move or copy, the folder they go to, and the way name clashes are settled.")] = None,
+        return_single_operation: Annotated[Optional[StrictBool], Field(description="Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.")] = None,
+        folder_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        file_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        dest_folder_id: Annotated[Optional[Any], Field(description="The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.")] = None,
+        conflict_resolve_type: Annotated[Optional[Any], Field(description="What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.")] = None,
+        delete_after: Annotated[Optional[StrictBool], Field(description="Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.")] = None,
+        content: Annotated[Optional[StrictBool], Field(description="What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.")] = None,
+        to_fill_out: Annotated[Optional[StrictBool], Field(description="Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1460,8 +1547,22 @@ class OperationsApi:
 
         Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
 
-        :param in_dto: The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
-        :type in_dto: BatchRequestDto
+        :param return_single_operation: Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+        :type return_single_operation: bool
+        :param folder_ids: The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+        :type folder_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param file_ids: The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+        :type file_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param dest_folder_id: The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+        :type dest_folder_id: CheckMoveOrCopyBatchItemsDestFolderIdParameter
+        :param conflict_resolve_type: What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+        :type conflict_resolve_type: FileConflictResolveType
+        :param delete_after: Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+        :type delete_after: bool
+        :param content: What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+        :type content: bool
+        :param to_fill_out: Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
+        :type to_fill_out: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1485,7 +1586,14 @@ class OperationsApi:
         """ # noqa: E501
 
         _param = self._check_move_or_copy_batch_items_serialize(
-            in_dto=in_dto,
+            return_single_operation=return_single_operation,
+            folder_ids=folder_ids,
+            file_ids=file_ids,
+            dest_folder_id=dest_folder_id,
+            conflict_resolve_type=conflict_resolve_type,
+            delete_after=delete_after,
+            content=content,
+            to_fill_out=to_fill_out,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1494,11 +1602,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
+            '400': None,
             '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1512,7 +1621,14 @@ class OperationsApi:
 
     def _check_move_or_copy_batch_items_serialize(
         self,
-        in_dto,
+        return_single_operation,
+        folder_ids,
+        file_ids,
+        dest_folder_id,
+        conflict_resolve_type,
+        delete_after,
+        content,
+        to_fill_out,
         _request_auth,
         _content_type,
         _headers,
@@ -1522,6 +1638,8 @@ class OperationsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'folderIds': 'multi',
+            'fileIds': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1535,9 +1653,37 @@ class OperationsApi:
 
         # process the path parameters
         # process the query parameters
-        if in_dto is not None:
+        if return_single_operation is not None:
             
-            _query_params.append(('inDto', in_dto))
+            _query_params.append(('returnSingleOperation', return_single_operation))
+            
+        if folder_ids is not None:
+            
+            _query_params.append(('folderIds', folder_ids))
+            
+        if file_ids is not None:
+            
+            _query_params.append(('fileIds', file_ids))
+            
+        if dest_folder_id is not None:
+            
+            _query_params.append(('destFolderId', dest_folder_id))
+            
+        if conflict_resolve_type is not None:
+            
+            _query_params.append(('conflictResolveType', conflict_resolve_type.value))
+            
+        if delete_after is not None:
+            
+            _query_params.append(('deleteAfter', delete_after))
+            
+        if content is not None:
+            
+            _query_params.append(('content', content))
+            
+        if to_fill_out is not None:
+            
+            _query_params.append(('toFillOut', to_fill_out))
             
         # process the header parameters
         # process the form parameters
@@ -1587,7 +1733,14 @@ class OperationsApi:
     @validate_call
     def check_move_or_copy_dest_folder(
         self,
-        in_dto: Annotated[Optional[Any], Field(description="The files and folders to move or copy, the folder they go to, and the way name clashes are settled.")] = None,
+        return_single_operation: Annotated[Optional[StrictBool], Field(description="Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.")] = None,
+        folder_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        file_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        dest_folder_id: Annotated[Optional[Any], Field(description="The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.")] = None,
+        conflict_resolve_type: Annotated[Optional[Any], Field(description="What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.")] = None,
+        delete_after: Annotated[Optional[StrictBool], Field(description="Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.")] = None,
+        content: Annotated[Optional[StrictBool], Field(description="What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.")] = None,
+        to_fill_out: Annotated[Optional[StrictBool], Field(description="Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1605,8 +1758,22 @@ class OperationsApi:
 
         Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
 
-        :param in_dto: The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
-        :type in_dto: BatchRequestDto
+        :param return_single_operation: Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+        :type return_single_operation: bool
+        :param folder_ids: The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+        :type folder_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param file_ids: The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+        :type file_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param dest_folder_id: The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+        :type dest_folder_id: CheckMoveOrCopyBatchItemsDestFolderIdParameter
+        :param conflict_resolve_type: What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+        :type conflict_resolve_type: FileConflictResolveType
+        :param delete_after: Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+        :type delete_after: bool
+        :param content: What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+        :type content: bool
+        :param to_fill_out: Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
+        :type to_fill_out: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1630,7 +1797,14 @@ class OperationsApi:
         """ # noqa: E501
 
         _param = self._check_move_or_copy_dest_folder_serialize(
-            in_dto=in_dto,
+            return_single_operation=return_single_operation,
+            folder_ids=folder_ids,
+            file_ids=file_ids,
+            dest_folder_id=dest_folder_id,
+            conflict_resolve_type=conflict_resolve_type,
+            delete_after=delete_after,
+            content=content,
+            to_fill_out=to_fill_out,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1639,11 +1813,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckDestFolderWrapper",
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1662,7 +1837,14 @@ class OperationsApi:
     @validate_call
     def check_move_or_copy_dest_folder_with_http_info(
         self,
-        in_dto: Annotated[Optional[Any], Field(description="The files and folders to move or copy, the folder they go to, and the way name clashes are settled.")] = None,
+        return_single_operation: Annotated[Optional[StrictBool], Field(description="Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.")] = None,
+        folder_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        file_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        dest_folder_id: Annotated[Optional[Any], Field(description="The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.")] = None,
+        conflict_resolve_type: Annotated[Optional[Any], Field(description="What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.")] = None,
+        delete_after: Annotated[Optional[StrictBool], Field(description="Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.")] = None,
+        content: Annotated[Optional[StrictBool], Field(description="What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.")] = None,
+        to_fill_out: Annotated[Optional[StrictBool], Field(description="Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1680,8 +1862,22 @@ class OperationsApi:
 
         Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
 
-        :param in_dto: The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
-        :type in_dto: BatchRequestDto
+        :param return_single_operation: Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+        :type return_single_operation: bool
+        :param folder_ids: The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+        :type folder_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param file_ids: The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+        :type file_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param dest_folder_id: The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+        :type dest_folder_id: CheckMoveOrCopyBatchItemsDestFolderIdParameter
+        :param conflict_resolve_type: What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+        :type conflict_resolve_type: FileConflictResolveType
+        :param delete_after: Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+        :type delete_after: bool
+        :param content: What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+        :type content: bool
+        :param to_fill_out: Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
+        :type to_fill_out: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1705,7 +1901,14 @@ class OperationsApi:
         """ # noqa: E501
 
         _param = self._check_move_or_copy_dest_folder_serialize(
-            in_dto=in_dto,
+            return_single_operation=return_single_operation,
+            folder_ids=folder_ids,
+            file_ids=file_ids,
+            dest_folder_id=dest_folder_id,
+            conflict_resolve_type=conflict_resolve_type,
+            delete_after=delete_after,
+            content=content,
+            to_fill_out=to_fill_out,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1714,11 +1917,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckDestFolderWrapper",
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1737,7 +1941,14 @@ class OperationsApi:
     @validate_call
     def check_move_or_copy_dest_folder_without_preload_content(
         self,
-        in_dto: Annotated[Optional[Any], Field(description="The files and folders to move or copy, the folder they go to, and the way name clashes are settled.")] = None,
+        return_single_operation: Annotated[Optional[StrictBool], Field(description="Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.")] = None,
+        folder_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        file_ids: Annotated[Optional[List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]], Field(description="The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.")] = None,
+        dest_folder_id: Annotated[Optional[Any], Field(description="The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.")] = None,
+        conflict_resolve_type: Annotated[Optional[Any], Field(description="What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.")] = None,
+        delete_after: Annotated[Optional[StrictBool], Field(description="Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.")] = None,
+        content: Annotated[Optional[StrictBool], Field(description="What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.")] = None,
+        to_fill_out: Annotated[Optional[StrictBool], Field(description="Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1755,8 +1966,22 @@ class OperationsApi:
 
         Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
 
-        :param in_dto: The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
-        :type in_dto: BatchRequestDto
+        :param return_single_operation: Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+        :type return_single_operation: bool
+        :param folder_ids: The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+        :type folder_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param file_ids: The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+        :type file_ids: List[CheckMoveOrCopyBatchItemsFolderIdsParameterInner]
+        :param dest_folder_id: The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+        :type dest_folder_id: CheckMoveOrCopyBatchItemsDestFolderIdParameter
+        :param conflict_resolve_type: What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+        :type conflict_resolve_type: FileConflictResolveType
+        :param delete_after: Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+        :type delete_after: bool
+        :param content: What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+        :type content: bool
+        :param to_fill_out: Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
+        :type to_fill_out: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1780,7 +2005,14 @@ class OperationsApi:
         """ # noqa: E501
 
         _param = self._check_move_or_copy_dest_folder_serialize(
-            in_dto=in_dto,
+            return_single_operation=return_single_operation,
+            folder_ids=folder_ids,
+            file_ids=file_ids,
+            dest_folder_id=dest_folder_id,
+            conflict_resolve_type=conflict_resolve_type,
+            delete_after=delete_after,
+            content=content,
+            to_fill_out=to_fill_out,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1789,11 +2021,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckDestFolderWrapper",
+            '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1807,7 +2040,14 @@ class OperationsApi:
 
     def _check_move_or_copy_dest_folder_serialize(
         self,
-        in_dto,
+        return_single_operation,
+        folder_ids,
+        file_ids,
+        dest_folder_id,
+        conflict_resolve_type,
+        delete_after,
+        content,
+        to_fill_out,
         _request_auth,
         _content_type,
         _headers,
@@ -1817,6 +2057,8 @@ class OperationsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'folderIds': 'multi',
+            'fileIds': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1830,9 +2072,37 @@ class OperationsApi:
 
         # process the path parameters
         # process the query parameters
-        if in_dto is not None:
+        if return_single_operation is not None:
             
-            _query_params.append(('inDto', in_dto))
+            _query_params.append(('returnSingleOperation', return_single_operation))
+            
+        if folder_ids is not None:
+            
+            _query_params.append(('folderIds', folder_ids))
+            
+        if file_ids is not None:
+            
+            _query_params.append(('fileIds', file_ids))
+            
+        if dest_folder_id is not None:
+            
+            _query_params.append(('destFolderId', dest_folder_id))
+            
+        if conflict_resolve_type is not None:
+            
+            _query_params.append(('conflictResolveType', conflict_resolve_type.value))
+            
+        if delete_after is not None:
+            
+            _query_params.append(('deleteAfter', delete_after))
+            
+        if content is not None:
+            
+            _query_params.append(('content', content))
+            
+        if to_fill_out is not None:
+            
+            _query_params.append(('toFillOut', to_fill_out))
             
         # process the header parameters
         # process the form parameters
@@ -1935,9 +2205,11 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -2010,9 +2282,11 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -2085,9 +2359,11 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -2202,7 +2478,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ChunkedUploadSessionResponseWrapperWrapper: ...
+    ) -> ChunkedUploadSessionResultWrapper: ...
 
     @overload
     def create_upload_session(
@@ -2221,7 +2497,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ThirdPartyChunkedUploadSessionResponseWrapperWrapper: ...
+    ) -> ThirdPartyChunkedUploadSessionResultWrapper: ...
 
     @overload
     def create_upload_session(
@@ -2240,7 +2516,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Union[ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]: ...
+    ) -> Union[ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]: ...
 
     @validate_call
     def create_upload_session(
@@ -2259,7 +2535,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Union[ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]:
+    ) -> Union[ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]:
         """(Deprecated) Chunked upload
 
         Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
@@ -2301,12 +2577,15 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseWrapperWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResponseWrapperWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionResultWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResultWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2339,7 +2618,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ChunkedUploadSessionResponseWrapperWrapper]: ...
+    ) -> ApiResponse[ChunkedUploadSessionResultWrapper]: ...
 
     @overload
     def create_upload_session_with_http_info(
@@ -2358,7 +2637,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ThirdPartyChunkedUploadSessionResponseWrapperWrapper]: ...
+    ) -> ApiResponse[ThirdPartyChunkedUploadSessionResultWrapper]: ...
 
     @overload
     def create_upload_session_with_http_info(
@@ -2377,7 +2656,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Union[ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]]: ...
+    ) -> ApiResponse[Union[ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]]: ...
 
     @validate_call
     def create_upload_session_with_http_info(
@@ -2396,7 +2675,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Union[ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]]:
+    ) -> ApiResponse[Union[ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]]:
         """(Deprecated) Chunked upload
 
         Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
@@ -2438,12 +2717,15 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseWrapperWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResponseWrapperWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionResultWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResultWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2518,12 +2800,15 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseWrapperWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResponseWrapperWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionResultWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResultWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
+            '404': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2640,7 +2925,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ChunkedUploadSessionResponseResponseWrapper: ...
+    ) -> ChunkedUploadSessionWrapper: ...
 
     @overload
     def create_upload_session_in_folder(
@@ -2659,7 +2944,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ThirdPartyChunkedUploadSessionResponseResponseWrapper: ...
+    ) -> ThirdPartyChunkedUploadSessionWrapper: ...
 
     @overload
     def create_upload_session_in_folder(
@@ -2678,7 +2963,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Union[ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]: ...
+    ) -> Union[ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper]: ...
 
     @validate_call
     def create_upload_session_in_folder(
@@ -2697,7 +2982,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Union[ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]:
+    ) -> Union[ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper]:
         """Create an upload session
 
         Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
@@ -2738,11 +3023,15 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseResponseWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResponseResponseWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2775,7 +3064,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ChunkedUploadSessionResponseResponseWrapper]: ...
+    ) -> ApiResponse[ChunkedUploadSessionWrapper]: ...
 
     @overload
     def create_upload_session_in_folder_with_http_info(
@@ -2794,7 +3083,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ThirdPartyChunkedUploadSessionResponseResponseWrapper]: ...
+    ) -> ApiResponse[ThirdPartyChunkedUploadSessionWrapper]: ...
 
     @overload
     def create_upload_session_in_folder_with_http_info(
@@ -2813,7 +3102,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Union[ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]]: ...
+    ) -> ApiResponse[Union[ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper]]: ...
 
     @validate_call
     def create_upload_session_in_folder_with_http_info(
@@ -2832,7 +3121,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Union[ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]]:
+    ) -> ApiResponse[Union[ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper]]:
         """Create an upload session
 
         Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
@@ -2873,11 +3162,15 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseResponseWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResponseResponseWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2951,11 +3244,15 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseResponseWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResponseResponseWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '415': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3111,9 +3408,10 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -3186,9 +3484,10 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -3261,9 +3560,10 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -3416,10 +3716,11 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3490,10 +3791,11 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3564,10 +3866,11 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3719,10 +4022,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3793,10 +4098,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3867,10 +4174,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4023,9 +4332,11 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -4098,9 +4409,11 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -4173,9 +4486,11 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -4332,10 +4647,10 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4410,10 +4725,10 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4488,10 +4803,10 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4532,7 +4847,7 @@ class OperationsApi:
         # process the query parameters
         if single is not None:
             
-            _query_params.append(('Single', single))
+            _query_params.append(('single', single))
             
         if folder_type is not None:
             
@@ -4699,10 +5014,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyUploadSessionResponseWrapper" if isinstance(folder_id, str) else "UploadSessionResponseWrapper"),
+            '400': None,
+            '402': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4834,10 +5151,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyUploadSessionResponseWrapper" if isinstance(folder_id, str) else "UploadSessionResponseWrapper"),
+            '400': None,
+            '402': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -4912,10 +5231,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyUploadSessionResponseWrapper" if isinstance(folder_id, str) else "UploadSessionResponseWrapper"),
+            '400': None,
+            '402': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5021,7 +5342,7 @@ class OperationsApi:
     ) -> FileOperationArrayWrapper:
         """Get active file operations
 
-        Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
+        Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads, mark-as-read  and builder runs. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
 
         :param id: The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error.
         :type id: str
@@ -5094,7 +5415,7 @@ class OperationsApi:
     ) -> ApiResponse[FileOperationArrayWrapper]:
         """Get active file operations
 
-        Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
+        Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads, mark-as-read  and builder runs. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
 
         :param id: The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error.
         :type id: str
@@ -5167,7 +5488,7 @@ class OperationsApi:
     ) -> RESTResponseType:
         """Get active file operations
 
-        Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
+        Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads, mark-as-read  and builder runs. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
 
         :param id: The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error.
         :type id: str
@@ -5311,7 +5632,7 @@ class OperationsApi:
     ) -> FileOperationArrayWrapper:
         """Get file operations by type
 
-        Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account's operations.
+        Returns the background file operations of the caller that are of one kind, named by the number in the route: `1`  for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read, `7` for a duplication and `8` for a  document builder run. The answer carries the same records as `GET api/2.0/files/fileops`, with the same rule  that a finished operation is reported once and then dropped, and `id` narrows it further to a single operation.  Moves, kind `0`, cannot be read through this route: the address `api/2.0/files/fileops/move` belongs to another  operation, so read moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind  that has no queue of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty  array, while a number outside the operation type is rejected as an invalid request. The call changes nothing and  never shows another account's operations.
 
         :param operation_type: The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation. (required)
         :type operation_type: FileOperationType
@@ -5350,9 +5671,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5388,7 +5709,7 @@ class OperationsApi:
     ) -> ApiResponse[FileOperationArrayWrapper]:
         """Get file operations by type
 
-        Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account's operations.
+        Returns the background file operations of the caller that are of one kind, named by the number in the route: `1`  for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read, `7` for a duplication and `8` for a  document builder run. The answer carries the same records as `GET api/2.0/files/fileops`, with the same rule  that a finished operation is reported once and then dropped, and `id` narrows it further to a single operation.  Moves, kind `0`, cannot be read through this route: the address `api/2.0/files/fileops/move` belongs to another  operation, so read moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind  that has no queue of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty  array, while a number outside the operation type is rejected as an invalid request. The call changes nothing and  never shows another account's operations.
 
         :param operation_type: The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation. (required)
         :type operation_type: FileOperationType
@@ -5427,9 +5748,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5465,7 +5786,7 @@ class OperationsApi:
     ) -> RESTResponseType:
         """Get file operations by type
 
-        Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account's operations.
+        Returns the background file operations of the caller that are of one kind, named by the number in the route: `1`  for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read, `7` for a duplication and `8` for a  document builder run. The answer carries the same records as `GET api/2.0/files/fileops`, with the same rule  that a finished operation is reported once and then dropped, and `id` narrows it further to a single operation.  Moves, kind `0`, cannot be read through this route: the address `api/2.0/files/fileops/move` belongs to another  operation, so read moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind  that has no queue of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty  array, while a number outside the operation type is rejected as an invalid request. The call changes nothing and  never shows another account's operations.
 
         :param operation_type: The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation. (required)
         :type operation_type: FileOperationType
@@ -5504,9 +5825,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '400': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5650,9 +5971,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -5724,9 +6045,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -5798,9 +6119,9 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -5954,9 +6275,11 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -6029,9 +6352,11 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -6104,9 +6429,11 @@ class OperationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
             '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -6813,7 +7140,7 @@ class OperationsApi:
     def update_file_comment(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file whose version comment is replaced.")], Annotated[StrictStr, Field(description="The file whose version comment is replaced.")]],
-        update_comment: Annotated[UpdateComment, Field(description="The version and the comment to store on it.")],
+        update_comment_request: Annotated[UpdateCommentRequest, Field(description="The version and the comment to store on it.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6833,8 +7160,8 @@ class OperationsApi:
 
         :param file_id: The file whose version comment is replaced. (required)
         :type file_id: Union[int, str]
-        :param update_comment: The version and the comment to store on it. (required)
-        :type update_comment: UpdateComment
+        :param update_comment_request: The version and the comment to store on it. (required)
+        :type update_comment_request: UpdateCommentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6859,7 +7186,7 @@ class OperationsApi:
 
         _param = self._update_file_comment_serialize(
             file_id=file_id,
-            update_comment=update_comment,
+            update_comment_request=update_comment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6868,10 +7195,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6891,7 +7220,7 @@ class OperationsApi:
     def update_file_comment_with_http_info(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file whose version comment is replaced.")], Annotated[StrictStr, Field(description="The file whose version comment is replaced.")]],
-        update_comment: Annotated[UpdateComment, Field(description="The version and the comment to store on it.")],
+        update_comment_request: Annotated[UpdateCommentRequest, Field(description="The version and the comment to store on it.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6911,8 +7240,8 @@ class OperationsApi:
 
         :param file_id: The file whose version comment is replaced. (required)
         :type file_id: Union[int, str]
-        :param update_comment: The version and the comment to store on it. (required)
-        :type update_comment: UpdateComment
+        :param update_comment_request: The version and the comment to store on it. (required)
+        :type update_comment_request: UpdateCommentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6937,7 +7266,7 @@ class OperationsApi:
 
         _param = self._update_file_comment_serialize(
             file_id=file_id,
-            update_comment=update_comment,
+            update_comment_request=update_comment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6946,10 +7275,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6969,7 +7300,7 @@ class OperationsApi:
     def update_file_comment_without_preload_content(
         self,
         file_id: Union[Annotated[StrictInt, Field(description="The file whose version comment is replaced.")], Annotated[StrictStr, Field(description="The file whose version comment is replaced.")]],
-        update_comment: Annotated[UpdateComment, Field(description="The version and the comment to store on it.")],
+        update_comment_request: Annotated[UpdateCommentRequest, Field(description="The version and the comment to store on it.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6989,8 +7320,8 @@ class OperationsApi:
 
         :param file_id: The file whose version comment is replaced. (required)
         :type file_id: Union[int, str]
-        :param update_comment: The version and the comment to store on it. (required)
-        :type update_comment: UpdateComment
+        :param update_comment_request: The version and the comment to store on it. (required)
+        :type update_comment_request: UpdateCommentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7015,7 +7346,7 @@ class OperationsApi:
 
         _param = self._update_file_comment_serialize(
             file_id=file_id,
-            update_comment=update_comment,
+            update_comment_request=update_comment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7024,10 +7355,12 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7042,7 +7375,7 @@ class OperationsApi:
     def _update_file_comment_serialize(
         self,
         file_id,
-        update_comment,
+        update_comment_request,
         _request_auth,
         _content_type,
         _headers,
@@ -7070,8 +7403,8 @@ class OperationsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_comment is not None:
-            _body_params = update_comment
+        if update_comment_request is not None:
+            _body_params = update_comment_request
 
 
         # set the HTTP header `Accept`
@@ -7146,7 +7479,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ChunkedUploadSessionResponseResponseWrapper: ...
+    ) -> ChunkedUploadSessionWrapper: ...
 
     @overload
     def upload_async_session(
@@ -7167,7 +7500,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ThirdPartyChunkedUploadSessionResponseResponseWrapper: ...
+    ) -> ThirdPartyChunkedUploadSessionWrapper: ...
 
     @overload
     def upload_async_session(
@@ -7188,7 +7521,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Union[ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]: ...
+    ) -> Union[ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper]: ...
 
     @validate_call
     def upload_async_session(
@@ -7209,7 +7542,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Union[ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]:
+    ) -> Union[ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper]:
         """Upload a numbered chunk
 
         Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
@@ -7256,10 +7589,12 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseResponseWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResponseResponseWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionWrapper"),
+            '402': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -7295,7 +7630,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ChunkedUploadSessionResponseResponseWrapper]: ...
+    ) -> ApiResponse[ChunkedUploadSessionWrapper]: ...
 
     @overload
     def upload_async_session_with_http_info(
@@ -7316,7 +7651,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ThirdPartyChunkedUploadSessionResponseResponseWrapper]: ...
+    ) -> ApiResponse[ThirdPartyChunkedUploadSessionWrapper]: ...
 
     @overload
     def upload_async_session_with_http_info(
@@ -7337,7 +7672,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Union[ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]]: ...
+    ) -> ApiResponse[Union[ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper]]: ...
 
     @validate_call
     def upload_async_session_with_http_info(
@@ -7358,7 +7693,7 @@ class OperationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Union[ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]]:
+    ) -> ApiResponse[Union[ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper]]:
         """Upload a numbered chunk
 
         Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
@@ -7405,10 +7740,12 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseResponseWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResponseResponseWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionWrapper"),
+            '402': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -7491,10 +7828,12 @@ class OperationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': ("ThirdPartyChunkedUploadSessionResponseResponseWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionResponseResponseWrapper"),
+            '200': ("ThirdPartyChunkedUploadSessionWrapper" if isinstance(folder_id, str) else "ChunkedUploadSessionWrapper"),
+            '402': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -7541,12 +7880,12 @@ class OperationsApi:
         # process the query parameters
         if chunk_number is not None:
             
-            _query_params.append(('ChunkNumber', chunk_number))
+            _query_params.append(('chunkNumber', chunk_number))
             
         # process the header parameters
         # process the form parameters
         if file is not None:
-            _files['File'] = file
+            _files['file'] = file
         # process the body parameter
 
 
@@ -7726,9 +8065,11 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyUploadSessionResponseWrapper" if isinstance(folder_id, str) else "UploadSessionResponseWrapper"),
+            '402': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -7868,9 +8209,11 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyUploadSessionResponseWrapper" if isinstance(folder_id, str) else "UploadSessionResponseWrapper"),
+            '402': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -7950,9 +8293,11 @@ class OperationsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyUploadSessionResponseWrapper" if isinstance(folder_id, str) else "UploadSessionResponseWrapper"),
+            '402': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -7999,7 +8344,7 @@ class OperationsApi:
         # process the header parameters
         # process the form parameters
         if file is not None:
-            _files['File'] = file
+            _files['file'] = file
         # process the body parameter
 
 

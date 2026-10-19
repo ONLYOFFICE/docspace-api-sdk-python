@@ -23,8 +23,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.ai_error_data import AiErrorData
 from docspace_api_sdk.models.ai_prompt import AiPrompt
-from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +34,7 @@ class AiPromptMutationResult(BaseModel):
     """ # noqa: E501
     success: StrictBool = Field(description="True when the prompt was persisted.", json_schema_extra={"examples": [True]})
     prompt: Optional[AiPrompt] = Field(default=None, description="The persisted prompt. Present on success.")
-    error: Optional[AiTErrorData] = Field(default=None, description="Why the prompt was rejected. Present on failure.")
+    error: Optional[AiErrorData] = Field(default=None, description="Why the prompt was rejected. Present on failure.")
     __properties: ClassVar[List[str]] = ["success", "prompt", "error"]
 
     model_config = ConfigDict(
@@ -97,7 +97,7 @@ class AiPromptMutationResult(BaseModel):
         _obj = cls.model_validate({
             "success": obj.get("success"),
             "prompt": AiPrompt.from_dict(obj["prompt"]) if obj.get("prompt") is not None else None,
-            "error": AiTErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
+            "error": AiErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
 

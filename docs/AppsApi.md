@@ -274,7 +274,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_enabled**
-> AppWrapper set_enabled(id, set_app_enabled_body)
+> AppWrapper set_enabled(id, set_app_enabled_request)
 
 Turns one portal application on or off for the current portal, and notifies the clients connected to the portal
 so that they can show or hide it without being reloaded. The identifier must be an application declared in the
@@ -284,6 +284,7 @@ the default that the configuration gives the application, and repeating it with 
 Disabling an application does not delete its settings document, which stays saved and applies again as soon as
 the application is enabled. The response is the application in its new state, including that settings document.
 Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
+The enabled field is mandatory, and a body without it is rejected with 400 rather than read as false.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -293,7 +294,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. | 
- **set_app_enabled_body** | [**SetAppEnabledBody**](SetAppEnabledBody.md)| The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. | 
+ **set_app_enabled_request** | [**SetAppEnabledRequest**](SetAppEnabledRequest.md)| The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. | 
 
 ### Return type
 
@@ -309,7 +310,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.app_wrapper import AppWrapper
-from docspace_api_sdk.models.set_app_enabled_body import SetAppEnabledBody
+from docspace_api_sdk.models.set_app_enabled_request import SetAppEnabledRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -331,11 +332,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AppsApi(api_client)
     id = 'ai-room' # str | The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything.
-    set_app_enabled_body = docspace_api_sdk.SetAppEnabledBody() # SetAppEnabledBody | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
+    set_app_enabled_request = docspace_api_sdk.SetAppEnabledRequest() # SetAppEnabledRequest | The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
 
     try:
         # Enable or disable an app
-        api_response = api_instance.set_enabled(id, set_app_enabled_body)
+        api_response = api_instance.set_enabled(id, set_app_enabled_request)
         print("The response of AppsApi->set_enabled:\n")
         pprint(api_response)
     except Exception as e:
@@ -354,19 +355,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The application in its new state, with the saved settings document left untouched |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller is not allowed to edit the portal settings |  -  |
+**400** | The request body is not a valid JSON document or has no enabled field, so the state is not changed |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **404** | No application with this identifier is configured on this installation |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_settings**
-> AppWrapper set_settings(id, set_app_settings_body)
+> AppWrapper set_settings(id, set_app_settings_request)
 
 Stores the application-specific settings document of one portal application for the current portal. The
 identifier must be an application declared in the installation configuration, as listed by `GET api/2.0/apps`.
@@ -387,7 +388,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. | 
- **set_app_settings_body** | [**SetAppSettingsBody**](SetAppSettingsBody.md)| The configuration to store for this portal, replacing whatever was stored before. | 
+ **set_app_settings_request** | [**SetAppSettingsRequest**](SetAppSettingsRequest.md)| The configuration to store for this portal, replacing whatever was stored before. | 
 
 ### Return type
 
@@ -403,7 +404,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.app_wrapper import AppWrapper
-from docspace_api_sdk.models.set_app_settings_body import SetAppSettingsBody
+from docspace_api_sdk.models.set_app_settings_request import SetAppSettingsRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -425,11 +426,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AppsApi(api_client)
     id = 'ai-room' # str | The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404.
-    set_app_settings_body = docspace_api_sdk.SetAppSettingsBody() # SetAppSettingsBody | The configuration to store for this portal, replacing whatever was stored before.
+    set_app_settings_request = docspace_api_sdk.SetAppSettingsRequest() # SetAppSettingsRequest | The configuration to store for this portal, replacing whatever was stored before.
 
     try:
         # Save app settings
-        api_response = api_instance.set_settings(id, set_app_settings_body)
+        api_response = api_instance.set_settings(id, set_app_settings_request)
         print("The response of AppsApi->set_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -449,7 +450,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The application in its new state, with the stored settings document |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The request body is not a valid JSON document, so no settings are stored |  -  |
-**403** | The caller is not allowed to edit the portal settings |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **404** | No application with this identifier is configured on this installation |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |

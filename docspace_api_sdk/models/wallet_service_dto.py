@@ -24,10 +24,10 @@ import re  # noqa: F401
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.entity_quota_dto import EntityQuotaDto
 from docspace_api_sdk.models.price_dto import PriceDto
-from docspace_api_sdk.models.tenant_entity_quota_settings import TenantEntityQuotaSettings
 from docspace_api_sdk.models.tenant_quota_feature_dto import TenantQuotaFeatureDto
-from docspace_api_sdk.models.tenant_quota_settings import TenantQuotaSettings
+from docspace_api_sdk.models.tenant_quota_settings_dto import TenantQuotaSettingsDto
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field

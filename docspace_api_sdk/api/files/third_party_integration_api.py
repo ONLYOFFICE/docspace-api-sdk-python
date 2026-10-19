@@ -27,10 +27,10 @@ from typing_extensions import Annotated
 from docspace_api_sdk.models.array_array_wrapper import ArrayArrayWrapper
 from docspace_api_sdk.models.provider_array_wrapper import ProviderArrayWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.third_party_account_array_wrapper import ThirdPartyAccountArrayWrapper
 from docspace_api_sdk.models.third_party_backup_request_dto import ThirdPartyBackupRequestDto
 from docspace_api_sdk.models.third_party_folder_array_wrapper import ThirdPartyFolderArrayWrapper
 from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
-from docspace_api_sdk.models.third_party_params_array_wrapper import ThirdPartyParamsArrayWrapper
 from docspace_api_sdk.models.third_party_request_dto import ThirdPartyRequestDto
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -71,7 +71,7 @@ class ThirdPartyIntegrationApi:
     ) -> StringWrapper:
         """Remove a third-party account
 
-        Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member's request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal's link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
+        Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member's request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal's link to them together with the stored credentials, the sharing records and the tags  kept for its entries. An account a room was created on is refused with 403 while the room exists: delete the  room instead, which disconnects the account along with it. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
 
         :param provider_id: The ID of the connected third-party storage account, as `providerId` of `GET api/2.0/files/thirdparty`. (required)
         :type provider_id: int
@@ -107,6 +107,8 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -145,7 +147,7 @@ class ThirdPartyIntegrationApi:
     ) -> ApiResponse[StringWrapper]:
         """Remove a third-party account
 
-        Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member's request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal's link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
+        Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member's request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal's link to them together with the stored credentials, the sharing records and the tags  kept for its entries. An account a room was created on is refused with 403 while the room exists: delete the  room instead, which disconnects the account along with it. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
 
         :param provider_id: The ID of the connected third-party storage account, as `providerId` of `GET api/2.0/files/thirdparty`. (required)
         :type provider_id: int
@@ -181,6 +183,8 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -219,7 +223,7 @@ class ThirdPartyIntegrationApi:
     ) -> RESTResponseType:
         """Remove a third-party account
 
-        Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member's request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal's link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
+        Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member's request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal's link to them together with the stored credentials, the sharing records and the tags  kept for its entries. An account a room was created on is refused with 403 while the room exists: delete the  room instead, which disconnects the account along with it. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
 
         :param provider_id: The ID of the connected third-party storage account, as `providerId` of `GET api/2.0/files/thirdparty`. (required)
         :type provider_id: int
@@ -255,6 +259,8 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '403': None,
+            '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1465,7 +1471,7 @@ class ThirdPartyIntegrationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ThirdPartyParamsArrayWrapper:
+    ) -> ThirdPartyAccountArrayWrapper:
         """Get the third-party accounts
 
         Lists the third-party storage accounts the caller has connected, one element per account, with the title it  was saved under, the storage service behind it and the portal section it is attached to. Accounts connected by  other members are not included, and neither is the portal backup account of  `GET api/2.0/files/thirdparty/backup`, even for an administrator. The `providerId` of an element is the value  to send to `DELETE api/2.0/files/thirdparty/{providerId}` and, as `providerId` in  `POST api/2.0/files/thirdparty`, the way to re-authenticate that same account instead of connecting a new one.  Credentials are never disclosed: `auth_data` comes back empty for every element. An element with  `roomsStorage` set is available as storage for a room, while `corporate` marks an account inherited from the  legacy Common section. The call is read-only, returns a plain array with no paging and no contractual  ordering, and answers with an empty array when the caller has connected nothing. To browse the content of an  account, take the folder ID from the answer of the operation that connected it or from  `GET api/2.0/files/@root`.
@@ -1500,7 +1506,7 @@ class ThirdPartyIntegrationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ThirdPartyParamsArrayWrapper",
+            '200': "ThirdPartyAccountArrayWrapper",
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1534,7 +1540,7 @@ class ThirdPartyIntegrationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ThirdPartyParamsArrayWrapper]:
+    ) -> ApiResponse[ThirdPartyAccountArrayWrapper]:
         """Get the third-party accounts
 
         Lists the third-party storage accounts the caller has connected, one element per account, with the title it  was saved under, the storage service behind it and the portal section it is attached to. Accounts connected by  other members are not included, and neither is the portal backup account of  `GET api/2.0/files/thirdparty/backup`, even for an administrator. The `providerId` of an element is the value  to send to `DELETE api/2.0/files/thirdparty/{providerId}` and, as `providerId` in  `POST api/2.0/files/thirdparty`, the way to re-authenticate that same account instead of connecting a new one.  Credentials are never disclosed: `auth_data` comes back empty for every element. An element with  `roomsStorage` set is available as storage for a room, while `corporate` marks an account inherited from the  legacy Common section. The call is read-only, returns a plain array with no paging and no contractual  ordering, and answers with an empty array when the caller has connected nothing. To browse the content of an  account, take the folder ID from the answer of the operation that connected it or from  `GET api/2.0/files/@root`.
@@ -1569,7 +1575,7 @@ class ThirdPartyIntegrationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ThirdPartyParamsArrayWrapper",
+            '200': "ThirdPartyAccountArrayWrapper",
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1638,7 +1644,7 @@ class ThirdPartyIntegrationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ThirdPartyParamsArrayWrapper",
+            '200': "ThirdPartyAccountArrayWrapper",
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1777,10 +1783,12 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1851,10 +1859,12 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1925,10 +1935,12 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2080,10 +2092,11 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2154,10 +2167,11 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2228,10 +2242,11 @@ class ThirdPartyIntegrationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

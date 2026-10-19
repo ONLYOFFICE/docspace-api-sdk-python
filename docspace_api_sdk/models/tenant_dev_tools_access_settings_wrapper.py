@@ -24,15 +24,15 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.get_portal_prices200_response_links_inner import GetPortalPrices200ResponseLinksInner
-from docspace_api_sdk.models.tenant_dev_tools_access_settings import TenantDevToolsAccessSettings
+from docspace_api_sdk.models.tenant_dev_tools_access_settings_dto import TenantDevToolsAccessSettingsDto
 from typing import Optional, Set
 from typing_extensions import Self
 
 class TenantDevToolsAccessSettingsWrapper(BaseModel):
     """
-    The successful API response containing the TenantDevToolsAccessSettings object.
+    The successful API response containing the TenantDevToolsAccessSettingsDto object.
     """ # noqa: E501
-    response: Optional[TenantDevToolsAccessSettings] = Field(default=None, description="The TenantDevToolsAccessSettings object returned by the operation.")
+    response: Optional[TenantDevToolsAccessSettingsDto] = Field(default=None, description="The TenantDevToolsAccessSettingsDto object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")
@@ -101,7 +101,7 @@ class TenantDevToolsAccessSettingsWrapper(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "response": TenantDevToolsAccessSettings.from_dict(obj["response"]) if obj.get("response") is not None else None,
+            "response": TenantDevToolsAccessSettingsDto.from_dict(obj["response"]) if obj.get("response") is not None else None,
             "count": obj.get("count"),
             "links": [GetPortalPrices200ResponseLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
             "status": obj.get("status"),

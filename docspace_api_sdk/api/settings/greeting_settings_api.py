@@ -23,7 +23,7 @@ from typing_extensions import Annotated
 
 from typing import Optional
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.greeting_settings_requests_dto import GreetingSettingsRequestsDto
+from docspace_api_sdk.models.greeting_settings_request_dto import GreetingSettingsRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -640,6 +640,7 @@ class GreetingSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -709,6 +710,7 @@ class GreetingSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -778,6 +780,7 @@ class GreetingSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -864,7 +867,7 @@ class GreetingSettingsApi:
     @validate_call
     def save_greeting_settings(
         self,
-        greeting_settings_requests_dto: Optional[GreetingSettingsRequestsDto] = None,
+        greeting_settings_request_dto: Optional[GreetingSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -882,8 +885,8 @@ class GreetingSettingsApi:
 
         Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
 
-        :param greeting_settings_requests_dto:
-        :type greeting_settings_requests_dto: GreetingSettingsRequestsDto
+        :param greeting_settings_request_dto:
+        :type greeting_settings_request_dto: GreetingSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -907,7 +910,7 @@ class GreetingSettingsApi:
         """ # noqa: E501
 
         _param = self._save_greeting_settings_serialize(
-            greeting_settings_requests_dto=greeting_settings_requests_dto,
+            greeting_settings_request_dto=greeting_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -916,10 +919,11 @@ class GreetingSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -938,7 +942,7 @@ class GreetingSettingsApi:
     @validate_call
     def save_greeting_settings_with_http_info(
         self,
-        greeting_settings_requests_dto: Optional[GreetingSettingsRequestsDto] = None,
+        greeting_settings_request_dto: Optional[GreetingSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -956,8 +960,8 @@ class GreetingSettingsApi:
 
         Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
 
-        :param greeting_settings_requests_dto:
-        :type greeting_settings_requests_dto: GreetingSettingsRequestsDto
+        :param greeting_settings_request_dto:
+        :type greeting_settings_request_dto: GreetingSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -981,7 +985,7 @@ class GreetingSettingsApi:
         """ # noqa: E501
 
         _param = self._save_greeting_settings_serialize(
-            greeting_settings_requests_dto=greeting_settings_requests_dto,
+            greeting_settings_request_dto=greeting_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -990,10 +994,11 @@ class GreetingSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1012,7 +1017,7 @@ class GreetingSettingsApi:
     @validate_call
     def save_greeting_settings_without_preload_content(
         self,
-        greeting_settings_requests_dto: Optional[GreetingSettingsRequestsDto] = None,
+        greeting_settings_request_dto: Optional[GreetingSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1030,8 +1035,8 @@ class GreetingSettingsApi:
 
         Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
 
-        :param greeting_settings_requests_dto:
-        :type greeting_settings_requests_dto: GreetingSettingsRequestsDto
+        :param greeting_settings_request_dto:
+        :type greeting_settings_request_dto: GreetingSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1055,7 +1060,7 @@ class GreetingSettingsApi:
         """ # noqa: E501
 
         _param = self._save_greeting_settings_serialize(
-            greeting_settings_requests_dto=greeting_settings_requests_dto,
+            greeting_settings_request_dto=greeting_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1064,10 +1069,11 @@ class GreetingSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1081,7 +1087,7 @@ class GreetingSettingsApi:
 
     def _save_greeting_settings_serialize(
         self,
-        greeting_settings_requests_dto,
+        greeting_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -1107,8 +1113,8 @@ class GreetingSettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if greeting_settings_requests_dto is not None:
-            _body_params = greeting_settings_requests_dto
+        if greeting_settings_request_dto is not None:
+            _body_params = greeting_settings_request_dto
 
 
         # set the HTTP header `Accept`

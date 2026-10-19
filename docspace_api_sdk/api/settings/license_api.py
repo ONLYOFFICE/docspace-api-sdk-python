@@ -638,6 +638,8 @@ class LicenseApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '402': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -707,6 +709,8 @@ class LicenseApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '402': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -776,6 +780,8 @@ class LicenseApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '402': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -916,10 +922,10 @@ class LicenseApi:
             '200': "StringWrapper",
             '400': None,
             '403': None,
-            '405': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -992,10 +998,10 @@ class LicenseApi:
             '200': "StringWrapper",
             '400': None,
             '403': None,
-            '405': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1068,10 +1074,10 @@ class LicenseApi:
             '200': "StringWrapper",
             '400': None,
             '403': None,
-            '405': None,
+            '415': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1095,7 +1101,7 @@ class LicenseApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'Files': 'multi',
+            'files': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1112,7 +1118,7 @@ class LicenseApi:
         # process the header parameters
         # process the form parameters
         if files is not None:
-            _files['Files'] = files
+            _files['files'] = files
         # process the body parameter
 
 

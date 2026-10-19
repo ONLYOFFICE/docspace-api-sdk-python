@@ -22,11 +22,11 @@ from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
-from docspace_api_sdk.models.auth_service_requests_array_wrapper import AuthServiceRequestsArrayWrapper
-from docspace_api_sdk.models.auth_service_requests_dto import AuthServiceRequestsDto
+from docspace_api_sdk.models.auth_service_array_wrapper import AuthServiceArrayWrapper
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.connection_test_result_wrapper import ConnectionTestResultWrapper
-from docspace_api_sdk.models.external_database_settings import ExternalDatabaseSettings
+from docspace_api_sdk.models.external_database_connection_request_dto import ExternalDatabaseConnectionRequestDto
+from docspace_api_sdk.models.save_auth_keys_request_dto import SaveAuthKeysRequestDto
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -62,7 +62,7 @@ class AuthorizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuthServiceRequestsArrayWrapper:
+    ) -> AuthServiceArrayWrapper:
         """Get the authorization services
 
         Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider's configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider's keys with `POST api/2.0/settings/authservice`.
@@ -97,7 +97,8 @@ class AuthorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AuthServiceRequestsArrayWrapper",
+            '200': "AuthServiceArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -131,7 +132,7 @@ class AuthorizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AuthServiceRequestsArrayWrapper]:
+    ) -> ApiResponse[AuthServiceArrayWrapper]:
         """Get the authorization services
 
         Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider's configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider's keys with `POST api/2.0/settings/authservice`.
@@ -166,7 +167,8 @@ class AuthorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AuthServiceRequestsArrayWrapper",
+            '200': "AuthServiceArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -235,7 +237,8 @@ class AuthorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AuthServiceRequestsArrayWrapper",
+            '200': "AuthServiceArrayWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -322,7 +325,7 @@ class AuthorizationApi:
     @validate_call
     def save_auth_keys(
         self,
-        auth_service_requests_dto: Optional[AuthServiceRequestsDto] = None,
+        save_auth_keys_request_dto: Optional[SaveAuthKeysRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -340,8 +343,8 @@ class AuthorizationApi:
 
         Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal's tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider's own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
 
-        :param auth_service_requests_dto:
-        :type auth_service_requests_dto: AuthServiceRequestsDto
+        :param save_auth_keys_request_dto:
+        :type save_auth_keys_request_dto: SaveAuthKeysRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -365,7 +368,7 @@ class AuthorizationApi:
         """ # noqa: E501
 
         _param = self._save_auth_keys_serialize(
-            auth_service_requests_dto=auth_service_requests_dto,
+            save_auth_keys_request_dto=save_auth_keys_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -376,6 +379,7 @@ class AuthorizationApi:
             '200': "BooleanWrapper",
             '400': None,
             '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -397,7 +401,7 @@ class AuthorizationApi:
     @validate_call
     def save_auth_keys_with_http_info(
         self,
-        auth_service_requests_dto: Optional[AuthServiceRequestsDto] = None,
+        save_auth_keys_request_dto: Optional[SaveAuthKeysRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -415,8 +419,8 @@ class AuthorizationApi:
 
         Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal's tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider's own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
 
-        :param auth_service_requests_dto:
-        :type auth_service_requests_dto: AuthServiceRequestsDto
+        :param save_auth_keys_request_dto:
+        :type save_auth_keys_request_dto: SaveAuthKeysRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -440,7 +444,7 @@ class AuthorizationApi:
         """ # noqa: E501
 
         _param = self._save_auth_keys_serialize(
-            auth_service_requests_dto=auth_service_requests_dto,
+            save_auth_keys_request_dto=save_auth_keys_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -451,6 +455,7 @@ class AuthorizationApi:
             '200': "BooleanWrapper",
             '400': None,
             '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -472,7 +477,7 @@ class AuthorizationApi:
     @validate_call
     def save_auth_keys_without_preload_content(
         self,
-        auth_service_requests_dto: Optional[AuthServiceRequestsDto] = None,
+        save_auth_keys_request_dto: Optional[SaveAuthKeysRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -490,8 +495,8 @@ class AuthorizationApi:
 
         Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal's tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider's own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
 
-        :param auth_service_requests_dto:
-        :type auth_service_requests_dto: AuthServiceRequestsDto
+        :param save_auth_keys_request_dto:
+        :type save_auth_keys_request_dto: SaveAuthKeysRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -515,7 +520,7 @@ class AuthorizationApi:
         """ # noqa: E501
 
         _param = self._save_auth_keys_serialize(
-            auth_service_requests_dto=auth_service_requests_dto,
+            save_auth_keys_request_dto=save_auth_keys_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -526,6 +531,7 @@ class AuthorizationApi:
             '200': "BooleanWrapper",
             '400': None,
             '402': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -542,7 +548,7 @@ class AuthorizationApi:
 
     def _save_auth_keys_serialize(
         self,
-        auth_service_requests_dto,
+        save_auth_keys_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -568,8 +574,8 @@ class AuthorizationApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if auth_service_requests_dto is not None:
-            _body_params = auth_service_requests_dto
+        if save_auth_keys_request_dto is not None:
+            _body_params = save_auth_keys_request_dto
 
 
         # set the HTTP header `Accept`
@@ -628,7 +634,7 @@ class AuthorizationApi:
     @validate_call
     def test_external_database_connection(
         self,
-        external_database_settings: Optional[ExternalDatabaseSettings] = None,
+        external_database_connection_request_dto: Optional[ExternalDatabaseConnectionRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -646,8 +652,8 @@ class AuthorizationApi:
 
         Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal's own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
 
-        :param external_database_settings:
-        :type external_database_settings: ExternalDatabaseSettings
+        :param external_database_connection_request_dto:
+        :type external_database_connection_request_dto: ExternalDatabaseConnectionRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -671,7 +677,7 @@ class AuthorizationApi:
         """ # noqa: E501
 
         _param = self._test_external_database_connection_serialize(
-            external_database_settings=external_database_settings,
+            external_database_connection_request_dto=external_database_connection_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -680,6 +686,7 @@ class AuthorizationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConnectionTestResultWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -702,7 +709,7 @@ class AuthorizationApi:
     @validate_call
     def test_external_database_connection_with_http_info(
         self,
-        external_database_settings: Optional[ExternalDatabaseSettings] = None,
+        external_database_connection_request_dto: Optional[ExternalDatabaseConnectionRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -720,8 +727,8 @@ class AuthorizationApi:
 
         Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal's own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
 
-        :param external_database_settings:
-        :type external_database_settings: ExternalDatabaseSettings
+        :param external_database_connection_request_dto:
+        :type external_database_connection_request_dto: ExternalDatabaseConnectionRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -745,7 +752,7 @@ class AuthorizationApi:
         """ # noqa: E501
 
         _param = self._test_external_database_connection_serialize(
-            external_database_settings=external_database_settings,
+            external_database_connection_request_dto=external_database_connection_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -754,6 +761,7 @@ class AuthorizationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConnectionTestResultWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -776,7 +784,7 @@ class AuthorizationApi:
     @validate_call
     def test_external_database_connection_without_preload_content(
         self,
-        external_database_settings: Optional[ExternalDatabaseSettings] = None,
+        external_database_connection_request_dto: Optional[ExternalDatabaseConnectionRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -794,8 +802,8 @@ class AuthorizationApi:
 
         Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal's own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
 
-        :param external_database_settings:
-        :type external_database_settings: ExternalDatabaseSettings
+        :param external_database_connection_request_dto:
+        :type external_database_connection_request_dto: ExternalDatabaseConnectionRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -819,7 +827,7 @@ class AuthorizationApi:
         """ # noqa: E501
 
         _param = self._test_external_database_connection_serialize(
-            external_database_settings=external_database_settings,
+            external_database_connection_request_dto=external_database_connection_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -828,6 +836,7 @@ class AuthorizationApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConnectionTestResultWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -845,7 +854,7 @@ class AuthorizationApi:
 
     def _test_external_database_connection_serialize(
         self,
-        external_database_settings,
+        external_database_connection_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -871,8 +880,8 @@ class AuthorizationApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if external_database_settings is not None:
-            _body_params = external_database_settings
+        if external_database_connection_request_dto is not None:
+            _body_params = external_database_connection_request_dto
 
 
         # set the HTTP header `Accept`

@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **configure_csp**
-> CspWrapper configure_csp(csp_requests_dto=csp_requests_dto)
+> CspWrapper configure_csp(csp_request_dto=csp_request_dto)
 
 Replaces the list of external domains the portal's Content Security Policy trusts and returns the policy
 header the portal serves to browsers from that moment on. The list in `domains` replaces the stored one, so an
@@ -29,7 +29,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **csp_requests_dto** | [**CspRequestsDto**](CspRequestsDto.md)|  | [optional] 
+ **csp_request_dto** | [**CspRequestDto**](CspRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -44,7 +44,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.csp_requests_dto import CspRequestsDto
+from docspace_api_sdk.models.csp_request_dto import CspRequestDto
 from docspace_api_sdk.models.csp_wrapper import CspWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -66,11 +66,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.CSPApi(api_client)
-    csp_requests_dto = docspace_api_sdk.CspRequestsDto() # CspRequestsDto |  (optional)
+    csp_request_dto = docspace_api_sdk.CspRequestDto() # CspRequestDto |  (optional)
 
     try:
         # Configure CSP settings
-        api_response = api_instance.configure_csp(csp_requests_dto=csp_requests_dto)
+        api_response = api_instance.configure_csp(csp_request_dto=csp_request_dto)
         print("The response of CSPApi->configure_csp:\n")
         pprint(api_response)
     except Exception as e:
@@ -89,11 +89,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The stored domains and the policy header the portal now serves |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | An entry of `domains` is not a valid address or holds non-ASCII characters |  -  |
+**400** | The request body cannot be read, or an entry of `domains` is not a valid address or holds non-ASCII characters |  -  |
 **403** | The caller does not have the portal-settings right of a DocSpace administrator, or the built policy header exceeds the size allowed for the installation |  -  |
+**500** | An entry of `domains` is `null` |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -174,6 +174,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The allowed domains and the full policy header the portal serves |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**304** | The CSP settings have not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

@@ -85,7 +85,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Encryption or decryption progress as a percentage, or empty when no run is in flight |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**405** | Storage encryption is not available on this installation |  -  |
+**415** | Storage encryption is not available on this installation |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -99,8 +99,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption
 started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run
-begins. The password is deliberately blanked out, so the field always comes back empty even on an encrypted
-installation. The caller is expected to have the permission to edit portal settings, which in practice means
+begins. The encryption password is never returned. The caller is expected to have the permission to edit portal settings, which in practice means
 the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other
 installation, and whenever the check fails, the operation answers with an empty body instead of an error. An
 empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this
@@ -169,9 +168,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The encryption status and the notify-users flag, with the password blanked out; empty where encryption settings cannot be read |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not edit portal settings |  -  |
-**405** | Storage encryption is not available on this installation |  -  |
+**200** | The encryption status and the notify-users flag; empty on a custom-mode installation, or when the caller has no portal-settings right, the installation hides storage encryption or does not grant unrestricted space access, or the settings cannot be read |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -181,7 +178,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **start_storage_encryption**
-> BooleanWrapper start_storage_encryption(storage_encryption_requests_dto=storage_encryption_requests_dto)
+> BooleanWrapper start_storage_encryption(storage_encryption_request_dto=storage_encryption_request_dto)
 
 Queues encryption of everything the installation keeps in its local storage, or decryption of it when the data
 is already encrypted: the saved encryption state decides the direction, so the same call encrypts a decrypted
@@ -204,7 +201,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_encryption_requests_dto** | [**StorageEncryptionRequestsDto**](StorageEncryptionRequestsDto.md)|  | [optional] 
+ **storage_encryption_request_dto** | [**StorageEncryptionRequestDto**](StorageEncryptionRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -220,7 +217,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.storage_encryption_requests_dto import StorageEncryptionRequestsDto
+from docspace_api_sdk.models.storage_encryption_request_dto import StorageEncryptionRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -241,11 +238,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.EncryptionApi(api_client)
-    storage_encryption_requests_dto = docspace_api_sdk.StorageEncryptionRequestsDto() # StorageEncryptionRequestsDto |  (optional)
+    storage_encryption_request_dto = docspace_api_sdk.StorageEncryptionRequestDto() # StorageEncryptionRequestDto |  (optional)
 
     try:
         # Start the storage encryption
-        api_response = api_instance.start_storage_encryption(storage_encryption_requests_dto=storage_encryption_requests_dto)
+        api_response = api_instance.start_storage_encryption(storage_encryption_request_dto=storage_encryption_request_dto)
         print("The response of EncryptionApi->start_storage_encryption:\n")
         pprint(api_response)
     except Exception as e:
@@ -266,10 +263,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | True when the encryption job has been queued; false in a build where storage encryption is switched off |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **402** | The portal pricing plan does not include storage encryption |  -  |
 **403** | The caller may not edit portal settings, or this installation does not allow storage encryption |  -  |
-**405** | Storage encryption is not available on this installation |  -  |
+**415** | Storage encryption is not available on this installation, or the storage or the CDN of the current portal is a third-party provider |  -  |
+**500** | A backup of one of the portals is still running |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

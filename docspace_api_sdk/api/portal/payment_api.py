@@ -48,15 +48,15 @@ from docspace_api_sdk.models.quantity_request_dto import QuantityRequestDto
 from docspace_api_sdk.models.quota_array_wrapper import QuotaArrayWrapper
 from docspace_api_sdk.models.quota_wrapper import QuotaWrapper
 from docspace_api_sdk.models.report_wrapper import ReportWrapper
-from docspace_api_sdk.models.restricted_models_response_wrapper import RestrictedModelsResponseWrapper
-from docspace_api_sdk.models.sales_requests_dto import SalesRequestsDto
-from docspace_api_sdk.models.service_price_info_array_wrapper import ServicePriceInfoArrayWrapper
+from docspace_api_sdk.models.restricted_ai_models_wrapper import RestrictedAiModelsWrapper
+from docspace_api_sdk.models.sales_request_dto import SalesRequestDto
+from docspace_api_sdk.models.service_price_array_wrapper import ServicePriceArrayWrapper
 from docspace_api_sdk.models.set_restricted_ai_models_request_dto import SetRestrictedAiModelsRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.models.subscription_balance_info_wrapper import SubscriptionBalanceInfoWrapper
+from docspace_api_sdk.models.subscription_balance_wrapper import SubscriptionBalanceWrapper
 from docspace_api_sdk.models.tenant_wallet_service import TenantWalletService
 from docspace_api_sdk.models.tenant_wallet_service_settings_wrapper import TenantWalletServiceSettingsWrapper
-from docspace_api_sdk.models.tenant_wallet_settings_response_wrapper import TenantWalletSettingsResponseWrapper
+from docspace_api_sdk.models.tenant_wallet_settings_request_dto import TenantWalletSettingsRequestDto
 from docspace_api_sdk.models.tenant_wallet_settings_wrapper import TenantWalletSettingsWrapper
 from docspace_api_sdk.models.top_up_deposit_request_dto import TopUpDepositRequestDto
 from docspace_api_sdk.models.wallet_quantity_request_dto import WalletQuantityRequestDto
@@ -446,12 +446,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -522,12 +522,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -598,12 +598,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantWalletServiceSettingsWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1644,7 +1644,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ServicePriceInfoArrayWrapper:
+    ) -> ServicePriceArrayWrapper:
         """Get the service prices from the accounting service
 
         Returns the portal's automatic wallet top-up settings: whether it is switched on, the balance that triggers  it, the balance it tops the wallet up to and the currency it charges in. Only a DocSpace administrator may  read it, no billing customer is needed, and the call is read-only. A portal that has never configured it gets  the defaults rather than an empty result, so `enabled` is the field that says whether anything happens at all.  Two of the values are kept by the portal itself and cannot be set through this API: `lowBalanceThreshold` is  the balance below which the portal warns its administrators by mail, and `lowBalanceNotified` says whether  that warning has already gone out for the current dip. Change the rest with  `POST api/2.0/portal/payment/topupsettings`.
@@ -1685,12 +1685,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ServicePriceInfoArrayWrapper",
+            '200': "ServicePriceArrayWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1723,7 +1723,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ServicePriceInfoArrayWrapper]:
+    ) -> ApiResponse[ServicePriceArrayWrapper]:
         """Get the service prices from the accounting service
 
         Returns the portal's automatic wallet top-up settings: whether it is switched on, the balance that triggers  it, the balance it tops the wallet up to and the currency it charges in. Only a DocSpace administrator may  read it, no billing customer is needed, and the call is read-only. A portal that has never configured it gets  the defaults rather than an empty result, so `enabled` is the field that says whether anything happens at all.  Two of the values are kept by the portal itself and cannot be set through this API: `lowBalanceThreshold` is  the balance below which the portal warns its administrators by mail, and `lowBalanceNotified` says whether  that warning has already gone out for the current dip. Change the rest with  `POST api/2.0/portal/payment/topupsettings`.
@@ -1764,12 +1764,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ServicePriceInfoArrayWrapper",
+            '200': "ServicePriceArrayWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1843,12 +1843,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ServicePriceInfoArrayWrapper",
+            '200': "ServicePriceArrayWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1988,10 +1988,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ActiveServiceArrayWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2058,10 +2059,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ActiveServiceArrayWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2128,10 +2130,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ActiveServiceArrayWrapper",
+            '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2264,9 +2267,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPricesWrapper",
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2334,9 +2337,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPricesWrapper",
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2404,9 +2407,9 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiPricesWrapper",
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2546,11 +2549,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2625,11 +2628,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2704,11 +2707,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2748,11 +2751,11 @@ class PaymentApi:
         # process the query parameters
         if back_url is not None:
             
-            _query_params.append(('BackUrl', back_url))
+            _query_params.append(('backUrl', back_url))
             
         if success_url is not None:
             
-            _query_params.append(('SuccessUrl', success_url))
+            _query_params.append(('successUrl', success_url))
             
         # process the header parameters
         # process the form parameters
@@ -4376,7 +4379,7 @@ class PaymentApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'ServiceName': 'multi',
+            'serviceName': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4400,61 +4403,61 @@ class PaymentApi:
             
         if service_name is not None:
             
-            _query_params.append(('ServiceName', service_name))
+            _query_params.append(('serviceName', service_name))
             
         if start_date is not None:
             if isinstance(start_date, datetime):
                 _query_params.append(
                     (
-                        'StartDate',
+                        'startDate',
                         start_date.strftime(
                             self.api_client.configuration.datetime_format
                         )
                     )
                 )
             else:
-                _query_params.append(('StartDate', start_date))
+                _query_params.append(('startDate', start_date))
             
         if end_date is not None:
             if isinstance(end_date, datetime):
                 _query_params.append(
                     (
-                        'EndDate',
+                        'endDate',
                         end_date.strftime(
                             self.api_client.configuration.datetime_format
                         )
                     )
                 )
             else:
-                _query_params.append(('EndDate', end_date))
+                _query_params.append(('endDate', end_date))
             
         if participant_name is not None:
             
-            _query_params.append(('ParticipantName', participant_name))
+            _query_params.append(('participantName', participant_name))
             
         if credit is not None:
             
-            _query_params.append(('Credit', credit))
+            _query_params.append(('credit', credit))
             
         if debit is not None:
             
-            _query_params.append(('Debit', debit))
+            _query_params.append(('debit', debit))
             
         if type is not None:
             
-            _query_params.append(('Type', type.value))
+            _query_params.append(('type', type.value))
             
         if status is not None:
             
-            _query_params.append(('Status', status.value))
+            _query_params.append(('status', status.value))
             
         if order_by is not None:
             
-            _query_params.append(('OrderBy', order_by))
+            _query_params.append(('orderBy', order_by))
             
         if order_type is not None:
             
-            _query_params.append(('OrderType', order_type.value))
+            _query_params.append(('orderType', order_type.value))
             
         # process the header parameters
         # process the form parameters
@@ -5132,7 +5135,7 @@ class PaymentApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'ServiceName': 'multi',
+            'serviceName': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -5148,45 +5151,45 @@ class PaymentApi:
         # process the query parameters
         if service_name is not None:
             
-            _query_params.append(('ServiceName', service_name))
+            _query_params.append(('serviceName', service_name))
             
         if participant_name is not None:
             
-            _query_params.append(('ParticipantName', participant_name))
+            _query_params.append(('participantName', participant_name))
             
         if status is not None:
             
-            _query_params.append(('Status', status.value))
+            _query_params.append(('status', status.value))
             
         if start_date is not None:
             if isinstance(start_date, datetime):
                 _query_params.append(
                     (
-                        'StartDate',
+                        'startDate',
                         start_date.strftime(
                             self.api_client.configuration.datetime_format
                         )
                     )
                 )
             else:
-                _query_params.append(('StartDate', start_date))
+                _query_params.append(('startDate', start_date))
             
         if end_date is not None:
             if isinstance(end_date, datetime):
                 _query_params.append(
                     (
-                        'EndDate',
+                        'endDate',
                         end_date.strftime(
                             self.api_client.configuration.datetime_format
                         )
                     )
                 )
             else:
-                _query_params.append(('EndDate', end_date))
+                _query_params.append(('endDate', end_date))
             
         if metadata is not None:
             
-            _query_params.append(('Metadata', metadata))
+            _query_params.append(('metadata', metadata))
             
         if offset is not None:
             
@@ -5198,11 +5201,11 @@ class PaymentApi:
             
         if order_by is not None:
             
-            _query_params.append(('OrderBy', order_by))
+            _query_params.append(('orderBy', order_by))
             
         if order_type is not None:
             
-            _query_params.append(('OrderType', order_type.value))
+            _query_params.append(('orderType', order_type.value))
             
         # process the header parameters
         # process the form parameters
@@ -5582,11 +5585,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5657,11 +5660,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -5732,11 +5735,11 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6465,6 +6468,7 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '400': None,
+            '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -6540,6 +6544,7 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '400': None,
+            '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -6615,6 +6620,7 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '400': None,
+            '402': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -7300,7 +7306,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RestrictedModelsResponseWrapper:
+    ) -> RestrictedAiModelsWrapper:
         """Get restricted AI models
 
         Returns the AI chat models that are barred on this portal - the ones no user of it may pick for a  conversation, whatever the price list offers. Only a DocSpace administrator may read it, and the call is  read-only. When the installation has no billing service or AI is not enabled for the portal, the answer is an  empty set instead of an error, which is indistinguishable from a portal that restricts nothing. An empty  `models` therefore means every model in `GET api/2.0/portal/payment/ai-prices` may be used. The set names the  barred models and not the allowed ones; replace it with `PUT api/2.0/portal/payment/ai-model/restrictions`.
@@ -7335,11 +7341,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RestrictedModelsResponseWrapper",
+            '200': "RestrictedAiModelsWrapper",
+            '402': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7370,7 +7377,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[RestrictedModelsResponseWrapper]:
+    ) -> ApiResponse[RestrictedAiModelsWrapper]:
         """Get restricted AI models
 
         Returns the AI chat models that are barred on this portal - the ones no user of it may pick for a  conversation, whatever the price list offers. Only a DocSpace administrator may read it, and the call is  read-only. When the installation has no billing service or AI is not enabled for the portal, the answer is an  empty set instead of an error, which is indistinguishable from a portal that restricts nothing. An empty  `models` therefore means every model in `GET api/2.0/portal/payment/ai-prices` may be used. The set names the  barred models and not the allowed ones; replace it with `PUT api/2.0/portal/payment/ai-model/restrictions`.
@@ -7405,11 +7412,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RestrictedModelsResponseWrapper",
+            '200': "RestrictedAiModelsWrapper",
+            '402': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7475,11 +7483,12 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RestrictedModelsResponseWrapper",
+            '200': "RestrictedAiModelsWrapper",
+            '402': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -7575,7 +7584,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SubscriptionBalanceInfoWrapper:
+    ) -> SubscriptionBalanceWrapper:
         """Get the subscription balance information
 
         Reports in money how much of the portal's paid subscription period is still unused - the credit that  `POST api/2.0/portal/payment/subscription/movetowallet` would carry over to the wallet if the subscription  were ended now. The portal must have a billing customer and a plan in the paid state; a plan that is not paid  answers 402, and a paid plan without a subscription row gives 404. Only the payer - the portal user whose  e-mail is the billing customer's e-mail - may read it, and the call is read-only. The answer states the total  cost of the current period with its currency, the start and the end of that period in UTC, the moment the  unused part is measured up to, the days already elapsed, and the remaining balance both in the subscription  currency and converted to the wallet currency. Every figure is computed for the instant of the request, so it  changes between calls.
@@ -7610,7 +7619,7 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubscriptionBalanceInfoWrapper",
+            '200': "SubscriptionBalanceWrapper",
             '400': None,
             '402': None,
             '403': None,
@@ -7648,7 +7657,7 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SubscriptionBalanceInfoWrapper]:
+    ) -> ApiResponse[SubscriptionBalanceWrapper]:
         """Get the subscription balance information
 
         Reports in money how much of the portal's paid subscription period is still unused - the credit that  `POST api/2.0/portal/payment/subscription/movetowallet` would carry over to the wallet if the subscription  were ended now. The portal must have a billing customer and a plan in the paid state; a plan that is not paid  answers 402, and a paid plan without a subscription row gives 404. Only the payer - the portal user whose  e-mail is the billing customer's e-mail - may read it, and the call is read-only. The answer states the total  cost of the current period with its currency, the start and the end of that period in UTC, the moment the  unused part is measured up to, the days already elapsed, and the remaining balance both in the subscription  currency and converted to the wallet currency. Every figure is computed for the instant of the request, so it  changes between calls.
@@ -7683,7 +7692,7 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubscriptionBalanceInfoWrapper",
+            '200': "SubscriptionBalanceWrapper",
             '400': None,
             '402': None,
             '403': None,
@@ -7756,7 +7765,7 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubscriptionBalanceInfoWrapper",
+            '200': "SubscriptionBalanceWrapper",
             '400': None,
             '402': None,
             '403': None,
@@ -8134,10 +8143,10 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantWalletSettingsResponseWrapper:
+    ) -> TenantWalletSettingsWrapper:
         """Get the auto top-up settings
 
-        Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+        Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8169,7 +8178,7 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsResponseWrapper",
+            '200': "TenantWalletSettingsWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -8204,10 +8213,10 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantWalletSettingsResponseWrapper]:
+    ) -> ApiResponse[TenantWalletSettingsWrapper]:
         """Get the auto top-up settings
 
-        Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+        Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8239,7 +8248,7 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsResponseWrapper",
+            '200': "TenantWalletSettingsWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -8277,7 +8286,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Get the auto top-up settings
 
-        Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+        Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8309,7 +8318,7 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsResponseWrapper",
+            '200': "TenantWalletSettingsWrapper",
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
@@ -8449,12 +8458,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8525,12 +8534,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8601,12 +8610,12 @@ class PaymentApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WalletServiceWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9282,7 +9291,7 @@ class PaymentApi:
     @validate_call
     def send_payment_request(
         self,
-        sales_requests_dto: Optional[SalesRequestsDto] = None,
+        sales_request_dto: Optional[SalesRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9300,8 +9309,8 @@ class PaymentApi:
 
         Sends the portal's message to the ONLYOFFICE sales team - the contact-sales form behind a request for a quote,  an invoice or a plan that cannot be bought online. `email` has to be a well-formed address and is where the  answer will go, while `userName` and `message` say who is asking and what for; all three are required and none  may be empty. Only a DocSpace administrator may call it. Nothing on the portal changes: no plan, no quota and  no payment is touched, a message is mailed out and the request is written to the portal audit trail. There is  no response body - status 200 means the message was handed to the mail service - and the call is not  idempotent, so a repeat sends a second message. It is limited to ten requests a minute per user by default and  answers 429 above that.
 
-        :param sales_requests_dto:
-        :type sales_requests_dto: SalesRequestsDto
+        :param sales_request_dto:
+        :type sales_request_dto: SalesRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9325,7 +9334,7 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._send_payment_request_serialize(
-            sales_requests_dto=sales_requests_dto,
+            sales_request_dto=sales_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9357,7 +9366,7 @@ class PaymentApi:
     @validate_call
     def send_payment_request_with_http_info(
         self,
-        sales_requests_dto: Optional[SalesRequestsDto] = None,
+        sales_request_dto: Optional[SalesRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9375,8 +9384,8 @@ class PaymentApi:
 
         Sends the portal's message to the ONLYOFFICE sales team - the contact-sales form behind a request for a quote,  an invoice or a plan that cannot be bought online. `email` has to be a well-formed address and is where the  answer will go, while `userName` and `message` say who is asking and what for; all three are required and none  may be empty. Only a DocSpace administrator may call it. Nothing on the portal changes: no plan, no quota and  no payment is touched, a message is mailed out and the request is written to the portal audit trail. There is  no response body - status 200 means the message was handed to the mail service - and the call is not  idempotent, so a repeat sends a second message. It is limited to ten requests a minute per user by default and  answers 429 above that.
 
-        :param sales_requests_dto:
-        :type sales_requests_dto: SalesRequestsDto
+        :param sales_request_dto:
+        :type sales_request_dto: SalesRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9400,7 +9409,7 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._send_payment_request_serialize(
-            sales_requests_dto=sales_requests_dto,
+            sales_request_dto=sales_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9432,7 +9441,7 @@ class PaymentApi:
     @validate_call
     def send_payment_request_without_preload_content(
         self,
-        sales_requests_dto: Optional[SalesRequestsDto] = None,
+        sales_request_dto: Optional[SalesRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9450,8 +9459,8 @@ class PaymentApi:
 
         Sends the portal's message to the ONLYOFFICE sales team - the contact-sales form behind a request for a quote,  an invoice or a plan that cannot be bought online. `email` has to be a well-formed address and is where the  answer will go, while `userName` and `message` say who is asking and what for; all three are required and none  may be empty. Only a DocSpace administrator may call it. Nothing on the portal changes: no plan, no quota and  no payment is touched, a message is mailed out and the request is written to the portal audit trail. There is  no response body - status 200 means the message was handed to the mail service - and the call is not  idempotent, so a repeat sends a second message. It is limited to ten requests a minute per user by default and  answers 429 above that.
 
-        :param sales_requests_dto:
-        :type sales_requests_dto: SalesRequestsDto
+        :param sales_request_dto:
+        :type sales_request_dto: SalesRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9475,7 +9484,7 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._send_payment_request_serialize(
-            sales_requests_dto=sales_requests_dto,
+            sales_request_dto=sales_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9502,7 +9511,7 @@ class PaymentApi:
 
     def _send_payment_request_serialize(
         self,
-        sales_requests_dto,
+        sales_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -9528,8 +9537,8 @@ class PaymentApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if sales_requests_dto is not None:
-            _body_params = sales_requests_dto
+        if sales_request_dto is not None:
+            _body_params = sales_request_dto
 
 
         # set the HTTP header `Accept`
@@ -9601,10 +9610,10 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RestrictedModelsResponseWrapper:
+    ) -> RestrictedAiModelsWrapper:
         """Set restricted AI models
 
-        Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer, and the caller needs the permission to edit the  portal settings as well as DocSpace administrator rights. The call is mutating and idempotent - sending the  same set twice leaves the same state - and it is written to the portal audit trail. It takes effect on the  next AI request, so a conversation already open on a model that has just been barred cannot go on with it. The  stored set comes back in the answer.
+        Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer and the AI tools wallet service switched on with  `POST api/2.0/portal/payment/servicestate`, and the caller needs the permission to edit the portal settings as  well as DocSpace administrator rights. The call is mutating and idempotent - sending the same set twice leaves  the same state - and it is written to the portal audit trail. It takes effect on the next AI request, so a  conversation already open on a model that has just been barred cannot go on with it. The stored set comes  back in the answer. While AI tools is off the call is refused with 403 instead of being stored, because the  read reports an empty set then and nothing written could be read back.
 
         :param set_restricted_ai_models_request_dto:
         :type set_restricted_ai_models_request_dto: SetRestrictedAiModelsRequestDto
@@ -9639,13 +9648,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RestrictedModelsResponseWrapper",
+            '200': "RestrictedAiModelsWrapper",
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9677,10 +9686,10 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[RestrictedModelsResponseWrapper]:
+    ) -> ApiResponse[RestrictedAiModelsWrapper]:
         """Set restricted AI models
 
-        Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer, and the caller needs the permission to edit the  portal settings as well as DocSpace administrator rights. The call is mutating and idempotent - sending the  same set twice leaves the same state - and it is written to the portal audit trail. It takes effect on the  next AI request, so a conversation already open on a model that has just been barred cannot go on with it. The  stored set comes back in the answer.
+        Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer and the AI tools wallet service switched on with  `POST api/2.0/portal/payment/servicestate`, and the caller needs the permission to edit the portal settings as  well as DocSpace administrator rights. The call is mutating and idempotent - sending the same set twice leaves  the same state - and it is written to the portal audit trail. It takes effect on the next AI request, so a  conversation already open on a model that has just been barred cannot go on with it. The stored set comes  back in the answer. While AI tools is off the call is refused with 403 instead of being stored, because the  read reports an empty set then and nothing written could be read back.
 
         :param set_restricted_ai_models_request_dto:
         :type set_restricted_ai_models_request_dto: SetRestrictedAiModelsRequestDto
@@ -9715,13 +9724,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RestrictedModelsResponseWrapper",
+            '200': "RestrictedAiModelsWrapper",
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9756,7 +9765,7 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Set restricted AI models
 
-        Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer, and the caller needs the permission to edit the  portal settings as well as DocSpace administrator rights. The call is mutating and idempotent - sending the  same set twice leaves the same state - and it is written to the portal audit trail. It takes effect on the  next AI request, so a conversation already open on a model that has just been barred cannot go on with it. The  stored set comes back in the answer.
+        Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer and the AI tools wallet service switched on with  `POST api/2.0/portal/payment/servicestate`, and the caller needs the permission to edit the portal settings as  well as DocSpace administrator rights. The call is mutating and idempotent - sending the same set twice leaves  the same state - and it is written to the portal audit trail. It takes effect on the next AI request, so a  conversation already open on a model that has just been barred cannot go on with it. The stored set comes  back in the answer. While AI tools is off the call is refused with 403 instead of being stored, because the  read reports an empty set then and nothing written could be read back.
 
         :param set_restricted_ai_models_request_dto:
         :type set_restricted_ai_models_request_dto: SetRestrictedAiModelsRequestDto
@@ -9791,13 +9800,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RestrictedModelsResponseWrapper",
+            '200': "RestrictedAiModelsWrapper",
+            '400': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9897,7 +9906,7 @@ class PaymentApi:
     @validate_call
     def set_tenant_wallet_settings(
         self,
-        tenant_wallet_settings_wrapper: Optional[TenantWalletSettingsWrapper] = None,
+        tenant_wallet_settings_request_dto: Optional[TenantWalletSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9910,13 +9919,13 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantWalletSettingsResponseWrapper:
+    ) -> TenantWalletSettingsWrapper:
         """Set the auto top-up settings
 
-        Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+        Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, and `upToBalance` has to be greater than `minBalance`, so that a top-up lifts the wallet above the balance  that triggers it. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
 
-        :param tenant_wallet_settings_wrapper:
-        :type tenant_wallet_settings_wrapper: TenantWalletSettingsWrapper
+        :param tenant_wallet_settings_request_dto:
+        :type tenant_wallet_settings_request_dto: TenantWalletSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9940,7 +9949,7 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._set_tenant_wallet_settings_serialize(
-            tenant_wallet_settings_wrapper=tenant_wallet_settings_wrapper,
+            tenant_wallet_settings_request_dto=tenant_wallet_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9948,13 +9957,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsResponseWrapper",
+            '200': "TenantWalletSettingsWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -9973,7 +9982,7 @@ class PaymentApi:
     @validate_call
     def set_tenant_wallet_settings_with_http_info(
         self,
-        tenant_wallet_settings_wrapper: Optional[TenantWalletSettingsWrapper] = None,
+        tenant_wallet_settings_request_dto: Optional[TenantWalletSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9986,13 +9995,13 @@ class PaymentApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantWalletSettingsResponseWrapper]:
+    ) -> ApiResponse[TenantWalletSettingsWrapper]:
         """Set the auto top-up settings
 
-        Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+        Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, and `upToBalance` has to be greater than `minBalance`, so that a top-up lifts the wallet above the balance  that triggers it. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
 
-        :param tenant_wallet_settings_wrapper:
-        :type tenant_wallet_settings_wrapper: TenantWalletSettingsWrapper
+        :param tenant_wallet_settings_request_dto:
+        :type tenant_wallet_settings_request_dto: TenantWalletSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10016,7 +10025,7 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._set_tenant_wallet_settings_serialize(
-            tenant_wallet_settings_wrapper=tenant_wallet_settings_wrapper,
+            tenant_wallet_settings_request_dto=tenant_wallet_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10024,13 +10033,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsResponseWrapper",
+            '200': "TenantWalletSettingsWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10049,7 +10058,7 @@ class PaymentApi:
     @validate_call
     def set_tenant_wallet_settings_without_preload_content(
         self,
-        tenant_wallet_settings_wrapper: Optional[TenantWalletSettingsWrapper] = None,
+        tenant_wallet_settings_request_dto: Optional[TenantWalletSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10065,10 +10074,10 @@ class PaymentApi:
     ) -> RESTResponseType:
         """Set the auto top-up settings
 
-        Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+        Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, and `upToBalance` has to be greater than `minBalance`, so that a top-up lifts the wallet above the balance  that triggers it. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
 
-        :param tenant_wallet_settings_wrapper:
-        :type tenant_wallet_settings_wrapper: TenantWalletSettingsWrapper
+        :param tenant_wallet_settings_request_dto:
+        :type tenant_wallet_settings_request_dto: TenantWalletSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10092,7 +10101,7 @@ class PaymentApi:
         """ # noqa: E501
 
         _param = self._set_tenant_wallet_settings_serialize(
-            tenant_wallet_settings_wrapper=tenant_wallet_settings_wrapper,
+            tenant_wallet_settings_request_dto=tenant_wallet_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10100,13 +10109,13 @@ class PaymentApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantWalletSettingsResponseWrapper",
+            '200': "TenantWalletSettingsWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -10120,7 +10129,7 @@ class PaymentApi:
 
     def _set_tenant_wallet_settings_serialize(
         self,
-        tenant_wallet_settings_wrapper,
+        tenant_wallet_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -10146,8 +10155,8 @@ class PaymentApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if tenant_wallet_settings_wrapper is not None:
-            _body_params = tenant_wallet_settings_wrapper
+        if tenant_wallet_settings_request_dto is not None:
+            _body_params = tenant_wallet_settings_request_dto
 
 
         # set the HTTP header `Accept`
@@ -11402,6 +11411,7 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '400': None,
+            '402': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
@@ -11478,6 +11488,7 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '400': None,
+            '402': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
@@ -11554,6 +11565,7 @@ class PaymentApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
             '400': None,
+            '402': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",

@@ -24,8 +24,9 @@ from typing_extensions import Annotated
 from pydantic import Field
 from typing import Any, Dict
 from typing_extensions import Annotated
-from docspace_api_sdk.models.ai_ai_settings_wrapper import AiAiSettingsWrapper
-from docspace_api_sdk.models.ai_ai_user_settings_wrapper import AiAiUserSettingsWrapper
+from docspace_api_sdk.models.ai_settings_wrapper import AiSettingsWrapper
+from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
+from docspace_api_sdk.models.ai_user_settings_wrapper import AiUserSettingsWrapper
 from docspace_api_sdk.models.ai_vectorization_settings_wrapper import AiVectorizationSettingsWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -62,7 +63,7 @@ class SettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiAiSettingsWrapper:
+    ) -> AiSettingsWrapper:
         """Get AI settings
 
         Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
@@ -97,7 +98,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiSettingsWrapper",
+            '200': "AiSettingsWrapper",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -129,7 +130,7 @@ class SettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiAiSettingsWrapper]:
+    ) -> ApiResponse[AiSettingsWrapper]:
         """Get AI settings
 
         Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
@@ -164,7 +165,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiSettingsWrapper",
+            '200': "AiSettingsWrapper",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -231,7 +232,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiSettingsWrapper",
+            '200': "AiSettingsWrapper",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -310,6 +311,268 @@ class SettingsApi:
 
 
     @validate_call
+    def ai_settings_get_tool_mode(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AiSuccessResponse:
+        """Get the tool permission mode
+
+        Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_settings_get_tool_mode_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiSuccessResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def ai_settings_get_tool_mode_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AiSuccessResponse]:
+        """Get the tool permission mode
+
+        Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_settings_get_tool_mode_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiSuccessResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def ai_settings_get_tool_mode_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the tool permission mode
+
+        Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_settings_get_tool_mode_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiSuccessResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _ai_settings_get_tool_mode_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
+        ]
+
+
+        resource_path = "/api/2.0/ai/config/tool-mode"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def ai_settings_get_user(
         self,
         _request_timeout: Union[
@@ -324,7 +587,7 @@ class SettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiAiUserSettingsWrapper:
+    ) -> AiUserSettingsWrapper:
         """Get user AI settings
 
         Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
@@ -359,7 +622,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiUserSettingsWrapper",
+            '200': "AiUserSettingsWrapper",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -391,7 +654,7 @@ class SettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiAiUserSettingsWrapper]:
+    ) -> ApiResponse[AiUserSettingsWrapper]:
         """Get user AI settings
 
         Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
@@ -426,7 +689,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiUserSettingsWrapper",
+            '200': "AiUserSettingsWrapper",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -493,7 +756,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiUserSettingsWrapper",
+            '200': "AiUserSettingsWrapper",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -834,9 +1097,9 @@ class SettingsApi:
 
 
     @validate_call
-    def ai_settings_set_user(
+    def ai_settings_set_tool_mode(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.")],
+        ai_settings_set_tool_mode_request: Annotated[Dict[str, Any], Field(description="`{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -849,13 +1112,13 @@ class SettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiAiUserSettingsWrapper:
-        """Update user AI settings
+    ) -> AiSuccessResponse:
+        """Set the tool permission mode
 
-        Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
+        Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
 
-        :param request_body: The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_settings_set_tool_mode_request: `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum. (required)
+        :type ai_settings_set_tool_mode_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -878,8 +1141,8 @@ class SettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_settings_set_user_serialize(
-            request_body=request_body,
+        _param = self._ai_settings_set_tool_mode_serialize(
+            ai_settings_set_tool_mode_request=ai_settings_set_tool_mode_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -887,7 +1150,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiUserSettingsWrapper",
+            '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -906,9 +1169,9 @@ class SettingsApi:
 
 
     @validate_call
-    def ai_settings_set_user_with_http_info(
+    def ai_settings_set_tool_mode_with_http_info(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.")],
+        ai_settings_set_tool_mode_request: Annotated[Dict[str, Any], Field(description="`{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -921,13 +1184,13 @@ class SettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiAiUserSettingsWrapper]:
-        """Update user AI settings
+    ) -> ApiResponse[AiSuccessResponse]:
+        """Set the tool permission mode
 
-        Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
+        Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
 
-        :param request_body: The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_settings_set_tool_mode_request: `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum. (required)
+        :type ai_settings_set_tool_mode_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -950,8 +1213,8 @@ class SettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_settings_set_user_serialize(
-            request_body=request_body,
+        _param = self._ai_settings_set_tool_mode_serialize(
+            ai_settings_set_tool_mode_request=ai_settings_set_tool_mode_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -959,7 +1222,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiUserSettingsWrapper",
+            '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -978,9 +1241,9 @@ class SettingsApi:
 
 
     @validate_call
-    def ai_settings_set_user_without_preload_content(
+    def ai_settings_set_tool_mode_without_preload_content(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.")],
+        ai_settings_set_tool_mode_request: Annotated[Dict[str, Any], Field(description="`{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -994,12 +1257,12 @@ class SettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update user AI settings
+        """Set the tool permission mode
 
-        Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
+        Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
 
-        :param request_body: The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_settings_set_tool_mode_request: `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum. (required)
+        :type ai_settings_set_tool_mode_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1022,8 +1285,8 @@ class SettingsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ai_settings_set_user_serialize(
-            request_body=request_body,
+        _param = self._ai_settings_set_tool_mode_serialize(
+            ai_settings_set_tool_mode_request=ai_settings_set_tool_mode_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1031,7 +1294,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiUserSettingsWrapper",
+            '200': "AiSuccessResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1045,9 +1308,9 @@ class SettingsApi:
         return response_data.response
 
 
-    def _ai_settings_set_user_serialize(
+    def _ai_settings_set_tool_mode_serialize(
         self,
-        request_body,
+        ai_settings_set_tool_mode_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1073,8 +1336,304 @@ class SettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_settings_set_tool_mode_request is not None:
+            _body_params = ai_settings_set_tool_mode_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
+        ]
+
+
+        resource_path = "/api/2.0/ai/config/tool-mode"
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def ai_settings_set_user(
+        self,
+        ai_settings_set_user_request: Annotated[Dict[str, Any], Field(description="The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AiUserSettingsWrapper:
+        """Update user AI settings
+
+        Replaces the AI settings of the calling user and returns the stored result. `chatRecommendedModelVisible` is required and has to be a real boolean - a body the JSON parser cannot read, such as one sent as text/plain, used to arrive empty and answer 200 having stored nothing. The body is then proxied to the DocSpace AI service, which validates the rest, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
+
+        :param ai_settings_set_user_request: The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. (required)
+        :type ai_settings_set_user_request: Dict[str, Optional[object]]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_settings_set_user_serialize(
+            ai_settings_set_user_request=ai_settings_set_user_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiUserSettingsWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def ai_settings_set_user_with_http_info(
+        self,
+        ai_settings_set_user_request: Annotated[Dict[str, Any], Field(description="The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AiUserSettingsWrapper]:
+        """Update user AI settings
+
+        Replaces the AI settings of the calling user and returns the stored result. `chatRecommendedModelVisible` is required and has to be a real boolean - a body the JSON parser cannot read, such as one sent as text/plain, used to arrive empty and answer 200 having stored nothing. The body is then proxied to the DocSpace AI service, which validates the rest, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
+
+        :param ai_settings_set_user_request: The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. (required)
+        :type ai_settings_set_user_request: Dict[str, Optional[object]]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_settings_set_user_serialize(
+            ai_settings_set_user_request=ai_settings_set_user_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiUserSettingsWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def ai_settings_set_user_without_preload_content(
+        self,
+        ai_settings_set_user_request: Annotated[Dict[str, Any], Field(description="The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update user AI settings
+
+        Replaces the AI settings of the calling user and returns the stored result. `chatRecommendedModelVisible` is required and has to be a real boolean - a body the JSON parser cannot read, such as one sent as text/plain, used to arrive empty and answer 200 having stored nothing. The body is then proxied to the DocSpace AI service, which validates the rest, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
+
+        :param ai_settings_set_user_request: The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. (required)
+        :type ai_settings_set_user_request: Dict[str, Optional[object]]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_settings_set_user_serialize(
+            ai_settings_set_user_request=ai_settings_set_user_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiUserSettingsWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _ai_settings_set_user_serialize(
+        self,
+        ai_settings_set_user_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if ai_settings_set_user_request is not None:
+            _body_params = ai_settings_set_user_request
 
 
         # set the HTTP header `Accept`
@@ -1129,7 +1688,7 @@ class SettingsApi:
     @validate_call
     def ai_settings_set_vectorization(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.")],
+        ai_settings_set_vectorization_request: Annotated[Dict[str, Any], Field(description="The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1147,8 +1706,8 @@ class SettingsApi:
 
         Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
 
-        :param request_body: The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_settings_set_vectorization_request: The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. (required)
+        :type ai_settings_set_vectorization_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1172,7 +1731,7 @@ class SettingsApi:
         """ # noqa: E501
 
         _param = self._ai_settings_set_vectorization_serialize(
-            request_body=request_body,
+            ai_settings_set_vectorization_request=ai_settings_set_vectorization_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1201,7 +1760,7 @@ class SettingsApi:
     @validate_call
     def ai_settings_set_vectorization_with_http_info(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.")],
+        ai_settings_set_vectorization_request: Annotated[Dict[str, Any], Field(description="The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1219,8 +1778,8 @@ class SettingsApi:
 
         Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
 
-        :param request_body: The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_settings_set_vectorization_request: The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. (required)
+        :type ai_settings_set_vectorization_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1244,7 +1803,7 @@ class SettingsApi:
         """ # noqa: E501
 
         _param = self._ai_settings_set_vectorization_serialize(
-            request_body=request_body,
+            ai_settings_set_vectorization_request=ai_settings_set_vectorization_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1273,7 +1832,7 @@ class SettingsApi:
     @validate_call
     def ai_settings_set_vectorization_without_preload_content(
         self,
-        request_body: Annotated[Dict[str, Any], Field(description="The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.")],
+        ai_settings_set_vectorization_request: Annotated[Dict[str, Any], Field(description="The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1291,8 +1850,8 @@ class SettingsApi:
 
         Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
 
-        :param request_body: The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. (required)
-        :type request_body: Dict[str, Optional[object]]
+        :param ai_settings_set_vectorization_request: The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. (required)
+        :type ai_settings_set_vectorization_request: Dict[str, Optional[object]]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1316,7 +1875,7 @@ class SettingsApi:
         """ # noqa: E501
 
         _param = self._ai_settings_set_vectorization_serialize(
-            request_body=request_body,
+            ai_settings_set_vectorization_request=ai_settings_set_vectorization_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1340,7 +1899,7 @@ class SettingsApi:
 
     def _ai_settings_set_vectorization_serialize(
         self,
-        request_body,
+        ai_settings_set_vectorization_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1366,8 +1925,8 @@ class SettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if ai_settings_set_vectorization_request is not None:
+            _body_params = ai_settings_set_vectorization_request
 
 
         # set the HTTP header `Accept`

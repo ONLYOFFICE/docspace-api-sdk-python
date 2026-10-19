@@ -20,10 +20,10 @@ from docspace_api_sdk import Configuration, ApiClient, AuthenticationApi, Folder
 from docspace_api_sdk.api.authentication.authentication_api import AuthenticationApi
 from docspace_api_sdk.api.backup.backup_api import BackupApi
 from docspace_api_sdk.api.files.folders_api import FoldersApi
-from docspace_api_sdk.models.auth_requests_dto import AuthRequestsDto
-from docspace_api_sdk.models.create_folder import CreateFolder
-from docspace_api_sdk.models.delete_folder import DeleteFolder
-from docspace_api_sdk.models.backup_dto import BackupDto
+from docspace_api_sdk.models.auth_request_dto import AuthRequestDto
+from docspace_api_sdk.models.create_folder_request import CreateFolderRequest
+from docspace_api_sdk.models.delete_folder_request import DeleteFolderRequest
+from docspace_api_sdk.models.start_backup_request_dto import StartBackupRequestDto
 from docspace_api_sdk.models.backup_storage_type import BackupStorageType
 from docspace_api_sdk.models.sorted_by_type import SortedByType
 from docspace_api_sdk.models.sort_order import SortOrder
@@ -31,14 +31,14 @@ import time
 
 def main():
     config = Configuration()
-    config.host = "https://your-docspace.onlyoffice.com"
+    config.host = "http://localhost:8092"
     
     with ApiClient(config) as api_client:
         auth_instance = AuthenticationApi(api_client)
         
-        auth_request_data = AuthRequestsDto()
-        auth_request_data.password = ""
-        auth_request_data.user_name = ""
+        auth_request_data = AuthRequestDto()
+        auth_request_data.password = "adminadmin"
+        auth_request_data.user_name = "adminadmin@mail.ru"
         
         try:
             auth_response = auth_instance.authenticate_me(auth_request_data)
@@ -49,22 +49,22 @@ def main():
             print(responseFolderMy.response.current.id)
 
             folderMyId = responseFolderMy.response.current.id
-            folderData = CreateFolder(title="TestTitle")
-            createFolder = folder_instance.create_folder(folder_id=folderMyId, create_folder=folderData, _headers=custom_headers)
+            folderData = CreateFolderRequest(title="TestTitle")
+            createFolder = folder_instance.create_folder(folder_id=folderMyId, create_folder_request=folderData, _headers=custom_headers)
             print(createFolder.response.id)
 
             newFolderId = createFolder.response.id
             getFolder = folder_instance.get_folder_by_folder_id(folder_id=newFolderId, _headers=custom_headers)
             print(getFolder.status_code)
 
-            newFolderData = CreateFolder(title="Updated title")
-            updateFolder = folder_instance.rename_folder(folder_id=newFolderId, create_folder=newFolderData, _headers=custom_headers)
+            newFolderData = CreateFolderRequest(title="Updated title")
+            updateFolder = folder_instance.rename_folder(folder_id=newFolderId, create_folder_request=newFolderData, _headers=custom_headers)
             print(updateFolder.status_code)
 
-            deleteFolderData = DeleteFolder()
+            deleteFolderData = DeleteFolderRequest()
             deleteFolderData.delete_after = False
             deleteFolderData.immediately = True
-            deleteFolder = folder_instance.delete_folder(folder_id=newFolderId, delete_folder=deleteFolderData, _headers=custom_headers)
+            deleteFolder = folder_instance.delete_folder(folder_id=newFolderId, delete_folder_request=deleteFolderData, _headers=custom_headers)
             print(deleteFolder.status_code)
 
             room_instance = RoomsApi(api_client)
@@ -72,10 +72,10 @@ def main():
             print(getRoom.status_code)
 
             backup_instanse = BackupApi(api_client)
-            backup_data = BackupDto()
+            backup_data = StartBackupRequestDto()
             backup_data.dump = False
             backup_data.storage_type = BackupStorageType.DataStore
-            createBackup = backup_instanse.start_backup(backup_dto=backup_data, _headers=custom_headers)
+            createBackup = backup_instanse.start_backup(start_backup_request_dto=backup_data, _headers=custom_headers)
             if createBackup.status_code == 200:
                 print("Backup started")
             

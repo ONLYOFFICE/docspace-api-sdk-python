@@ -116,6 +116,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -190,6 +191,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -264,6 +266,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -670,7 +673,7 @@ class SettingsApi:
     @validate_call
     def change_default_access_rights(
         self,
-        request_body: Annotated[Optional[List[StrictInt]], Field(description="The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.")] = None,
+        default_access_rights_request_dto: Annotated[Optional[List[StrictInt]], Field(description="The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -688,8 +691,8 @@ class SettingsApi:
 
         Stores the access rights the sharing dialog offers the calling account by default, and returns the set that  was actually stored. The body is a bare array of access-right values, not an object. The portal normalises the  array instead of keeping it as sent: it keeps the fill-forms, custom-filter and review entries, then adds  read-and-write or comment - whichever is present, in that order - and stops there, and it falls back to read  alone when nothing else applies, so the response can be shorter than the request and its order can differ. An  empty array clears the setting, after which read alone is reported. A value outside the published list is  rejected as an invalid request. The set belongs to the calling account alone: every authenticated role down to  a guest may store its own, and an unauthenticated caller is refused. Nothing already shared is changed. The  stored set is published as `defaultSharingAccessRights` by `GET api/2.0/files/settings`.
 
-        :param request_body: The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
-        :type request_body: List[int]
+        :param default_access_rights_request_dto: The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
+        :type default_access_rights_request_dto: List[int]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -713,7 +716,7 @@ class SettingsApi:
         """ # noqa: E501
 
         _param = self._change_default_access_rights_serialize(
-            request_body=request_body,
+            default_access_rights_request_dto=default_access_rights_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -722,10 +725,10 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareResponseArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -744,7 +747,7 @@ class SettingsApi:
     @validate_call
     def change_default_access_rights_with_http_info(
         self,
-        request_body: Annotated[Optional[List[StrictInt]], Field(description="The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.")] = None,
+        default_access_rights_request_dto: Annotated[Optional[List[StrictInt]], Field(description="The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -762,8 +765,8 @@ class SettingsApi:
 
         Stores the access rights the sharing dialog offers the calling account by default, and returns the set that  was actually stored. The body is a bare array of access-right values, not an object. The portal normalises the  array instead of keeping it as sent: it keeps the fill-forms, custom-filter and review entries, then adds  read-and-write or comment - whichever is present, in that order - and stops there, and it falls back to read  alone when nothing else applies, so the response can be shorter than the request and its order can differ. An  empty array clears the setting, after which read alone is reported. A value outside the published list is  rejected as an invalid request. The set belongs to the calling account alone: every authenticated role down to  a guest may store its own, and an unauthenticated caller is refused. Nothing already shared is changed. The  stored set is published as `defaultSharingAccessRights` by `GET api/2.0/files/settings`.
 
-        :param request_body: The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
-        :type request_body: List[int]
+        :param default_access_rights_request_dto: The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
+        :type default_access_rights_request_dto: List[int]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -787,7 +790,7 @@ class SettingsApi:
         """ # noqa: E501
 
         _param = self._change_default_access_rights_serialize(
-            request_body=request_body,
+            default_access_rights_request_dto=default_access_rights_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -796,10 +799,10 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareResponseArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -818,7 +821,7 @@ class SettingsApi:
     @validate_call
     def change_default_access_rights_without_preload_content(
         self,
-        request_body: Annotated[Optional[List[StrictInt]], Field(description="The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.")] = None,
+        default_access_rights_request_dto: Annotated[Optional[List[StrictInt]], Field(description="The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -836,8 +839,8 @@ class SettingsApi:
 
         Stores the access rights the sharing dialog offers the calling account by default, and returns the set that  was actually stored. The body is a bare array of access-right values, not an object. The portal normalises the  array instead of keeping it as sent: it keeps the fill-forms, custom-filter and review entries, then adds  read-and-write or comment - whichever is present, in that order - and stops there, and it falls back to read  alone when nothing else applies, so the response can be shorter than the request and its order can differ. An  empty array clears the setting, after which read alone is reported. A value outside the published list is  rejected as an invalid request. The set belongs to the calling account alone: every authenticated role down to  a guest may store its own, and an unauthenticated caller is refused. Nothing already shared is changed. The  stored set is published as `defaultSharingAccessRights` by `GET api/2.0/files/settings`.
 
-        :param request_body: The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
-        :type request_body: List[int]
+        :param default_access_rights_request_dto: The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
+        :type default_access_rights_request_dto: List[int]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -861,7 +864,7 @@ class SettingsApi:
         """ # noqa: E501
 
         _param = self._change_default_access_rights_serialize(
-            request_body=request_body,
+            default_access_rights_request_dto=default_access_rights_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -870,10 +873,10 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareResponseArrayWrapper",
+            '400': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -887,7 +890,7 @@ class SettingsApi:
 
     def _change_default_access_rights_serialize(
         self,
-        request_body,
+        default_access_rights_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -897,7 +900,7 @@ class SettingsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'request_body': '',
+            'DefaultAccessRightsRequestDto': '',
         }
 
         _path_params: Dict[str, str] = {}
@@ -914,8 +917,8 @@ class SettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if request_body is not None:
-            _body_params = request_body
+        if default_access_rights_request_dto is not None:
+            _body_params = default_access_rights_request_dto
 
 
         # set the HTTP header `Accept`
@@ -1632,6 +1635,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalSharingSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1706,6 +1710,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalSharingSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1780,6 +1785,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalSharingSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -1937,9 +1943,9 @@ class SettingsApi:
             '200': "DocServiceUrlWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2012,9 +2018,9 @@ class SettingsApi:
             '200': "DocServiceUrlWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2087,9 +2093,9 @@ class SettingsApi:
             '200': "DocServiceUrlWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2850,6 +2856,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2924,6 +2931,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -2998,6 +3006,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -3153,6 +3162,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -3227,6 +3237,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -3301,6 +3312,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -4832,6 +4844,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesSettingsWrapper",
+            '401': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -4900,6 +4913,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesSettingsWrapper",
+            '401': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -4968,6 +4982,7 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesSettingsWrapper",
+            '401': None,
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
             '502': None,
@@ -6317,11 +6332,11 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DefaultTemplateSettingsWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6392,11 +6407,11 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DefaultTemplateSettingsWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6467,11 +6482,11 @@ class SettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DefaultTemplateSettingsWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6625,9 +6640,10 @@ class SettingsApi:
             '200': "DefaultTemplateSettingsWrapper",
             '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6700,9 +6716,10 @@ class SettingsApi:
             '200': "DefaultTemplateSettingsWrapper",
             '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -6775,9 +6792,10 @@ class SettingsApi:
             '200': "DefaultTemplateSettingsWrapper",
             '400': None,
             '403': None,
+            '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -8922,12 +8940,12 @@ class SettingsApi:
         # process the query parameters
         if file_extension is not None:
             
-            _query_params.append(('FileExtension', file_extension))
+            _query_params.append(('fileExtension', file_extension))
             
         # process the header parameters
         # process the form parameters
         if file is not None:
-            _files['File'] = file
+            _files['file'] = file
         # process the body parameter
 
 

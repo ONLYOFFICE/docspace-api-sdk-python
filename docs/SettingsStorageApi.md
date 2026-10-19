@@ -440,6 +440,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Migration progress as a percentage, or -1 where storage migration is not offered |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -614,7 +615,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_cdn_storage**
-> CdnStorageSettingsWrapper update_cdn_storage(storage_requests_dto=storage_requests_dto)
+> StorageSettingsWrapper update_cdn_storage(storage_request_dto=storage_request_dto)
 
 Selects the content delivery network that serves the static content of the portal and saves the credentials it
 needs: `module` is the identifier of one of the entries of `GET api/2.0/settings/storage/cdn`, and `props`
@@ -636,100 +637,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_requests_dto** | [**StorageRequestsDto**](StorageRequestsDto.md)|  | [optional] 
-
-### Return type
-
-[**CdnStorageSettingsWrapper**](CdnStorageSettingsWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-
-```python
-import docspace_api_sdk
-from docspace_api_sdk.models.cdn_storage_settings_wrapper import CdnStorageSettingsWrapper
-from docspace_api_sdk.models.storage_requests_dto import StorageRequestsDto
-from docspace_api_sdk.rest import ApiException
-from pprint import pprint
-
-configuration = docspace_api_sdk.Configuration(
-    host = "https://your-docspace.onlyoffice.com"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): Bearer
-configuration = docspace_api_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-# Enter a context with an instance of the API client
-with docspace_api_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = docspace_api_sdk.StorageApi(api_client)
-    storage_requests_dto = docspace_api_sdk.StorageRequestsDto() # StorageRequestsDto |  (optional)
-
-    try:
-        # Update the CDN storage
-        api_response = api_instance.update_cdn_storage(storage_requests_dto=storage_requests_dto)
-        print("The response of StorageApi->update_cdn_storage:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling StorageApi->update_cdn_storage: %s\n" % e)
-```
-
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The saved CDN configuration; the upload of the static content has been handed to the storage service |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The requested CDN module is not configured on this installation |  -  |
-**403** | The caller may not edit portal settings, or this installation does not allow changing the storage |  -  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_storage**
-> StorageSettingsWrapper update_storage(storage_requests_dto=storage_requests_dto)
-
-Points the current portal at another storage and saves the credentials it needs: `module` is the identifier of
-one of the storages listed by `GET api/2.0/settings/storage`, and `props` carries that provider's
-authentication keys as name and value pairs, for example the bucket, region and access key of an Amazon S3
-storage. The provider has to be available on the server, which the `isSet` flag of the listing tells,
-otherwise the request is rejected as invalid. Sending the module the portal already uses changes nothing and
-returns the saved settings as they are. Any other module starts an asynchronous migration of the portal data:
-the portal moves into the migrating state and stays unavailable until the transfer ends, so follow it with
-`GET api/2.0/settings/storage/progress` and do not send a second switch while it runs. The caller needs the
-permission to edit portal settings, which in practice means the portal owner or a DocSpace admin, on a server
-installation with an unrestricted access space. The response is the stored configuration, module and
-properties, not the state of the migration. To return to the built-in local storage call
-`DELETE api/2.0/settings/storage`, and for the CDN use `PUT api/2.0/settings/storage/cdn`.
-
-For more information, see [api.onlyoffice.com]().
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **storage_requests_dto** | [**StorageRequestsDto**](StorageRequestsDto.md)|  | [optional] 
+ **storage_request_dto** | [**StorageRequestDto**](StorageRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -744,7 +652,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.storage_requests_dto import StorageRequestsDto
+from docspace_api_sdk.models.storage_request_dto import StorageRequestDto
 from docspace_api_sdk.models.storage_settings_wrapper import StorageSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -766,11 +674,104 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.StorageApi(api_client)
-    storage_requests_dto = docspace_api_sdk.StorageRequestsDto() # StorageRequestsDto |  (optional)
+    storage_request_dto = docspace_api_sdk.StorageRequestDto() # StorageRequestDto |  (optional)
+
+    try:
+        # Update the CDN storage
+        api_response = api_instance.update_cdn_storage(storage_request_dto=storage_request_dto)
+        print("The response of StorageApi->update_cdn_storage:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling StorageApi->update_cdn_storage: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The saved CDN configuration; the upload of the static content has been handed to the storage service |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `module`, or the requested CDN module is unknown or not configured on this installation |  -  |
+**403** | The caller may not edit portal settings, or this installation does not allow changing the storage |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_storage**
+> StorageSettingsWrapper update_storage(storage_request_dto=storage_request_dto)
+
+Points the current portal at another storage and saves the credentials it needs: `module` is the identifier of
+one of the storages listed by `GET api/2.0/settings/storage`, and `props` carries that provider's
+authentication keys as name and value pairs, for example the bucket, region and access key of an Amazon S3
+storage. The provider has to be available on the server, which the `isSet` flag of the listing tells,
+otherwise the request is rejected as invalid. Sending the module the portal already uses changes nothing and
+returns the saved settings as they are. Any other module starts an asynchronous migration of the portal data:
+the portal moves into the migrating state and stays unavailable until the transfer ends, so follow it with
+`GET api/2.0/settings/storage/progress` and do not send a second switch while it runs. The caller needs the
+permission to edit portal settings, which in practice means the portal owner or a DocSpace admin, on a server
+installation with an unrestricted access space. The response is the stored configuration, module and
+properties, not the state of the migration. To return to the built-in local storage call
+`DELETE api/2.0/settings/storage`, and for the CDN use `PUT api/2.0/settings/storage/cdn`.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **storage_request_dto** | [**StorageRequestDto**](StorageRequestDto.md)|  | [optional] 
+
+### Return type
+
+[**StorageSettingsWrapper**](StorageSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.storage_request_dto import StorageRequestDto
+from docspace_api_sdk.models.storage_settings_wrapper import StorageSettingsWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.StorageApi(api_client)
+    storage_request_dto = docspace_api_sdk.StorageRequestDto() # StorageRequestDto |  (optional)
 
     try:
         # Switch the portal storage
-        api_response = api_instance.update_storage(storage_requests_dto=storage_requests_dto)
+        api_response = api_instance.update_storage(storage_request_dto=storage_request_dto)
         print("The response of StorageApi->update_storage:\n")
         pprint(api_response)
     except Exception as e:
@@ -789,7 +790,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The saved storage configuration; migration of the portal data to it has been started |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The requested storage module is not configured on this installation |  -  |
+**400** | The request body cannot be read or has no `module`, or the requested storage module is unknown or not configured on this installation |  -  |
 **403** | The caller may not edit portal settings, or this installation does not allow changing the storage |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |

@@ -1,4 +1,4 @@
-# STRINGArrayWrapper
+# StringArrayWrapper
 The successful API response.
 
 ## Properties
@@ -14,19 +14,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
+from docspace_api_sdk.models.string_array_wrapper import StringArrayWrapper
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of STRINGArrayWrapper from a JSON string
-string_array_wrapper_instance = STRINGArrayWrapper.from_json(json)
+# create an instance of StringArrayWrapper from a JSON string
+string_array_wrapper_instance = StringArrayWrapper.from_json(json)
 # print the JSON string representation of the object
-print(STRINGArrayWrapper.to_json())
+print(StringArrayWrapper.to_json())
 
 # convert the object into a dict
 string_array_wrapper_dict = string_array_wrapper_instance.to_dict()
-# create an instance of STRINGArrayWrapper from a dict
-string_array_wrapper_from_dict = STRINGArrayWrapper.from_dict(string_array_wrapper_dict)
+# create an instance of StringArrayWrapper from a dict
+string_array_wrapper_from_dict = StringArrayWrapper.from_dict(string_array_wrapper_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

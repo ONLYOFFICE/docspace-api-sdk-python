@@ -25,7 +25,7 @@ from pydantic import Field, StrictBool
 from typing import Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.docs_cloud_config import DocsCloudConfig
+from docspace_api_sdk.models.docs_cloud_config_request_dto import DocsCloudConfigRequestDto
 from docspace_api_sdk.models.docs_cloud_config_wrapper import DocsCloudConfigWrapper
 from docspace_api_sdk.models.docs_cloud_dev_pack_request_dto import DocsCloudDevPackRequestDto
 from docspace_api_sdk.models.docs_cloud_quota_wrapper import DocsCloudQuotaWrapper
@@ -697,9 +697,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantWrapper",
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -772,9 +772,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantWrapper",
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -847,9 +847,9 @@ class DocsCloudApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocsCloudTenantWrapper",
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '400': "ErrorApiResponse",
             '502': None,
             '503': None,
@@ -993,9 +993,9 @@ class DocsCloudApi:
             '200': "DocsCloudConfigWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1068,9 +1068,9 @@ class DocsCloudApi:
             '200': "DocsCloudConfigWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1143,9 +1143,9 @@ class DocsCloudApi:
             '200': "DocsCloudConfigWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1288,9 +1288,9 @@ class DocsCloudApi:
             '200': "DocsCloudTenantInfoWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1363,9 +1363,9 @@ class DocsCloudApi:
             '200': "DocsCloudTenantInfoWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1438,9 +1438,9 @@ class DocsCloudApi:
             '200': "DocsCloudTenantInfoWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1583,9 +1583,9 @@ class DocsCloudApi:
             '200': "DocsCloudQuotaWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1658,9 +1658,9 @@ class DocsCloudApi:
             '200': "DocsCloudQuotaWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1733,9 +1733,9 @@ class DocsCloudApi:
             '200': "DocsCloudQuotaWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2153,9 +2153,9 @@ class DocsCloudApi:
             '200': "DocsCloudUsageWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2228,9 +2228,9 @@ class DocsCloudApi:
             '200': "DocsCloudUsageWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2303,9 +2303,9 @@ class DocsCloudApi:
             '200': "DocsCloudUsageWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2446,9 +2446,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2519,9 +2519,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2592,9 +2592,9 @@ class DocsCloudApi:
             '402': None,
             '403': None,
             '404': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3265,7 +3265,7 @@ class DocsCloudApi:
     @validate_call
     def update_tenant_config(
         self,
-        docs_cloud_config: Optional[DocsCloudConfig] = None,
+        docs_cloud_config_request_dto: Optional[DocsCloudConfigRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3283,8 +3283,8 @@ class DocsCloudApi:
 
         Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
 
-        :param docs_cloud_config:
-        :type docs_cloud_config: DocsCloudConfig
+        :param docs_cloud_config_request_dto:
+        :type docs_cloud_config_request_dto: DocsCloudConfigRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3308,7 +3308,7 @@ class DocsCloudApi:
         """ # noqa: E501
 
         _param = self._update_tenant_config_serialize(
-            docs_cloud_config=docs_cloud_config,
+            docs_cloud_config_request_dto=docs_cloud_config_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3319,9 +3319,9 @@ class DocsCloudApi:
             '200': "DocsCloudConfigWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3340,7 +3340,7 @@ class DocsCloudApi:
     @validate_call
     def update_tenant_config_with_http_info(
         self,
-        docs_cloud_config: Optional[DocsCloudConfig] = None,
+        docs_cloud_config_request_dto: Optional[DocsCloudConfigRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3358,8 +3358,8 @@ class DocsCloudApi:
 
         Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
 
-        :param docs_cloud_config:
-        :type docs_cloud_config: DocsCloudConfig
+        :param docs_cloud_config_request_dto:
+        :type docs_cloud_config_request_dto: DocsCloudConfigRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3383,7 +3383,7 @@ class DocsCloudApi:
         """ # noqa: E501
 
         _param = self._update_tenant_config_serialize(
-            docs_cloud_config=docs_cloud_config,
+            docs_cloud_config_request_dto=docs_cloud_config_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3394,9 +3394,9 @@ class DocsCloudApi:
             '200': "DocsCloudConfigWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3415,7 +3415,7 @@ class DocsCloudApi:
     @validate_call
     def update_tenant_config_without_preload_content(
         self,
-        docs_cloud_config: Optional[DocsCloudConfig] = None,
+        docs_cloud_config_request_dto: Optional[DocsCloudConfigRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3433,8 +3433,8 @@ class DocsCloudApi:
 
         Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
 
-        :param docs_cloud_config:
-        :type docs_cloud_config: DocsCloudConfig
+        :param docs_cloud_config_request_dto:
+        :type docs_cloud_config_request_dto: DocsCloudConfigRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3458,7 +3458,7 @@ class DocsCloudApi:
         """ # noqa: E501
 
         _param = self._update_tenant_config_serialize(
-            docs_cloud_config=docs_cloud_config,
+            docs_cloud_config_request_dto=docs_cloud_config_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3469,9 +3469,9 @@ class DocsCloudApi:
             '200': "DocsCloudConfigWrapper",
             '400': None,
             '403': None,
+            '500': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
-            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3485,7 +3485,7 @@ class DocsCloudApi:
 
     def _update_tenant_config_serialize(
         self,
-        docs_cloud_config,
+        docs_cloud_config_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -3511,8 +3511,8 @@ class DocsCloudApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if docs_cloud_config is not None:
-            _body_params = docs_cloud_config
+        if docs_cloud_config_request_dto is not None:
+            _body_params = docs_cloud_config_request_dto
 
 
         # set the HTTP header `Accept`

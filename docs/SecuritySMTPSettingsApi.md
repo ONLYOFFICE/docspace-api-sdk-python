@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **get_smtp_operation_status**
-> SmtpOperationStatusRequestsWrapper get_smtp_operation_status()
+> SmtpOperationStatusWrapper get_smtp_operation_status()
 
 Returns the state of the test message that `GET api/2.0/smtpsettings/smtp/test` queued for this portal, and is
 the operation to poll while that test runs. A test has to be queued first; the caller needs the
@@ -33,7 +33,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SmtpOperationStatusRequestsWrapper**](SmtpOperationStatusRequestsWrapper.md)
+[**SmtpOperationStatusWrapper**](SmtpOperationStatusWrapper.md)
 
 ### Authorization
 
@@ -44,7 +44,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.smtp_operation_status_requests_wrapper import SmtpOperationStatusRequestsWrapper
+from docspace_api_sdk.models.smtp_operation_status_wrapper import SmtpOperationStatusWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -88,6 +88,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The state of the test message of the portal, or an empty answer when no test is on record |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **402** | The SMTP settings section is not enabled for this portal |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -174,6 +175,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The SMTP settings stored for the portal, with an empty password and `isDefaultSettings` telling whether the configuration of the installation is in use |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **402** | The SMTP settings section is not enabled for this portal |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -259,6 +261,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The settings in force after the reset - the configuration of the installation, or an empty settings object in a cloud portal |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **402** | The SMTP settings section is not enabled for this portal |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -350,18 +353,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The SMTP settings now stored for the portal, with an empty password |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, `host` or `senderAddress` is empty, `senderDisplayName` is missing, `enableAuth` is true without `credentialsUserName` or `credentialsUserPassword`, a text field is longer than 255 characters, or `port` is outside 1-65535 |  -  |
 **402** | The SMTP settings section is not enabled for this portal |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **test_smtp_settings**
-> SmtpOperationStatusRequestsWrapper test_smtp_settings()
+> SmtpOperationStatusWrapper test_smtp_settings()
 
 Queues a background job that sends a test message through the SMTP settings currently stored for the portal to
 the email address of the calling user, and returns the state of that job. Save the settings with
@@ -384,7 +388,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SmtpOperationStatusRequestsWrapper**](SmtpOperationStatusRequestsWrapper.md)
+[**SmtpOperationStatusWrapper**](SmtpOperationStatusWrapper.md)
 
 ### Authorization
 
@@ -395,7 +399,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.smtp_operation_status_requests_wrapper import SmtpOperationStatusRequestsWrapper
+from docspace_api_sdk.models.smtp_operation_status_wrapper import SmtpOperationStatusWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -439,6 +443,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The state of the queued test message, to be polled until `completed` is true |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
 **402** | The SMTP settings section is not enabled for this portal |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
 **500** | Internal Server Error. |  -  |

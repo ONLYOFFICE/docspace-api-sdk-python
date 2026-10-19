@@ -1,0 +1,97 @@
+#
+# (c) Copyright Ascensio System SIA 2026
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+
+
+from __future__ import annotations
+import pprint
+import re  # noqa: F401
+import json
+
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
+from typing import Optional, Set
+from typing_extensions import Self
+
+class SalesRequestDto(BaseModel):
+    """
+    Who is writing to the ONLYOFFICE sales team, and what about.
+    """ # noqa: E501
+    user_name: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="The name the sales team should address the reply to. It is sent as written and is not matched against any  portal account; an empty value fails the request with 400.", alias="userName", json_schema_extra={"examples": ["John Doe"]})
+    email: Annotated[str, Field(min_length=1, strict=True, max_length=64)] = Field(description="The address the answer is sent to. It has to be a well-formed email address and need not be the caller portal  address; an empty or malformed value fails the request with 400.", json_schema_extra={"examples": ["user@example.com"]})
+    message: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="What is being asked of the sales team - a quote, an invoice, or a plan that cannot be bought online. An empty  value fails the request with 400.", json_schema_extra={"examples": ["I would like to inquire about pricing"]})
+    __properties: ClassVar[List[str]] = ["userName", "email", "message"]
+
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
+
+
+    def to_str(self) -> str:
+        """Returns the string representation of the model using alias"""
+        return pprint.pformat(self.model_dump(by_alias=True))
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_json(cls, json_str: str) -> Optional[Self]:
+        """Create an instance of SalesRequestDto from a JSON string"""
+        return cls.from_dict(json.loads(json_str))
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([
+        ])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
+        return _dict
+
+    @classmethod
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+        """Create an instance of SalesRequestDto from a dict"""
+        if obj is None:
+            return None
+
+
+        if not isinstance(obj, dict):
+            return cls.model_validate(obj)
+
+        _obj = cls.model_validate({
+            "userName": obj.get("userName"),
+            "email": obj.get("email"),
+            "message": obj.get("message")
+        })
+        return _obj
+
+

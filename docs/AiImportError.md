@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **kind** | **str** | `folder` or `prompt`, plus the offending name or id. | 
 **ref** | **str** | The offending entry - its name or its id. | 
-**error** | [**AiTErrorData**](AiTErrorData.md) | Why the entry was rejected. | 
+**error** | [**AiErrorData**](AiErrorData.md) | Why the entry was rejected. | 
 
 ## Example
 

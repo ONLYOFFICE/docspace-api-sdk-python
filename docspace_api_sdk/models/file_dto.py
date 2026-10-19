@@ -36,7 +36,8 @@ from docspace_api_sdk.models.file_status import FileStatus
 from docspace_api_sdk.models.file_type import FileType
 from docspace_api_sdk.models.folder_type import FolderType
 from docspace_api_sdk.models.form_filling_status import FormFillingStatus
-from docspace_api_sdk.models.size import Size
+from docspace_api_sdk.models.image_size_dto import ImageSizeDto
+from docspace_api_sdk.models.metadata_match_dto import MetadataMatchDto
 from docspace_api_sdk.models.thumbnail import Thumbnail
 from docspace_api_sdk.models.vectorization_status import VectorizationStatus
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
@@ -83,7 +84,7 @@ class FileDto(FileEntryDto):
     expired: Optional[ApiDateTime] = Field(default=None, description="The moment the file falls under the lifetime rule of the room holding it and is removed. It is counted from  the first revision rather than the latest one, so editing a file does not postpone it, and it is null when the  room sets no lifetime. Written with the offset of the portal's time zone.")
     vectorization_status: Optional[VectorizationStatus] = Field(default=None, description="How far the indexing of the file's content for AI search has got. It is null for a file that has never been  queued for indexing, which is every file while the feature is off for the portal.", alias="vectorizationStatus")
     external_db_table_name: Optional[StrictStr] = Field(default=None, description="The table collecting the submitted values of this form in the external database configured for its room. The  field is left out of the answer entirely when the form has no such table.", alias="externalDbTableName", json_schema_extra={"examples": ["form_123_v1"]})
-    dimensions: Optional[Size] = Field(default=None, description="The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read.")
+    dimensions: Optional[ImageSizeDto] = Field(default=None, description="The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read.")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -156,6 +157,13 @@ class FileDto(FileEntryDto):
         # override the default output from pydantic by calling `to_dict()` of expiration_date
         if self.expiration_date:
             _dict['expirationDate'] = self.expiration_date.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in metadata_matches (list)
+        _items = []
+        if self.metadata_matches:
+            for _item_metadata_matches in self.metadata_matches:
+                if _item_metadata_matches:
+                    _items.append(_item_metadata_matches.to_dict())
+            _dict['metadataMatches'] = _items
         # override the default output from pydantic by calling `to_dict()` of draft_location
         if self.draft_location:
             _dict['draftLocation'] = self.draft_location.to_dict()
@@ -339,7 +347,7 @@ class FileDto(FileEntryDto):
             "expired": ApiDateTime.from_dict(obj["expired"]) if obj.get("expired") is not None else None,
             "vectorizationStatus": obj.get("vectorizationStatus"),
             "externalDbTableName": obj.get("externalDbTableName"),
-            "dimensions": Size.from_dict(obj["dimensions"]) if obj.get("dimensions") is not None else None
+            "dimensions": ImageSizeDto.from_dict(obj["dimensions"]) if obj.get("dimensions") is not None else None
         }
         all_fields = {**base_dict, **extra_fields}
         return cls.model_validate(all_fields)

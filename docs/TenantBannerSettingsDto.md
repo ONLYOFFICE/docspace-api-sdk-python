@@ -1,11 +1,12 @@
 # TenantBannerSettingsDto
-Whether the portal promotional banners are hidden.
+Whether the portal hides its promotional banners.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**hidden** | **bool** | Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here. | [optional] 
+**hidden** | **bool** | The banners visibility flag. | [optional] 
+**last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example
 

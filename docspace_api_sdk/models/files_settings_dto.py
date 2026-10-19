@@ -23,9 +23,9 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.auto_clean_up_data import AutoCleanUpData
+from docspace_api_sdk.models.auto_clean_up_data_dto import AutoCleanUpDataDto
 from docspace_api_sdk.models.files_settings_dto_internal_formats import FilesSettingsDtoInternalFormats
-from docspace_api_sdk.models.order_by import OrderBy
+from docspace_api_sdk.models.order_by_dto import OrderByDto
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -78,14 +78,14 @@ class FilesSettingsDto(BaseModel):
     hide_confirm_convert_save: Optional[StrictBool] = Field(default=None, description="Whether the prompt that offers to keep a copy in the original format on conversion is hidden for the caller.  Once true it cannot be turned back through the API.", alias="hideConfirmConvertSave", json_schema_extra={"examples": [False]})
     hide_confirm_convert_open: Optional[StrictBool] = Field(default=None, description="Whether the prompt that offers to open the conversion result is hidden for the caller. Once true it cannot be  turned back through the API.", alias="hideConfirmConvertOpen", json_schema_extra={"examples": [False]})
     hide_confirm_room_lifetime: Optional[StrictBool] = Field(default=None, description="Whether the warning shown before the lifetime settings of a room are changed is hidden for the caller.", alias="hideConfirmRoomLifetime", json_schema_extra={"examples": [False]})
-    default_order: Optional[OrderBy] = Field(default=None, description="The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used.", alias="defaultOrder")
+    default_order: Optional[OrderByDto] = Field(default=None, description="The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used.", alias="defaultOrder")
     forcesave: Optional[StrictBool] = Field(default=None, description="Whether the editor writes a document back to storage while the session is still open. It is on for every  portal and cannot be switched off.", json_schema_extra={"examples": [True]})
     store_forcesave: Optional[StrictBool] = Field(default=None, description="Whether those intermediate saves are kept as separate versions. They are not, in any portal: they update the  current version instead.", alias="storeForcesave", json_schema_extra={"examples": [False]})
     recent_section: Optional[StrictBool] = Field(default=None, description="Whether the Recent section is offered to the caller among the section roots.", alias="recentSection", json_schema_extra={"examples": [True]})
     favorites_section: Optional[StrictBool] = Field(default=None, description="Whether the Favorites section is offered to the caller among the section roots.", alias="favoritesSection", json_schema_extra={"examples": [True]})
     templates_section: Optional[StrictBool] = Field(default=None, description="Whether the Templates section is offered to the caller among the section roots.", alias="templatesSection", json_schema_extra={"examples": [True]})
     download_tar_gz: Optional[StrictBool] = Field(default=None, description="The archive format the caller's multi-item downloads are packed into: true for `.tar.gz`, false for `.zip`.", alias="downloadTarGz", json_schema_extra={"examples": [True]})
-    automatically_clean_up: Optional[AutoCleanUpData] = Field(default=None, description="The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns.", alias="automaticallyCleanUp")
+    automatically_clean_up: Optional[AutoCleanUpDataDto] = Field(default=None, description="The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns.", alias="automaticallyCleanUp")
     can_search_by_content: Optional[StrictBool] = Field(default=None, description="Whether documents in this portal can be searched by what is inside them and not only by title. It depends on  the full-text search service being configured and having indexed the portal.", alias="canSearchByContent", json_schema_extra={"examples": [True]})
     default_sharing_access_rights: Optional[List[StrictInt]] = Field(default=None, description="The access rights the sharing dialog offers the caller by default. The portal normalises the set it stores, so  this can be shorter than what was last sent.", alias="defaultSharingAccessRights", json_schema_extra={"examples": [[1, 2]]})
     max_upload_thread_count: Optional[StrictInt] = Field(default=None, description="How many upload requests the portal accepts from one account at a time. Sending more than this in parallel  gets the extra ones refused rather than queued.", alias="maxUploadThreadCount", json_schema_extra={"examples": [10]})
@@ -382,14 +382,14 @@ class FilesSettingsDto(BaseModel):
             "hideConfirmConvertSave": obj.get("hideConfirmConvertSave"),
             "hideConfirmConvertOpen": obj.get("hideConfirmConvertOpen"),
             "hideConfirmRoomLifetime": obj.get("hideConfirmRoomLifetime"),
-            "defaultOrder": OrderBy.from_dict(obj["defaultOrder"]) if obj.get("defaultOrder") is not None else None,
+            "defaultOrder": OrderByDto.from_dict(obj["defaultOrder"]) if obj.get("defaultOrder") is not None else None,
             "forcesave": obj.get("forcesave"),
             "storeForcesave": obj.get("storeForcesave"),
             "recentSection": obj.get("recentSection"),
             "favoritesSection": obj.get("favoritesSection"),
             "templatesSection": obj.get("templatesSection"),
             "downloadTarGz": obj.get("downloadTarGz"),
-            "automaticallyCleanUp": AutoCleanUpData.from_dict(obj["automaticallyCleanUp"]) if obj.get("automaticallyCleanUp") is not None else None,
+            "automaticallyCleanUp": AutoCleanUpDataDto.from_dict(obj["automaticallyCleanUp"]) if obj.get("automaticallyCleanUp") is not None else None,
             "canSearchByContent": obj.get("canSearchByContent"),
             "defaultSharingAccessRights": obj.get("defaultSharingAccessRights"),
             "maxUploadThreadCount": obj.get("maxUploadThreadCount"),

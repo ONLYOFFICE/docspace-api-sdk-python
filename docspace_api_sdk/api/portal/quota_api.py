@@ -666,6 +666,7 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -735,6 +736,7 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -804,6 +806,7 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",

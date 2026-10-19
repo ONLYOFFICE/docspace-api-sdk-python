@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **ai_web_search_clear**
-> AiSuccessResponse ai_web_search_clear(body)
+> AiSuccessResponse ai_web_search_clear(ai_web_search_clear_request)
 
 Removes the portal's web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room's configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
 
@@ -26,7 +26,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. | 
+ **ai_web_search_clear_request** | **str**| Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. | 
 
 ### Return type
 
@@ -62,11 +62,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebSearchApi(api_client)
-    body = 'body_example' # str | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
+    ai_web_search_clear_request = 'ai_web_search_clear_request_example' # str | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
 
     try:
         # Clear the web-search configuration
-        api_response = api_instance.ai_web_search_clear(body)
+        api_response = api_instance.ai_web_search_clear(ai_web_search_clear_request)
         print("The response of WebSearchApi->ai_web_search_clear:\n")
         pprint(api_response)
     except Exception as e:
@@ -86,7 +86,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | Confirms the portal has no web-search configuration any more. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -163,11 +163,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Whether the configuration was stored, after the provider answered. |  -  |
-**400** | The configuration is missing or malformed, or the provider URL points at a private network address. |  -  |
+**200** | The stored configuration, after the provider accepted it. |  -  |
+**400** | The configuration is missing or malformed, the provider URL points at a private network address, or the provider refused the configuration - the body then carries `success: false` and an `error` naming the field. Nothing is stored in any of these cases. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -246,8 +246,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | The configuration in force for the scope, without the provider key, or an empty result when web search is not configured. |  -  |
 **400** | `entityId` is not a string. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -324,16 +324,16 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | Whether a web-search provider is stored for the scope. |  -  |
 **400** | `entityId` is not a string. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_web_search_passthrough_contents**
-> Dict[str, object] ai_web_search_passthrough_contents(request_body)
+> Dict[str, object] ai_web_search_passthrough_contents(ai_web_search_passthrough_contents_request)
 
-Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider's 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -342,7 +342,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**Dict[str, Optional[object]]**](object.md)| A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration. | 
+ **ai_web_search_passthrough_contents_request** | [**Dict[str, Optional[object]]**](object.md)| A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration. | 
 
 ### Return type
 
@@ -377,11 +377,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebSearchApi(api_client)
-    request_body = None # Dict[str, Optional[object]] | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
+    ai_web_search_passthrough_contents_request = None # Dict[str, Optional[object]] | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.
 
     try:
         # Web page contents passthrough
-        api_response = api_instance.ai_web_search_passthrough_contents(request_body)
+        api_response = api_instance.ai_web_search_passthrough_contents(ai_web_search_passthrough_contents_request)
         print("The response of WebSearchApi->ai_web_search_passthrough_contents:\n")
         pprint(api_response)
     except Exception as e:
@@ -400,20 +400,21 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The provider's own response, relayed verbatim with its status and content type. |  -  |
+**400** | `urls` is missing or not a non-empty array of strings; `field` names the input. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **404** | Web search is not configured for this portal. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal's key. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
-**502** | The AI provider could not be reached, or answered with a failure of its own. |  -  |
+**502** | The provider, or the hop in front of it, failed or answered a 5xx; the detail is in the server log. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_web_search_passthrough_search**
-> Dict[str, object] ai_web_search_passthrough_search(request_body)
+> Dict[str, Optional[object]] ai_web_search_passthrough_search(ai_web_search_passthrough_search_request)
 
-Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider's own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -422,11 +423,11 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**Dict[str, Optional[object]]**](object.md)| A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here. | 
+ **ai_web_search_passthrough_search_request** | [**Dict[str, Optional[object]]**](object.md)| A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here. | 
 
 ### Return type
 
-**Dict[str, object]**
+**Dict[str, Optional[object]]**
 
 ### Authorization
 
@@ -457,11 +458,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebSearchApi(api_client)
-    request_body = None # Dict[str, Optional[object]] | A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
+    ai_web_search_passthrough_search_request = None # Dict[str, Optional[object]] | A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.
 
     try:
         # Web search passthrough
-        api_response = api_instance.ai_web_search_passthrough_search(request_body)
+        api_response = api_instance.ai_web_search_passthrough_search(ai_web_search_passthrough_search_request)
         print("The response of WebSearchApi->ai_web_search_passthrough_search:\n")
         pprint(api_response)
     except Exception as e:
@@ -480,18 +481,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The provider's own response, relayed verbatim with its status and content type. |  -  |
+**400** | `query` is missing or empty, or `numResults` is not a positive integer; `field` names the input. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **404** | Web search is not configured for this portal. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **429** | Relayed verbatim from the AI provider, which is rate-limiting this portal's key. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
-**502** | The AI provider could not be reached, or answered with a failure of its own. |  -  |
+**502** | The provider, or the hop in front of it, failed or answered a 5xx; the detail is in the server log. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_web_search_set_active_config**
-> AiSuccessResponse ai_web_search_set_active_config(ai_web_search_configure_request)
+> AiSuccessResponse ai_web_search_set_active_config(ai_web_search_set_active_config_request)
 
 Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
 
@@ -502,7 +504,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ai_web_search_configure_request** | [**AiWebSearchConfigureRequest**](AiWebSearchConfigureRequest.md)|  | 
+ **ai_web_search_set_active_config_request** | [**AiWebSearchSetActiveConfigRequest**](AiWebSearchSetActiveConfigRequest.md)|  | 
 
 ### Return type
 
@@ -518,7 +520,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
-from docspace_api_sdk.models.ai_web_search_configure_request import AiWebSearchConfigureRequest
+from docspace_api_sdk.models.ai_web_search_set_active_config_request import AiWebSearchSetActiveConfigRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -539,11 +541,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.WebSearchApi(api_client)
-    ai_web_search_configure_request = docspace_api_sdk.AiWebSearchConfigureRequest() # AiWebSearchConfigureRequest | 
+    ai_web_search_set_active_config_request = docspace_api_sdk.AiWebSearchSetActiveConfigRequest() # AiWebSearchSetActiveConfigRequest | 
 
     try:
         # Set active config
-        api_response = api_instance.ai_web_search_set_active_config(ai_web_search_configure_request)
+        api_response = api_instance.ai_web_search_set_active_config(ai_web_search_set_active_config_request)
         print("The response of WebSearchApi->ai_web_search_set_active_config:\n")
         pprint(api_response)
     except Exception as e:
@@ -564,8 +566,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | Confirms the configuration was stored, unverified. |  -  |
 **400** | The configuration is missing or malformed, or the provider URL points at a private network address. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -645,7 +647,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | The outcome of the probe. A failed probe is reported here, not as a status. |  -  |
 **400** | The configuration is missing or malformed, or the provider URL points at a private network address. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 

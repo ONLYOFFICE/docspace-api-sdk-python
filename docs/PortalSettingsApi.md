@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**send_delete_instructions**](#send_delete_instructions) | **POST** /api/2.0/portal/delete | Send removal instructions
 [**send_suspend_instructions**](#send_suspend_instructions) | **POST** /api/2.0/portal/suspend | Send suspension instructions
 [**suspend_portal**](#suspend_portal) | **PUT** /api/2.0/portal/suspend | Deactivate a portal
+[**unblock_portal**](#unblock_portal) | **PUT** /api/2.0/portal/unblock | Unblock a portal
 
 
 # **continue_portal**
@@ -169,9 +170,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The absolute URL of the feedback form to send the owner of the removed portal to |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The account the confirmation link was issued for is not the portal owner |  -  |
+**500** | On a server installation every other space has limited access, so the last remaining space cannot be removed |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -424,9 +426,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The removal letter has been handed to the mail service; nothing about the portal has changed yet and the response carries no content |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller is not the portal owner or has no portal-settings right |  -  |
+**500** | On a server installation every other space has limited access, so the last remaining space cannot be removed |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -505,9 +508,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The deactivation letter has been handed to the mail service and the request is recorded in the audit trail; the portal itself is still active and the response carries no content |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller is not the portal owner or has no portal-settings right |  -  |
+**500** | On a server installation every other space has limited access, so the last remaining space cannot be deactivated |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -586,7 +590,90 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The portal is now suspended, its users can no longer work in it and its content is kept; the response carries no content |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The account the confirmation link was issued for is not the portal owner |  -  |
+**500** | On a server installation every other space has limited access, so the last remaining space cannot be deactivated |  -  |
 **401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **unblock_portal**
+> unblock_portal()
+
+Unblocks this portal, blocked by the retention policy after a long period without use, so its users can sign in
+again. The portal must be blocked. The call is authorized only by the unblocking link the retention letters send
+to the owner; it works for the current block only. The call is mutating: it makes the portal active, records the
+unblocking in the audit trail, refreshes its Content Security Policy and restarts the retention count. Nothing
+is returned in the body; to check the status, read `tenantStatus` from `GET api/2.0/settings`, which a blocked
+portal still answers. A lapsed paid tariff stays unpaid after the unblocking, so renewing it is the next step.
+The letters of a free portal carry no such link: support unblocks it. The call does not bring back a portal
+deleted at the end of its retention period, or one its owner deactivated, which `PUT api/2.0/portal/continue`
+brings back. An invalid link, a link of an earlier block, or a portal that is no longer blocked, a repeated call
+included, is refused with 401; an ordinary sign-in token instead of the link is refused with 403.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.SettingsApi(api_client)
+
+    try:
+        # Unblock a portal
+        api_instance.unblock_portal()
+    except Exception as e:
+        print("Exception when calling SettingsApi->unblock_portal: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The portal is active again and its users can sign in; the response carries no content |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**401** | The unblocking link is invalid, was mailed for an earlier block, or the portal is not blocked |  -  |
+**403** | The call carries an ordinary sign-in token instead of the unblocking link |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

@@ -26,8 +26,8 @@ from typing_extensions import Annotated
 from docspace_api_sdk.models.app_array_wrapper import AppArrayWrapper
 from docspace_api_sdk.models.app_wrapper import AppWrapper
 from docspace_api_sdk.models.json_value_wrapper import JsonValueWrapper
-from docspace_api_sdk.models.set_app_enabled_body import SetAppEnabledBody
-from docspace_api_sdk.models.set_app_settings_body import SetAppSettingsBody
+from docspace_api_sdk.models.set_app_enabled_request import SetAppEnabledRequest
+from docspace_api_sdk.models.set_app_settings_request import SetAppSettingsRequest
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -910,7 +910,7 @@ class AppsApi:
     def set_enabled(
         self,
         id: Annotated[StrictStr, Field(description="The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything.")],
-        set_app_enabled_body: Annotated[SetAppEnabledBody, Field(description="The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.")],
+        set_app_enabled_request: Annotated[SetAppEnabledRequest, Field(description="The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -926,12 +926,12 @@ class AppsApi:
     ) -> AppWrapper:
         """Enable or disable an app
 
-        Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
+        Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.  The enabled field is mandatory, and a body without it is rejected with 400 rather than read as false.
 
         :param id: The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. (required)
         :type id: str
-        :param set_app_enabled_body: The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. (required)
-        :type set_app_enabled_body: SetAppEnabledBody
+        :param set_app_enabled_request: The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. (required)
+        :type set_app_enabled_request: SetAppEnabledRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -956,7 +956,7 @@ class AppsApi:
 
         _param = self._set_enabled_serialize(
             id=id,
-            set_app_enabled_body=set_app_enabled_body,
+            set_app_enabled_request=set_app_enabled_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -965,12 +965,12 @@ class AppsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -990,7 +990,7 @@ class AppsApi:
     def set_enabled_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything.")],
-        set_app_enabled_body: Annotated[SetAppEnabledBody, Field(description="The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.")],
+        set_app_enabled_request: Annotated[SetAppEnabledRequest, Field(description="The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1006,12 +1006,12 @@ class AppsApi:
     ) -> ApiResponse[AppWrapper]:
         """Enable or disable an app
 
-        Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
+        Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.  The enabled field is mandatory, and a body without it is rejected with 400 rather than read as false.
 
         :param id: The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. (required)
         :type id: str
-        :param set_app_enabled_body: The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. (required)
-        :type set_app_enabled_body: SetAppEnabledBody
+        :param set_app_enabled_request: The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. (required)
+        :type set_app_enabled_request: SetAppEnabledRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1036,7 +1036,7 @@ class AppsApi:
 
         _param = self._set_enabled_serialize(
             id=id,
-            set_app_enabled_body=set_app_enabled_body,
+            set_app_enabled_request=set_app_enabled_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1045,12 +1045,12 @@ class AppsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1070,7 +1070,7 @@ class AppsApi:
     def set_enabled_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything.")],
-        set_app_enabled_body: Annotated[SetAppEnabledBody, Field(description="The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.")],
+        set_app_enabled_request: Annotated[SetAppEnabledRequest, Field(description="The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1086,12 +1086,12 @@ class AppsApi:
     ) -> RESTResponseType:
         """Enable or disable an app
 
-        Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
+        Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.  The enabled field is mandatory, and a body without it is rejected with 400 rather than read as false.
 
         :param id: The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. (required)
         :type id: str
-        :param set_app_enabled_body: The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. (required)
-        :type set_app_enabled_body: SetAppEnabledBody
+        :param set_app_enabled_request: The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. (required)
+        :type set_app_enabled_request: SetAppEnabledRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1116,7 +1116,7 @@ class AppsApi:
 
         _param = self._set_enabled_serialize(
             id=id,
-            set_app_enabled_body=set_app_enabled_body,
+            set_app_enabled_request=set_app_enabled_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1125,12 +1125,12 @@ class AppsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1145,7 +1145,7 @@ class AppsApi:
     def _set_enabled_serialize(
         self,
         id,
-        set_app_enabled_body,
+        set_app_enabled_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1173,8 +1173,8 @@ class AppsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if set_app_enabled_body is not None:
-            _body_params = set_app_enabled_body
+        if set_app_enabled_request is not None:
+            _body_params = set_app_enabled_request
 
 
         # set the HTTP header `Accept`
@@ -1234,7 +1234,7 @@ class AppsApi:
     def set_settings(
         self,
         id: Annotated[StrictStr, Field(description="The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404.")],
-        set_app_settings_body: Annotated[SetAppSettingsBody, Field(description="The configuration to store for this portal, replacing whatever was stored before.")],
+        set_app_settings_request: Annotated[SetAppSettingsRequest, Field(description="The configuration to store for this portal, replacing whatever was stored before.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1254,8 +1254,8 @@ class AppsApi:
 
         :param id: The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. (required)
         :type id: str
-        :param set_app_settings_body: The configuration to store for this portal, replacing whatever was stored before. (required)
-        :type set_app_settings_body: SetAppSettingsBody
+        :param set_app_settings_request: The configuration to store for this portal, replacing whatever was stored before. (required)
+        :type set_app_settings_request: SetAppSettingsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1280,7 +1280,7 @@ class AppsApi:
 
         _param = self._set_settings_serialize(
             id=id,
-            set_app_settings_body=set_app_settings_body,
+            set_app_settings_request=set_app_settings_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1314,7 +1314,7 @@ class AppsApi:
     def set_settings_with_http_info(
         self,
         id: Annotated[StrictStr, Field(description="The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404.")],
-        set_app_settings_body: Annotated[SetAppSettingsBody, Field(description="The configuration to store for this portal, replacing whatever was stored before.")],
+        set_app_settings_request: Annotated[SetAppSettingsRequest, Field(description="The configuration to store for this portal, replacing whatever was stored before.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1334,8 +1334,8 @@ class AppsApi:
 
         :param id: The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. (required)
         :type id: str
-        :param set_app_settings_body: The configuration to store for this portal, replacing whatever was stored before. (required)
-        :type set_app_settings_body: SetAppSettingsBody
+        :param set_app_settings_request: The configuration to store for this portal, replacing whatever was stored before. (required)
+        :type set_app_settings_request: SetAppSettingsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1360,7 +1360,7 @@ class AppsApi:
 
         _param = self._set_settings_serialize(
             id=id,
-            set_app_settings_body=set_app_settings_body,
+            set_app_settings_request=set_app_settings_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1394,7 +1394,7 @@ class AppsApi:
     def set_settings_without_preload_content(
         self,
         id: Annotated[StrictStr, Field(description="The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404.")],
-        set_app_settings_body: Annotated[SetAppSettingsBody, Field(description="The configuration to store for this portal, replacing whatever was stored before.")],
+        set_app_settings_request: Annotated[SetAppSettingsRequest, Field(description="The configuration to store for this portal, replacing whatever was stored before.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1414,8 +1414,8 @@ class AppsApi:
 
         :param id: The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. (required)
         :type id: str
-        :param set_app_settings_body: The configuration to store for this portal, replacing whatever was stored before. (required)
-        :type set_app_settings_body: SetAppSettingsBody
+        :param set_app_settings_request: The configuration to store for this portal, replacing whatever was stored before. (required)
+        :type set_app_settings_request: SetAppSettingsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1440,7 +1440,7 @@ class AppsApi:
 
         _param = self._set_settings_serialize(
             id=id,
-            set_app_settings_body=set_app_settings_body,
+            set_app_settings_request=set_app_settings_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1469,7 +1469,7 @@ class AppsApi:
     def _set_settings_serialize(
         self,
         id,
-        set_app_settings_body,
+        set_app_settings_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1497,8 +1497,8 @@ class AppsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if set_app_settings_body is not None:
-            _body_params = set_app_settings_body
+        if set_app_settings_request is not None:
+            _body_params = set_app_settings_request
 
 
         # set the HTTP header `Accept`

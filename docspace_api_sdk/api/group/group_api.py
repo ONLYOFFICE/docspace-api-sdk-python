@@ -1300,7 +1300,7 @@ class GroupApi:
     @validate_call
     def get_group_by_user_id(
         self,
-        userid: Annotated[UUID, Field(description="The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.")],
+        user_id: Annotated[UUID, Field(description="The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1318,8 +1318,8 @@ class GroupApi:
 
         Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
 
-        :param userid: The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (required)
-        :type userid: UUID
+        :param user_id: The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (required)
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1343,7 +1343,7 @@ class GroupApi:
         """ # noqa: E501
 
         _param = self._get_group_by_user_id_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1375,7 +1375,7 @@ class GroupApi:
     @validate_call
     def get_group_by_user_id_with_http_info(
         self,
-        userid: Annotated[UUID, Field(description="The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.")],
+        user_id: Annotated[UUID, Field(description="The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1393,8 +1393,8 @@ class GroupApi:
 
         Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
 
-        :param userid: The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (required)
-        :type userid: UUID
+        :param user_id: The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (required)
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1418,7 +1418,7 @@ class GroupApi:
         """ # noqa: E501
 
         _param = self._get_group_by_user_id_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1450,7 +1450,7 @@ class GroupApi:
     @validate_call
     def get_group_by_user_id_without_preload_content(
         self,
-        userid: Annotated[UUID, Field(description="The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.")],
+        user_id: Annotated[UUID, Field(description="The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1468,8 +1468,8 @@ class GroupApi:
 
         Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
 
-        :param userid: The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (required)
-        :type userid: UUID
+        :param user_id: The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (required)
+        :type user_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1493,7 +1493,7 @@ class GroupApi:
         """ # noqa: E501
 
         _param = self._get_group_by_user_id_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1520,7 +1520,7 @@ class GroupApi:
 
     def _get_group_by_user_id_serialize(
         self,
-        userid,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -1542,8 +1542,8 @@ class GroupApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if userid is not None:
-            _path_params['userid'] = userid
+        if user_id is not None:
+            _path_params['userId'] = user_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1570,7 +1570,7 @@ class GroupApi:
         ]
 
 
-        resource_path = "/api/2.0/group/user/{userid}"
+        resource_path = "/api/2.0/group/user/{userId}"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -1615,7 +1615,7 @@ class GroupApi:
     ) -> GroupArrayWrapper:
         """Get groups
 
-        Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+        Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
 
         :param user_id: Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
         :type user_id: UUID
@@ -1669,11 +1669,11 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1714,7 +1714,7 @@ class GroupApi:
     ) -> ApiResponse[GroupArrayWrapper]:
         """Get groups
 
-        Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+        Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
 
         :param user_id: Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
         :type user_id: UUID
@@ -1768,11 +1768,11 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1813,7 +1813,7 @@ class GroupApi:
     ) -> RESTResponseType:
         """Get groups
 
-        Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+        Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
 
         :param user_id: Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
         :type user_id: UUID
@@ -1867,11 +1867,11 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2683,12 +2683,12 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2763,12 +2763,12 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2843,12 +2843,12 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3331,12 +3331,12 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3411,12 +3411,12 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -3491,12 +3491,12 @@ class GroupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

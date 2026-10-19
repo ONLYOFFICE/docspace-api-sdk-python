@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List
-from docspace_api_sdk.models.ai_t_error_data import AiTErrorData
+from docspace_api_sdk.models.ai_error_data import AiErrorData
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +33,7 @@ class AiImportError(BaseModel):
     """ # noqa: E501
     kind: StrictStr = Field(description="`folder` or `prompt`, plus the offending name or id.", json_schema_extra={"examples": ["prompt"]})
     ref: StrictStr = Field(description="The offending entry - its name or its id.", json_schema_extra={"examples": ["33333333-3333-3333-3333-333333333333"]})
-    error: AiTErrorData = Field(description="Why the entry was rejected.")
+    error: AiErrorData = Field(description="Why the entry was rejected.")
     __properties: ClassVar[List[str]] = ["kind", "ref", "error"]
 
     @field_validator('kind')
@@ -100,7 +100,7 @@ class AiImportError(BaseModel):
         _obj = cls.model_validate({
             "kind": obj.get("kind"),
             "ref": obj.get("ref"),
-            "error": AiTErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
+            "error": AiErrorData.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
 

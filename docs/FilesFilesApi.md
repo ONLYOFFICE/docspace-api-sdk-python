@@ -142,12 +142,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file as it stands after the entry was recorded |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A third-party file identifier refers to a storage account that is not connected |  -  |
 **403** | The calling account cannot read this file |  -  |
 **404** | No file answers to this identifier |  -  |
+**500** | A third-party file identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -233,6 +233,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Always true: the request was understood, which does not mean that anything was added |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller is a guest |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -243,7 +244,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **change_version_history**
-> FileArrayWrapper change_version_history(file_id, change_history)
+> FileArrayWrapper change_version_history(file_id, change_history_request)
 
 Closes or reopens a revision group in the version history of a file and answers with every stored version of
 that file, newest first. With `continueVersion=false` the named version is completed: its content is stored
@@ -264,7 +265,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **Union[int, str]**| The file whose version history is changed. | 
- **change_history** | [**ChangeHistory**](ChangeHistory.md)| The change to make to the revision group. | 
+ **change_history_request** | [**ChangeHistoryRequest**](ChangeHistoryRequest.md)| The change to make to the revision group. | 
 
 ### Return type
 
@@ -283,7 +284,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.change_history import ChangeHistory
+from docspace_api_sdk.models.change_history_request import ChangeHistoryRequest
 from docspace_api_sdk.models.file_array_wrapper import FileArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -306,11 +307,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     file_id = 1 # int | The file whose version history is changed.
-    change_history = docspace_api_sdk.ChangeHistory() # ChangeHistory | The change to make to the revision group.
+    change_history_request = docspace_api_sdk.ChangeHistoryRequest() # ChangeHistoryRequest | The change to make to the revision group.
 
     try:
         # Change version history
-        api_response = api_instance.change_version_history(file_id, change_history)
+        api_response = api_instance.change_version_history(file_id, change_history_request)
         print("The response of FilesApi->change_version_history:\n")
         pprint(api_response)
     except Exception as e:
@@ -329,18 +330,20 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The versions of the file after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `version` |  -  |
+**402** | Completing the current version needs more space than the room or user storage quota leaves |  -  |
 **403** | The caller may not change the version history of the file |  -  |
+**404** | The file id, or the requested version of it, resolves to nothing |  -  |
+**500** | The file is locked by somebody else, or, when the current version is completed, the file is encrypted, another update of it is in progress, or storing the new version fails |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **check_fill_form_draft**
-> StringWrapper check_fill_form_draft(file_id, check_fill_form_draft)
+> StringWrapper check_fill_form_draft(file_id, check_fill_form_draft_request)
 
 Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal
 draft that filling needs. The form has to live in a form-filling room and filling has to be started for it
@@ -364,7 +367,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **Union[int, str]**| The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | 
- **check_fill_form_draft** | [**CheckFillFormDraft**](CheckFillFormDraft.md)| The revision of the form to open and what the caller intends to do with it. | 
+ **check_fill_form_draft_request** | [**CheckFillFormDraftRequest**](CheckFillFormDraftRequest.md)| The revision of the form to open and what the caller intends to do with it. | 
 
 ### Return type
 
@@ -383,7 +386,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.check_fill_form_draft import CheckFillFormDraft
+from docspace_api_sdk.models.check_fill_form_draft_request import CheckFillFormDraftRequest
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -406,11 +409,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     file_id = 1 # int | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-    check_fill_form_draft = docspace_api_sdk.CheckFillFormDraft() # CheckFillFormDraft | The revision of the form to open and what the caller intends to do with it.
+    check_fill_form_draft_request = docspace_api_sdk.CheckFillFormDraftRequest() # CheckFillFormDraftRequest | The revision of the form to open and what the caller intends to do with it.
 
     try:
         # Open a form draft for filling
-        api_response = api_instance.check_fill_form_draft(file_id, check_fill_form_draft)
+        api_response = api_instance.check_fill_form_draft(file_id, check_fill_form_draft_request)
         print("The response of FilesApi->check_fill_form_draft:\n")
         pprint(api_response)
     except Exception as e:
@@ -429,17 +432,21 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The editor address to open, with an optional notice fragment |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot open the form, or asked for a past revision without history access |  -  |
+**400** | The request body cannot be read or has no `version` |  -  |
+**401** | An anonymous caller has no external link |  -  |
+**402** | The personal draft does not fit into the storage quota of the portal or the room |  -  |
+**403** | The caller cannot open the form, asked for a past revision without history access, the form is in Trash, or the caller may fill the form but not the folder it lies in |  -  |
+**404** | The file id, or the requested version of it, resolves to nothing |  -  |
+**415** | The file is in a format the editors can neither edit nor open for viewing |  -  |
+**500** | The file lies in a third-party storage that cannot deliver it |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **copy_file_as**
-> FileEntryBaseWrapper copy_file_as(file_id, copy_as_json_element)
+> FileEntryBaseWrapper copy_file_as(file_id, copy_as_request)
 
 Copies one file into another folder under a new title, converting its content when the new title names a
 different format, and answers with the copy that was created. The extension of `destTitle` decides what
@@ -460,7 +467,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **Union[int, str]**| The file to copy. | 
- **copy_as_json_element** | [**CopyAsJsonElement**](CopyAsJsonElement.md)| The title, the destination and the conversion options of the copy. | 
+ **copy_as_request** | [**CopyAsRequest**](CopyAsRequest.md)| The title, the destination and the conversion options of the copy. | 
 
 ### Return type
 
@@ -479,7 +486,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.copy_as_json_element import CopyAsJsonElement
+from docspace_api_sdk.models.copy_as_request import CopyAsRequest
 from docspace_api_sdk.models.file_entry_base_wrapper import FileEntryBaseWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -502,11 +509,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     file_id = 1 # int | The file to copy.
-    copy_as_json_element = docspace_api_sdk.CopyAsJsonElement() # CopyAsJsonElement | The title, the destination and the conversion options of the copy.
+    copy_as_request = docspace_api_sdk.CopyAsRequest() # CopyAsRequest | The title, the destination and the conversion options of the copy.
 
     try:
         # Copy a file
-        api_response = api_instance.copy_file_as(file_id, copy_as_json_element)
+        api_response = api_instance.copy_file_as(file_id, copy_as_request)
         print("The response of FilesApi->copy_file_as:\n")
         pprint(api_response)
     except Exception as e:
@@ -525,19 +532,21 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The copy that was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The content cannot be converted into the format of the new title |  -  |
-**403** | The caller may not read the file or may not create files in the destination folder |  -  |
+**400** | The request body cannot be read or has no `destTitle` or `destFolderId`, or the new title is empty while the source file has no extension |  -  |
+**402** | The copy does not fit into the storage quota of the portal, the room or the user, or the converted content exceeds the maximum upload size |  -  |
+**403** | The caller may not read the file, the destination folder does not exist, or the caller may not create files in it |  -  |
 **404** | The file or the destination folder does not exist |  -  |
+**415** | The installation filters uploads and does not accept the format of the new title |  -  |
+**500** | The document service fails to convert the content, `destFolderId` is a fraction or outside the 32-bit range, or the file is a PDF form in a form-filling room whose filling has not started and the caller may only fill forms there |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_edit_session**
-> ChunkedUploadSessionResponseWrapperWrapper create_edit_session(file_id, file_size=file_size)
+> ChunkedUploadSessionResultWrapper create_edit_session(file_id, file_size=file_size)
 
 Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a
 document. The answer carries the session id the later calls quote, the address of the standalone chunk
@@ -562,11 +571,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChunkedUploadSessionResponseWrapperWrapper**](ChunkedUploadSessionResponseWrapperWrapper.md)
+[**ChunkedUploadSessionResultWrapper**](ChunkedUploadSessionResultWrapper.md)
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md).
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id: str` and the answer is [**ThirdPartyChunkedUploadSessionResultWrapper**](ThirdPartyChunkedUploadSessionResultWrapper.md).
 
 ### Authorization
 
@@ -577,7 +586,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.chunked_upload_session_response_wrapper_wrapper import ChunkedUploadSessionResponseWrapperWrapper
+from docspace_api_sdk.models.chunked_upload_session_result_wrapper import ChunkedUploadSessionResultWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -622,7 +631,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created editing session, wrapped in the success envelope |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot edit this file |  -  |
+**402** | The declared `fileSize` exceeds the portal limit for chunked uploads |  -  |
+**403** | The caller cannot edit this file, or the file is locked, open in the editor, in the trash or encrypted |  -  |
+**404** | No file with the specified ID |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -633,7 +644,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_file**
-> FileWrapper create_file(folder_id, create_file_json_element)
+> FileWrapper create_file(folder_id, create_file_request)
 
 Creates a file in the folder named in the route and answers with the stored file. The extension in the title
 decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the
@@ -655,7 +666,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **Union[int, str]**| The folder the file is created in. | 
- **create_file_json_element** | [**CreateFileJsonElement**](CreateFileJsonElement.md)| The title of the new file and the source of its content. | 
+ **create_file_request** | [**CreateFileRequest**](CreateFileRequest.md)| The title of the new file and the source of its content. | 
 
 ### Return type
 
@@ -674,7 +685,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_file_json_element import CreateFileJsonElement
+from docspace_api_sdk.models.create_file_request import CreateFileRequest
 from docspace_api_sdk.models.file_wrapper import FileWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -697,11 +708,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     folder_id = 1 # int | The folder the file is created in.
-    create_file_json_element = docspace_api_sdk.CreateFileJsonElement() # CreateFileJsonElement | The title of the new file and the source of its content.
+    create_file_request = docspace_api_sdk.CreateFileRequest() # CreateFileRequest | The title of the new file and the source of its content.
 
     try:
         # Create a file
-        api_response = api_instance.create_file(folder_id, create_file_json_element)
+        api_response = api_instance.create_file(folder_id, create_file_request)
         print("The response of FilesApi->create_file:\n")
         pprint(api_response)
     except Exception as e:
@@ -720,17 +731,20 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file created in the folder: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `title`, or the title is empty or longer than 165 characters |  -  |
+**402** | The new file does not fit into the storage quota of the portal, the room or the user |  -  |
+**403** | The caller may not create files in the folder, the folder does not exist or is a section where files cannot be created, the template does not exist or cannot be read, or the form gallery has no file of the title's format |  -  |
+**404** | The folder id or `templateId` is a string that is not the id of an item in a known third-party storage |  -  |
+**500** | `templateId` is a fraction, a number outside the 32-bit range or a numeric string, the form gallery does not know `formId` or cannot be reached, or the folder id is 0 and the caller is a guest without My documents |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_file_in_my_documents**
-> FileWrapper create_file_in_my_documents(create_file_json_element=create_file_json_element)
+> FileWrapper create_file_in_my_documents(create_file_request=create_file_request)
 
 Creates a file in the caller's own My documents section and answers with the stored file. The extension in
 the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to
@@ -752,7 +766,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_file_json_element** | [**CreateFileJsonElement**](CreateFileJsonElement.md)|  | [optional] 
+ **create_file_request** | [**CreateFileRequest**](CreateFileRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -767,7 +781,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_file_json_element import CreateFileJsonElement
+from docspace_api_sdk.models.create_file_request import CreateFileRequest
 from docspace_api_sdk.models.file_wrapper import FileWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -789,11 +803,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    create_file_json_element = docspace_api_sdk.CreateFileJsonElement() # CreateFileJsonElement |  (optional)
+    create_file_request = docspace_api_sdk.CreateFileRequest() # CreateFileRequest |  (optional)
 
     try:
         # Create a file in My documents
-        api_response = api_instance.create_file_in_my_documents(create_file_json_element=create_file_json_element)
+        api_response = api_instance.create_file_in_my_documents(create_file_request=create_file_request)
         print("The response of FilesApi->create_file_in_my_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -812,10 +826,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file created in My documents: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `title`, or the title is empty or longer than 165 characters |  -  |
+**402** | The new file does not fit into the storage quota of the portal, the room or the user |  -  |
+**403** | The template does not exist or cannot be read, or the form gallery has no file of the title's format |  -  |
+**404** | `templateId` is a string that is not the id of a file in a known third-party storage |  -  |
+**500** | `templateId` is a fraction, a number outside the 32-bit range or a numeric string, the form gallery does not know `formId` or cannot be reached, or the caller is a guest, who has no My documents |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -908,19 +925,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The primary external link of the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not share the file |  -  |
+**400** | The title or password is longer than 255 characters, the password does not meet the portal password policy, or `expirationDate` lies more than 10 years ahead |  -  |
+**403** | The caller may not share the file, the access level is not available for links to this file, the link limit is reached, or the admin restricts external links to public rooms |  -  |
 **404** | The file does not exist, or its primary link was revoked |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_html_file**
-> FileWrapper create_html_file(folder_id, create_text_or_html_file)
+> FileWrapper create_html_file(folder_id, create_text_or_html_file_request)
 
 Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers
 with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a
@@ -941,7 +958,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **Union[int, str]**| The folder the file is created in. | 
- **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)| The title, the content and the collision behaviour of the new file. | 
+ **create_text_or_html_file_request** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md)| The title, the content and the collision behaviour of the new file. | 
 
 ### Return type
 
@@ -960,7 +977,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_text_or_html_file import CreateTextOrHtmlFile
+from docspace_api_sdk.models.create_text_or_html_file_request import CreateTextOrHtmlFileRequest
 from docspace_api_sdk.models.file_wrapper import FileWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -983,11 +1000,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     folder_id = 1 # int | The folder the file is created in.
-    create_text_or_html_file = docspace_api_sdk.CreateTextOrHtmlFile() # CreateTextOrHtmlFile | The title, the content and the collision behaviour of the new file.
+    create_text_or_html_file_request = docspace_api_sdk.CreateTextOrHtmlFileRequest() # CreateTextOrHtmlFileRequest | The title, the content and the collision behaviour of the new file.
 
     try:
         # Create an HTML file
-        api_response = api_instance.create_html_file(folder_id, create_text_or_html_file)
+        api_response = api_instance.create_html_file(folder_id, create_text_or_html_file_request)
         print("The response of FilesApi->create_html_file:\n")
         pprint(api_response)
     except Exception as e:
@@ -1006,18 +1023,20 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created or updated HTML file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not create files in this folder |  -  |
+**400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters |  -  |
+**402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user |  -  |
+**403** | The caller may not create files in this folder, or the folder is a section where files cannot be created |  -  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_html_file_in_my_documents**
-> FileWrapper create_html_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
+> FileWrapper create_html_file_in_my_documents(create_text_or_html_file_request=create_text_or_html_file_request)
 
 Creates an HTML file in the caller's own My documents section out of the markup passed as the content, and
 answers with the stored file. The `.html` extension is added to the title unless the title already ends with
@@ -1038,7 +1057,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)|  | [optional] 
+ **create_text_or_html_file_request** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -1053,7 +1072,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_text_or_html_file import CreateTextOrHtmlFile
+from docspace_api_sdk.models.create_text_or_html_file_request import CreateTextOrHtmlFileRequest
 from docspace_api_sdk.models.file_wrapper import FileWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -1075,11 +1094,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    create_text_or_html_file = docspace_api_sdk.CreateTextOrHtmlFile() # CreateTextOrHtmlFile |  (optional)
+    create_text_or_html_file_request = docspace_api_sdk.CreateTextOrHtmlFileRequest() # CreateTextOrHtmlFileRequest |  (optional)
 
     try:
         # Create an HTML file in My documents
-        api_response = api_instance.create_html_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
+        api_response = api_instance.create_html_file_in_my_documents(create_text_or_html_file_request=create_text_or_html_file_request)
         print("The response of FilesApi->create_html_file_in_my_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -1098,18 +1117,20 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created or updated HTML file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters |  -  |
+**402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user |  -  |
 **403** | The caller may not create a file in this section |  -  |
+**404** | The caller is a guest, who has no My documents |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_text_file**
-> FileWrapper create_text_file(folder_id, create_text_or_html_file)
+> FileWrapper create_text_file(folder_id, create_text_or_html_file_request)
 
 Creates a text file in the folder named in the route out of the text passed as the content, and answers with
 the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as
@@ -1130,7 +1151,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **Union[int, str]**| The folder the file is created in. | 
- **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)| The title, the content and the collision behaviour of the new file. | 
+ **create_text_or_html_file_request** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md)| The title, the content and the collision behaviour of the new file. | 
 
 ### Return type
 
@@ -1149,7 +1170,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_text_or_html_file import CreateTextOrHtmlFile
+from docspace_api_sdk.models.create_text_or_html_file_request import CreateTextOrHtmlFileRequest
 from docspace_api_sdk.models.file_wrapper import FileWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -1172,11 +1193,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     folder_id = 1 # int | The folder the file is created in.
-    create_text_or_html_file = docspace_api_sdk.CreateTextOrHtmlFile() # CreateTextOrHtmlFile | The title, the content and the collision behaviour of the new file.
+    create_text_or_html_file_request = docspace_api_sdk.CreateTextOrHtmlFileRequest() # CreateTextOrHtmlFileRequest | The title, the content and the collision behaviour of the new file.
 
     try:
         # Create a text file
-        api_response = api_instance.create_text_file(folder_id, create_text_or_html_file)
+        api_response = api_instance.create_text_file(folder_id, create_text_or_html_file_request)
         print("The response of FilesApi->create_text_file:\n")
         pprint(api_response)
     except Exception as e:
@@ -1195,17 +1216,20 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created or updated text file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters |  -  |
+**402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user |  -  |
+**403** | The caller may not create files in this folder, or the folder is a section where files cannot be created |  -  |
+**404** | The folder does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_text_file_in_my_documents**
-> FileWrapper create_text_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
+> FileWrapper create_text_file_in_my_documents(create_text_or_html_file_request=create_text_or_html_file_request)
 
 Creates a text file in the caller's own My documents section out of the text passed as the content, and
 answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but
@@ -1225,7 +1249,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md)|  | [optional] 
+ **create_text_or_html_file_request** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -1240,7 +1264,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_text_or_html_file import CreateTextOrHtmlFile
+from docspace_api_sdk.models.create_text_or_html_file_request import CreateTextOrHtmlFileRequest
 from docspace_api_sdk.models.file_wrapper import FileWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -1262,11 +1286,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    create_text_or_html_file = docspace_api_sdk.CreateTextOrHtmlFile() # CreateTextOrHtmlFile |  (optional)
+    create_text_or_html_file_request = docspace_api_sdk.CreateTextOrHtmlFileRequest() # CreateTextOrHtmlFileRequest |  (optional)
 
     try:
         # Create a text file in My documents
-        api_response = api_instance.create_text_file_in_my_documents(create_text_or_html_file=create_text_or_html_file)
+        api_response = api_instance.create_text_file_in_my_documents(create_text_or_html_file_request=create_text_or_html_file_request)
         print("The response of FilesApi->create_text_file_in_my_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -1285,10 +1309,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created or updated text file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters |  -  |
+**402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user |  -  |
+**403** | The caller may not create a file in this section |  -  |
+**404** | The caller is a guest, who has no My documents |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1375,6 +1402,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file ids from the request, echoed back |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**401** | An anonymous caller has no external link |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
@@ -1384,7 +1412,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_file**
-> FileOperationArrayWrapper delete_file(file_id, delete, return_single_operation=return_single_operation)
+> FileOperationArrayWrapper delete_file(file_id, delete_file_request, return_single_operation=return_single_operation)
 
 Queues the deletion of one file and answers with the caller's file operations, the one just created among
 them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation
@@ -1406,7 +1434,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **Union[int, str]**| The file to delete. | 
- **delete** | [**Delete**](Delete.md)| When and how the file is deleted. | 
+ **delete_file_request** | [**DeleteFileRequest**](DeleteFileRequest.md)| When and how the file is deleted. | 
  **return_single_operation** | **bool**| Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] 
 
 ### Return type
@@ -1426,7 +1454,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.delete import Delete
+from docspace_api_sdk.models.delete_file_request import DeleteFileRequest
 from docspace_api_sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -1449,12 +1477,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     file_id = 1 # int | The file to delete.
-    delete = docspace_api_sdk.Delete() # Delete | When and how the file is deleted.
+    delete_file_request = docspace_api_sdk.DeleteFileRequest() # DeleteFileRequest | When and how the file is deleted.
     return_single_operation = false # bool | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional)
 
     try:
         # Delete a file
-        api_response = api_instance.delete_file(file_id, delete, return_single_operation=return_single_operation)
+        api_response = api_instance.delete_file(file_id, delete_file_request, return_single_operation=return_single_operation)
         print("The response of FilesApi->delete_file:\n")
         pprint(api_response)
     except Exception as e:
@@ -1473,6 +1501,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file operations of the caller, including the deletion just queued |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller may not delete the file, or the file is locked by somebody else or open in an editing session |  -  |
+**404** | The file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1488,12 +1518,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 Removes the listed entries from the Recent section of the calling account, the history of opened files that
 `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;
 access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from
-their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be
-cleared this way, and folder ids are accepted but change nothing because the section lists files only. The
-answer carries no body and reports nothing about how many entries were found: an empty request and an id that
-was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time
-the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section
-instead, call `PUT api/2.0/files/displayrecent`.
+their own history. A file on a connected third-party account is cleared by its string id too, but only while
+the storage can still find it: the entry of a file removed from the storage stays in the history. Folder ids
+are accepted but change nothing because the section lists files only. The answer carries no body and reports
+nothing about how many entries were found: an empty request and an id that was never in the section are
+accepted alike. Repeating the call is safe, but an entry returns the next time the file is opened or
+`POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section instead, call
+`PUT api/2.0/files/displayrecent`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1559,17 +1590,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Empty answer: the listed entries no longer appear in the Recent section |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, or a third-party file or folder identifier refers to a storage account that is not connected |  -  |
+**404** | A third-party file or folder identifier names a storage type the portal does not know |  -  |
+**500** | An id is a number that is not a 32-bit integer, or a third-party file or folder identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_templates**
-> BooleanWrapper delete_templates(request_body=request_body)
+> BooleanWrapper delete_templates(delete_template_files_request_dto=delete_template_files_request_dto)
 
 Takes the listed files off the personal template list of the calling account, leaving the files themselves
 untouched: only the template mark is dropped. The body of this request is a bare JSON array of numeric file
@@ -1588,7 +1620,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_body** | [**List[int]**](int.md)| The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. | [optional] 
+ **delete_template_files_request_dto** | [**List[int]**](int.md)| The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. | [optional] 
 
 ### Return type
 
@@ -1624,11 +1656,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
-    request_body = [56] # List[int] | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. (optional)
+    delete_template_files_request_dto = [56] # List[int] | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. (optional)
 
     try:
         # Delete template files
-        api_response = api_instance.delete_templates(request_body=request_body)
+        api_response = api_instance.delete_templates(delete_template_files_request_dto=delete_template_files_request_dto)
         print("The response of FilesApi->delete_templates:\n")
         pprint(api_response)
     except Exception as e:
@@ -1647,6 +1679,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Always true: the files named in the array are no longer templates of the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller is a guest |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -1831,7 +1864,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The roles of the form with the state of each |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller has no read access to the form |  -  |
+**403** | The caller has no read access to the form, or the file is not a PDF |  -  |
 **404** | No file with this identifier exists |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -1929,6 +1962,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The addresses and keys the editor needs to show the changes |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller may not read the history of the file, as with an anonymous caller, read-only or commenting access, or a file in a third-party storage |  -  |
+**404** | The file id, or the requested version of it, resolves to nothing |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
@@ -2022,6 +2057,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The editing revisions of the file, oldest first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller may not read the history of the file, as with an anonymous caller, read-only or commenting access, or a file in a third-party storage |  -  |
+**404** | The file id resolves to nothing |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
@@ -2114,7 +2151,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The key pairs of the caller and the file keys issued to them |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The file cannot carry encryption keys |  -  |
-**403** | The caller has no read access to the file |  -  |
+**403** | The file does not exist, or the caller has no read access to it |  -  |
 **404** | The file does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -2212,12 +2249,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The activity entries of the file, newest first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, the `count` is outside its allowed range, or `fromDate` or `toDate` is not a date and time ending in `Z` or a UTC offset |  -  |
 **403** | The caller has no read access to the file |  -  |
 **404** | No file with this identifier exists |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2308,6 +2345,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file as it is stored, with the state it has for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**401** | An anonymous caller has no external link |  -  |
+**403** | The caller cannot read the file |  -  |
+**404** | The file id, or the requested version of it, resolves to nothing, or the file is a PDF form in a form-filling room whose filling has not started and the caller may only fill forms there |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
@@ -2404,10 +2444,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The external links of the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
+**403** | The caller cannot read the file |  -  |
+**404** | The file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2501,11 +2543,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The primary external link of the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
+**401** | An anonymous caller has no external link |  -  |
 **403** | The caller may not share the file |  -  |
 **404** | The file does not exist, or its primary link was revoked |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2595,6 +2638,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Every stored version of the file, newest first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller may not read the history of the file, or the file id resolves to nothing |  -  |
+**404** | The file id is neither a number nor the id of a file in a known third-party storage |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
@@ -2683,9 +2728,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The result of the completed form-filling session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The `fillingSessionId` is missing or empty |  -  |
+**404** | No completed form-filling session with this identifier is remembered |  -  |
+**500** | The original form of the filled copy has been deleted |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2771,7 +2817,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The submissions collected for the form, with the description of its fields |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller has no read access to the form |  -  |
+**403** | The form does not exist or is not a PDF, the caller has no read access to it, its filling has not started, it is a copy rather than the original form, or it lies outside the room its filling was started in |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -2864,6 +2910,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The download address of the file with its signature token |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller cannot read the file |  -  |
+**404** | The file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -2957,17 +3005,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The download address of the current file version |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The file is a PDF form in a form-filling room whose filling has not started, and the caller may only fill forms there |  -  |
+**403** | The caller cannot read the file |  -  |
+**404** | The file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_protected_file_users**
-> MentionWrapperArrayWrapper get_protected_file_users(file_id)
+> MentionArrayWrapper get_protected_file_users(file_id)
 
 Lists the users the file is shared with, which is what a client offers when the author protects a document and
 picks who may still edit it. The list is built from the whole access list of the file: every entry that is not
@@ -2989,7 +3039,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
+[**MentionArrayWrapper**](MentionArrayWrapper.md)
 
 ### Third-party storage
 
@@ -3004,7 +3054,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
+from docspace_api_sdk.models.mention_array_wrapper import MentionArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -3048,6 +3098,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The users the file is shared with, ordered by display name |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller is a guest, or the file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -3138,10 +3189,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The reference descriptor, or the same object with the error text set when nothing resolved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `fileKey` or `instanceId` |  -  |
+**403** | The caller cannot read the source file, its folder or the referenced file |  -  |
+**500** | `fileKey` is empty or not a number while `instanceId` names this portal |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3318,9 +3370,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | True when the file is a PDF form made in the editors, false otherwise |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller cannot read the file |  -  |
+**404** | The file id resolves to nothing |  -  |
+**500** | The file is a PDF form in a form-filling room whose filling has not started, and the caller may only fill forms there |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -3328,7 +3382,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **lock_file**
-> FileWrapper lock_file(file_id, lock_file_parameters)
+> FileWrapper lock_file(file_id, lock_file_request)
 
 Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now
 stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment
@@ -3349,7 +3403,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **Union[int, str]**| The file to lock or unlock. | 
- **lock_file_parameters** | [**LockFileParameters**](LockFileParameters.md)| The lock state to reach. | 
+ **lock_file_request** | [**LockFileRequest**](LockFileRequest.md)| The lock state to reach. | 
 
 ### Return type
 
@@ -3369,7 +3423,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.file_wrapper import FileWrapper
-from docspace_api_sdk.models.lock_file_parameters import LockFileParameters
+from docspace_api_sdk.models.lock_file_request import LockFileRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -3391,11 +3445,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     file_id = 1 # int | The file to lock or unlock.
-    lock_file_parameters = docspace_api_sdk.LockFileParameters() # LockFileParameters | The lock state to reach.
+    lock_file_request = docspace_api_sdk.LockFileRequest() # LockFileRequest | The lock state to reach.
 
     try:
         # Lock a file
-        api_response = api_instance.lock_file(file_id, lock_file_parameters)
+        api_response = api_instance.lock_file(file_id, lock_file_request)
         print("The response of FilesApi->lock_file:\n")
         pprint(api_response)
     except Exception as e:
@@ -3414,6 +3468,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file with its lock state as it now stands |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller may not lock or unlock the file |  -  |
+**404** | The file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -3504,11 +3560,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The action was applied to the form |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not start, stop or resume the filling of this form |  -  |
+**400** | The request body cannot be read or has no `formId` |  -  |
+**403** | The form does not exist, is not a PDF or lies outside a room, the caller may not start or stop its filling, or `action` is not one of the known values |  -  |
+**500** | The form has no filling properties yet, as when a filling that was never started is resumed, or the form lies in a third-party storage |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3610,9 +3666,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The editor configuration for the requested file and mode |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot read the file, or asked for a past version without access to the file history |  -  |
+**403** | The caller cannot read the file, asked for a past version without access to the file history, or the file is in Trash |  -  |
+**404** | The file id, or the requested version of it, resolves to nothing |  -  |
+**415** | The file is in a format the editors can neither edit nor open for viewing |  -  |
+**500** | The file lies in a third-party storage that cannot deliver it |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -3708,9 +3766,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The editing revisions of the file after the restore |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The version is missing or is already the current one |  -  |
-**403** | The caller may not change the version history of the file |  -  |
+**402** | The restored content does not fit into the storage quota |  -  |
+**403** | The caller may not change the version history of the file, or, with `url`, may not edit the file or the file is locked by somebody else or being edited |  -  |
+**404** | Without `url`, the file id or the requested version resolves to nothing |  -  |
+**500** | The file is locked by somebody else or being edited, another restore of it is in progress, or storing the new version fails; with `url`, also when the file or the version does not exist or the address cannot be fetched |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3810,17 +3870,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The file is saved and the stored version is returned |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The file id cannot be resolved to a storage that could accept the content |  -  |
+**402** | The content does not fit into the portal's storage quota, even with the overshoot allowed for editor saves |  -  |
 **403** | The caller cannot edit the file, or it is locked, in Trash, or open in somebody else's editing session |  -  |
+**404** | The file id resolves to nothing |  -  |
+**500** | The file lies in a third-party storage in another format and the document service fails to convert the content |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_file_as_pdf**
-> FileWrapper save_file_as_pdf(id, save_as_pdf)
+> FileWrapper save_file_as_pdf(id, save_as_pdf_request)
 
 Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with
 the file that was created. The source is left untouched, so the two files then live side by side. `title`
@@ -3842,7 +3904,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **Union[int, str]**| The file to convert; it is left untouched. | 
- **save_as_pdf** | [**SaveAsPdf**](SaveAsPdf.md)| The destination folder and the name of the PDF. | 
+ **save_as_pdf_request** | [**SaveAsPdfRequest**](SaveAsPdfRequest.md)| The destination folder and the name of the PDF. | 
 
 ### Return type
 
@@ -3850,7 +3912,7 @@ Name | Type | Description  | Notes
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` `save_as_pdf: ThirdPartySaveAsPdf` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: str` `save_as_pdf_request: ThirdPartySaveAsPdfRequest` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -3862,7 +3924,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.file_wrapper import FileWrapper
-from docspace_api_sdk.models.save_as_pdf import SaveAsPdf
+from docspace_api_sdk.models.save_as_pdf_request import SaveAsPdfRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -3884,11 +3946,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     id = 1 # int | The file to convert; it is left untouched.
-    save_as_pdf = docspace_api_sdk.SaveAsPdf() # SaveAsPdf | The destination folder and the name of the PDF.
+    save_as_pdf_request = docspace_api_sdk.SaveAsPdfRequest() # SaveAsPdfRequest | The destination folder and the name of the PDF.
 
     try:
         # Save a file as PDF
-        api_response = api_instance.save_file_as_pdf(id, save_as_pdf)
+        api_response = api_instance.save_file_as_pdf(id, save_as_pdf_request)
         print("The response of FilesApi->save_file_as_pdf:\n")
         pprint(api_response)
     except Exception as e:
@@ -3907,11 +3969,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The PDF file that was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `folderId` or `title` |  -  |
+**402** | The PDF does not fit into the storage quota of the portal, the room or the user |  -  |
+**403** | The caller cannot read the source file or may not create files in the destination folder |  -  |
 **404** | The source file or the destination folder does not exist |  -  |
+**500** | The document service fails to convert the file to PDF, or the converted file cannot be downloaded |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3997,18 +4061,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The roles were stored and the filling was started or reset |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not start or reset the filling of this form |  -  |
+**400** | The request body cannot be read or has no `formId` or `roles`, or `roles` is null |  -  |
+**403** | The caller may not start or reset the filling of this form, or the file is not a PDF or lies outside a room |  -  |
+**500** | No file with the `formId` exists |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_custom_filter_tag**
-> FileWrapper set_custom_filter_tag(file_id, custom_filter_parameters)
+> FileWrapper set_custom_filter_tag(file_id, custom_filter_request)
 
 Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In
 that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that
@@ -4029,7 +4093,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **Union[int, str]**| The spreadsheet whose Custom Filter mode is switched. | 
- **custom_filter_parameters** | [**CustomFilterParameters**](CustomFilterParameters.md)| The Custom Filter state to reach. | 
+ **custom_filter_request** | [**CustomFilterRequest**](CustomFilterRequest.md)| The Custom Filter state to reach. | 
 
 ### Return type
 
@@ -4048,7 +4112,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.custom_filter_parameters import CustomFilterParameters
+from docspace_api_sdk.models.custom_filter_request import CustomFilterRequest
 from docspace_api_sdk.models.file_wrapper import FileWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -4071,11 +4135,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     file_id = 1 # int | The spreadsheet whose Custom Filter mode is switched.
-    custom_filter_parameters = docspace_api_sdk.CustomFilterParameters() # CustomFilterParameters | The Custom Filter state to reach.
+    custom_filter_request = docspace_api_sdk.CustomFilterRequest() # CustomFilterRequest | The Custom Filter state to reach.
 
     try:
         # Set the Custom Filter editing mode
-        api_response = api_instance.set_custom_filter_tag(file_id, custom_filter_parameters)
+        api_response = api_instance.set_custom_filter_tag(file_id, custom_filter_request)
         print("The response of FilesApi->set_custom_filter_tag:\n")
         pprint(api_response)
     except Exception as e:
@@ -4094,10 +4158,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The spreadsheet with its Custom Filter state as it now stands |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The file is not in a format that supports the Custom Filter mode |  -  |
+**403** | The caller may not use the Custom Filter mode on the file, or somebody else switched the mode on and the caller is neither a room manager nor a DocSpace admin |  -  |
+**404** | The file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -4188,7 +4254,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file keys were stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not issue keys for this file, or the file is not in a private room |  -  |
+**403** | The file does not exist, the caller may not issue keys for it, the file is not in a private room, or a recipient has no read access to it |  -  |
 **404** | The file does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -4286,10 +4352,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The link as it now stands, or nothing when it was revoked |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The title or password is longer than 255 characters, the password does not meet the portal password policy, or `expirationDate` lies more than 10 years ahead |  -  |
+**403** | The caller may not share the file, the access level is not available for links to this file, the link limit is reached, or the admin's restriction on external links forbids the change |  -  |
+**404** | The file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -4382,12 +4450,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file with the position it now holds |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, or `order` is below 1 or is neither a number nor a dotted path ending in one |  -  |
 **403** | The caller may not reorder this file |  -  |
 **404** | The file does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -4474,17 +4542,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The files and folders that were moved, with the positions they now hold |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `items`, an item has no `entryId` or `entryType`, or an `order` is below 1 or is neither a number nor a dotted path ending in one |  -  |
+**403** | The caller may not administer the room of an entry, or an entry lies outside any room |  -  |
+**404** | An entry does not exist or is sent with the wrong `entryType` |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **start_edit_file**
-> StringWrapper start_edit_file(file_id, start_edit)
+> StringWrapper start_edit_file(file_id, start_edit_request)
 
 Opens an editing session on the file and answers with the document key that identifies it, the value an editor
 client passes to the document service in order to join the co-editing session for that exact revision. The
@@ -4505,7 +4575,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **Union[int, str]**| The file to open the editing session on. The caller needs edit access to it. | 
- **start_edit** | [**StartEdit**](StartEdit.md)| The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | 
+ **start_edit_request** | [**StartEditRequest**](StartEditRequest.md)| The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | 
 
 ### Return type
 
@@ -4524,7 +4594,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.start_edit import StartEdit
+from docspace_api_sdk.models.start_edit_request import StartEditRequest
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -4547,11 +4617,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     file_id = 1 # int | The file to open the editing session on. The caller needs edit access to it.
-    start_edit = docspace_api_sdk.StartEdit() # StartEdit | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
+    start_edit_request = docspace_api_sdk.StartEditRequest() # StartEditRequest | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
 
     try:
         # Open an editing session
-        api_response = api_instance.start_edit_file(file_id, start_edit)
+        api_response = api_instance.start_edit_file(file_id, start_edit_request)
         print("The response of FilesApi->start_edit_file:\n")
         pprint(api_response)
     except Exception as e:
@@ -4570,9 +4640,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The document key of the editing session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller cannot edit the file, or the file is already being edited and the session was claimed alone |  -  |
+**401** | An anonymous caller who may not edit the file claims the session with `editingAlone=true` |  -  |
+**403** | The caller cannot edit the file, the file is locked or in Trash, somebody is already editing it and the session was claimed alone, or the document service did not accept the tracking request |  -  |
+**404** | The file id resolves to nothing |  -  |
+**415** | The file is in a format the editors can neither edit nor open for viewing |  -  |
+**500** | The file lies in a third-party storage that cannot deliver it, or, with `editingAlone=true`, the file is locked by somebody else or lies in Trash |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -4663,6 +4736,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The form file, with the filling properties now stored on it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | The caller holds only form-filling access on the room, or no access to it at all |  -  |
+**404** | The file id resolves to nothing |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -4758,11 +4832,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Echo of the requested state, which does not prove that the mark was changed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | A parameter has the wrong type, or a third-party file identifier refers to a storage account that is not connected |  -  |
 **403** | Changing the favorite mark is refused for the caller |  -  |
+**404** | A third-party file identifier names a storage type the portal does not know |  -  |
+**500** | A third-party file identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -4859,9 +4934,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The session was refreshed or closed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The document key does not match the revision being edited |  -  |
+**401** | An anonymous caller has no external link, or refreshes the session through a link that does not grant editing |  -  |
+**403** | The document key does not match the revision being edited, or the caller has none of the editing rights on the file |  -  |
+**404** | The file id resolves to nothing |  -  |
+**500** | The session is refreshed while the file is locked by somebody else or lies in Trash |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -4869,7 +4946,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_file**
-> FileWrapper update_file(file_id, update_file)
+> FileWrapper update_file(file_id, update_file_request)
 
 Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A
 non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename
@@ -4890,7 +4967,7 @@ For more information, see [api.onlyoffice.com]().
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **Union[int, str]**| The file to update. | 
- **update_file** | [**UpdateFile**](UpdateFile.md)| The new title and the version to restore. | 
+ **update_file_request** | [**UpdateFileRequest**](UpdateFileRequest.md)| The new title and the version to restore. | 
 
 ### Return type
 
@@ -4910,7 +4987,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.file_wrapper import FileWrapper
-from docspace_api_sdk.models.update_file import UpdateFile
+from docspace_api_sdk.models.update_file_request import UpdateFileRequest
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -4932,11 +5009,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FilesApi(api_client)
     file_id = 1 # int | The file to update.
-    update_file = docspace_api_sdk.UpdateFile() # UpdateFile | The new title and the version to restore.
+    update_file_request = docspace_api_sdk.UpdateFileRequest() # UpdateFileRequest | The new title and the version to restore.
 
     try:
         # Update a file
-        api_response = api_instance.update_file(file_id, update_file)
+        api_response = api_instance.update_file(file_id, update_file_request)
         print("The response of FilesApi->update_file:\n")
         pprint(api_response)
     except Exception as e:
@@ -4955,10 +5032,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The file after the rename, the restore, or both |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The caller may not rename the file or change its version |  -  |
+**400** | The title is longer than 165 characters, or `lastVersion` is the current version |  -  |
+**401** | An anonymous caller has no external link |  -  |
+**402** | Restoring `lastVersion` needs more space than the room or user storage quota leaves |  -  |
+**403** | The caller may not read or rename the file or change its version |  -  |
+**404** | The file id, or `lastVersion` of it, resolves to nothing, or the file is a PDF form in a form-filling room whose filling has not started and the caller may only fill forms there |  -  |
+**500** | The file is locked by somebody else, a third-party file is renamed while it is being edited, or restoring `lastVersion` fails because the file is being edited, another update of it is in progress or the new version cannot be stored |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

@@ -4,12 +4,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**change_user_email**](#change_user_email) | **PUT** /api/2.0/people/{userid}/email | Change a user email
+[**change_user_email**](#change_user_email) | **PUT** /api/2.0/people/{userId}/email | Change a user email
 [**send_email_change_instructions**](#send_email_change_instructions) | **POST** /api/2.0/people/email | Send instructions to change email
 
 
 # **change_user_email**
-> EmployeeFullWrapper change_user_email(userid, change_email_request)
+> EmployeeFullWrapper change_user_email(user_id, change_email_request)
 
 Sets a new email address on an account, which is the step that completes an email change.
 The request has to carry the confirmation token from the emailed link rather than an ordinary session, and an
@@ -29,7 +29,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **UUID**| The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | 
+ **user_id** | **UUID**| The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | 
  **change_email_request** | [**ChangeEmailRequest**](ChangeEmailRequest.md)| The new address, in plain text or in the encrypted form the confirmation link carries. | 
 
 ### Return type
@@ -67,12 +67,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.EmailApi(api_client)
-    userid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+    user_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
     change_email_request = docspace_api_sdk.ChangeEmailRequest() # ChangeEmailRequest | The new address, in plain text or in the encrypted form the confirmation link carries.
 
     try:
         # Change a user email
-        api_response = api_instance.change_user_email(userid, change_email_request)
+        api_response = api_instance.change_user_email(user_id, change_email_request)
         print("The response of EmailApi->change_user_email:\n")
         pprint(api_response)
     except Exception as e:
@@ -107,7 +107,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 Starts changing the email address of an account, and what it actually does depends on who calls it.
 A caller acting on their own account only gets a confirmation letter sent to the new address, and the address
-stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userid}/email`.
+stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userId}/email`.
 A DocSpace administrator acting on somebody else changes the address immediately instead: the account is
 marked as not activated, every session of it is ended, and activation instructions are sent to the new
 address - and passing the address the account already has is then rejected with 400.

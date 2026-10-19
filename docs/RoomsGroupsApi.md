@@ -93,10 +93,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created room group with the rooms that were linked to it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `name`, `icon` or `rooms`, the name is blank or longer than 128 characters, the icon is not a built-in cover, `searchArea` names a section other than `Active` and `Forms`, a room identifier is neither a positive number nor a non-numeric string, a third-party room identifier refers to a storage account that is not connected, or none of the listed rooms can be added and the existing ones all belong to the other section than `searchArea` |  -  |
+**403** | The `rooms` list is empty, the listed rooms exist but none of them is a room the caller can read, or only some of them could be added - the group is then created with those |  -  |
+**404** | None of the listed rooms exists, or a string room identifier does not name a third-party storage |  -  |
+**500** | A third-party room identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -184,10 +186,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room group with the new icon |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, or the icon is neither a built-in cover nor an empty string |  -  |
+**404** | The group does not exist or belongs to another account |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -272,6 +275,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room group no longer exists; the body is empty and the rooms it gathered are left as they were |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The group belongs to another account |  -  |
+**404** | The group does not exist |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -291,7 +296,8 @@ already been deleted, and a portal administrator is no exception to that rule. T
 group without the `rooms` array, which is the cheaper form when only the name, the icon and the number of
 rooms are needed; `totalRooms` is filled either way. A room moved to the archive is left out of both `rooms`
 and `totalRooms` while its membership survives, so taking the room out of the archive brings it back into the
-group. Rooms stored in the portal are listed before rooms on connected third-party accounts. The call is
+group. A room the caller can no longer open is left out the same way, and comes back if access to it is
+granted again. Rooms stored in the portal are listed before rooms on connected third-party accounts. The call is
 read-only and changes nothing about the group or the rooms it refers to.
 
 For more information, see [api.onlyoffice.com]().
@@ -362,6 +368,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room group with the rooms it gathers |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**404** | The group does not exist or belongs to another account |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -379,7 +386,8 @@ created are listed: groups of other members never appear here, and an account th
 empty array back. Set `includeMembers` to false to leave the `rooms` array out of every entry and keep the
 name, the icon and `totalRooms` alone, which is the cheaper form when the list is only being shown as a menu.
 Archived rooms are skipped in both the `rooms` array and the `totalRooms` count, and reappear once the room is
-taken out of the archive. The listing is neither paged nor filtered - it always carries the whole set - and
+taken out of the archive; rooms the caller can no longer open are skipped the same way until access to them
+is granted again. The listing is neither paged nor filtered - it always carries the whole set - and
 the order of the entries is not contractual, so sort them on the client when the order matters. The call is
 read-only. Use `GET api/2.0/files/group/{id}` when the identifier of a single group is already known, and
 `POST api/2.0/files/group` to add one.
@@ -453,10 +461,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room groups of the calling account |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The `searchArea` names a section other than `Active` and `Forms` |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -545,10 +553,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The room group as stored after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or names its members with every one of them null, the new name is blank or longer than 128 characters, a room identifier is neither a positive number nor a non-numeric string, a third-party room identifier refers to a storage account that is not connected, or none of the rooms of `roomsToAdd` can be added and the existing ones all belong to the other section than the group |  -  |
+**403** | The rooms of `roomsToAdd`, or the rooms of `roomsToRemove` that are not in the group, exist but none of them is a room the caller can read, or only some of the rooms could be applied - the earlier steps stay applied |  -  |
+**404** | The group does not exist or belongs to another account, none of the rooms of `roomsToAdd` or of the rooms of `roomsToRemove` that are not in the group exists, or a string room identifier does not name a third-party storage |  -  |
+**500** | A third-party room identifier carries a storage account number beyond the 32-bit range |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

@@ -4,11 +4,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_guest_sharing_link**](#get_guest_sharing_link) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link
+[**get_guest_sharing_link**](#get_guest_sharing_link) | **GET** /api/2.0/people/guests/{userId}/share | Get a guest sharing link
 
 
 # **get_guest_sharing_link**
-> StringWrapper get_guest_sharing_link(userid)
+> StringWrapper get_guest_sharing_link(user_id)
 
 Builds a link that lets another member of the portal take over the caller's guest, so that the guest becomes
 visible to them as well.
@@ -27,7 +27,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **UUID**| The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. | 
+ **user_id** | **UUID**| The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. | 
 
 ### Return type
 
@@ -63,11 +63,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.GuestsApi(api_client)
-    userid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
+    user_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
 
     try:
         # Get a guest sharing link
-        api_response = api_instance.get_guest_sharing_link(userid)
+        api_response = api_instance.get_guest_sharing_link(user_id)
         print("The response of GuestsApi->get_guest_sharing_link:\n")
         pprint(api_response)
     except Exception as e:

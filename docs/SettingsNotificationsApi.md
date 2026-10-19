@@ -179,10 +179,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The notification kind that was asked for together with the flag that says whether it is switched on for the calling user |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The `type` is not one of the notification kinds 0-3 |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -274,7 +274,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_notification_settings**
-> NotificationSettingsWrapper set_notification_settings(notification_settings_requests_dto=notification_settings_requests_dto)
+> NotificationSettingsWrapper set_notification_settings(notification_settings_request_dto=notification_settings_request_dto)
 
 Switches one kind of notification on or off for the calling user: send the kind as `type` - 0 the new-item
 badges, 1 the room activity letters, 2 the daily feed digest, 3 the periodic tips letters - together with
@@ -295,7 +295,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **notification_settings_requests_dto** | [**NotificationSettingsRequestsDto**](NotificationSettingsRequestsDto.md)|  | [optional] 
+ **notification_settings_request_dto** | [**NotificationSettingsRequestDto**](NotificationSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -310,7 +310,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.notification_settings_requests_dto import NotificationSettingsRequestsDto
+from docspace_api_sdk.models.notification_settings_request_dto import NotificationSettingsRequestDto
 from docspace_api_sdk.models.notification_settings_wrapper import NotificationSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -332,11 +332,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.NotificationsApi(api_client)
-    notification_settings_requests_dto = docspace_api_sdk.NotificationSettingsRequestsDto() # NotificationSettingsRequestsDto |  (optional)
+    notification_settings_request_dto = docspace_api_sdk.NotificationSettingsRequestDto() # NotificationSettingsRequestDto |  (optional)
 
     try:
         # Set notification status
-        api_response = api_instance.set_notification_settings(notification_settings_requests_dto=notification_settings_requests_dto)
+        api_response = api_instance.set_notification_settings(notification_settings_request_dto=notification_settings_request_dto)
         print("The response of NotificationsApi->set_notification_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -355,10 +355,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The notification kind and state as they were sent in the request |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `type` |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

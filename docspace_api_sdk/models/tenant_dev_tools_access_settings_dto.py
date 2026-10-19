@@ -21,6 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
@@ -28,10 +29,11 @@ from typing_extensions import Self
 
 class TenantDevToolsAccessSettingsDto(BaseModel):
     """
-    Whether the `User` role is barred from the portal developer tools.
+    Whether the developer tools are closed to the portal's users with the `User` role.
     """ # noqa: E501
-    limited_access_for_users: Optional[StrictBool] = Field(default=None, description="Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way.", alias="limitedAccessForUsers", json_schema_extra={"examples": [False]})
-    __properties: ClassVar[List[str]] = ["limitedAccessForUsers"]
+    limited_access_for_users: Optional[StrictBool] = Field(default=None, description="Specifies if the Developer Tools access are limited for users or not.", alias="limitedAccessForUsers", json_schema_extra={"examples": [False]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
+    __properties: ClassVar[List[str]] = ["limitedAccessForUsers", "lastModified"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +87,8 @@ class TenantDevToolsAccessSettingsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "limitedAccessForUsers": obj.get("limitedAccessForUsers")
+            "limitedAccessForUsers": obj.get("limitedAccessForUsers"),
+            "lastModified": obj.get("lastModified")
         })
         return _obj
 

@@ -23,7 +23,8 @@ in the `provider-accountId` form the Files operations use for third-party entrie
 connected the account can remove it; another member's request is refused unless they hold delete rights on the
 folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what
 goes away is the portal's link to them together with the stored credentials, the sharing records and the tags
-kept for its entries. A room that was created on this account stops being available. When the account being
+kept for its entries. An account a room was created on is refused with 403 while the room exists: delete the
+room instead, which disconnects the account along with it. When the account being
 removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is
 deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than
 confirmed, so treat the first successful answer as the record of it.
@@ -94,6 +95,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The ID of the folder that stood for the removed account |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller neither connected the account nor has the right to delete the folder it stands for |  -  |
+**404** | No third-party account with this ID exists on the portal |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -446,7 +449,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_third_party_accounts**
-> ThirdPartyParamsArrayWrapper get_third_party_accounts()
+> ThirdPartyAccountArrayWrapper get_third_party_accounts()
 
 Lists the third-party storage accounts the caller has connected, one element per account, with the title it
 was saved under, the storage service behind it and the portal section it is attached to. Accounts connected by
@@ -469,7 +472,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ThirdPartyParamsArrayWrapper**](ThirdPartyParamsArrayWrapper.md)
+[**ThirdPartyAccountArrayWrapper**](ThirdPartyAccountArrayWrapper.md)
 
 ### Authorization
 
@@ -480,7 +483,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.third_party_params_array_wrapper import ThirdPartyParamsArrayWrapper
+from docspace_api_sdk.models.third_party_account_array_wrapper import ThirdPartyAccountArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -613,10 +616,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The root folder of the connected account |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read or has no `customerTitle` or `providerKey`, `providerId` is neither a number nor a numeric string, or, for a new account, `providerKey` names no known storage service or the `token` or `password` the service needs is missing |  -  |
+**403** | The caller cannot create rooms, the portal-wide third-party switch is off or no storage service is enabled, the title of a new account is empty once invalid characters are removed, the service rejects the credentials, or `providerId` names an account connected by another member |  -  |
+**404** | `providerId` names no third-party account on the portal |  -  |
+**500** | The storage service cannot be reached or fails while the credentials are checked |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -703,10 +708,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The root folder of the backup storage account |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The request body cannot be read, `providerKey` names no known storage service, or, while no backup account is connected yet, the `token` or `password` the service needs is missing |  -  |
+**403** | The caller is not a DocSpace administrator, the portal-wide third-party switch is off or no storage service is enabled, the service rejects the credentials, or, while no backup account is connected yet, the title is empty once invalid characters are removed |  -  |
+**500** | The storage service cannot be reached or fails while the credentials are checked |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

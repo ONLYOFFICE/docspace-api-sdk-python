@@ -4,12 +4,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**change_user_password**](#change_user_password) | **PUT** /api/2.0/people/{userid}/password | Change a user password
+[**change_user_password**](#change_user_password) | **PUT** /api/2.0/people/{userId}/password | Change a user password
 [**send_user_password**](#send_user_password) | **POST** /api/2.0/people/password | Remind a user password
 
 
 # **change_user_password**
-> EmployeeFullWrapper change_user_password(userid, change_password_request)
+> EmployeeFullWrapper change_user_password(user_id, change_password_request)
 
 Sets a new password on an account, which is the step that completes a password change or a password
 recovery.
@@ -30,7 +30,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userid** | **UUID**| The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | 
+ **user_id** | **UUID**| The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. | 
  **change_password_request** | [**ChangePasswordRequest**](ChangePasswordRequest.md)| The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed. | 
 
 ### Return type
@@ -68,12 +68,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PasswordApi(api_client)
-    userid = UUID('00000000-0000-0000-0000-000000000000') # UUID | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+    user_id = UUID('00000000-0000-0000-0000-000000000000') # UUID | The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
     change_password_request = docspace_api_sdk.ChangePasswordRequest() # ChangePasswordRequest | The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed.
 
     try:
         # Change a user password
-        api_response = api_instance.change_user_password(userid, change_password_request)
+        api_response = api_instance.change_user_password(user_id, change_password_request)
         print("The response of PasswordApi->change_user_password:\n")
         pprint(api_response)
     except Exception as e:
@@ -115,7 +115,7 @@ account, so the answer cannot be used to find out which addresses are registered
 An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires
 DocSpace administrator rights, while the owner's password can be asked for by the owner alone and another
 administrator's only by the owner.
-The link that is sent leads to `PUT api/2.0/people/{userid}/password`, which is where the new password is
+The link that is sent leads to `PUT api/2.0/people/{userId}/password`, which is where the new password is
 set; no password is ever sent by email despite the wording of the message.
 Repeated calls are throttled.
 
@@ -186,10 +186,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The message stating that the recovery link was sent to the address |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
-**403** | The CAPTCHA was not passed, or an authenticated caller may not ask for that account |  -  |
+**400** | The request body cannot be read or has no `email`, or the email is not a valid address or is longer than 255 characters |  -  |
+**403** | The CAPTCHA was not passed, an authenticated caller may not ask for that account, or, for an authenticated caller, the account does not exist, is disabled, comes from LDAP or SSO, or has an auto-generated email |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

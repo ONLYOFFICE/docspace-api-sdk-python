@@ -24,9 +24,11 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from docspace_api_sdk.models.ai_ai_reasoning_level import AiAiReasoningLevel
+from docspace_api_sdk.models.ai_chat_tool_permission_mode import AiChatToolPermissionMode
 from docspace_api_sdk.models.ai_preferences_set_deep_mode_request import AiPreferencesSetDeepModeRequest
 from docspace_api_sdk.models.ai_preferences_set_reasoning_level_request import AiPreferencesSetReasoningLevelRequest
+from docspace_api_sdk.models.ai_preferences_set_tool_permission_mode_request import AiPreferencesSetToolPermissionModeRequest
+from docspace_api_sdk.models.ai_reasoning_level import AiReasoningLevel
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -51,7 +53,7 @@ class PreferencesApi:
     @validate_call
     def ai_preferences_clear_deep_mode(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.")],
+        ai_preferences_clear_deep_mode_request: Annotated[StrictStr, Field(description="The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -69,8 +71,8 @@ class PreferencesApi:
 
         Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
 
-        :param body: The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference. (required)
-        :type body: str
+        :param ai_preferences_clear_deep_mode_request: The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference. (required)
+        :type ai_preferences_clear_deep_mode_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -94,7 +96,7 @@ class PreferencesApi:
         """ # noqa: E501
 
         _param = self._ai_preferences_clear_deep_mode_serialize(
-            body=body,
+            ai_preferences_clear_deep_mode_request=ai_preferences_clear_deep_mode_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -103,6 +105,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -123,7 +126,7 @@ class PreferencesApi:
     @validate_call
     def ai_preferences_clear_deep_mode_with_http_info(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.")],
+        ai_preferences_clear_deep_mode_request: Annotated[StrictStr, Field(description="The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -141,8 +144,8 @@ class PreferencesApi:
 
         Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
 
-        :param body: The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference. (required)
-        :type body: str
+        :param ai_preferences_clear_deep_mode_request: The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference. (required)
+        :type ai_preferences_clear_deep_mode_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -166,7 +169,7 @@ class PreferencesApi:
         """ # noqa: E501
 
         _param = self._ai_preferences_clear_deep_mode_serialize(
-            body=body,
+            ai_preferences_clear_deep_mode_request=ai_preferences_clear_deep_mode_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -175,6 +178,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -195,7 +199,7 @@ class PreferencesApi:
     @validate_call
     def ai_preferences_clear_deep_mode_without_preload_content(
         self,
-        body: Annotated[StrictStr, Field(description="The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.")],
+        ai_preferences_clear_deep_mode_request: Annotated[StrictStr, Field(description="The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -213,8 +217,8 @@ class PreferencesApi:
 
         Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
 
-        :param body: The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference. (required)
-        :type body: str
+        :param ai_preferences_clear_deep_mode_request: The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference. (required)
+        :type ai_preferences_clear_deep_mode_request: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -238,7 +242,7 @@ class PreferencesApi:
         """ # noqa: E501
 
         _param = self._ai_preferences_clear_deep_mode_serialize(
-            body=body,
+            ai_preferences_clear_deep_mode_request=ai_preferences_clear_deep_mode_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -247,6 +251,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -262,7 +267,7 @@ class PreferencesApi:
 
     def _ai_preferences_clear_deep_mode_serialize(
         self,
-        body,
+        ai_preferences_clear_deep_mode_request,
         _request_auth,
         _content_type,
         _headers,
@@ -288,8 +293,8 @@ class PreferencesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if ai_preferences_clear_deep_mode_request is not None:
+            _body_params = ai_preferences_clear_deep_mode_request
 
 
         # set the HTTP header `Accept`
@@ -360,7 +365,7 @@ class PreferencesApi:
     ) -> bool:
         """Get deep mode
 
-        Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
+        Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400, as it is on the write. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -396,6 +401,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bool",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -431,7 +437,7 @@ class PreferencesApi:
     ) -> ApiResponse[bool]:
         """Get deep mode
 
-        Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
+        Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400, as it is on the write. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -467,6 +473,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bool",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -502,7 +509,7 @@ class PreferencesApi:
     ) -> RESTResponseType:
         """Get deep mode
 
-        Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
+        Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400, as it is on the write. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -538,6 +545,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bool",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -636,10 +644,10 @@ class PreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiAiReasoningLevel:
+    ) -> AiReasoningLevel:
         """Get reasoning level
 
-        Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+        Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400. Providers clamp the depth to what the model accepts.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -674,7 +682,8 @@ class PreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiReasoningLevel",
+            '200': "AiReasoningLevel",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -707,10 +716,10 @@ class PreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiAiReasoningLevel]:
+    ) -> ApiResponse[AiReasoningLevel]:
         """Get reasoning level
 
-        Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+        Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400. Providers clamp the depth to what the model accepts.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -745,7 +754,8 @@ class PreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiReasoningLevel",
+            '200': "AiReasoningLevel",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -781,7 +791,7 @@ class PreferencesApi:
     ) -> RESTResponseType:
         """Get reasoning level
 
-        Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+        Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400. Providers clamp the depth to what the model accepts.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -816,7 +826,8 @@ class PreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAiReasoningLevel",
+            '200': "AiReasoningLevel",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -900,6 +911,288 @@ class PreferencesApi:
 
 
     @validate_call
+    def ai_preferences_get_tool_permission_mode(
+        self,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AiChatToolPermissionMode:
+        """Get tool permission mode
+
+        Returns how a tool call the model makes is approved for the calling user, in the chat library's spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user's AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service's enum); `entityId` is accepted for symmetry with the depth routes and ignored, though a value that is not a room ID is still refused with 400. The AI service's default is `auto`.
+
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+        :type entity_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_preferences_get_tool_permission_mode_serialize(
+            entity_id=entity_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiChatToolPermissionMode",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def ai_preferences_get_tool_permission_mode_with_http_info(
+        self,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AiChatToolPermissionMode]:
+        """Get tool permission mode
+
+        Returns how a tool call the model makes is approved for the calling user, in the chat library's spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user's AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service's enum); `entityId` is accepted for symmetry with the depth routes and ignored, though a value that is not a room ID is still refused with 400. The AI service's default is `auto`.
+
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+        :type entity_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_preferences_get_tool_permission_mode_serialize(
+            entity_id=entity_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiChatToolPermissionMode",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def ai_preferences_get_tool_permission_mode_without_preload_content(
+        self,
+        entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get tool permission mode
+
+        Returns how a tool call the model makes is approved for the calling user, in the chat library's spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user's AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service's enum); `entityId` is accepted for symmetry with the depth routes and ignored, though a value that is not a room ID is still refused with 400. The AI service's default is `auto`.
+
+        :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+        :type entity_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_preferences_get_tool_permission_mode_serialize(
+            entity_id=entity_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiChatToolPermissionMode",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _ai_preferences_get_tool_permission_mode_serialize(
+        self,
+        entity_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if entity_id is not None:
+            
+            _query_params.append(('entityId', entity_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
+        ]
+
+
+        resource_path = "/api/2.0/ai/preferences/get-tool-permission-mode"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def ai_preferences_is_deep_mode_set(
         self,
         entity_id: Annotated[Optional[StrictStr], Field(description="The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.")] = None,
@@ -918,7 +1211,7 @@ class PreferencesApi:
     ) -> bool:
         """Is deep mode set
 
-        Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
+        Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference; a value that is not a room ID is refused with 400. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -954,6 +1247,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bool",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -989,7 +1283,7 @@ class PreferencesApi:
     ) -> ApiResponse[bool]:
         """Is deep mode set
 
-        Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
+        Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference; a value that is not a room ID is refused with 400. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -1025,6 +1319,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bool",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -1060,7 +1355,7 @@ class PreferencesApi:
     ) -> RESTResponseType:
         """Is deep mode set
 
-        Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
+        Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference; a value that is not a room ID is refused with 400. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
 
         :param entity_id: The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
         :type entity_id: str
@@ -1096,6 +1391,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "bool",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -1529,6 +1825,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1601,6 +1898,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1673,6 +1971,7 @@ class PreferencesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1748,6 +2047,302 @@ class PreferencesApi:
 
 
         resource_path = "/api/2.0/ai/preferences/set-reasoning-level"
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def ai_preferences_set_tool_permission_mode(
+        self,
+        ai_preferences_set_tool_permission_mode_request: AiPreferencesSetToolPermissionModeRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AiSuccessResponse:
+        """Set tool permission mode
+
+        Persists the tool permission mode of the calling user. `value` has to be one of `ask`, `auto`, `allow`: anything else is rejected rather than coerced, so an absent or mistyped value can never overwrite the stored mode. `entityId` is validated like on the other writes and otherwise ignored - the mode applies to every chat of the user. Idempotent.
+
+        :param ai_preferences_set_tool_permission_mode_request: (required)
+        :type ai_preferences_set_tool_permission_mode_request: AiPreferencesSetToolPermissionModeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_preferences_set_tool_permission_mode_serialize(
+            ai_preferences_set_tool_permission_mode_request=ai_preferences_set_tool_permission_mode_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def ai_preferences_set_tool_permission_mode_with_http_info(
+        self,
+        ai_preferences_set_tool_permission_mode_request: AiPreferencesSetToolPermissionModeRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AiSuccessResponse]:
+        """Set tool permission mode
+
+        Persists the tool permission mode of the calling user. `value` has to be one of `ask`, `auto`, `allow`: anything else is rejected rather than coerced, so an absent or mistyped value can never overwrite the stored mode. `entityId` is validated like on the other writes and otherwise ignored - the mode applies to every chat of the user. Idempotent.
+
+        :param ai_preferences_set_tool_permission_mode_request: (required)
+        :type ai_preferences_set_tool_permission_mode_request: AiPreferencesSetToolPermissionModeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_preferences_set_tool_permission_mode_serialize(
+            ai_preferences_set_tool_permission_mode_request=ai_preferences_set_tool_permission_mode_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def ai_preferences_set_tool_permission_mode_without_preload_content(
+        self,
+        ai_preferences_set_tool_permission_mode_request: AiPreferencesSetToolPermissionModeRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Set tool permission mode
+
+        Persists the tool permission mode of the calling user. `value` has to be one of `ask`, `auto`, `allow`: anything else is rejected rather than coerced, so an absent or mistyped value can never overwrite the stored mode. `entityId` is validated like on the other writes and otherwise ignored - the mode applies to every chat of the user. Idempotent.
+
+        :param ai_preferences_set_tool_permission_mode_request: (required)
+        :type ai_preferences_set_tool_permission_mode_request: AiPreferencesSetToolPermissionModeRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._ai_preferences_set_tool_permission_mode_serialize(
+            ai_preferences_set_tool_permission_mode_request=ai_preferences_set_tool_permission_mode_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AiSuccessResponse",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _ai_preferences_set_tool_permission_mode_serialize(
+        self,
+        ai_preferences_set_tool_permission_mode_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if ai_preferences_set_tool_permission_mode_request is not None:
+            _body_params = ai_preferences_set_tool_permission_mode_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'cookieAuth', 
+            'bearerAuth'
+        ]
+
+
+        resource_path = "/api/2.0/ai/preferences/set-tool-permission-mode"
 
         return self.api_client.param_serialize(
             method='PUT',

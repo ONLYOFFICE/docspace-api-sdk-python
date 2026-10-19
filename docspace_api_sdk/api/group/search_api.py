@@ -117,12 +117,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -209,12 +209,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -301,12 +301,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -481,12 +481,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -573,12 +573,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -665,12 +665,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -845,12 +845,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -937,12 +937,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -1029,12 +1029,12 @@ class SearchApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GroupArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

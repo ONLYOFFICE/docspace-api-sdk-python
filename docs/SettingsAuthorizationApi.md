@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **get_auth_services**
-> AuthServiceRequestsArrayWrapper get_auth_services()
+> AuthServiceArrayWrapper get_auth_services()
 
 Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for
 example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that
@@ -27,7 +27,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**AuthServiceRequestsArrayWrapper**](AuthServiceRequestsArrayWrapper.md)
+[**AuthServiceArrayWrapper**](AuthServiceArrayWrapper.md)
 
 ### Authorization
 
@@ -38,7 +38,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.auth_service_requests_array_wrapper import AuthServiceRequestsArrayWrapper
+from docspace_api_sdk.models.auth_service_array_wrapper import AuthServiceArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -81,6 +81,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Third-party providers with a manageable key, and their last-saved key values |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -90,7 +91,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **save_auth_keys**
-> BooleanWrapper save_auth_keys(auth_service_requests_dto=auth_service_requests_dto)
+> BooleanWrapper save_auth_keys(save_auth_keys_request_dto=save_auth_keys_request_dto)
 
 Saves the authorization keys for one third-party storage or authorization provider, identified by name, or
 clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings
@@ -109,7 +110,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **auth_service_requests_dto** | [**AuthServiceRequestsDto**](AuthServiceRequestsDto.md)|  | [optional] 
+ **save_auth_keys_request_dto** | [**SaveAuthKeysRequestDto**](SaveAuthKeysRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -124,8 +125,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.auth_service_requests_dto import AuthServiceRequestsDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.models.save_auth_keys_request_dto import SaveAuthKeysRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -146,11 +147,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuthorizationApi(api_client)
-    auth_service_requests_dto = docspace_api_sdk.AuthServiceRequestsDto() # AuthServiceRequestsDto |  (optional)
+    save_auth_keys_request_dto = docspace_api_sdk.SaveAuthKeysRequestDto() # SaveAuthKeysRequestDto |  (optional)
 
     try:
         # Save the authorization keys
-        api_response = api_instance.save_auth_keys(auth_service_requests_dto=auth_service_requests_dto)
+        api_response = api_instance.save_auth_keys(save_auth_keys_request_dto=save_auth_keys_request_dto)
         print("The response of AuthorizationApi->save_auth_keys:\n")
         pprint(api_response)
     except Exception as e:
@@ -169,8 +170,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Whether the provider's keys actually changed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | The submitted keys failed the provider's own validation |  -  |
+**400** | The request body cannot be read or has no `name` or `props`, a key has no `name` or `value` or a `value` longer than 4000 characters, or the submitted keys failed the provider's own validation |  -  |
 **402** | The provider is a paid option not covered by the portal's current pricing plan |  -  |
+**403** | The caller has no portal-settings right, or the provider is unknown or its keys cannot be set |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -180,7 +182,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **test_external_database_connection**
-> ConnectionTestResultWrapper test_external_database_connection(external_database_settings=external_database_settings)
+> ConnectionTestResultWrapper test_external_database_connection(external_database_connection_request_dto=external_database_connection_request_dto)
 
 Probes connectivity to an external database using the settings supplied in the request, without saving them or
 affecting the portal's own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).
@@ -196,7 +198,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **external_database_settings** | [**ExternalDatabaseSettings**](ExternalDatabaseSettings.md)|  | [optional] 
+ **external_database_connection_request_dto** | [**ExternalDatabaseConnectionRequestDto**](ExternalDatabaseConnectionRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -212,7 +214,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.connection_test_result_wrapper import ConnectionTestResultWrapper
-from docspace_api_sdk.models.external_database_settings import ExternalDatabaseSettings
+from docspace_api_sdk.models.external_database_connection_request_dto import ExternalDatabaseConnectionRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -233,11 +235,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AuthorizationApi(api_client)
-    external_database_settings = docspace_api_sdk.ExternalDatabaseSettings() # ExternalDatabaseSettings |  (optional)
+    external_database_connection_request_dto = docspace_api_sdk.ExternalDatabaseConnectionRequestDto() # ExternalDatabaseConnectionRequestDto |  (optional)
 
     try:
         # Test external database connection
-        api_response = api_instance.test_external_database_connection(external_database_settings=external_database_settings)
+        api_response = api_instance.test_external_database_connection(external_database_connection_request_dto=external_database_connection_request_dto)
         print("The response of AuthorizationApi->test_external_database_connection:\n")
         pprint(api_response)
     except Exception as e:
@@ -256,6 +258,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Connection test result: a success flag and, on failure, an error message |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |

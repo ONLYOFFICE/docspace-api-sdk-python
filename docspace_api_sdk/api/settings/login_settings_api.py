@@ -95,6 +95,8 @@ class LoginSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginSettingsWrapper",
+            '304': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -164,6 +166,8 @@ class LoginSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginSettingsWrapper",
+            '304': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -233,6 +237,8 @@ class LoginSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginSettingsWrapper",
+            '304': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -367,6 +373,7 @@ class LoginSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -436,6 +443,7 @@ class LoginSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -505,6 +513,7 @@ class LoginSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginSettingsWrapper",
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
@@ -643,10 +652,11 @@ class LoginSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginSettingsWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -717,10 +727,11 @@ class LoginSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginSettingsWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -791,10 +802,11 @@ class LoginSettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "LoginSettingsWrapper",
+            '400': None,
+            '403': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
