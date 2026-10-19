@@ -31,14 +31,14 @@ import time
 
 def main():
     config = Configuration()
-    config.host = "http://localhost:8092"
+    config.host = "https://your-docspace.onlyoffice.com"
     
     with ApiClient(config) as api_client:
         auth_instance = AuthenticationApi(api_client)
         
         auth_request_data = AuthRequestDto()
-        auth_request_data.password = "adminadmin"
-        auth_request_data.user_name = "adminadmin@mail.ru"
+        auth_request_data.password = ""
+        auth_request_data.user_name = ""
         
         try:
             auth_response = auth_instance.authenticate_me(auth_request_data)
