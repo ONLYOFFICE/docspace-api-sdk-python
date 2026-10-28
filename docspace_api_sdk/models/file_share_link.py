@@ -31,21 +31,21 @@ from typing_extensions import Self
 
 class FileShareLink(BaseModel):
     """
-    A shareable link for a file with its configuration and status.
+    A sharing link of a file, a folder or a room, with everything set on it.
     """ # noqa: E501
-    id: Optional[UUID] = Field(default=None, description="The unique identifier of the shared link.")
-    title: Optional[StrictStr] = Field(default=None, description="The title of the shared content.")
-    share_link: Optional[StrictStr] = Field(default=None, description="The URL for accessing the shared content.", alias="shareLink")
-    expiration_date: Optional[ApiDateTime] = Field(default=None, alias="expirationDate")
-    link_type: Optional[LinkType] = Field(default=None, alias="linkType")
-    password: Optional[StrictStr] = Field(default=None, description="The password protection for accessing the shared content.")
-    deny_download: Optional[StrictBool] = Field(default=None, description="Indicates whether downloading of the shared content is prohibited.", alias="denyDownload")
-    is_expired: Optional[StrictBool] = Field(default=None, description="Indicates whether the shared link has expired.", alias="isExpired")
-    primary: Optional[StrictBool] = Field(default=None, description="Indicates whether this is the primary shared link.")
-    internal: Optional[StrictBool] = Field(default=None, description="Indicates whether the link is for the internal sharing only.")
-    request_token: Optional[StrictStr] = Field(default=None, description="The token for validating access requests.", alias="requestToken")
-    max_use_count: Optional[StrictInt] = Field(default=None, description="The maximum number of times the invitation link can be used.", alias="maxUseCount")
-    current_use_count: Optional[StrictInt] = Field(default=None, description="The current number of times the invitation link has been used.", alias="currentUseCount")
+    id: Optional[UUID] = Field(default=None, description="The identifier of the link, the one to send back as `linkId` to change or delete it.", json_schema_extra={"examples": ["9a2c1b3e-6d47-4f10-9b52-ac7d3e5f0812"]})
+    title: Optional[StrictStr] = Field(default=None, description="The name the link is listed under, which its author is free to choose and to leave empty.", json_schema_extra={"examples": ["Shared document"]})
+    share_link: Optional[StrictStr] = Field(default=None, description="The shortened address to hand out. Opening it is what turns the link into access; the address stays the same  while the link exists.", alias="shareLink", json_schema_extra={"examples": ["https://portal.example.com/s/a1b2c3d4"]})
+    expiration_date: Optional[ApiDateTime] = Field(default=None, description="The moment the link stops working, written with the offset of the portal time zone. Null when the link was  left without an end.", alias="expirationDate")
+    link_type: Optional[LinkType] = Field(default=None, description="Which of the two jobs the link does: letting somebody into the room as a member, or handing out the entry  itself. The counters of uses are filled in for the first kind only.", alias="linkType")
+    password: Optional[StrictStr] = Field(default=None, description="The password a visitor has to send before the link resolves, readable only by those who may manage the link.  Empty when the link asks for none.", json_schema_extra={"examples": ["S3cretPhrase"]})
+    deny_download: Optional[StrictBool] = Field(default=None, description="Whether visitors coming through this link may only read the entry in the editor and not download or print it.", alias="denyDownload", json_schema_extra={"examples": [False]})
+    is_expired: Optional[StrictBool] = Field(default=None, description="Whether the moment in `expirationDate` has already passed, which leaves the link in place but refuses  everybody who opens it.", alias="isExpired", json_schema_extra={"examples": [False]})
+    primary: Optional[StrictBool] = Field(default=None, description="Whether this is the one link the entry always keeps: a public or a form-filling room is given it at creation,  and deleting it there only makes a new one.", json_schema_extra={"examples": [True]})
+    internal: Optional[StrictBool] = Field(default=None, description="Whether the visitor has to sign in to the portal before the link resolves, as opposed to it being open to  anybody who has the address.", json_schema_extra={"examples": [False]})
+    request_token: Optional[StrictStr] = Field(default=None, description="The key that stands for this link in the calls that resolve it, such as `GET api/2.0/files/share/{key}`. It is  filled in for links that hand out the entry, and empty for the ones that invite into a room.", alias="requestToken", json_schema_extra={"examples": ["gg9J4mBW7pW9Wk0HqQoQ9L2mS1x6bK8vTnQ0aZ3"]})
+    max_use_count: Optional[StrictInt] = Field(default=None, description="How many accounts may still join the room through this invitation link in total. Null on a link that hands out  the entry, where nothing is counted.", alias="maxUseCount", json_schema_extra={"examples": [10]})
+    current_use_count: Optional[StrictInt] = Field(default=None, description="How many accounts have already joined through this invitation link. Once it reaches `maxUseCount` the link  stops letting anybody else in. Null on a link that hands out the entry.", alias="currentUseCount", json_schema_extra={"examples": [5]})
     __properties: ClassVar[List[str]] = ["id", "title", "shareLink", "expirationDate", "linkType", "password", "denyDownload", "isExpired", "primary", "internal", "requestToken", "maxUseCount", "currentUseCount"]
 
     model_config = ConfigDict(

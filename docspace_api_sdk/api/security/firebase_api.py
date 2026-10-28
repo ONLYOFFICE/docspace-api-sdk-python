@@ -18,12 +18,12 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
-from docspace_api_sdk.models.fire_base_user_wrapper import FireBaseUserWrapper
-from docspace_api_sdk.models.firebase_requests_dto import FirebaseRequestsDto
+from docspace_api_sdk.models.firebase_device_wrapper import FirebaseDeviceWrapper
+from docspace_api_sdk.models.firebase_request_dto import FirebaseRequestDto
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -47,7 +47,7 @@ class FirebaseApi:
     @validate_call
     def doc_register_pusn_notification_device(
         self,
-        firebase_requests_dto: Optional[FirebaseRequestsDto] = None,
+        firebase_request_dto: Optional[FirebaseRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,13 +60,13 @@ class FirebaseApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FireBaseUserWrapper:
-        """Save the Documents Firebase device token
+    ) -> FirebaseDeviceWrapper:
+        """Register a push device
 
-        Saves the Firebase device token specified in the request for the Documents application.
+        Registers one mobile device of the calling user for the push notifications of the Documents application, by  storing the Firebase token that device was issued together with the initial `isSubscribed` state. The token is  handed out by Firebase to the mobile client, so obtain it there before calling: nothing here checks it, and it  is kept as an opaque string of up to 255 characters. Every signed-in member registers its own devices,  whatever its role - owner, administrator, user or guest - and a registration is bound to the caller and the  current portal, so another member's devices cannot be touched. The call is safe to repeat, but it is not an  update: a token already registered comes back as it stands and `isSubscribed` from the request is ignored, so  switch an existing registration on or off with `PUT api/2.0/settings/push/docsubscribe` instead. What comes  back is the stored registration, with `application` always `doc` and `isSubscribed` as stored. Only a  subscribed device is sent the room activity messages, such as an invitation to a room, a role change, an  archived room or a new document in a room, and only while the installation itself is configured with Firebase  credentials.
 
-        :param firebase_requests_dto:
-        :type firebase_requests_dto: FirebaseRequestsDto
+        :param firebase_request_dto:
+        :type firebase_request_dto: FirebaseRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -90,7 +90,7 @@ class FirebaseApi:
         """ # noqa: E501
 
         _param = self._doc_register_pusn_notification_device_serialize(
-            firebase_requests_dto=firebase_requests_dto,
+            firebase_request_dto=firebase_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -98,12 +98,15 @@ class FirebaseApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FireBaseUserWrapper",
-            '401': None,
-            '429': None,
+            '200': "FirebaseDeviceWrapper",
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -118,7 +121,7 @@ class FirebaseApi:
     @validate_call
     def doc_register_pusn_notification_device_with_http_info(
         self,
-        firebase_requests_dto: Optional[FirebaseRequestsDto] = None,
+        firebase_request_dto: Optional[FirebaseRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -131,13 +134,13 @@ class FirebaseApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FireBaseUserWrapper]:
-        """Save the Documents Firebase device token
+    ) -> ApiResponse[FirebaseDeviceWrapper]:
+        """Register a push device
 
-        Saves the Firebase device token specified in the request for the Documents application.
+        Registers one mobile device of the calling user for the push notifications of the Documents application, by  storing the Firebase token that device was issued together with the initial `isSubscribed` state. The token is  handed out by Firebase to the mobile client, so obtain it there before calling: nothing here checks it, and it  is kept as an opaque string of up to 255 characters. Every signed-in member registers its own devices,  whatever its role - owner, administrator, user or guest - and a registration is bound to the caller and the  current portal, so another member's devices cannot be touched. The call is safe to repeat, but it is not an  update: a token already registered comes back as it stands and `isSubscribed` from the request is ignored, so  switch an existing registration on or off with `PUT api/2.0/settings/push/docsubscribe` instead. What comes  back is the stored registration, with `application` always `doc` and `isSubscribed` as stored. Only a  subscribed device is sent the room activity messages, such as an invitation to a room, a role change, an  archived room or a new document in a room, and only while the installation itself is configured with Firebase  credentials.
 
-        :param firebase_requests_dto:
-        :type firebase_requests_dto: FirebaseRequestsDto
+        :param firebase_request_dto:
+        :type firebase_request_dto: FirebaseRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -161,7 +164,7 @@ class FirebaseApi:
         """ # noqa: E501
 
         _param = self._doc_register_pusn_notification_device_serialize(
-            firebase_requests_dto=firebase_requests_dto,
+            firebase_request_dto=firebase_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -169,12 +172,15 @@ class FirebaseApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FireBaseUserWrapper",
-            '401': None,
-            '429': None,
+            '200': "FirebaseDeviceWrapper",
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -189,7 +195,7 @@ class FirebaseApi:
     @validate_call
     def doc_register_pusn_notification_device_without_preload_content(
         self,
-        firebase_requests_dto: Optional[FirebaseRequestsDto] = None,
+        firebase_request_dto: Optional[FirebaseRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -203,12 +209,12 @@ class FirebaseApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Save the Documents Firebase device token
+        """Register a push device
 
-        Saves the Firebase device token specified in the request for the Documents application.
+        Registers one mobile device of the calling user for the push notifications of the Documents application, by  storing the Firebase token that device was issued together with the initial `isSubscribed` state. The token is  handed out by Firebase to the mobile client, so obtain it there before calling: nothing here checks it, and it  is kept as an opaque string of up to 255 characters. Every signed-in member registers its own devices,  whatever its role - owner, administrator, user or guest - and a registration is bound to the caller and the  current portal, so another member's devices cannot be touched. The call is safe to repeat, but it is not an  update: a token already registered comes back as it stands and `isSubscribed` from the request is ignored, so  switch an existing registration on or off with `PUT api/2.0/settings/push/docsubscribe` instead. What comes  back is the stored registration, with `application` always `doc` and `isSubscribed` as stored. Only a  subscribed device is sent the room activity messages, such as an invitation to a room, a role change, an  archived room or a new document in a room, and only while the installation itself is configured with Firebase  credentials.
 
-        :param firebase_requests_dto:
-        :type firebase_requests_dto: FirebaseRequestsDto
+        :param firebase_request_dto:
+        :type firebase_request_dto: FirebaseRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -232,7 +238,7 @@ class FirebaseApi:
         """ # noqa: E501
 
         _param = self._doc_register_pusn_notification_device_serialize(
-            firebase_requests_dto=firebase_requests_dto,
+            firebase_request_dto=firebase_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -240,12 +246,15 @@ class FirebaseApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FireBaseUserWrapper",
-            '401': None,
-            '429': None,
+            '200': "FirebaseDeviceWrapper",
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -255,7 +264,7 @@ class FirebaseApi:
 
     def _doc_register_pusn_notification_device_serialize(
         self,
-        firebase_requests_dto,
+        firebase_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -281,8 +290,8 @@ class FirebaseApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if firebase_requests_dto is not None:
-            _body_params = firebase_requests_dto
+        if firebase_request_dto is not None:
+            _body_params = firebase_request_dto
 
 
         # set the HTTP header `Accept`
@@ -341,7 +350,7 @@ class FirebaseApi:
     @validate_call
     def subscribe_documents_push_notification(
         self,
-        firebase_requests_dto: Optional[FirebaseRequestsDto] = None,
+        firebase_request_dto: Optional[FirebaseRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -354,13 +363,13 @@ class FirebaseApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FireBaseUserWrapper:
-        """Subscribe to Documents push notification
+    ) -> FirebaseDeviceWrapper:
+        """Set push subscription
 
-        Subscribes to the Documents push notification.
+        Switches the push notifications of the Documents application on or off for one already registered device of  the calling user: send that device's Firebase token together with `isSubscribed` true to let the messages  through or false to stop them. The device has to be registered first with  `POST api/2.0/settings/push/docregisterdevice`, and only the subscription state is written - the token is  matched, never changed. Every signed-in member manages its own devices, whatever its role - owner,  administrator, user or guest - and a token that belongs to another member or to another portal is not matched  at all, so nothing of theirs can be switched. Repeating the call with the same pair leaves the registration as  it is. What comes back is the updated registration, while an empty response means no registration of the  caller carries that token and nothing was stored - register the device and call again. A device switched off  keeps its token stored but is left out of the delivery, and the other devices of the same member are  unaffected. Which kinds of notification the account receives at all is a separate setting, read with  `GET api/2.0/settings/notification/{type}`.
 
-        :param firebase_requests_dto:
-        :type firebase_requests_dto: FirebaseRequestsDto
+        :param firebase_request_dto:
+        :type firebase_request_dto: FirebaseRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -384,7 +393,7 @@ class FirebaseApi:
         """ # noqa: E501
 
         _param = self._subscribe_documents_push_notification_serialize(
-            firebase_requests_dto=firebase_requests_dto,
+            firebase_request_dto=firebase_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -392,12 +401,15 @@ class FirebaseApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FireBaseUserWrapper",
-            '401': None,
-            '429': None,
+            '200': "FirebaseDeviceWrapper",
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -412,7 +424,7 @@ class FirebaseApi:
     @validate_call
     def subscribe_documents_push_notification_with_http_info(
         self,
-        firebase_requests_dto: Optional[FirebaseRequestsDto] = None,
+        firebase_request_dto: Optional[FirebaseRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -425,13 +437,13 @@ class FirebaseApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FireBaseUserWrapper]:
-        """Subscribe to Documents push notification
+    ) -> ApiResponse[FirebaseDeviceWrapper]:
+        """Set push subscription
 
-        Subscribes to the Documents push notification.
+        Switches the push notifications of the Documents application on or off for one already registered device of  the calling user: send that device's Firebase token together with `isSubscribed` true to let the messages  through or false to stop them. The device has to be registered first with  `POST api/2.0/settings/push/docregisterdevice`, and only the subscription state is written - the token is  matched, never changed. Every signed-in member manages its own devices, whatever its role - owner,  administrator, user or guest - and a token that belongs to another member or to another portal is not matched  at all, so nothing of theirs can be switched. Repeating the call with the same pair leaves the registration as  it is. What comes back is the updated registration, while an empty response means no registration of the  caller carries that token and nothing was stored - register the device and call again. A device switched off  keeps its token stored but is left out of the delivery, and the other devices of the same member are  unaffected. Which kinds of notification the account receives at all is a separate setting, read with  `GET api/2.0/settings/notification/{type}`.
 
-        :param firebase_requests_dto:
-        :type firebase_requests_dto: FirebaseRequestsDto
+        :param firebase_request_dto:
+        :type firebase_request_dto: FirebaseRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -455,7 +467,7 @@ class FirebaseApi:
         """ # noqa: E501
 
         _param = self._subscribe_documents_push_notification_serialize(
-            firebase_requests_dto=firebase_requests_dto,
+            firebase_request_dto=firebase_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -463,12 +475,15 @@ class FirebaseApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FireBaseUserWrapper",
-            '401': None,
-            '429': None,
+            '200': "FirebaseDeviceWrapper",
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -483,7 +498,7 @@ class FirebaseApi:
     @validate_call
     def subscribe_documents_push_notification_without_preload_content(
         self,
-        firebase_requests_dto: Optional[FirebaseRequestsDto] = None,
+        firebase_request_dto: Optional[FirebaseRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -497,12 +512,12 @@ class FirebaseApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Subscribe to Documents push notification
+        """Set push subscription
 
-        Subscribes to the Documents push notification.
+        Switches the push notifications of the Documents application on or off for one already registered device of  the calling user: send that device's Firebase token together with `isSubscribed` true to let the messages  through or false to stop them. The device has to be registered first with  `POST api/2.0/settings/push/docregisterdevice`, and only the subscription state is written - the token is  matched, never changed. Every signed-in member manages its own devices, whatever its role - owner,  administrator, user or guest - and a token that belongs to another member or to another portal is not matched  at all, so nothing of theirs can be switched. Repeating the call with the same pair leaves the registration as  it is. What comes back is the updated registration, while an empty response means no registration of the  caller carries that token and nothing was stored - register the device and call again. A device switched off  keeps its token stored but is left out of the delivery, and the other devices of the same member are  unaffected. Which kinds of notification the account receives at all is a separate setting, read with  `GET api/2.0/settings/notification/{type}`.
 
-        :param firebase_requests_dto:
-        :type firebase_requests_dto: FirebaseRequestsDto
+        :param firebase_request_dto:
+        :type firebase_request_dto: FirebaseRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -526,7 +541,7 @@ class FirebaseApi:
         """ # noqa: E501
 
         _param = self._subscribe_documents_push_notification_serialize(
-            firebase_requests_dto=firebase_requests_dto,
+            firebase_request_dto=firebase_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -534,12 +549,15 @@ class FirebaseApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FireBaseUserWrapper",
-            '401': None,
-            '429': None,
+            '200': "FirebaseDeviceWrapper",
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -549,7 +567,7 @@ class FirebaseApi:
 
     def _subscribe_documents_push_notification_serialize(
         self,
-        firebase_requests_dto,
+        firebase_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -575,8 +593,8 @@ class FirebaseApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if firebase_requests_dto is not None:
-            _body_params = firebase_requests_dto
+        if firebase_request_dto is not None:
+            _body_params = firebase_request_dto
 
 
         # set the HTTP header `Accept`

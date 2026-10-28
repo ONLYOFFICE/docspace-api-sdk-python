@@ -1,0 +1,107 @@
+#
+# (c) Copyright Ascensio System SIA 2026
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+
+
+from __future__ import annotations
+import pprint
+import re  # noqa: F401
+import json
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
+from typing import Optional, Set
+from typing_extensions import Self
+
+class EncryptionKeyRequestDto(BaseModel):
+    """
+    The two halves of an encryption key pair to store for the calling user, plus the identifier the pair is kept  under.
+    """ # noqa: E501
+    id: Optional[UUID] = Field(default=None, description="Names the pair inside the caller's own key set. The client generates it, and leaving it out means the all-zero  GUID, which is the pair a client that never sends an identifier keeps working with.", json_schema_extra={"examples": ["9924256B-447C-4F19-9dbd-8ad8c39e8ff5"]})
+    public_key: Optional[StrictStr] = Field(default=None, description="The public half of the pair, as the client's crypto engine produced it and stored verbatim. This is the half  handed to the other members of a private room so that they can encrypt file keys for this user.", alias="publicKey", json_schema_extra={"examples": ["MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A..."]})
+    private_key_enc: Optional[StrictStr] = Field(default=None, description="The private half of the pair, encrypted on the client with the user's password before it is sent. The portal  stores it as opaque text and cannot decrypt it, so material lost on the client cannot be recovered from here.", alias="privateKeyEnc", json_schema_extra={"examples": ["U2FsdGVkX1+Lm3s..."]})
+    __properties: ClassVar[List[str]] = ["id", "publicKey", "privateKeyEnc"]
+
+    model_config = ConfigDict(
+        populate_by_name=True,
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
+
+
+    def to_str(self) -> str:
+        """Returns the string representation of the model using alias"""
+        return pprint.pformat(self.model_dump(by_alias=True))
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the model using alias"""
+        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_json(cls, json_str: str) -> Optional[Self]:
+        """Create an instance of EncryptionKeyRequestDto from a JSON string"""
+        return cls.from_dict(json.loads(json_str))
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
+
+        This has the following differences from calling pydantic's
+        `self.model_dump(by_alias=True)`:
+
+        * `None` is only added to the output dict for nullable fields that
+          were set at model initialization. Other fields with value `None`
+          are ignored.
+        """
+        excluded_fields: Set[str] = set([
+        ])
+
+        _dict = self.model_dump(
+            by_alias=True,
+            exclude=excluded_fields,
+            exclude_none=True,
+        )
+        # set to None if public_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.public_key is None and "public_key" in self.model_fields_set:
+            _dict['publicKey'] = None
+
+        # set to None if private_key_enc (nullable) is None
+        # and model_fields_set contains the field
+        if self.private_key_enc is None and "private_key_enc" in self.model_fields_set:
+            _dict['privateKeyEnc'] = None
+
+        return _dict
+
+    @classmethod
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+        """Create an instance of EncryptionKeyRequestDto from a dict"""
+        if obj is None:
+            return None
+
+
+        if not isinstance(obj, dict):
+            return cls.model_validate(obj)
+
+        _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "publicKey": obj.get("publicKey"),
+            "privateKeyEnc": obj.get("privateKeyEnc")
+        })
+        return _obj
+
+

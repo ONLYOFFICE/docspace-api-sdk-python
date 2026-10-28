@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class CoverRequestDto(BaseModel):
     """
-    The request parameters to change the room cover.
+    The picture and the colour a room is drawn with while it has no logo.
     """ # noqa: E501
-    color: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The cover color.")
-    cover: Optional[StrictStr] = Field(default=None, description="The cover name.")
+    color: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The background colour the room is drawn with while it has no logo, as six hexadecimal digits with no leading  number sign. An empty value restores the default colour of the room type.", json_schema_extra={"examples": ["FF5733"]})
+    cover: Optional[StrictStr] = Field(default=None, description="The picture drawn on the room while it has no logo, named by an identifier from  `GET api/2.0/files/rooms/covers`. Any other value is rejected, and an empty value leaves the room without a  cover.", json_schema_extra={"examples": ["bookmark"]})
     __properties: ClassVar[List[str]] = ["color", "cover"]
 
     @field_validator('color')
@@ -41,8 +41,8 @@ class CoverRequestDto(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", value):
-            raise ValueError(r"must validate the regular expression /^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/")
+        if not re.match(r"^[A-Fa-f0-9]{6}$", value):
+            raise ValueError(r"must validate the regular expression /^[A-Fa-f0-9]{6}$/")
         return value
 
     model_config = ConfigDict(

@@ -1,12 +1,12 @@
 # CoversResultDto
-The result of the cover request containing the cover image data.
+One drawing of the built-in gallery of room covers.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The cover unique identifier. | 
-**data** | **str** | The cover image data. | 
+**id** | **str** | The name of the cover, and the value to send as `cover` when a room is created or changed. The names are the  same on every portal and do not change with the language of the request. | 
+**data** | **str** | The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays. | 
 
 ## Example
 

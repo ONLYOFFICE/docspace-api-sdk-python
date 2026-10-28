@@ -1,11 +1,12 @@
 # TenantDevToolsAccessSettingsDto
-The request parameters for managing the Developer Tools access settings for the current tenant.
+Whether the developer tools are closed to the portal's users with the `User` role.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**limited_access_for_users** | **bool** | Determines if users have restricted access to the Developer Tools. | [optional] 
+**limited_access_for_users** | **bool** | Specifies if the Developer Tools access are limited for users or not. | [optional] 
+**last_modified** | **datetime** | The timestamp indicating when the settings were last modified. | [optional] 
 
 ## Example
 

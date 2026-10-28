@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.ai_tool_permission_mode import AiToolPermissionMode
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,8 +31,9 @@ class AiUserSettingsDto(BaseModel):
     """
     The per-user AI settings.
     """ # noqa: E501
-    chat_recommended_model_visible: Optional[StrictBool] = Field(default=None, description="Indicates whether the recommended model banner is visible in the AI chat for the current user.", alias="chatRecommendedModelVisible")
-    __properties: ClassVar[List[str]] = ["chatRecommendedModelVisible"]
+    chat_recommended_model_visible: Optional[StrictBool] = Field(default=None, description="Indicates whether the recommended model banner is visible in the AI chat for the current user.", alias="chatRecommendedModelVisible", json_schema_extra={"examples": [True]})
+    tool_permission_mode: Optional[AiToolPermissionMode] = Field(default=None, description="How tool calls made by the model are approved for the current user. The default applies while the user has stored nothing.", alias="toolPermissionMode")
+    __properties: ClassVar[List[str]] = ["chatRecommendedModelVisible", "toolPermissionMode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +87,8 @@ class AiUserSettingsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "chatRecommendedModelVisible": obj.get("chatRecommendedModelVisible")
+            "chatRecommendedModelVisible": obj.get("chatRecommendedModelVisible"),
+            "toolPermissionMode": obj.get("toolPermissionMode")
         })
         return _obj
 

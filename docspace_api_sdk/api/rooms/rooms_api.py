@@ -19,12 +19,13 @@
 from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
+from uuid import UUID
 from docspace_api_sdk.models.archive_room_request import ArchiveRoomRequest
 from docspace_api_sdk.models.batch_tags_request_dto import BatchTagsRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
@@ -33,41 +34,44 @@ from docspace_api_sdk.models.covers_result_array_wrapper import CoversResultArra
 from docspace_api_sdk.models.create_room_from_template_dto import CreateRoomFromTemplateDto
 from docspace_api_sdk.models.create_room_request_dto import CreateRoomRequestDto
 from docspace_api_sdk.models.create_tag_request_dto import CreateTagRequestDto
-from docspace_api_sdk.models.create_third_party_room import CreateThirdPartyRoom
+from docspace_api_sdk.models.create_third_party_room_request import CreateThirdPartyRoomRequest
 from docspace_api_sdk.models.delete_room_request import DeleteRoomRequest
 from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
 from docspace_api_sdk.models.external_db_sync_task_wrapper import ExternalDbSyncTaskWrapper
 from docspace_api_sdk.models.file_operation_wrapper import FileOperationWrapper
 from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
 from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper
-from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
-from docspace_api_sdk.models.folder_integer_wrapper import FolderIntegerWrapper
-from docspace_api_sdk.models.folder_string_wrapper import FolderStringWrapper
+from docspace_api_sdk.models.filter_type import FilterType
+from docspace_api_sdk.models.folder_content_wrapper import FolderContentWrapper
+from docspace_api_sdk.models.folder_wrapper import FolderWrapper
 from docspace_api_sdk.models.link_type import LinkType
 from docspace_api_sdk.models.logo_request import LogoRequest
 from docspace_api_sdk.models.new_items_file_entry_base_array_wrapper import NewItemsFileEntryBaseArrayWrapper
 from docspace_api_sdk.models.new_items_room_new_items_array_wrapper import NewItemsRoomNewItemsArrayWrapper
-from docspace_api_sdk.models.object_array_wrapper import ObjectArrayWrapper
 from docspace_api_sdk.models.provider_filter import ProviderFilter
 from docspace_api_sdk.models.quota_filter import QuotaFilter
 from docspace_api_sdk.models.room_from_template_status_wrapper import RoomFromTemplateStatusWrapper
 from docspace_api_sdk.models.room_invitation_request import RoomInvitationRequest
 from docspace_api_sdk.models.room_link_request import RoomLinkRequest
+from docspace_api_sdk.models.room_privacy_filter import RoomPrivacyFilter
 from docspace_api_sdk.models.room_security_wrapper import RoomSecurityWrapper
 from docspace_api_sdk.models.room_template_dto import RoomTemplateDto
 from docspace_api_sdk.models.room_template_status_wrapper import RoomTemplateStatusWrapper
 from docspace_api_sdk.models.room_type import RoomType
+from docspace_api_sdk.models.rooms_metadata_search_request_dto import RoomsMetadataSearchRequestDto
 from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.models.set_public_dto import SetPublicDto
 from docspace_api_sdk.models.share_filter_type import ShareFilterType
 from docspace_api_sdk.models.sort_order import SortOrder
 from docspace_api_sdk.models.storage_filter import StorageFilter
+from docspace_api_sdk.models.string_array_wrapper import StringArrayWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
-from docspace_api_sdk.models.subject_filter import SubjectFilter
+from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
 from docspace_api_sdk.models.update_room_request import UpdateRoomRequest
 from docspace_api_sdk.models.update_tag_request_dto import UpdateTagRequestDto
 from docspace_api_sdk.models.upload_result_wrapper import UploadResultWrapper
 from docspace_api_sdk.models.user_invitation import UserInvitation
+from docspace_api_sdk.models.error_api_response import ErrorApiResponse
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -92,11 +96,11 @@ class RoomsApi:
         return self
 
 
-    @validate_call
+    @overload
     def add_room_tags(
         self,
-        id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
+        id: Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -109,14 +113,71 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
-        """Add the room tags
+    ) -> FolderWrapper: ...
 
-        Adds the tags to a room with the ID specified in the request.
+    @overload
+    def add_room_tags(
+        self,
+        id: Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
 
-        :param id: The room Id. (required)
-        :type id: int
-        :param batch_tags_request_dto: The parameters for managing tags.
+    @overload
+    def add_room_tags(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def add_room_tags(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
+        """Attach tags to a room
+
+        Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
+
+        :param id: The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param batch_tags_request_dto: The names to attach or to detach.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -150,13 +211,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -168,11 +233,11 @@ class RoomsApi:
         ).data
 
 
-    @validate_call
+    @overload
     def add_room_tags_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
+        id: Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -185,14 +250,71 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
-        """Add the room tags
+    ) -> ApiResponse[FolderWrapper]: ...
 
-        Adds the tags to a room with the ID specified in the request.
+    @overload
+    def add_room_tags_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
 
-        :param id: The room Id. (required)
-        :type id: int
-        :param batch_tags_request_dto: The parameters for managing tags.
+    @overload
+    def add_room_tags_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def add_room_tags_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
+        """Attach tags to a room
+
+        Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
+
+        :param id: The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param batch_tags_request_dto: The names to attach or to detach.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -226,13 +348,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -247,8 +373,8 @@ class RoomsApi:
     @validate_call
     def add_room_tags_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -262,13 +388,13 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Add the room tags
+        """Attach tags to a room
 
-        Adds the tags to a room with the ID specified in the request.
+        Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
 
-        :param id: The room Id. (required)
-        :type id: int
-        :param batch_tags_request_dto: The parameters for managing tags.
+        :param id: The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param batch_tags_request_dto: The names to attach or to detach.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -302,13 +428,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -407,8 +537,8 @@ class RoomsApi:
     @validate_call
     def archive_room(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The parameters for archiving a room.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -424,11 +554,11 @@ class RoomsApi:
     ) -> FileOperationWrapper:
         """Archive a room
 
-        Moves a room with the ID specified in the request to the Archive section.
+        Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param archive_room_request: The parameters for archiving a room.
+        :param id: The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param archive_room_request: The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
         :type archive_room_request: ArchiveRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -463,11 +593,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -482,8 +617,8 @@ class RoomsApi:
     @validate_call
     def archive_room_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The parameters for archiving a room.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -499,11 +634,11 @@ class RoomsApi:
     ) -> ApiResponse[FileOperationWrapper]:
         """Archive a room
 
-        Moves a room with the ID specified in the request to the Archive section.
+        Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param archive_room_request: The parameters for archiving a room.
+        :param id: The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param archive_room_request: The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
         :type archive_room_request: ArchiveRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -538,11 +673,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -557,8 +697,8 @@ class RoomsApi:
     @validate_call
     def archive_room_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The parameters for archiving a room.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -574,11 +714,11 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Archive a room
 
-        Moves a room with the ID specified in the request to the Archive section.
+        Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param archive_room_request: The parameters for archiving a room.
+        :param id: The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param archive_room_request: The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
         :type archive_room_request: ArchiveRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -613,11 +753,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -713,11 +858,11 @@ class RoomsApi:
 
 
 
-    @validate_call
+    @overload
     def change_room_cover(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        cover_request_dto: Annotated[CoverRequestDto, Field(description="The request parameters to change the room cover.")],
+        id: Annotated[StrictInt, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        cover_request_dto: Annotated[CoverRequestDto, Field(description="The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -730,14 +875,71 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
+    ) -> FolderWrapper: ...
+
+    @overload
+    def change_room_cover(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        cover_request_dto: Annotated[CoverRequestDto, Field(description="The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
+
+    @overload
+    def change_room_cover(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        cover_request_dto: Annotated[CoverRequestDto, Field(description="The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def change_room_cover(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        cover_request_dto: Annotated[CoverRequestDto, Field(description="The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
         """Change the room cover
 
-        Changes a cover of a room with the ID specified in the request.
+        Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param cover_request_dto: The request parameters to change the room cover. (required)
+        :param id: The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param cover_request_dto: The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. (required)
         :type cover_request_dto: CoverRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -771,14 +973,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -790,11 +995,11 @@ class RoomsApi:
         ).data
 
 
-    @validate_call
+    @overload
     def change_room_cover_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        cover_request_dto: Annotated[CoverRequestDto, Field(description="The request parameters to change the room cover.")],
+        id: Annotated[StrictInt, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        cover_request_dto: Annotated[CoverRequestDto, Field(description="The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -807,14 +1012,71 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderWrapper]: ...
+
+    @overload
+    def change_room_cover_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        cover_request_dto: Annotated[CoverRequestDto, Field(description="The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
+
+    @overload
+    def change_room_cover_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        cover_request_dto: Annotated[CoverRequestDto, Field(description="The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def change_room_cover_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        cover_request_dto: Annotated[CoverRequestDto, Field(description="The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
         """Change the room cover
 
-        Changes a cover of a room with the ID specified in the request.
+        Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param cover_request_dto: The request parameters to change the room cover. (required)
+        :param id: The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param cover_request_dto: The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. (required)
         :type cover_request_dto: CoverRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -848,14 +1110,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -870,8 +1135,8 @@ class RoomsApi:
     @validate_call
     def change_room_cover_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        cover_request_dto: Annotated[CoverRequestDto, Field(description="The request parameters to change the room cover.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        cover_request_dto: Annotated[CoverRequestDto, Field(description="The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -887,11 +1152,11 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Change the room cover
 
-        Changes a cover of a room with the ID specified in the request.
+        Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param cover_request_dto: The request parameters to change the room cover. (required)
+        :param id: The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param cover_request_dto: The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. (required)
         :type cover_request_dto: CoverRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -925,14 +1190,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1044,10 +1312,10 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
+    ) -> FolderWrapper:
         """Create a room
 
-        Creates a room in the Rooms section.
+        Creates a room in the portal Rooms section and returns it. `roomType` decides which sharing links, member  roles and form features the room offers, and it cannot be changed afterwards, so a room of the wrong kind has  to be recreated. The caller must be the portal owner, a portal administrator or a room administrator; a user  or a guest is refused, and so is a public room while the portal forbids external sharing. `title` is required  and must not be blank: characters a folder name cannot hold are replaced with underscores and the rest is  truncated, so the stored title can differ from the one sent and two rooms can share it. `quota` is accepted  only while the per-room quota feature is on and must stay within the portal quota, `cover` only for an id  returned by `GET api/2.0/files/rooms/covers`, and `color` as six hexadecimal digits with no leading number  sign. Tag names the portal does not know yet are added to the tag catalogue. `share` is not implemented and  any non-empty value is rejected, so invite members afterwards with `PUT api/2.0/files/rooms/{id}/share`.  Passing the portal room limit ends the call as a billing refusal and creates nothing.
 
         :param create_room_request_dto:
         :type create_room_request_dto: CreateRoomRequestDto
@@ -1082,12 +1350,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': "FolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1115,10 +1389,10 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderWrapper]:
         """Create a room
 
-        Creates a room in the Rooms section.
+        Creates a room in the portal Rooms section and returns it. `roomType` decides which sharing links, member  roles and form features the room offers, and it cannot be changed afterwards, so a room of the wrong kind has  to be recreated. The caller must be the portal owner, a portal administrator or a room administrator; a user  or a guest is refused, and so is a public room while the portal forbids external sharing. `title` is required  and must not be blank: characters a folder name cannot hold are replaced with underscores and the rest is  truncated, so the stored title can differ from the one sent and two rooms can share it. `quota` is accepted  only while the per-room quota feature is on and must stay within the portal quota, `cover` only for an id  returned by `GET api/2.0/files/rooms/covers`, and `color` as six hexadecimal digits with no leading number  sign. Tag names the portal does not know yet are added to the tag catalogue. `share` is not implemented and  any non-empty value is rejected, so invite members afterwards with `PUT api/2.0/files/rooms/{id}/share`.  Passing the portal room limit ends the call as a billing refusal and creates nothing.
 
         :param create_room_request_dto:
         :type create_room_request_dto: CreateRoomRequestDto
@@ -1153,12 +1427,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': "FolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1189,7 +1469,7 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Create a room
 
-        Creates a room in the Rooms section.
+        Creates a room in the portal Rooms section and returns it. `roomType` decides which sharing links, member  roles and form features the room offers, and it cannot be changed afterwards, so a room of the wrong kind has  to be recreated. The caller must be the portal owner, a portal administrator or a room administrator; a user  or a guest is refused, and so is a public room while the portal forbids external sharing. `title` is required  and must not be blank: characters a folder name cannot hold are replaced with underscores and the rest is  truncated, so the stored title can differ from the one sent and two rooms can share it. `quota` is accepted  only while the per-room quota feature is on and must stay within the portal quota, `cover` only for an id  returned by `GET api/2.0/files/rooms/covers`, and `color` as six hexadecimal digits with no leading number  sign. Tag names the portal does not know yet are added to the tag catalogue. `share` is not implemented and  any non-empty value is rejected, so invite members afterwards with `PUT api/2.0/files/rooms/{id}/share`.  Passing the portal room limit ends the call as a billing refusal and creates nothing.
 
         :param create_room_request_dto:
         :type create_room_request_dto: CreateRoomRequestDto
@@ -1224,12 +1504,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': "FolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1341,7 +1627,7 @@ class RoomsApi:
     ) -> RoomFromTemplateStatusWrapper:
         """Create a room from the template
 
-        Creates a room in the Rooms section based on the template.
+        Starts a background job that copies a room template into a new room of the Rooms section, and answers with the  same progress record that `GET api/2.0/files/rooms/fromtemplate/status` returns. The caller must be able to  read the template and to create rooms at all, so a user or a guest is refused, and the checks run before the  job is queued. The room does not exist when the response arrives: poll the status operation until  `isCompleted` is true, then take `roomId` from it, and treat a non-empty `error` as a failed job. Only one  such job is kept per account, and a finished one is discarded when the next is started, so a second creation  loses the record of the first. Anything not sent is inherited from the template, and `copyLogo` keeps the  template logo and makes `logo` pointless. `quota` is accepted only while the per-room quota feature is on, and  a template of a public room cannot be instantiated while the portal forbids external sharing. A template that  does not exist or cannot be read is answered as missing.
 
         :param create_room_from_template_dto:
         :type create_room_from_template_dto: CreateRoomFromTemplateDto
@@ -1377,11 +1663,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1412,7 +1703,7 @@ class RoomsApi:
     ) -> ApiResponse[RoomFromTemplateStatusWrapper]:
         """Create a room from the template
 
-        Creates a room in the Rooms section based on the template.
+        Starts a background job that copies a room template into a new room of the Rooms section, and answers with the  same progress record that `GET api/2.0/files/rooms/fromtemplate/status` returns. The caller must be able to  read the template and to create rooms at all, so a user or a guest is refused, and the checks run before the  job is queued. The room does not exist when the response arrives: poll the status operation until  `isCompleted` is true, then take `roomId` from it, and treat a non-empty `error` as a failed job. Only one  such job is kept per account, and a finished one is discarded when the next is started, so a second creation  loses the record of the first. Anything not sent is inherited from the template, and `copyLogo` keeps the  template logo and makes `logo` pointless. `quota` is accepted only while the per-room quota feature is on, and  a template of a public room cannot be instantiated while the portal forbids external sharing. A template that  does not exist or cannot be read is answered as missing.
 
         :param create_room_from_template_dto:
         :type create_room_from_template_dto: CreateRoomFromTemplateDto
@@ -1448,11 +1739,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1483,7 +1779,7 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Create a room from the template
 
-        Creates a room in the Rooms section based on the template.
+        Starts a background job that copies a room template into a new room of the Rooms section, and answers with the  same progress record that `GET api/2.0/files/rooms/fromtemplate/status` returns. The caller must be able to  read the template and to create rooms at all, so a user or a guest is refused, and the checks run before the  job is queued. The room does not exist when the response arrives: poll the status operation until  `isCompleted` is true, then take `roomId` from it, and treat a non-empty `error` as a failed job. Only one  such job is kept per account, and a finished one is discarded when the next is started, so a second creation  loses the record of the first. Anything not sent is inherited from the template, and `copyLogo` keeps the  template logo and makes `logo` pointless. `quota` is accepted only while the per-room quota feature is on, and  a template of a public room cannot be instantiated while the portal forbids external sharing. A template that  does not exist or cannot be read is answered as missing.
 
         :param create_room_from_template_dto:
         :type create_room_from_template_dto: CreateRoomFromTemplateDto
@@ -1519,11 +1815,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1616,11 +1917,11 @@ class RoomsApi:
 
 
 
-    @validate_call
+    @overload
     def create_room_logo(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        logo_request: Annotated[LogoRequest, Field(description="The logo request parameters.")],
+        id: Annotated[StrictInt, Field(description="The room the logo is set on.")],
+        logo_request: Annotated[LogoRequest, Field(description="The uploaded picture and the piece of it to use.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1633,14 +1934,71 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
-        """Create a room logo
+    ) -> FolderWrapper: ...
 
-        Creates a logo for a room with the ID specified in the request.
+    @overload
+    def create_room_logo(
+        self,
+        id: Annotated[StrictStr, Field(description="The room the logo is set on.")],
+        logo_request: Annotated[LogoRequest, Field(description="The uploaded picture and the piece of it to use.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param logo_request: The logo request parameters. (required)
+    @overload
+    def create_room_logo(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room the logo is set on.")], Annotated[StrictStr, Field(description="The room the logo is set on.")]],
+        logo_request: Annotated[LogoRequest, Field(description="The uploaded picture and the piece of it to use.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def create_room_logo(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room the logo is set on.")], Annotated[StrictStr, Field(description="The room the logo is set on.")]],
+        logo_request: Annotated[LogoRequest, Field(description="The uploaded picture and the piece of it to use.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
+        """Set the room logo
+
+        Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
+
+        :param id: The room the logo is set on. (required)
+        :type id: Union[int, str]
+        :param logo_request: The uploaded picture and the piece of it to use. (required)
         :type logo_request: LogoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1674,13 +2032,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1692,11 +2055,11 @@ class RoomsApi:
         ).data
 
 
-    @validate_call
+    @overload
     def create_room_logo_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        logo_request: Annotated[LogoRequest, Field(description="The logo request parameters.")],
+        id: Annotated[StrictInt, Field(description="The room the logo is set on.")],
+        logo_request: Annotated[LogoRequest, Field(description="The uploaded picture and the piece of it to use.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1709,14 +2072,71 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
-        """Create a room logo
+    ) -> ApiResponse[FolderWrapper]: ...
 
-        Creates a logo for a room with the ID specified in the request.
+    @overload
+    def create_room_logo_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room the logo is set on.")],
+        logo_request: Annotated[LogoRequest, Field(description="The uploaded picture and the piece of it to use.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param logo_request: The logo request parameters. (required)
+    @overload
+    def create_room_logo_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room the logo is set on.")], Annotated[StrictStr, Field(description="The room the logo is set on.")]],
+        logo_request: Annotated[LogoRequest, Field(description="The uploaded picture and the piece of it to use.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def create_room_logo_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room the logo is set on.")], Annotated[StrictStr, Field(description="The room the logo is set on.")]],
+        logo_request: Annotated[LogoRequest, Field(description="The uploaded picture and the piece of it to use.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
+        """Set the room logo
+
+        Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
+
+        :param id: The room the logo is set on. (required)
+        :type id: Union[int, str]
+        :param logo_request: The uploaded picture and the piece of it to use. (required)
         :type logo_request: LogoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1750,13 +2170,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1771,8 +2196,8 @@ class RoomsApi:
     @validate_call
     def create_room_logo_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        logo_request: Annotated[LogoRequest, Field(description="The logo request parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The room the logo is set on.")], Annotated[StrictStr, Field(description="The room the logo is set on.")]],
+        logo_request: Annotated[LogoRequest, Field(description="The uploaded picture and the piece of it to use.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1786,13 +2211,13 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create a room logo
+        """Set the room logo
 
-        Creates a logo for a room with the ID specified in the request.
+        Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param logo_request: The logo request parameters. (required)
+        :param id: The room the logo is set on. (required)
+        :type id: Union[int, str]
+        :param logo_request: The uploaded picture and the piece of it to use. (required)
         :type logo_request: LogoRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1826,13 +2251,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1947,7 +2377,7 @@ class RoomsApi:
     ) -> StringWrapper:
         """Create a room tag
 
-        Creates a custom room tag with the parameters specified in the request.
+        Adds a custom tag to the portal-wide catalog of room tags and answers with the stored name. Tags are shared by  the whole portal instead of belonging to the caller: once the tag exists, every room manager can attach it to  their own rooms with `PUT api/2.0/files/rooms/{id}/tags`, and that call also creates a tag it does not find.  Creating a name that is already in the catalog returns the existing tag unchanged rather than a duplicate or  an error, so repeating the call after a timeout is safe. A blank name, or one longer than the published limit,  is rejected as an invalid request. Only a room manager or a portal administrator may create a tag, and a user  or a guest is refused. The answer is the name as stored, and that name is the value to send in the `tags`  filter of `GET api/2.0/files/rooms` and in the room tag calls. The catalog itself is read with  `GET api/2.0/files/tags`.
 
         :param create_tag_request_dto:
         :type create_tag_request_dto: CreateTagRequestDto
@@ -1983,12 +2413,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2019,7 +2452,7 @@ class RoomsApi:
     ) -> ApiResponse[StringWrapper]:
         """Create a room tag
 
-        Creates a custom room tag with the parameters specified in the request.
+        Adds a custom tag to the portal-wide catalog of room tags and answers with the stored name. Tags are shared by  the whole portal instead of belonging to the caller: once the tag exists, every room manager can attach it to  their own rooms with `PUT api/2.0/files/rooms/{id}/tags`, and that call also creates a tag it does not find.  Creating a name that is already in the catalog returns the existing tag unchanged rather than a duplicate or  an error, so repeating the call after a timeout is safe. A blank name, or one longer than the published limit,  is rejected as an invalid request. Only a room manager or a portal administrator may create a tag, and a user  or a guest is refused. The answer is the name as stored, and that name is the value to send in the `tags`  filter of `GET api/2.0/files/rooms` and in the room tag calls. The catalog itself is read with  `GET api/2.0/files/tags`.
 
         :param create_tag_request_dto:
         :type create_tag_request_dto: CreateTagRequestDto
@@ -2055,12 +2488,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2091,7 +2527,7 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Create a room tag
 
-        Creates a custom room tag with the parameters specified in the request.
+        Adds a custom tag to the portal-wide catalog of room tags and answers with the stored name. Tags are shared by  the whole portal instead of belonging to the caller: once the tag exists, every room manager can attach it to  their own rooms with `PUT api/2.0/files/rooms/{id}/tags`, and that call also creates a tag it does not find.  Creating a name that is already in the catalog returns the existing tag unchanged rather than a duplicate or  an error, so repeating the call after a timeout is safe. A blank name, or one longer than the published limit,  is rejected as an invalid request. Only a room manager or a portal administrator may create a tag, and a user  or a guest is refused. The answer is the name as stored, and that name is the value to send in the `tags`  filter of `GET api/2.0/files/rooms` and in the room tag calls. The catalog itself is read with  `GET api/2.0/files/tags`.
 
         :param create_tag_request_dto:
         :type create_tag_request_dto: CreateTagRequestDto
@@ -2127,12 +2563,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2242,9 +2681,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoomTemplateStatusWrapper:
-        """Start creating room template
+        """Create a room template
 
-        Starts creating the room template.
+        Queues a background job that turns an existing room into a reusable room template, and returns the state of  that job right away. The template lands in the portal's Templates section, inherits the source room's type,  privacy, indexing, storage limit, lifetime, download and watermark settings, and receives copies of the room's  files together with its ordinary subfolders and everything inside them; the service subfolders a room keeps  for its own workflows are left out. The caller needs room-manager rights on the source room, and the room must  not be archived: a room that cannot be found under Rooms is answered as missing, and every other refusal comes  back as a rejection. The template is not ready when the response arrives, so poll  `GET api/2.0/files/roomtemplate/status` until `isCompleted` is true, then read `templateId`; a non-empty  `error` there means the job failed and the half-built template was removed. Only one template creation is  tracked per caller, and starting another replaces the previous record. Setting `public` to true discards  `share` and `groups` and shares the finished template with everyone instead, while `copyLogo` reuses the  source room's own picture and makes `logo` irrelevant.
 
         :param room_template_dto:
         :type room_template_dto: RoomTemplateDto
@@ -2280,11 +2719,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2313,9 +2757,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[RoomTemplateStatusWrapper]:
-        """Start creating room template
+        """Create a room template
 
-        Starts creating the room template.
+        Queues a background job that turns an existing room into a reusable room template, and returns the state of  that job right away. The template lands in the portal's Templates section, inherits the source room's type,  privacy, indexing, storage limit, lifetime, download and watermark settings, and receives copies of the room's  files together with its ordinary subfolders and everything inside them; the service subfolders a room keeps  for its own workflows are left out. The caller needs room-manager rights on the source room, and the room must  not be archived: a room that cannot be found under Rooms is answered as missing, and every other refusal comes  back as a rejection. The template is not ready when the response arrives, so poll  `GET api/2.0/files/roomtemplate/status` until `isCompleted` is true, then read `templateId`; a non-empty  `error` there means the job failed and the half-built template was removed. Only one template creation is  tracked per caller, and starting another replaces the previous record. Setting `public` to true discards  `share` and `groups` and shares the finished template with everyone instead, while `copyLogo` reuses the  source room's own picture and makes `logo` irrelevant.
 
         :param room_template_dto:
         :type room_template_dto: RoomTemplateDto
@@ -2351,11 +2795,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2384,9 +2833,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Start creating room template
+        """Create a room template
 
-        Starts creating the room template.
+        Queues a background job that turns an existing room into a reusable room template, and returns the state of  that job right away. The template lands in the portal's Templates section, inherits the source room's type,  privacy, indexing, storage limit, lifetime, download and watermark settings, and receives copies of the room's  files together with its ordinary subfolders and everything inside them; the service subfolders a room keeps  for its own workflows are left out. The caller needs room-manager rights on the source room, and the room must  not be archived: a room that cannot be found under Rooms is answered as missing, and every other refusal comes  back as a rejection. The template is not ready when the response arrives, so poll  `GET api/2.0/files/roomtemplate/status` until `isCompleted` is true, then read `templateId`; a non-empty  `error` there means the job failed and the half-built template was removed. Only one template creation is  tracked per caller, and starting another replaces the previous record. Setting `public` to true discards  `share` and `groups` and shares the finished template with everyone instead, while `copyLogo` reuses the  source room's own picture and makes `logo` irrelevant.
 
         :param room_template_dto:
         :type room_template_dto: RoomTemplateDto
@@ -2422,11 +2871,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2522,8 +2976,8 @@ class RoomsApi:
     @validate_call
     def create_room_third_party(
         self,
-        id: Annotated[StrictStr, Field(description="The ID of the folder in the third-party storage in which the contents of the room will be stored.")],
-        create_third_party_room: Annotated[CreateThirdPartyRoom, Field(description="The third-party room information.")],
+        id: Annotated[StrictStr, Field(description="The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.")],
+        create_third_party_room_request: Annotated[CreateThirdPartyRoomRequest, Field(description="The settings of the room to be created out of the folder.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2536,15 +2990,15 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderStringWrapper:
+    ) -> ThirdPartyFolderWrapper:
         """Create a third-party room
 
-        Creates a room in the Rooms section stored in a third-party storage.
+        Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `tags` and `logo` are then dropped. A third-party room keeps neither  `indexing` nor `denyDownload` in either mode: both are accepted and ignored, and the room reads back with them  off. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
 
-        :param id: The ID of the folder in the third-party storage in which the contents of the room will be stored. (required)
+        :param id: The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. (required)
         :type id: str
-        :param create_third_party_room: The third-party room information. (required)
-        :type create_third_party_room: CreateThirdPartyRoom
+        :param create_third_party_room_request: The settings of the room to be created out of the folder. (required)
+        :type create_third_party_room_request: CreateThirdPartyRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2569,7 +3023,7 @@ class RoomsApi:
 
         _param = self._create_room_third_party_serialize(
             id=id,
-            create_third_party_room=create_third_party_room,
+            create_third_party_room_request=create_third_party_room_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2577,12 +3031,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderStringWrapper",
-            '401': None,
-            '429': None,
+            '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2597,8 +3057,8 @@ class RoomsApi:
     @validate_call
     def create_room_third_party_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The ID of the folder in the third-party storage in which the contents of the room will be stored.")],
-        create_third_party_room: Annotated[CreateThirdPartyRoom, Field(description="The third-party room information.")],
+        id: Annotated[StrictStr, Field(description="The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.")],
+        create_third_party_room_request: Annotated[CreateThirdPartyRoomRequest, Field(description="The settings of the room to be created out of the folder.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2611,15 +3071,15 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderStringWrapper]:
+    ) -> ApiResponse[ThirdPartyFolderWrapper]:
         """Create a third-party room
 
-        Creates a room in the Rooms section stored in a third-party storage.
+        Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `tags` and `logo` are then dropped. A third-party room keeps neither  `indexing` nor `denyDownload` in either mode: both are accepted and ignored, and the room reads back with them  off. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
 
-        :param id: The ID of the folder in the third-party storage in which the contents of the room will be stored. (required)
+        :param id: The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. (required)
         :type id: str
-        :param create_third_party_room: The third-party room information. (required)
-        :type create_third_party_room: CreateThirdPartyRoom
+        :param create_third_party_room_request: The settings of the room to be created out of the folder. (required)
+        :type create_third_party_room_request: CreateThirdPartyRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2644,7 +3104,7 @@ class RoomsApi:
 
         _param = self._create_room_third_party_serialize(
             id=id,
-            create_third_party_room=create_third_party_room,
+            create_third_party_room_request=create_third_party_room_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2652,12 +3112,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderStringWrapper",
-            '401': None,
-            '429': None,
+            '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2672,8 +3138,8 @@ class RoomsApi:
     @validate_call
     def create_room_third_party_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The ID of the folder in the third-party storage in which the contents of the room will be stored.")],
-        create_third_party_room: Annotated[CreateThirdPartyRoom, Field(description="The third-party room information.")],
+        id: Annotated[StrictStr, Field(description="The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.")],
+        create_third_party_room_request: Annotated[CreateThirdPartyRoomRequest, Field(description="The settings of the room to be created out of the folder.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2689,12 +3155,12 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Create a third-party room
 
-        Creates a room in the Rooms section stored in a third-party storage.
+        Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `tags` and `logo` are then dropped. A third-party room keeps neither  `indexing` nor `denyDownload` in either mode: both are accepted and ignored, and the room reads back with them  off. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
 
-        :param id: The ID of the folder in the third-party storage in which the contents of the room will be stored. (required)
+        :param id: The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account. (required)
         :type id: str
-        :param create_third_party_room: The third-party room information. (required)
-        :type create_third_party_room: CreateThirdPartyRoom
+        :param create_third_party_room_request: The settings of the room to be created out of the folder. (required)
+        :type create_third_party_room_request: CreateThirdPartyRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2719,7 +3185,7 @@ class RoomsApi:
 
         _param = self._create_room_third_party_serialize(
             id=id,
-            create_third_party_room=create_third_party_room,
+            create_third_party_room_request=create_third_party_room_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2727,12 +3193,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderStringWrapper",
-            '401': None,
-            '429': None,
+            '200': "ThirdPartyFolderWrapper",
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2743,7 +3215,7 @@ class RoomsApi:
     def _create_room_third_party_serialize(
         self,
         id,
-        create_third_party_room,
+        create_third_party_room_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2771,8 +3243,8 @@ class RoomsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_third_party_room is not None:
-            _body_params = create_third_party_room
+        if create_third_party_room_request is not None:
+            _body_params = create_third_party_room_request
 
 
         # set the HTTP header `Accept`
@@ -2847,7 +3319,7 @@ class RoomsApi:
     ) -> None:
         """Delete the custom room tags
 
-        Deletes a bunch of custom tags specified in the request.
+        Deletes custom room tags from the portal catalog by name and detaches them from every room that carries them;  the rooms themselves and their content are untouched, and only the tag disappears from their tag lists. Only a  portal administrator may call it, and a room manager who is allowed to create tags is refused. The names are  matched exactly as they are stored: names that are not in the catalog are skipped in silence and an empty list  is accepted as a no-op, so a successful answer does not prove that anything was deleted; check a name with  `GET api/2.0/files/tags/{tagName}/haslinks` first when that matters. The call cannot be undone: creating the  name again with `POST api/2.0/files/tags` brings back the tag but not its links, which have to be attached to  each room once more. The answer carries no body. To take a tag off one room and leave it in the catalog for  the others, use `DELETE api/2.0/files/rooms/{id}/tags` instead.
 
         :param batch_tags_request_dto:
         :type batch_tags_request_dto: BatchTagsRequestDto
@@ -2883,12 +3355,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2919,7 +3394,7 @@ class RoomsApi:
     ) -> ApiResponse[None]:
         """Delete the custom room tags
 
-        Deletes a bunch of custom tags specified in the request.
+        Deletes custom room tags from the portal catalog by name and detaches them from every room that carries them;  the rooms themselves and their content are untouched, and only the tag disappears from their tag lists. Only a  portal administrator may call it, and a room manager who is allowed to create tags is refused. The names are  matched exactly as they are stored: names that are not in the catalog are skipped in silence and an empty list  is accepted as a no-op, so a successful answer does not prove that anything was deleted; check a name with  `GET api/2.0/files/tags/{tagName}/haslinks` first when that matters. The call cannot be undone: creating the  name again with `POST api/2.0/files/tags` brings back the tag but not its links, which have to be attached to  each room once more. The answer carries no body. To take a tag off one room and leave it in the catalog for  the others, use `DELETE api/2.0/files/rooms/{id}/tags` instead.
 
         :param batch_tags_request_dto:
         :type batch_tags_request_dto: BatchTagsRequestDto
@@ -2955,12 +3430,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2991,7 +3469,7 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Delete the custom room tags
 
-        Deletes a bunch of custom tags specified in the request.
+        Deletes custom room tags from the portal catalog by name and detaches them from every room that carries them;  the rooms themselves and their content are untouched, and only the tag disappears from their tag lists. Only a  portal administrator may call it, and a room manager who is allowed to create tags is refused. The names are  matched exactly as they are stored: names that are not in the catalog are skipped in silence and an empty list  is accepted as a no-op, so a successful answer does not prove that anything was deleted; check a name with  `GET api/2.0/files/tags/{tagName}/haslinks` first when that matters. The call cannot be undone: creating the  name again with `POST api/2.0/files/tags` brings back the tag but not its links, which have to be attached to  each room once more. The answer carries no body. To take a tag off one room and leave it in the catalog for  the others, use `DELETE api/2.0/files/rooms/{id}/tags` instead.
 
         :param batch_tags_request_dto:
         :type batch_tags_request_dto: BatchTagsRequestDto
@@ -3027,12 +3505,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3072,6 +3553,13 @@ class RoomsApi:
             _body_params = batch_tags_request_dto
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -3121,8 +3609,8 @@ class RoomsApi:
     @validate_call
     def delete_room(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        delete_room_request: Annotated[DeleteRoomRequest, Field(description="The parameters for deleting a room.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        delete_room_request: Annotated[DeleteRoomRequest, Field(description="The body of the request. It is required even though the deletion does not depend on what it holds.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3138,11 +3626,11 @@ class RoomsApi:
     ) -> FileOperationWrapper:
         """Remove a room
 
-        Removes a room with the ID specified in the request.
+        Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param delete_room_request: The parameters for deleting a room. (required)
+        :param id: The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param delete_room_request: The body of the request. It is required even though the deletion does not depend on what it holds. (required)
         :type delete_room_request: DeleteRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3177,11 +3665,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3196,8 +3689,8 @@ class RoomsApi:
     @validate_call
     def delete_room_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        delete_room_request: Annotated[DeleteRoomRequest, Field(description="The parameters for deleting a room.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        delete_room_request: Annotated[DeleteRoomRequest, Field(description="The body of the request. It is required even though the deletion does not depend on what it holds.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3213,11 +3706,11 @@ class RoomsApi:
     ) -> ApiResponse[FileOperationWrapper]:
         """Remove a room
 
-        Removes a room with the ID specified in the request.
+        Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param delete_room_request: The parameters for deleting a room. (required)
+        :param id: The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param delete_room_request: The body of the request. It is required even though the deletion does not depend on what it holds. (required)
         :type delete_room_request: DeleteRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3252,11 +3745,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3271,8 +3769,8 @@ class RoomsApi:
     @validate_call
     def delete_room_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        delete_room_request: Annotated[DeleteRoomRequest, Field(description="The parameters for deleting a room.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        delete_room_request: Annotated[DeleteRoomRequest, Field(description="The body of the request. It is required even though the deletion does not depend on what it holds.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3288,11 +3786,11 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Remove a room
 
-        Removes a room with the ID specified in the request.
+        Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param delete_room_request: The parameters for deleting a room. (required)
+        :param id: The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param delete_room_request: The body of the request. It is required even though the deletion does not depend on what it holds. (required)
         :type delete_room_request: DeleteRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3327,11 +3825,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3427,10 +3930,10 @@ class RoomsApi:
 
 
 
-    @validate_call
+    @overload
     def delete_room_logo(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3443,13 +3946,67 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
+    ) -> FolderWrapper: ...
+
+    @overload
+    def delete_room_logo(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
+
+    @overload
+    def delete_room_logo(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def delete_room_logo(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
         """Remove a room logo
 
-        Removes a logo from a room with the ID specified in the request.
+        Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3481,12 +4038,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3498,10 +4060,10 @@ class RoomsApi:
         ).data
 
 
-    @validate_call
+    @overload
     def delete_room_logo_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3514,13 +4076,67 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderWrapper]: ...
+
+    @overload
+    def delete_room_logo_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
+
+    @overload
+    def delete_room_logo_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def delete_room_logo_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
         """Remove a room logo
 
-        Removes a logo from a room with the ID specified in the request.
+        Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3552,12 +4168,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3572,7 +4193,7 @@ class RoomsApi:
     @validate_call
     def delete_room_logo_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3588,10 +4209,10 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Remove a room logo
 
-        Removes a logo from a room with the ID specified in the request.
+        Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3623,12 +4244,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3708,11 +4334,11 @@ class RoomsApi:
 
 
 
-    @validate_call
+    @overload
     def delete_room_tags(
         self,
-        id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
+        id: Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3725,14 +4351,71 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
-        """Remove the room tags
+    ) -> FolderWrapper: ...
 
-        Removes the tags from a room with the ID specified in the request.
+    @overload
+    def delete_room_tags(
+        self,
+        id: Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
 
-        :param id: The room Id. (required)
-        :type id: int
-        :param batch_tags_request_dto: The parameters for managing tags.
+    @overload
+    def delete_room_tags(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def delete_room_tags(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
+        """Detach tags from a room
+
+        Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
+
+        :param id: The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param batch_tags_request_dto: The names to attach or to detach.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3766,13 +4449,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3784,11 +4471,11 @@ class RoomsApi:
         ).data
 
 
-    @validate_call
+    @overload
     def delete_room_tags_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
+        id: Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3801,14 +4488,71 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
-        """Remove the room tags
+    ) -> ApiResponse[FolderWrapper]: ...
 
-        Removes the tags from a room with the ID specified in the request.
+    @overload
+    def delete_room_tags_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
 
-        :param id: The room Id. (required)
-        :type id: int
-        :param batch_tags_request_dto: The parameters for managing tags.
+    @overload
+    def delete_room_tags_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def delete_room_tags_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
+        """Detach tags from a room
+
+        Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
+
+        :param id: The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param batch_tags_request_dto: The names to attach or to detach.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3842,13 +4586,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3863,8 +4611,8 @@ class RoomsApi:
     @validate_call
     def delete_room_tags_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room Id.")],
-        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The parameters for managing tags.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        batch_tags_request_dto: Annotated[Optional[BatchTagsRequestDto], Field(description="The names to attach or to detach.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3878,13 +4626,13 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Remove the room tags
+        """Detach tags from a room
 
-        Removes the tags from a room with the ID specified in the request.
+        Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
 
-        :param id: The room Id. (required)
-        :type id: int
-        :param batch_tags_request_dto: The parameters for managing tags.
+        :param id: The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param batch_tags_request_dto: The names to attach or to detach.
         :type batch_tags_request_dto: BatchTagsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3918,13 +4666,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4023,7 +4775,7 @@ class RoomsApi:
     @validate_call
     def get_external_db_sync_status(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4039,9 +4791,9 @@ class RoomsApi:
     ) -> ExternalDbSyncTaskWrapper:
         """Get external DB sync status
 
-        Returns the status of the external DB synchronization task for the specified filling forms room.
+        Returns the record of the external database export job of a form filling room, or an empty body when the room  has no job at all. The room must be a form filling room and the caller must be able to edit it, otherwise the  call is refused; an unknown room is answered with 404. This is the polling target of  `POST api/2.0/files/rooms/{id}/externaldbsync`: repeat it until `isCompleted` is true, and then read `forms`,  which lists one entry per original form with its own `success` and `error` and is empty while the job is still  running. `percentage` advances as forms are processed, `status` distinguishes a job that is queued, running,  finished or failed, and `error` carries the message of a job that stopped as a whole. The record belongs to  the room rather than to the account that started the job, so any member who can edit the room sees the same  answer. The call changes nothing and is safe to repeat.
 
-        :param id: The room ID. (required)
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4075,12 +4827,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
+            '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4095,7 +4851,7 @@ class RoomsApi:
     @validate_call
     def get_external_db_sync_status_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4111,9 +4867,9 @@ class RoomsApi:
     ) -> ApiResponse[ExternalDbSyncTaskWrapper]:
         """Get external DB sync status
 
-        Returns the status of the external DB synchronization task for the specified filling forms room.
+        Returns the record of the external database export job of a form filling room, or an empty body when the room  has no job at all. The room must be a form filling room and the caller must be able to edit it, otherwise the  call is refused; an unknown room is answered with 404. This is the polling target of  `POST api/2.0/files/rooms/{id}/externaldbsync`: repeat it until `isCompleted` is true, and then read `forms`,  which lists one entry per original form with its own `success` and `error` and is empty while the job is still  running. `percentage` advances as forms are processed, `status` distinguishes a job that is queued, running,  finished or failed, and `error` carries the message of a job that stopped as a whole. The record belongs to  the room rather than to the account that started the job, so any member who can edit the room sees the same  answer. The call changes nothing and is safe to repeat.
 
-        :param id: The room ID. (required)
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4147,12 +4903,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
+            '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4167,7 +4927,7 @@ class RoomsApi:
     @validate_call
     def get_external_db_sync_status_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4183,9 +4943,9 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Get external DB sync status
 
-        Returns the status of the external DB synchronization task for the specified filling forms room.
+        Returns the record of the external database export job of a form filling room, or an empty body when the room  has no job at all. The room must be a form filling room and the caller must be able to edit it, otherwise the  call is refused; an unknown room is answered with 404. This is the polling target of  `POST api/2.0/files/rooms/{id}/externaldbsync`: repeat it until `isCompleted` is true, and then read `forms`,  which lists one entry per original form with its own `success` and `error` and is empty while the job is still  running. `percentage` advances as forms are processed, `status` distinguishes a job that is queued, running,  finished or failed, and `error` carries the message of a job that stopped as a whole. The record belongs to  the room rather than to the account that started the job, so any member who can edit the room sees the same  answer. The call changes nothing and is safe to repeat.
 
-        :param id: The room ID. (required)
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4219,12 +4979,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
+            '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4307,7 +5071,7 @@ class RoomsApi:
     @validate_call
     def get_new_room_items(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4321,12 +5085,12 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NewItemsFileEntryBaseArrayWrapper:
-        """Get the new room items
+        """Get new items in a room
 
-        Returns a list of all the new items from a room with the ID specified in the request.
+        Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4359,11 +5123,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4378,7 +5147,7 @@ class RoomsApi:
     @validate_call
     def get_new_room_items_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4392,12 +5161,12 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[NewItemsFileEntryBaseArrayWrapper]:
-        """Get the new room items
+        """Get new items in a room
 
-        Returns a list of all the new items from a room with the ID specified in the request.
+        Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4430,11 +5199,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4449,7 +5223,7 @@ class RoomsApi:
     @validate_call
     def get_new_room_items_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4463,12 +5237,12 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the new room items
+        """Get new items in a room
 
-        Returns a list of all the new items from a room with the ID specified in the request.
+        Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4501,11 +5275,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsFileEntryBaseArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4588,7 +5367,7 @@ class RoomsApi:
     @validate_call
     def get_public_settings(
         self,
-        id: Annotated[StrictInt, Field(description="The room template ID.")],
+        id: Annotated[int, Field(le=2147483647, strict=True, ge=1, description="The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4602,11 +5381,11 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """Get public settings
+        """Get room template public access
 
-        Returns the public settings of the room template with the ID specified in the request.
+        Reports whether the room template addressed by `id` is shared with everyone or is reachable only by the  accounts it was explicitly shared with. True means the Everyone group holds read access, so any member allowed  to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; false means only  the owner and the named recipients can. The identifier has to belong to a room template — take it from  `templateId` of `GET api/2.0/files/roomtemplate/status`, or from the folder list of `GET api/2.0/files/rooms`  called with `searchArea` set to 4 — while an ordinary room, a deleted template or an unknown value is answered  as missing. The caller needs read access to the template, so somebody else's private template is refused even  for a portal administrator, and members who cannot reach the Templates section at all are refused whatever the  template's state. The call only reads state; use `PUT api/2.0/files/roomtemplate/public` to change it.
 
-        :param id: The room template ID. (required)
+        :param id: The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4640,11 +5419,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4659,7 +5443,7 @@ class RoomsApi:
     @validate_call
     def get_public_settings_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room template ID.")],
+        id: Annotated[int, Field(le=2147483647, strict=True, ge=1, description="The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4673,11 +5457,11 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """Get public settings
+        """Get room template public access
 
-        Returns the public settings of the room template with the ID specified in the request.
+        Reports whether the room template addressed by `id` is shared with everyone or is reachable only by the  accounts it was explicitly shared with. True means the Everyone group holds read access, so any member allowed  to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; false means only  the owner and the named recipients can. The identifier has to belong to a room template — take it from  `templateId` of `GET api/2.0/files/roomtemplate/status`, or from the folder list of `GET api/2.0/files/rooms`  called with `searchArea` set to 4 — while an ordinary room, a deleted template or an unknown value is answered  as missing. The caller needs read access to the template, so somebody else's private template is refused even  for a portal administrator, and members who cannot reach the Templates section at all are refused whatever the  template's state. The call only reads state; use `PUT api/2.0/files/roomtemplate/public` to change it.
 
-        :param id: The room template ID. (required)
+        :param id: The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4711,11 +5495,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4730,7 +5519,7 @@ class RoomsApi:
     @validate_call
     def get_public_settings_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room template ID.")],
+        id: Annotated[int, Field(le=2147483647, strict=True, ge=1, description="The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4744,11 +5533,11 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get public settings
+        """Get room template public access
 
-        Returns the public settings of the room template with the ID specified in the request.
+        Reports whether the room template addressed by `id` is shared with everyone or is reachable only by the  accounts it was explicitly shared with. True means the Everyone group holds read access, so any member allowed  to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; false means only  the owner and the named recipients can. The identifier has to belong to a room template — take it from  `templateId` of `GET api/2.0/files/roomtemplate/status`, or from the folder list of `GET api/2.0/files/rooms`  called with `searchArea` set to 4 — while an ordinary room, a deleted template or an unknown value is answered  as missing. The caller needs read access to the template, so somebody else's private template is refused even  for a portal administrator, and members who cannot reach the Templates section at all are refused whatever the  template's state. The call only reads state; use `PUT api/2.0/files/roomtemplate/public` to change it.
 
-        :param id: The room template ID. (required)
+        :param id: The identifier of the room template. Take it from `templateId` of `GET api/2.0/files/roomtemplate/status`, or  from the folder list of `GET api/2.0/files/rooms` called with `searchArea` set to 4; an identifier of an  ordinary room is not accepted. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4782,11 +5571,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4867,6 +5661,404 @@ class RoomsApi:
 
 
     @validate_call
+    def get_room_ai_folder(
+        self,
+        id: Annotated[StrictInt, Field(description="The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FolderContentWrapper:
+        """Get the .ai folder of a room
+
+        Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist is answered as not found. A room that holds no .ai folder is  answered with an empty page: no files and folders, a zero `total`, no `current` folder and empty `pathParts`.
+
+        :param id: The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: int
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+        :type filter_type: FilterType
+        :param count: The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+        :type count: int
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+        :type start_index: int
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+        :type sort_by: str
+        :param sort_order: The direction in which the `sortBy` field is ordered.
+        :type sort_order: SortOrder
+        :param filter_value: The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_room_ai_folder_serialize(
+            id=id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_room_ai_folder_with_http_info(
+        self,
+        id: Annotated[StrictInt, Field(description="The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FolderContentWrapper]:
+        """Get the .ai folder of a room
+
+        Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist is answered as not found. A room that holds no .ai folder is  answered with an empty page: no files and folders, a zero `total`, no `current` folder and empty `pathParts`.
+
+        :param id: The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: int
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+        :type filter_type: FilterType
+        :param count: The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+        :type count: int
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+        :type start_index: int
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+        :type sort_by: str
+        :param sort_order: The direction in which the `sortBy` field is ordered.
+        :type sort_order: SortOrder
+        :param filter_value: The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_room_ai_folder_serialize(
+            id=id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_room_ai_folder_without_preload_content(
+        self,
+        id: Annotated[StrictInt, Field(description="The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the .ai folder of a room
+
+        Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist is answered as not found. A room that holds no .ai folder is  answered with an empty page: no files and folders, a zero `total`, no `current` folder and empty `pathParts`.
+
+        :param id: The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: int
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+        :type filter_type: FilterType
+        :param count: The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+        :type count: int
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+        :type start_index: int
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+        :type sort_by: str
+        :param sort_order: The direction in which the `sortBy` field is ordered.
+        :type sort_order: SortOrder
+        :param filter_value: The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+        :type filter_value: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_room_ai_folder_serialize(
+            id=id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_room_ai_folder_serialize(
+        self,
+        id,
+        filter_type,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        if filter_type is not None:
+            
+            _query_params.append(('filterType', filter_type.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/rooms/{id}/ai"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_room_covers(
         self,
         _request_timeout: Union[
@@ -4882,9 +6074,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CoversResultArrayWrapper:
-        """Get covers
+        """Get room cover gallery
 
-        Returns a list of all covers.
+        Returns the gallery of cover pictures a room can be given: every entry pairs the identifier to send to  `POST api/2.0/files/rooms/{id}/cover` with the drawing itself as inline vector markup ready to be rendered.  The gallery is built into the product rather than stored per portal, so it is the same for every account and  every room, does not depend on what rooms exist, and its identifiers do not change with the language of the  request. The identifiers are unique and stable, which makes them safe to keep in a client, while the drawings  behind them may change between product versions. Any account of the portal may read the gallery, but a guest  is refused. The list is the only source of valid cover identifiers: a value that is not in it is rejected  wherever a cover is set, including room creation and room update. The call changes nothing and is safe to  repeat.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4917,11 +6109,14 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4949,9 +6144,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CoversResultArrayWrapper]:
-        """Get covers
+        """Get room cover gallery
 
-        Returns a list of all covers.
+        Returns the gallery of cover pictures a room can be given: every entry pairs the identifier to send to  `POST api/2.0/files/rooms/{id}/cover` with the drawing itself as inline vector markup ready to be rendered.  The gallery is built into the product rather than stored per portal, so it is the same for every account and  every room, does not depend on what rooms exist, and its identifiers do not change with the language of the  request. The identifiers are unique and stable, which makes them safe to keep in a client, while the drawings  behind them may change between product versions. Any account of the portal may read the gallery, but a guest  is refused. The list is the only source of valid cover identifiers: a value that is not in it is rejected  wherever a cover is set, including room creation and room update. The call changes nothing and is safe to  repeat.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4984,11 +6179,14 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5016,9 +6214,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get covers
+        """Get room cover gallery
 
-        Returns a list of all covers.
+        Returns the gallery of cover pictures a room can be given: every entry pairs the identifier to send to  `POST api/2.0/files/rooms/{id}/cover` with the drawing itself as inline vector markup ready to be rendered.  The gallery is built into the product rather than stored per portal, so it is the same for every account and  every room, does not depend on what rooms exist, and its identifiers do not change with the language of the  request. The identifiers are unique and stable, which makes them safe to keep in a client, while the drawings  behind them may change between product versions. Any account of the portal may read the gallery, but a guest  is refused. The list is the only source of valid cover identifiers: a value that is not in it is rejected  wherever a cover is set, including room creation and room update. The call changes nothing and is safe to  repeat.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5051,11 +6249,14 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CoversResultArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5150,7 +6351,7 @@ class RoomsApi:
     ) -> RoomFromTemplateStatusWrapper:
         """Get the room creation progress
 
-        Returns the progress of creating a room from the template.
+        Returns the progress of the room-from-template job started by the calling account with  `POST api/2.0/files/rooms/fromtemplate`. The record is private to the account that started the job: jobs of  other members are never reported, and only one record is kept per account. The body is empty when the account  has no such record, and it is also empty when the job queue cannot be read, so an empty answer is not proof  that nothing was started. `progress` is a percentage, `isCompleted` marks the end of the job whether it  succeeded or failed, `error` carries the failure message and is empty on success, and `roomId` is meaningful  only once the room exists. The record survives the end of the job and is dropped when the next creation  starts, so polling after completion keeps returning the same answer. Poll this operation until `isCompleted`  is true and then read the room itself with `GET api/2.0/files/rooms/{id}`. The call changes nothing and is  safe to repeat.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5183,11 +6384,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5217,7 +6420,7 @@ class RoomsApi:
     ) -> ApiResponse[RoomFromTemplateStatusWrapper]:
         """Get the room creation progress
 
-        Returns the progress of creating a room from the template.
+        Returns the progress of the room-from-template job started by the calling account with  `POST api/2.0/files/rooms/fromtemplate`. The record is private to the account that started the job: jobs of  other members are never reported, and only one record is kept per account. The body is empty when the account  has no such record, and it is also empty when the job queue cannot be read, so an empty answer is not proof  that nothing was started. `progress` is a percentage, `isCompleted` marks the end of the job whether it  succeeded or failed, `error` carries the failure message and is empty on success, and `roomId` is meaningful  only once the room exists. The record survives the end of the job and is dropped when the next creation  starts, so polling after completion keeps returning the same answer. Poll this operation until `isCompleted`  is true and then read the room itself with `GET api/2.0/files/rooms/{id}`. The call changes nothing and is  safe to repeat.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5250,11 +6453,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5284,7 +6489,7 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Get the room creation progress
 
-        Returns the progress of creating a room from the template.
+        Returns the progress of the room-from-template job started by the calling account with  `POST api/2.0/files/rooms/fromtemplate`. The record is private to the account that started the job: jobs of  other members are never reported, and only one record is kept per account. The body is empty when the account  has no such record, and it is also empty when the job queue cannot be read, so an empty answer is not proof  that nothing was started. `progress` is a percentage, `isCompleted` marks the end of the job whether it  succeeded or failed, `error` carries the failure message and is empty on success, and `roomId` is meaningful  only once the room exists. The record survives the end of the job and is dropped when the next creation  starts, so polling after completion keeps returning the same answer. Poll this operation until `isCompleted`  is true and then read the room itself with `GET api/2.0/files/rooms/{id}`. The call changes nothing and is  safe to repeat.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5317,11 +6522,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomFromTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5416,7 +6623,7 @@ class RoomsApi:
     ) -> DocumentBuilderTaskWrapper:
         """Get the room index export
 
-        Returns the room index export.
+        Returns the state of the index export of the calling account, the job started by  `POST api/2.0/files/rooms/{id}/indexexport`. The record is not addressed by room: there is at most one per  account, and the answer describes the latest export whichever room it was started for. When the account has  never started one, or its record was cancelled, the body is null rather than an error, so null is the normal  way of saying that there is nothing to report. While the job runs, `percentage` moves in coarse steps instead  of smoothly, which makes it a rough hint rather than a measure of the remaining time; `isCompleted` is the  field to wait on, and it is also set for a job that failed or was cancelled, so read `status` to tell the  outcomes apart and `error` for the message. After a successful build, `resultFileId`, `resultFileName` and  `resultFileUrl` point to the spreadsheet saved in the My documents section of the caller. The record survives  completion and is replaced only by the next export.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5449,11 +6656,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5483,7 +6692,7 @@ class RoomsApi:
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
         """Get the room index export
 
-        Returns the room index export.
+        Returns the state of the index export of the calling account, the job started by  `POST api/2.0/files/rooms/{id}/indexexport`. The record is not addressed by room: there is at most one per  account, and the answer describes the latest export whichever room it was started for. When the account has  never started one, or its record was cancelled, the body is null rather than an error, so null is the normal  way of saying that there is nothing to report. While the job runs, `percentage` moves in coarse steps instead  of smoothly, which makes it a rough hint rather than a measure of the remaining time; `isCompleted` is the  field to wait on, and it is also set for a job that failed or was cancelled, so read `status` to tell the  outcomes apart and `error` for the message. After a successful build, `resultFileId`, `resultFileName` and  `resultFileUrl` point to the spreadsheet saved in the My documents section of the caller. The record survives  completion and is replaced only by the next export.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5516,11 +6725,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5550,7 +6761,7 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Get the room index export
 
-        Returns the room index export.
+        Returns the state of the index export of the calling account, the job started by  `POST api/2.0/files/rooms/{id}/indexexport`. The record is not addressed by room: there is at most one per  account, and the answer describes the latest export whichever room it was started for. When the account has  never started one, or its record was cancelled, the body is null rather than an error, so null is the normal  way of saying that there is nothing to report. While the job runs, `percentage` moves in coarse steps instead  of smoothly, which makes it a rough hint rather than a measure of the remaining time; `isCompleted` is the  field to wait on, and it is also set for a job that failed or was cancelled, so read `status` to tell the  outcomes apart and `error` for the message. After a successful build, `resultFileId`, `resultFileName` and  `resultFileUrl` point to the spreadsheet saved in the My documents section of the caller. The record survives  completion and is replaced only by the next export.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5583,11 +6794,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5664,10 +6877,10 @@ class RoomsApi:
 
 
 
-    @validate_call
+    @overload
     def get_room_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5680,13 +6893,67 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
+    ) -> FolderWrapper: ...
+
+    @overload
+    def get_room_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
+
+    @overload
+    def get_room_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def get_room_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
         """Get room information
 
-        Returns the room information.
+        Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5718,11 +6985,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '401': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5734,10 +7007,10 @@ class RoomsApi:
         ).data
 
 
-    @validate_call
+    @overload
     def get_room_info_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5750,13 +7023,67 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderWrapper]: ...
+
+    @overload
+    def get_room_info_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
+
+    @overload
+    def get_room_info_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def get_room_info_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
         """Get room information
 
-        Returns the room information.
+        Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5788,11 +7115,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '401': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5807,7 +7140,7 @@ class RoomsApi:
     @validate_call
     def get_room_info_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5823,10 +7156,10 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Get room information
 
-        Returns the room information.
+        Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5858,11 +7191,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '401': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5913,6 +7252,12 @@ class RoomsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -5939,8 +7284,8 @@ class RoomsApi:
     @validate_call
     def get_room_links(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        type: Annotated[Optional[LinkType], Field(description="The link type.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        type: Annotated[Optional[LinkType], Field(description="Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5956,11 +7301,11 @@ class RoomsApi:
     ) -> FileShareArrayWrapper:
         """Get the room links
 
-        Returns the links of the room with the ID specified in the request.
+        Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param type: The link type.
+        :param id: The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param type: Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
         :type type: LinkType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5995,11 +7340,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6014,8 +7364,8 @@ class RoomsApi:
     @validate_call
     def get_room_links_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        type: Annotated[Optional[LinkType], Field(description="The link type.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        type: Annotated[Optional[LinkType], Field(description="Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6031,11 +7381,11 @@ class RoomsApi:
     ) -> ApiResponse[FileShareArrayWrapper]:
         """Get the room links
 
-        Returns the links of the room with the ID specified in the request.
+        Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param type: The link type.
+        :param id: The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param type: Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
         :type type: LinkType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6070,11 +7420,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6089,8 +7444,8 @@ class RoomsApi:
     @validate_call
     def get_room_links_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        type: Annotated[Optional[LinkType], Field(description="The link type.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        type: Annotated[Optional[LinkType], Field(description="Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6106,11 +7461,11 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Get the room links
 
-        Returns the links of the room with the ID specified in the request.
+        Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param type: The link type.
+        :param id: The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param type: Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
         :type type: LinkType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6145,11 +7500,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6237,11 +7597,11 @@ class RoomsApi:
     @validate_call
     def get_room_security_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        filter_type: Annotated[Optional[ShareFilterType], Field(description="The filter type of the access rights.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved or processed.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index of the items to retrieve in a paginated request.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used for filtering room security information.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        filter_type: Annotated[Optional[ShareFilterType], Field(description="What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6257,17 +7617,17 @@ class RoomsApi:
     ) -> FileShareArrayWrapper:
         """Get the room access rights
 
-        Returns the access rights of a room with the ID specified in the request.
+        Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param filter_type: The filter type of the access rights.
+        :param id: The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param filter_type: What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
         :type filter_type: ShareFilterType
-        :param count: The number of items to be retrieved or processed.
+        :param count: How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
         :type count: int
-        :param start_index: The starting index of the items to retrieve in a paginated request.
+        :param start_index: How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.
         :type start_index: int
-        :param filter_value: The text filter value used for filtering room security information.
+        :param filter_value: Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6305,11 +7665,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6324,11 +7689,11 @@ class RoomsApi:
     @validate_call
     def get_room_security_info_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        filter_type: Annotated[Optional[ShareFilterType], Field(description="The filter type of the access rights.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved or processed.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index of the items to retrieve in a paginated request.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used for filtering room security information.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        filter_type: Annotated[Optional[ShareFilterType], Field(description="What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6344,17 +7709,17 @@ class RoomsApi:
     ) -> ApiResponse[FileShareArrayWrapper]:
         """Get the room access rights
 
-        Returns the access rights of a room with the ID specified in the request.
+        Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param filter_type: The filter type of the access rights.
+        :param id: The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param filter_type: What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
         :type filter_type: ShareFilterType
-        :param count: The number of items to be retrieved or processed.
+        :param count: How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
         :type count: int
-        :param start_index: The starting index of the items to retrieve in a paginated request.
+        :param start_index: How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.
         :type start_index: int
-        :param filter_value: The text filter value used for filtering room security information.
+        :param filter_value: Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6392,11 +7757,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6411,11 +7781,11 @@ class RoomsApi:
     @validate_call
     def get_room_security_info_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        filter_type: Annotated[Optional[ShareFilterType], Field(description="The filter type of the access rights.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved or processed.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index of the items to retrieve in a paginated request.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used for filtering room security information.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        filter_type: Annotated[Optional[ShareFilterType], Field(description="What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6431,17 +7801,17 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Get the room access rights
 
-        Returns the access rights of a room with the ID specified in the request.
+        Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param filter_type: The filter type of the access rights.
+        :param id: The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param filter_type: What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
         :type filter_type: ShareFilterType
-        :param count: The number of items to be retrieved or processed.
+        :param count: How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
         :type count: int
-        :param start_index: The starting index of the items to retrieve in a paginated request.
+        :param start_index: How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.
         :type start_index: int
-        :param filter_value: The text filter value used for filtering room security information.
+        :param filter_value: Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6479,11 +7849,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6586,9 +7961,9 @@ class RoomsApi:
     @validate_call
     def get_room_tags_info(
         self,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted.")] = None,
+        start_index: Annotated[Optional[Annotated[int, Field(le=2147483647, strict=True, ge=0)]], Field(description="How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6601,16 +7976,16 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ObjectArrayWrapper:
-        """Get the room tags
+    ) -> StringArrayWrapper:
+        """Get available room tags
 
-        Returns a list of custom tags.
+        Returns the custom room tags available to the caller as a flat array of names, not of objects. What the array  holds depends on the account: a portal administrator gets the whole catalog, including tags that no room uses  yet, while every other account gets only the tags attached to rooms it can see, with duplicates removed. An  empty answer therefore means that this caller sees no tagged room, not that the portal has no tags.  `filterValue` keeps the names that contain the given text, ignoring case, while `count` and `startIndex` page  the result; no total is returned, so a page shorter than `count` is the signal that the list is exhausted. The  names are exactly the values accepted by the `tags` filter of `GET api/2.0/files/rooms` and by the room tag  calls, which makes this the call to fill a tag picker with. Add a tag with `POST api/2.0/files/tags` and check  whether one is still in use with `GET api/2.0/files/tags/{tagName}/haslinks`.
 
-        :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
+        :param count: How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted.
         :type count: int
-        :param start_index: Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+        :param start_index: How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page.
         :type start_index: int
-        :param filter_value: Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
+        :param filter_value: Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6645,12 +8020,15 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "StringArrayWrapper",
+            '400': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6665,9 +8043,9 @@ class RoomsApi:
     @validate_call
     def get_room_tags_info_with_http_info(
         self,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted.")] = None,
+        start_index: Annotated[Optional[Annotated[int, Field(le=2147483647, strict=True, ge=0)]], Field(description="How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6680,16 +8058,16 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ObjectArrayWrapper]:
-        """Get the room tags
+    ) -> ApiResponse[StringArrayWrapper]:
+        """Get available room tags
 
-        Returns a list of custom tags.
+        Returns the custom room tags available to the caller as a flat array of names, not of objects. What the array  holds depends on the account: a portal administrator gets the whole catalog, including tags that no room uses  yet, while every other account gets only the tags attached to rooms it can see, with duplicates removed. An  empty answer therefore means that this caller sees no tagged room, not that the portal has no tags.  `filterValue` keeps the names that contain the given text, ignoring case, while `count` and `startIndex` page  the result; no total is returned, so a page shorter than `count` is the signal that the list is exhausted. The  names are exactly the values accepted by the `tags` filter of `GET api/2.0/files/rooms` and by the room tag  calls, which makes this the call to fill a tag picker with. Add a tag with `POST api/2.0/files/tags` and check  whether one is still in use with `GET api/2.0/files/tags/{tagName}/haslinks`.
 
-        :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
+        :param count: How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted.
         :type count: int
-        :param start_index: Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+        :param start_index: How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page.
         :type start_index: int
-        :param filter_value: Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
+        :param filter_value: Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6724,12 +8102,15 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "StringArrayWrapper",
+            '400': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6744,9 +8125,9 @@ class RoomsApi:
     @validate_call
     def get_room_tags_info_without_preload_content(
         self,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted.")] = None,
+        start_index: Annotated[Optional[Annotated[int, Field(le=2147483647, strict=True, ge=0)]], Field(description="How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6760,15 +8141,15 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the room tags
+        """Get available room tags
 
-        Returns a list of custom tags.
+        Returns the custom room tags available to the caller as a flat array of names, not of objects. What the array  holds depends on the account: a portal administrator gets the whole catalog, including tags that no room uses  yet, while every other account gets only the tags attached to rooms it can see, with duplicates removed. An  empty answer therefore means that this caller sees no tagged room, not that the portal has no tags.  `filterValue` keeps the names that contain the given text, ignoring case, while `count` and `startIndex` page  the result; no total is returned, so a page shorter than `count` is the signal that the list is exhausted. The  names are exactly the values accepted by the `tags` filter of `GET api/2.0/files/rooms` and by the room tag  calls, which makes this the call to fill a tag picker with. Add a tag with `POST api/2.0/files/tags` and check  whether one is still in use with `GET api/2.0/files/tags/{tagName}/haslinks`.
 
-        :param count: Gets or sets the number of tag results to retrieve.  This property specifies the maximum amount of tag data to be included in the result set.
+        :param count: How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted.
         :type count: int
-        :param start_index: Represents the starting index from which the tags' information will be retrieved.  This property is used to define the offset for pagination when retrieving a list of tags. It determines  the point in the data set from which the retrieval begins.
+        :param start_index: How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page.
         :type start_index: int
-        :param filter_value: Gets or sets the text value used for searching tags.  This property is typically used as a filter value when retrieving tag information.
+        :param filter_value: Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6803,12 +8184,15 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ObjectArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "StringArrayWrapper",
+            '400': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6918,9 +8302,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoomTemplateStatusWrapper:
-        """Get status of room template creation
+        """Get room template creation status
 
-        Returns the progress status of the room template creation process.
+        Reports the state of the room template creation the caller started with `POST api/2.0/files/roomtemplate`. The  record is private to the account that started the job: work started by another member is never reported, and a  caller who has started none gets an empty response instead of an object. Poll until `isCompleted` turns true,  then take the identifier of the finished template from `templateId`; a non-empty `error` means the job failed  and no template was kept. Treat `isCompleted` as the completion signal rather than `progress`, which the  background job only sets to 100 once the work is over. The record outlives the job, so a finished operation  can be read again and keeps returning the same identifier until the caller starts another template creation,  which replaces it. The call only reads state and needs no access to the source room or to the template, but it  does require an authenticated caller.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6953,11 +8337,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6985,9 +8371,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[RoomTemplateStatusWrapper]:
-        """Get status of room template creation
+        """Get room template creation status
 
-        Returns the progress status of the room template creation process.
+        Reports the state of the room template creation the caller started with `POST api/2.0/files/roomtemplate`. The  record is private to the account that started the job: work started by another member is never reported, and a  caller who has started none gets an empty response instead of an object. Poll until `isCompleted` turns true,  then take the identifier of the finished template from `templateId`; a non-empty `error` means the job failed  and no template was kept. Treat `isCompleted` as the completion signal rather than `progress`, which the  background job only sets to 100 once the work is over. The record outlives the job, so a finished operation  can be read again and keeps returning the same identifier until the caller starts another template creation,  which replaces it. The call only reads state and needs no access to the source room or to the template, but it  does require an authenticated caller.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7020,11 +8406,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7052,9 +8440,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get status of room template creation
+        """Get room template creation status
 
-        Returns the progress status of the room template creation process.
+        Reports the state of the room template creation the caller started with `POST api/2.0/files/roomtemplate`. The  record is private to the account that started the job: work started by another member is never reported, and a  caller who has started none gets an empty response instead of an object. Poll until `isCompleted` turns true,  then take the identifier of the finished template from `templateId`; a non-empty `error` means the job failed  and no template was kept. Treat `isCompleted` as the completion signal rather than `progress`, which the  background job only sets to 100 once the work is over. The record outlives the job, so a finished operation  can be read again and keeps returning the same identifier until the caller starts another template creation,  which replaces it. The call only reads state and needs no access to the source room or to the template, but it  does require an authenticated caller.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7087,11 +8475,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomTemplateStatusWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7171,23 +8561,27 @@ class RoomsApi:
     @validate_call
     def get_rooms_folder(
         self,
-        type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
-        subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
-        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
-        without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
-        tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        provider: Annotated[Optional[ProviderFilter], Field(description="The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).")] = None,
-        subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
-        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
-        storage_filter: Annotated[Optional[StorageFilter], Field(description="The filter by storage (None - 0, Internal - 1, ThirdParty - 2).")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
-        group_id: Annotated[Optional[StrictInt], Field(description="The group ID")] = None,
+        type: Annotated[Optional[List[RoomType]], Field(description="Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind.")] = None,
+        subject_id: Annotated[Optional[UUID], Field(description="Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite.")] = None,
+        subject_owner_id: Annotated[Optional[UUID], Field(description="Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value.")] = None,
+        without_tags: Annotated[Optional[StrictBool], Field(description="When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection.")] = None,
+        tags: Annotated[Optional[StrictStr], Field(description="A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own.")] = None,
+        provider: Annotated[Optional[ProviderFilter], Field(description="Keeps only the rooms whose content lives in the named third-party service, for portals where rooms may be  connected to external storage. The default keeps rooms of every origin.")] = None,
+        quota_filter: Annotated[Optional[QuotaFilter], Field(description="Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.")] = None,
+        storage_filter: Annotated[Optional[StorageFilter], Field(description="Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.")] = None,
+        privacy_filter: Annotated[Optional[RoomPrivacyFilter], Field(description="Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.")] = None,
+        with_ai_folder: Annotated[Optional[StrictBool], Field(description="Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.")] = None,
+        group_id: Annotated[Optional[StrictInt], Field(description="Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7200,45 +8594,53 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerWrapper:
+    ) -> FolderContentWrapper:
         """Get rooms
 
-        Returns the contents of the Rooms section by the parameters specified in the request.
+        Lists the rooms of one section of the portal: the active rooms by default, or the archive, the form-filling  section or the room templates, chosen with `searchArea`. The rooms arrive in `folders` while `files` stays  empty, `current` describes the section itself, and `total` counts every room that matched the filters before  paging. A caller sees only the rooms they created or were invited to, while a portal administrator sees all of  them, so an empty answer means nothing is visible to this account rather than nothing exists. The remaining  parameters narrow the same set, by room type, title, tags, member, owner, storage, quota and privacy, and they  combine with each other. Sorting is not free of side effects: a `sortBy` value is also stored as this  account's default order for later listings, and omitting it reuses the stored order. Page the result with  `count` and `startIndex`. Read a single room with `GET api/2.0/files/rooms/{id}`, and create one with  `POST api/2.0/files/rooms`.
 
-        :param type: The filter by room type.
+        :param type: Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind.
         :type type: List[RoomType]
-        :param subject_id: The filter by user ID.
-        :type subject_id: str
-        :param subject_owner_id: The filter by room owner ID.
-        :type subject_owner_id: str
-        :param search_area: The room search area (Active, Archive, Any, Recent by links).
+        :param subject_id: Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite.
+        :type subject_id: UUID
+        :param subject_owner_id: Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite.
+        :type subject_owner_id: UUID
+        :param search_area: The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value.
         :type search_area: SearchArea
-        :param without_tags: Specifies whether to search by tags or not.
+        :param without_tags: When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection.
         :type without_tags: bool
-        :param tags: The tags in the serialized format.
+        :param tags: A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing.
         :type tags: str
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param exclude_subject: Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own.
         :type exclude_subject: bool
-        :param provider: The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).
+        :param provider: Keeps only the rooms whose content lives in the named third-party service, for portals where rooms may be  connected to external storage. The default keeps rooms of every origin.
         :type provider: ProviderFilter
-        :param subject_filter: The filter by user (Owner - 0, Member - 1).
-        :type subject_filter: SubjectFilter
-        :param quota_filter: The filter by quota (All - 0, Default - 1, Custom - 2).
+        :param quota_filter: Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.
         :type quota_filter: QuotaFilter
-        :param storage_filter: The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
+        :param storage_filter: Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.
         :type storage_filter: StorageFilter
-        :param count: Specifies the maximum number of items to retrieve.
+        :param privacy_filter: Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.
+        :type privacy_filter: RoomPrivacyFilter
+        :param with_ai_folder: Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
+        :type with_ai_folder: bool
+        :param count: How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
         :type count: int
-        :param start_index: The index from which to start retrieving the room content.
+        :param start_index: How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.
         :type start_index: int
-        :param sort_by: Specifies the field by which the room content should be sorted.
+        :param sort_by: The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.
         :type sort_order: SortOrder
-        :param filter_value: The text filter value used to refine search or query operations.
+        :param filter_value: Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.
         :type filter_value: str
-        :param group_id: The group ID
+        :param group_id: Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.
         :type group_id: int
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7270,15 +8672,19 @@ class RoomsApi:
             tags=tags,
             exclude_subject=exclude_subject,
             provider=provider,
-            subject_filter=subject_filter,
             quota_filter=quota_filter,
             storage_filter=storage_filter,
+            privacy_filter=privacy_filter,
+            with_ai_folder=with_ai_folder,
             count=count,
             start_index=start_index,
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
             group_id=group_id,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7286,13 +8692,16 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7307,23 +8716,27 @@ class RoomsApi:
     @validate_call
     def get_rooms_folder_with_http_info(
         self,
-        type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
-        subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
-        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
-        without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
-        tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        provider: Annotated[Optional[ProviderFilter], Field(description="The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).")] = None,
-        subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
-        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
-        storage_filter: Annotated[Optional[StorageFilter], Field(description="The filter by storage (None - 0, Internal - 1, ThirdParty - 2).")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
-        group_id: Annotated[Optional[StrictInt], Field(description="The group ID")] = None,
+        type: Annotated[Optional[List[RoomType]], Field(description="Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind.")] = None,
+        subject_id: Annotated[Optional[UUID], Field(description="Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite.")] = None,
+        subject_owner_id: Annotated[Optional[UUID], Field(description="Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value.")] = None,
+        without_tags: Annotated[Optional[StrictBool], Field(description="When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection.")] = None,
+        tags: Annotated[Optional[StrictStr], Field(description="A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own.")] = None,
+        provider: Annotated[Optional[ProviderFilter], Field(description="Keeps only the rooms whose content lives in the named third-party service, for portals where rooms may be  connected to external storage. The default keeps rooms of every origin.")] = None,
+        quota_filter: Annotated[Optional[QuotaFilter], Field(description="Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.")] = None,
+        storage_filter: Annotated[Optional[StorageFilter], Field(description="Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.")] = None,
+        privacy_filter: Annotated[Optional[RoomPrivacyFilter], Field(description="Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.")] = None,
+        with_ai_folder: Annotated[Optional[StrictBool], Field(description="Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.")] = None,
+        group_id: Annotated[Optional[StrictInt], Field(description="Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7336,45 +8749,53 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerWrapper]:
+    ) -> ApiResponse[FolderContentWrapper]:
         """Get rooms
 
-        Returns the contents of the Rooms section by the parameters specified in the request.
+        Lists the rooms of one section of the portal: the active rooms by default, or the archive, the form-filling  section or the room templates, chosen with `searchArea`. The rooms arrive in `folders` while `files` stays  empty, `current` describes the section itself, and `total` counts every room that matched the filters before  paging. A caller sees only the rooms they created or were invited to, while a portal administrator sees all of  them, so an empty answer means nothing is visible to this account rather than nothing exists. The remaining  parameters narrow the same set, by room type, title, tags, member, owner, storage, quota and privacy, and they  combine with each other. Sorting is not free of side effects: a `sortBy` value is also stored as this  account's default order for later listings, and omitting it reuses the stored order. Page the result with  `count` and `startIndex`. Read a single room with `GET api/2.0/files/rooms/{id}`, and create one with  `POST api/2.0/files/rooms`.
 
-        :param type: The filter by room type.
+        :param type: Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind.
         :type type: List[RoomType]
-        :param subject_id: The filter by user ID.
-        :type subject_id: str
-        :param subject_owner_id: The filter by room owner ID.
-        :type subject_owner_id: str
-        :param search_area: The room search area (Active, Archive, Any, Recent by links).
+        :param subject_id: Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite.
+        :type subject_id: UUID
+        :param subject_owner_id: Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite.
+        :type subject_owner_id: UUID
+        :param search_area: The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value.
         :type search_area: SearchArea
-        :param without_tags: Specifies whether to search by tags or not.
+        :param without_tags: When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection.
         :type without_tags: bool
-        :param tags: The tags in the serialized format.
+        :param tags: A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing.
         :type tags: str
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param exclude_subject: Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own.
         :type exclude_subject: bool
-        :param provider: The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).
+        :param provider: Keeps only the rooms whose content lives in the named third-party service, for portals where rooms may be  connected to external storage. The default keeps rooms of every origin.
         :type provider: ProviderFilter
-        :param subject_filter: The filter by user (Owner - 0, Member - 1).
-        :type subject_filter: SubjectFilter
-        :param quota_filter: The filter by quota (All - 0, Default - 1, Custom - 2).
+        :param quota_filter: Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.
         :type quota_filter: QuotaFilter
-        :param storage_filter: The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
+        :param storage_filter: Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.
         :type storage_filter: StorageFilter
-        :param count: Specifies the maximum number of items to retrieve.
+        :param privacy_filter: Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.
+        :type privacy_filter: RoomPrivacyFilter
+        :param with_ai_folder: Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
+        :type with_ai_folder: bool
+        :param count: How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
         :type count: int
-        :param start_index: The index from which to start retrieving the room content.
+        :param start_index: How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.
         :type start_index: int
-        :param sort_by: Specifies the field by which the room content should be sorted.
+        :param sort_by: The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.
         :type sort_order: SortOrder
-        :param filter_value: The text filter value used to refine search or query operations.
+        :param filter_value: Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.
         :type filter_value: str
-        :param group_id: The group ID
+        :param group_id: Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.
         :type group_id: int
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7406,15 +8827,19 @@ class RoomsApi:
             tags=tags,
             exclude_subject=exclude_subject,
             provider=provider,
-            subject_filter=subject_filter,
             quota_filter=quota_filter,
             storage_filter=storage_filter,
+            privacy_filter=privacy_filter,
+            with_ai_folder=with_ai_folder,
             count=count,
             start_index=start_index,
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
             group_id=group_id,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7422,13 +8847,16 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7443,23 +8871,27 @@ class RoomsApi:
     @validate_call
     def get_rooms_folder_without_preload_content(
         self,
-        type: Annotated[Optional[List[List[RoomType]]], Field(description="The filter by room type.")] = None,
-        subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
-        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The room search area (Active, Archive, Any, Recent by links).")] = None,
-        without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
-        tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        provider: Annotated[Optional[ProviderFilter], Field(description="The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).")] = None,
-        subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
-        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
-        storage_filter: Annotated[Optional[StorageFilter], Field(description="The filter by storage (None - 0, Internal - 1, ThirdParty - 2).")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
-        group_id: Annotated[Optional[StrictInt], Field(description="The group ID")] = None,
+        type: Annotated[Optional[List[RoomType]], Field(description="Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind.")] = None,
+        subject_id: Annotated[Optional[UUID], Field(description="Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite.")] = None,
+        subject_owner_id: Annotated[Optional[UUID], Field(description="Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value.")] = None,
+        without_tags: Annotated[Optional[StrictBool], Field(description="When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection.")] = None,
+        tags: Annotated[Optional[StrictStr], Field(description="A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own.")] = None,
+        provider: Annotated[Optional[ProviderFilter], Field(description="Keeps only the rooms whose content lives in the named third-party service, for portals where rooms may be  connected to external storage. The default keeps rooms of every origin.")] = None,
+        quota_filter: Annotated[Optional[QuotaFilter], Field(description="Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.")] = None,
+        storage_filter: Annotated[Optional[StorageFilter], Field(description="Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.")] = None,
+        privacy_filter: Annotated[Optional[RoomPrivacyFilter], Field(description="Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.")] = None,
+        with_ai_folder: Annotated[Optional[StrictBool], Field(description="Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.")] = None,
+        group_id: Annotated[Optional[StrictInt], Field(description="Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7475,42 +8907,50 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Get rooms
 
-        Returns the contents of the Rooms section by the parameters specified in the request.
+        Lists the rooms of one section of the portal: the active rooms by default, or the archive, the form-filling  section or the room templates, chosen with `searchArea`. The rooms arrive in `folders` while `files` stays  empty, `current` describes the section itself, and `total` counts every room that matched the filters before  paging. A caller sees only the rooms they created or were invited to, while a portal administrator sees all of  them, so an empty answer means nothing is visible to this account rather than nothing exists. The remaining  parameters narrow the same set, by room type, title, tags, member, owner, storage, quota and privacy, and they  combine with each other. Sorting is not free of side effects: a `sortBy` value is also stored as this  account's default order for later listings, and omitting it reuses the stored order. Page the result with  `count` and `startIndex`. Read a single room with `GET api/2.0/files/rooms/{id}`, and create one with  `POST api/2.0/files/rooms`.
 
-        :param type: The filter by room type.
+        :param type: Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind.
         :type type: List[RoomType]
-        :param subject_id: The filter by user ID.
-        :type subject_id: str
-        :param subject_owner_id: The filter by room owner ID.
-        :type subject_owner_id: str
-        :param search_area: The room search area (Active, Archive, Any, Recent by links).
+        :param subject_id: Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite.
+        :type subject_id: UUID
+        :param subject_owner_id: Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite.
+        :type subject_owner_id: UUID
+        :param search_area: The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value.
         :type search_area: SearchArea
-        :param without_tags: Specifies whether to search by tags or not.
+        :param without_tags: When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection.
         :type without_tags: bool
-        :param tags: The tags in the serialized format.
+        :param tags: A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing.
         :type tags: str
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param exclude_subject: Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own.
         :type exclude_subject: bool
-        :param provider: The filter by provider name (None, Box, DropBox, GoogleDrive, kDrive, OneDrive, SharePoint, WebDav, Yandex, Storage).
+        :param provider: Keeps only the rooms whose content lives in the named third-party service, for portals where rooms may be  connected to external storage. The default keeps rooms of every origin.
         :type provider: ProviderFilter
-        :param subject_filter: The filter by user (Owner - 0, Member - 1).
-        :type subject_filter: SubjectFilter
-        :param quota_filter: The filter by quota (All - 0, Default - 1, Custom - 2).
+        :param quota_filter: Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.
         :type quota_filter: QuotaFilter
-        :param storage_filter: The filter by storage (None - 0, Internal - 1, ThirdParty - 2).
+        :param storage_filter: Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.
         :type storage_filter: StorageFilter
-        :param count: Specifies the maximum number of items to retrieve.
+        :param privacy_filter: Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.
+        :type privacy_filter: RoomPrivacyFilter
+        :param with_ai_folder: Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
+        :type with_ai_folder: bool
+        :param count: How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
         :type count: int
-        :param start_index: The index from which to start retrieving the room content.
+        :param start_index: How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.
         :type start_index: int
-        :param sort_by: Specifies the field by which the room content should be sorted.
+        :param sort_by: The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.
         :type sort_order: SortOrder
-        :param filter_value: The text filter value used to refine search or query operations.
+        :param filter_value: Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.
         :type filter_value: str
-        :param group_id: The group ID
+        :param group_id: Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.
         :type group_id: int
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7542,15 +8982,19 @@ class RoomsApi:
             tags=tags,
             exclude_subject=exclude_subject,
             provider=provider,
-            subject_filter=subject_filter,
             quota_filter=quota_filter,
             storage_filter=storage_filter,
+            privacy_filter=privacy_filter,
+            with_ai_folder=with_ai_folder,
             count=count,
             start_index=start_index,
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
             group_id=group_id,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7558,13 +9002,16 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7582,15 +9029,19 @@ class RoomsApi:
         tags,
         exclude_subject,
         provider,
-        subject_filter,
         quota_filter,
         storage_filter,
+        privacy_filter,
+        with_ai_folder,
         count,
         start_index,
         sort_by,
         sort_order,
         filter_value,
         group_id,
+        metadata_template_id,
+        metadata_filters,
+        include_hidden_metadata,
         _request_auth,
         _content_type,
         _headers,
@@ -7600,7 +9051,7 @@ class RoomsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'type': 'csv',
+            'type': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -7646,10 +9097,6 @@ class RoomsApi:
             
             _query_params.append(('provider', provider.value))
             
-        if subject_filter is not None:
-            
-            _query_params.append(('subjectFilter', subject_filter.value))
-            
         if quota_filter is not None:
             
             _query_params.append(('quotaFilter', quota_filter.value))
@@ -7657,6 +9104,14 @@ class RoomsApi:
         if storage_filter is not None:
             
             _query_params.append(('storageFilter', storage_filter.value))
+            
+        if privacy_filter is not None:
+            
+            _query_params.append(('privacyFilter', privacy_filter.value))
+            
+        if with_ai_folder is not None:
+            
+            _query_params.append(('withAiFolder', with_ai_folder))
             
         if count is not None:
             
@@ -7681,6 +9136,18 @@ class RoomsApi:
         if group_id is not None:
             
             _query_params.append(('groupId', group_id))
+            
+        if metadata_template_id is not None:
+            
+            _query_params.append(('metadataTemplateId', metadata_template_id))
+            
+        if metadata_filters is not None:
+            
+            _query_params.append(('metadataFilters', metadata_filters))
+            
+        if include_hidden_metadata is not None:
+            
+            _query_params.append(('includeHiddenMetadata', include_hidden_metadata))
             
         # process the header parameters
         if self._fields is not None:
@@ -7745,9 +9212,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NewItemsRoomNewItemsArrayWrapper:
-        """Get the room new items
+        """Get new items in all rooms
 
-        Returns the room new items.
+        Collects everything that is marked as new for the caller across the active rooms into one answer, grouped  first by the day an entry changed and then by the room it belongs to. An entry becomes new when somebody else  creates or changes it in a room the caller has already opened, so the caller's own work never shows up here,  and neither does anything from a room they have never visited. Only files are listed: a new subfolder is not  an item, although files created inside it are, at any depth. The days come newest first, and inside a day the  rooms and their files follow the same order by change time. The archive is out of scope, only rooms of the  active section are covered. Reading the list clears nothing: the marks stay until the room itself is opened  with `GET api/2.0/files/rooms/{id}`. An empty array means that this account has nothing new. For one room, use  `GET api/2.0/files/rooms/{id}/news`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7780,11 +9247,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7812,9 +9281,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[NewItemsRoomNewItemsArrayWrapper]:
-        """Get the room new items
+        """Get new items in all rooms
 
-        Returns the room new items.
+        Collects everything that is marked as new for the caller across the active rooms into one answer, grouped  first by the day an entry changed and then by the room it belongs to. An entry becomes new when somebody else  creates or changes it in a room the caller has already opened, so the caller's own work never shows up here,  and neither does anything from a room they have never visited. Only files are listed: a new subfolder is not  an item, although files created inside it are, at any depth. The days come newest first, and inside a day the  rooms and their files follow the same order by change time. The archive is out of scope, only rooms of the  active section are covered. Reading the list clears nothing: the marks stay until the room itself is opened  with `GET api/2.0/files/rooms/{id}`. An empty array means that this account has nothing new. For one room, use  `GET api/2.0/files/rooms/{id}/news`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7847,11 +9316,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7879,9 +9350,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the room new items
+        """Get new items in all rooms
 
-        Returns the room new items.
+        Collects everything that is marked as new for the caller across the active rooms into one answer, grouped  first by the day an entry changed and then by the room it belongs to. An entry becomes new when somebody else  creates or changes it in a room the caller has already opened, so the caller's own work never shows up here,  and neither does anything from a room they have never visited. Only files are listed: a new subfolder is not  an item, although files created inside it are, at any depth. The days come newest first, and inside a day the  rooms and their files follow the same order by change time. The archive is out of scope, only rooms of the  active section are covered. Reading the list clears nothing: the marks stay until the room itself is opened  with `GET api/2.0/files/rooms/{id}`. An empty array means that this account has nothing new. For one room, use  `GET api/2.0/files/rooms/{id}/news`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7914,11 +9385,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "NewItemsRoomNewItemsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7998,7 +9471,7 @@ class RoomsApi:
     @validate_call
     def get_rooms_primary_external_link(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8014,10 +9487,10 @@ class RoomsApi:
     ) -> FileShareWrapper:
         """Get the room primary external link
 
-        Returns the primary external link of the room with the ID specified in the request.
+        Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8050,13 +9523,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8071,7 +9547,7 @@ class RoomsApi:
     @validate_call
     def get_rooms_primary_external_link_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8087,10 +9563,10 @@ class RoomsApi:
     ) -> ApiResponse[FileShareWrapper]:
         """Get the room primary external link
 
-        Returns the primary external link of the room with the ID specified in the request.
+        Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8123,13 +9599,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8144,7 +9623,7 @@ class RoomsApi:
     @validate_call
     def get_rooms_primary_external_link_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8160,10 +9639,10 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Get the room primary external link
 
-        Returns the primary external link of the room with the ID specified in the request.
+        Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8196,13 +9675,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8285,8 +9767,8 @@ class RoomsApi:
     @validate_call
     def has_tag_links(
         self,
-        tag_name2: StrictStr,
-        tag_name: Annotated[Optional[StrictStr], Field(description="Represents the name of a tag")] = None,
+        tag_name2: Annotated[StrictStr, Field(description="The tag being checked. Send the same value as the `tagName` query parameter, which is the one the handler reads.")],
+        tag_name: Annotated[Optional[StrictStr], Field(description="The tag to check, spelled exactly as it is stored in the catalog. This query value is the one the handler  reads, so the path segment of the same name has to repeat it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8300,13 +9782,13 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """Has tag links
+        """Check room tag usage
 
-        Checks if a specific custom tag has linked items.
+        Reports whether any room still carries the named tag, which is the check to run before the tag is deleted from  the catalog. Only a portal administrator may call it, and every other account is refused. The name is matched  exactly against the catalog, and a name that is not in it is answered with 404. That also tells the two ways a  tag stops being used apart: taking the tag off the last room that carried it leaves the tag in the catalog and  turns the answer to false, while deleting that last room removes the tag itself, after which the call answers  404. A true answer means at least one room, active or archived, still references the tag, so deleting it with  `DELETE api/2.0/files/tags` would strip it from those rooms. The handler reads the tag name from the query  string, so the value has to be sent twice: in the path segment and as the `tagName` query parameter.
 
-        :param tag_name2: (required)
+        :param tag_name2: The tag being checked. Send the same value as the `tagName` query parameter, which is the one the handler reads. (required)
         :type tag_name2: str
-        :param tag_name: Represents the name of a tag
+        :param tag_name: The tag to check, spelled exactly as it is stored in the catalog. This query value is the one the handler  reads, so the path segment of the same name has to repeat it.
         :type tag_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8341,12 +9823,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8361,8 +9847,8 @@ class RoomsApi:
     @validate_call
     def has_tag_links_with_http_info(
         self,
-        tag_name2: StrictStr,
-        tag_name: Annotated[Optional[StrictStr], Field(description="Represents the name of a tag")] = None,
+        tag_name2: Annotated[StrictStr, Field(description="The tag being checked. Send the same value as the `tagName` query parameter, which is the one the handler reads.")],
+        tag_name: Annotated[Optional[StrictStr], Field(description="The tag to check, spelled exactly as it is stored in the catalog. This query value is the one the handler  reads, so the path segment of the same name has to repeat it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8376,13 +9862,13 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """Has tag links
+        """Check room tag usage
 
-        Checks if a specific custom tag has linked items.
+        Reports whether any room still carries the named tag, which is the check to run before the tag is deleted from  the catalog. Only a portal administrator may call it, and every other account is refused. The name is matched  exactly against the catalog, and a name that is not in it is answered with 404. That also tells the two ways a  tag stops being used apart: taking the tag off the last room that carried it leaves the tag in the catalog and  turns the answer to false, while deleting that last room removes the tag itself, after which the call answers  404. A true answer means at least one room, active or archived, still references the tag, so deleting it with  `DELETE api/2.0/files/tags` would strip it from those rooms. The handler reads the tag name from the query  string, so the value has to be sent twice: in the path segment and as the `tagName` query parameter.
 
-        :param tag_name2: (required)
+        :param tag_name2: The tag being checked. Send the same value as the `tagName` query parameter, which is the one the handler reads. (required)
         :type tag_name2: str
-        :param tag_name: Represents the name of a tag
+        :param tag_name: The tag to check, spelled exactly as it is stored in the catalog. This query value is the one the handler  reads, so the path segment of the same name has to repeat it.
         :type tag_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8417,12 +9903,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8437,8 +9927,8 @@ class RoomsApi:
     @validate_call
     def has_tag_links_without_preload_content(
         self,
-        tag_name2: StrictStr,
-        tag_name: Annotated[Optional[StrictStr], Field(description="Represents the name of a tag")] = None,
+        tag_name2: Annotated[StrictStr, Field(description="The tag being checked. Send the same value as the `tagName` query parameter, which is the one the handler reads.")],
+        tag_name: Annotated[Optional[StrictStr], Field(description="The tag to check, spelled exactly as it is stored in the catalog. This query value is the one the handler  reads, so the path segment of the same name has to repeat it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8452,13 +9942,13 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Has tag links
+        """Check room tag usage
 
-        Checks if a specific custom tag has linked items.
+        Reports whether any room still carries the named tag, which is the check to run before the tag is deleted from  the catalog. Only a portal administrator may call it, and every other account is refused. The name is matched  exactly against the catalog, and a name that is not in it is answered with 404. That also tells the two ways a  tag stops being used apart: taking the tag off the last room that carried it leaves the tag in the catalog and  turns the answer to false, while deleting that last room removes the tag itself, after which the call answers  404. A true answer means at least one room, active or archived, still references the tag, so deleting it with  `DELETE api/2.0/files/tags` would strip it from those rooms. The handler reads the tag name from the query  string, so the value has to be sent twice: in the path segment and as the `tagName` query parameter.
 
-        :param tag_name2: (required)
+        :param tag_name2: The tag being checked. Send the same value as the `tagName` query parameter, which is the one the handler reads. (required)
         :type tag_name2: str
-        :param tag_name: Represents the name of a tag
+        :param tag_name: The tag to check, spelled exactly as it is stored in the catalog. This query value is the one the handler  reads, so the path segment of the same name has to repeat it.
         :type tag_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8493,12 +9983,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8583,10 +10077,10 @@ class RoomsApi:
 
 
 
-    @validate_call
+    @overload
     def pin_room(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8599,13 +10093,67 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
+    ) -> FolderWrapper: ...
+
+    @overload
+    def pin_room(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
+
+    @overload
+    def pin_room(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def pin_room(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
         """Pin a room
 
-        Pins a room with the ID specified in the request to the top of the list.
+        Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8637,12 +10185,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8654,10 +10207,10 @@ class RoomsApi:
         ).data
 
 
-    @validate_call
+    @overload
     def pin_room_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8670,13 +10223,67 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderWrapper]: ...
+
+    @overload
+    def pin_room_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
+
+    @overload
+    def pin_room_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def pin_room_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
         """Pin a room
 
-        Pins a room with the ID specified in the request to the top of the list.
+        Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8708,12 +10315,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8728,7 +10340,7 @@ class RoomsApi:
     @validate_call
     def pin_room_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8744,10 +10356,10 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Pin a room
 
-        Pins a room with the ID specified in the request to the top of the list.
+        Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8779,12 +10391,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8864,10 +10481,10 @@ class RoomsApi:
 
 
 
-    @validate_call
+    @overload
     def reorder_room(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8880,13 +10497,67 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
-        """Reorder the room
+    ) -> FolderWrapper: ...
 
-        Reorders the room with ID specified in the request.
+    @overload
+    def reorder_room(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
 
-        :param id: The room ID. (required)
-        :type id: int
+    @overload
+    def reorder_room(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def reorder_room(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
+        """Reorder room contents
+
+        Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
+
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8918,12 +10589,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8935,10 +10611,10 @@ class RoomsApi:
         ).data
 
 
-    @validate_call
+    @overload
     def reorder_room_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8951,13 +10627,67 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
-        """Reorder the room
+    ) -> ApiResponse[FolderWrapper]: ...
 
-        Reorders the room with ID specified in the request.
+    @overload
+    def reorder_room_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
 
-        :param id: The room ID. (required)
-        :type id: int
+    @overload
+    def reorder_room_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def reorder_room_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
+        """Reorder room contents
+
+        Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
+
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8989,12 +10719,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9009,7 +10744,7 @@ class RoomsApi:
     @validate_call
     def reorder_room_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9023,12 +10758,12 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Reorder the room
+        """Reorder room contents
 
-        Reorders the room with ID specified in the request.
+        Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9060,12 +10795,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9148,8 +10888,8 @@ class RoomsApi:
     @validate_call
     def resend_email_invitations(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        user_invitation: Annotated[UserInvitation, Field(description="The user invitation parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        user_invitation: Annotated[UserInvitation, Field(description="Which pending invitations to send again.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9165,11 +10905,11 @@ class RoomsApi:
     ) -> None:
         """Resend the room invitations
 
-        Resends the email invitations to a room with the ID specified in the request to the selected users.
+        Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param user_invitation: The user invitation parameters. (required)
+        :param id: The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param user_invitation: Which pending invitations to send again. (required)
         :type user_invitation: UserInvitation
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9204,11 +10944,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9223,8 +10968,8 @@ class RoomsApi:
     @validate_call
     def resend_email_invitations_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        user_invitation: Annotated[UserInvitation, Field(description="The user invitation parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        user_invitation: Annotated[UserInvitation, Field(description="Which pending invitations to send again.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9240,11 +10985,11 @@ class RoomsApi:
     ) -> ApiResponse[None]:
         """Resend the room invitations
 
-        Resends the email invitations to a room with the ID specified in the request to the selected users.
+        Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param user_invitation: The user invitation parameters. (required)
+        :param id: The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param user_invitation: Which pending invitations to send again. (required)
         :type user_invitation: UserInvitation
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9279,11 +11024,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9298,8 +11048,8 @@ class RoomsApi:
     @validate_call
     def resend_email_invitations_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        user_invitation: Annotated[UserInvitation, Field(description="The user invitation parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        user_invitation: Annotated[UserInvitation, Field(description="Which pending invitations to send again.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9315,11 +11065,11 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Resend the room invitations
 
-        Resends the email invitations to a room with the ID specified in the request to the selected users.
+        Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param user_invitation: The user invitation parameters. (required)
+        :param id: The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param user_invitation: Which pending invitations to send again. (required)
         :type user_invitation: UserInvitation
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9354,11 +11104,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9401,6 +11156,13 @@ class RoomsApi:
             _body_params = user_invitation
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -9448,6 +11210,312 @@ class RoomsApi:
 
 
     @validate_call
+    def search_rooms(
+        self,
+        rooms_metadata_search_request_dto: Optional[RoomsMetadataSearchRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FolderContentWrapper:
+        """Search the rooms by metadata
+
+        Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+        :param rooms_metadata_search_request_dto:
+        :type rooms_metadata_search_request_dto: RoomsMetadataSearchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_rooms_serialize(
+            rooms_metadata_search_request_dto=rooms_metadata_search_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def search_rooms_with_http_info(
+        self,
+        rooms_metadata_search_request_dto: Optional[RoomsMetadataSearchRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FolderContentWrapper]:
+        """Search the rooms by metadata
+
+        Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+        :param rooms_metadata_search_request_dto:
+        :type rooms_metadata_search_request_dto: RoomsMetadataSearchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_rooms_serialize(
+            rooms_metadata_search_request_dto=rooms_metadata_search_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def search_rooms_without_preload_content(
+        self,
+        rooms_metadata_search_request_dto: Optional[RoomsMetadataSearchRequestDto] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Search the rooms by metadata
+
+        Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+        :param rooms_metadata_search_request_dto:
+        :type rooms_metadata_search_request_dto: RoomsMetadataSearchRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_rooms_serialize(
+            rooms_metadata_search_request_dto=rooms_metadata_search_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _search_rooms_serialize(
+        self,
+        rooms_metadata_search_request_dto,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if rooms_metadata_search_request_dto is not None:
+            _body_params = rooms_metadata_search_request_dto
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/rooms/search"
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def set_public_settings(
         self,
         set_public_dto: Optional[SetPublicDto] = None,
@@ -9464,9 +11532,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Set public settings
+        """Set room template public access
 
-        Sets the public settings for the room template with the ID specified in the request.
+        Switches the room template named by `id` between shared with everyone and private, rewriting its whole  recipient list in the process. With `public` true the Everyone group is granted read access, so every member  allowed to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; with  false that access is taken away. In both cases every other account and group the template was shared with —  including the addresses passed as `share` when it was created — loses access, so this is not a way to add a  single recipient to an existing list. Only the account that owns the template may call it: a portal  administrator who does not own it is refused, and so is a member invited to the source room. The identifier  has to resolve to a room template; an ordinary room or an unknown value is answered as missing, and an  identifier below 1 is rejected as an invalid request. Repeating the call with the same value changes nothing,  and nothing is returned; read the current state with `GET api/2.0/files/roomtemplate/{id}/public`.
 
         :param set_public_dto:
         :type set_public_dto: SetPublicDto
@@ -9502,11 +11570,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9535,9 +11608,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Set public settings
+        """Set room template public access
 
-        Sets the public settings for the room template with the ID specified in the request.
+        Switches the room template named by `id` between shared with everyone and private, rewriting its whole  recipient list in the process. With `public` true the Everyone group is granted read access, so every member  allowed to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; with  false that access is taken away. In both cases every other account and group the template was shared with —  including the addresses passed as `share` when it was created — loses access, so this is not a way to add a  single recipient to an existing list. Only the account that owns the template may call it: a portal  administrator who does not own it is refused, and so is a member invited to the source room. The identifier  has to resolve to a room template; an ordinary room or an unknown value is answered as missing, and an  identifier below 1 is rejected as an invalid request. Repeating the call with the same value changes nothing,  and nothing is returned; read the current state with `GET api/2.0/files/roomtemplate/{id}/public`.
 
         :param set_public_dto:
         :type set_public_dto: SetPublicDto
@@ -9573,11 +11646,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9606,9 +11684,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Set public settings
+        """Set room template public access
 
-        Sets the public settings for the room template with the ID specified in the request.
+        Switches the room template named by `id` between shared with everyone and private, rewriting its whole  recipient list in the process. With `public` true the Everyone group is granted read access, so every member  allowed to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; with  false that access is taken away. In both cases every other account and group the template was shared with —  including the addresses passed as `share` when it was created — loses access, so this is not a way to add a  single recipient to an existing list. Only the account that owns the template may call it: a portal  administrator who does not own it is refused, and so is a member invited to the source room. The identifier  has to resolve to a room template; an ordinary room or an unknown value is answered as missing, and an  identifier below 1 is rejected as an invalid request. Repeating the call with the same value changes nothing,  and nothing is returned; read the current state with `GET api/2.0/files/roomtemplate/{id}/public`.
 
         :param set_public_dto:
         :type set_public_dto: SetPublicDto
@@ -9644,11 +11722,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9688,6 +11771,13 @@ class RoomsApi:
             _body_params = set_public_dto
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -9737,8 +11827,8 @@ class RoomsApi:
     @validate_call
     def set_room_link(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        room_link_request: Annotated[RoomLinkRequest, Field(description="The room link parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        room_link_request: Annotated[RoomLinkRequest, Field(description="The link to create, change or revoke.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9754,11 +11844,11 @@ class RoomsApi:
     ) -> FileShareWrapper:
         """Set the room external or invitation link
 
-        Sets the room external or invitation link with the ID specified in the request.
+        Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param room_link_request: The room link parameters. (required)
+        :param id: The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param room_link_request: The link to create, change or revoke. (required)
         :type room_link_request: RoomLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9793,11 +11883,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9812,8 +11907,8 @@ class RoomsApi:
     @validate_call
     def set_room_link_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        room_link_request: Annotated[RoomLinkRequest, Field(description="The room link parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        room_link_request: Annotated[RoomLinkRequest, Field(description="The link to create, change or revoke.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9829,11 +11924,11 @@ class RoomsApi:
     ) -> ApiResponse[FileShareWrapper]:
         """Set the room external or invitation link
 
-        Sets the room external or invitation link with the ID specified in the request.
+        Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param room_link_request: The room link parameters. (required)
+        :param id: The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param room_link_request: The link to create, change or revoke. (required)
         :type room_link_request: RoomLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9868,11 +11963,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9887,8 +11987,8 @@ class RoomsApi:
     @validate_call
     def set_room_link_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        room_link_request: Annotated[RoomLinkRequest, Field(description="The room link parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        room_link_request: Annotated[RoomLinkRequest, Field(description="The link to create, change or revoke.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9904,11 +12004,11 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Set the room external or invitation link
 
-        Sets the room external or invitation link with the ID specified in the request.
+        Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param room_link_request: The room link parameters. (required)
+        :param id: The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param room_link_request: The link to create, change or revoke. (required)
         :type room_link_request: RoomLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9943,11 +12043,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10046,8 +12151,8 @@ class RoomsApi:
     @validate_call
     def set_room_security(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        room_invitation_request: Annotated[RoomInvitationRequest, Field(description="The room invitation request.")],
+        id: Union[Annotated[StrictInt, Field(description="The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        room_invitation_request: Annotated[RoomInvitationRequest, Field(description="The membership changes to apply, together with how the people concerned are notified.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10063,11 +12168,11 @@ class RoomsApi:
     ) -> RoomSecurityWrapper:
         """Set the room access rights
 
-        Sets the access rights to the room with the ID specified in the request.
+        Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param room_invitation_request: The room invitation request. (required)
+        :param id: The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param room_invitation_request: The membership changes to apply, together with how the people concerned are notified. (required)
         :type room_invitation_request: RoomInvitationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10102,10 +12207,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
-            '401': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10120,8 +12230,8 @@ class RoomsApi:
     @validate_call
     def set_room_security_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        room_invitation_request: Annotated[RoomInvitationRequest, Field(description="The room invitation request.")],
+        id: Union[Annotated[StrictInt, Field(description="The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        room_invitation_request: Annotated[RoomInvitationRequest, Field(description="The membership changes to apply, together with how the people concerned are notified.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10137,11 +12247,11 @@ class RoomsApi:
     ) -> ApiResponse[RoomSecurityWrapper]:
         """Set the room access rights
 
-        Sets the access rights to the room with the ID specified in the request.
+        Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param room_invitation_request: The room invitation request. (required)
+        :param id: The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param room_invitation_request: The membership changes to apply, together with how the people concerned are notified. (required)
         :type room_invitation_request: RoomInvitationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10176,10 +12286,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
-            '401': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10194,8 +12309,8 @@ class RoomsApi:
     @validate_call
     def set_room_security_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        room_invitation_request: Annotated[RoomInvitationRequest, Field(description="The room invitation request.")],
+        id: Union[Annotated[StrictInt, Field(description="The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        room_invitation_request: Annotated[RoomInvitationRequest, Field(description="The membership changes to apply, together with how the people concerned are notified.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10211,11 +12326,11 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Set the room access rights
 
-        Sets the access rights to the room with the ID specified in the request.
+        Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param room_invitation_request: The room invitation request. (required)
+        :param id: The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param room_invitation_request: The membership changes to apply, together with how the people concerned are notified. (required)
         :type room_invitation_request: RoomInvitationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10250,10 +12365,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomSecurityWrapper",
-            '401': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10352,7 +12472,7 @@ class RoomsApi:
     @validate_call
     def start_external_db_sync(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10368,9 +12488,9 @@ class RoomsApi:
     ) -> ExternalDbSyncTaskWrapper:
         """Start external DB sync
 
-        Triggers external DB synchronization for all form templates in the specified filling forms room.
+        Queues a background job that re-exports the collected data of every original form of a form filling room into  the external database configured for the portal, and returns the job record. The room must be a form filling  room and the caller must be able to edit it, otherwise the call is refused with 403; an unknown room is  answered with 404. The export is not done when the response arrives: poll  `GET api/2.0/files/rooms/{id}/externaldbsync` until `isCompleted` is true, then read `forms` for the per-form  outcome, which stays empty while the job is running. Starting the job again while it is still running returns  the same record instead of a second job, so a retry is safe; a finished job is replaced by the new one. One  job is kept per room. A form whose data cannot be exported does not stop the others: it comes back in `forms`  with `success` false and its own `error`. When the portal has no external database configured the call fails  and nothing is queued.
 
-        :param id: The room ID. (required)
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10404,14 +12524,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
-            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10426,7 +12548,7 @@ class RoomsApi:
     @validate_call
     def start_external_db_sync_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10442,9 +12564,9 @@ class RoomsApi:
     ) -> ApiResponse[ExternalDbSyncTaskWrapper]:
         """Start external DB sync
 
-        Triggers external DB synchronization for all form templates in the specified filling forms room.
+        Queues a background job that re-exports the collected data of every original form of a form filling room into  the external database configured for the portal, and returns the job record. The room must be a form filling  room and the caller must be able to edit it, otherwise the call is refused with 403; an unknown room is  answered with 404. The export is not done when the response arrives: poll  `GET api/2.0/files/rooms/{id}/externaldbsync` until `isCompleted` is true, then read `forms` for the per-form  outcome, which stays empty while the job is running. Starting the job again while it is still running returns  the same record instead of a second job, so a retry is safe; a finished job is replaced by the new one. One  job is kept per room. A form whose data cannot be exported does not stop the others: it comes back in `forms`  with `success` false and its own `error`. When the portal has no external database configured the call fails  and nothing is queued.
 
-        :param id: The room ID. (required)
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10478,14 +12600,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
-            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10500,7 +12624,7 @@ class RoomsApi:
     @validate_call
     def start_external_db_sync_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10516,9 +12640,9 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Start external DB sync
 
-        Triggers external DB synchronization for all form templates in the specified filling forms room.
+        Queues a background job that re-exports the collected data of every original form of a form filling room into  the external database configured for the portal, and returns the job record. The room must be a form filling  room and the caller must be able to edit it, otherwise the call is refused with 403; an unknown room is  answered with 404. The export is not done when the response arrives: poll  `GET api/2.0/files/rooms/{id}/externaldbsync` until `isCompleted` is true, then read `forms` for the per-form  outcome, which stays empty while the job is running. Starting the job again while it is still running returns  the same record instead of a second job, so a retry is safe; a finished job is replaced by the new one. One  job is kept per room. A form whose data cannot be exported does not stop the others: it comes back in `forms`  with `success` false and its own `error`. When the portal has no external database configured the call fails  and nothing is queued.
 
-        :param id: The room ID. (required)
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10552,14 +12676,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalDbSyncTaskWrapper",
-            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10642,7 +12768,7 @@ class RoomsApi:
     @validate_call
     def start_room_index_export(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10658,9 +12784,9 @@ class RoomsApi:
     ) -> DocumentBuilderTaskWrapper:
         """Start the room index export
 
-        Starts the index export of a room with the ID specified in the request.
+        Queues a background job that builds the index of a virtual data room as a spreadsheet, and answers with the  job record to poll. The room has to be a virtual data room with indexing switched on, and the caller has to be  its manager or a portal administrator; any other kind of room, a room template, and a member invited with a  lower access level are refused, while an unknown room is answered as missing. There is one job per account:  starting an export while an earlier one is still running answers with that earlier record instead of queuing a  second job, and a finished record is replaced by the new one. Poll `GET api/2.0/files/rooms/indexexport` until  `isCompleted` is true, then read `status` to tell a completed job from a failed or cancelled one, and take  `resultFileId` and `resultFileUrl` from the same record. The report is saved as a spreadsheet in the My  documents section of the caller, not in the room. Cancel a running job with  `DELETE api/2.0/files/rooms/indexexport`.
 
-        :param id: The room ID. (required)
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10694,12 +12820,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '501': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10714,7 +12844,7 @@ class RoomsApi:
     @validate_call
     def start_room_index_export_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10730,9 +12860,9 @@ class RoomsApi:
     ) -> ApiResponse[DocumentBuilderTaskWrapper]:
         """Start the room index export
 
-        Starts the index export of a room with the ID specified in the request.
+        Queues a background job that builds the index of a virtual data room as a spreadsheet, and answers with the  job record to poll. The room has to be a virtual data room with indexing switched on, and the caller has to be  its manager or a portal administrator; any other kind of room, a room template, and a member invited with a  lower access level are refused, while an unknown room is answered as missing. There is one job per account:  starting an export while an earlier one is still running answers with that earlier record instead of queuing a  second job, and a finished record is replaced by the new one. Poll `GET api/2.0/files/rooms/indexexport` until  `isCompleted` is true, then read `status` to tell a completed job from a failed or cancelled one, and take  `resultFileId` and `resultFileUrl` from the same record. The report is saved as a spreadsheet in the My  documents section of the caller, not in the room. Cancel a running job with  `DELETE api/2.0/files/rooms/indexexport`.
 
-        :param id: The room ID. (required)
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10766,12 +12896,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '501': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10786,7 +12920,7 @@ class RoomsApi:
     @validate_call
     def start_room_index_export_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10802,9 +12936,9 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Start the room index export
 
-        Starts the index export of a room with the ID specified in the request.
+        Queues a background job that builds the index of a virtual data room as a spreadsheet, and answers with the  job record to poll. The room has to be a virtual data room with indexing switched on, and the caller has to be  its manager or a portal administrator; any other kind of room, a room template, and a member invited with a  lower access level are refused, while an unknown room is answered as missing. There is one job per account:  starting an export while an earlier one is still running answers with that earlier record instead of queuing a  second job, and a finished record is replaced by the new one. Poll `GET api/2.0/files/rooms/indexexport` until  `isCompleted` is true, then read `status` to tell a completed job from a failed or cancelled one, and take  `resultFileId` and `resultFileUrl` from the same record. The report is saved as a spreadsheet in the My  documents section of the caller, not in the room. Cancel a running job with  `DELETE api/2.0/files/rooms/indexexport`.
 
-        :param id: The room ID. (required)
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
         :type id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10838,12 +12972,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentBuilderTaskWrapper",
-            '501': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10941,7 +13079,7 @@ class RoomsApi:
     ) -> None:
         """Terminate the room index export
 
-        Terminates the room index export.
+        Cancels the room index export of the calling account and drops its job record. No room is named because there  is at most one export per account, so the call always acts on the caller's own job and never on somebody  else's: an account with nothing running gets a successful answer that changes nothing, which makes the call  safe to repeat and makes it useless as a way of stopping an export somebody else started. Afterwards  `GET api/2.0/files/rooms/indexexport` answers with an empty body until a new export is started with  `POST api/2.0/files/rooms/{id}/indexexport`. The cancellation is asynchronous: the background job stops at its  next checkpoint, so one that is already saving the file may still finish, and a report that was written before  the cancellation stays in the My documents section of the caller and has to be deleted as an ordinary file.  The answer carries no body and says nothing about whether an export was running.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10974,11 +13112,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11008,7 +13148,7 @@ class RoomsApi:
     ) -> ApiResponse[None]:
         """Terminate the room index export
 
-        Terminates the room index export.
+        Cancels the room index export of the calling account and drops its job record. No room is named because there  is at most one export per account, so the call always acts on the caller's own job and never on somebody  else's: an account with nothing running gets a successful answer that changes nothing, which makes the call  safe to repeat and makes it useless as a way of stopping an export somebody else started. Afterwards  `GET api/2.0/files/rooms/indexexport` answers with an empty body until a new export is started with  `POST api/2.0/files/rooms/{id}/indexexport`. The cancellation is asynchronous: the background job stops at its  next checkpoint, so one that is already saving the file may still finish, and a report that was written before  the cancellation stays in the My documents section of the caller and has to be deleted as an ordinary file.  The answer carries no body and says nothing about whether an export was running.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11041,11 +13181,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11075,7 +13217,7 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Terminate the room index export
 
-        Terminates the room index export.
+        Cancels the room index export of the calling account and drops its job record. No room is named because there  is at most one export per account, so the call always acts on the caller's own job and never on somebody  else's: an account with nothing running gets a successful answer that changes nothing, which makes the call  safe to repeat and makes it useless as a way of stopping an export somebody else started. Afterwards  `GET api/2.0/files/rooms/indexexport` answers with an empty body until a new export is started with  `POST api/2.0/files/rooms/{id}/indexexport`. The cancellation is asynchronous: the background job stops at its  next checkpoint, so one that is already saving the file may still finish, and a report that was written before  the cancellation stays in the My documents section of the caller and has to be deleted as an ordinary file.  The answer carries no body and says nothing about whether an export was running.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11108,11 +13250,13 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11149,6 +13293,13 @@ class RoomsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -11185,8 +13336,8 @@ class RoomsApi:
     @validate_call
     def unarchive_room(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The parameters for archiving a room.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11202,11 +13353,11 @@ class RoomsApi:
     ) -> FileOperationWrapper:
         """Unarchive a room
 
-        Moves a room with the ID specified in the request from the Archive section to the Rooms section.
+        Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param archive_room_request: The parameters for archiving a room.
+        :param id: The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param archive_room_request: The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
         :type archive_room_request: ArchiveRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11241,11 +13392,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11260,8 +13416,8 @@ class RoomsApi:
     @validate_call
     def unarchive_room_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The parameters for archiving a room.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11277,11 +13433,11 @@ class RoomsApi:
     ) -> ApiResponse[FileOperationWrapper]:
         """Unarchive a room
 
-        Moves a room with the ID specified in the request from the Archive section to the Rooms section.
+        Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param archive_room_request: The parameters for archiving a room.
+        :param id: The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param archive_room_request: The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
         :type archive_room_request: ArchiveRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11316,11 +13472,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11335,8 +13496,8 @@ class RoomsApi:
     @validate_call
     def unarchive_room_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The parameters for archiving a room.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        archive_room_request: Annotated[Optional[ArchiveRoomRequest], Field(description="The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11352,11 +13513,11 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Unarchive a room
 
-        Moves a room with the ID specified in the request from the Archive section to the Rooms section.
+        Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param archive_room_request: The parameters for archiving a room.
+        :param id: The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param archive_room_request: The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
         :type archive_room_request: ArchiveRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11391,11 +13552,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11491,10 +13657,10 @@ class RoomsApi:
 
 
 
-    @validate_call
+    @overload
     def unpin_room(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11507,13 +13673,67 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
+    ) -> FolderWrapper: ...
+
+    @overload
+    def unpin_room(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
+
+    @overload
+    def unpin_room(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def unpin_room(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
         """Unpin a room
 
-        Unpins a room with the ID specified in the request from the top of the list.
+        Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11545,12 +13765,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11562,10 +13787,10 @@ class RoomsApi:
         ).data
 
 
-    @validate_call
+    @overload
     def unpin_room_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11578,13 +13803,67 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderWrapper]: ...
+
+    @overload
+    def unpin_room_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
+
+    @overload
+    def unpin_room_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def unpin_room_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
         """Unpin a room
 
-        Unpins a room with the ID specified in the request from the top of the list.
+        Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11616,12 +13895,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11636,7 +13920,7 @@ class RoomsApi:
     @validate_call
     def unpin_room_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")], Annotated[StrictStr, Field(description="The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11652,10 +13936,10 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Unpin a room
 
-        Unpins a room with the ID specified in the request from the top of the list.
+        Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11687,12 +13971,17 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11772,11 +14061,11 @@ class RoomsApi:
 
 
 
-    @validate_call
+    @overload
     def update_room(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        update_room_request: Annotated[UpdateRoomRequest, Field(description="The request parameters for updating a room.")],
+        id: Annotated[StrictInt, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        update_room_request: Annotated[UpdateRoomRequest, Field(description="The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11789,14 +14078,71 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
+    ) -> FolderWrapper: ...
+
+    @overload
+    def update_room(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        update_room_request: Annotated[UpdateRoomRequest, Field(description="The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
+
+    @overload
+    def update_room(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        update_room_request: Annotated[UpdateRoomRequest, Field(description="The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def update_room(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        update_room_request: Annotated[UpdateRoomRequest, Field(description="The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
         """Update a room
 
-        Updates a room with the ID specified in the request.
+        Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param update_room_request: The request parameters for updating a room. (required)
+        :param id: The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param update_room_request: The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. (required)
         :type update_room_request: UpdateRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11830,12 +14176,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11847,11 +14199,11 @@ class RoomsApi:
         ).data
 
 
-    @validate_call
+    @overload
     def update_room_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        update_room_request: Annotated[UpdateRoomRequest, Field(description="The request parameters for updating a room.")],
+        id: Annotated[StrictInt, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        update_room_request: Annotated[UpdateRoomRequest, Field(description="The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11864,14 +14216,71 @@ class RoomsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderWrapper]: ...
+
+    @overload
+    def update_room_with_http_info(
+        self,
+        id: Annotated[StrictStr, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")],
+        update_room_request: Annotated[UpdateRoomRequest, Field(description="The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
+
+    @overload
+    def update_room_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        update_room_request: Annotated[UpdateRoomRequest, Field(description="The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def update_room_with_http_info(
+        self,
+        id: Union[Annotated[StrictInt, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        update_room_request: Annotated[UpdateRoomRequest, Field(description="The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
         """Update a room
 
-        Updates a room with the ID specified in the request.
+        Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param update_room_request: The request parameters for updating a room. (required)
+        :param id: The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param update_room_request: The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. (required)
         :type update_room_request: UpdateRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11905,12 +14314,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -11925,8 +14340,8 @@ class RoomsApi:
     @validate_call
     def update_room_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        update_room_request: Annotated[UpdateRoomRequest, Field(description="The request parameters for updating a room.")],
+        id: Union[Annotated[StrictInt, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")], Annotated[StrictStr, Field(description="The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.")]],
+        update_room_request: Annotated[UpdateRoomRequest, Field(description="The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11942,11 +14357,11 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Update a room
 
-        Updates a room with the ID specified in the request.
+        Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param update_room_request: The request parameters for updating a room. (required)
+        :param id: The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. (required)
+        :type id: Union[int, str]
+        :param update_room_request: The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. (required)
         :type update_room_request: UpdateRoomRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11980,12 +14395,18 @@ class RoomsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(id, str) else "FolderWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12098,9 +14519,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """Update tag
+        """Rename a room tag
 
-        Updates the name of a custom tag.
+        Renames a custom room tag in the portal catalog. The rename follows the tag everywhere it is used: every room  that carries it keeps it and shows the new name, so nothing has to be re-attached afterwards. Only a portal  administrator may rename a tag, and a room manager who is allowed to create tags is still refused here. The  old name is matched exactly as it is stored rather than searched for, and a name that is not in the catalog is  answered as missing. A new name that another tag already occupies is rejected as an invalid request, because  tag names are unique across the portal; both names must be non-blank and within the published length limit.  The answer is the new name. Stored queries are not updated for the caller: a `tags` filter of  `GET api/2.0/files/rooms` that still names the old value stops matching anything. The catalog is read with  `GET api/2.0/files/tags`.
 
         :param update_tag_request_dto:
         :type update_tag_request_dto: UpdateTagRequestDto
@@ -12136,12 +14557,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12170,9 +14595,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """Update tag
+        """Rename a room tag
 
-        Updates the name of a custom tag.
+        Renames a custom room tag in the portal catalog. The rename follows the tag everywhere it is used: every room  that carries it keeps it and shows the new name, so nothing has to be re-attached afterwards. Only a portal  administrator may rename a tag, and a room manager who is allowed to create tags is still refused here. The  old name is matched exactly as it is stored rather than searched for, and a name that is not in the catalog is  answered as missing. A new name that another tag already occupies is rejected as an invalid request, because  tag names are unique across the portal; both names must be non-blank and within the published length limit.  The answer is the new name. Stored queries are not updated for the caller: a `tags` filter of  `GET api/2.0/files/rooms` that still names the old value stops matching anything. The catalog is read with  `GET api/2.0/files/tags`.
 
         :param update_tag_request_dto:
         :type update_tag_request_dto: UpdateTagRequestDto
@@ -12208,12 +14633,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12242,9 +14671,9 @@ class RoomsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update tag
+        """Rename a room tag
 
-        Updates the name of a custom tag.
+        Renames a custom room tag in the portal catalog. The rename follows the tag everywhere it is used: every room  that carries it keeps it and shows the new name, so nothing has to be re-attached afterwards. Only a portal  administrator may rename a tag, and a room manager who is allowed to create tags is still refused here. The  old name is matched exactly as it is stored rather than searched for, and a name that is not in the catalog is  answered as missing. A new name that another tag already occupies is rejected as an invalid request, because  tag names are unique across the portal; both names must be non-blank and within the published length limit.  The answer is the new name. Stored queries are not updated for the caller: a `tags` filter of  `GET api/2.0/files/rooms` that still names the old value stops matching anything. The catalog is read with  `GET api/2.0/files/tags`.
 
         :param update_tag_request_dto:
         :type update_tag_request_dto: UpdateTagRequestDto
@@ -12280,12 +14709,16 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12397,7 +14830,7 @@ class RoomsApi:
     ) -> UploadResultWrapper:
         """Upload a room logo image
 
-        Uploads a temporary image to create a room logo.
+        Stores an image in temporary storage and answers with the path to it, which is the first half of setting a  room logo. No room changes here: pass the returned path as `tmpFile` to `POST api/2.0/files/rooms/{id}/logo`,  together with the crop rectangle, to make the image the logo of a room. The image travels as multipart form  data, and the first file part of the request is the one that is used while any other part is ignored. It is  re-encoded to PNG and scaled down to fit 1280 by 1280 pixels, so a larger picture is accepted and shrunk,  while a part that is not a readable image, or one over the portal limit for uploaded images, is refused with  400. Only a room manager or a portal administrator may upload, and everyone else gets 403. Every call produces  a new path, and an image that is never used stays in temporary storage until it is cleaned up, so uploading  twice is harmless.
 
         :param file: The image data.
         :type file: bytes
@@ -12433,12 +14866,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12469,7 +14905,7 @@ class RoomsApi:
     ) -> ApiResponse[UploadResultWrapper]:
         """Upload a room logo image
 
-        Uploads a temporary image to create a room logo.
+        Stores an image in temporary storage and answers with the path to it, which is the first half of setting a  room logo. No room changes here: pass the returned path as `tmpFile` to `POST api/2.0/files/rooms/{id}/logo`,  together with the crop rectangle, to make the image the logo of a room. The image travels as multipart form  data, and the first file part of the request is the one that is used while any other part is ignored. It is  re-encoded to PNG and scaled down to fit 1280 by 1280 pixels, so a larger picture is accepted and shrunk,  while a part that is not a readable image, or one over the portal limit for uploaded images, is refused with  400. Only a room manager or a portal administrator may upload, and everyone else gets 403. Every call produces  a new path, and an image that is never used stays in temporary storage until it is cleaned up, so uploading  twice is harmless.
 
         :param file: The image data.
         :type file: bytes
@@ -12505,12 +14941,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -12541,7 +14980,7 @@ class RoomsApi:
     ) -> RESTResponseType:
         """Upload a room logo image
 
-        Uploads a temporary image to create a room logo.
+        Stores an image in temporary storage and answers with the path to it, which is the first half of setting a  room logo. No room changes here: pass the returned path as `tmpFile` to `POST api/2.0/files/rooms/{id}/logo`,  together with the crop rectangle, to make the image the logo of a room. The image travels as multipart form  data, and the first file part of the request is the one that is used while any other part is ignored. It is  re-encoded to PNG and scaled down to fit 1280 by 1280 pixels, so a larger picture is accepted and shrunk,  while a part that is not a readable image, or one over the portal limit for uploaded images, is refused with  400. Only a room manager or a portal administrator may upload, and everyone else gets 403. Every call produces  a new path, and an image that is never used stays in temporary storage until it is cleaned up, so uploading  twice is harmless.
 
         :param file: The image data.
         :type file: bytes
@@ -12577,12 +15016,15 @@ class RoomsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UploadResultWrapper",
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

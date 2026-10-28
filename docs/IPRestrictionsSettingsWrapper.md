@@ -1,10 +1,11 @@
-# IPRestrictionsSettingsWrapper
+# IpRestrictionsSettingsWrapper
+The successful API response containing the IpRestrictionsSettingsDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**IPRestrictionsSettings**](IPRestrictionsSettings.md) |  | [optional] 
+**response** | [**IpRestrictionsSettingsDto**](IpRestrictionsSettingsDto.md) | The IpRestrictionsSettingsDto object returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 
@@ -13,19 +14,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from docspace_api_sdk.models.ip_restrictions_settings_wrapper import IPRestrictionsSettingsWrapper
+from docspace_api_sdk.models.ip_restrictions_settings_wrapper import IpRestrictionsSettingsWrapper
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of IPRestrictionsSettingsWrapper from a JSON string
-ip_restrictions_settings_wrapper_instance = IPRestrictionsSettingsWrapper.from_json(json)
+# create an instance of IpRestrictionsSettingsWrapper from a JSON string
+ip_restrictions_settings_wrapper_instance = IpRestrictionsSettingsWrapper.from_json(json)
 # print the JSON string representation of the object
-print(IPRestrictionsSettingsWrapper.to_json())
+print(IpRestrictionsSettingsWrapper.to_json())
 
 # convert the object into a dict
 ip_restrictions_settings_wrapper_dict = ip_restrictions_settings_wrapper_instance.to_dict()
-# create an instance of IPRestrictionsSettingsWrapper from a dict
-ip_restrictions_settings_wrapper_from_dict = IPRestrictionsSettingsWrapper.from_dict(ip_restrictions_settings_wrapper_dict)
+# create an instance of IpRestrictionsSettingsWrapper from a dict
+ip_restrictions_settings_wrapper_from_dict = IpRestrictionsSettingsWrapper.from_dict(ip_restrictions_settings_wrapper_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

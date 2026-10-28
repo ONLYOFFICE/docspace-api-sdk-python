@@ -1,11 +1,11 @@
 # TerminateRequestDto
-The request parameters for terminating the reassignment/deletion process.
+The request parameters that address the queued job of a single user - a data reassignment, a data deletion or a  user type change.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **UUID** | The user ID whose data is reassigned/removed. | 
+**user_id** | **UUID** | The ID of the user whose job is addressed. For a terminate operation it has to be the same ID that was passed  when the job was started. | 
 
 ## Example
 

@@ -5,7 +5,7 @@ Client activation change request
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **bool** | The activation status of the client | 
+**status** | **bool** | Whether the client may obtain tokens from now on. Sending false leaves the registration and the already issued tokens in place but refuses new authorization requests; sending true allows them again. | 
 
 ## Example
 

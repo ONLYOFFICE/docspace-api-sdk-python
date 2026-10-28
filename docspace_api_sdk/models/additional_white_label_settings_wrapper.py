@@ -21,18 +21,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.additional_white_label_settings import AdditionalWhiteLabelSettings
+from docspace_api_sdk.models.additional_white_label_settings_dto import AdditionalWhiteLabelSettingsDto
+from docspace_api_sdk.models.get_portal_prices200_response_links_inner import GetPortalPrices200ResponseLinksInner
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AdditionalWhiteLabelSettingsWrapper(BaseModel):
     """
-    The additional white label settings wrapper.
+    The successful API response containing the AdditionalWhiteLabelSettingsDto object.
     """ # noqa: E501
-    settings: Optional[AdditionalWhiteLabelSettings] = None
-    __properties: ClassVar[List[str]] = ["settings"]
+    response: Optional[AdditionalWhiteLabelSettingsDto] = Field(default=None, description="The AdditionalWhiteLabelSettingsDto object returned by the operation.")
+    count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
+    links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
+    status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")
+    status_code: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response (duplicate of status)", alias="statusCode")
+    __properties: ClassVar[List[str]] = ["response", "count", "links", "status", "statusCode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,9 +78,16 @@ class AdditionalWhiteLabelSettingsWrapper(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of settings
-        if self.settings:
-            _dict['settings'] = self.settings.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of response
+        if self.response:
+            _dict['response'] = self.response.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item_links in self.links:
+                if _item_links:
+                    _items.append(_item_links.to_dict())
+            _dict['links'] = _items
         return _dict
 
     @classmethod
@@ -89,7 +101,11 @@ class AdditionalWhiteLabelSettingsWrapper(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "settings": AdditionalWhiteLabelSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
+            "response": AdditionalWhiteLabelSettingsDto.from_dict(obj["response"]) if obj.get("response") is not None else None,
+            "count": obj.get("count"),
+            "links": [GetPortalPrices200ResponseLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
+            "status": obj.get("status"),
+            "statusCode": obj.get("statusCode")
         })
         return _obj
 

@@ -29,11 +29,11 @@ from typing_extensions import Self
 
 class PageableModificationResponse(BaseModel):
     """
-    The response containing paginated modification information.
+    One page of results ordered by modification time, together with the cursor that asks for the next page.
     """ # noqa: E501
-    data: Optional[Dict[str, Any]] = Field(default=None, description="The paginated modification data.")
-    limit: Optional[StrictInt] = Field(default=None, description="The maximum number of results returned per page.")
-    last_modified_on: Optional[datetime] = Field(default=None, description="The date when the user consent was last modified.")
+    data: Optional[Any] = None
+    limit: Optional[StrictInt] = Field(default=None, description="The page size that was applied to this request, between 1 and 50.", json_schema_extra={"examples": [50]})
+    last_modified_on: Optional[datetime] = Field(default=None, description="The cursor to send back as last_modified_on to ask for the next page. It is null when the page is empty.", json_schema_extra={"examples": ["2024-04-04T12:00:00Z"]})
     __properties: ClassVar[List[str]] = ["data", "limit", "last_modified_on"]
 
     model_config = ConfigDict(
@@ -75,6 +75,11 @@ class PageableModificationResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if data (nullable) is None
+        # and model_fields_set contains the field
+        if self.data is None and "data" in self.model_fields_set:
+            _dict['data'] = None
+
         return _dict
 
     @classmethod

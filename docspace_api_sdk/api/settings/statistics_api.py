@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field
@@ -48,7 +48,7 @@ class StatisticsApi:
     @validate_call
     def get_space_usage_statistics(
         self,
-        id: Annotated[UUID, Field(description="The ID extracted from the route parameters.")],
+        id: Annotated[UUID, Field(description="The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,9 +64,9 @@ class StatisticsApi:
     ) -> UsageSpaceStatItemArrayWrapper:
         """Get the space usage statistics
 
-        Returns the space usage statistics for the module with the ID specified in the request.
+        Returns the storage space used by one portal module, broken down per data category the module tracks (for  example per room type), together with a human-readable size and whether the category is disabled. Requires  Owner or DocSpaceAdmin (the EditPortalSettings permission). `id` identifies the module by the same GUID the  portal's module catalog uses; a module that does not exist, or one that does not report space usage at all,  returns an empty list rather than an error. This is a read-only, idempotent call, and the list is not  paginated. Sizes are already formatted as display strings (for example `1.5 GB`), not raw byte counts.
 
-        :param id: The ID extracted from the route parameters. (required)
+        :param id: The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. (required)
         :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -100,11 +100,15 @@ class StatisticsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UsageSpaceStatItemArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -119,7 +123,7 @@ class StatisticsApi:
     @validate_call
     def get_space_usage_statistics_with_http_info(
         self,
-        id: Annotated[UUID, Field(description="The ID extracted from the route parameters.")],
+        id: Annotated[UUID, Field(description="The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -135,9 +139,9 @@ class StatisticsApi:
     ) -> ApiResponse[UsageSpaceStatItemArrayWrapper]:
         """Get the space usage statistics
 
-        Returns the space usage statistics for the module with the ID specified in the request.
+        Returns the storage space used by one portal module, broken down per data category the module tracks (for  example per room type), together with a human-readable size and whether the category is disabled. Requires  Owner or DocSpaceAdmin (the EditPortalSettings permission). `id` identifies the module by the same GUID the  portal's module catalog uses; a module that does not exist, or one that does not report space usage at all,  returns an empty list rather than an error. This is a read-only, idempotent call, and the list is not  paginated. Sizes are already formatted as display strings (for example `1.5 GB`), not raw byte counts.
 
-        :param id: The ID extracted from the route parameters. (required)
+        :param id: The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. (required)
         :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -171,11 +175,15 @@ class StatisticsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UsageSpaceStatItemArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -190,7 +198,7 @@ class StatisticsApi:
     @validate_call
     def get_space_usage_statistics_without_preload_content(
         self,
-        id: Annotated[UUID, Field(description="The ID extracted from the route parameters.")],
+        id: Annotated[UUID, Field(description="The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -206,9 +214,9 @@ class StatisticsApi:
     ) -> RESTResponseType:
         """Get the space usage statistics
 
-        Returns the space usage statistics for the module with the ID specified in the request.
+        Returns the storage space used by one portal module, broken down per data category the module tracks (for  example per room type), together with a human-readable size and whether the category is disabled. Requires  Owner or DocSpaceAdmin (the EditPortalSettings permission). `id` identifies the module by the same GUID the  portal's module catalog uses; a module that does not exist, or one that does not report space usage at all,  returns an empty list rather than an error. This is a read-only, idempotent call, and the list is not  paginated. Sizes are already formatted as display strings (for example `1.5 GB`), not raw byte counts.
 
-        :param id: The ID extracted from the route parameters. (required)
+        :param id: The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found. (required)
         :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -242,11 +250,15 @@ class StatisticsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "UsageSpaceStatItemArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

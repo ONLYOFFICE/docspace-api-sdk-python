@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class FilesStatisticsResultWrapper(BaseModel):
     """
-    FilesStatisticsResultWrapper
+    The successful API response containing the FilesStatisticsResultDto object.
     """ # noqa: E501
-    response: Optional[FilesStatisticsResultDto] = None
+    response: Optional[FilesStatisticsResultDto] = Field(default=None, description="The FilesStatisticsResultDto object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

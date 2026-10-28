@@ -18,11 +18,11 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
-from docspace_api_sdk.models.tenant_dev_tools_access_settings_dto import TenantDevToolsAccessSettingsDto
+from docspace_api_sdk.models.tenant_dev_tools_access_settings_request_dto import TenantDevToolsAccessSettingsRequestDto
 from docspace_api_sdk.models.tenant_dev_tools_access_settings_wrapper import TenantDevToolsAccessSettingsWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -47,7 +47,7 @@ class AccessToDevToolsApi:
     @validate_call
     def set_tenant_dev_tools_access_settings(
         self,
-        tenant_dev_tools_access_settings_dto: Optional[TenantDevToolsAccessSettingsDto] = None,
+        tenant_dev_tools_access_settings_request_dto: Optional[TenantDevToolsAccessSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -63,10 +63,10 @@ class AccessToDevToolsApi:
     ) -> TenantDevToolsAccessSettingsWrapper:
         """Set the Developer Tools access settings
 
-        Sets the Developer Tools access settings for the portal.
+        Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
 
-        :param tenant_dev_tools_access_settings_dto:
-        :type tenant_dev_tools_access_settings_dto: TenantDevToolsAccessSettingsDto
+        :param tenant_dev_tools_access_settings_request_dto:
+        :type tenant_dev_tools_access_settings_request_dto: TenantDevToolsAccessSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -90,7 +90,7 @@ class AccessToDevToolsApi:
         """ # noqa: E501
 
         _param = self._set_tenant_dev_tools_access_settings_serialize(
-            tenant_dev_tools_access_settings_dto=tenant_dev_tools_access_settings_dto,
+            tenant_dev_tools_access_settings_request_dto=tenant_dev_tools_access_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -99,11 +99,15 @@ class AccessToDevToolsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDevToolsAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -118,7 +122,7 @@ class AccessToDevToolsApi:
     @validate_call
     def set_tenant_dev_tools_access_settings_with_http_info(
         self,
-        tenant_dev_tools_access_settings_dto: Optional[TenantDevToolsAccessSettingsDto] = None,
+        tenant_dev_tools_access_settings_request_dto: Optional[TenantDevToolsAccessSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,10 +138,10 @@ class AccessToDevToolsApi:
     ) -> ApiResponse[TenantDevToolsAccessSettingsWrapper]:
         """Set the Developer Tools access settings
 
-        Sets the Developer Tools access settings for the portal.
+        Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
 
-        :param tenant_dev_tools_access_settings_dto:
-        :type tenant_dev_tools_access_settings_dto: TenantDevToolsAccessSettingsDto
+        :param tenant_dev_tools_access_settings_request_dto:
+        :type tenant_dev_tools_access_settings_request_dto: TenantDevToolsAccessSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -161,7 +165,7 @@ class AccessToDevToolsApi:
         """ # noqa: E501
 
         _param = self._set_tenant_dev_tools_access_settings_serialize(
-            tenant_dev_tools_access_settings_dto=tenant_dev_tools_access_settings_dto,
+            tenant_dev_tools_access_settings_request_dto=tenant_dev_tools_access_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -170,11 +174,15 @@ class AccessToDevToolsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDevToolsAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -189,7 +197,7 @@ class AccessToDevToolsApi:
     @validate_call
     def set_tenant_dev_tools_access_settings_without_preload_content(
         self,
-        tenant_dev_tools_access_settings_dto: Optional[TenantDevToolsAccessSettingsDto] = None,
+        tenant_dev_tools_access_settings_request_dto: Optional[TenantDevToolsAccessSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -205,10 +213,10 @@ class AccessToDevToolsApi:
     ) -> RESTResponseType:
         """Set the Developer Tools access settings
 
-        Sets the Developer Tools access settings for the portal.
+        Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
 
-        :param tenant_dev_tools_access_settings_dto:
-        :type tenant_dev_tools_access_settings_dto: TenantDevToolsAccessSettingsDto
+        :param tenant_dev_tools_access_settings_request_dto:
+        :type tenant_dev_tools_access_settings_request_dto: TenantDevToolsAccessSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -232,7 +240,7 @@ class AccessToDevToolsApi:
         """ # noqa: E501
 
         _param = self._set_tenant_dev_tools_access_settings_serialize(
-            tenant_dev_tools_access_settings_dto=tenant_dev_tools_access_settings_dto,
+            tenant_dev_tools_access_settings_request_dto=tenant_dev_tools_access_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -241,11 +249,15 @@ class AccessToDevToolsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDevToolsAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -255,7 +267,7 @@ class AccessToDevToolsApi:
 
     def _set_tenant_dev_tools_access_settings_serialize(
         self,
-        tenant_dev_tools_access_settings_dto,
+        tenant_dev_tools_access_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -281,8 +293,8 @@ class AccessToDevToolsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if tenant_dev_tools_access_settings_dto is not None:
-            _body_params = tenant_dev_tools_access_settings_dto
+        if tenant_dev_tools_access_settings_request_dto is not None:
+            _body_params = tenant_dev_tools_access_settings_request_dto
 
 
         # set the HTTP header `Accept`

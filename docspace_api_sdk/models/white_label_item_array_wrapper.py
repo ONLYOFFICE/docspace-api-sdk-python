@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class WhiteLabelItemArrayWrapper(BaseModel):
     """
-    WhiteLabelItemArrayWrapper
+    The successful API response containing the list of WhiteLabelItemDto objects.
     """ # noqa: E501
-    response: Optional[List[WhiteLabelItemDto]] = None
+    response: Optional[List[WhiteLabelItemDto]] = Field(default=None, description="The list of WhiteLabelItemDto objects returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

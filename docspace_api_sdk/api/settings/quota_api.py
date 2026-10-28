@@ -18,16 +18,14 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
-from docspace_api_sdk.models.quota_settings_requests_dto import QuotaSettingsRequestsDto
-from docspace_api_sdk.models.tenant_ai_agent_quota_settings_wrapper import TenantAiAgentQuotaSettingsWrapper
-from docspace_api_sdk.models.tenant_quota_settings_requests_dto import TenantQuotaSettingsRequestsDto
+from docspace_api_sdk.models.entity_quota_settings_wrapper import EntityQuotaSettingsWrapper
+from docspace_api_sdk.models.quota_settings_request_dto import QuotaSettingsRequestDto
+from docspace_api_sdk.models.tenant_quota_settings_request_dto import TenantQuotaSettingsRequestDto
 from docspace_api_sdk.models.tenant_quota_settings_wrapper import TenantQuotaSettingsWrapper
-from docspace_api_sdk.models.tenant_room_quota_settings_wrapper import TenantRoomQuotaSettingsWrapper
-from docspace_api_sdk.models.tenant_user_quota_settings_wrapper import TenantUserQuotaSettingsWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -63,10 +61,10 @@ class QuotaApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantUserQuotaSettingsWrapper:
+    ) -> EntityQuotaSettingsWrapper:
         """Get the user quota settings
 
-        Returns the user quota settings.
+        Returns the portal's per-user default storage quota: whether it is enabled and, if so, its size in bytes.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other authenticated role, and an  anonymous caller, is refused. This is a read-only, idempotent call. When `enableQuota` is false, the size  value is not enforced and users get unlimited personal storage regardless of what it holds. The response  supports conditional requests: send the standard If-Modified-Since header with the previous `lastModified`  value, and an unchanged response comes back empty instead of resending the settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -98,12 +96,16 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantUserQuotaSettingsWrapper",
-            '401': None,
-            '429': None,
+            '200': "EntityQuotaSettingsWrapper",
+            '304': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -130,10 +132,10 @@ class QuotaApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantUserQuotaSettingsWrapper]:
+    ) -> ApiResponse[EntityQuotaSettingsWrapper]:
         """Get the user quota settings
 
-        Returns the user quota settings.
+        Returns the portal's per-user default storage quota: whether it is enabled and, if so, its size in bytes.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other authenticated role, and an  anonymous caller, is refused. This is a read-only, idempotent call. When `enableQuota` is false, the size  value is not enforced and users get unlimited personal storage regardless of what it holds. The response  supports conditional requests: send the standard If-Modified-Since header with the previous `lastModified`  value, and an unchanged response comes back empty instead of resending the settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -165,12 +167,16 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantUserQuotaSettingsWrapper",
-            '401': None,
-            '429': None,
+            '200': "EntityQuotaSettingsWrapper",
+            '304': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -200,7 +206,7 @@ class QuotaApi:
     ) -> RESTResponseType:
         """Get the user quota settings
 
-        Returns the user quota settings.
+        Returns the portal's per-user default storage quota: whether it is enabled and, if so, its size in bytes.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other authenticated role, and an  anonymous caller, is refused. This is a read-only, idempotent call. When `enableQuota` is false, the size  value is not enforced and users get unlimited personal storage regardless of what it holds. The response  supports conditional requests: send the standard If-Modified-Since header with the previous `lastModified`  value, and an unchanged response comes back empty instead of resending the settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -232,12 +238,16 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantUserQuotaSettingsWrapper",
-            '401': None,
-            '429': None,
+            '200': "EntityQuotaSettingsWrapper",
+            '304': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -317,7 +327,7 @@ class QuotaApi:
     @validate_call
     def save_ai_agent_quota_settings(
         self,
-        quota_settings_requests_dto: Optional[QuotaSettingsRequestsDto] = None,
+        quota_settings_request_dto: Optional[QuotaSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -330,13 +340,13 @@ class QuotaApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantAiAgentQuotaSettingsWrapper:
+    ) -> EntityQuotaSettingsWrapper:
         """Save the AI Agent quota settings
 
-        Saves the AI Agent quota settings specified in the request to the current portal.
+        Sets the portal's default storage quota for AI agents, applied as the starting limit for newly created agents.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal's own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota's size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new agents. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not any agent's current usage.
 
-        :param quota_settings_requests_dto:
-        :type quota_settings_requests_dto: QuotaSettingsRequestsDto
+        :param quota_settings_request_dto:
+        :type quota_settings_request_dto: QuotaSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -360,7 +370,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._save_ai_agent_quota_settings_serialize(
-            quota_settings_requests_dto=quota_settings_requests_dto,
+            quota_settings_request_dto=quota_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -368,13 +378,17 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAiAgentQuotaSettingsWrapper",
+            '200': "EntityQuotaSettingsWrapper",
+            '400': None,
             '402': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -389,7 +403,7 @@ class QuotaApi:
     @validate_call
     def save_ai_agent_quota_settings_with_http_info(
         self,
-        quota_settings_requests_dto: Optional[QuotaSettingsRequestsDto] = None,
+        quota_settings_request_dto: Optional[QuotaSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -402,13 +416,13 @@ class QuotaApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantAiAgentQuotaSettingsWrapper]:
+    ) -> ApiResponse[EntityQuotaSettingsWrapper]:
         """Save the AI Agent quota settings
 
-        Saves the AI Agent quota settings specified in the request to the current portal.
+        Sets the portal's default storage quota for AI agents, applied as the starting limit for newly created agents.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal's own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota's size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new agents. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not any agent's current usage.
 
-        :param quota_settings_requests_dto:
-        :type quota_settings_requests_dto: QuotaSettingsRequestsDto
+        :param quota_settings_request_dto:
+        :type quota_settings_request_dto: QuotaSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -432,7 +446,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._save_ai_agent_quota_settings_serialize(
-            quota_settings_requests_dto=quota_settings_requests_dto,
+            quota_settings_request_dto=quota_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -440,13 +454,17 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAiAgentQuotaSettingsWrapper",
+            '200': "EntityQuotaSettingsWrapper",
+            '400': None,
             '402': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -461,7 +479,7 @@ class QuotaApi:
     @validate_call
     def save_ai_agent_quota_settings_without_preload_content(
         self,
-        quota_settings_requests_dto: Optional[QuotaSettingsRequestsDto] = None,
+        quota_settings_request_dto: Optional[QuotaSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -477,10 +495,10 @@ class QuotaApi:
     ) -> RESTResponseType:
         """Save the AI Agent quota settings
 
-        Saves the AI Agent quota settings specified in the request to the current portal.
+        Sets the portal's default storage quota for AI agents, applied as the starting limit for newly created agents.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal's own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota's size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new agents. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not any agent's current usage.
 
-        :param quota_settings_requests_dto:
-        :type quota_settings_requests_dto: QuotaSettingsRequestsDto
+        :param quota_settings_request_dto:
+        :type quota_settings_request_dto: QuotaSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -504,7 +522,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._save_ai_agent_quota_settings_serialize(
-            quota_settings_requests_dto=quota_settings_requests_dto,
+            quota_settings_request_dto=quota_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -512,13 +530,17 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantAiAgentQuotaSettingsWrapper",
+            '200': "EntityQuotaSettingsWrapper",
+            '400': None,
             '402': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -528,7 +550,7 @@ class QuotaApi:
 
     def _save_ai_agent_quota_settings_serialize(
         self,
-        quota_settings_requests_dto,
+        quota_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -554,8 +576,8 @@ class QuotaApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if quota_settings_requests_dto is not None:
-            _body_params = quota_settings_requests_dto
+        if quota_settings_request_dto is not None:
+            _body_params = quota_settings_request_dto
 
 
         # set the HTTP header `Accept`
@@ -614,7 +636,7 @@ class QuotaApi:
     @validate_call
     def save_room_quota_settings(
         self,
-        quota_settings_requests_dto: Optional[QuotaSettingsRequestsDto] = None,
+        quota_settings_request_dto: Optional[QuotaSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -627,13 +649,13 @@ class QuotaApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TenantRoomQuotaSettingsWrapper:
+    ) -> EntityQuotaSettingsWrapper:
         """Save the room quota settings
 
-        Saves the room quota settings specified in the request to the current portal.
+        Sets the portal's default per-room storage quota, applied to newly created rooms as their starting limit.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal's own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota's size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new rooms. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not the individual rooms' current usage.
 
-        :param quota_settings_requests_dto:
-        :type quota_settings_requests_dto: QuotaSettingsRequestsDto
+        :param quota_settings_request_dto:
+        :type quota_settings_request_dto: QuotaSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -657,7 +679,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._save_room_quota_settings_serialize(
-            quota_settings_requests_dto=quota_settings_requests_dto,
+            quota_settings_request_dto=quota_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -665,13 +687,17 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantRoomQuotaSettingsWrapper",
+            '200': "EntityQuotaSettingsWrapper",
+            '400': None,
             '402': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -686,7 +712,7 @@ class QuotaApi:
     @validate_call
     def save_room_quota_settings_with_http_info(
         self,
-        quota_settings_requests_dto: Optional[QuotaSettingsRequestsDto] = None,
+        quota_settings_request_dto: Optional[QuotaSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -699,13 +725,13 @@ class QuotaApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TenantRoomQuotaSettingsWrapper]:
+    ) -> ApiResponse[EntityQuotaSettingsWrapper]:
         """Save the room quota settings
 
-        Saves the room quota settings specified in the request to the current portal.
+        Sets the portal's default per-room storage quota, applied to newly created rooms as their starting limit.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal's own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota's size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new rooms. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not the individual rooms' current usage.
 
-        :param quota_settings_requests_dto:
-        :type quota_settings_requests_dto: QuotaSettingsRequestsDto
+        :param quota_settings_request_dto:
+        :type quota_settings_request_dto: QuotaSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -729,7 +755,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._save_room_quota_settings_serialize(
-            quota_settings_requests_dto=quota_settings_requests_dto,
+            quota_settings_request_dto=quota_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -737,13 +763,17 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantRoomQuotaSettingsWrapper",
+            '200': "EntityQuotaSettingsWrapper",
+            '400': None,
             '402': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -758,7 +788,7 @@ class QuotaApi:
     @validate_call
     def save_room_quota_settings_without_preload_content(
         self,
-        quota_settings_requests_dto: Optional[QuotaSettingsRequestsDto] = None,
+        quota_settings_request_dto: Optional[QuotaSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -774,10 +804,10 @@ class QuotaApi:
     ) -> RESTResponseType:
         """Save the room quota settings
 
-        Saves the room quota settings specified in the request to the current portal.
+        Sets the portal's default per-room storage quota, applied to newly created rooms as their starting limit.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal's own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota's size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new rooms. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not the individual rooms' current usage.
 
-        :param quota_settings_requests_dto:
-        :type quota_settings_requests_dto: QuotaSettingsRequestsDto
+        :param quota_settings_request_dto:
+        :type quota_settings_request_dto: QuotaSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -801,7 +831,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._save_room_quota_settings_serialize(
-            quota_settings_requests_dto=quota_settings_requests_dto,
+            quota_settings_request_dto=quota_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -809,13 +839,17 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TenantRoomQuotaSettingsWrapper",
+            '200': "EntityQuotaSettingsWrapper",
+            '400': None,
             '402': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -825,7 +859,7 @@ class QuotaApi:
 
     def _save_room_quota_settings_serialize(
         self,
-        quota_settings_requests_dto,
+        quota_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -851,8 +885,8 @@ class QuotaApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if quota_settings_requests_dto is not None:
-            _body_params = quota_settings_requests_dto
+        if quota_settings_request_dto is not None:
+            _body_params = quota_settings_request_dto
 
 
         # set the HTTP header `Accept`
@@ -911,7 +945,7 @@ class QuotaApi:
     @validate_call
     def set_tenant_quota_settings(
         self,
-        tenant_quota_settings_requests_dto: Optional[TenantQuotaSettingsRequestsDto] = None,
+        tenant_quota_settings_request_dto: Optional[TenantQuotaSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -927,10 +961,10 @@ class QuotaApi:
     ) -> TenantQuotaSettingsWrapper:
         """Save the tenant quota settings
 
-        Saves the tenant quota settings specified in the request to the current portal.
+        Sets or removes the storage quota for a given tenant. Available only on a Standalone (self-hosted)  installation; on SaaS the call is always refused. Requires a DocSpace administrator, and the portal's plan  must include the statistics feature or the call is rejected as not covered by the plan. Pass a non-negative  `quota` in bytes to enable the limit for the tenant identified by `tenantId`, or a negative value to remove  any limit. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved quota settings for that tenant, not its current usage.
 
-        :param tenant_quota_settings_requests_dto:
-        :type tenant_quota_settings_requests_dto: TenantQuotaSettingsRequestsDto
+        :param tenant_quota_settings_request_dto:
+        :type tenant_quota_settings_request_dto: TenantQuotaSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -954,7 +988,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._set_tenant_quota_settings_serialize(
-            tenant_quota_settings_requests_dto=tenant_quota_settings_requests_dto,
+            tenant_quota_settings_request_dto=tenant_quota_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -963,13 +997,17 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantQuotaSettingsWrapper",
+            '400': None,
             '402': None,
-            '405': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -984,7 +1022,7 @@ class QuotaApi:
     @validate_call
     def set_tenant_quota_settings_with_http_info(
         self,
-        tenant_quota_settings_requests_dto: Optional[TenantQuotaSettingsRequestsDto] = None,
+        tenant_quota_settings_request_dto: Optional[TenantQuotaSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1000,10 +1038,10 @@ class QuotaApi:
     ) -> ApiResponse[TenantQuotaSettingsWrapper]:
         """Save the tenant quota settings
 
-        Saves the tenant quota settings specified in the request to the current portal.
+        Sets or removes the storage quota for a given tenant. Available only on a Standalone (self-hosted)  installation; on SaaS the call is always refused. Requires a DocSpace administrator, and the portal's plan  must include the statistics feature or the call is rejected as not covered by the plan. Pass a non-negative  `quota` in bytes to enable the limit for the tenant identified by `tenantId`, or a negative value to remove  any limit. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved quota settings for that tenant, not its current usage.
 
-        :param tenant_quota_settings_requests_dto:
-        :type tenant_quota_settings_requests_dto: TenantQuotaSettingsRequestsDto
+        :param tenant_quota_settings_request_dto:
+        :type tenant_quota_settings_request_dto: TenantQuotaSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1027,7 +1065,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._set_tenant_quota_settings_serialize(
-            tenant_quota_settings_requests_dto=tenant_quota_settings_requests_dto,
+            tenant_quota_settings_request_dto=tenant_quota_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1036,13 +1074,17 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantQuotaSettingsWrapper",
+            '400': None,
             '402': None,
-            '405': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1057,7 +1099,7 @@ class QuotaApi:
     @validate_call
     def set_tenant_quota_settings_without_preload_content(
         self,
-        tenant_quota_settings_requests_dto: Optional[TenantQuotaSettingsRequestsDto] = None,
+        tenant_quota_settings_request_dto: Optional[TenantQuotaSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1073,10 +1115,10 @@ class QuotaApi:
     ) -> RESTResponseType:
         """Save the tenant quota settings
 
-        Saves the tenant quota settings specified in the request to the current portal.
+        Sets or removes the storage quota for a given tenant. Available only on a Standalone (self-hosted)  installation; on SaaS the call is always refused. Requires a DocSpace administrator, and the portal's plan  must include the statistics feature or the call is rejected as not covered by the plan. Pass a non-negative  `quota` in bytes to enable the limit for the tenant identified by `tenantId`, or a negative value to remove  any limit. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved quota settings for that tenant, not its current usage.
 
-        :param tenant_quota_settings_requests_dto:
-        :type tenant_quota_settings_requests_dto: TenantQuotaSettingsRequestsDto
+        :param tenant_quota_settings_request_dto:
+        :type tenant_quota_settings_request_dto: TenantQuotaSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1100,7 +1142,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._set_tenant_quota_settings_serialize(
-            tenant_quota_settings_requests_dto=tenant_quota_settings_requests_dto,
+            tenant_quota_settings_request_dto=tenant_quota_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1109,13 +1151,17 @@ class QuotaApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantQuotaSettingsWrapper",
+            '400': None,
             '402': None,
-            '405': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1125,7 +1171,7 @@ class QuotaApi:
 
     def _set_tenant_quota_settings_serialize(
         self,
-        tenant_quota_settings_requests_dto,
+        tenant_quota_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -1151,8 +1197,8 @@ class QuotaApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if tenant_quota_settings_requests_dto is not None:
-            _body_params = tenant_quota_settings_requests_dto
+        if tenant_quota_settings_request_dto is not None:
+            _body_params = tenant_quota_settings_request_dto
 
 
         # set the HTTP header `Accept`

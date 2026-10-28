@@ -18,11 +18,11 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
-from docspace_api_sdk.models.cookie_settings_requests_dto import CookieSettingsRequestsDto
+from docspace_api_sdk.models.cookie_settings_request_dto import CookieSettingsRequestDto
 from docspace_api_sdk.models.cookie_settings_wrapper import CookieSettingsWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 
@@ -61,9 +61,9 @@ class CookiesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CookieSettingsWrapper:
-        """Get cookies lifetime
+        """Get the cookie lifetime settings
 
-        Returns the cookies lifetime value in minutes.
+        Returns how long an authentication session of this portal stays valid: `lifeTime` in minutes together with the  `enabled` flag that says whether that limit is applied at all. The caller needs the portal-settings right of a  DocSpace administrator - the portal owner and a DocSpace administrator qualify, any other member is refused -  and the call is read-only. The pair describes the whole portal rather than the calling user, and it is never  empty: a portal nobody has configured answers `lifeTime` 1440, one day, with `enabled` false. Read the two  fields together, because the number alone does not say how long a session lasts - while `enabled` is false the  stored number is ignored and an issued session is honoured for a year, and `lifeTime` 0 with `enabled` true  means a session that never expires on its own. On an installation whose configuration hides the cookie section  the built-in default pair comes back instead of the stored one. `GET api/2.0/settings` carries the same flag  as `cookieSettingsEnabled` without the number; change the pair with `PUT api/2.0/settings/cookiesettings`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -96,11 +96,14 @@ class CookiesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CookieSettingsWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -128,9 +131,9 @@ class CookiesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CookieSettingsWrapper]:
-        """Get cookies lifetime
+        """Get the cookie lifetime settings
 
-        Returns the cookies lifetime value in minutes.
+        Returns how long an authentication session of this portal stays valid: `lifeTime` in minutes together with the  `enabled` flag that says whether that limit is applied at all. The caller needs the portal-settings right of a  DocSpace administrator - the portal owner and a DocSpace administrator qualify, any other member is refused -  and the call is read-only. The pair describes the whole portal rather than the calling user, and it is never  empty: a portal nobody has configured answers `lifeTime` 1440, one day, with `enabled` false. Read the two  fields together, because the number alone does not say how long a session lasts - while `enabled` is false the  stored number is ignored and an issued session is honoured for a year, and `lifeTime` 0 with `enabled` true  means a session that never expires on its own. On an installation whose configuration hides the cookie section  the built-in default pair comes back instead of the stored one. `GET api/2.0/settings` carries the same flag  as `cookieSettingsEnabled` without the number; change the pair with `PUT api/2.0/settings/cookiesettings`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -163,11 +166,14 @@ class CookiesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CookieSettingsWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -195,9 +201,9 @@ class CookiesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get cookies lifetime
+        """Get the cookie lifetime settings
 
-        Returns the cookies lifetime value in minutes.
+        Returns how long an authentication session of this portal stays valid: `lifeTime` in minutes together with the  `enabled` flag that says whether that limit is applied at all. The caller needs the portal-settings right of a  DocSpace administrator - the portal owner and a DocSpace administrator qualify, any other member is refused -  and the call is read-only. The pair describes the whole portal rather than the calling user, and it is never  empty: a portal nobody has configured answers `lifeTime` 1440, one day, with `enabled` false. Read the two  fields together, because the number alone does not say how long a session lasts - while `enabled` is false the  stored number is ignored and an issued session is honoured for a year, and `lifeTime` 0 with `enabled` true  means a session that never expires on its own. On an installation whose configuration hides the cookie section  the built-in default pair comes back instead of the stored one. `GET api/2.0/settings` carries the same flag  as `cookieSettingsEnabled` without the number; change the pair with `PUT api/2.0/settings/cookiesettings`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -230,11 +236,14 @@ class CookiesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CookieSettingsWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -314,7 +323,7 @@ class CookiesApi:
     @validate_call
     def update_cookie_settings(
         self,
-        cookie_settings_requests_dto: Optional[CookieSettingsRequestsDto] = None,
+        cookie_settings_request_dto: Optional[CookieSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -328,12 +337,12 @@ class CookiesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """Update cookies lifetime
+        """Update the cookie lifetime settings
 
-        Updates the cookies lifetime value in minutes.
+        Stores how long an authentication session of this portal stays valid: `lifeTime` in minutes together with the  `enabled` flag that switches the limit on. The caller needs the portal-settings right of a DocSpace  administrator - the portal owner and a DocSpace administrator qualify, any other member is refused - and on an  installation whose configuration hides the cookie section nothing is stored and the call is answered with 402.  A `lifeTime` above 9999 minutes is not rejected but clamped to 9999, while 0 or less clears the number  instead, which with `enabled` true leaves sessions that never expire on their own. Any positive `lifeTime`  raises the session version of the portal: every session issued before the call stops being accepted, and with  `enabled` true the connections behind them are dropped as well. The caller is signed in again inside the same  call and gets a fresh session cookie in the response, so a client that keeps sending the token it held before  this call is the one locked out. The change is recorded in the audit trail. What comes back is a localized  confirmation message; read the stored pair with `GET api/2.0/settings/cookiesettings`.
 
-        :param cookie_settings_requests_dto:
-        :type cookie_settings_requests_dto: CookieSettingsRequestsDto
+        :param cookie_settings_request_dto:
+        :type cookie_settings_request_dto: CookieSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -357,7 +366,7 @@ class CookiesApi:
         """ # noqa: E501
 
         _param = self._update_cookie_settings_serialize(
-            cookie_settings_requests_dto=cookie_settings_requests_dto,
+            cookie_settings_request_dto=cookie_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -367,11 +376,15 @@ class CookiesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '402': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -386,7 +399,7 @@ class CookiesApi:
     @validate_call
     def update_cookie_settings_with_http_info(
         self,
-        cookie_settings_requests_dto: Optional[CookieSettingsRequestsDto] = None,
+        cookie_settings_request_dto: Optional[CookieSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -400,12 +413,12 @@ class CookiesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """Update cookies lifetime
+        """Update the cookie lifetime settings
 
-        Updates the cookies lifetime value in minutes.
+        Stores how long an authentication session of this portal stays valid: `lifeTime` in minutes together with the  `enabled` flag that switches the limit on. The caller needs the portal-settings right of a DocSpace  administrator - the portal owner and a DocSpace administrator qualify, any other member is refused - and on an  installation whose configuration hides the cookie section nothing is stored and the call is answered with 402.  A `lifeTime` above 9999 minutes is not rejected but clamped to 9999, while 0 or less clears the number  instead, which with `enabled` true leaves sessions that never expire on their own. Any positive `lifeTime`  raises the session version of the portal: every session issued before the call stops being accepted, and with  `enabled` true the connections behind them are dropped as well. The caller is signed in again inside the same  call and gets a fresh session cookie in the response, so a client that keeps sending the token it held before  this call is the one locked out. The change is recorded in the audit trail. What comes back is a localized  confirmation message; read the stored pair with `GET api/2.0/settings/cookiesettings`.
 
-        :param cookie_settings_requests_dto:
-        :type cookie_settings_requests_dto: CookieSettingsRequestsDto
+        :param cookie_settings_request_dto:
+        :type cookie_settings_request_dto: CookieSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -429,7 +442,7 @@ class CookiesApi:
         """ # noqa: E501
 
         _param = self._update_cookie_settings_serialize(
-            cookie_settings_requests_dto=cookie_settings_requests_dto,
+            cookie_settings_request_dto=cookie_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -439,11 +452,15 @@ class CookiesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '402': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -458,7 +475,7 @@ class CookiesApi:
     @validate_call
     def update_cookie_settings_without_preload_content(
         self,
-        cookie_settings_requests_dto: Optional[CookieSettingsRequestsDto] = None,
+        cookie_settings_request_dto: Optional[CookieSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -472,12 +489,12 @@ class CookiesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update cookies lifetime
+        """Update the cookie lifetime settings
 
-        Updates the cookies lifetime value in minutes.
+        Stores how long an authentication session of this portal stays valid: `lifeTime` in minutes together with the  `enabled` flag that switches the limit on. The caller needs the portal-settings right of a DocSpace  administrator - the portal owner and a DocSpace administrator qualify, any other member is refused - and on an  installation whose configuration hides the cookie section nothing is stored and the call is answered with 402.  A `lifeTime` above 9999 minutes is not rejected but clamped to 9999, while 0 or less clears the number  instead, which with `enabled` true leaves sessions that never expire on their own. Any positive `lifeTime`  raises the session version of the portal: every session issued before the call stops being accepted, and with  `enabled` true the connections behind them are dropped as well. The caller is signed in again inside the same  call and gets a fresh session cookie in the response, so a client that keeps sending the token it held before  this call is the one locked out. The change is recorded in the audit trail. What comes back is a localized  confirmation message; read the stored pair with `GET api/2.0/settings/cookiesettings`.
 
-        :param cookie_settings_requests_dto:
-        :type cookie_settings_requests_dto: CookieSettingsRequestsDto
+        :param cookie_settings_request_dto:
+        :type cookie_settings_request_dto: CookieSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -501,7 +518,7 @@ class CookiesApi:
         """ # noqa: E501
 
         _param = self._update_cookie_settings_serialize(
-            cookie_settings_requests_dto=cookie_settings_requests_dto,
+            cookie_settings_request_dto=cookie_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -511,11 +528,15 @@ class CookiesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '402': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -525,7 +546,7 @@ class CookiesApi:
 
     def _update_cookie_settings_serialize(
         self,
-        cookie_settings_requests_dto,
+        cookie_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -551,8 +572,8 @@ class CookiesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if cookie_settings_requests_dto is not None:
-            _body_params = cookie_settings_requests_dto
+        if cookie_settings_request_dto is not None:
+            _body_params = cookie_settings_request_dto
 
 
         # set the HTTP header `Accept`

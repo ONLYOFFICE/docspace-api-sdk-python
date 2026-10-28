@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt
@@ -28,6 +28,7 @@ from docspace_api_sdk.models.icon_request import IconRequest
 from docspace_api_sdk.models.room_group_array_wrapper import RoomGroupArrayWrapper
 from docspace_api_sdk.models.room_group_request_dto import RoomGroupRequestDto
 from docspace_api_sdk.models.room_group_wrapper import RoomGroupWrapper
+from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.models.update_room_group_request import UpdateRoomGroupRequest
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -68,7 +69,7 @@ class GroupsApi:
     ) -> RoomGroupWrapper:
         """Add a new room group
 
-        Creates a new room group with the specified name, icon, and list of rooms.
+        Creates a room group, a personal collection that gathers rooms the caller already works with under one name  and icon; it belongs to the account that created it and is never shown to other members of the portal. Pass  the group name, the identifier of one of the built-in covers offered by `GET api/2.0/files/rooms/covers`, and  a list of at least one room - a number for a room stored in the portal, a string for a room on a connected  third-party account. Any role may create its own group, a guest included: what is checked is read access to  each listed room, not the role of the caller. Repeated identifiers are collapsed, and a value that is not a  room identifier at all is rejected as an invalid request. When none of the listed rooms can be read the group  is not created; when only some of them can, the group is created with those rooms and the call is still  reported as failed, so re-read `GET api/2.0/files/group` before retrying. A room may sit in several groups,  and two groups of the same account may carry the same name. The answer is the stored group with its rooms.
 
         :param room_group_request_dto:
         :type room_group_request_dto: RoomGroupRequestDto
@@ -104,11 +105,16 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -139,7 +145,7 @@ class GroupsApi:
     ) -> ApiResponse[RoomGroupWrapper]:
         """Add a new room group
 
-        Creates a new room group with the specified name, icon, and list of rooms.
+        Creates a room group, a personal collection that gathers rooms the caller already works with under one name  and icon; it belongs to the account that created it and is never shown to other members of the portal. Pass  the group name, the identifier of one of the built-in covers offered by `GET api/2.0/files/rooms/covers`, and  a list of at least one room - a number for a room stored in the portal, a string for a room on a connected  third-party account. Any role may create its own group, a guest included: what is checked is read access to  each listed room, not the role of the caller. Repeated identifiers are collapsed, and a value that is not a  room identifier at all is rejected as an invalid request. When none of the listed rooms can be read the group  is not created; when only some of them can, the group is created with those rooms and the call is still  reported as failed, so re-read `GET api/2.0/files/group` before retrying. A room may sit in several groups,  and two groups of the same account may carry the same name. The answer is the stored group with its rooms.
 
         :param room_group_request_dto:
         :type room_group_request_dto: RoomGroupRequestDto
@@ -175,11 +181,16 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -210,7 +221,7 @@ class GroupsApi:
     ) -> RESTResponseType:
         """Add a new room group
 
-        Creates a new room group with the specified name, icon, and list of rooms.
+        Creates a room group, a personal collection that gathers rooms the caller already works with under one name  and icon; it belongs to the account that created it and is never shown to other members of the portal. Pass  the group name, the identifier of one of the built-in covers offered by `GET api/2.0/files/rooms/covers`, and  a list of at least one room - a number for a room stored in the portal, a string for a room on a connected  third-party account. Any role may create its own group, a guest included: what is checked is read access to  each listed room, not the role of the caller. Repeated identifiers are collapsed, and a value that is not a  room identifier at all is rejected as an invalid request. When none of the listed rooms can be read the group  is not created; when only some of them can, the group is created with those rooms and the call is still  reported as failed, so re-read `GET api/2.0/files/group` before retrying. A room may sit in several groups,  and two groups of the same account may carry the same name. The answer is the stored group with its rooms.
 
         :param room_group_request_dto:
         :type room_group_request_dto: RoomGroupRequestDto
@@ -246,11 +257,16 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -346,8 +362,8 @@ class GroupsApi:
     @validate_call
     def change_room_group_icon(
         self,
-        id: Annotated[StrictInt, Field(description="Group id")],
-        icon_request: Annotated[Optional[IconRequest], Field(description="Icon update data.")] = None,
+        id: Annotated[StrictInt, Field(description="The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing.")],
+        icon_request: Annotated[Optional[IconRequest], Field(description="The icon to give the group. A body that leaves the icon out is accepted and changes nothing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -361,13 +377,13 @@ class GroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoomGroupWrapper:
-        """Change group icon
+        """Change room group icon
 
-        Changes the icon of an existing room group.
+        Replaces the icon of one of the caller's own room groups and returns the whole group, its name and its rooms  left as they were. Send the identifier of one of the built-in covers offered by  `GET api/2.0/files/rooms/covers`; an empty string strips the icon, after which the group comes back with an  empty `icon`, and any other value - including a word that merely reads like one, such as `none` - is rejected  as an invalid request. An uploaded image cannot be used here, unlike the logo of a room. Leaving `icon` out of  the body or sending it as null is accepted and changes nothing, whereas a request that carries no body at all,  or a body that is not JSON, is refused. Setting the icon the group already has is accepted as well, so  retrying the call is safe. Any role may re-icon its own group, and a group belonging to another account is  answered as missing rather than refused, exactly as reading it would be.
 
-        :param id: Group id (required)
+        :param id: The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param icon_request: Icon update data.
+        :param icon_request: The icon to give the group. A body that leaves the icon out is accepted and changes nothing.
         :type icon_request: IconRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -402,11 +418,15 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -421,8 +441,8 @@ class GroupsApi:
     @validate_call
     def change_room_group_icon_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="Group id")],
-        icon_request: Annotated[Optional[IconRequest], Field(description="Icon update data.")] = None,
+        id: Annotated[StrictInt, Field(description="The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing.")],
+        icon_request: Annotated[Optional[IconRequest], Field(description="The icon to give the group. A body that leaves the icon out is accepted and changes nothing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -436,13 +456,13 @@ class GroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[RoomGroupWrapper]:
-        """Change group icon
+        """Change room group icon
 
-        Changes the icon of an existing room group.
+        Replaces the icon of one of the caller's own room groups and returns the whole group, its name and its rooms  left as they were. Send the identifier of one of the built-in covers offered by  `GET api/2.0/files/rooms/covers`; an empty string strips the icon, after which the group comes back with an  empty `icon`, and any other value - including a word that merely reads like one, such as `none` - is rejected  as an invalid request. An uploaded image cannot be used here, unlike the logo of a room. Leaving `icon` out of  the body or sending it as null is accepted and changes nothing, whereas a request that carries no body at all,  or a body that is not JSON, is refused. Setting the icon the group already has is accepted as well, so  retrying the call is safe. Any role may re-icon its own group, and a group belonging to another account is  answered as missing rather than refused, exactly as reading it would be.
 
-        :param id: Group id (required)
+        :param id: The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param icon_request: Icon update data.
+        :param icon_request: The icon to give the group. A body that leaves the icon out is accepted and changes nothing.
         :type icon_request: IconRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -477,11 +497,15 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -496,8 +520,8 @@ class GroupsApi:
     @validate_call
     def change_room_group_icon_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="Group id")],
-        icon_request: Annotated[Optional[IconRequest], Field(description="Icon update data.")] = None,
+        id: Annotated[StrictInt, Field(description="The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing.")],
+        icon_request: Annotated[Optional[IconRequest], Field(description="The icon to give the group. A body that leaves the icon out is accepted and changes nothing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -511,13 +535,13 @@ class GroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Change group icon
+        """Change room group icon
 
-        Changes the icon of an existing room group.
+        Replaces the icon of one of the caller's own room groups and returns the whole group, its name and its rooms  left as they were. Send the identifier of one of the built-in covers offered by  `GET api/2.0/files/rooms/covers`; an empty string strips the icon, after which the group comes back with an  empty `icon`, and any other value - including a word that merely reads like one, such as `none` - is rejected  as an invalid request. An uploaded image cannot be used here, unlike the logo of a room. Leaving `icon` out of  the body or sending it as null is accepted and changes nothing, whereas a request that carries no body at all,  or a body that is not JSON, is refused. Setting the icon the group already has is accepted as well, so  retrying the call is safe. Any role may re-icon its own group, and a group belonging to another account is  answered as missing rather than refused, exactly as reading it would be.
 
-        :param id: Group id (required)
+        :param id: The room group to re-icon, identified by the value `GET api/2.0/files/group` reports for it. A group of  another account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param icon_request: Icon update data.
+        :param icon_request: The icon to give the group. A body that leaves the icon out is accepted and changes nothing.
         :type icon_request: IconRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -552,11 +576,15 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -655,8 +683,8 @@ class GroupsApi:
     @validate_call
     def delete_room_group(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
+        id: Annotated[StrictInt, Field(description="The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.")],
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -670,13 +698,13 @@ class GroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Delete group
+        """Delete a room group
 
-        Deletes the specified room group.
+        Deletes one of the caller's own room groups. Only the collection goes away: the rooms it gathered, their  content and the shares on them are left exactly as they were, and a room that was in no other group simply  stops being grouped. Deleting a group of another account is refused, and an identifier that names nothing -  because it never existed, or because the group has already been deleted - is answered as missing, so repeating  the call after a successful delete does not report success a second time. The operation is destructive and  cannot be undone: there is no trash for groups, and rebuilding one means calling `POST api/2.0/files/group`  again with the same name, icon and rooms, which gives it a new identifier. Nothing is returned in the body.  The `includeMembers` parameter is accepted here because the route shares its contract with  `GET api/2.0/files/group/{id}`, and has no effect on what is deleted. Read the group first when the rooms it  gathers still have to be recorded somewhere.
 
-        :param id: The group unique identifier. (required)
+        :param id: The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param include_members: Whether to include group members.
+        :param include_members: Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -711,11 +739,16 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -730,8 +763,8 @@ class GroupsApi:
     @validate_call
     def delete_room_group_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
+        id: Annotated[StrictInt, Field(description="The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.")],
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -745,13 +778,13 @@ class GroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Delete group
+        """Delete a room group
 
-        Deletes the specified room group.
+        Deletes one of the caller's own room groups. Only the collection goes away: the rooms it gathered, their  content and the shares on them are left exactly as they were, and a room that was in no other group simply  stops being grouped. Deleting a group of another account is refused, and an identifier that names nothing -  because it never existed, or because the group has already been deleted - is answered as missing, so repeating  the call after a successful delete does not report success a second time. The operation is destructive and  cannot be undone: there is no trash for groups, and rebuilding one means calling `POST api/2.0/files/group`  again with the same name, icon and rooms, which gives it a new identifier. Nothing is returned in the body.  The `includeMembers` parameter is accepted here because the route shares its contract with  `GET api/2.0/files/group/{id}`, and has no effect on what is deleted. Read the group first when the rooms it  gathers still have to be recorded somewhere.
 
-        :param id: The group unique identifier. (required)
+        :param id: The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param include_members: Whether to include group members.
+        :param include_members: Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -786,11 +819,16 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -805,8 +843,8 @@ class GroupsApi:
     @validate_call
     def delete_room_group_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
+        id: Annotated[StrictInt, Field(description="The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.")],
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -820,13 +858,13 @@ class GroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete group
+        """Delete a room group
 
-        Deletes the specified room group.
+        Deletes one of the caller's own room groups. Only the collection goes away: the rooms it gathered, their  content and the shares on them are left exactly as they were, and a room that was in no other group simply  stops being grouped. Deleting a group of another account is refused, and an identifier that names nothing -  because it never existed, or because the group has already been deleted - is answered as missing, so repeating  the call after a successful delete does not report success a second time. The operation is destructive and  cannot be undone: there is no trash for groups, and rebuilding one means calling `POST api/2.0/files/group`  again with the same name, icon and rooms, which gives it a new identifier. Nothing is returned in the body.  The `includeMembers` parameter is accepted here because the route shares its contract with  `GET api/2.0/files/group/{id}`, and has no effect on what is deleted. Read the group first when the rooms it  gathers still have to be recorded somewhere.
 
-        :param id: The group unique identifier. (required)
+        :param id: The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param include_members: Whether to include group members.
+        :param include_members: Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -861,11 +899,16 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
-            '401': None,
-            '429': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -910,6 +953,13 @@ class GroupsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -946,8 +996,8 @@ class GroupsApi:
     @validate_call
     def get_room_group_info(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
+        id: Annotated[StrictInt, Field(description="The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.")],
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -963,11 +1013,11 @@ class GroupsApi:
     ) -> RoomGroupWrapper:
         """Get room group info
 
-        Returns detailed information about a room group.
+        Returns one room group of the calling account together with the rooms it gathers. Groups are personal: an  identifier that belongs to another member is answered the same way as one that was never created or has  already been deleted, and a portal administrator is no exception to that rule. Take the identifier from  `GET api/2.0/files/group`, which lists the groups the caller owns. Set `includeMembers` to false to get the  group without the `rooms` array, which is the cheaper form when only the name, the icon and the number of  rooms are needed; `totalRooms` is filled either way. A room moved to the archive is left out of both `rooms`  and `totalRooms` while its membership survives, so taking the room out of the archive brings it back into the  group. A room the caller can no longer open is left out the same way, and comes back if access to it is  granted again. Rooms stored in the portal are listed before rooms on connected third-party accounts. The call is  read-only and changes nothing about the group or the rooms it refers to.
 
-        :param id: The group unique identifier. (required)
+        :param id: The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param include_members: Whether to include group members.
+        :param include_members: Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1002,11 +1052,15 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1021,8 +1075,8 @@ class GroupsApi:
     @validate_call
     def get_room_group_info_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
+        id: Annotated[StrictInt, Field(description="The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.")],
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1038,11 +1092,11 @@ class GroupsApi:
     ) -> ApiResponse[RoomGroupWrapper]:
         """Get room group info
 
-        Returns detailed information about a room group.
+        Returns one room group of the calling account together with the rooms it gathers. Groups are personal: an  identifier that belongs to another member is answered the same way as one that was never created or has  already been deleted, and a portal administrator is no exception to that rule. Take the identifier from  `GET api/2.0/files/group`, which lists the groups the caller owns. Set `includeMembers` to false to get the  group without the `rooms` array, which is the cheaper form when only the name, the icon and the number of  rooms are needed; `totalRooms` is filled either way. A room moved to the archive is left out of both `rooms`  and `totalRooms` while its membership survives, so taking the room out of the archive brings it back into the  group. A room the caller can no longer open is left out the same way, and comes back if access to it is  granted again. Rooms stored in the portal are listed before rooms on connected third-party accounts. The call is  read-only and changes nothing about the group or the rooms it refers to.
 
-        :param id: The group unique identifier. (required)
+        :param id: The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param include_members: Whether to include group members.
+        :param include_members: Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1077,11 +1131,15 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1096,8 +1154,8 @@ class GroupsApi:
     @validate_call
     def get_room_group_info_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
+        id: Annotated[StrictInt, Field(description="The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.")],
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1113,11 +1171,11 @@ class GroupsApi:
     ) -> RESTResponseType:
         """Get room group info
 
-        Returns detailed information about a room group.
+        Returns one room group of the calling account together with the rooms it gathers. Groups are personal: an  identifier that belongs to another member is answered the same way as one that was never created or has  already been deleted, and a portal administrator is no exception to that rule. Take the identifier from  `GET api/2.0/files/group`, which lists the groups the caller owns. Set `includeMembers` to false to get the  group without the `rooms` array, which is the cheaper form when only the name, the icon and the number of  rooms are needed; `totalRooms` is filled either way. A room moved to the archive is left out of both `rooms`  and `totalRooms` while its membership survives, so taking the room out of the archive brings it back into the  group. A room the caller can no longer open is left out the same way, and comes back if access to it is  granted again. Rooms stored in the portal are listed before rooms on connected third-party accounts. The call is  read-only and changes nothing about the group or the rooms it refers to.
 
-        :param id: The group unique identifier. (required)
+        :param id: The room group to act on, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param include_members: Whether to include group members.
+        :param include_members: Whether the rooms of the group are listed in the answer: true fills the `rooms` array, false leaves it out and  reports only how many there are in `totalRooms`.
         :type include_members: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1152,11 +1210,15 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1244,8 +1306,8 @@ class GroupsApi:
     @validate_call
     def get_room_groups(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1261,12 +1323,12 @@ class GroupsApi:
     ) -> RoomGroupArrayWrapper:
         """List room groups
 
-        Returns a list of all room groups for the current user.
+        Returns every room group of the calling account, each with the rooms it gathers. Only groups the caller  created are listed: groups of other members never appear here, and an account that has never made one gets an  empty array back. Set `includeMembers` to false to leave the `rooms` array out of every entry and keep the  name, the icon and `totalRooms` alone, which is the cheaper form when the list is only being shown as a menu.  Archived rooms are skipped in both the `rooms` array and the `totalRooms` count, and reappear once the room is  taken out of the archive; rooms the caller can no longer open are skipped the same way until access to them  is granted again. The listing is neither paged nor filtered - it always carries the whole set - and  the order of the entries is not contractual, so sort them on the client when the order matters. The call is  read-only. Use `GET api/2.0/files/group/{id}` when the identifier of a single group is already known, and  `POST api/2.0/files/group` to add one.
 
-        :param id: The group unique identifier. (required)
-        :type id: int
-        :param include_members: Whether to include group members.
+        :param include_members: Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
         :type include_members: bool
+        :param search_area: The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
+        :type search_area: SearchArea
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1290,8 +1352,8 @@ class GroupsApi:
         """ # noqa: E501
 
         _param = self._get_room_groups_serialize(
-            id=id,
             include_members=include_members,
+            search_area=search_area,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1300,11 +1362,14 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1319,8 +1384,8 @@ class GroupsApi:
     @validate_call
     def get_room_groups_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1336,12 +1401,12 @@ class GroupsApi:
     ) -> ApiResponse[RoomGroupArrayWrapper]:
         """List room groups
 
-        Returns a list of all room groups for the current user.
+        Returns every room group of the calling account, each with the rooms it gathers. Only groups the caller  created are listed: groups of other members never appear here, and an account that has never made one gets an  empty array back. Set `includeMembers` to false to leave the `rooms` array out of every entry and keep the  name, the icon and `totalRooms` alone, which is the cheaper form when the list is only being shown as a menu.  Archived rooms are skipped in both the `rooms` array and the `totalRooms` count, and reappear once the room is  taken out of the archive; rooms the caller can no longer open are skipped the same way until access to them  is granted again. The listing is neither paged nor filtered - it always carries the whole set - and  the order of the entries is not contractual, so sort them on the client when the order matters. The call is  read-only. Use `GET api/2.0/files/group/{id}` when the identifier of a single group is already known, and  `POST api/2.0/files/group` to add one.
 
-        :param id: The group unique identifier. (required)
-        :type id: int
-        :param include_members: Whether to include group members.
+        :param include_members: Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
         :type include_members: bool
+        :param search_area: The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
+        :type search_area: SearchArea
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1365,8 +1430,8 @@ class GroupsApi:
         """ # noqa: E501
 
         _param = self._get_room_groups_serialize(
-            id=id,
             include_members=include_members,
+            search_area=search_area,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1375,11 +1440,14 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1394,8 +1462,8 @@ class GroupsApi:
     @validate_call
     def get_room_groups_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The group unique identifier.")],
-        include_members: Annotated[Optional[StrictBool], Field(description="Whether to include group members.")] = None,
+        include_members: Annotated[Optional[StrictBool], Field(description="Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1411,12 +1479,12 @@ class GroupsApi:
     ) -> RESTResponseType:
         """List room groups
 
-        Returns a list of all room groups for the current user.
+        Returns every room group of the calling account, each with the rooms it gathers. Only groups the caller  created are listed: groups of other members never appear here, and an account that has never made one gets an  empty array back. Set `includeMembers` to false to leave the `rooms` array out of every entry and keep the  name, the icon and `totalRooms` alone, which is the cheaper form when the list is only being shown as a menu.  Archived rooms are skipped in both the `rooms` array and the `totalRooms` count, and reappear once the room is  taken out of the archive; rooms the caller can no longer open are skipped the same way until access to them  is granted again. The listing is neither paged nor filtered - it always carries the whole set - and  the order of the entries is not contractual, so sort them on the client when the order matters. The call is  read-only. Use `GET api/2.0/files/group/{id}` when the identifier of a single group is already known, and  `POST api/2.0/files/group` to add one.
 
-        :param id: The group unique identifier. (required)
-        :type id: int
-        :param include_members: Whether to include group members.
+        :param include_members: Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
         :type include_members: bool
+        :param search_area: The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
+        :type search_area: SearchArea
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1440,8 +1508,8 @@ class GroupsApi:
         """ # noqa: E501
 
         _param = self._get_room_groups_serialize(
-            id=id,
             include_members=include_members,
+            search_area=search_area,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1450,11 +1518,14 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1464,8 +1535,8 @@ class GroupsApi:
 
     def _get_room_groups_serialize(
         self,
-        id,
         include_members,
+        search_area,
         _request_auth,
         _content_type,
         _headers,
@@ -1487,12 +1558,14 @@ class GroupsApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if id is not None:
-            _path_params['id'] = id
         # process the query parameters
         if include_members is not None:
             
             _query_params.append(('includeMembers', include_members))
+            
+        if search_area is not None:
+            
+            _query_params.append(('searchArea', search_area.value))
             
         # process the header parameters
         # process the form parameters
@@ -1542,8 +1615,8 @@ class GroupsApi:
     @validate_call
     def update_room_group(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        update_room_group_request: Annotated[UpdateRoomGroupRequest, Field(description="The request for updating a group.")],
+        id: Annotated[StrictInt, Field(description="The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.")],
+        update_room_group_request: Annotated[UpdateRoomGroupRequest, Field(description="The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1559,11 +1632,11 @@ class GroupsApi:
     ) -> RoomGroupWrapper:
         """Update room group
 
-        Updates room group properties and adds or removes rooms.
+        Applies changes to one of the caller's own room groups: a new name, rooms to attach, rooms to detach, or any  combination of the three in a single call. A body that carries none of the three (`{}`) is accepted and  changes nothing, while a body that names them and leaves every one of them empty asks for an update that  cannot be performed and is rejected as an invalid request. `roomsToAdd` is resolved the way creation resolves  its list: every identifier has to name a room the caller can read, repeats and rooms already in the group are  collapsed, and when only part of the list resolves the rest is still attached and the call is reported as  failed. `roomsToRemove` works the other way round - a room already in the group is always detached, even when  the caller has since lost access to it, whereas an identifier that is not in the group is resolved first and  refused when it names nothing. The steps are applied in order and are not rolled back when a later one fails.  A group of another account is answered as missing. The answer is the group as stored after the call.
 
-        :param id: The group ID. (required)
+        :param id: The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param update_room_group_request: The request for updating a group. (required)
+        :param update_room_group_request: The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others. (required)
         :type update_room_group_request: UpdateRoomGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1598,11 +1671,16 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1617,8 +1695,8 @@ class GroupsApi:
     @validate_call
     def update_room_group_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        update_room_group_request: Annotated[UpdateRoomGroupRequest, Field(description="The request for updating a group.")],
+        id: Annotated[StrictInt, Field(description="The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.")],
+        update_room_group_request: Annotated[UpdateRoomGroupRequest, Field(description="The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1634,11 +1712,11 @@ class GroupsApi:
     ) -> ApiResponse[RoomGroupWrapper]:
         """Update room group
 
-        Updates room group properties and adds or removes rooms.
+        Applies changes to one of the caller's own room groups: a new name, rooms to attach, rooms to detach, or any  combination of the three in a single call. A body that carries none of the three (`{}`) is accepted and  changes nothing, while a body that names them and leaves every one of them empty asks for an update that  cannot be performed and is rejected as an invalid request. `roomsToAdd` is resolved the way creation resolves  its list: every identifier has to name a room the caller can read, repeats and rooms already in the group are  collapsed, and when only part of the list resolves the rest is still attached and the call is reported as  failed. `roomsToRemove` works the other way round - a room already in the group is always detached, even when  the caller has since lost access to it, whereas an identifier that is not in the group is resolved first and  refused when it names nothing. The steps are applied in order and are not rolled back when a later one fails.  A group of another account is answered as missing. The answer is the group as stored after the call.
 
-        :param id: The group ID. (required)
+        :param id: The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param update_room_group_request: The request for updating a group. (required)
+        :param update_room_group_request: The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others. (required)
         :type update_room_group_request: UpdateRoomGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1673,11 +1751,16 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1692,8 +1775,8 @@ class GroupsApi:
     @validate_call
     def update_room_group_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The group ID.")],
-        update_room_group_request: Annotated[UpdateRoomGroupRequest, Field(description="The request for updating a group.")],
+        id: Annotated[StrictInt, Field(description="The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing.")],
+        update_room_group_request: Annotated[UpdateRoomGroupRequest, Field(description="The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1709,11 +1792,11 @@ class GroupsApi:
     ) -> RESTResponseType:
         """Update room group
 
-        Updates room group properties and adds or removes rooms.
+        Applies changes to one of the caller's own room groups: a new name, rooms to attach, rooms to detach, or any  combination of the three in a single call. A body that carries none of the three (`{}`) is accepted and  changes nothing, while a body that names them and leaves every one of them empty asks for an update that  cannot be performed and is rejected as an invalid request. `roomsToAdd` is resolved the way creation resolves  its list: every identifier has to name a room the caller can read, repeats and rooms already in the group are  collapsed, and when only part of the list resolves the rest is still attached and the call is reported as  failed. `roomsToRemove` works the other way round - a room already in the group is always detached, even when  the caller has since lost access to it, whereas an identifier that is not in the group is resolved first and  refused when it names nothing. The steps are applied in order and are not rolled back when a later one fails.  A group of another account is answered as missing. The answer is the group as stored after the call.
 
-        :param id: The group ID. (required)
+        :param id: The room group to change, identified by the value `GET api/2.0/files/group` reports for it. A group of another  account cannot be addressed and reads as missing. (required)
         :type id: int
-        :param update_room_group_request: The request for updating a group. (required)
+        :param update_room_group_request: The changes to apply. Carrying none of them leaves the group as it is, and each of them may be sent on its own  or together with the others. (required)
         :type update_room_group_request: UpdateRoomGroupRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1748,11 +1831,16 @@ class GroupsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "RoomGroupWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

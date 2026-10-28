@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictBytes, StrictStr
@@ -51,8 +51,8 @@ class PhotosApi:
     @validate_call
     def create_member_photo_thumbnails(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        thumbnails_request: Annotated[ThumbnailsRequest, Field(description="The thumbnail request.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.")],
+        thumbnails_request: Annotated[ThumbnailsRequest, Field(description="The crop rectangle, and optionally the temporary image to crop.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -68,11 +68,11 @@ class PhotosApi:
     ) -> ThumbnailsDataWrapper:
         """Create photo thumbnails
 
-        Creates the user photo thumbnails by coordinates of the original image specified in the request.
+        Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userId}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userId}/photo`  returns.
 
-        :param userid: The user ID. (required)
-        :type userid: str
-        :param thumbnails_request: The thumbnail request. (required)
+        :param user_id: The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. (required)
+        :type user_id: str
+        :param thumbnails_request: The crop rectangle, and optionally the temporary image to crop. (required)
         :type thumbnails_request: ThumbnailsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -97,7 +97,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._create_member_photo_thumbnails_serialize(
-            userid=userid,
+            user_id=user_id,
             thumbnails_request=thumbnails_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -109,11 +109,14 @@ class PhotosApi:
             '200': "ThumbnailsDataWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -128,8 +131,8 @@ class PhotosApi:
     @validate_call
     def create_member_photo_thumbnails_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        thumbnails_request: Annotated[ThumbnailsRequest, Field(description="The thumbnail request.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.")],
+        thumbnails_request: Annotated[ThumbnailsRequest, Field(description="The crop rectangle, and optionally the temporary image to crop.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -145,11 +148,11 @@ class PhotosApi:
     ) -> ApiResponse[ThumbnailsDataWrapper]:
         """Create photo thumbnails
 
-        Creates the user photo thumbnails by coordinates of the original image specified in the request.
+        Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userId}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userId}/photo`  returns.
 
-        :param userid: The user ID. (required)
-        :type userid: str
-        :param thumbnails_request: The thumbnail request. (required)
+        :param user_id: The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. (required)
+        :type user_id: str
+        :param thumbnails_request: The crop rectangle, and optionally the temporary image to crop. (required)
         :type thumbnails_request: ThumbnailsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -174,7 +177,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._create_member_photo_thumbnails_serialize(
-            userid=userid,
+            user_id=user_id,
             thumbnails_request=thumbnails_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -186,11 +189,14 @@ class PhotosApi:
             '200': "ThumbnailsDataWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -205,8 +211,8 @@ class PhotosApi:
     @validate_call
     def create_member_photo_thumbnails_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        thumbnails_request: Annotated[ThumbnailsRequest, Field(description="The thumbnail request.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.")],
+        thumbnails_request: Annotated[ThumbnailsRequest, Field(description="The crop rectangle, and optionally the temporary image to crop.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -222,11 +228,11 @@ class PhotosApi:
     ) -> RESTResponseType:
         """Create photo thumbnails
 
-        Creates the user photo thumbnails by coordinates of the original image specified in the request.
+        Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userId}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userId}/photo`  returns.
 
-        :param userid: The user ID. (required)
-        :type userid: str
-        :param thumbnails_request: The thumbnail request. (required)
+        :param user_id: The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. (required)
+        :type user_id: str
+        :param thumbnails_request: The crop rectangle, and optionally the temporary image to crop. (required)
         :type thumbnails_request: ThumbnailsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -251,7 +257,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._create_member_photo_thumbnails_serialize(
-            userid=userid,
+            user_id=user_id,
             thumbnails_request=thumbnails_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -263,11 +269,14 @@ class PhotosApi:
             '200': "ThumbnailsDataWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -277,7 +286,7 @@ class PhotosApi:
 
     def _create_member_photo_thumbnails_serialize(
         self,
-        userid,
+        user_id,
         thumbnails_request,
         _request_auth,
         _content_type,
@@ -300,8 +309,8 @@ class PhotosApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if userid is not None:
-            _path_params['userid'] = userid
+        if user_id is not None:
+            _path_params['userId'] = user_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -343,7 +352,7 @@ class PhotosApi:
         ]
 
 
-        resource_path = "/api/2.0/people/{userid}/photo/thumbnails"
+        resource_path = "/api/2.0/people/{userId}/photo/thumbnails"
 
         return self.api_client.param_serialize(
             method='POST',
@@ -366,7 +375,7 @@ class PhotosApi:
     @validate_call
     def delete_member_photo(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -382,10 +391,10 @@ class PhotosApi:
     ) -> ThumbnailsDataWrapper:
         """Delete a user photo
 
-        Deletes a photo of the user with the ID specified in the request.
+        Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userId}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
 
-        :param userid: The user ID. (required)
-        :type userid: str
+        :param user_id: The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. (required)
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -409,7 +418,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._delete_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -420,11 +429,14 @@ class PhotosApi:
             '200': "ThumbnailsDataWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -439,7 +451,7 @@ class PhotosApi:
     @validate_call
     def delete_member_photo_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -455,10 +467,10 @@ class PhotosApi:
     ) -> ApiResponse[ThumbnailsDataWrapper]:
         """Delete a user photo
 
-        Deletes a photo of the user with the ID specified in the request.
+        Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userId}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
 
-        :param userid: The user ID. (required)
-        :type userid: str
+        :param user_id: The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. (required)
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -482,7 +494,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._delete_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -493,11 +505,14 @@ class PhotosApi:
             '200': "ThumbnailsDataWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -512,7 +527,7 @@ class PhotosApi:
     @validate_call
     def delete_member_photo_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -528,10 +543,10 @@ class PhotosApi:
     ) -> RESTResponseType:
         """Delete a user photo
 
-        Deletes a photo of the user with the ID specified in the request.
+        Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userId}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
 
-        :param userid: The user ID. (required)
-        :type userid: str
+        :param user_id: The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. (required)
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -555,7 +570,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._delete_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -566,11 +581,14 @@ class PhotosApi:
             '200': "ThumbnailsDataWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -580,7 +598,7 @@ class PhotosApi:
 
     def _delete_member_photo_serialize(
         self,
-        userid,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -602,8 +620,8 @@ class PhotosApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if userid is not None:
-            _path_params['userid'] = userid
+        if user_id is not None:
+            _path_params['userId'] = user_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -630,7 +648,7 @@ class PhotosApi:
         ]
 
 
-        resource_path = "/api/2.0/people/{userid}/photo"
+        resource_path = "/api/2.0/people/{userId}/photo"
 
         return self.api_client.param_serialize(
             method='DELETE',
@@ -653,7 +671,7 @@ class PhotosApi:
     @validate_call
     def get_member_photo(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -669,10 +687,10 @@ class PhotosApi:
     ) -> ThumbnailsDataWrapper:
         """Get a user photo
 
-        Returns a photo of the user with the ID specified in the request.
+        Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userId}/photo` for an uploaded file,  `PUT api/2.0/people/{userId}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userId}/photo` to drop it.
 
-        :param userid: The user ID. (required)
-        :type userid: str
+        :param user_id: The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. (required)
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -696,7 +714,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._get_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -707,11 +725,14 @@ class PhotosApi:
             '200': "ThumbnailsDataWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -726,7 +747,7 @@ class PhotosApi:
     @validate_call
     def get_member_photo_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -742,10 +763,10 @@ class PhotosApi:
     ) -> ApiResponse[ThumbnailsDataWrapper]:
         """Get a user photo
 
-        Returns a photo of the user with the ID specified in the request.
+        Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userId}/photo` for an uploaded file,  `PUT api/2.0/people/{userId}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userId}/photo` to drop it.
 
-        :param userid: The user ID. (required)
-        :type userid: str
+        :param user_id: The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. (required)
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -769,7 +790,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._get_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -780,11 +801,14 @@ class PhotosApi:
             '200': "ThumbnailsDataWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -799,7 +823,7 @@ class PhotosApi:
     @validate_call
     def get_member_photo_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -815,10 +839,10 @@ class PhotosApi:
     ) -> RESTResponseType:
         """Get a user photo
 
-        Returns a photo of the user with the ID specified in the request.
+        Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userId}/photo` for an uploaded file,  `PUT api/2.0/people/{userId}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userId}/photo` to drop it.
 
-        :param userid: The user ID. (required)
-        :type userid: str
+        :param user_id: The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself. (required)
+        :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -842,7 +866,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._get_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -853,11 +877,14 @@ class PhotosApi:
             '200': "ThumbnailsDataWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -867,7 +894,7 @@ class PhotosApi:
 
     def _get_member_photo_serialize(
         self,
-        userid,
+        user_id,
         _request_auth,
         _content_type,
         _headers,
@@ -889,8 +916,8 @@ class PhotosApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if userid is not None:
-            _path_params['userid'] = userid
+        if user_id is not None:
+            _path_params['userId'] = user_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -917,7 +944,7 @@ class PhotosApi:
         ]
 
 
-        resource_path = "/api/2.0/people/{userid}/photo"
+        resource_path = "/api/2.0/people/{userId}/photo"
 
         return self.api_client.param_serialize(
             method='GET',
@@ -940,8 +967,8 @@ class PhotosApi:
     @validate_call
     def update_member_photo(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        update_photo_member_request: Annotated[UpdatePhotoMemberRequest, Field(description="The request parameters for updating a photo.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.")],
+        update_photo_member_request: Annotated[UpdatePhotoMemberRequest, Field(description="The address of the image to use as the new avatar.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -957,11 +984,11 @@ class PhotosApi:
     ) -> ThumbnailsDataWrapper:
         """Update a user photo
 
-        Updates a photo of the user with the ID specified in the request.
+        Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userId}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userId}/photo`.
 
-        :param userid: The user ID. (required)
-        :type userid: str
-        :param update_photo_member_request: The request parameters for updating a photo. (required)
+        :param user_id: The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. (required)
+        :type user_id: str
+        :param update_photo_member_request: The address of the image to use as the new avatar. (required)
         :type update_photo_member_request: UpdatePhotoMemberRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -986,7 +1013,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._update_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             update_photo_member_request=update_photo_member_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -996,13 +1023,16 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1017,8 +1047,8 @@ class PhotosApi:
     @validate_call
     def update_member_photo_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        update_photo_member_request: Annotated[UpdatePhotoMemberRequest, Field(description="The request parameters for updating a photo.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.")],
+        update_photo_member_request: Annotated[UpdatePhotoMemberRequest, Field(description="The address of the image to use as the new avatar.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1034,11 +1064,11 @@ class PhotosApi:
     ) -> ApiResponse[ThumbnailsDataWrapper]:
         """Update a user photo
 
-        Updates a photo of the user with the ID specified in the request.
+        Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userId}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userId}/photo`.
 
-        :param userid: The user ID. (required)
-        :type userid: str
-        :param update_photo_member_request: The request parameters for updating a photo. (required)
+        :param user_id: The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. (required)
+        :type user_id: str
+        :param update_photo_member_request: The address of the image to use as the new avatar. (required)
         :type update_photo_member_request: UpdatePhotoMemberRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1063,7 +1093,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._update_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             update_photo_member_request=update_photo_member_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1073,13 +1103,16 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1094,8 +1127,8 @@ class PhotosApi:
     @validate_call
     def update_member_photo_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        update_photo_member_request: Annotated[UpdatePhotoMemberRequest, Field(description="The request parameters for updating a photo.")],
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.")],
+        update_photo_member_request: Annotated[UpdatePhotoMemberRequest, Field(description="The address of the image to use as the new avatar.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1111,11 +1144,11 @@ class PhotosApi:
     ) -> RESTResponseType:
         """Update a user photo
 
-        Updates a photo of the user with the ID specified in the request.
+        Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userId}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userId}/photo`.
 
-        :param userid: The user ID. (required)
-        :type userid: str
-        :param update_photo_member_request: The request parameters for updating a photo. (required)
+        :param user_id: The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. (required)
+        :type user_id: str
+        :param update_photo_member_request: The address of the image to use as the new avatar. (required)
         :type update_photo_member_request: UpdatePhotoMemberRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1140,7 +1173,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._update_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             update_photo_member_request=update_photo_member_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1150,13 +1183,16 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ThumbnailsDataWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1166,7 +1202,7 @@ class PhotosApi:
 
     def _update_member_photo_serialize(
         self,
-        userid,
+        user_id,
         update_photo_member_request,
         _request_auth,
         _content_type,
@@ -1189,8 +1225,8 @@ class PhotosApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if userid is not None:
-            _path_params['userid'] = userid
+        if user_id is not None:
+            _path_params['userId'] = user_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1232,7 +1268,7 @@ class PhotosApi:
         ]
 
 
-        resource_path = "/api/2.0/people/{userid}/photo"
+        resource_path = "/api/2.0/people/{userId}/photo"
 
         return self.api_client.param_serialize(
             method='PUT',
@@ -1255,9 +1291,9 @@ class PhotosApi:
     @validate_call
     def upload_member_photo(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image data.")],
-        autosave: Annotated[Optional[StrictBool], Field(description="Specifies whether to autosave a photo or not.")] = None,
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.")],
+        file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status.")],
+        autosave: Annotated[Optional[StrictBool], Field(description="Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1273,13 +1309,13 @@ class PhotosApi:
     ) -> FileUploadResultWrapper:
         """Upload a user photo
 
-        Uploads a photo of the user with the ID specified in the request.
+        Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userId}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
 
-        :param userid: The user ID. (required)
-        :type userid: str
-        :param file: The image data. (required)
+        :param user_id: The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. (required)
+        :type user_id: str
+        :param file: The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status. (required)
         :type file: bytes
-        :param autosave: Specifies whether to autosave a photo or not.
+        :param autosave: Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect.
         :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1304,7 +1340,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._upload_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             file=file,
             autosave=autosave,
             _request_auth=_request_auth,
@@ -1315,15 +1351,14 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileUploadResultWrapper",
-            '400': None,
-            '403': None,
-            '413': None,
-            '415': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1338,9 +1373,9 @@ class PhotosApi:
     @validate_call
     def upload_member_photo_with_http_info(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image data.")],
-        autosave: Annotated[Optional[StrictBool], Field(description="Specifies whether to autosave a photo or not.")] = None,
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.")],
+        file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status.")],
+        autosave: Annotated[Optional[StrictBool], Field(description="Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1356,13 +1391,13 @@ class PhotosApi:
     ) -> ApiResponse[FileUploadResultWrapper]:
         """Upload a user photo
 
-        Uploads a photo of the user with the ID specified in the request.
+        Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userId}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
 
-        :param userid: The user ID. (required)
-        :type userid: str
-        :param file: The image data. (required)
+        :param user_id: The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. (required)
+        :type user_id: str
+        :param file: The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status. (required)
         :type file: bytes
-        :param autosave: Specifies whether to autosave a photo or not.
+        :param autosave: Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect.
         :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1387,7 +1422,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._upload_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             file=file,
             autosave=autosave,
             _request_auth=_request_auth,
@@ -1398,15 +1433,14 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileUploadResultWrapper",
-            '400': None,
-            '403': None,
-            '413': None,
-            '415': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1421,9 +1455,9 @@ class PhotosApi:
     @validate_call
     def upload_member_photo_without_preload_content(
         self,
-        userid: Annotated[StrictStr, Field(description="The user ID.")],
-        file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image data.")],
-        autosave: Annotated[Optional[StrictBool], Field(description="Specifies whether to autosave a photo or not.")] = None,
+        user_id: Annotated[StrictStr, Field(description="The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.")],
+        file: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status.")],
+        autosave: Annotated[Optional[StrictBool], Field(description="Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1439,13 +1473,13 @@ class PhotosApi:
     ) -> RESTResponseType:
         """Upload a user photo
 
-        Uploads a photo of the user with the ID specified in the request.
+        Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userId}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
 
-        :param userid: The user ID. (required)
-        :type userid: str
-        :param file: The image data. (required)
+        :param user_id: The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner. (required)
+        :type user_id: str
+        :param file: The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status. (required)
         :type file: bytes
-        :param autosave: Specifies whether to autosave a photo or not.
+        :param autosave: Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect.
         :type autosave: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1470,7 +1504,7 @@ class PhotosApi:
         """ # noqa: E501
 
         _param = self._upload_member_photo_serialize(
-            userid=userid,
+            user_id=user_id,
             file=file,
             autosave=autosave,
             _request_auth=_request_auth,
@@ -1481,15 +1515,14 @@ class PhotosApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileUploadResultWrapper",
-            '400': None,
-            '403': None,
-            '413': None,
-            '415': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1499,7 +1532,7 @@ class PhotosApi:
 
     def _upload_member_photo_serialize(
         self,
-        userid,
+        user_id,
         file,
         autosave,
         _request_auth,
@@ -1523,15 +1556,15 @@ class PhotosApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if userid is not None:
-            _path_params['userid'] = userid
+        if user_id is not None:
+            _path_params['userId'] = user_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         if file is not None:
-            _files['File'] = file
+            _files['file'] = file
         if autosave is not None:
-            _form_params.append(('Autosave', autosave))
+            _form_params.append(('autosave', autosave))
         # process the body parameter
 
 
@@ -1568,7 +1601,7 @@ class PhotosApi:
         ]
 
 
-        resource_path = "/api/2.0/people/{userid}/photo"
+        resource_path = "/api/2.0/people/{userId}/photo"
 
         return self.api_client.param_serialize(
             method='POST',

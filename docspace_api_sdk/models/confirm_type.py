@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class ConfirmType(str, Enum):
     """
-    [EmpInvite - Emp invite, LinkInvite - Link invite, PortalSuspend - Portal suspend, PortalContinue - Portal continue, PortalRemove - Portal remove, DnsChange - Dns change, PortalOwnerChange - Portal owner change, Activation - Activation, EmailChange - Email change, EmailActivation - Email activation, PasswordChange - Password change, ProfileRemove - Profile remove, PhoneActivation - Phone activation, PhoneAuth - Phone auth, Auth - Auth, TfaActivation - Tfa activation, TfaAuth - Tfa auth, Wizard - Wizard, GuestShareLink - Guest share link]
+    [EmpInvite - Emp invite, LinkInvite - Link invite, PortalSuspend - Portal suspend, PortalContinue - Portal continue, PortalRemove - Portal remove, DnsChange - Dns change, PortalOwnerChange - Portal owner change, Activation - Activation, EmailChange - Email change, EmailActivation - Email activation, PasswordChange - Password change, ProfileRemove - Profile remove, PhoneActivation - Phone activation, PhoneAuth - Phone auth, Auth - Auth, TfaActivation - Tfa activation, TfaAuth - Tfa auth, Wizard - Wizard, GuestShareLink - Guest share link, PortalUnblock - Portal unblock]
     """
 
     """
@@ -49,6 +49,7 @@ class ConfirmType(str, Enum):
     TFAAUTH = 'TfaAuth'
     WIZARD = 'Wizard'
     GUESTSHARELINK = 'GuestShareLink'
+    PORTALUNBLOCK = 'PortalUnblock'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

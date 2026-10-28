@@ -30,8 +30,8 @@ class Contact(BaseModel):
     """
     The contact information.
     """ # noqa: E501
-    type: Optional[StrictStr] = Field(default=None, description="The contact type.")
-    value: Optional[StrictStr] = Field(default=None, description="The contact value.")
+    type: Optional[StrictStr] = Field(default=None, description="The contact type.", json_schema_extra={"examples": ["GTalk"]})
+    value: Optional[StrictStr] = Field(default=None, description="The contact value.", json_schema_extra={"examples": ["my@gmail.com"]})
     __properties: ClassVar[List[str]] = ["type", "value"]
 
     model_config = ConfigDict(

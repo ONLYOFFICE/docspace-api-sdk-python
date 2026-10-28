@@ -18,14 +18,14 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.double_nullable_wrapper import DoubleNullableWrapper
 from docspace_api_sdk.models.encryption_settings_wrapper import EncryptionSettingsWrapper
-from docspace_api_sdk.models.storage_encryption_requests_dto import StorageEncryptionRequestsDto
+from docspace_api_sdk.models.storage_encryption_request_dto import StorageEncryptionRequestDto
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -64,7 +64,7 @@ class EncryptionApi:
     ) -> DoubleNullableWrapper:
         """Get the storage encryption progress
 
-        Returns the storage encryption progress.
+        Returns how far the running encryption or decryption of the installation storage has got, as a percentage from  0 to 100. It reports the run started by `POST api/2.0/settings/encryption/start`, whose direction, encryption  or decryption, is told by `GET api/2.0/settings/encryption/settings`. An empty response means no run is in  flight and no recent result is remembered: the value of a finished run is kept for one minute after it  completes and then dropped, so poll often enough not to miss the end of the operation. A value of -1 means the  build does not offer storage encryption at all, and on an installation that is not a server one the call is  refused rather than answered. Unlike the other encryption operations, this one asks for no portal-settings  permission: any authenticated member of the portal may read the progress, which is intentional, because the  portals are unavailable while the run is on and their users need to see when it ends. Nothing is written and  the call is safe to repeat.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -97,12 +97,14 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleNullableWrapper",
-            '405': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -132,7 +134,7 @@ class EncryptionApi:
     ) -> ApiResponse[DoubleNullableWrapper]:
         """Get the storage encryption progress
 
-        Returns the storage encryption progress.
+        Returns how far the running encryption or decryption of the installation storage has got, as a percentage from  0 to 100. It reports the run started by `POST api/2.0/settings/encryption/start`, whose direction, encryption  or decryption, is told by `GET api/2.0/settings/encryption/settings`. An empty response means no run is in  flight and no recent result is remembered: the value of a finished run is kept for one minute after it  completes and then dropped, so poll often enough not to miss the end of the operation. A value of -1 means the  build does not offer storage encryption at all, and on an installation that is not a server one the call is  refused rather than answered. Unlike the other encryption operations, this one asks for no portal-settings  permission: any authenticated member of the portal may read the progress, which is intentional, because the  portals are unavailable while the run is on and their users need to see when it ends. Nothing is written and  the call is safe to repeat.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -165,12 +167,14 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleNullableWrapper",
-            '405': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -200,7 +204,7 @@ class EncryptionApi:
     ) -> RESTResponseType:
         """Get the storage encryption progress
 
-        Returns the storage encryption progress.
+        Returns how far the running encryption or decryption of the installation storage has got, as a percentage from  0 to 100. It reports the run started by `POST api/2.0/settings/encryption/start`, whose direction, encryption  or decryption, is told by `GET api/2.0/settings/encryption/settings`. An empty response means no run is in  flight and no recent result is remembered: the value of a finished run is kept for one minute after it  completes and then dropped, so poll often enough not to miss the end of the operation. A value of -1 means the  build does not offer storage encryption at all, and on an installation that is not a server one the call is  refused rather than answered. Unlike the other encryption operations, this one asks for no portal-settings  permission: any authenticated member of the portal may read the progress, which is intentional, because the  portals are unavailable while the run is on and their users need to see when it ends. Nothing is written and  the call is safe to repeat.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -233,12 +237,14 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DoubleNullableWrapper",
-            '405': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -333,7 +339,7 @@ class EncryptionApi:
     ) -> EncryptionSettingsWrapper:
         """Get the storage encryption settings
 
-        Returns the storage encryption settings.
+        Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption  started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run  begins. The encryption password is never returned. The caller is expected to have the permission to edit portal settings, which in practice means  the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other  installation, and whenever the check fails, the operation answers with an empty body instead of an error. An  empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this  context. Nothing is written and the call is safe to repeat. Use `GET api/2.0/settings/encryption/progress` to  follow a run that is in flight, and `POST api/2.0/settings/encryption/start` to encrypt or decrypt the  storage.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -366,13 +372,13 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionSettingsWrapper",
-            '403': None,
-            '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -402,7 +408,7 @@ class EncryptionApi:
     ) -> ApiResponse[EncryptionSettingsWrapper]:
         """Get the storage encryption settings
 
-        Returns the storage encryption settings.
+        Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption  started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run  begins. The encryption password is never returned. The caller is expected to have the permission to edit portal settings, which in practice means  the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other  installation, and whenever the check fails, the operation answers with an empty body instead of an error. An  empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this  context. Nothing is written and the call is safe to repeat. Use `GET api/2.0/settings/encryption/progress` to  follow a run that is in flight, and `POST api/2.0/settings/encryption/start` to encrypt or decrypt the  storage.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -435,13 +441,13 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionSettingsWrapper",
-            '403': None,
-            '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -471,7 +477,7 @@ class EncryptionApi:
     ) -> RESTResponseType:
         """Get the storage encryption settings
 
-        Returns the storage encryption settings.
+        Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption  started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run  begins. The encryption password is never returned. The caller is expected to have the permission to edit portal settings, which in practice means  the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other  installation, and whenever the check fails, the operation answers with an empty body instead of an error. An  empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this  context. Nothing is written and the call is safe to repeat. Use `GET api/2.0/settings/encryption/progress` to  follow a run that is in flight, and `POST api/2.0/settings/encryption/start` to encrypt or decrypt the  storage.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -504,13 +510,13 @@ class EncryptionApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EncryptionSettingsWrapper",
-            '403': None,
-            '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -590,7 +596,7 @@ class EncryptionApi:
     @validate_call
     def start_storage_encryption(
         self,
-        storage_encryption_requests_dto: Optional[StorageEncryptionRequestsDto] = None,
+        storage_encryption_request_dto: Optional[StorageEncryptionRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -604,12 +610,12 @@ class EncryptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """Start the storage encryption process
+        """Start the storage encryption
 
-        Starts the storage encryption process.
+        Queues encryption of everything the installation keeps in its local storage, or decryption of it when the data  is already encrypted: the saved encryption state decides the direction, so the same call encrypts a decrypted  installation and decrypts an encrypted one. It covers the whole server, not one portal, and only a server  installation with the feature switched on can run it, with neither the portal storage nor the CDN pointing at  a third-party provider: reset those first with `DELETE api/2.0/settings/storage` and  `DELETE api/2.0/settings/storage/cdn`. No backup may be running, and the backup schedules of all portals are  dropped as part of starting. The caller needs the permission to edit portal settings, that is the portal owner  or a DocSpace admin, and an unrestricted access space. This is a long, disruptive operation: every portal is  put into the encryption state and stays unavailable until it ends, so do not repeat the call while it runs,  and follow it with `GET api/2.0/settings/encryption/progress` instead. The password is generated on the server  and never returned by the API. Pass `notifyUsers=true` to mail every user before the portals go down. The  response is true once the job is queued, and false where encryption is switched off, nothing being started  then.
 
-        :param storage_encryption_requests_dto:
-        :type storage_encryption_requests_dto: StorageEncryptionRequestsDto
+        :param storage_encryption_request_dto:
+        :type storage_encryption_request_dto: StorageEncryptionRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -633,7 +639,7 @@ class EncryptionApi:
         """ # noqa: E501
 
         _param = self._start_storage_encryption_serialize(
-            storage_encryption_requests_dto=storage_encryption_requests_dto,
+            storage_encryption_request_dto=storage_encryption_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -644,12 +650,15 @@ class EncryptionApi:
             '200': "BooleanWrapper",
             '402': None,
             '403': None,
-            '405': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -664,7 +673,7 @@ class EncryptionApi:
     @validate_call
     def start_storage_encryption_with_http_info(
         self,
-        storage_encryption_requests_dto: Optional[StorageEncryptionRequestsDto] = None,
+        storage_encryption_request_dto: Optional[StorageEncryptionRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -678,12 +687,12 @@ class EncryptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """Start the storage encryption process
+        """Start the storage encryption
 
-        Starts the storage encryption process.
+        Queues encryption of everything the installation keeps in its local storage, or decryption of it when the data  is already encrypted: the saved encryption state decides the direction, so the same call encrypts a decrypted  installation and decrypts an encrypted one. It covers the whole server, not one portal, and only a server  installation with the feature switched on can run it, with neither the portal storage nor the CDN pointing at  a third-party provider: reset those first with `DELETE api/2.0/settings/storage` and  `DELETE api/2.0/settings/storage/cdn`. No backup may be running, and the backup schedules of all portals are  dropped as part of starting. The caller needs the permission to edit portal settings, that is the portal owner  or a DocSpace admin, and an unrestricted access space. This is a long, disruptive operation: every portal is  put into the encryption state and stays unavailable until it ends, so do not repeat the call while it runs,  and follow it with `GET api/2.0/settings/encryption/progress` instead. The password is generated on the server  and never returned by the API. Pass `notifyUsers=true` to mail every user before the portals go down. The  response is true once the job is queued, and false where encryption is switched off, nothing being started  then.
 
-        :param storage_encryption_requests_dto:
-        :type storage_encryption_requests_dto: StorageEncryptionRequestsDto
+        :param storage_encryption_request_dto:
+        :type storage_encryption_request_dto: StorageEncryptionRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -707,7 +716,7 @@ class EncryptionApi:
         """ # noqa: E501
 
         _param = self._start_storage_encryption_serialize(
-            storage_encryption_requests_dto=storage_encryption_requests_dto,
+            storage_encryption_request_dto=storage_encryption_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -718,12 +727,15 @@ class EncryptionApi:
             '200': "BooleanWrapper",
             '402': None,
             '403': None,
-            '405': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -738,7 +750,7 @@ class EncryptionApi:
     @validate_call
     def start_storage_encryption_without_preload_content(
         self,
-        storage_encryption_requests_dto: Optional[StorageEncryptionRequestsDto] = None,
+        storage_encryption_request_dto: Optional[StorageEncryptionRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -752,12 +764,12 @@ class EncryptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Start the storage encryption process
+        """Start the storage encryption
 
-        Starts the storage encryption process.
+        Queues encryption of everything the installation keeps in its local storage, or decryption of it when the data  is already encrypted: the saved encryption state decides the direction, so the same call encrypts a decrypted  installation and decrypts an encrypted one. It covers the whole server, not one portal, and only a server  installation with the feature switched on can run it, with neither the portal storage nor the CDN pointing at  a third-party provider: reset those first with `DELETE api/2.0/settings/storage` and  `DELETE api/2.0/settings/storage/cdn`. No backup may be running, and the backup schedules of all portals are  dropped as part of starting. The caller needs the permission to edit portal settings, that is the portal owner  or a DocSpace admin, and an unrestricted access space. This is a long, disruptive operation: every portal is  put into the encryption state and stays unavailable until it ends, so do not repeat the call while it runs,  and follow it with `GET api/2.0/settings/encryption/progress` instead. The password is generated on the server  and never returned by the API. Pass `notifyUsers=true` to mail every user before the portals go down. The  response is true once the job is queued, and false where encryption is switched off, nothing being started  then.
 
-        :param storage_encryption_requests_dto:
-        :type storage_encryption_requests_dto: StorageEncryptionRequestsDto
+        :param storage_encryption_request_dto:
+        :type storage_encryption_request_dto: StorageEncryptionRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -781,7 +793,7 @@ class EncryptionApi:
         """ # noqa: E501
 
         _param = self._start_storage_encryption_serialize(
-            storage_encryption_requests_dto=storage_encryption_requests_dto,
+            storage_encryption_request_dto=storage_encryption_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -792,12 +804,15 @@ class EncryptionApi:
             '200': "BooleanWrapper",
             '402': None,
             '403': None,
-            '405': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -807,7 +822,7 @@ class EncryptionApi:
 
     def _start_storage_encryption_serialize(
         self,
-        storage_encryption_requests_dto,
+        storage_encryption_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -833,8 +848,8 @@ class EncryptionApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if storage_encryption_requests_dto is not None:
-            _body_params = storage_encryption_requests_dto
+        if storage_encryption_request_dto is not None:
+            _body_params = storage_encryption_request_dto
 
 
         # set the HTTP header `Accept`

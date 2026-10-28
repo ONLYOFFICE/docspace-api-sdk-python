@@ -18,14 +18,14 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from docspace_api_sdk.models.web_plugin_array_wrapper import WebPluginArrayWrapper
-from docspace_api_sdk.models.web_plugin_requests import WebPluginRequests
+from docspace_api_sdk.models.web_plugin_request import WebPluginRequest
 from docspace_api_sdk.models.web_plugin_wrapper import WebPluginWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
@@ -50,7 +50,7 @@ class WebpluginsApi:
     @validate_call
     def add_web_plugin_from_file(
         self,
-        system: Annotated[Optional[StrictBool], Field(description="Specifies whether to load the system plugins or not.")] = None,
+        system: Annotated[Optional[StrictBool], Field(description="Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,9 +66,9 @@ class WebpluginsApi:
     ) -> WebPluginWrapper:
         """Add a web plugin
 
-        Adds a web plugin from a file to the current portal.
+        Installs a web plugin into the current portal from an uploaded package, and switches the plugin on straight  away. The package is sent as `multipart/form-data` with exactly one file: a `.zip` archive holding a  `config.json` manifest and a `plugin.js` entry point, under the configured size cap of 5 MB by default.  Editing the portal settings is required, so a portal owner or administrator, and the installation has to have  web plugins and plugin uploading enabled in its configuration. Pass `system=true` to install the plugin for  every portal of the installation, which is accepted on standalone installations only. The call is mutating and  not idempotent: a package whose manifest name is already installed replaces the stored files and keeps the  settings saved for that name, and the domains the manifest declares are added to the portal Content Security  Policy. It returns the freshly installed plugin, enabled, with the `url` its script is served from. A portal  holds up to 100 plugins by default, the manifest name has to be lower-case letters, digits, `_`, `.` or `-`,  and the package is rejected when another installed plugin registers the same JavaScript object under a  different name. List what is installed with `GET api/2.0/settings/webplugins`.
 
-        :param system: Specifies whether to load the system plugins or not.
+        :param system: Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name.
         :type system: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -104,11 +104,13 @@ class WebpluginsApi:
             '200': "WebPluginWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -123,7 +125,7 @@ class WebpluginsApi:
     @validate_call
     def add_web_plugin_from_file_with_http_info(
         self,
-        system: Annotated[Optional[StrictBool], Field(description="Specifies whether to load the system plugins or not.")] = None,
+        system: Annotated[Optional[StrictBool], Field(description="Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -139,9 +141,9 @@ class WebpluginsApi:
     ) -> ApiResponse[WebPluginWrapper]:
         """Add a web plugin
 
-        Adds a web plugin from a file to the current portal.
+        Installs a web plugin into the current portal from an uploaded package, and switches the plugin on straight  away. The package is sent as `multipart/form-data` with exactly one file: a `.zip` archive holding a  `config.json` manifest and a `plugin.js` entry point, under the configured size cap of 5 MB by default.  Editing the portal settings is required, so a portal owner or administrator, and the installation has to have  web plugins and plugin uploading enabled in its configuration. Pass `system=true` to install the plugin for  every portal of the installation, which is accepted on standalone installations only. The call is mutating and  not idempotent: a package whose manifest name is already installed replaces the stored files and keeps the  settings saved for that name, and the domains the manifest declares are added to the portal Content Security  Policy. It returns the freshly installed plugin, enabled, with the `url` its script is served from. A portal  holds up to 100 plugins by default, the manifest name has to be lower-case letters, digits, `_`, `.` or `-`,  and the package is rejected when another installed plugin registers the same JavaScript object under a  different name. List what is installed with `GET api/2.0/settings/webplugins`.
 
-        :param system: Specifies whether to load the system plugins or not.
+        :param system: Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name.
         :type system: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -177,11 +179,13 @@ class WebpluginsApi:
             '200': "WebPluginWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -196,7 +200,7 @@ class WebpluginsApi:
     @validate_call
     def add_web_plugin_from_file_without_preload_content(
         self,
-        system: Annotated[Optional[StrictBool], Field(description="Specifies whether to load the system plugins or not.")] = None,
+        system: Annotated[Optional[StrictBool], Field(description="Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -212,9 +216,9 @@ class WebpluginsApi:
     ) -> RESTResponseType:
         """Add a web plugin
 
-        Adds a web plugin from a file to the current portal.
+        Installs a web plugin into the current portal from an uploaded package, and switches the plugin on straight  away. The package is sent as `multipart/form-data` with exactly one file: a `.zip` archive holding a  `config.json` manifest and a `plugin.js` entry point, under the configured size cap of 5 MB by default.  Editing the portal settings is required, so a portal owner or administrator, and the installation has to have  web plugins and plugin uploading enabled in its configuration. Pass `system=true` to install the plugin for  every portal of the installation, which is accepted on standalone installations only. The call is mutating and  not idempotent: a package whose manifest name is already installed replaces the stored files and keeps the  settings saved for that name, and the domains the manifest declares are added to the portal Content Security  Policy. It returns the freshly installed plugin, enabled, with the `url` its script is served from. A portal  holds up to 100 plugins by default, the manifest name has to be lower-case letters, digits, `_`, `.` or `-`,  and the package is rejected when another installed plugin registers the same JavaScript object under a  different name. List what is installed with `GET api/2.0/settings/webplugins`.
 
-        :param system: Specifies whether to load the system plugins or not.
+        :param system: Whether the plugin is installed for every portal of the installation rather than only this one. It is  accepted on a self-hosted installation alone and refused with 403 elsewhere; an installation-wide plugin also  hides a portal plugin that carries the same name.
         :type system: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -250,11 +254,13 @@ class WebpluginsApi:
             '200': "WebPluginWrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -339,7 +345,7 @@ class WebpluginsApi:
     @validate_call
     def delete_web_plugin(
         self,
-        name: Annotated[StrictStr, Field(description="The web plugin name.")],
+        name: Annotated[StrictStr, Field(description="The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -355,9 +361,9 @@ class WebpluginsApi:
     ) -> None:
         """Delete a web plugin
 
-        Deletes a web plugin by the name specified in the request.
+        Removes a web plugin from the current portal and deletes the files of its package from storage. The `name` is  the manifest name published by `GET api/2.0/settings/webplugins`, matched without regard to case. Editing the  portal settings is required, so a portal owner or administrator, and the installation has to have web plugins  and plugin deletion enabled in its configuration. An installation-wide plugin, the one whose `system` field is  true, can be removed on standalone installations only. The call is destructive and cannot be undone: the state  and the settings stored for the plugin are dropped along with its files, the domains its manifest declares are  taken out of the portal Content Security Policy, and the connected clients are notified. Getting the plugin  back means uploading its package again with `POST api/2.0/settings/webplugins`, and the settings it had are  gone. Nothing is returned on success, and a repeated call on a name that is no longer installed is rejected as  not found instead of answered as success. To keep a plugin installed but inactive, switch it off with  `PUT api/2.0/settings/webplugins/{name}` instead.
 
-        :param name: The web plugin name. (required)
+        :param name: The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. (required)
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -392,11 +398,15 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -411,7 +421,7 @@ class WebpluginsApi:
     @validate_call
     def delete_web_plugin_with_http_info(
         self,
-        name: Annotated[StrictStr, Field(description="The web plugin name.")],
+        name: Annotated[StrictStr, Field(description="The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -427,9 +437,9 @@ class WebpluginsApi:
     ) -> ApiResponse[None]:
         """Delete a web plugin
 
-        Deletes a web plugin by the name specified in the request.
+        Removes a web plugin from the current portal and deletes the files of its package from storage. The `name` is  the manifest name published by `GET api/2.0/settings/webplugins`, matched without regard to case. Editing the  portal settings is required, so a portal owner or administrator, and the installation has to have web plugins  and plugin deletion enabled in its configuration. An installation-wide plugin, the one whose `system` field is  true, can be removed on standalone installations only. The call is destructive and cannot be undone: the state  and the settings stored for the plugin are dropped along with its files, the domains its manifest declares are  taken out of the portal Content Security Policy, and the connected clients are notified. Getting the plugin  back means uploading its package again with `POST api/2.0/settings/webplugins`, and the settings it had are  gone. Nothing is returned on success, and a repeated call on a name that is no longer installed is rejected as  not found instead of answered as success. To keep a plugin installed but inactive, switch it off with  `PUT api/2.0/settings/webplugins/{name}` instead.
 
-        :param name: The web plugin name. (required)
+        :param name: The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. (required)
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -464,11 +474,15 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -483,7 +497,7 @@ class WebpluginsApi:
     @validate_call
     def delete_web_plugin_without_preload_content(
         self,
-        name: Annotated[StrictStr, Field(description="The web plugin name.")],
+        name: Annotated[StrictStr, Field(description="The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -499,9 +513,9 @@ class WebpluginsApi:
     ) -> RESTResponseType:
         """Delete a web plugin
 
-        Deletes a web plugin by the name specified in the request.
+        Removes a web plugin from the current portal and deletes the files of its package from storage. The `name` is  the manifest name published by `GET api/2.0/settings/webplugins`, matched without regard to case. Editing the  portal settings is required, so a portal owner or administrator, and the installation has to have web plugins  and plugin deletion enabled in its configuration. An installation-wide plugin, the one whose `system` field is  true, can be removed on standalone installations only. The call is destructive and cannot be undone: the state  and the settings stored for the plugin are dropped along with its files, the domains its manifest declares are  taken out of the portal Content Security Policy, and the connected clients are notified. Getting the plugin  back means uploading its package again with `POST api/2.0/settings/webplugins`, and the settings it had are  gone. Nothing is returned on success, and a repeated call on a name that is no longer installed is rejected as  not found instead of answered as success. To keep a plugin installed but inactive, switch it off with  `PUT api/2.0/settings/webplugins/{name}` instead.
 
-        :param name: The web plugin name. (required)
+        :param name: The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. (required)
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -536,11 +550,15 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -580,6 +598,13 @@ class WebpluginsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -616,7 +641,7 @@ class WebpluginsApi:
     @validate_call
     def get_web_plugin(
         self,
-        name: Annotated[StrictStr, Field(description="The web plugin name.")],
+        name: Annotated[StrictStr, Field(description="The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -632,9 +657,9 @@ class WebpluginsApi:
     ) -> WebPluginWrapper:
         """Get a web plugin by name
 
-        Returns a web plugin by the name specified in the request.
+        Returns one web plugin of the current portal by its manifest name, looked up over the same set as  `GET api/2.0/settings/webplugins`: the installation-wide plugins plus the portal's own. The `name` is the  manifest name published in the `name` field of that list, matched without regard to case; it is neither the  localized display name nor the JavaScript object name in `pluginName`, so it cannot be taken from the title  shown in the interface. Any authenticated portal member may call it, no settings permission needed, and the  installation has to have web plugins enabled in its configuration. The call is read-only and idempotent. The  response carries the manifest data along with the state the portal stored for that plugin: `enabled`, the  `settings` string, `system`, and the `url` and `cssUrl` a client loads it from. A name that is not installed  is rejected as not found, and 403 means web plugins are switched off for the installation. Change the state of  the plugin with `PUT api/2.0/settings/webplugins/{name}`.
 
-        :param name: The web plugin name. (required)
+        :param name: The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. (required)
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -669,11 +694,15 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -688,7 +717,7 @@ class WebpluginsApi:
     @validate_call
     def get_web_plugin_with_http_info(
         self,
-        name: Annotated[StrictStr, Field(description="The web plugin name.")],
+        name: Annotated[StrictStr, Field(description="The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -704,9 +733,9 @@ class WebpluginsApi:
     ) -> ApiResponse[WebPluginWrapper]:
         """Get a web plugin by name
 
-        Returns a web plugin by the name specified in the request.
+        Returns one web plugin of the current portal by its manifest name, looked up over the same set as  `GET api/2.0/settings/webplugins`: the installation-wide plugins plus the portal's own. The `name` is the  manifest name published in the `name` field of that list, matched without regard to case; it is neither the  localized display name nor the JavaScript object name in `pluginName`, so it cannot be taken from the title  shown in the interface. Any authenticated portal member may call it, no settings permission needed, and the  installation has to have web plugins enabled in its configuration. The call is read-only and idempotent. The  response carries the manifest data along with the state the portal stored for that plugin: `enabled`, the  `settings` string, `system`, and the `url` and `cssUrl` a client loads it from. A name that is not installed  is rejected as not found, and 403 means web plugins are switched off for the installation. Change the state of  the plugin with `PUT api/2.0/settings/webplugins/{name}`.
 
-        :param name: The web plugin name. (required)
+        :param name: The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. (required)
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -741,11 +770,15 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -760,7 +793,7 @@ class WebpluginsApi:
     @validate_call
     def get_web_plugin_without_preload_content(
         self,
-        name: Annotated[StrictStr, Field(description="The web plugin name.")],
+        name: Annotated[StrictStr, Field(description="The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -776,9 +809,9 @@ class WebpluginsApi:
     ) -> RESTResponseType:
         """Get a web plugin by name
 
-        Returns a web plugin by the name specified in the request.
+        Returns one web plugin of the current portal by its manifest name, looked up over the same set as  `GET api/2.0/settings/webplugins`: the installation-wide plugins plus the portal's own. The `name` is the  manifest name published in the `name` field of that list, matched without regard to case; it is neither the  localized display name nor the JavaScript object name in `pluginName`, so it cannot be taken from the title  shown in the interface. Any authenticated portal member may call it, no settings permission needed, and the  installation has to have web plugins enabled in its configuration. The call is read-only and idempotent. The  response carries the manifest data along with the state the portal stored for that plugin: `enabled`, the  `settings` string, `system`, and the `url` and `cssUrl` a client loads it from. A name that is not installed  is rejected as not found, and 403 means web plugins are switched off for the installation. Change the state of  the plugin with `PUT api/2.0/settings/webplugins/{name}`.
 
-        :param name: The web plugin name. (required)
+        :param name: The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. (required)
         :type name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -813,11 +846,15 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -900,7 +937,7 @@ class WebpluginsApi:
     @validate_call
     def get_web_plugins(
         self,
-        enabled: Annotated[Optional[StrictBool], Field(description="The optional filter for the plugin enabled state.")] = None,
+        enabled: Annotated[Optional[StrictBool], Field(description="Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -916,9 +953,9 @@ class WebpluginsApi:
     ) -> WebPluginArrayWrapper:
         """Get web plugins
 
-        Returns the portal web plugins.
+        Lists the web plugins available in the current portal: the plugins installed for the whole installation first,  then the portal's own, with a portal plugin dropped when an installation-wide plugin already uses its name.  Any authenticated portal member may call it, no settings permission needed, and the installation has to have  web plugins enabled in its configuration. The call is read-only and idempotent. Pass `enabled=true` or  `enabled=false` to keep only the plugins in that state, and leave the parameter out to get every plugin. Each  entry carries the manifest data together with the state the portal stored for that plugin: `enabled`, the  `settings` string, `system` for an installation-wide plugin, and the `url` and `cssUrl` a client loads the  plugin from. An empty list means nothing is installed for this portal, not that plugins are switched off,  which is refused with 403 instead. The list is capped at the configured maximum, 100 plugins by default, and  is not paginated. For one plugin by its manifest name use `GET api/2.0/settings/webplugins/{name}`.
 
-        :param enabled: The optional filter for the plugin enabled state.
+        :param enabled: Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state.
         :type enabled: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -953,11 +990,14 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -972,7 +1012,7 @@ class WebpluginsApi:
     @validate_call
     def get_web_plugins_with_http_info(
         self,
-        enabled: Annotated[Optional[StrictBool], Field(description="The optional filter for the plugin enabled state.")] = None,
+        enabled: Annotated[Optional[StrictBool], Field(description="Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -988,9 +1028,9 @@ class WebpluginsApi:
     ) -> ApiResponse[WebPluginArrayWrapper]:
         """Get web plugins
 
-        Returns the portal web plugins.
+        Lists the web plugins available in the current portal: the plugins installed for the whole installation first,  then the portal's own, with a portal plugin dropped when an installation-wide plugin already uses its name.  Any authenticated portal member may call it, no settings permission needed, and the installation has to have  web plugins enabled in its configuration. The call is read-only and idempotent. Pass `enabled=true` or  `enabled=false` to keep only the plugins in that state, and leave the parameter out to get every plugin. Each  entry carries the manifest data together with the state the portal stored for that plugin: `enabled`, the  `settings` string, `system` for an installation-wide plugin, and the `url` and `cssUrl` a client loads the  plugin from. An empty list means nothing is installed for this portal, not that plugins are switched off,  which is refused with 403 instead. The list is capped at the configured maximum, 100 plugins by default, and  is not paginated. For one plugin by its manifest name use `GET api/2.0/settings/webplugins/{name}`.
 
-        :param enabled: The optional filter for the plugin enabled state.
+        :param enabled: Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state.
         :type enabled: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1025,11 +1065,14 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1044,7 +1087,7 @@ class WebpluginsApi:
     @validate_call
     def get_web_plugins_without_preload_content(
         self,
-        enabled: Annotated[Optional[StrictBool], Field(description="The optional filter for the plugin enabled state.")] = None,
+        enabled: Annotated[Optional[StrictBool], Field(description="Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1060,9 +1103,9 @@ class WebpluginsApi:
     ) -> RESTResponseType:
         """Get web plugins
 
-        Returns the portal web plugins.
+        Lists the web plugins available in the current portal: the plugins installed for the whole installation first,  then the portal's own, with a portal plugin dropped when an installation-wide plugin already uses its name.  Any authenticated portal member may call it, no settings permission needed, and the installation has to have  web plugins enabled in its configuration. The call is read-only and idempotent. Pass `enabled=true` or  `enabled=false` to keep only the plugins in that state, and leave the parameter out to get every plugin. Each  entry carries the manifest data together with the state the portal stored for that plugin: `enabled`, the  `settings` string, `system` for an installation-wide plugin, and the `url` and `cssUrl` a client loads the  plugin from. An empty list means nothing is installed for this portal, not that plugins are switched off,  which is refused with 403 instead. The list is capped at the configured maximum, 100 plugins by default, and  is not paginated. For one plugin by its manifest name use `GET api/2.0/settings/webplugins/{name}`.
 
-        :param enabled: The optional filter for the plugin enabled state.
+        :param enabled: Which plugins are kept: `true` the ones switched on, `false` the ones switched off. Omitting it lists every  installed plugin whatever its state.
         :type enabled: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1097,11 +1140,14 @@ class WebpluginsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "WebPluginArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1184,10 +1230,9 @@ class WebpluginsApi:
 
 
     @validate_call
-    def update_web_plugin(
+    def refresh_web_plugin(
         self,
-        name: Annotated[StrictStr, Field(description="The web plugin name.")],
-        web_plugin_requests: Annotated[WebPluginRequests, Field(description="The configuration settings for the web plugin instance.")],
+        name: Annotated[StrictStr, Field(description="The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1200,15 +1245,13 @@ class WebpluginsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Update a web plugin
+    ) -> WebPluginWrapper:
+        """Refresh a web plugin
 
-        Updates a web plugin with the parameters specified in the request.
+        Picks up a web plugin whose files were replaced in storage without an upload, for example a new version of an  installation-wide plugin put in place during a deployment. The `name` is the manifest name published by  `GET api/2.0/settings/webplugins`, matched without regard to case. Editing the portal settings is required, so  a portal owner or administrator, and the installation has to have web plugins enabled in its configuration.  The server compares the version of the plugin it serves with the `version` of the manifest in storage and,  only when they differ or the plugin appeared in or vanished from storage, re-reads the plugin list on every  server: for all portals when the plugin is installation-wide, for this portal alone otherwise, and notifies  the connected clients of this portal. The call is idempotent: with matching versions nothing changes, so a  repeat is safe. The response is the plugin as served after the check. The stored state, the settings and the  Content Security Policy of the portal are left as they are. To install a new version use  `POST api/2.0/settings/webplugins` instead.
 
-        :param name: The web plugin name. (required)
+        :param name: The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. (required)
         :type name: str
-        :param web_plugin_requests: The configuration settings for the web plugin instance. (required)
-        :type web_plugin_requests: WebPluginRequests
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1231,9 +1274,8 @@ class WebpluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_web_plugin_serialize(
+        _param = self._refresh_web_plugin_serialize(
             name=name,
-            web_plugin_requests=web_plugin_requests,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1241,13 +1283,17 @@ class WebpluginsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "WebPluginWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1260,10 +1306,9 @@ class WebpluginsApi:
 
 
     @validate_call
-    def update_web_plugin_with_http_info(
+    def refresh_web_plugin_with_http_info(
         self,
-        name: Annotated[StrictStr, Field(description="The web plugin name.")],
-        web_plugin_requests: Annotated[WebPluginRequests, Field(description="The configuration settings for the web plugin instance.")],
+        name: Annotated[StrictStr, Field(description="The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1276,15 +1321,13 @@ class WebpluginsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Update a web plugin
+    ) -> ApiResponse[WebPluginWrapper]:
+        """Refresh a web plugin
 
-        Updates a web plugin with the parameters specified in the request.
+        Picks up a web plugin whose files were replaced in storage without an upload, for example a new version of an  installation-wide plugin put in place during a deployment. The `name` is the manifest name published by  `GET api/2.0/settings/webplugins`, matched without regard to case. Editing the portal settings is required, so  a portal owner or administrator, and the installation has to have web plugins enabled in its configuration.  The server compares the version of the plugin it serves with the `version` of the manifest in storage and,  only when they differ or the plugin appeared in or vanished from storage, re-reads the plugin list on every  server: for all portals when the plugin is installation-wide, for this portal alone otherwise, and notifies  the connected clients of this portal. The call is idempotent: with matching versions nothing changes, so a  repeat is safe. The response is the plugin as served after the check. The stored state, the settings and the  Content Security Policy of the portal are left as they are. To install a new version use  `POST api/2.0/settings/webplugins` instead.
 
-        :param name: The web plugin name. (required)
+        :param name: The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. (required)
         :type name: str
-        :param web_plugin_requests: The configuration settings for the web plugin instance. (required)
-        :type web_plugin_requests: WebPluginRequests
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1307,9 +1350,8 @@ class WebpluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_web_plugin_serialize(
+        _param = self._refresh_web_plugin_serialize(
             name=name,
-            web_plugin_requests=web_plugin_requests,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1317,13 +1359,17 @@ class WebpluginsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "WebPluginWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1336,10 +1382,9 @@ class WebpluginsApi:
 
 
     @validate_call
-    def update_web_plugin_without_preload_content(
+    def refresh_web_plugin_without_preload_content(
         self,
-        name: Annotated[StrictStr, Field(description="The web plugin name.")],
-        web_plugin_requests: Annotated[WebPluginRequests, Field(description="The configuration settings for the web plugin instance.")],
+        name: Annotated[StrictStr, Field(description="The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1353,14 +1398,12 @@ class WebpluginsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update a web plugin
+        """Refresh a web plugin
 
-        Updates a web plugin with the parameters specified in the request.
+        Picks up a web plugin whose files were replaced in storage without an upload, for example a new version of an  installation-wide plugin put in place during a deployment. The `name` is the manifest name published by  `GET api/2.0/settings/webplugins`, matched without regard to case. Editing the portal settings is required, so  a portal owner or administrator, and the installation has to have web plugins enabled in its configuration.  The server compares the version of the plugin it serves with the `version` of the manifest in storage and,  only when they differ or the plugin appeared in or vanished from storage, re-reads the plugin list on every  server: for all portals when the plugin is installation-wide, for this portal alone otherwise, and notifies  the connected clients of this portal. The call is idempotent: with matching versions nothing changes, so a  repeat is safe. The response is the plugin as served after the check. The stored state, the settings and the  Content Security Policy of the portal are left as they are. To install a new version use  `POST api/2.0/settings/webplugins` instead.
 
-        :param name: The web plugin name. (required)
+        :param name: The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. (required)
         :type name: str
-        :param web_plugin_requests: The configuration settings for the web plugin instance. (required)
-        :type web_plugin_requests: WebPluginRequests
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1383,9 +1426,8 @@ class WebpluginsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_web_plugin_serialize(
+        _param = self._refresh_web_plugin_serialize(
             name=name,
-            web_plugin_requests=web_plugin_requests,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1393,13 +1435,17 @@ class WebpluginsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "WebPluginWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1407,10 +1453,9 @@ class WebpluginsApi:
         return response_data.response
 
 
-    def _update_web_plugin_serialize(
+    def _refresh_web_plugin_serialize(
         self,
         name,
-        web_plugin_requests,
         _request_auth,
         _content_type,
         _headers,
@@ -1438,10 +1483,326 @@ class WebpluginsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if web_plugin_requests is not None:
-            _body_params = web_plugin_requests
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/settings/webplugins/{name}/refresh"
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_web_plugin(
+        self,
+        name: Annotated[StrictStr, Field(description="The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404.")],
+        web_plugin_request: Annotated[WebPluginRequest, Field(description="The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Update a web plugin
+
+        Switches a web plugin of the current portal on or off and stores the settings string the portal keeps for it.  The plugin has to be installed already, so upload its package with `POST api/2.0/settings/webplugins` first,  and `name` is its manifest name as published by `GET api/2.0/settings/webplugins`, matched without regard to  case. Editing the portal settings is required, so a portal owner or administrator, and the installation has to  have web plugins enabled in its configuration. The body replaces the stored state instead of merging into it,  which makes the call idempotent; `settings` is required, so send `{}` when there is nothing to keep, and it is  limited to 255 characters and stored encrypted for this portal alone. Switching the plugin on adds the domains  its manifest declares to the portal Content Security Policy and switching it off takes them away again, and  the connected clients are notified of the new state. Nothing is returned on success. A name that is not  installed is rejected as not found, and 403 means web plugins are switched off or the caller may not edit the  portal settings.
+
+        :param name: The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404. (required)
+        :type name: str
+        :param web_plugin_request: The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time. (required)
+        :type web_plugin_request: WebPluginRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_web_plugin_serialize(
+            name=name,
+            web_plugin_request=web_plugin_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_web_plugin_with_http_info(
+        self,
+        name: Annotated[StrictStr, Field(description="The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404.")],
+        web_plugin_request: Annotated[WebPluginRequest, Field(description="The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Update a web plugin
+
+        Switches a web plugin of the current portal on or off and stores the settings string the portal keeps for it.  The plugin has to be installed already, so upload its package with `POST api/2.0/settings/webplugins` first,  and `name` is its manifest name as published by `GET api/2.0/settings/webplugins`, matched without regard to  case. Editing the portal settings is required, so a portal owner or administrator, and the installation has to  have web plugins enabled in its configuration. The body replaces the stored state instead of merging into it,  which makes the call idempotent; `settings` is required, so send `{}` when there is nothing to keep, and it is  limited to 255 characters and stored encrypted for this portal alone. Switching the plugin on adds the domains  its manifest declares to the portal Content Security Policy and switching it off takes them away again, and  the connected clients are notified of the new state. Nothing is returned on success. A name that is not  installed is rejected as not found, and 403 means web plugins are switched off or the caller may not edit the  portal settings.
+
+        :param name: The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404. (required)
+        :type name: str
+        :param web_plugin_request: The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time. (required)
+        :type web_plugin_request: WebPluginRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_web_plugin_serialize(
+            name=name,
+            web_plugin_request=web_plugin_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_web_plugin_without_preload_content(
+        self,
+        name: Annotated[StrictStr, Field(description="The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404.")],
+        web_plugin_request: Annotated[WebPluginRequest, Field(description="The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update a web plugin
+
+        Switches a web plugin of the current portal on or off and stores the settings string the portal keeps for it.  The plugin has to be installed already, so upload its package with `POST api/2.0/settings/webplugins` first,  and `name` is its manifest name as published by `GET api/2.0/settings/webplugins`, matched without regard to  case. Editing the portal settings is required, so a portal owner or administrator, and the installation has to  have web plugins enabled in its configuration. The body replaces the stored state instead of merging into it,  which makes the call idempotent; `settings` is required, so send `{}` when there is nothing to keep, and it is  limited to 255 characters and stored encrypted for this portal alone. Switching the plugin on adds the domains  its manifest declares to the portal Content Security Policy and switching it off takes them away again, and  the connected clients are notified of the new state. Nothing is returned on success. A name that is not  installed is rejected as not found, and 403 means web plugins are switched off or the caller may not edit the  portal settings.
+
+        :param name: The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404. (required)
+        :type name: str
+        :param web_plugin_request: The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time. (required)
+        :type web_plugin_request: WebPluginRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_web_plugin_serialize(
+            name=name,
+            web_plugin_request=web_plugin_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_web_plugin_serialize(
+        self,
+        name,
+        web_plugin_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if name is not None:
+            _path_params['name'] = name
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if web_plugin_request is not None:
+            _body_params = web_plugin_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

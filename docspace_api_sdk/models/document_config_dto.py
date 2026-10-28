@@ -23,29 +23,29 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.file_reference_data import FileReferenceData
+from docspace_api_sdk.models.document_options_dto import DocumentOptionsDto
+from docspace_api_sdk.models.file_reference_data_dto import FileReferenceDataDto
 from docspace_api_sdk.models.info_config_dto import InfoConfigDto
-from docspace_api_sdk.models.options import Options
-from docspace_api_sdk.models.permissions_config import PermissionsConfig
+from docspace_api_sdk.models.permissions_config_dto import PermissionsConfigDto
 from typing import Optional, Set
 from typing_extensions import Self
 
 class DocumentConfigDto(BaseModel):
     """
-    The document config parameters.
+    The document itself as the editors address it: what to fetch, under which revision key, and what this caller may  do with it.
     """ # noqa: E501
-    file_type: Optional[StrictStr] = Field(default=None, description="The file type of the document.", alias="fileType")
-    info: Optional[InfoConfigDto] = None
-    is_linked_for_me: Optional[StrictBool] = Field(default=None, description="Specifies if the documnet is linked for current user.", alias="isLinkedForMe")
-    key: Optional[StrictStr] = Field(default=None, description="The document key.")
-    permissions: Optional[PermissionsConfig] = None
-    shared_link_param: Optional[StrictStr] = Field(default=None, description="The shared link parameter of the document.", alias="sharedLinkParam")
-    shared_link_key: Optional[StrictStr] = Field(default=None, description="The shared link key of the document.", alias="sharedLinkKey")
-    reference_data: Optional[FileReferenceData] = Field(default=None, alias="referenceData")
-    title: Optional[StrictStr] = Field(default=None, description="The document title.")
-    url: Optional[StrictStr] = Field(default=None, description="The document url.")
-    is_form: Optional[StrictBool] = Field(default=None, description="Indicates whether this is a form.", alias="isForm")
-    options: Optional[Options] = None
+    file_type: Optional[StrictStr] = Field(default=None, description="The format the editors treat the content as, without the leading dot. For a file that had to be converted this  is the format it was converted to, not the one it is stored under.", alias="fileType", json_schema_extra={"examples": ["docx"]})
+    info: Optional[InfoConfigDto] = Field(default=None, description="The facts the editor information panel shows about the document.")
+    is_linked_for_me: Optional[StrictBool] = Field(default=None, description="Whether the caller opened the original document rather than a link pointing at it, which matters only for  formats whose editing is restricted through links.", alias="isLinkedForMe", json_schema_extra={"examples": [False]})
+    key: Optional[StrictStr] = Field(default=None, description="Identifies the exact revision to the editors: everyone who receives the same key joins the same co-editing  session, and the key changes as soon as the document is saved.", json_schema_extra={"examples": ["1_512_3"]})
+    permissions: Optional[PermissionsConfigDto] = Field(default=None, description="What this caller may do inside the editor - edit, comment, review, fill, download, print, copy and chat.")
+    shared_link_param: Optional[StrictStr] = Field(default=None, description="The name of the query parameter that carries the external share key. It is set only when the document was  opened through an external link.", alias="sharedLinkParam", json_schema_extra={"examples": ["share"]})
+    shared_link_key: Optional[StrictStr] = Field(default=None, description="The external share key this opening runs under, empty when the caller opened the document as a portal member.  The editors pass it back on every request they make for the document.", alias="sharedLinkKey", json_schema_extra={"examples": ["HkQd9nT2"]})
+    reference_data: Optional[FileReferenceDataDto] = Field(default=None, description="How another spreadsheet names this document in a formula. Pass it to `POST api/2.0/files/file/referencedata`  to resolve such a reference.", alias="referenceData")
+    title: Optional[StrictStr] = Field(default=None, description="The name the editors display. When a past version was opened, the moment that version was created is appended  to it in brackets.", json_schema_extra={"examples": ["Budget 2026.xlsx"]})
+    url: Optional[StrictStr] = Field(default=None, description="Where the editors fetch the content. It is addressed to the host the document service can reach, which is not  necessarily the address a browser should follow.", json_schema_extra={"examples": ["https://portal.example.com/filehandler.ashx?action=download&fileid=512"]})
+    is_form: Optional[StrictBool] = Field(default=None, description="Whether the document is a fillable PDF form. A PDF that the portal has never classified is inspected while the  configuration is built, so the answer is trustworthy even for a freshly uploaded file.", alias="isForm", json_schema_extra={"examples": [False]})
+    options: Optional[DocumentOptionsDto] = Field(default=None, description="Extra instructions for the editors, currently the watermark to draw over the document. It is empty when the  room sets no watermark.")
     __properties: ClassVar[List[str]] = ["fileType", "info", "isLinkedForMe", "key", "permissions", "sharedLinkParam", "sharedLinkKey", "referenceData", "title", "url", "isForm", "options"]
 
     model_config = ConfigDict(
@@ -146,14 +146,14 @@ class DocumentConfigDto(BaseModel):
             "info": InfoConfigDto.from_dict(obj["info"]) if obj.get("info") is not None else None,
             "isLinkedForMe": obj.get("isLinkedForMe"),
             "key": obj.get("key"),
-            "permissions": PermissionsConfig.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None,
+            "permissions": PermissionsConfigDto.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None,
             "sharedLinkParam": obj.get("sharedLinkParam"),
             "sharedLinkKey": obj.get("sharedLinkKey"),
-            "referenceData": FileReferenceData.from_dict(obj["referenceData"]) if obj.get("referenceData") is not None else None,
+            "referenceData": FileReferenceDataDto.from_dict(obj["referenceData"]) if obj.get("referenceData") is not None else None,
             "title": obj.get("title"),
             "url": obj.get("url"),
             "isForm": obj.get("isForm"),
-            "options": Options.from_dict(obj["options"]) if obj.get("options") is not None else None
+            "options": DocumentOptionsDto.from_dict(obj["options"]) if obj.get("options") is not None else None
         })
         return _obj
 

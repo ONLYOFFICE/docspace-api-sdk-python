@@ -1,0 +1,35 @@
+# AiModel
+AI model metadata. Describes a single model available from a provider.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** | Model identifier as used by the provider API (e.g. `gpt-4o`, `claude-sonnet-4-20250514`). | 
+**name** | **str** | Human-readable model name for display in the UI. | 
+**provider** | [**AiProviderType**](AiProviderType.md) | Provider that offers this model. | 
+**reasoning** | **bool** | Whether this model supports extended thinking / chain-of-thought reasoning. | [optional] 
+**reasoning_support** | [**AiReasoningSupport**](AiReasoningSupport.md) | What the model can do with extended thinking, when the provider's catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider's id-based table. | [optional] 
+**capabilities** | **float** | Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`. | [optional] 
+**created** | **float** | Release date as a Unix timestamp in **seconds**, when the provider's catalogue reports one (OpenAI-shaped `/models` responses and OpenRouter carry `created`; Anthropic carries an ISO `created_at`). The model picker sorts on it so the newest releases come first; entries without it fall back to alphabetical order. | [optional] 
+
+## Example
+
+```python
+from docspace_api_sdk.models.ai_model import AiModel
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AiModel from a JSON string
+ai_model_instance = AiModel.from_json(json)
+# print the JSON string representation of the object
+print(AiModel.to_json())
+
+# convert the object into a dict
+ai_model_dict = ai_model_instance.to_dict()
+# create an instance of AiModel from a dict
+ai_model_from_dict = AiModel.from_dict(ai_model_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

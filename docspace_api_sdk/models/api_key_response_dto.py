@@ -33,16 +33,16 @@ class ApiKeyResponseDto(BaseModel):
     """
     The response data for the API key operations.
     """ # noqa: E501
-    id: UUID = Field(description="The API key unique identifier.")
-    name: Optional[StrictStr] = Field(description="The API key name.")
-    key: Optional[StrictStr] = Field(description="The full API key value (only returned when creating a new key).")
-    key_postfix: Optional[StrictStr] = Field(default=None, description="The API key postfix (used for identification).", alias="keyPostfix")
-    permissions: Optional[List[StrictStr]] = Field(description="The list of permissions granted to the API key.")
-    last_used: Optional[ApiDateTime] = Field(default=None, alias="lastUsed")
-    create_on: Optional[ApiDateTime] = Field(default=None, alias="createOn")
-    create_by: Optional[EmployeeDto] = Field(default=None, alias="createBy")
-    expires_at: Optional[ApiDateTime] = Field(default=None, alias="expiresAt")
-    is_active: StrictBool = Field(description="Indicates whether the API key is active or not.", alias="isActive")
+    id: UUID = Field(description="The ID of the key. This is the value to pass to `PUT api/2.0/keys/{keyId}` and  `DELETE api/2.0/keys/{keyId}`.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    name: Optional[StrictStr] = Field(description="The label given to the key when it was created or last updated.", json_schema_extra={"examples": ["My API Key"]})
+    key: Optional[StrictStr] = Field(description="The secret to send in the `Authorization` header as `Bearer sk-...`. It is filled in only by the answer of  `POST api/2.0/keys` and cannot be read again afterwards, so it has to be stored at that moment.", json_schema_extra={"examples": ["sk-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"]})
+    key_postfix: Optional[StrictStr] = Field(default=None, description="The last four characters of the secret. It is the only part of the secret that later reads expose, and it is  meant for telling keys apart in a list.", alias="keyPostfix", json_schema_extra={"examples": ["cdef"]})
+    permissions: Optional[List[StrictStr]] = Field(description="The scopes the key may use, as accepted by `GET api/2.0/keys/permissions`. An empty list means the key has no  scope restrictions.", json_schema_extra={"examples": [["rooms:read", "files:write"]]})
+    last_used: Optional[ApiDateTime] = Field(default=None, description="The UTC moment the key was last used to authenticate a request. It is empty for a key that has never been  used.", alias="lastUsed")
+    create_on: Optional[ApiDateTime] = Field(default=None, description="The UTC moment the key was created.", alias="createOn")
+    create_by: Optional[EmployeeDto] = Field(default=None, description="The portal member who created the key, and whose access the key acts with.", alias="createBy")
+    expires_at: Optional[ApiDateTime] = Field(default=None, description="The UTC moment the key stops working. It is empty for a key created without `expiresInDays`, which never  expires.", alias="expiresAt")
+    is_active: StrictBool = Field(description="Whether the key may authenticate requests. A key deactivated through `PUT api/2.0/keys/{keyId}` stays in the  list with this field set to false.", alias="isActive", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["id", "name", "key", "keyPostfix", "permissions", "lastUsed", "createOn", "createBy", "expiresAt", "isActive"]
 
     model_config = ConfigDict(

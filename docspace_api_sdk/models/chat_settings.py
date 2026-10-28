@@ -30,10 +30,10 @@ class ChatSettings(BaseModel):
     """
     The chat settings.
     """ # noqa: E501
-    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID.", alias="providerId")
-    model_id: Optional[StrictStr] = Field(default=None, description="The model ID.", alias="modelId")
-    prompt: Optional[StrictStr] = Field(default=None, description="The prompt.")
-    internal: Optional[StrictBool] = Field(default=None, description="Specifies whether the provider is internal or not.")
+    provider_id: Optional[StrictInt] = Field(default=None, description="The provider ID.", alias="providerId", json_schema_extra={"examples": [1]})
+    model_id: Optional[StrictStr] = Field(default=None, description="The model ID.", alias="modelId", json_schema_extra={"examples": ["gpt-4"]})
+    prompt: Optional[StrictStr] = Field(default=None, description="The prompt.", json_schema_extra={"examples": ["Please analyze this document"]})
+    internal: Optional[StrictBool] = Field(default=None, description="Specifies whether the provider is internal or not.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["providerId", "modelId", "prompt", "internal"]
 
     model_config = ConfigDict(

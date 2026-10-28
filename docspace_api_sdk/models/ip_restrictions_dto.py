@@ -23,16 +23,16 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.ip_restriction_base import IpRestrictionBase
+from docspace_api_sdk.models.ip_restriction_entry_dto import IpRestrictionEntryDto
 from typing import Optional, Set
 from typing_extensions import Self
 
 class IpRestrictionsDto(BaseModel):
     """
-    The parameters for configuring new IP restriction settings.
+    The addresses allowed to reach the portal, and whether the restriction is enforced.
     """ # noqa: E501
-    ip_restrictions: Optional[List[IpRestrictionBase]] = Field(description="The list of IP restriction addresses.", alias="ipRestrictions")
-    enable: Optional[StrictBool] = Field(default=None, description="Specifies whether to enable IP restrictions or not.")
+    ip_restrictions: Optional[List[IpRestrictionEntryDto]] = Field(description="The allowed addresses, each entry pairing a single IPv4 or IPv6 address with the flag that limits it to  administrators. This is the whole list that is to hold afterwards: entries not repeated here are deleted.  Ranges written as `from-to` and CIDR blocks are refused with 400, even though the portal matches such forms  when they are already stored. Enforcement spares only the portal owner and the installation own networks, so  a list without the caller address locks the remaining administrators out.", alias="ipRestrictions", json_schema_extra={"examples": [[{"ip": "192.0.2.1", "forAdmin": False}]]})
+    enable: Optional[StrictBool] = Field(default=None, description="Whether the list is enforced. Leaving it out follows the list - on when addresses are sent, off when the list  is empty - and sending `true` with an empty list is refused with 400, since that would admit nobody.", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["ipRestrictions", "enable"]
 
     model_config = ConfigDict(
@@ -104,7 +104,7 @@ class IpRestrictionsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "ipRestrictions": [IpRestrictionBase.from_dict(_item) for _item in obj["ipRestrictions"]] if obj.get("ipRestrictions") is not None else None,
+            "ipRestrictions": [IpRestrictionEntryDto.from_dict(_item) for _item in obj["ipRestrictions"]] if obj.get("ipRestrictions") is not None else None,
             "enable": obj.get("enable")
         })
         return _obj

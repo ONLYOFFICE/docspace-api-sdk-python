@@ -23,6 +23,8 @@ from logging import FileHandler
 import multiprocessing
 import sys
 from typing import Any, ClassVar, Dict, List, Literal, Optional, TypedDict, Union
+from urllib.parse import urlparse
+from urllib.request import getproxies
 from typing_extensions import NotRequired, Self
 
 import urllib3
@@ -117,6 +119,8 @@ HTTPSignatureAuthSetting = TypedDict(
 AuthSettings = TypedDict(
     "AuthSettings",
     {
+        "cookieAuth": APIKeyAuthSetting,
+        "bearerAuth": BearerAuthSetting,
         "asc_auth_key": APIKeyAuthSetting,
         "Basic": BasicAuthSetting,
         "Bearer": BearerFormatAuthSetting,
@@ -180,6 +184,7 @@ class Configuration:
     :param tls_server_name: SSL/TLS Server Name Indication (SNI). Set this to the SNI value expected by the server.
     :param connection_pool_maxsize: Connection pool max size. None in the constructor is coerced to 100 for async and cpu_count * 5 for sync.
     :param proxy: Proxy URL.
+    :param no_proxy: Comma-separated hosts that bypass the proxy.
     :param proxy_headers: Proxy headers.
     :param safe_chars_for_path_param: Safe characters for path parameter encoding.
     :param client_side_validation: Enable client-side validation. Default True.
@@ -250,6 +255,7 @@ conf = docspace_api_sdk.Configuration(
         tls_server_name: Optional[str]=None,
         connection_pool_maxsize: Optional[int]=None,
         proxy: Optional[str]=None,
+        no_proxy: Optional[str]=None,
         proxy_headers: Optional[Any]=None,
         safe_chars_for_path_param: str='',
         client_side_validation: bool=True,
@@ -356,8 +362,20 @@ conf = docspace_api_sdk.Configuration(
            per pool. None in the constructor is coerced to cpu_count * 5.
         """
 
+        # urllib3 does not read proxy environment variables itself:
+        # https://github.com/urllib3/urllib3/issues/1785
+        if proxy is None or no_proxy is None:
+            proxies = getproxies()
+            if proxy is None:
+                scheme = urlparse(self.host).scheme
+                proxy = proxies.get(scheme) or proxies.get("all")
+            if no_proxy is None:
+                no_proxy = proxies.get("no")
         self.proxy = proxy
         """Proxy URL
+        """
+        self.no_proxy = no_proxy
+        """Hosts that bypass the proxy
         """
         self.proxy_headers = proxy_headers
         """Proxy headers
@@ -392,9 +410,9 @@ conf = docspace_api_sdk.Configuration(
                 setattr(result, k, copy.deepcopy(v, memo))
         # shallow copy of loggers
         result.logger = copy.copy(self.logger)
-        # use setters to configure loggers
+        # use setter to re-create the file handler (excluded from __dict__ copy)
         result.logger_file = self.logger_file
-        result.debug = self.debug
+
         return result
 
     def __setattr__(self, name: str, value: Any) -> None:
@@ -531,7 +549,8 @@ conf = docspace_api_sdk.Configuration(
             self.refresh_api_key_hook(self)
         key = self.api_key.get(identifier, self.api_key.get(alias) if alias is not None else None)
         if key:
-            prefix = self.api_key_prefix.get(identifier)
+            prefix = self.api_key_prefix.get(
+                identifier, self.api_key_prefix.get(alias) if alias is not None else None)
             if prefix:
                 return "%s %s" % (prefix, key)
             else:
@@ -561,6 +580,22 @@ conf = docspace_api_sdk.Configuration(
         :return: The Auth Settings information dict.
         """
         auth: AuthSettings = {}
+        if 'cookieAuth' in self.api_key:
+            auth['cookieAuth'] = {
+                'type': 'api_key',
+                'in': 'cookie',
+                'key': 'asc_auth_key',
+                'value': self.get_api_key_with_prefix(
+                    'cookieAuth',
+                ),
+            }
+        if self.access_token is not None:
+            auth['bearerAuth'] = {
+                'type': 'bearer',
+                'in': 'header',
+                'key': 'Authorization',
+                'value': 'Bearer ' + self.access_token
+            }
         if 'asc_auth_key' in self.api_key:
             auth['asc_auth_key'] = {
                 'type': 'api_key',
@@ -620,8 +655,8 @@ conf = docspace_api_sdk.Configuration(
         return "Python SDK Debug Report:\n"\
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
-               "Version of the API: 3.7.0\n"\
-               "SDK Package Version: 3.7.0".\
+               "Version of the API: 4.0.0\n"\
+               "SDK Package Version: 4.0.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:
@@ -632,7 +667,7 @@ conf = docspace_api_sdk.Configuration(
         return [
             {
                 'url': "{baseUrl}",
-                'description': "Server configuration",
+                'description': "The production DocSpace portal, at the customer's own domain.",
                 'variables': {
                     'baseUrl': {
                         'description': "Default URL",

@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class ClientSecretResponse(BaseModel):
     """
-    The response containing the regenerated client secret.
+    The response carrying a regenerated client secret.
     """ # noqa: E501
-    client_secret: Optional[StrictStr] = Field(default=None, description="The newly generated client secret.")
+    client_secret: Optional[StrictStr] = Field(default=None, description="The newly generated client secret. It replaces the previous one immediately, so every deployed copy of the client has to be updated with this value.", json_schema_extra={"examples": ["6c7cf17b-1bd3-47d5-94c6-be2d3570e168"]})
     __properties: ClassVar[List[str]] = ["client_secret"]
 
     model_config = ConfigDict(

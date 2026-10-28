@@ -31,8 +31,8 @@ class InviteUsersRequestDto(BaseModel):
     """
     The request parameters for inviting users.
     """ # noqa: E501
-    invitations: List[UserInvitationRequestDto] = Field(description="The list of user invitations.")
-    culture: Optional[StrictStr] = Field(default=None, description="The culture code of invitations.")
+    invitations: List[UserInvitationRequestDto] = Field(description="The list of user invitations.", json_schema_extra={"examples": [[{"email": "user@example.com", "type": 1}]]})
+    culture: Optional[StrictStr] = Field(default=None, description="The culture code of invitations.", json_schema_extra={"examples": ["en-US"]})
     __properties: ClassVar[List[str]] = ["invitations", "culture"]
 
     model_config = ConfigDict(

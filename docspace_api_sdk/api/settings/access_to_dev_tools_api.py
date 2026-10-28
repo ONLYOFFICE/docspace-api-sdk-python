@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from docspace_api_sdk.models.tenant_dev_tools_access_settings_wrapper import TenantDevToolsAccessSettingsWrapper
@@ -60,7 +60,7 @@ class AccessToDevToolsApi:
     ) -> TenantDevToolsAccessSettingsWrapper:
         """Get the Developer Tools access settings
 
-        Returns the Developer Tools access settings for the portal.
+        Returns whether the portal currently restricts the `User` role from using the developer tools (API keys, OAuth  apps, webhooks). Requires an authenticated session; every role can read the restriction, even though it only  limits what a `User` may do, not what a `RoomAdmin` or `DocSpaceAdmin` may do. This is a read-only, idempotent  call. Change the restriction with `POST api/2.0/security/devtoolsaccess`, which requires the  EditPortalSettings permission.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -93,11 +93,13 @@ class AccessToDevToolsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDevToolsAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -127,7 +129,7 @@ class AccessToDevToolsApi:
     ) -> ApiResponse[TenantDevToolsAccessSettingsWrapper]:
         """Get the Developer Tools access settings
 
-        Returns the Developer Tools access settings for the portal.
+        Returns whether the portal currently restricts the `User` role from using the developer tools (API keys, OAuth  apps, webhooks). Requires an authenticated session; every role can read the restriction, even though it only  limits what a `User` may do, not what a `RoomAdmin` or `DocSpaceAdmin` may do. This is a read-only, idempotent  call. Change the restriction with `POST api/2.0/security/devtoolsaccess`, which requires the  EditPortalSettings permission.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -160,11 +162,13 @@ class AccessToDevToolsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDevToolsAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -194,7 +198,7 @@ class AccessToDevToolsApi:
     ) -> RESTResponseType:
         """Get the Developer Tools access settings
 
-        Returns the Developer Tools access settings for the portal.
+        Returns whether the portal currently restricts the `User` role from using the developer tools (API keys, OAuth  apps, webhooks). Requires an authenticated session; every role can read the restriction, even though it only  limits what a `User` may do, not what a `RoomAdmin` or `DocSpaceAdmin` may do. This is a read-only, idempotent  call. Change the restriction with `POST api/2.0/security/devtoolsaccess`, which requires the  EditPortalSettings permission.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -227,11 +231,13 @@ class AccessToDevToolsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TenantDevToolsAccessSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

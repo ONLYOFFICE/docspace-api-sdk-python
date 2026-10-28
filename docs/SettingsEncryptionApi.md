@@ -6,13 +6,22 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_storage_encryption_progress**](#get_storage_encryption_progress) | **GET** /api/2.0/settings/encryption/progress | Get the storage encryption progress
 [**get_storage_encryption_settings**](#get_storage_encryption_settings) | **GET** /api/2.0/settings/encryption/settings | Get the storage encryption settings
-[**start_storage_encryption**](#start_storage_encryption) | **POST** /api/2.0/settings/encryption/start | Start the storage encryption process
+[**start_storage_encryption**](#start_storage_encryption) | **POST** /api/2.0/settings/encryption/start | Start the storage encryption
 
 
 # **get_storage_encryption_progress**
 > DoubleNullableWrapper get_storage_encryption_progress()
 
-Returns the storage encryption progress.
+Returns how far the running encryption or decryption of the installation storage has got, as a percentage from
+0 to 100. It reports the run started by `POST api/2.0/settings/encryption/start`, whose direction, encryption
+or decryption, is told by `GET api/2.0/settings/encryption/settings`. An empty response means no run is in
+flight and no recent result is remembered: the value of a finished run is kept for one minute after it
+completes and then dropped, so poll often enough not to miss the end of the operation. A value of -1 means the
+build does not offer storage encryption at all, and on an installation that is not a server one the call is
+refused rather than answered. Unlike the other encryption operations, this one asks for no portal-settings
+permission: any authenticated member of the portal may read the progress, which is intentional, because the
+portals are unavailable while the run is on and their users need to see when it ends. Nothing is written and
+the call is safe to repeat.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -75,10 +84,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Storage encryption progress |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**405** | Method not allowed |  -  |
+**200** | Encryption or decryption progress as a percentage, or empty when no run is in flight |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**415** | Storage encryption is not available on this installation |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -87,7 +97,15 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_storage_encryption_settings**
 > EncryptionSettingsWrapper get_storage_encryption_settings()
 
-Returns the storage encryption settings.
+Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption
+started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run
+begins. The encryption password is never returned. The caller is expected to have the permission to edit portal settings, which in practice means
+the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other
+installation, and whenever the check fails, the operation answers with an empty body instead of an error. An
+empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this
+context. Nothing is written and the call is safe to repeat. Use `GET api/2.0/settings/encryption/progress` to
+follow a run that is in flight, and `POST api/2.0/settings/encryption/start` to encrypt or decrypt the
+storage.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -150,20 +168,31 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Storage encryption settings |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**403** | No permissions to perform this action |  -  |
-**405** | Method not allowed |  -  |
+**200** | The encryption status and the notify-users flag; empty on a custom-mode installation, or when the caller has no portal-settings right, the installation hides storage encryption or does not grant unrestricted space access, or the settings cannot be read |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **start_storage_encryption**
-> BooleanWrapper start_storage_encryption(storage_encryption_requests_dto=storage_encryption_requests_dto)
+> BooleanWrapper start_storage_encryption(storage_encryption_request_dto=storage_encryption_request_dto)
 
-Starts the storage encryption process.
+Queues encryption of everything the installation keeps in its local storage, or decryption of it when the data
+is already encrypted: the saved encryption state decides the direction, so the same call encrypts a decrypted
+installation and decrypts an encrypted one. It covers the whole server, not one portal, and only a server
+installation with the feature switched on can run it, with neither the portal storage nor the CDN pointing at
+a third-party provider: reset those first with `DELETE api/2.0/settings/storage` and
+`DELETE api/2.0/settings/storage/cdn`. No backup may be running, and the backup schedules of all portals are
+dropped as part of starting. The caller needs the permission to edit portal settings, that is the portal owner
+or a DocSpace admin, and an unrestricted access space. This is a long, disruptive operation: every portal is
+put into the encryption state and stays unavailable until it ends, so do not repeat the call while it runs,
+and follow it with `GET api/2.0/settings/encryption/progress` instead. The password is generated on the server
+and never returned by the API. Pass `notifyUsers=true` to mail every user before the portals go down. The
+response is true once the job is queued, and false where encryption is switched off, nothing being started
+then.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -172,7 +201,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storage_encryption_requests_dto** | [**StorageEncryptionRequestsDto**](StorageEncryptionRequestsDto.md)|  | [optional] 
+ **storage_encryption_request_dto** | [**StorageEncryptionRequestDto**](StorageEncryptionRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -188,7 +217,7 @@ Name | Type | Description  | Notes
 ```python
 import docspace_api_sdk
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.storage_encryption_requests_dto import StorageEncryptionRequestsDto
+from docspace_api_sdk.models.storage_encryption_request_dto import StorageEncryptionRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -209,11 +238,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.EncryptionApi(api_client)
-    storage_encryption_requests_dto = docspace_api_sdk.StorageEncryptionRequestsDto() # StorageEncryptionRequestsDto |  (optional)
+    storage_encryption_request_dto = docspace_api_sdk.StorageEncryptionRequestDto() # StorageEncryptionRequestDto |  (optional)
 
     try:
-        # Start the storage encryption process
-        api_response = api_instance.start_storage_encryption(storage_encryption_requests_dto=storage_encryption_requests_dto)
+        # Start the storage encryption
+        api_response = api_instance.start_storage_encryption(storage_encryption_request_dto=storage_encryption_request_dto)
         print("The response of EncryptionApi->start_storage_encryption:\n")
         pprint(api_response)
     except Exception as e:
@@ -231,12 +260,14 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Boolean value: true if the operation is successful |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**402** | Your pricing plan does not support this option |  -  |
-**403** | No permissions to perform this action |  -  |
-**405** | Method not allowed |  -  |
+**200** | True when the encryption job has been queued; false in a build where storage encryption is switched off |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The portal pricing plan does not include storage encryption |  -  |
+**403** | The caller may not edit portal settings, or this installation does not allow storage encryption |  -  |
+**415** | Storage encryption is not available on this installation, or the storage or the CDN of the current portal is a third-party provider |  -  |
+**500** | A backup of one of the portals is still running |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

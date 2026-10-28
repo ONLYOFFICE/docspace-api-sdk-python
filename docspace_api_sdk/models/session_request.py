@@ -29,14 +29,14 @@ from typing_extensions import Self
 
 class SessionRequest(BaseModel):
     """
-    The session request parameters.
+    The file a chunked upload session is opened for, and how a clash with an existing name is settled.
     """ # noqa: E501
-    file_name: Optional[StrictStr] = Field(description="The file name.", alias="fileName")
-    file_size: Optional[StrictInt] = Field(default=None, description="The file size.", alias="fileSize")
-    relative_path: Optional[StrictStr] = Field(default=None, description="The relative path to the file.", alias="relativePath")
-    create_on: Optional[ApiDateTime] = Field(default=None, alias="createOn")
-    encrypted: Optional[StrictBool] = Field(default=None, description="Specifies whether the file is encrypted or not.")
-    create_new_if_exist: Optional[StrictBool] = Field(default=None, description="Specifies whether to create a new file if it already exists.", alias="createNewIfExist")
+    file_name: Optional[StrictStr] = Field(description="The name to store the file under, extension included. Characters a title cannot hold are replaced and the name  is truncated, so the stored title can differ from the one sent.", alias="fileName", json_schema_extra={"examples": ["My Document.docx"]})
+    file_size: Optional[StrictInt] = Field(default=None, description="The exact number of bytes that will be sent. The size is reserved when the session opens and compared with the  parts as they arrive; below the portal chunk size the session takes the whole payload in one part, and above  the portal limit for chunked uploads it is refused.", alias="fileSize", json_schema_extra={"examples": [10485760]})
+    relative_path: Optional[StrictStr] = Field(default=None, description="A slash-separated chain of folder titles under the target folder to store the file in; folders in the chain  that do not exist yet are created. Leave it empty to store the file in the folder from the path itself.", alias="relativePath", json_schema_extra={"examples": ["subfolder/documents"]})
+    create_on: Optional[ApiDateTime] = Field(default=None, description="The creation time to stamp on a newly created file instead of the moment the upload finishes. It is ignored  when the upload lands on a file that already exists.", alias="createOn")
+    encrypted: Optional[StrictBool] = Field(default=None, description="Marks the stored file as client-side encrypted, which is how content uploaded into a private room is kept;  with false the bytes are stored as they arrive.", json_schema_extra={"examples": [False]})
+    create_new_if_exist: Optional[StrictBool] = Field(default=None, description="Settles the clash when the folder already holds a file with this name: true stores the upload beside it under  a name with a numeric suffix, false takes the existing file over and adds the content to it as a new version.", alias="createNewIfExist", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["fileName", "fileSize", "relativePath", "createOn", "encrypted", "createNewIfExist"]
 
     model_config = ConfigDict(

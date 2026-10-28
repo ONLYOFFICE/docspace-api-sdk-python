@@ -1,11 +1,11 @@
 # TurnOnAdminMessageSettingsRequestDto
-The request parameters for enabling or disabling administrator messaging system.
+Whether the sign-in page offers the form for writing to the portal administrators.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**turn_on** | **bool** | The global switch for the administrator messaging functionality. | [optional] 
+**turn_on** | **bool** | Whether the form is offered. Switching it off hides the form for everybody and makes the operation that  submits it refuse new messages; letters already sent are untouched. | [optional] 
 
 ## Example
 

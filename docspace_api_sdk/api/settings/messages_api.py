@@ -18,12 +18,12 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
-from docspace_api_sdk.models.admin_message_base_settings_requests_dto import AdminMessageBaseSettingsRequestsDto
-from docspace_api_sdk.models.admin_message_settings_requests_dto import AdminMessageSettingsRequestsDto
+from docspace_api_sdk.models.admin_message_base_settings_request_dto import AdminMessageBaseSettingsRequestDto
+from docspace_api_sdk.models.admin_message_settings_request_dto import AdminMessageSettingsRequestDto
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.turn_on_admin_message_settings_request_dto import TurnOnAdminMessageSettingsRequestDto
 
@@ -63,9 +63,9 @@ class MessagesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """Enable the administrator message settings
+        """Enable or disable administrator messages
 
-        Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+        Switches on or off the contact form the sign-in page offers a visitor who cannot get into the portal, and  which delivers their message to the portal administrators. The caller needs the portal-settings right of a  DocSpace administrator - the portal owner and a DocSpace administrator qualify, any other member is refused.  Send the new state as `turnOn`: `true` publishes the form, `false` hides it. The change covers the whole  portal, applies to the next sign-in page without a restart, is recorded in the audit trail, and repeating the  call with the same value leaves the portal as it is. What comes back is a localized confirmation message  rather than the stored flag - read the flag as `enableAdmMess` from `GET api/2.0/settings`, which needs no  token. That flag is also forced on while the portal's payment has lapsed, so it can report `true` on a portal  where the form was switched off here. The form itself posts to `POST api/2.0/settings/sendadmmail` and this  setting gates nothing else: the notifications administrators receive as portal members are subscribed  separately with `POST api/2.0/settings/notification`.
 
         :param turn_on_admin_message_settings_request_dto:
         :type turn_on_admin_message_settings_request_dto: TurnOnAdminMessageSettingsRequestDto
@@ -101,11 +101,15 @@ class MessagesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -134,9 +138,9 @@ class MessagesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """Enable the administrator message settings
+        """Enable or disable administrator messages
 
-        Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+        Switches on or off the contact form the sign-in page offers a visitor who cannot get into the portal, and  which delivers their message to the portal administrators. The caller needs the portal-settings right of a  DocSpace administrator - the portal owner and a DocSpace administrator qualify, any other member is refused.  Send the new state as `turnOn`: `true` publishes the form, `false` hides it. The change covers the whole  portal, applies to the next sign-in page without a restart, is recorded in the audit trail, and repeating the  call with the same value leaves the portal as it is. What comes back is a localized confirmation message  rather than the stored flag - read the flag as `enableAdmMess` from `GET api/2.0/settings`, which needs no  token. That flag is also forced on while the portal's payment has lapsed, so it can report `true` on a portal  where the form was switched off here. The form itself posts to `POST api/2.0/settings/sendadmmail` and this  setting gates nothing else: the notifications administrators receive as portal members are subscribed  separately with `POST api/2.0/settings/notification`.
 
         :param turn_on_admin_message_settings_request_dto:
         :type turn_on_admin_message_settings_request_dto: TurnOnAdminMessageSettingsRequestDto
@@ -172,11 +176,15 @@ class MessagesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -205,9 +213,9 @@ class MessagesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Enable the administrator message settings
+        """Enable or disable administrator messages
 
-        Displays the contact form on the Sign In page, allowing users to send a message to the DocSpace administrator in case they encounter any issues while accessing DocSpace.
+        Switches on or off the contact form the sign-in page offers a visitor who cannot get into the portal, and  which delivers their message to the portal administrators. The caller needs the portal-settings right of a  DocSpace administrator - the portal owner and a DocSpace administrator qualify, any other member is refused.  Send the new state as `turnOn`: `true` publishes the form, `false` hides it. The change covers the whole  portal, applies to the next sign-in page without a restart, is recorded in the audit trail, and repeating the  call with the same value leaves the portal as it is. What comes back is a localized confirmation message  rather than the stored flag - read the flag as `enableAdmMess` from `GET api/2.0/settings`, which needs no  token. That flag is also forced on while the portal's payment has lapsed, so it can report `true` on a portal  where the form was switched off here. The form itself posts to `POST api/2.0/settings/sendadmmail` and this  setting gates nothing else: the notifications administrators receive as portal members are subscribed  separately with `POST api/2.0/settings/notification`.
 
         :param turn_on_admin_message_settings_request_dto:
         :type turn_on_admin_message_settings_request_dto: TurnOnAdminMessageSettingsRequestDto
@@ -243,11 +251,15 @@ class MessagesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -343,7 +355,7 @@ class MessagesApi:
     @validate_call
     def send_admin_mail(
         self,
-        admin_message_settings_requests_dto: Optional[AdminMessageSettingsRequestsDto] = None,
+        admin_message_settings_request_dto: Optional[AdminMessageSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -359,10 +371,10 @@ class MessagesApi:
     ) -> StringWrapper:
         """Send a message to the administrator
 
-        Sends a message to the administrator email when unauthorized users encounter issues accessing DocSpace.
+        Sends a message from someone who cannot get into the portal to its administrators - the contact form the  sign-in page offers unauthenticated visitors. No token is needed. The form has to be published first with  `POST api/2.0/settings/messagesettings` unless the portal's payment has lapsed, otherwise nothing is sent;  `enableAdmMess` in `GET api/2.0/settings` reports whether the call is worth making. `email` is the address the  administrators answer to and has to be a real address, and `message` is reduced to plain text first, so a body  carrying nothing but markup counts as empty - either fault is refused with 400. When the caller is not signed  in and this installation has a CAPTCHA configured, `recaptchaResponse` has to carry a solved challenge of the  `recaptchaType` that `GET api/2.0/settings` publishes together with the site key, and a missing or stale  answer refuses the call. `culture` picks the language of the letter. Delivery is queued and reaches the  administrators subscribed to administrator notifications, so a confirmed call means accepted rather than read,  and the answer is a localized confirmation. Attempts are rate limited per address and per operation, and  further ones are refused with 429.
 
-        :param admin_message_settings_requests_dto:
-        :type admin_message_settings_requests_dto: AdminMessageSettingsRequestsDto
+        :param admin_message_settings_request_dto:
+        :type admin_message_settings_request_dto: AdminMessageSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -386,7 +398,7 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._send_admin_mail_serialize(
-            admin_message_settings_requests_dto=admin_message_settings_requests_dto,
+            admin_message_settings_request_dto=admin_message_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -396,10 +408,13 @@ class MessagesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '400': None,
-            '429': None,
+            '403': None,
+            '429': "ErrorApiResponse",
+            '500': None,
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -414,7 +429,7 @@ class MessagesApi:
     @validate_call
     def send_admin_mail_with_http_info(
         self,
-        admin_message_settings_requests_dto: Optional[AdminMessageSettingsRequestsDto] = None,
+        admin_message_settings_request_dto: Optional[AdminMessageSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -430,10 +445,10 @@ class MessagesApi:
     ) -> ApiResponse[StringWrapper]:
         """Send a message to the administrator
 
-        Sends a message to the administrator email when unauthorized users encounter issues accessing DocSpace.
+        Sends a message from someone who cannot get into the portal to its administrators - the contact form the  sign-in page offers unauthenticated visitors. No token is needed. The form has to be published first with  `POST api/2.0/settings/messagesettings` unless the portal's payment has lapsed, otherwise nothing is sent;  `enableAdmMess` in `GET api/2.0/settings` reports whether the call is worth making. `email` is the address the  administrators answer to and has to be a real address, and `message` is reduced to plain text first, so a body  carrying nothing but markup counts as empty - either fault is refused with 400. When the caller is not signed  in and this installation has a CAPTCHA configured, `recaptchaResponse` has to carry a solved challenge of the  `recaptchaType` that `GET api/2.0/settings` publishes together with the site key, and a missing or stale  answer refuses the call. `culture` picks the language of the letter. Delivery is queued and reaches the  administrators subscribed to administrator notifications, so a confirmed call means accepted rather than read,  and the answer is a localized confirmation. Attempts are rate limited per address and per operation, and  further ones are refused with 429.
 
-        :param admin_message_settings_requests_dto:
-        :type admin_message_settings_requests_dto: AdminMessageSettingsRequestsDto
+        :param admin_message_settings_request_dto:
+        :type admin_message_settings_request_dto: AdminMessageSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -457,7 +472,7 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._send_admin_mail_serialize(
-            admin_message_settings_requests_dto=admin_message_settings_requests_dto,
+            admin_message_settings_request_dto=admin_message_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -467,10 +482,13 @@ class MessagesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '400': None,
-            '429': None,
+            '403': None,
+            '429': "ErrorApiResponse",
+            '500': None,
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -485,7 +503,7 @@ class MessagesApi:
     @validate_call
     def send_admin_mail_without_preload_content(
         self,
-        admin_message_settings_requests_dto: Optional[AdminMessageSettingsRequestsDto] = None,
+        admin_message_settings_request_dto: Optional[AdminMessageSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -501,10 +519,10 @@ class MessagesApi:
     ) -> RESTResponseType:
         """Send a message to the administrator
 
-        Sends a message to the administrator email when unauthorized users encounter issues accessing DocSpace.
+        Sends a message from someone who cannot get into the portal to its administrators - the contact form the  sign-in page offers unauthenticated visitors. No token is needed. The form has to be published first with  `POST api/2.0/settings/messagesettings` unless the portal's payment has lapsed, otherwise nothing is sent;  `enableAdmMess` in `GET api/2.0/settings` reports whether the call is worth making. `email` is the address the  administrators answer to and has to be a real address, and `message` is reduced to plain text first, so a body  carrying nothing but markup counts as empty - either fault is refused with 400. When the caller is not signed  in and this installation has a CAPTCHA configured, `recaptchaResponse` has to carry a solved challenge of the  `recaptchaType` that `GET api/2.0/settings` publishes together with the site key, and a missing or stale  answer refuses the call. `culture` picks the language of the letter. Delivery is queued and reaches the  administrators subscribed to administrator notifications, so a confirmed call means accepted rather than read,  and the answer is a localized confirmation. Attempts are rate limited per address and per operation, and  further ones are refused with 429.
 
-        :param admin_message_settings_requests_dto:
-        :type admin_message_settings_requests_dto: AdminMessageSettingsRequestsDto
+        :param admin_message_settings_request_dto:
+        :type admin_message_settings_request_dto: AdminMessageSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -528,7 +546,7 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._send_admin_mail_serialize(
-            admin_message_settings_requests_dto=admin_message_settings_requests_dto,
+            admin_message_settings_request_dto=admin_message_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -538,10 +556,13 @@ class MessagesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
             '400': None,
-            '429': None,
+            '403': None,
+            '429': "ErrorApiResponse",
+            '500': None,
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -551,7 +572,7 @@ class MessagesApi:
 
     def _send_admin_mail_serialize(
         self,
-        admin_message_settings_requests_dto,
+        admin_message_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -577,8 +598,8 @@ class MessagesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if admin_message_settings_requests_dto is not None:
-            _body_params = admin_message_settings_requests_dto
+        if admin_message_settings_request_dto is not None:
+            _body_params = admin_message_settings_request_dto
 
 
         # set the HTTP header `Accept`
@@ -605,6 +626,12 @@ class MessagesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -631,7 +658,7 @@ class MessagesApi:
     @validate_call
     def send_join_invite_mail(
         self,
-        admin_message_base_settings_requests_dto: Optional[AdminMessageBaseSettingsRequestsDto] = None,
+        admin_message_base_settings_request_dto: Optional[AdminMessageBaseSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -645,12 +672,12 @@ class MessagesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """Sends an invitation email
+        """Send an invitation email
 
-        Sends an invitation email with a link to the DocSpace.
+        Sends an invitation email with a join link to the address in the request - the self-registration the sign-in  page's register link performs. No token is needed. The portal has to publish a trusted-domain policy first,  saved with `POST api/2.0/settings/maildomainsettings`: without one there is nothing to join and every caller  alike is answered with 405 - the same condition `GET api/2.0/settings` reports as `enabledJoin`. `email` has  to be a real address written in ASCII rather than an internationalized one, must not already belong to a  portal member, and, when the policy names domains rather than accepting all of them, has to end with one of  them - each of those faults is refused with 400. `culture` picks the language of the letter. The invitation is  not an account: the invitee becomes a member only after following the link, and the role it grants, user or  room administrator, follows the trusted-domain settings and drops to user once the portal's paid places are  taken. Where the installation caps invitations, an accepted call spends one of those counted by  `invitationLimit`, and only about a dozen calls from one address in two minutes are accepted. What comes back  is a localized confirmation.
 
-        :param admin_message_base_settings_requests_dto:
-        :type admin_message_base_settings_requests_dto: AdminMessageBaseSettingsRequestsDto
+        :param admin_message_base_settings_request_dto:
+        :type admin_message_base_settings_request_dto: AdminMessageBaseSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -674,7 +701,7 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._send_join_invite_mail_serialize(
-            admin_message_base_settings_requests_dto=admin_message_base_settings_requests_dto,
+            admin_message_base_settings_request_dto=admin_message_base_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -685,10 +712,13 @@ class MessagesApi:
             '200': "StringWrapper",
             '400': None,
             '403': None,
-            '429': None,
+            '405': None,
+            '500': None,
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -703,7 +733,7 @@ class MessagesApi:
     @validate_call
     def send_join_invite_mail_with_http_info(
         self,
-        admin_message_base_settings_requests_dto: Optional[AdminMessageBaseSettingsRequestsDto] = None,
+        admin_message_base_settings_request_dto: Optional[AdminMessageBaseSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -717,12 +747,12 @@ class MessagesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """Sends an invitation email
+        """Send an invitation email
 
-        Sends an invitation email with a link to the DocSpace.
+        Sends an invitation email with a join link to the address in the request - the self-registration the sign-in  page's register link performs. No token is needed. The portal has to publish a trusted-domain policy first,  saved with `POST api/2.0/settings/maildomainsettings`: without one there is nothing to join and every caller  alike is answered with 405 - the same condition `GET api/2.0/settings` reports as `enabledJoin`. `email` has  to be a real address written in ASCII rather than an internationalized one, must not already belong to a  portal member, and, when the policy names domains rather than accepting all of them, has to end with one of  them - each of those faults is refused with 400. `culture` picks the language of the letter. The invitation is  not an account: the invitee becomes a member only after following the link, and the role it grants, user or  room administrator, follows the trusted-domain settings and drops to user once the portal's paid places are  taken. Where the installation caps invitations, an accepted call spends one of those counted by  `invitationLimit`, and only about a dozen calls from one address in two minutes are accepted. What comes back  is a localized confirmation.
 
-        :param admin_message_base_settings_requests_dto:
-        :type admin_message_base_settings_requests_dto: AdminMessageBaseSettingsRequestsDto
+        :param admin_message_base_settings_request_dto:
+        :type admin_message_base_settings_request_dto: AdminMessageBaseSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -746,7 +776,7 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._send_join_invite_mail_serialize(
-            admin_message_base_settings_requests_dto=admin_message_base_settings_requests_dto,
+            admin_message_base_settings_request_dto=admin_message_base_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -757,10 +787,13 @@ class MessagesApi:
             '200': "StringWrapper",
             '400': None,
             '403': None,
-            '429': None,
+            '405': None,
+            '500': None,
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -775,7 +808,7 @@ class MessagesApi:
     @validate_call
     def send_join_invite_mail_without_preload_content(
         self,
-        admin_message_base_settings_requests_dto: Optional[AdminMessageBaseSettingsRequestsDto] = None,
+        admin_message_base_settings_request_dto: Optional[AdminMessageBaseSettingsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -789,12 +822,12 @@ class MessagesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Sends an invitation email
+        """Send an invitation email
 
-        Sends an invitation email with a link to the DocSpace.
+        Sends an invitation email with a join link to the address in the request - the self-registration the sign-in  page's register link performs. No token is needed. The portal has to publish a trusted-domain policy first,  saved with `POST api/2.0/settings/maildomainsettings`: without one there is nothing to join and every caller  alike is answered with 405 - the same condition `GET api/2.0/settings` reports as `enabledJoin`. `email` has  to be a real address written in ASCII rather than an internationalized one, must not already belong to a  portal member, and, when the policy names domains rather than accepting all of them, has to end with one of  them - each of those faults is refused with 400. `culture` picks the language of the letter. The invitation is  not an account: the invitee becomes a member only after following the link, and the role it grants, user or  room administrator, follows the trusted-domain settings and drops to user once the portal's paid places are  taken. Where the installation caps invitations, an accepted call spends one of those counted by  `invitationLimit`, and only about a dozen calls from one address in two minutes are accepted. What comes back  is a localized confirmation.
 
-        :param admin_message_base_settings_requests_dto:
-        :type admin_message_base_settings_requests_dto: AdminMessageBaseSettingsRequestsDto
+        :param admin_message_base_settings_request_dto:
+        :type admin_message_base_settings_request_dto: AdminMessageBaseSettingsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -818,7 +851,7 @@ class MessagesApi:
         """ # noqa: E501
 
         _param = self._send_join_invite_mail_serialize(
-            admin_message_base_settings_requests_dto=admin_message_base_settings_requests_dto,
+            admin_message_base_settings_request_dto=admin_message_base_settings_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -829,10 +862,13 @@ class MessagesApi:
             '200': "StringWrapper",
             '400': None,
             '403': None,
-            '429': None,
+            '405': None,
+            '500': None,
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -842,7 +878,7 @@ class MessagesApi:
 
     def _send_join_invite_mail_serialize(
         self,
-        admin_message_base_settings_requests_dto,
+        admin_message_base_settings_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -868,8 +904,8 @@ class MessagesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if admin_message_base_settings_requests_dto is not None:
-            _body_params = admin_message_base_settings_requests_dto
+        if admin_message_base_settings_request_dto is not None:
+            _body_params = admin_message_base_settings_request_dto
 
 
         # set the HTTP header `Accept`
@@ -896,6 +932,12 @@ class MessagesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 

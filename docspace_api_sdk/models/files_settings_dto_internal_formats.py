@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class FilesSettingsDtoInternalFormats(BaseModel):
     """
-    The internal file formats.
+    The extension the portal creates for each kind of document, keyed by that kind. This is what a new empty  document gets when no extension is asked for.
     """ # noqa: E501
     unknown: Optional[StrictStr] = Field(default=None, alias="Unknown")
     archive: Optional[StrictStr] = Field(default=None, alias="Archive")

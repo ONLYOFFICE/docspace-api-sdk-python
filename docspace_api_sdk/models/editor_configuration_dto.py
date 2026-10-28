@@ -23,34 +23,34 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.co_editing_config import CoEditingConfig
+from docspace_api_sdk.models.co_editing_config_dto import CoEditingConfigDto
 from docspace_api_sdk.models.customization_config_dto import CustomizationConfigDto
-from docspace_api_sdk.models.embedded_config import EmbeddedConfig
-from docspace_api_sdk.models.encryption_keys_config import EncryptionKeysConfig
-from docspace_api_sdk.models.plugins_config import PluginsConfig
-from docspace_api_sdk.models.recent_config import RecentConfig
-from docspace_api_sdk.models.templates_config import TemplatesConfig
-from docspace_api_sdk.models.user_config import UserConfig
+from docspace_api_sdk.models.embedded_config_dto import EmbeddedConfigDto
+from docspace_api_sdk.models.encryption_key_dto import EncryptionKeyDto
+from docspace_api_sdk.models.plugins_config_dto import PluginsConfigDto
+from docspace_api_sdk.models.recent_config_dto import RecentConfigDto
+from docspace_api_sdk.models.templates_config_dto import TemplatesConfigDto
+from docspace_api_sdk.models.user_config_dto import UserConfigDto
 from typing import Optional, Set
 from typing_extensions import Self
 
 class EditorConfigurationDto(BaseModel):
     """
-    The editor configuration parameters.
+    How the editors behave for this opening: the mode, the language, the interface, and who is editing.
     """ # noqa: E501
-    callback_url: Optional[StrictStr] = Field(default=None, description="The callback URL of the editor.", alias="callbackUrl")
-    co_editing: Optional[CoEditingConfig] = Field(default=None, alias="coEditing")
-    create_url: Optional[StrictStr] = Field(default=None, description="The creation URL of the editor.", alias="createUrl")
-    customization: Optional[CustomizationConfigDto] = None
-    embedded: Optional[EmbeddedConfig] = None
-    encryption_keys: Optional[EncryptionKeysConfig] = Field(default=None, alias="encryptionKeys")
-    lang: Optional[StrictStr] = Field(description="The language of the editor configuration.")
-    mode: Optional[StrictStr] = Field(description="The mode of the editor configuration.")
-    mode_write: Optional[StrictBool] = Field(default=None, description="Specifies if the mode is write of the editor configuration.", alias="modeWrite")
-    plugins: Optional[PluginsConfig] = None
-    recent: Optional[List[RecentConfig]] = Field(default=None, description="The recent configuration of the editor.")
-    templates: Optional[List[TemplatesConfig]] = Field(default=None, description="The templates of the editor configuration.")
-    user: Optional[UserConfig] = None
+    callback_url: Optional[StrictStr] = Field(default=None, description="Where the editors post the document back to when they save it. A client must not call it itself; it is the  address the document service uses.", alias="callbackUrl", json_schema_extra={"examples": ["https://portal.example.com/filehandler.ashx?action=track&fileid=512"]})
+    co_editing: Optional[CoEditingConfigDto] = Field(default=None, description="How co-editing starts out for this session and whether the user may switch it in the interface.", alias="coEditing")
+    create_url: Optional[StrictStr] = Field(default=None, description="Where the editor sends the user when they ask for a new document of the same type. It is empty when creating  one is not offered here.", alias="createUrl", json_schema_extra={"examples": ["https://portal.example.com/products/files/?action=create&doctype=word"]})
+    customization: Optional[CustomizationConfigDto] = Field(default=None, description="How the editor interface is dressed for this portal, this document and this layout.")
+    embedded: Optional[EmbeddedConfigDto] = Field(default=None, description="The addresses the framed viewer needs. It is filled in only for the embedded layout.")
+    encryption_keys: Optional[List[EncryptionKeyDto]] = Field(default=None, description="The caller's end-to-end encryption keys, added only when the document lies in a private room, so that the  editors can decrypt it in the browser. It is empty everywhere else.", alias="encryptionKeys")
+    lang: Optional[StrictStr] = Field(description="The culture the editor interface is shown in, taken from the profile of the caller.", json_schema_extra={"examples": ["en-US"]})
+    mode: Optional[StrictStr] = Field(description="`edit` when this session may write the document, `view` when it may only read it.", json_schema_extra={"examples": ["edit"]})
+    mode_write: Optional[StrictBool] = Field(default=None, description="Whether this session may write; it is what the mode above says in one word.", alias="modeWrite", json_schema_extra={"examples": [True]})
+    plugins: Optional[PluginsConfigDto] = Field(default=None, description="Which editor plugins are offered. The portal currently offers none, so the list inside comes back empty.")
+    recent: Optional[List[RecentConfigDto]] = Field(default=None, description="The documents offered in the editor's recent list. It is left out altogether when there is nothing to offer.", json_schema_extra={"examples": [[]]})
+    templates: Optional[List[TemplatesConfigDto]] = Field(default=None, description="Always empty: the portal no longer passes creation templates through the editor configuration.", json_schema_extra={"examples": [[]]})
+    user: Optional[UserConfigDto] = Field(default=None, description="The account the editors attribute changes to. It is empty for an anonymous session opened through an external  link, and the editors then ask for a name themselves.")
     __properties: ClassVar[List[str]] = ["callbackUrl", "coEditing", "createUrl", "customization", "embedded", "encryptionKeys", "lang", "mode", "modeWrite", "plugins", "recent", "templates", "user"]
 
     model_config = ConfigDict(
@@ -101,9 +101,13 @@ class EditorConfigurationDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of embedded
         if self.embedded:
             _dict['embedded'] = self.embedded.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of encryption_keys
+        # override the default output from pydantic by calling `to_dict()` of each item in encryption_keys (list)
+        _items = []
         if self.encryption_keys:
-            _dict['encryptionKeys'] = self.encryption_keys.to_dict()
+            for _item_encryption_keys in self.encryption_keys:
+                if _item_encryption_keys:
+                    _items.append(_item_encryption_keys.to_dict())
+            _dict['encryptionKeys'] = _items
         # override the default output from pydantic by calling `to_dict()` of plugins
         if self.plugins:
             _dict['plugins'] = self.plugins.to_dict()
@@ -133,6 +137,11 @@ class EditorConfigurationDto(BaseModel):
         # and model_fields_set contains the field
         if self.create_url is None and "create_url" in self.model_fields_set:
             _dict['createUrl'] = None
+
+        # set to None if encryption_keys (nullable) is None
+        # and model_fields_set contains the field
+        if self.encryption_keys is None and "encryption_keys" in self.model_fields_set:
+            _dict['encryptionKeys'] = None
 
         # set to None if lang (nullable) is None
         # and model_fields_set contains the field
@@ -168,18 +177,18 @@ class EditorConfigurationDto(BaseModel):
 
         _obj = cls.model_validate({
             "callbackUrl": obj.get("callbackUrl"),
-            "coEditing": CoEditingConfig.from_dict(obj["coEditing"]) if obj.get("coEditing") is not None else None,
+            "coEditing": CoEditingConfigDto.from_dict(obj["coEditing"]) if obj.get("coEditing") is not None else None,
             "createUrl": obj.get("createUrl"),
             "customization": CustomizationConfigDto.from_dict(obj["customization"]) if obj.get("customization") is not None else None,
-            "embedded": EmbeddedConfig.from_dict(obj["embedded"]) if obj.get("embedded") is not None else None,
-            "encryptionKeys": EncryptionKeysConfig.from_dict(obj["encryptionKeys"]) if obj.get("encryptionKeys") is not None else None,
+            "embedded": EmbeddedConfigDto.from_dict(obj["embedded"]) if obj.get("embedded") is not None else None,
+            "encryptionKeys": [EncryptionKeyDto.from_dict(_item) for _item in obj["encryptionKeys"]] if obj.get("encryptionKeys") is not None else None,
             "lang": obj.get("lang"),
             "mode": obj.get("mode"),
             "modeWrite": obj.get("modeWrite"),
-            "plugins": PluginsConfig.from_dict(obj["plugins"]) if obj.get("plugins") is not None else None,
-            "recent": [RecentConfig.from_dict(_item) for _item in obj["recent"]] if obj.get("recent") is not None else None,
-            "templates": [TemplatesConfig.from_dict(_item) for _item in obj["templates"]] if obj.get("templates") is not None else None,
-            "user": UserConfig.from_dict(obj["user"]) if obj.get("user") is not None else None
+            "plugins": PluginsConfigDto.from_dict(obj["plugins"]) if obj.get("plugins") is not None else None,
+            "recent": [RecentConfigDto.from_dict(_item) for _item in obj["recent"]] if obj.get("recent") is not None else None,
+            "templates": [TemplatesConfigDto.from_dict(_item) for _item in obj["templates"]] if obj.get("templates") is not None else None,
+            "user": UserConfigDto.from_dict(obj["user"]) if obj.get("user") is not None else None
         })
         return _obj
 

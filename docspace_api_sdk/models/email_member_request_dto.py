@@ -32,9 +32,9 @@ class EmailMemberRequestDto(BaseModel):
     """
     The request parameters for the user email.
     """ # noqa: E501
-    email: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The user email address.")
-    recaptcha_type: Optional[RecaptchaType] = Field(default=None, alias="recaptchaType")
-    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse")
+    email: Annotated[str, Field(min_length=0, strict=True, max_length=255)] = Field(description="The address to send the password recovery link to. It is required and validated even by  `POST api/2.0/people/guests/share/approve`, which then ignores its value and takes the account from the  confirmation token instead.", json_schema_extra={"examples": ["john.doe@example.com"]})
+    recaptcha_type: Optional[RecaptchaType] = Field(default=None, description="Which CAPTCHA the `recaptchaResponse` comes from: `Default` for the web reCAPTCHA, `AndroidV2` or `iOSV2` for  the mobile ones, and `hCaptcha` when the portal is configured with hCaptcha. It matters only for an  unauthenticated request on a portal that has a CAPTCHA.", alias="recaptchaType")
+    recaptcha_response: Optional[StrictStr] = Field(default=None, description="The user's response to the CAPTCHA challenge.", alias="recaptchaResponse", json_schema_extra={"examples": ["03AGdBq27..."]})
     __properties: ClassVar[List[str]] = ["email", "recaptchaType", "recaptchaResponse"]
 
     model_config = ConfigDict(

@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class FileOperationType(int, Enum):
     """
-    [0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate]
+    [0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate, 8 - Build]
     """
 
     """
@@ -38,6 +38,7 @@ class FileOperationType(int, Enum):
     Import = 5
     Convert = 6
     Duplicate = 7
+    Build = 8
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

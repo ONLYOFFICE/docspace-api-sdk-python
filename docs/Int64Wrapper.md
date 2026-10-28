@@ -1,10 +1,11 @@
 # Int64Wrapper
+The successful API response containing the int64 value.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | **int** |  | [optional] 
+**response** | **int** | The int64 value returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

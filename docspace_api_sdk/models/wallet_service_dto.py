@@ -24,10 +24,10 @@ import re  # noqa: F401
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.entity_quota_dto import EntityQuotaDto
 from docspace_api_sdk.models.price_dto import PriceDto
-from docspace_api_sdk.models.tenant_entity_quota_settings import TenantEntityQuotaSettings
 from docspace_api_sdk.models.tenant_quota_feature_dto import TenantQuotaFeatureDto
-from docspace_api_sdk.models.tenant_quota_settings import TenantQuotaSettings
+from docspace_api_sdk.models.tenant_quota_settings_dto import TenantQuotaSettingsDto
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
@@ -35,11 +35,11 @@ from docspace_api_sdk.models.quota_dto import QuotaDto
 
 class WalletServiceDto(QuotaDto):
     """
-    The wallet service information.
+    One service the portal can pay for out of its wallet: a quota sold per unit rather than per period.
     """
 
-    inner_services: Optional[List[WalletServiceDto]] = Field(default=None, description="The list of inner services.", alias="innerServices")
-    service_name: Optional[StrictStr] = Field(default=None, description="The service name.", alias="serviceName")
+    inner_services: Optional[List[WalletServiceDto]] = Field(default=None, description="The variants of this service that are folded into it, so a client renders one card per group instead of  one per variant. It is empty when the service has no variants, and always empty in the answer of  `GET api/2.0/portal/payment/walletservice`, which looks one service up on its own.", alias="innerServices", json_schema_extra={"examples": [[{"serviceName": "docs-cloud-dev", "title": "Developer pack"}]]})
+    service_name: Optional[StrictStr] = Field(default=None, description="The stable key of the service, which is what the wallet operations take as their `service` argument and  what the usage reports key their entries by.", alias="serviceName", json_schema_extra={"examples": ["backup"]})
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,21 +108,6 @@ class WalletServiceDto(QuotaDto):
                 if _item_inner_services:
                     _items.append(_item_inner_services.to_dict())
             _dict['innerServices'] = _items
-        # set to None if title (nullable) is None
-        # and model_fields_set contains the field
-        if self.title is None and "title" in self.model_fields_set:
-            _dict['title'] = None
-
-        # set to None if features (nullable) is None
-        # and model_fields_set contains the field
-        if self.features is None and "features" in self.model_fields_set:
-            _dict['features'] = None
-
-        # set to None if due_date (nullable) is None
-        # and model_fields_set contains the field
-        if self.due_date is None and "due_date" in self.model_fields_set:
-            _dict['dueDate'] = None
-
         # set to None if inner_services (nullable) is None
         # and model_fields_set contains the field
         if self.inner_services is None and "inner_services" in self.model_fields_set:

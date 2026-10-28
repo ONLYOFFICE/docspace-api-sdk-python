@@ -18,18 +18,18 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
-from docspace_api_sdk.models.setup_code_wrapper import SetupCodeWrapper
 from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.models.tfa_app_code_array_wrapper import TfaAppCodeArrayWrapper
 from docspace_api_sdk.models.tfa_confirm_data_wrapper import TfaConfirmDataWrapper
-from docspace_api_sdk.models.tfa_requests_dto import TfaRequestsDto
+from docspace_api_sdk.models.tfa_request_dto import TfaRequestDto
 from docspace_api_sdk.models.tfa_settings_array_wrapper import TfaSettingsArrayWrapper
-from docspace_api_sdk.models.tfa_validate_requests_dto import TfaValidateRequestsDto
+from docspace_api_sdk.models.tfa_setup_code_wrapper import TfaSetupCodeWrapper
+from docspace_api_sdk.models.tfa_validate_request_dto import TfaValidateRequestDto
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -66,9 +66,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TfaAppCodeArrayWrapper:
-        """Get the TFA codes
+        """Get the TFA backup codes
 
-        Returns the two-factor authentication application codes.
+        Returns the one-time backup codes of the current user's authenticator-application credential, each with the  flag that says whether it has been spent. A backup code is accepted in place of a code from the application  when signing in, and every code works exactly once, so this list is what a member falls back on after losing  access to their authenticator. Any authenticated member may call it, always for their own account: there is no  way to read someone else's codes. The authenticator method has to be enabled on the portal and an application  has to be linked to the account already, otherwise the call answers 405; link one through  `GET api/2.0/settings/tfaapp/confirm` and `POST api/2.0/settings/tfaapp/validate`. This is a read-only,  idempotent call: the codes are generated once, when the application is first linked, and the whole set is  replaced by `PUT api/2.0/settings/tfaappnewcodes`. The default configuration issues five codes of six  characters, and a portal may be configured for a different number and length.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -102,11 +102,13 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -134,9 +136,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TfaAppCodeArrayWrapper]:
-        """Get the TFA codes
+        """Get the TFA backup codes
 
-        Returns the two-factor authentication application codes.
+        Returns the one-time backup codes of the current user's authenticator-application credential, each with the  flag that says whether it has been spent. A backup code is accepted in place of a code from the application  when signing in, and every code works exactly once, so this list is what a member falls back on after losing  access to their authenticator. Any authenticated member may call it, always for their own account: there is no  way to read someone else's codes. The authenticator method has to be enabled on the portal and an application  has to be linked to the account already, otherwise the call answers 405; link one through  `GET api/2.0/settings/tfaapp/confirm` and `POST api/2.0/settings/tfaapp/validate`. This is a read-only,  idempotent call: the codes are generated once, when the application is first linked, and the whole set is  replaced by `PUT api/2.0/settings/tfaappnewcodes`. The default configuration issues five codes of six  characters, and a portal may be configured for a different number and length.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -170,11 +172,13 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -202,9 +206,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the TFA codes
+        """Get the TFA backup codes
 
-        Returns the two-factor authentication application codes.
+        Returns the one-time backup codes of the current user's authenticator-application credential, each with the  flag that says whether it has been spent. A backup code is accepted in place of a code from the application  when signing in, and every code works exactly once, so this list is what a member falls back on after losing  access to their authenticator. Any authenticated member may call it, always for their own account: there is no  way to read someone else's codes. The authenticator method has to be enabled on the portal and an application  has to be linked to the account already, otherwise the call answers 405; link one through  `GET api/2.0/settings/tfaapp/confirm` and `POST api/2.0/settings/tfaapp/validate`. This is a read-only,  idempotent call: the codes are generated once, when the application is first linked, and the whole set is  replaced by `PUT api/2.0/settings/tfaappnewcodes`. The default configuration issues five codes of six  characters, and a portal may be configured for a different number and length.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -238,11 +242,13 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -337,7 +343,7 @@ class TFASettingsApi:
     ) -> TfaConfirmDataWrapper:
         """Get TFA confirmation data
 
-        Returns the confirmation data for authorization via SMS or TFA application.
+        Returns the confirmation link the current user has to follow to pass the portal's two-factor authentication  step, together with the confirmation cookie that link depends on. Any authenticated member may call it, always  for their own account, and TFA has to be required for that account by the portal policy already, otherwise the  response body is empty. Which link comes back depends on the method. With the SMS method it is a phone  activation link while the account has no activated mobile number and a phone authorization link afterwards,  and only `url` is filled in. With the authenticator-application method the response also carries `cookieName`  and `cookieValue`, and the call mutates state by issuing a fresh confirmation key and setting that cookie; the  link then points at activation while no application is linked, or after the previous link was reset, and at  re-verification once one is linked. Hand the code obtained through that flow to  `POST api/2.0/settings/tfaapp/validate`. The portal-wide policy behind all of this is read with  `GET api/2.0/settings/tfaapp`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -370,11 +376,13 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaConfirmDataWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -404,7 +412,7 @@ class TFASettingsApi:
     ) -> ApiResponse[TfaConfirmDataWrapper]:
         """Get TFA confirmation data
 
-        Returns the confirmation data for authorization via SMS or TFA application.
+        Returns the confirmation link the current user has to follow to pass the portal's two-factor authentication  step, together with the confirmation cookie that link depends on. Any authenticated member may call it, always  for their own account, and TFA has to be required for that account by the portal policy already, otherwise the  response body is empty. Which link comes back depends on the method. With the SMS method it is a phone  activation link while the account has no activated mobile number and a phone authorization link afterwards,  and only `url` is filled in. With the authenticator-application method the response also carries `cookieName`  and `cookieValue`, and the call mutates state by issuing a fresh confirmation key and setting that cookie; the  link then points at activation while no application is linked, or after the previous link was reset, and at  re-verification once one is linked. Hand the code obtained through that flow to  `POST api/2.0/settings/tfaapp/validate`. The portal-wide policy behind all of this is read with  `GET api/2.0/settings/tfaapp`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -437,11 +445,13 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaConfirmDataWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -471,7 +481,7 @@ class TFASettingsApi:
     ) -> RESTResponseType:
         """Get TFA confirmation data
 
-        Returns the confirmation data for authorization via SMS or TFA application.
+        Returns the confirmation link the current user has to follow to pass the portal's two-factor authentication  step, together with the confirmation cookie that link depends on. Any authenticated member may call it, always  for their own account, and TFA has to be required for that account by the portal policy already, otherwise the  response body is empty. Which link comes back depends on the method. With the SMS method it is a phone  activation link while the account has no activated mobile number and a phone authorization link afterwards,  and only `url` is filled in. With the authenticator-application method the response also carries `cookieName`  and `cookieValue`, and the call mutates state by issuing a fresh confirmation key and setting that cookie; the  link then points at activation while no application is linked, or after the previous link was reset, and at  re-verification once one is linked. Hand the code obtained through that flow to  `POST api/2.0/settings/tfaapp/validate`. The portal-wide policy behind all of this is read with  `GET api/2.0/settings/tfaapp`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -504,11 +514,13 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaConfirmDataWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -603,7 +615,7 @@ class TFASettingsApi:
     ) -> TfaSettingsArrayWrapper:
         """Get the TFA settings
 
-        Returns the current two-factor authentication settings.
+        Lists the two-factor authentication methods this portal offers, with the state of each one. The list carries  at most two entries: `sms`, present only when the SMS method is enabled in the portal's configuration, and  `app`, present only when the authenticator-application method is enabled there, so an empty list means neither  method is offered here. Any authenticated member may call it, and what it returns is the portal-wide policy,  not the caller's own linked credential. This is a read-only, idempotent call. For every entry `enabled` says  whether that method is the current policy, `available` says whether it can actually be switched on (for `sms`  that also requires a configured SMS provider), `trustedIps` lists the addresses and ranges exempt from the  challenge, and `mandatoryUsers` and `mandatoryGroups` list the accounts that have to pass it even from a  trusted address. Change the policy with `PUT api/2.0/settings/tfaapp`, and read the caller's own backup codes  with `GET api/2.0/settings/tfaappcodes`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -636,11 +648,13 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaSettingsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -670,7 +684,7 @@ class TFASettingsApi:
     ) -> ApiResponse[TfaSettingsArrayWrapper]:
         """Get the TFA settings
 
-        Returns the current two-factor authentication settings.
+        Lists the two-factor authentication methods this portal offers, with the state of each one. The list carries  at most two entries: `sms`, present only when the SMS method is enabled in the portal's configuration, and  `app`, present only when the authenticator-application method is enabled there, so an empty list means neither  method is offered here. Any authenticated member may call it, and what it returns is the portal-wide policy,  not the caller's own linked credential. This is a read-only, idempotent call. For every entry `enabled` says  whether that method is the current policy, `available` says whether it can actually be switched on (for `sms`  that also requires a configured SMS provider), `trustedIps` lists the addresses and ranges exempt from the  challenge, and `mandatoryUsers` and `mandatoryGroups` list the accounts that have to pass it even from a  trusted address. Change the policy with `PUT api/2.0/settings/tfaapp`, and read the caller's own backup codes  with `GET api/2.0/settings/tfaappcodes`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -703,11 +717,13 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaSettingsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -737,7 +753,7 @@ class TFASettingsApi:
     ) -> RESTResponseType:
         """Get the TFA settings
 
-        Returns the current two-factor authentication settings.
+        Lists the two-factor authentication methods this portal offers, with the state of each one. The list carries  at most two entries: `sms`, present only when the SMS method is enabled in the portal's configuration, and  `app`, present only when the authenticator-application method is enabled there, so an empty list means neither  method is offered here. Any authenticated member may call it, and what it returns is the portal-wide policy,  not the caller's own linked credential. This is a read-only, idempotent call. For every entry `enabled` says  whether that method is the current policy, `available` says whether it can actually be switched on (for `sms`  that also requires a configured SMS provider), `trustedIps` lists the addresses and ranges exempt from the  challenge, and `mandatoryUsers` and `mandatoryGroups` list the accounts that have to pass it even from a  trusted address. Change the policy with `PUT api/2.0/settings/tfaapp`, and read the caller's own backup codes  with `GET api/2.0/settings/tfaappcodes`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -770,11 +786,13 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaSettingsArrayWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -866,10 +884,10 @@ class TFASettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SetupCodeWrapper:
-        """Generate setup code
+    ) -> TfaSetupCodeWrapper:
+        """Generate the TFA setup code
 
-        Generates the setup TFA code for the current user.
+        Issues the secret the current user has to enter in an authenticator application before the  authenticator-application method can be used, both as a scannable QR-code image and as a key for manual entry.  The call is reachable only with a confirmation token carrying the `TfaActivation` role, obtained from  `GET api/2.0/settings/tfaapp/confirm` or from the login flow; an ordinary bearer token is refused. The  authenticator method has to be enabled on the portal and be its current policy, and the account must have no  application linked yet: for an already-linked account the call answers 405, so reset the credential first with  `PUT api/2.0/settings/tfaappnewapp`. Repeating the call is safe and hands back the same secret for the  account, so the QR code and the manual key always describe one and the same credential. `qrCodeSetupImageUrl`  is a base64 `data:` URL of a PNG image, and `account` is the label the application will show. Finish the setup  by sending a code from the application to `POST api/2.0/settings/tfaapp/validate`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -901,13 +919,15 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SetupCodeWrapper",
+            '200': "TfaSetupCodeWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -934,10 +954,10 @@ class TFASettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SetupCodeWrapper]:
-        """Generate setup code
+    ) -> ApiResponse[TfaSetupCodeWrapper]:
+        """Generate the TFA setup code
 
-        Generates the setup TFA code for the current user.
+        Issues the secret the current user has to enter in an authenticator application before the  authenticator-application method can be used, both as a scannable QR-code image and as a key for manual entry.  The call is reachable only with a confirmation token carrying the `TfaActivation` role, obtained from  `GET api/2.0/settings/tfaapp/confirm` or from the login flow; an ordinary bearer token is refused. The  authenticator method has to be enabled on the portal and be its current policy, and the account must have no  application linked yet: for an already-linked account the call answers 405, so reset the credential first with  `PUT api/2.0/settings/tfaappnewapp`. Repeating the call is safe and hands back the same secret for the  account, so the QR code and the manual key always describe one and the same credential. `qrCodeSetupImageUrl`  is a base64 `data:` URL of a PNG image, and `account` is the label the application will show. Finish the setup  by sending a code from the application to `POST api/2.0/settings/tfaapp/validate`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -969,13 +989,15 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SetupCodeWrapper",
+            '200': "TfaSetupCodeWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1003,9 +1025,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Generate setup code
+        """Generate the TFA setup code
 
-        Generates the setup TFA code for the current user.
+        Issues the secret the current user has to enter in an authenticator application before the  authenticator-application method can be used, both as a scannable QR-code image and as a key for manual entry.  The call is reachable only with a confirmation token carrying the `TfaActivation` role, obtained from  `GET api/2.0/settings/tfaapp/confirm` or from the login flow; an ordinary bearer token is refused. The  authenticator method has to be enabled on the portal and be its current policy, and the account must have no  application linked yet: for an already-linked account the call answers 405, so reset the credential first with  `PUT api/2.0/settings/tfaappnewapp`. Repeating the call is safe and hands back the same secret for the  account, so the QR code and the manual key always describe one and the same credential. `qrCodeSetupImageUrl`  is a base64 `data:` URL of a PNG image, and `account` is the label the application will show. Finish the setup  by sending a code from the application to `POST api/2.0/settings/tfaapp/validate`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1037,13 +1059,15 @@ class TFASettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SetupCodeWrapper",
+            '200': "TfaSetupCodeWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1123,7 +1147,7 @@ class TFASettingsApi:
     @validate_call
     def tfa_validate_auth_code(
         self,
-        tfa_validate_requests_dto: Optional[TfaValidateRequestsDto] = None,
+        tfa_validate_request_dto: Optional[TfaValidateRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1139,10 +1163,10 @@ class TFASettingsApi:
     ) -> BooleanWrapper:
         """Validate the TFA code
 
-        Validates the two-factor authentication code specified in the request.
+        Verifies a two-factor authentication code for the account named in the confirmation link being used, and  completes that account's pending TFA step. The call is reachable only with a confirmation token carrying the  `TfaActivation` or `TfaAuth` role, issued by `GET api/2.0/settings/tfaapp/confirm` or by the login flow; an  ordinary bearer token is refused. Both a code from the authenticator application and one of the account's  unused backup codes are accepted, and a backup code is spent by the check. The call mutates state: it signs  the account in, clears the confirmation cookie so the link cannot be replayed, and on the very first  activation it generates the backup codes later returned by `GET api/2.0/settings/tfaappcodes`. Pass  `session=true` to keep that sign-in for the browser session only instead of a persistent one. It answers  `true` only for that first activation and `false` when an application was already linked. A wrong code is  rejected as an invalid request, and further attempts are refused once the portal's login attempt limit is  reached. The call also works while the portal's payment is overdue.
 
-        :param tfa_validate_requests_dto:
-        :type tfa_validate_requests_dto: TfaValidateRequestsDto
+        :param tfa_validate_request_dto:
+        :type tfa_validate_request_dto: TfaValidateRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1166,7 +1190,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._tfa_validate_auth_code_serialize(
-            tfa_validate_requests_dto=tfa_validate_requests_dto,
+            tfa_validate_request_dto=tfa_validate_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1175,11 +1199,15 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1194,7 +1222,7 @@ class TFASettingsApi:
     @validate_call
     def tfa_validate_auth_code_with_http_info(
         self,
-        tfa_validate_requests_dto: Optional[TfaValidateRequestsDto] = None,
+        tfa_validate_request_dto: Optional[TfaValidateRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1210,10 +1238,10 @@ class TFASettingsApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Validate the TFA code
 
-        Validates the two-factor authentication code specified in the request.
+        Verifies a two-factor authentication code for the account named in the confirmation link being used, and  completes that account's pending TFA step. The call is reachable only with a confirmation token carrying the  `TfaActivation` or `TfaAuth` role, issued by `GET api/2.0/settings/tfaapp/confirm` or by the login flow; an  ordinary bearer token is refused. Both a code from the authenticator application and one of the account's  unused backup codes are accepted, and a backup code is spent by the check. The call mutates state: it signs  the account in, clears the confirmation cookie so the link cannot be replayed, and on the very first  activation it generates the backup codes later returned by `GET api/2.0/settings/tfaappcodes`. Pass  `session=true` to keep that sign-in for the browser session only instead of a persistent one. It answers  `true` only for that first activation and `false` when an application was already linked. A wrong code is  rejected as an invalid request, and further attempts are refused once the portal's login attempt limit is  reached. The call also works while the portal's payment is overdue.
 
-        :param tfa_validate_requests_dto:
-        :type tfa_validate_requests_dto: TfaValidateRequestsDto
+        :param tfa_validate_request_dto:
+        :type tfa_validate_request_dto: TfaValidateRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1237,7 +1265,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._tfa_validate_auth_code_serialize(
-            tfa_validate_requests_dto=tfa_validate_requests_dto,
+            tfa_validate_request_dto=tfa_validate_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1246,11 +1274,15 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1265,7 +1297,7 @@ class TFASettingsApi:
     @validate_call
     def tfa_validate_auth_code_without_preload_content(
         self,
-        tfa_validate_requests_dto: Optional[TfaValidateRequestsDto] = None,
+        tfa_validate_request_dto: Optional[TfaValidateRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1281,10 +1313,10 @@ class TFASettingsApi:
     ) -> RESTResponseType:
         """Validate the TFA code
 
-        Validates the two-factor authentication code specified in the request.
+        Verifies a two-factor authentication code for the account named in the confirmation link being used, and  completes that account's pending TFA step. The call is reachable only with a confirmation token carrying the  `TfaActivation` or `TfaAuth` role, issued by `GET api/2.0/settings/tfaapp/confirm` or by the login flow; an  ordinary bearer token is refused. Both a code from the authenticator application and one of the account's  unused backup codes are accepted, and a backup code is spent by the check. The call mutates state: it signs  the account in, clears the confirmation cookie so the link cannot be replayed, and on the very first  activation it generates the backup codes later returned by `GET api/2.0/settings/tfaappcodes`. Pass  `session=true` to keep that sign-in for the browser session only instead of a persistent one. It answers  `true` only for that first activation and `false` when an application was already linked. A wrong code is  rejected as an invalid request, and further attempts are refused once the portal's login attempt limit is  reached. The call also works while the portal's payment is overdue.
 
-        :param tfa_validate_requests_dto:
-        :type tfa_validate_requests_dto: TfaValidateRequestsDto
+        :param tfa_validate_request_dto:
+        :type tfa_validate_request_dto: TfaValidateRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1308,7 +1340,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._tfa_validate_auth_code_serialize(
-            tfa_validate_requests_dto=tfa_validate_requests_dto,
+            tfa_validate_request_dto=tfa_validate_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1317,11 +1349,15 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1331,7 +1367,7 @@ class TFASettingsApi:
 
     def _tfa_validate_auth_code_serialize(
         self,
-        tfa_validate_requests_dto,
+        tfa_validate_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -1357,8 +1393,8 @@ class TFASettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if tfa_validate_requests_dto is not None:
-            _body_params = tfa_validate_requests_dto
+        if tfa_validate_request_dto is not None:
+            _body_params = tfa_validate_request_dto
 
 
         # set the HTTP header `Accept`
@@ -1417,7 +1453,7 @@ class TFASettingsApi:
     @validate_call
     def unlink_tfa_app(
         self,
-        tfa_requests_dto: Optional[TfaRequestsDto] = None,
+        tfa_request_dto: Optional[TfaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1433,10 +1469,10 @@ class TFASettingsApi:
     ) -> StringWrapper:
         """Unlink the TFA application
 
-        Unlinks the current two-factor authentication application from the user account specified in the request.
+        Detaches the authenticator application from an account, so that the account has to link a new one before it  can sign in again. `id` has to name an existing account: an empty or unknown value is refused. Passing the  caller's own ID resets their own credential and returns the activation link they should follow next; passing  another member's ID is allowed for the portal owner only, and every other caller, a DocSpace administrator  included, is refused. The account has to have an application linked and the authenticator method has to be  enabled on the portal, otherwise the call answers 405, and a terminated account is refused. The call is  destructive: the account's backup codes are dropped together with the credential and all of its sessions are  signed out. For another member the portal also emails them that their TFA was reset, and the answer is then an  empty string. The portal-wide policy is not touched, so TFA stays required and the account sets up an  application again through `GET api/2.0/settings/tfaapp/confirm`; lift the requirement for everyone with  `PUT api/2.0/settings/tfaapp`.
 
-        :param tfa_requests_dto:
-        :type tfa_requests_dto: TfaRequestsDto
+        :param tfa_request_dto:
+        :type tfa_request_dto: TfaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1460,7 +1496,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._unlink_tfa_app_serialize(
-            tfa_requests_dto=tfa_requests_dto,
+            tfa_request_dto=tfa_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1469,13 +1505,16 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1490,7 +1529,7 @@ class TFASettingsApi:
     @validate_call
     def unlink_tfa_app_with_http_info(
         self,
-        tfa_requests_dto: Optional[TfaRequestsDto] = None,
+        tfa_request_dto: Optional[TfaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1506,10 +1545,10 @@ class TFASettingsApi:
     ) -> ApiResponse[StringWrapper]:
         """Unlink the TFA application
 
-        Unlinks the current two-factor authentication application from the user account specified in the request.
+        Detaches the authenticator application from an account, so that the account has to link a new one before it  can sign in again. `id` has to name an existing account: an empty or unknown value is refused. Passing the  caller's own ID resets their own credential and returns the activation link they should follow next; passing  another member's ID is allowed for the portal owner only, and every other caller, a DocSpace administrator  included, is refused. The account has to have an application linked and the authenticator method has to be  enabled on the portal, otherwise the call answers 405, and a terminated account is refused. The call is  destructive: the account's backup codes are dropped together with the credential and all of its sessions are  signed out. For another member the portal also emails them that their TFA was reset, and the answer is then an  empty string. The portal-wide policy is not touched, so TFA stays required and the account sets up an  application again through `GET api/2.0/settings/tfaapp/confirm`; lift the requirement for everyone with  `PUT api/2.0/settings/tfaapp`.
 
-        :param tfa_requests_dto:
-        :type tfa_requests_dto: TfaRequestsDto
+        :param tfa_request_dto:
+        :type tfa_request_dto: TfaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1533,7 +1572,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._unlink_tfa_app_serialize(
-            tfa_requests_dto=tfa_requests_dto,
+            tfa_request_dto=tfa_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1542,13 +1581,16 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1563,7 +1605,7 @@ class TFASettingsApi:
     @validate_call
     def unlink_tfa_app_without_preload_content(
         self,
-        tfa_requests_dto: Optional[TfaRequestsDto] = None,
+        tfa_request_dto: Optional[TfaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1579,10 +1621,10 @@ class TFASettingsApi:
     ) -> RESTResponseType:
         """Unlink the TFA application
 
-        Unlinks the current two-factor authentication application from the user account specified in the request.
+        Detaches the authenticator application from an account, so that the account has to link a new one before it  can sign in again. `id` has to name an existing account: an empty or unknown value is refused. Passing the  caller's own ID resets their own credential and returns the activation link they should follow next; passing  another member's ID is allowed for the portal owner only, and every other caller, a DocSpace administrator  included, is refused. The account has to have an application linked and the authenticator method has to be  enabled on the portal, otherwise the call answers 405, and a terminated account is refused. The call is  destructive: the account's backup codes are dropped together with the credential and all of its sessions are  signed out. For another member the portal also emails them that their TFA was reset, and the answer is then an  empty string. The portal-wide policy is not touched, so TFA stays required and the account sets up an  application again through `GET api/2.0/settings/tfaapp/confirm`; lift the requirement for everyone with  `PUT api/2.0/settings/tfaapp`.
 
-        :param tfa_requests_dto:
-        :type tfa_requests_dto: TfaRequestsDto
+        :param tfa_request_dto:
+        :type tfa_request_dto: TfaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1606,7 +1648,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._unlink_tfa_app_serialize(
-            tfa_requests_dto=tfa_requests_dto,
+            tfa_request_dto=tfa_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1615,13 +1657,16 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1631,7 +1676,7 @@ class TFASettingsApi:
 
     def _unlink_tfa_app_serialize(
         self,
-        tfa_requests_dto,
+        tfa_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -1657,8 +1702,8 @@ class TFASettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if tfa_requests_dto is not None:
-            _body_params = tfa_requests_dto
+        if tfa_request_dto is not None:
+            _body_params = tfa_request_dto
 
 
         # set the HTTP header `Accept`
@@ -1730,9 +1775,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TfaAppCodeArrayWrapper:
-        """Update the TFA codes
+        """Regenerate the TFA backup codes
 
-        Requests the new backup codes for the two-factor authentication application.
+        Replaces the current user's one-time backup codes with a freshly generated set and returns it. Use it once the  previous codes have been spent or may have leaked: the whole old set stops being accepted the moment this call  succeeds, so store the new codes before leaving the response. Any authenticated member may call it, always for  their own account. The authenticator method has to be enabled on the portal and an application has to be  linked to the account already, otherwise the call answers 405. The call mutates state and is not idempotent:  every invocation issues another set and discards the one before it, so a retry after a timeout returns codes  different from those the first attempt generated. The codes come back unused, five of them of six characters  with the default configuration, and a portal may be configured for a different number and length. Read the  current set without changing it through `GET api/2.0/settings/tfaappcodes`. The authenticator secret itself is  untouched, so the linked application keeps working.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1766,11 +1811,13 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1798,9 +1845,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[TfaAppCodeArrayWrapper]:
-        """Update the TFA codes
+        """Regenerate the TFA backup codes
 
-        Requests the new backup codes for the two-factor authentication application.
+        Replaces the current user's one-time backup codes with a freshly generated set and returns it. Use it once the  previous codes have been spent or may have leaked: the whole old set stops being accepted the moment this call  succeeds, so store the new codes before leaving the response. Any authenticated member may call it, always for  their own account. The authenticator method has to be enabled on the portal and an application has to be  linked to the account already, otherwise the call answers 405. The call mutates state and is not idempotent:  every invocation issues another set and discards the one before it, so a retry after a timeout returns codes  different from those the first attempt generated. The codes come back unused, five of them of six characters  with the default configuration, and a portal may be configured for a different number and length. Read the  current set without changing it through `GET api/2.0/settings/tfaappcodes`. The authenticator secret itself is  untouched, so the linked application keeps working.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1834,11 +1881,13 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1866,9 +1915,9 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update the TFA codes
+        """Regenerate the TFA backup codes
 
-        Requests the new backup codes for the two-factor authentication application.
+        Replaces the current user's one-time backup codes with a freshly generated set and returns it. Use it once the  previous codes have been spent or may have leaked: the whole old set stops being accepted the moment this call  succeeds, so store the new codes before leaving the response. Any authenticated member may call it, always for  their own account. The authenticator method has to be enabled on the portal and an application has to be  linked to the account already, otherwise the call answers 405. The call mutates state and is not idempotent:  every invocation issues another set and discards the one before it, so a retry after a timeout returns codes  different from those the first attempt generated. The codes come back unused, five of them of six characters  with the default configuration, and a portal may be configured for a different number and length. Read the  current set without changing it through `GET api/2.0/settings/tfaappcodes`. The authenticator secret itself is  untouched, so the linked application keeps working.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1902,11 +1951,13 @@ class TFASettingsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TfaAppCodeArrayWrapper",
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1986,7 +2037,7 @@ class TFASettingsApi:
     @validate_call
     def update_tfa_settings(
         self,
-        tfa_requests_dto: Optional[TfaRequestsDto] = None,
+        tfa_request_dto: Optional[TfaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2002,10 +2053,10 @@ class TFASettingsApi:
     ) -> BooleanWrapper:
         """Update the TFA settings
 
-        Updates the two-factor authentication settings with the parameters specified in the request.
+        Sets the portal-wide two-factor authentication policy: `type` `1` switches on the SMS method, `2` switches on  the authenticator application, and `0` turns TFA off, as does any unknown value. The two methods are mutually  exclusive, so switching one on switches the other off. The caller has to be the portal owner or a DocSpace  administrator; other members are refused, and a request that names the owner's account in `id` or in  `mandatoryUsers` is refused unless `id` carries the caller's own account. `trustedIps` takes single addresses,  inclusive ranges and CIDR blocks, and an unparseable entry is rejected as an invalid request; accounts listed  in `mandatoryUsers` or `mandatoryGroups` still have to pass the challenge even from a trusted address.  Switching a method on is disruptive: it resets the portal's authentication cookies, so every session on the  portal, the caller's own included, has to sign in again. The answer is `true` when a method was switched on  and `false` when TFA was turned off. Use `PUT api/2.0/settings/tfaappwithlink` instead to receive the caller's  own confirmation link in the same step.
 
-        :param tfa_requests_dto:
-        :type tfa_requests_dto: TfaRequestsDto
+        :param tfa_request_dto:
+        :type tfa_request_dto: TfaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2029,7 +2080,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._update_tfa_settings_serialize(
-            tfa_requests_dto=tfa_requests_dto,
+            tfa_request_dto=tfa_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2038,12 +2089,16 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2058,7 +2113,7 @@ class TFASettingsApi:
     @validate_call
     def update_tfa_settings_with_http_info(
         self,
-        tfa_requests_dto: Optional[TfaRequestsDto] = None,
+        tfa_request_dto: Optional[TfaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2074,10 +2129,10 @@ class TFASettingsApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Update the TFA settings
 
-        Updates the two-factor authentication settings with the parameters specified in the request.
+        Sets the portal-wide two-factor authentication policy: `type` `1` switches on the SMS method, `2` switches on  the authenticator application, and `0` turns TFA off, as does any unknown value. The two methods are mutually  exclusive, so switching one on switches the other off. The caller has to be the portal owner or a DocSpace  administrator; other members are refused, and a request that names the owner's account in `id` or in  `mandatoryUsers` is refused unless `id` carries the caller's own account. `trustedIps` takes single addresses,  inclusive ranges and CIDR blocks, and an unparseable entry is rejected as an invalid request; accounts listed  in `mandatoryUsers` or `mandatoryGroups` still have to pass the challenge even from a trusted address.  Switching a method on is disruptive: it resets the portal's authentication cookies, so every session on the  portal, the caller's own included, has to sign in again. The answer is `true` when a method was switched on  and `false` when TFA was turned off. Use `PUT api/2.0/settings/tfaappwithlink` instead to receive the caller's  own confirmation link in the same step.
 
-        :param tfa_requests_dto:
-        :type tfa_requests_dto: TfaRequestsDto
+        :param tfa_request_dto:
+        :type tfa_request_dto: TfaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2101,7 +2156,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._update_tfa_settings_serialize(
-            tfa_requests_dto=tfa_requests_dto,
+            tfa_request_dto=tfa_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2110,12 +2165,16 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2130,7 +2189,7 @@ class TFASettingsApi:
     @validate_call
     def update_tfa_settings_without_preload_content(
         self,
-        tfa_requests_dto: Optional[TfaRequestsDto] = None,
+        tfa_request_dto: Optional[TfaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2146,10 +2205,10 @@ class TFASettingsApi:
     ) -> RESTResponseType:
         """Update the TFA settings
 
-        Updates the two-factor authentication settings with the parameters specified in the request.
+        Sets the portal-wide two-factor authentication policy: `type` `1` switches on the SMS method, `2` switches on  the authenticator application, and `0` turns TFA off, as does any unknown value. The two methods are mutually  exclusive, so switching one on switches the other off. The caller has to be the portal owner or a DocSpace  administrator; other members are refused, and a request that names the owner's account in `id` or in  `mandatoryUsers` is refused unless `id` carries the caller's own account. `trustedIps` takes single addresses,  inclusive ranges and CIDR blocks, and an unparseable entry is rejected as an invalid request; accounts listed  in `mandatoryUsers` or `mandatoryGroups` still have to pass the challenge even from a trusted address.  Switching a method on is disruptive: it resets the portal's authentication cookies, so every session on the  portal, the caller's own included, has to sign in again. The answer is `true` when a method was switched on  and `false` when TFA was turned off. Use `PUT api/2.0/settings/tfaappwithlink` instead to receive the caller's  own confirmation link in the same step.
 
-        :param tfa_requests_dto:
-        :type tfa_requests_dto: TfaRequestsDto
+        :param tfa_request_dto:
+        :type tfa_request_dto: TfaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2173,7 +2232,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._update_tfa_settings_serialize(
-            tfa_requests_dto=tfa_requests_dto,
+            tfa_request_dto=tfa_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2182,12 +2241,16 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '400': None,
+            '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2197,7 +2260,7 @@ class TFASettingsApi:
 
     def _update_tfa_settings_serialize(
         self,
-        tfa_requests_dto,
+        tfa_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -2223,8 +2286,8 @@ class TFASettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if tfa_requests_dto is not None:
-            _body_params = tfa_requests_dto
+        if tfa_request_dto is not None:
+            _body_params = tfa_request_dto
 
 
         # set the HTTP header `Accept`
@@ -2283,7 +2346,7 @@ class TFASettingsApi:
     @validate_call
     def update_tfa_settings_link(
         self,
-        tfa_requests_dto: Optional[TfaRequestsDto] = None,
+        tfa_request_dto: Optional[TfaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2297,12 +2360,12 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StringWrapper:
-        """Updates TFA settings
+        """Update TFA settings with a link
 
-        Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
+        Applies the same portal-wide two-factor authentication change as `PUT api/2.0/settings/tfaapp` and  additionally returns the confirmation link the caller needs to pass the new challenge, so an administrator who  has just switched TFA on can go straight to setting it up for themselves. The caller has to be the portal  owner or a DocSpace administrator, and a request that names the owner's account in `id` or in `mandatoryUsers`  is refused unless `id` carries the caller's own account. Every effect of the plain call applies here too: the  methods are mutually exclusive, `type` `0` turns TFA off, `trustedIps` and the two mandatory lists behave the  same way, and switching a method on resets the portal's authentication cookies, so all sessions have to sign  in again. The answer is an empty string whenever there is no link to hand out: when the request turned TFA  off, and when the caller is exempt from the challenge, most often because their own address is in the  `trustedIps` list of that very request. The cookie the link depends on is not returned here, read it with  `GET api/2.0/settings/tfaapp/confirm`.
 
-        :param tfa_requests_dto:
-        :type tfa_requests_dto: TfaRequestsDto
+        :param tfa_request_dto:
+        :type tfa_request_dto: TfaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2326,7 +2389,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._update_tfa_settings_link_serialize(
-            tfa_requests_dto=tfa_requests_dto,
+            tfa_request_dto=tfa_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2335,13 +2398,16 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2356,7 +2422,7 @@ class TFASettingsApi:
     @validate_call
     def update_tfa_settings_link_with_http_info(
         self,
-        tfa_requests_dto: Optional[TfaRequestsDto] = None,
+        tfa_request_dto: Optional[TfaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2370,12 +2436,12 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[StringWrapper]:
-        """Updates TFA settings
+        """Update TFA settings with a link
 
-        Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
+        Applies the same portal-wide two-factor authentication change as `PUT api/2.0/settings/tfaapp` and  additionally returns the confirmation link the caller needs to pass the new challenge, so an administrator who  has just switched TFA on can go straight to setting it up for themselves. The caller has to be the portal  owner or a DocSpace administrator, and a request that names the owner's account in `id` or in `mandatoryUsers`  is refused unless `id` carries the caller's own account. Every effect of the plain call applies here too: the  methods are mutually exclusive, `type` `0` turns TFA off, `trustedIps` and the two mandatory lists behave the  same way, and switching a method on resets the portal's authentication cookies, so all sessions have to sign  in again. The answer is an empty string whenever there is no link to hand out: when the request turned TFA  off, and when the caller is exempt from the challenge, most often because their own address is in the  `trustedIps` list of that very request. The cookie the link depends on is not returned here, read it with  `GET api/2.0/settings/tfaapp/confirm`.
 
-        :param tfa_requests_dto:
-        :type tfa_requests_dto: TfaRequestsDto
+        :param tfa_request_dto:
+        :type tfa_request_dto: TfaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2399,7 +2465,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._update_tfa_settings_link_serialize(
-            tfa_requests_dto=tfa_requests_dto,
+            tfa_request_dto=tfa_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2408,13 +2474,16 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2429,7 +2498,7 @@ class TFASettingsApi:
     @validate_call
     def update_tfa_settings_link_without_preload_content(
         self,
-        tfa_requests_dto: Optional[TfaRequestsDto] = None,
+        tfa_request_dto: Optional[TfaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2443,12 +2512,12 @@ class TFASettingsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Updates TFA settings
+        """Update TFA settings with a link
 
-        Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
+        Applies the same portal-wide two-factor authentication change as `PUT api/2.0/settings/tfaapp` and  additionally returns the confirmation link the caller needs to pass the new challenge, so an administrator who  has just switched TFA on can go straight to setting it up for themselves. The caller has to be the portal  owner or a DocSpace administrator, and a request that names the owner's account in `id` or in `mandatoryUsers`  is refused unless `id` carries the caller's own account. Every effect of the plain call applies here too: the  methods are mutually exclusive, `type` `0` turns TFA off, `trustedIps` and the two mandatory lists behave the  same way, and switching a method on resets the portal's authentication cookies, so all sessions have to sign  in again. The answer is an empty string whenever there is no link to hand out: when the request turned TFA  off, and when the caller is exempt from the challenge, most often because their own address is in the  `trustedIps` list of that very request. The cookie the link depends on is not returned here, read it with  `GET api/2.0/settings/tfaapp/confirm`.
 
-        :param tfa_requests_dto:
-        :type tfa_requests_dto: TfaRequestsDto
+        :param tfa_request_dto:
+        :type tfa_request_dto: TfaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2472,7 +2541,7 @@ class TFASettingsApi:
         """ # noqa: E501
 
         _param = self._update_tfa_settings_link_serialize(
-            tfa_requests_dto=tfa_requests_dto,
+            tfa_request_dto=tfa_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2481,13 +2550,16 @@ class TFASettingsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StringWrapper",
+            '400': None,
             '403': None,
             '405': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2497,7 +2569,7 @@ class TFASettingsApi:
 
     def _update_tfa_settings_link_serialize(
         self,
-        tfa_requests_dto,
+        tfa_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -2523,8 +2595,8 @@ class TFASettingsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if tfa_requests_dto is not None:
-            _body_params = tfa_requests_dto
+        if tfa_request_dto is not None:
+            _body_params = tfa_request_dto
 
 
         # set the HTTP header `Accept`

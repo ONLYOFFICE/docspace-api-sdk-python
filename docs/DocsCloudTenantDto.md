@@ -1,0 +1,39 @@
+# DocsCloudTenantDto
+Represents a Docs Connect tenant of a portal.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**dedicated_resource_ex_id** | **int** | The external ID of the dedicated resource the tenant is hosted on. | [optional] 
+**alias** | **str** | The tenant alias. | [optional] 
+**name** | **str** | The tenant name. | [optional] 
+**modified_date** | **datetime** | The date and time when the tenant was last modified. | [optional] 
+**customer_id** | **str** | The customer ID. | [optional] 
+**customer_name** | **str** | The customer name. | [optional] 
+**end_date** | **datetime** | The date and time when the tenant subscription ends. | [optional] 
+**resource_type** | **int** | The resource type. | [optional] 
+**is_active** | **bool** | Whether the tenant is active (the end date is in the future). | [optional] 
+**address** | **str** | The tenant address. | [optional] 
+**payment** | [**DocsCloudPaymentDto**](DocsCloudPaymentDto.md) | The tenant payment information. | [optional] 
+
+## Example
+
+```python
+from docspace_api_sdk.models.docs_cloud_tenant_dto import DocsCloudTenantDto
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of DocsCloudTenantDto from a JSON string
+docs_cloud_tenant_dto_instance = DocsCloudTenantDto.from_json(json)
+# print the JSON string representation of the object
+print(DocsCloudTenantDto.to_json())
+
+# convert the object into a dict
+docs_cloud_tenant_dto_dict = docs_cloud_tenant_dto_instance.to_dict()
+# create an instance of DocsCloudTenantDto from a dict
+docs_cloud_tenant_dto_from_dict = DocsCloudTenantDto.from_dict(docs_cloud_tenant_dto_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

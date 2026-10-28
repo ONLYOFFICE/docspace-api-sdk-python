@@ -1,0 +1,28 @@
+# CopyAsRequestDestFolderId
+The folder the copy is placed in, as a number for a folder inside the portal and as a string for one in a  connected third-party storage; obtain it from `GET api/2.0/files/@root`. Anything else is answered with an  empty body and nothing is copied.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+
+## Example
+
+```python
+from docspace_api_sdk.models.copy_as_request_dest_folder_id import CopyAsRequestDestFolderId
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CopyAsRequestDestFolderId from a JSON string
+copy_as_request_dest_folder_id_instance = CopyAsRequestDestFolderId.from_json(json)
+# print the JSON string representation of the object
+print(CopyAsRequestDestFolderId.to_json())
+
+# convert the object into a dict
+copy_as_request_dest_folder_id_dict = copy_as_request_dest_folder_id_instance.to_dict()
+# create an instance of CopyAsRequestDestFolderId from a dict
+copy_as_request_dest_folder_id_from_dict = CopyAsRequestDestFolderId.from_dict(copy_as_request_dest_folder_id_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

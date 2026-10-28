@@ -18,12 +18,13 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field
 from typing_extensions import Annotated
-from docspace_api_sdk.models.vectorization_start_request_body import VectorizationStartRequestBody
+from docspace_api_sdk.models.ai_vectorization_start_task200_response import AiVectorizationStartTask200Response
+from docspace_api_sdk.models.ai_vectorization_start_task_request import AiVectorizationStartTaskRequest
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -45,9 +46,9 @@ class VectorizationApi:
 
 
     @validate_call
-    def start_task(
+    def ai_vectorization_start_task(
         self,
-        vectorization_start_request_body: Annotated[VectorizationStartRequestBody, Field(description="The vectorization parameters including file identifiers.")],
+        ai_vectorization_start_task_request: Annotated[AiVectorizationStartTaskRequest, Field(description="The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,13 +61,13 @@ class VectorizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AiVectorizationStartTask200Response:
         """Start a vectorization task
 
-        Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
+        Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
 
-        :param vectorization_start_request_body: The vectorization parameters including file identifiers. (required)
-        :type vectorization_start_request_body: VectorizationStartRequestBody
+        :param ai_vectorization_start_task_request: The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape. (required)
+        :type ai_vectorization_start_task_request: AiVectorizationStartTaskRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,8 +90,8 @@ class VectorizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_task_serialize(
-            vectorization_start_request_body=vectorization_start_request_body,
+        _param = self._ai_vectorization_start_task_serialize(
+            ai_vectorization_start_task_request=ai_vectorization_start_task_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -98,12 +99,13 @@ class VectorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiVectorizationStartTask200Response",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -116,9 +118,9 @@ class VectorizationApi:
 
 
     @validate_call
-    def start_task_with_http_info(
+    def ai_vectorization_start_task_with_http_info(
         self,
-        vectorization_start_request_body: Annotated[VectorizationStartRequestBody, Field(description="The vectorization parameters including file identifiers.")],
+        ai_vectorization_start_task_request: Annotated[AiVectorizationStartTaskRequest, Field(description="The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -131,13 +133,13 @@ class VectorizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AiVectorizationStartTask200Response]:
         """Start a vectorization task
 
-        Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
+        Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
 
-        :param vectorization_start_request_body: The vectorization parameters including file identifiers. (required)
-        :type vectorization_start_request_body: VectorizationStartRequestBody
+        :param ai_vectorization_start_task_request: The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape. (required)
+        :type ai_vectorization_start_task_request: AiVectorizationStartTaskRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -160,8 +162,8 @@ class VectorizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_task_serialize(
-            vectorization_start_request_body=vectorization_start_request_body,
+        _param = self._ai_vectorization_start_task_serialize(
+            ai_vectorization_start_task_request=ai_vectorization_start_task_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -169,12 +171,13 @@ class VectorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiVectorizationStartTask200Response",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -187,9 +190,9 @@ class VectorizationApi:
 
 
     @validate_call
-    def start_task_without_preload_content(
+    def ai_vectorization_start_task_without_preload_content(
         self,
-        vectorization_start_request_body: Annotated[VectorizationStartRequestBody, Field(description="The vectorization parameters including file identifiers.")],
+        ai_vectorization_start_task_request: Annotated[AiVectorizationStartTaskRequest, Field(description="The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -205,10 +208,10 @@ class VectorizationApi:
     ) -> RESTResponseType:
         """Start a vectorization task
 
-        Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
+        Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
 
-        :param vectorization_start_request_body: The vectorization parameters including file identifiers. (required)
-        :type vectorization_start_request_body: VectorizationStartRequestBody
+        :param ai_vectorization_start_task_request: The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape. (required)
+        :type ai_vectorization_start_task_request: AiVectorizationStartTaskRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -231,8 +234,8 @@ class VectorizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_task_serialize(
-            vectorization_start_request_body=vectorization_start_request_body,
+        _param = self._ai_vectorization_start_task_serialize(
+            ai_vectorization_start_task_request=ai_vectorization_start_task_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -240,12 +243,13 @@ class VectorizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiVectorizationStartTask200Response",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -253,9 +257,9 @@ class VectorizationApi:
         return response_data.response
 
 
-    def _start_task_serialize(
+    def _ai_vectorization_start_task_serialize(
         self,
-        vectorization_start_request_body,
+        ai_vectorization_start_task_request,
         _request_auth,
         _content_type,
         _headers,
@@ -281,10 +285,17 @@ class VectorizationApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if vectorization_start_request_body is not None:
-            _body_params = vectorization_start_request_body
+        if ai_vectorization_start_task_request is not None:
+            _body_params = ai_vectorization_start_task_request
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -302,12 +313,8 @@ class VectorizationApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 

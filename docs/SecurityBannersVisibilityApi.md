@@ -8,9 +8,14 @@ Method | HTTP request | Description
 
 
 # **set_tenant_banner_settings**
-> TenantBannerSettingsWrapper set_tenant_banner_settings(tenant_banner_settings_dto=tenant_banner_settings_dto)
+> TenantBannerSettingsWrapper set_tenant_banner_settings(tenant_banner_settings_request_dto=tenant_banner_settings_request_dto)
 
-Sets the visibility settings of the promotional banners in the portal.
+Sets whether the portal's promotional banners are hidden for every user. Available only on an Enterprise
+license; every other plan is refused regardless of the caller's role. Requires Owner or DocSpaceAdmin (the
+EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on
+SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:
+it applies to every user on the tenant immediately. It returns the saved setting; read the current value at
+any time from `GET api/2.0/settings/banner`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -19,7 +24,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_banner_settings_dto** | [**TenantBannerSettingsDto**](TenantBannerSettingsDto.md)|  | [optional] 
+ **tenant_banner_settings_request_dto** | [**TenantBannerSettingsRequestDto**](TenantBannerSettingsRequestDto.md)|  | [optional] 
 
 ### Return type
 
@@ -34,7 +39,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.tenant_banner_settings_dto import TenantBannerSettingsDto
+from docspace_api_sdk.models.tenant_banner_settings_request_dto import TenantBannerSettingsRequestDto
 from docspace_api_sdk.models.tenant_banner_settings_wrapper import TenantBannerSettingsWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
@@ -56,11 +61,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.BannersVisibilityApi(api_client)
-    tenant_banner_settings_dto = docspace_api_sdk.TenantBannerSettingsDto() # TenantBannerSettingsDto |  (optional)
+    tenant_banner_settings_request_dto = docspace_api_sdk.TenantBannerSettingsRequestDto() # TenantBannerSettingsRequestDto |  (optional)
 
     try:
         # Set the banners visibility
-        api_response = api_instance.set_tenant_banner_settings(tenant_banner_settings_dto=tenant_banner_settings_dto)
+        api_response = api_instance.set_tenant_banner_settings(tenant_banner_settings_request_dto=tenant_banner_settings_request_dto)
         print("The response of BannersVisibilityApi->set_tenant_banner_settings:\n")
         pprint(api_response)
     except Exception as e:
@@ -78,9 +83,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Promotional banners visibility settings |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | Saved promotional banners visibility setting |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**402** | The portal is not an Enterprise installation |  -  |
+**403** | The caller has no portal-settings right |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

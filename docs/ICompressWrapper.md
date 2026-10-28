@@ -1,10 +1,11 @@
 # ICompressWrapper
+The successful API response containing the ICompress object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | **object** | The archiving class unification interface. | [optional] 
+**response** | **object** | The ICompress object returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

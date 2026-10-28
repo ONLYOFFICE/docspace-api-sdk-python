@@ -1,15 +1,15 @@
 # SecurityInfoRequestDto
-The security information request parameters.
+The entries whose sharing rights are being changed, and the rights to apply to them.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder_ids** | [**List[DuplicateRequestDtoAllOfFileIds]**](DuplicateRequestDtoAllOfFileIds.md) | The list of the shared folder IDs. | [optional] 
-**file_ids** | [**List[DuplicateRequestDtoAllOfFileIds]**](DuplicateRequestDtoAllOfFileIds.md) | The list of the shared file IDs. | [optional] 
-**share** | [**List[FileShareParams]**](FileShareParams.md) | The collection of sharing parameters. | [optional] 
-**notify** | **bool** | Specifies whether to notify users about the shared file or not. | [optional] 
-**sharing_message** | **str** | The message to send when notifying about the shared file. | [optional] 
+**folder_ids** | [**List[DuplicateRequestDtoAllOfFileIds]**](DuplicateRequestDtoAllOfFileIds.md) | The folders and rooms whose rights are being changed, identified as a listing operation returns them - a  number on the portal, a string on a connected third-party account. | [optional] 
+**file_ids** | [**List[DuplicateRequestDtoAllOfFileIds]**](DuplicateRequestDtoAllOfFileIds.md) | The files whose rights are being changed, identified as a listing operation returns them - a number on the  portal, a string on a connected third-party account. | [optional] 
+**share** | [**List[FileShareParams]**](FileShareParams.md) | One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of `None` takes the access away. An empty collection makes the call change  nothing. | [optional] 
+**notify** | **bool** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] 
+**sharing_message** | **str** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] 
 
 ## Example
 

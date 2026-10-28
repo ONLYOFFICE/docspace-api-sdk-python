@@ -21,6 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
@@ -28,10 +29,11 @@ from typing_extensions import Self
 
 class TenantAiAccessSettingsDto(BaseModel):
     """
-    The request parameters for managing the tenant-level AI access settings.
+    Whether AI functionality is switched on for the portal.
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether AI functionality is enabled for the tenant.  Set to `true` to enable all AI features or `false` to disable them tenant-wide.")
-    __properties: ClassVar[List[str]] = ["enabled"]
+    enabled: Optional[StrictBool] = Field(default=None, description="Specifies whether AI functionality is enabled for the tenant.  When set to `false`, all AI features (chat, agents, vectorization) are disabled tenant-wide.", json_schema_extra={"examples": [True]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
+    __properties: ClassVar[List[str]] = ["enabled", "lastModified"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +87,8 @@ class TenantAiAccessSettingsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "enabled": obj.get("enabled")
+            "enabled": obj.get("enabled"),
+            "lastModified": obj.get("lastModified")
         })
         return _obj
 

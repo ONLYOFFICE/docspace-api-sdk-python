@@ -9,9 +9,16 @@ Method | HTTP request | Description
 
 
 # **reset_room_quota**
-> FolderIntegerArrayWrapper reset_room_quota(update_rooms_room_ids_request_dto_integer=update_rooms_room_ids_request_dto_integer)
+> FolderArrayWrapper reset_room_quota(update_rooms_room_ids_request_dto=update_rooms_room_ids_request_dto)
 
-Resets the quota limit for the rooms with the IDs specified in the request.
+Returns every listed room to the default room quota of the portal and streams the updated rooms back in the
+order they were given. This is not the same as removing the limit: the room stops carrying its own value and
+starts following the portal default, which a portal administrator can change at any time. The per-room quota
+feature has to be on, the caller must be a manager of each listed room, and an archived room or a room in the
+trash is refused. The list is not transactional, so rooms processed before a failing one keep the default and
+the rest keep what they had. Only numeric room ids are processed, which means ids of rooms stored in a
+connected third-party account are silently skipped. Use `PUT api/2.0/files/rooms/roomquota` to set an explicit
+value, and a quota of -1 in `PUT api/2.0/files/rooms/{id}` to leave the room with no custom limit at all.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -20,11 +27,11 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_rooms_room_ids_request_dto_integer** | [**UpdateRoomsRoomIdsRequestDtoInteger**](UpdateRoomsRoomIdsRequestDtoInteger.md)|  | [optional] 
+ **update_rooms_room_ids_request_dto** | [**UpdateRoomsRoomIdsRequestDto**](UpdateRoomsRoomIdsRequestDto.md)|  | [optional] 
 
 ### Return type
 
-[**FolderIntegerArrayWrapper**](FolderIntegerArrayWrapper.md)
+[**FolderArrayWrapper**](FolderArrayWrapper.md)
 
 ### Authorization
 
@@ -35,8 +42,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.folder_integer_array_wrapper import FolderIntegerArrayWrapper
-from docspace_api_sdk.models.update_rooms_room_ids_request_dto_integer import UpdateRoomsRoomIdsRequestDtoInteger
+from docspace_api_sdk.models.folder_array_wrapper import FolderArrayWrapper
+from docspace_api_sdk.models.update_rooms_room_ids_request_dto import UpdateRoomsRoomIdsRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -57,11 +64,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.QuotaApi(api_client)
-    update_rooms_room_ids_request_dto_integer = docspace_api_sdk.UpdateRoomsRoomIdsRequestDtoInteger() # UpdateRoomsRoomIdsRequestDtoInteger |  (optional)
+    update_rooms_room_ids_request_dto = docspace_api_sdk.UpdateRoomsRoomIdsRequestDto() # UpdateRoomsRoomIdsRequestDto |  (optional)
 
     try:
         # Reset the room quota limit
-        api_response = api_instance.reset_room_quota(update_rooms_room_ids_request_dto_integer=update_rooms_room_ids_request_dto_integer)
+        api_response = api_instance.reset_room_quota(update_rooms_room_ids_request_dto=update_rooms_room_ids_request_dto)
         print("The response of QuotaApi->reset_room_quota:\n")
         pprint(api_response)
     except Exception as e:
@@ -79,18 +86,29 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of rooms with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | The rooms as they are after the default limit was restored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The storage quota for rooms (for an AI agent, for agents) is turned off, or the caller may not edit a listed room or it lies in Trash or in the archive |  -  |
+**500** | An id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_rooms_quota**
-> FolderIntegerArrayWrapper update_rooms_quota(update_rooms_quota_request_dto_integer=update_rooms_quota_request_dto_integer)
+> FolderArrayWrapper update_rooms_quota(update_rooms_quota_request_dto=update_rooms_quota_request_dto)
 
-Changes the quota limit for the rooms with the IDs specified in the request.
+Sets the same custom storage limit, in bytes, on every listed room and streams the updated rooms back in the
+order they were given. The per-room quota feature has to be on for the portal, and the value must stay within
+the portal own limit, otherwise the call is refused before anything is written. The caller must be a manager
+of each listed room, and an archived room or a room in the trash is refused. The list is not transactional:
+rooms processed before the offending one keep their new limit, so a failed call has to be checked room by
+room. Only numeric room ids are processed, which means ids of rooms stored in a connected third-party account
+are silently skipped. A room whose limit already equals the requested value is left untouched and still
+returned. To go back to the portal default use `PUT api/2.0/files/rooms/resetquota`, and to drop the custom
+limit entirely send a quota of -1 to `PUT api/2.0/files/rooms/{id}`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -99,11 +117,11 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_rooms_quota_request_dto_integer** | [**UpdateRoomsQuotaRequestDtoInteger**](UpdateRoomsQuotaRequestDtoInteger.md)|  | [optional] 
+ **update_rooms_quota_request_dto** | [**UpdateRoomsQuotaRequestDto**](UpdateRoomsQuotaRequestDto.md)|  | [optional] 
 
 ### Return type
 
-[**FolderIntegerArrayWrapper**](FolderIntegerArrayWrapper.md)
+[**FolderArrayWrapper**](FolderArrayWrapper.md)
 
 ### Authorization
 
@@ -114,8 +132,8 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.folder_integer_array_wrapper import FolderIntegerArrayWrapper
-from docspace_api_sdk.models.update_rooms_quota_request_dto_integer import UpdateRoomsQuotaRequestDtoInteger
+from docspace_api_sdk.models.folder_array_wrapper import FolderArrayWrapper
+from docspace_api_sdk.models.update_rooms_quota_request_dto import UpdateRoomsQuotaRequestDto
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -136,11 +154,11 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.QuotaApi(api_client)
-    update_rooms_quota_request_dto_integer = docspace_api_sdk.UpdateRoomsQuotaRequestDtoInteger() # UpdateRoomsQuotaRequestDtoInteger |  (optional)
+    update_rooms_quota_request_dto = docspace_api_sdk.UpdateRoomsQuotaRequestDto() # UpdateRoomsQuotaRequestDto |  (optional)
 
     try:
         # Change the room quota limit
-        api_response = api_instance.update_rooms_quota(update_rooms_quota_request_dto_integer=update_rooms_quota_request_dto_integer)
+        api_response = api_instance.update_rooms_quota(update_rooms_quota_request_dto=update_rooms_quota_request_dto)
         print("The response of QuotaApi->update_rooms_quota:\n")
         pprint(api_response)
     except Exception as e:
@@ -158,9 +176,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of rooms with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | The rooms as they are after the new limit was applied |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The storage quota for rooms (for an AI agent, for agents) is turned off, `quota` exceeds the storage limit of the portal, or the caller may not edit a listed room or it lies in Trash or in the archive |  -  |
+**500** | An id is a number that is not a 32-bit integer |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

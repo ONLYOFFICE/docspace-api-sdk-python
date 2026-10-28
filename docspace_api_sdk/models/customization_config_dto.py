@@ -23,33 +23,35 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.ai_config_dto import AiConfigDto
 from docspace_api_sdk.models.anonymous_config_dto import AnonymousConfigDto
 from docspace_api_sdk.models.customer_config_dto import CustomerConfigDto
-from docspace_api_sdk.models.feedback_config import FeedbackConfig
-from docspace_api_sdk.models.goback_config import GobackConfig
+from docspace_api_sdk.models.feedback_config_dto import FeedbackConfigDto
+from docspace_api_sdk.models.goback_config_dto import GobackConfigDto
 from docspace_api_sdk.models.logo_config_dto import LogoConfigDto
-from docspace_api_sdk.models.review_config import ReviewConfig
+from docspace_api_sdk.models.review_config_dto import ReviewConfigDto
 from docspace_api_sdk.models.start_filling_form import StartFillingForm
-from docspace_api_sdk.models.submit_form import SubmitForm
+from docspace_api_sdk.models.submit_form_dto import SubmitFormDto
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CustomizationConfigDto(BaseModel):
     """
-    The customization config parameters.
+    How the editor interface is dressed: branding, the buttons that lead back into the portal, and the behaviour of  review, mentions and form submission.
     """ # noqa: E501
-    about: Optional[StrictBool] = Field(default=None, description="Specifies if the customization is about.")
-    customer: Optional[CustomerConfigDto] = None
-    anonymous: Optional[AnonymousConfigDto] = None
-    feedback: Optional[FeedbackConfig] = None
-    forcesave: Optional[StrictBool] = Field(default=None, description="Specifies if the customization should be force saved.")
-    goback: Optional[GobackConfig] = None
-    review: Optional[ReviewConfig] = None
-    logo: Optional[LogoConfigDto] = None
-    mention_share: Optional[StrictBool] = Field(default=None, description="Specifies if the share should be mentioned.", alias="mentionShare")
-    submit_form: Optional[SubmitForm] = Field(default=None, alias="submitForm")
-    start_filling_form: Optional[StartFillingForm] = Field(default=None, alias="startFillingForm")
-    __properties: ClassVar[List[str]] = ["about", "customer", "anonymous", "feedback", "forcesave", "goback", "review", "logo", "mentionShare", "submitForm", "startFillingForm"]
+    about: Optional[StrictBool] = Field(default=None, description="Whether the About entry of the editor menu is shown.", json_schema_extra={"examples": [True]})
+    customer: Optional[CustomerConfigDto] = Field(default=None, description="The branding of the organization running the portal. It is filled in on a server installation only and is  empty in the cloud.")
+    anonymous: Optional[AnonymousConfigDto] = Field(default=None, description="How an anonymous participant is treated in this session.")
+    feedback: Optional[FeedbackConfigDto] = Field(default=None, description="The support link the editor offers behind its feedback button.")
+    forcesave: Optional[StrictBool] = Field(default=None, description="Whether the editors write intermediate revisions while the document stays open. It is empty when the portal  leaves the decision to the editors themselves.", json_schema_extra={"examples": [False]})
+    goback: Optional[GobackConfigDto] = Field(default=None, description="Where the editor returns the user to when they leave the document. It is empty when there is nowhere to go  back to, as in an embedded opening.")
+    review: Optional[ReviewConfigDto] = Field(default=None, description="How tracked changes are displayed when the document opens; it depends on whether this session may write.")
+    logo: Optional[LogoConfigDto] = Field(default=None, description="The logo the editor shows, in the variants the current layout and file type need.")
+    mention_share: Optional[StrictBool] = Field(default=None, description="Whether mentioning a user who cannot yet open the document offers to share it with them, instead of silently  notifying nobody.", alias="mentionShare", json_schema_extra={"examples": [True]})
+    submit_form: Optional[SubmitFormDto] = Field(default=None, description="The submit button of a form: whether it is shown and what it says.", alias="submitForm")
+    start_filling_form: Optional[StartFillingForm] = Field(default=None, description="The button that starts filling out the form. It is empty when this opening offers no such button.", alias="startFillingForm")
+    ai: Optional[AiConfigDto] = Field(default=None, description="The AI configuration settings.")
+    __properties: ClassVar[List[str]] = ["about", "customer", "anonymous", "feedback", "forcesave", "goback", "review", "logo", "mentionShare", "submitForm", "startFillingForm", "ai"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -114,6 +116,9 @@ class CustomizationConfigDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of start_filling_form
         if self.start_filling_form:
             _dict['startFillingForm'] = self.start_filling_form.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of ai
+        if self.ai:
+            _dict['ai'] = self.ai.to_dict()
         # set to None if forcesave (nullable) is None
         # and model_fields_set contains the field
         if self.forcesave is None and "forcesave" in self.model_fields_set:
@@ -135,14 +140,15 @@ class CustomizationConfigDto(BaseModel):
             "about": obj.get("about"),
             "customer": CustomerConfigDto.from_dict(obj["customer"]) if obj.get("customer") is not None else None,
             "anonymous": AnonymousConfigDto.from_dict(obj["anonymous"]) if obj.get("anonymous") is not None else None,
-            "feedback": FeedbackConfig.from_dict(obj["feedback"]) if obj.get("feedback") is not None else None,
+            "feedback": FeedbackConfigDto.from_dict(obj["feedback"]) if obj.get("feedback") is not None else None,
             "forcesave": obj.get("forcesave"),
-            "goback": GobackConfig.from_dict(obj["goback"]) if obj.get("goback") is not None else None,
-            "review": ReviewConfig.from_dict(obj["review"]) if obj.get("review") is not None else None,
+            "goback": GobackConfigDto.from_dict(obj["goback"]) if obj.get("goback") is not None else None,
+            "review": ReviewConfigDto.from_dict(obj["review"]) if obj.get("review") is not None else None,
             "logo": LogoConfigDto.from_dict(obj["logo"]) if obj.get("logo") is not None else None,
             "mentionShare": obj.get("mentionShare"),
-            "submitForm": SubmitForm.from_dict(obj["submitForm"]) if obj.get("submitForm") is not None else None,
-            "startFillingForm": StartFillingForm.from_dict(obj["startFillingForm"]) if obj.get("startFillingForm") is not None else None
+            "submitForm": SubmitFormDto.from_dict(obj["submitForm"]) if obj.get("submitForm") is not None else None,
+            "startFillingForm": StartFillingForm.from_dict(obj["startFillingForm"]) if obj.get("startFillingForm") is not None else None,
+            "ai": AiConfigDto.from_dict(obj["ai"]) if obj.get("ai") is not None else None
         })
         return _obj
 

@@ -1,13 +1,14 @@
 # MigratingApiGroup
+The migrating group parameters.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**should_import** | **bool** |  | [optional] 
-**group_name** | **str** |  | [optional] 
-**module_name** | **str** |  | [optional] 
-**user_uid_list** | **List[str]** |  | [optional] 
+**should_import** | **bool** | Specifies whether the API entity should be imported. | [optional] 
+**group_name** | **str** | The group name. | [optional] 
+**module_name** | **str** | The group module name. | [optional] 
+**user_uid_list** | **List[str]** | The list of group user UIDs. | [optional] 
 
 ## Example
 
