@@ -29,12 +29,12 @@ DEFAULTTEMPLATESETTINGSREQUESTDTOSELECTEDFILE_ONE_OF_SCHEMAS = ["int", "str"]
 
 class DefaultTemplateSettingsRequestDtoSelectedFile(BaseModel):
     """
-    File id to replace template with
+    The document to copy as the blank: a number for a file stored in the portal, a string for one in a connected  third-party storage. Take the identifier from a folder listing such as `GET api/2.0/files/{folderId}`; the  caller must be allowed to copy that file, and its extension must be the one named below.
     """
     # data type: int
-    oneof_schema_1_validator: Optional[StrictInt] = None
+    oneof_schema_1_validator: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [1234]})
     # data type: str
-    oneof_schema_2_validator: Optional[StrictStr] = None
+    oneof_schema_2_validator: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["some text"]})
     actual_instance: Optional[Union[int, str]] = None
     one_of_schemas: Set[str] = { "int", "str" }
 

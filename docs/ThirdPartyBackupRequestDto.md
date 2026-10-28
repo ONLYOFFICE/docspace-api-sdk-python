@@ -1,16 +1,16 @@
 # ThirdPartyBackupRequestDto
-The third-party backup request parameters.
+The credentials and the title of the third-party storage account the portal writes its backups to.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | The connection URL for the sharepoint. | [optional] 
-**login** | **str** | The login. | [optional] 
-**password** | **str** | The password. | [optional] 
-**token** | **str** | The authentication token. | [optional] 
-**customer_title** | **str** | The customer title. | [optional] 
-**provider_key** | **str** | The provider key. | [optional] 
+**url** | **str** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it. | [optional] 
+**login** | **str** | The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request. | [optional] 
+**password** | **str** | The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] 
+**token** | **str** | The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`. | [optional] 
+**customer_title** | **str** | The name the backup account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated; on the first connection a title that comes out of that empty is refused. | [optional] 
+**provider_key** | **str** | The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`. | [optional] 
 
 ## Example
 

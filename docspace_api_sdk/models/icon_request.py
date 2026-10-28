@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class IconRequest(BaseModel):
     """
-    IconRequest
+    The icon to set on a room group.
     """ # noqa: E501
-    icon: Optional[StrictStr] = Field(default=None, description="Group icon")
+    icon: Optional[StrictStr] = Field(default=None, description="The identifier of one of the built-in covers listed by `GET api/2.0/files/rooms/covers`. An empty string  clears the icon of the group, null or a missing member keeps the current one, and anything else is refused.", json_schema_extra={"examples": ["heart"]})
     __properties: ClassVar[List[str]] = ["icon"]
 
     model_config = ConfigDict(

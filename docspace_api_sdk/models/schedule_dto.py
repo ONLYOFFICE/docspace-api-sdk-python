@@ -25,20 +25,20 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.backup_storage_type import BackupStorageType
-from docspace_api_sdk.models.cron_params import CronParams
+from docspace_api_sdk.models.cron_params_dto import CronParamsDto
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ScheduleDto(BaseModel):
     """
-    The backup schedule parameters.
+    The backup schedule of a portal.
     """ # noqa: E501
-    storage_type: BackupStorageType = Field(alias="storageType")
-    storage_params: Optional[Dict[str, Optional[StrictStr]]] = Field(description="The backup storage parameters.", alias="storageParams")
-    cron_params: CronParams = Field(alias="cronParams")
-    backups_stored: Optional[StrictInt] = Field(default=None, description="The maximum number of the stored backup copies.", alias="backupsStored")
-    last_backup_time: datetime = Field(description="The date and time when the last backup was reated.", alias="lastBackupTime")
-    dump: StrictBool = Field(description="Specifies if a dump will be created or not.")
+    storage_type: BackupStorageType = Field(description="The storage the scheduled archives are written to, reported as a number rather than as the name the  schedule was created with.", alias="storageType")
+    storage_params: Dict[str, Optional[StrictStr]] = Field(description="The settings of the storage, as an object keyed by parameter name - not as the array of key and value  pairs the schedule was created with, so it cannot be sent back unchanged. For every storage type  except `ThirdPartyConsumer` the `folderId` key is built from the stored base path.", alias="storageParams", json_schema_extra={"examples": [{"folderId": "1234"}]})
+    cron_params: CronParamsDto = Field(description="When the backup runs, read back from the stored cron expression. `day` is 0 for a daily schedule,  because a daily one has no day.", alias="cronParams")
+    backups_stored: Optional[StrictInt] = Field(default=None, description="The number of scheduled copies kept. It is null, not 0, when the schedule keeps an unlimited number.", alias="backupsStored", json_schema_extra={"examples": [5]})
+    last_backup_time: datetime = Field(description="The date and time the schedule last ran at. It is `0001-01-01T00:00:00` until the schedule has run  for the first time.", alias="lastBackupTime", json_schema_extra={"examples": ["2026-01-01T00:00:00Z"]})
+    dump: StrictBool = Field(description="Specifies whether this schedule backs up the whole server instead of one portal.", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["storageType", "storageParams", "cronParams", "backupsStored", "lastBackupTime", "dump"]
 
     model_config = ConfigDict(
@@ -83,11 +83,6 @@ class ScheduleDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of cron_params
         if self.cron_params:
             _dict['cronParams'] = self.cron_params.to_dict()
-        # set to None if storage_params (nullable) is None
-        # and model_fields_set contains the field
-        if self.storage_params is None and "storage_params" in self.model_fields_set:
-            _dict['storageParams'] = None
-
         # set to None if backups_stored (nullable) is None
         # and model_fields_set contains the field
         if self.backups_stored is None and "backups_stored" in self.model_fields_set:
@@ -108,7 +103,7 @@ class ScheduleDto(BaseModel):
         _obj = cls.model_validate({
             "storageType": obj.get("storageType"),
             "storageParams": obj.get("storageParams"),
-            "cronParams": CronParams.from_dict(obj["cronParams"]) if obj.get("cronParams") is not None else None,
+            "cronParams": CronParamsDto.from_dict(obj["cronParams"]) if obj.get("cronParams") is not None else None,
             "backupsStored": obj.get("backupsStored"),
             "lastBackupTime": obj.get("lastBackupTime"),
             "dump": obj.get("dump")

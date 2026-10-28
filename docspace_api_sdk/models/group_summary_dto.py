@@ -31,10 +31,10 @@ class GroupSummaryDto(BaseModel):
     """
     The group summary parameters.
     """ # noqa: E501
-    id: UUID = Field(description="The group ID.")
-    name: Optional[StrictStr] = Field(description="The group name.")
-    manager: Optional[StrictStr] = Field(default=None, description="The group manager.")
-    is_system: Optional[StrictBool] = Field(default=None, description="Indicates whether the group is a system group.", alias="isSystem")
+    id: UUID = Field(description="The group ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    name: Optional[StrictStr] = Field(description="The group name.", json_schema_extra={"examples": ["Group Name"]})
+    manager: Optional[StrictStr] = Field(default=None, description="The group manager.", json_schema_extra={"examples": ["Jake.Zazhitski"]})
+    is_system: Optional[StrictBool] = Field(default=None, description="Indicates whether the group is a system group.", alias="isSystem", json_schema_extra={"examples": [False]})
     __properties: ClassVar[List[str]] = ["id", "name", "manager", "isSystem"]
 
     model_config = ConfigDict(

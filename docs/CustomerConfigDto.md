@@ -1,16 +1,16 @@
 # CustomerConfigDto
-The customer config parameters.
+The branding of the organization running the portal, as the editor About panel shows it. It is reported on a  server installation only.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**address** | **str** | The address of the customer configuration. | [optional] 
-**logo** | **str** | The logo of the customer configuration. | [optional] 
-**logo_dark** | **str** | The dark logo of the customer configuration. | [optional] 
-**mail** | **str** | The mail address of the customer configuration. | [optional] 
-**name** | **str** | The name of the customer configuration. | [optional] 
-**www** | **str** | The site web address of the customer configuration. | [optional] 
+**address** | **str** | The postal address from the portal branding settings; empty when none was entered. | [optional] 
+**logo** | **str** | The About-panel logo of the organization. | [optional] 
+**logo_dark** | **str** | The About-panel logo for a dark interface theme. | [optional] 
+**mail** | **str** | The contact address from the portal branding settings. | [optional] 
+**name** | **str** | The organization name shown in the editor. | [optional] 
+**www** | **str** | The website of the organization. | [optional] 
 
 ## Example
 

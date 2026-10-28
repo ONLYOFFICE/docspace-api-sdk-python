@@ -32,16 +32,16 @@ class GroupDto(BaseModel):
     """
     The group parameters.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(description="The group name.")
-    parent: Optional[UUID] = Field(default=None, description="The parent group ID.")
-    category: UUID = Field(description="The group category ID.")
-    id: UUID = Field(description="The group ID.")
-    is_ldap: StrictBool = Field(description="Specifies if the LDAP settings are enabled for the group or not.", alias="isLDAP")
-    is_system: Optional[StrictBool] = Field(default=None, description="Indicates whether the group is a system group.", alias="isSystem")
-    manager: Optional[EmployeeFullDto] = None
-    members: Optional[List[EmployeeFullDto]] = Field(default=None, description="The list of group members.")
-    shared: Optional[StrictBool] = Field(default=None, description="Specifies whether the group can be shared or not.")
-    members_count: Optional[StrictInt] = Field(default=None, description="The number of group members.", alias="membersCount")
+    name: Optional[StrictStr] = Field(description="The group name.", json_schema_extra={"examples": ["Marketing Team"]})
+    parent: Optional[UUID] = Field(default=None, description="The parent group ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    category: UUID = Field(description="The group category ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    id: UUID = Field(description="The group ID.", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
+    is_ldap: StrictBool = Field(description="Specifies if the LDAP settings are enabled for the group or not.", alias="isLDAP", json_schema_extra={"examples": [False]})
+    is_system: Optional[StrictBool] = Field(default=None, description="Indicates whether the group is a system group.", alias="isSystem", json_schema_extra={"examples": [False]})
+    manager: Optional[EmployeeFullDto] = Field(default=None, description="The group manager full information.")
+    members: Optional[List[EmployeeFullDto]] = Field(default=None, description="The list of group members.", json_schema_extra={"examples": [[{"displayName": "John Doe"}]]})
+    shared: Optional[StrictBool] = Field(default=None, description="Specifies whether the group can be shared or not.", json_schema_extra={"examples": [False]})
+    members_count: Optional[StrictInt] = Field(default=None, description="The number of group members.", alias="membersCount", json_schema_extra={"examples": [0]})
     __properties: ClassVar[List[str]] = ["name", "parent", "category", "id", "isLDAP", "isSystem", "manager", "members", "shared", "membersCount"]
 
     model_config = ConfigDict(

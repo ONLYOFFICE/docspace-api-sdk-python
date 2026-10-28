@@ -31,8 +31,8 @@ class UserExistsResponseDto(BaseModel):
     """
     The user existence check response parameters.
     """ # noqa: E501
-    exists: StrictBool = Field(description="Specifies whether the user exists or not.")
-    status: Optional[EmployeeStatus] = None
+    exists: StrictBool = Field(description="Specifies whether the user exists or not.", json_schema_extra={"examples": [True]})
+    status: Optional[EmployeeStatus] = Field(default=None, description="The user status, if the user exists.")
     __properties: ClassVar[List[str]] = ["exists", "status"]
 
     model_config = ConfigDict(

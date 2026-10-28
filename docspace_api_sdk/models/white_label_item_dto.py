@@ -23,20 +23,20 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.i_magick_geometry import IMagickGeometry
 from docspace_api_sdk.models.white_label_item_path_dto import WhiteLabelItemPathDto
+from docspace_api_sdk.models.white_label_item_size_dto import WhiteLabelItemSizeDto
 from docspace_api_sdk.models.white_label_logo_type import WhiteLabelLogoType
 from typing import Optional, Set
 from typing_extensions import Self
 
 class WhiteLabelItemDto(BaseModel):
     """
-    The white label item parameters.
+    One branding logo slot of the portal: the size it is drawn at, and where its images are served from.
     """ # noqa: E501
-    type: Optional[WhiteLabelLogoType] = None
-    name: Optional[StrictStr] = Field(default=None, description="The white label file name.")
-    size: Optional[IMagickGeometry] = None
-    path: Optional[WhiteLabelItemPathDto] = None
+    type: Optional[WhiteLabelLogoType] = Field(default=None, description="Which branding slot this entry describes. `Notification` is part of the type but never appears here: that  logo is derived from the login-page one and used only in letters.")
+    name: Optional[StrictStr] = Field(default=None, description="The stable name of the same slot, which is what `GET api/2.0/settings/whitelabel/logos/isdefault` keys its  entries by. It is a name to match on, not a file name.", json_schema_extra={"examples": ["LightSmall"]})
+    size: Optional[WhiteLabelItemSizeDto] = Field(default=None, description="The pixel box the slot is drawn in. Only `width` and `height` carry information here; the resize flags and  offsets alongside them are left at their defaults and say nothing about how an uploaded image is treated.")
+    path: Optional[WhiteLabelItemPathDto] = Field(default=None, description="The absolute URLs to render the slot from, one per theme.")
     __properties: ClassVar[List[str]] = ["type", "name", "size", "path"]
 
     model_config = ConfigDict(
@@ -104,7 +104,7 @@ class WhiteLabelItemDto(BaseModel):
         _obj = cls.model_validate({
             "type": obj.get("type"),
             "name": obj.get("name"),
-            "size": IMagickGeometry.from_dict(obj["size"]) if obj.get("size") is not None else None,
+            "size": WhiteLabelItemSizeDto.from_dict(obj["size"]) if obj.get("size") is not None else None,
             "path": WhiteLabelItemPathDto.from_dict(obj["path"]) if obj.get("path") is not None else None
         })
         return _obj

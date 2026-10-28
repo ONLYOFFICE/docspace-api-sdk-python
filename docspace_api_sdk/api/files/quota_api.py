@@ -18,13 +18,13 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
-from docspace_api_sdk.models.folder_integer_array_wrapper import FolderIntegerArrayWrapper
-from docspace_api_sdk.models.update_rooms_quota_request_dto_integer import UpdateRoomsQuotaRequestDtoInteger
-from docspace_api_sdk.models.update_rooms_room_ids_request_dto_integer import UpdateRoomsRoomIdsRequestDtoInteger
+from docspace_api_sdk.models.folder_array_wrapper import FolderArrayWrapper
+from docspace_api_sdk.models.update_rooms_quota_request_dto import UpdateRoomsQuotaRequestDto
+from docspace_api_sdk.models.update_rooms_room_ids_request_dto import UpdateRoomsRoomIdsRequestDto
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -48,7 +48,7 @@ class QuotaApi:
     @validate_call
     def reset_room_quota(
         self,
-        update_rooms_room_ids_request_dto_integer: Optional[UpdateRoomsRoomIdsRequestDtoInteger] = None,
+        update_rooms_room_ids_request_dto: Optional[UpdateRoomsRoomIdsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,13 +61,13 @@ class QuotaApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerArrayWrapper:
+    ) -> FolderArrayWrapper:
         """Reset the room quota limit
 
-        Resets the quota limit for the rooms with the IDs specified in the request.
+        Returns every listed room to the default room quota of the portal and streams the updated rooms back in the  order they were given. This is not the same as removing the limit: the room stops carrying its own value and  starts following the portal default, which a portal administrator can change at any time. The per-room quota  feature has to be on, the caller must be a manager of each listed room, and an archived room or a room in the  trash is refused. The list is not transactional, so rooms processed before a failing one keep the default and  the rest keep what they had. Only numeric room ids are processed, which means ids of rooms stored in a  connected third-party account are silently skipped. Use `PUT api/2.0/files/rooms/roomquota` to set an explicit  value, and a quota of -1 in `PUT api/2.0/files/rooms/{id}` to leave the room with no custom limit at all.
 
-        :param update_rooms_room_ids_request_dto_integer:
-        :type update_rooms_room_ids_request_dto_integer: UpdateRoomsRoomIdsRequestDtoInteger
+        :param update_rooms_room_ids_request_dto:
+        :type update_rooms_room_ids_request_dto: UpdateRoomsRoomIdsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -91,7 +91,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._reset_room_quota_serialize(
-            update_rooms_room_ids_request_dto_integer=update_rooms_room_ids_request_dto_integer,
+            update_rooms_room_ids_request_dto=update_rooms_room_ids_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -99,12 +99,16 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "FolderArrayWrapper",
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -119,7 +123,7 @@ class QuotaApi:
     @validate_call
     def reset_room_quota_with_http_info(
         self,
-        update_rooms_room_ids_request_dto_integer: Optional[UpdateRoomsRoomIdsRequestDtoInteger] = None,
+        update_rooms_room_ids_request_dto: Optional[UpdateRoomsRoomIdsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,13 +136,13 @@ class QuotaApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerArrayWrapper]:
+    ) -> ApiResponse[FolderArrayWrapper]:
         """Reset the room quota limit
 
-        Resets the quota limit for the rooms with the IDs specified in the request.
+        Returns every listed room to the default room quota of the portal and streams the updated rooms back in the  order they were given. This is not the same as removing the limit: the room stops carrying its own value and  starts following the portal default, which a portal administrator can change at any time. The per-room quota  feature has to be on, the caller must be a manager of each listed room, and an archived room or a room in the  trash is refused. The list is not transactional, so rooms processed before a failing one keep the default and  the rest keep what they had. Only numeric room ids are processed, which means ids of rooms stored in a  connected third-party account are silently skipped. Use `PUT api/2.0/files/rooms/roomquota` to set an explicit  value, and a quota of -1 in `PUT api/2.0/files/rooms/{id}` to leave the room with no custom limit at all.
 
-        :param update_rooms_room_ids_request_dto_integer:
-        :type update_rooms_room_ids_request_dto_integer: UpdateRoomsRoomIdsRequestDtoInteger
+        :param update_rooms_room_ids_request_dto:
+        :type update_rooms_room_ids_request_dto: UpdateRoomsRoomIdsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -162,7 +166,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._reset_room_quota_serialize(
-            update_rooms_room_ids_request_dto_integer=update_rooms_room_ids_request_dto_integer,
+            update_rooms_room_ids_request_dto=update_rooms_room_ids_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -170,12 +174,16 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "FolderArrayWrapper",
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -190,7 +198,7 @@ class QuotaApi:
     @validate_call
     def reset_room_quota_without_preload_content(
         self,
-        update_rooms_room_ids_request_dto_integer: Optional[UpdateRoomsRoomIdsRequestDtoInteger] = None,
+        update_rooms_room_ids_request_dto: Optional[UpdateRoomsRoomIdsRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -206,10 +214,10 @@ class QuotaApi:
     ) -> RESTResponseType:
         """Reset the room quota limit
 
-        Resets the quota limit for the rooms with the IDs specified in the request.
+        Returns every listed room to the default room quota of the portal and streams the updated rooms back in the  order they were given. This is not the same as removing the limit: the room stops carrying its own value and  starts following the portal default, which a portal administrator can change at any time. The per-room quota  feature has to be on, the caller must be a manager of each listed room, and an archived room or a room in the  trash is refused. The list is not transactional, so rooms processed before a failing one keep the default and  the rest keep what they had. Only numeric room ids are processed, which means ids of rooms stored in a  connected third-party account are silently skipped. Use `PUT api/2.0/files/rooms/roomquota` to set an explicit  value, and a quota of -1 in `PUT api/2.0/files/rooms/{id}` to leave the room with no custom limit at all.
 
-        :param update_rooms_room_ids_request_dto_integer:
-        :type update_rooms_room_ids_request_dto_integer: UpdateRoomsRoomIdsRequestDtoInteger
+        :param update_rooms_room_ids_request_dto:
+        :type update_rooms_room_ids_request_dto: UpdateRoomsRoomIdsRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -233,7 +241,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._reset_room_quota_serialize(
-            update_rooms_room_ids_request_dto_integer=update_rooms_room_ids_request_dto_integer,
+            update_rooms_room_ids_request_dto=update_rooms_room_ids_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -241,12 +249,16 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "FolderArrayWrapper",
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -256,7 +268,7 @@ class QuotaApi:
 
     def _reset_room_quota_serialize(
         self,
-        update_rooms_room_ids_request_dto_integer,
+        update_rooms_room_ids_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -282,8 +294,8 @@ class QuotaApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_rooms_room_ids_request_dto_integer is not None:
-            _body_params = update_rooms_room_ids_request_dto_integer
+        if update_rooms_room_ids_request_dto is not None:
+            _body_params = update_rooms_room_ids_request_dto
 
 
         # set the HTTP header `Accept`
@@ -342,7 +354,7 @@ class QuotaApi:
     @validate_call
     def update_rooms_quota(
         self,
-        update_rooms_quota_request_dto_integer: Optional[UpdateRoomsQuotaRequestDtoInteger] = None,
+        update_rooms_quota_request_dto: Optional[UpdateRoomsQuotaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -355,13 +367,13 @@ class QuotaApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerArrayWrapper:
+    ) -> FolderArrayWrapper:
         """Change the room quota limit
 
-        Changes the quota limit for the rooms with the IDs specified in the request.
+        Sets the same custom storage limit, in bytes, on every listed room and streams the updated rooms back in the  order they were given. The per-room quota feature has to be on for the portal, and the value must stay within  the portal own limit, otherwise the call is refused before anything is written. The caller must be a manager  of each listed room, and an archived room or a room in the trash is refused. The list is not transactional:  rooms processed before the offending one keep their new limit, so a failed call has to be checked room by  room. Only numeric room ids are processed, which means ids of rooms stored in a connected third-party account  are silently skipped. A room whose limit already equals the requested value is left untouched and still  returned. To go back to the portal default use `PUT api/2.0/files/rooms/resetquota`, and to drop the custom  limit entirely send a quota of -1 to `PUT api/2.0/files/rooms/{id}`.
 
-        :param update_rooms_quota_request_dto_integer:
-        :type update_rooms_quota_request_dto_integer: UpdateRoomsQuotaRequestDtoInteger
+        :param update_rooms_quota_request_dto:
+        :type update_rooms_quota_request_dto: UpdateRoomsQuotaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -385,7 +397,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._update_rooms_quota_serialize(
-            update_rooms_quota_request_dto_integer=update_rooms_quota_request_dto_integer,
+            update_rooms_quota_request_dto=update_rooms_quota_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -393,12 +405,16 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "FolderArrayWrapper",
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -413,7 +429,7 @@ class QuotaApi:
     @validate_call
     def update_rooms_quota_with_http_info(
         self,
-        update_rooms_quota_request_dto_integer: Optional[UpdateRoomsQuotaRequestDtoInteger] = None,
+        update_rooms_quota_request_dto: Optional[UpdateRoomsQuotaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -426,13 +442,13 @@ class QuotaApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerArrayWrapper]:
+    ) -> ApiResponse[FolderArrayWrapper]:
         """Change the room quota limit
 
-        Changes the quota limit for the rooms with the IDs specified in the request.
+        Sets the same custom storage limit, in bytes, on every listed room and streams the updated rooms back in the  order they were given. The per-room quota feature has to be on for the portal, and the value must stay within  the portal own limit, otherwise the call is refused before anything is written. The caller must be a manager  of each listed room, and an archived room or a room in the trash is refused. The list is not transactional:  rooms processed before the offending one keep their new limit, so a failed call has to be checked room by  room. Only numeric room ids are processed, which means ids of rooms stored in a connected third-party account  are silently skipped. A room whose limit already equals the requested value is left untouched and still  returned. To go back to the portal default use `PUT api/2.0/files/rooms/resetquota`, and to drop the custom  limit entirely send a quota of -1 to `PUT api/2.0/files/rooms/{id}`.
 
-        :param update_rooms_quota_request_dto_integer:
-        :type update_rooms_quota_request_dto_integer: UpdateRoomsQuotaRequestDtoInteger
+        :param update_rooms_quota_request_dto:
+        :type update_rooms_quota_request_dto: UpdateRoomsQuotaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -456,7 +472,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._update_rooms_quota_serialize(
-            update_rooms_quota_request_dto_integer=update_rooms_quota_request_dto_integer,
+            update_rooms_quota_request_dto=update_rooms_quota_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -464,12 +480,16 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "FolderArrayWrapper",
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -484,7 +504,7 @@ class QuotaApi:
     @validate_call
     def update_rooms_quota_without_preload_content(
         self,
-        update_rooms_quota_request_dto_integer: Optional[UpdateRoomsQuotaRequestDtoInteger] = None,
+        update_rooms_quota_request_dto: Optional[UpdateRoomsQuotaRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -500,10 +520,10 @@ class QuotaApi:
     ) -> RESTResponseType:
         """Change the room quota limit
 
-        Changes the quota limit for the rooms with the IDs specified in the request.
+        Sets the same custom storage limit, in bytes, on every listed room and streams the updated rooms back in the  order they were given. The per-room quota feature has to be on for the portal, and the value must stay within  the portal own limit, otherwise the call is refused before anything is written. The caller must be a manager  of each listed room, and an archived room or a room in the trash is refused. The list is not transactional:  rooms processed before the offending one keep their new limit, so a failed call has to be checked room by  room. Only numeric room ids are processed, which means ids of rooms stored in a connected third-party account  are silently skipped. A room whose limit already equals the requested value is left untouched and still  returned. To go back to the portal default use `PUT api/2.0/files/rooms/resetquota`, and to drop the custom  limit entirely send a quota of -1 to `PUT api/2.0/files/rooms/{id}`.
 
-        :param update_rooms_quota_request_dto_integer:
-        :type update_rooms_quota_request_dto_integer: UpdateRoomsQuotaRequestDtoInteger
+        :param update_rooms_quota_request_dto:
+        :type update_rooms_quota_request_dto: UpdateRoomsQuotaRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -527,7 +547,7 @@ class QuotaApi:
         """ # noqa: E501
 
         _param = self._update_rooms_quota_serialize(
-            update_rooms_quota_request_dto_integer=update_rooms_quota_request_dto_integer,
+            update_rooms_quota_request_dto=update_rooms_quota_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -535,12 +555,16 @@ class QuotaApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "FolderArrayWrapper",
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -550,7 +574,7 @@ class QuotaApi:
 
     def _update_rooms_quota_serialize(
         self,
-        update_rooms_quota_request_dto_integer,
+        update_rooms_quota_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -576,8 +600,8 @@ class QuotaApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_rooms_quota_request_dto_integer is not None:
-            _body_params = update_rooms_quota_request_dto_integer
+        if update_rooms_quota_request_dto is not None:
+            _body_params = update_rooms_quota_request_dto
 
 
         # set the HTTP header `Accept`

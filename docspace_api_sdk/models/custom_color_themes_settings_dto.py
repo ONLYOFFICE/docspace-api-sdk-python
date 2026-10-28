@@ -23,17 +23,17 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.custom_color_themes_settings_item import CustomColorThemesSettingsItem
+from docspace_api_sdk.models.custom_color_theme_dto import CustomColorThemeDto
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CustomColorThemesSettingsDto(BaseModel):
     """
-    The custom color themes settings.
+    The colour themes the portal offers, which of them is applied, and how many the plan allows.
     """ # noqa: E501
-    themes: Optional[List[CustomColorThemesSettingsItem]] = Field(default=None, description="The list of the custom color themes.")
-    selected: Optional[StrictInt] = Field(default=None, description="Specifies whether the custom color theme is selected.")
-    limit: Optional[StrictInt] = Field(default=None, description="The maximum number of the custom color themes.")
+    themes: Optional[List[CustomColorThemeDto]] = Field(default=None, description="Every theme the portal can apply, ordered by ID, with the built-in ones first because they were created  first. It is never empty - the built-in themes cannot be deleted - and a custom theme is one whose ID is  higher than the built-in ones.", json_schema_extra={"examples": [[{"id": 1, "name": "Custom Theme"}]]})
+    selected: Optional[StrictInt] = Field(default=None, description="The ID of the theme in `themes` that is currently applied to the whole portal. Deleting the applied theme  moves it to the lowest remaining ID, so it can change without anyone having chosen a new one.", json_schema_extra={"examples": [1]})
+    limit: Optional[StrictInt] = Field(default=None, description="How many entries `themes` may hold in total, built-in ones included; `0` means the plan caps nothing. Once  the cap is reached `PUT api/2.0/settings/colortheme` drops a new theme silently instead of failing, so  compare this with the length of `themes` to tell whether a save took effect.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["themes", "selected", "limit"]
 
     model_config = ConfigDict(
@@ -100,7 +100,7 @@ class CustomColorThemesSettingsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "themes": [CustomColorThemesSettingsItem.from_dict(_item) for _item in obj["themes"]] if obj.get("themes") is not None else None,
+            "themes": [CustomColorThemeDto.from_dict(_item) for _item in obj["themes"]] if obj.get("themes") is not None else None,
             "selected": obj.get("selected"),
             "limit": obj.get("limit")
         })

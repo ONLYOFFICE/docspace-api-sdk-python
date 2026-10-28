@@ -19,25 +19,23 @@
 from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from docspace_api_sdk.models.create_agent_request_dto import CreateAgentRequestDto
-from docspace_api_sdk.models.delete_room_request import DeleteRoomRequest
-from docspace_api_sdk.models.file_operation_wrapper import FileOperationWrapper
-from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
-from docspace_api_sdk.models.folder_integer_array_wrapper import FolderIntegerArrayWrapper
-from docspace_api_sdk.models.folder_integer_wrapper import FolderIntegerWrapper
-from docspace_api_sdk.models.new_items_agent_new_items_array_wrapper import NewItemsAgentNewItemsArrayWrapper
-from docspace_api_sdk.models.quota_filter import QuotaFilter
-from docspace_api_sdk.models.sort_order import SortOrder
-from docspace_api_sdk.models.subject_filter import SubjectFilter
-from docspace_api_sdk.models.update_room_request import UpdateRoomRequest
-from docspace_api_sdk.models.update_rooms_quota_request_dto_integer import UpdateRoomsQuotaRequestDtoInteger
-from docspace_api_sdk.models.update_rooms_room_ids_request_dto_integer import UpdateRoomsRoomIdsRequestDtoInteger
+from docspace_api_sdk.models.ai_agents_create_request import AiAgentsCreateRequest
+from docspace_api_sdk.models.ai_agents_delete_request import AiAgentsDeleteRequest
+from docspace_api_sdk.models.ai_agents_get200_response import AiAgentsGet200Response
+from docspace_api_sdk.models.ai_agents_reset_quota_request import AiAgentsResetQuotaRequest
+from docspace_api_sdk.models.ai_agents_update_quota_request import AiAgentsUpdateQuotaRequest
+from docspace_api_sdk.models.ai_agents_update_request import AiAgentsUpdateRequest
+from docspace_api_sdk.models.ai_file_operation_wrapper import AiFileOperationWrapper
+from docspace_api_sdk.models.ai_folder_array_wrapper import AiFolderArrayWrapper
+from docspace_api_sdk.models.ai_folder_content_wrapper import AiFolderContentWrapper
+from docspace_api_sdk.models.ai_folder_wrapper import AiFolderWrapper
+from docspace_api_sdk.models.ai_new_items_agent_new_items_array_wrapper import AiNewItemsAgentNewItemsArrayWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -63,9 +61,9 @@ class AgentsApi:
 
 
     @validate_call
-    def create_agent(
+    def ai_agents_create(
         self,
-        create_agent_request_dto: Optional[CreateAgentRequestDto] = None,
+        ai_agents_create_request: AiAgentsCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -78,13 +76,13 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
-        """Create an ai agent
+    ) -> AiFolderWrapper:
+        """Create an agent
 
-        Creates an ai agent.
+        Creates an AI agent room and binds a model to it, in that order. `profileId` is required, has to be a UUID, has to name an existing profile, and that profile has to support chat - an image-only model is refused here rather than failing on every later request. `prompt` is required and is stored on the room as its standing instruction with any markup stripped, so it cannot round-trip HTML into another user's reply. The two steps are not atomic: when the room is created but the model binding fails, the call reports an error and the room is left behind, so re-bind it with `PUT api/2.0/ai/agents/{id}` rather than creating a second one.
 
-        :param create_agent_request_dto:
-        :type create_agent_request_dto: CreateAgentRequestDto
+        :param ai_agents_create_request: (required)
+        :type ai_agents_create_request: AiAgentsCreateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -107,8 +105,8 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_agent_serialize(
-            create_agent_request_dto=create_agent_request_dto,
+        _param = self._ai_agents_create_serialize(
+            ai_agents_create_request=ai_agents_create_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -116,12 +114,14 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -134,9 +134,9 @@ class AgentsApi:
 
 
     @validate_call
-    def create_agent_with_http_info(
+    def ai_agents_create_with_http_info(
         self,
-        create_agent_request_dto: Optional[CreateAgentRequestDto] = None,
+        ai_agents_create_request: AiAgentsCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -149,13 +149,13 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
-        """Create an ai agent
+    ) -> ApiResponse[AiFolderWrapper]:
+        """Create an agent
 
-        Creates an ai agent.
+        Creates an AI agent room and binds a model to it, in that order. `profileId` is required, has to be a UUID, has to name an existing profile, and that profile has to support chat - an image-only model is refused here rather than failing on every later request. `prompt` is required and is stored on the room as its standing instruction with any markup stripped, so it cannot round-trip HTML into another user's reply. The two steps are not atomic: when the room is created but the model binding fails, the call reports an error and the room is left behind, so re-bind it with `PUT api/2.0/ai/agents/{id}` rather than creating a second one.
 
-        :param create_agent_request_dto:
-        :type create_agent_request_dto: CreateAgentRequestDto
+        :param ai_agents_create_request: (required)
+        :type ai_agents_create_request: AiAgentsCreateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -178,8 +178,8 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_agent_serialize(
-            create_agent_request_dto=create_agent_request_dto,
+        _param = self._ai_agents_create_serialize(
+            ai_agents_create_request=ai_agents_create_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -187,12 +187,14 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -205,9 +207,9 @@ class AgentsApi:
 
 
     @validate_call
-    def create_agent_without_preload_content(
+    def ai_agents_create_without_preload_content(
         self,
-        create_agent_request_dto: Optional[CreateAgentRequestDto] = None,
+        ai_agents_create_request: AiAgentsCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -221,12 +223,12 @@ class AgentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create an ai agent
+        """Create an agent
 
-        Creates an ai agent.
+        Creates an AI agent room and binds a model to it, in that order. `profileId` is required, has to be a UUID, has to name an existing profile, and that profile has to support chat - an image-only model is refused here rather than failing on every later request. `prompt` is required and is stored on the room as its standing instruction with any markup stripped, so it cannot round-trip HTML into another user's reply. The two steps are not atomic: when the room is created but the model binding fails, the call reports an error and the room is left behind, so re-bind it with `PUT api/2.0/ai/agents/{id}` rather than creating a second one.
 
-        :param create_agent_request_dto:
-        :type create_agent_request_dto: CreateAgentRequestDto
+        :param ai_agents_create_request: (required)
+        :type ai_agents_create_request: AiAgentsCreateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -249,8 +251,8 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_agent_serialize(
-            create_agent_request_dto=create_agent_request_dto,
+        _param = self._ai_agents_create_serialize(
+            ai_agents_create_request=ai_agents_create_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -258,12 +260,14 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -271,9 +275,9 @@ class AgentsApi:
         return response_data.response
 
 
-    def _create_agent_serialize(
+    def _ai_agents_create_serialize(
         self,
-        create_agent_request_dto,
+        ai_agents_create_request,
         _request_auth,
         _content_type,
         _headers,
@@ -299,8 +303,8 @@ class AgentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_agent_request_dto is not None:
-            _body_params = create_agent_request_dto
+        if ai_agents_create_request is not None:
+            _body_params = ai_agents_create_request
 
 
         # set the HTTP header `Accept`
@@ -327,12 +331,8 @@ class AgentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -357,10 +357,10 @@ class AgentsApi:
 
 
     @validate_call
-    def delete_agent(
+    def ai_agents_delete(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        delete_room_request: Annotated[DeleteRoomRequest, Field(description="The parameters for deleting a room.")],
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
+        ai_agents_delete_request: AiAgentsDeleteRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -373,15 +373,15 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FileOperationWrapper:
-        """Remove an ai agent
+    ) -> AiFileOperationWrapper:
+        """Delete an agent
 
-        Removes an ai agent.
+        Deletes an AI agent room. The ID has to be the room's integer identifier, and the body is forwarded to the DocSpace AI service unchanged, so it accepts the same options as deleting an ordinary room - `deleteAfter` among them. Deletion is asynchronous there: the answer is a file-operation payload to poll, not a completed result. The agent's model binding is deliberately left behind, because the upstream assignment API has no per-entry delete, so an orphaned assignment row survives the room.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param delete_room_request: The parameters for deleting a room. (required)
-        :type delete_room_request: DeleteRoomRequest
+        :param id: The agent identifier. (required)
+        :type id: str
+        :param ai_agents_delete_request: (required)
+        :type ai_agents_delete_request: AiAgentsDeleteRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -404,9 +404,9 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_agent_serialize(
+        _param = self._ai_agents_delete_serialize(
             id=id,
-            delete_room_request=delete_room_request,
+            ai_agents_delete_request=ai_agents_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -414,12 +414,14 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFileOperationWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -432,10 +434,10 @@ class AgentsApi:
 
 
     @validate_call
-    def delete_agent_with_http_info(
+    def ai_agents_delete_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        delete_room_request: Annotated[DeleteRoomRequest, Field(description="The parameters for deleting a room.")],
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
+        ai_agents_delete_request: AiAgentsDeleteRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -448,15 +450,15 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FileOperationWrapper]:
-        """Remove an ai agent
+    ) -> ApiResponse[AiFileOperationWrapper]:
+        """Delete an agent
 
-        Removes an ai agent.
+        Deletes an AI agent room. The ID has to be the room's integer identifier, and the body is forwarded to the DocSpace AI service unchanged, so it accepts the same options as deleting an ordinary room - `deleteAfter` among them. Deletion is asynchronous there: the answer is a file-operation payload to poll, not a completed result. The agent's model binding is deliberately left behind, because the upstream assignment API has no per-entry delete, so an orphaned assignment row survives the room.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param delete_room_request: The parameters for deleting a room. (required)
-        :type delete_room_request: DeleteRoomRequest
+        :param id: The agent identifier. (required)
+        :type id: str
+        :param ai_agents_delete_request: (required)
+        :type ai_agents_delete_request: AiAgentsDeleteRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -479,9 +481,9 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_agent_serialize(
+        _param = self._ai_agents_delete_serialize(
             id=id,
-            delete_room_request=delete_room_request,
+            ai_agents_delete_request=ai_agents_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -489,12 +491,14 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFileOperationWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -507,10 +511,10 @@ class AgentsApi:
 
 
     @validate_call
-    def delete_agent_without_preload_content(
+    def ai_agents_delete_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        delete_room_request: Annotated[DeleteRoomRequest, Field(description="The parameters for deleting a room.")],
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
+        ai_agents_delete_request: AiAgentsDeleteRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -524,14 +528,14 @@ class AgentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Remove an ai agent
+        """Delete an agent
 
-        Removes an ai agent.
+        Deletes an AI agent room. The ID has to be the room's integer identifier, and the body is forwarded to the DocSpace AI service unchanged, so it accepts the same options as deleting an ordinary room - `deleteAfter` among them. Deletion is asynchronous there: the answer is a file-operation payload to poll, not a completed result. The agent's model binding is deliberately left behind, because the upstream assignment API has no per-entry delete, so an orphaned assignment row survives the room.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param delete_room_request: The parameters for deleting a room. (required)
-        :type delete_room_request: DeleteRoomRequest
+        :param id: The agent identifier. (required)
+        :type id: str
+        :param ai_agents_delete_request: (required)
+        :type ai_agents_delete_request: AiAgentsDeleteRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -554,9 +558,9 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_agent_serialize(
+        _param = self._ai_agents_delete_serialize(
             id=id,
-            delete_room_request=delete_room_request,
+            ai_agents_delete_request=ai_agents_delete_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -564,12 +568,14 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileOperationWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFileOperationWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -577,10 +583,10 @@ class AgentsApi:
         return response_data.response
 
 
-    def _delete_agent_serialize(
+    def _ai_agents_delete_serialize(
         self,
         id,
-        delete_room_request,
+        ai_agents_delete_request,
         _request_auth,
         _content_type,
         _headers,
@@ -608,8 +614,8 @@ class AgentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if delete_room_request is not None:
-            _body_params = delete_room_request
+        if ai_agents_delete_request is not None:
+            _body_params = ai_agents_delete_request
 
 
         # set the HTTP header `Accept`
@@ -636,12 +642,8 @@ class AgentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -666,9 +668,9 @@ class AgentsApi:
 
 
     @validate_call
-    def get_agent_info(
+    def ai_agents_get(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -681,13 +683,13 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
-        """Return an ai agent
+    ) -> AiAgentsGet200Response:
+        """Get an agent
 
-        Returns an ai agent.
+        Returns one AI agent room, enriched with the `profileId` currently bound to it so an edit form can prefill its model selector. The ID is the room's integer identifier, and a non-integer value is refused rather than passed on to fail opaquely upstream. The binding lives in an assignment rather than on the room, so it is looked up separately: a missing or unreadable assignment simply leaves `profileId` out of the answer instead of failing the call. The standing instruction comes back on the room as `chatSettings.prompt`.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The agent identifier. (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -710,7 +712,7 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_agent_info_serialize(
+        _param = self._ai_agents_get_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -719,12 +721,13 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiAgentsGet200Response",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -737,9 +740,9 @@ class AgentsApi:
 
 
     @validate_call
-    def get_agent_info_with_http_info(
+    def ai_agents_get_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -752,13 +755,13 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
-        """Return an ai agent
+    ) -> ApiResponse[AiAgentsGet200Response]:
+        """Get an agent
 
-        Returns an ai agent.
+        Returns one AI agent room, enriched with the `profileId` currently bound to it so an edit form can prefill its model selector. The ID is the room's integer identifier, and a non-integer value is refused rather than passed on to fail opaquely upstream. The binding lives in an assignment rather than on the room, so it is looked up separately: a missing or unreadable assignment simply leaves `profileId` out of the answer instead of failing the call. The standing instruction comes back on the room as `chatSettings.prompt`.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The agent identifier. (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -781,7 +784,7 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_agent_info_serialize(
+        _param = self._ai_agents_get_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -790,12 +793,13 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiAgentsGet200Response",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -808,9 +812,9 @@ class AgentsApi:
 
 
     @validate_call
-    def get_agent_info_without_preload_content(
+    def ai_agents_get_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -824,12 +828,12 @@ class AgentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Return an ai agent
+        """Get an agent
 
-        Returns an ai agent.
+        Returns one AI agent room, enriched with the `profileId` currently bound to it so an edit form can prefill its model selector. The ID is the room's integer identifier, and a non-integer value is refused rather than passed on to fail opaquely upstream. The binding lives in an assignment rather than on the room, so it is looked up separately: a missing or unreadable assignment simply leaves `profileId` out of the answer instead of failing the call. The standing instruction comes back on the room as `chatSettings.prompt`.
 
-        :param id: The room ID. (required)
-        :type id: int
+        :param id: The agent identifier. (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -852,7 +856,7 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_agent_info_serialize(
+        _param = self._ai_agents_get_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -861,12 +865,13 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiAgentsGet200Response",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -874,7 +879,7 @@ class AgentsApi:
         return response_data.response
 
 
-    def _get_agent_info_serialize(
+    def _ai_agents_get_serialize(
         self,
         id,
         _request_auth,
@@ -917,12 +922,8 @@ class AgentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -947,20 +948,19 @@ class AgentsApi:
 
 
     @validate_call
-    def get_agents(
+    def ai_agents_list(
         self,
-        subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
-        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
-        without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
-        tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
-        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
+        subject_id: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms this user takes part in.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms owned by this user.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Invert the user filter: leave out what `subjectId` selects instead of keeping it.")] = None,
+        tags: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms carrying these tags, comma-separated.")] = None,
+        without_tags: Annotated[Optional[StrictBool], Field(description="Show only the agent rooms that carry no tags at all.")] = None,
+        quota_filter: Annotated[Optional[StrictInt], Field(description="Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms whose title matches this text.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Field to sort by, for example `DateAndTime`.")] = None,
+        sort_order: Annotated[Optional[StrictStr], Field(description="Sort direction, `ascending` or `descending`.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="Index of the first entry to return; 0 starts at the beginning.")] = None,
+        count: Annotated[Optional[StrictInt], Field(description="How many entries to return. The internal service applies its own default.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -973,35 +973,33 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerWrapper:
-        """Get ai agents
+    ) -> AiFolderContentWrapper:
+        """List agents
 
-        Get ai agents
+        Lists the portal's AI agent rooms. The query is forwarded unchanged to the DocSpace AI service, so it takes the same paging, sorting and filtering parameters as an ordinary room listing, and the answer is that service's folder-content payload rather than a shape of this API's own. Array and object query values are dropped rather than guessed at, so send flat strings. The profile bound to each agent is not included here - read one agent with `GET api/2.0/ai/agents/{id}` for that.
 
-        :param subject_id: The filter by user ID.
+        :param subject_id: Show only the agent rooms this user takes part in.
         :type subject_id: str
-        :param subject_owner_id: The filter by room owner ID.
+        :param subject_owner_id: Show only the agent rooms owned by this user.
         :type subject_owner_id: str
-        :param without_tags: Specifies whether to search by tags or not.
-        :type without_tags: bool
-        :param tags: The tags in the serialized format.
-        :type tags: str
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param exclude_subject: Invert the user filter: leave out what `subjectId` selects instead of keeping it.
         :type exclude_subject: bool
-        :param subject_filter: The filter by user (Owner - 0, Member - 1).
-        :type subject_filter: SubjectFilter
-        :param quota_filter: The filter by quota (All - 0, Default - 1, Custom - 2).
-        :type quota_filter: QuotaFilter
-        :param count: Specifies the maximum number of items to retrieve.
-        :type count: int
-        :param start_index: The index from which to start retrieving the room content.
-        :type start_index: int
-        :param sort_by: Specifies the field by which the room content should be sorted.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text filter value used to refine search or query operations.
+        :param tags: Show only the agent rooms carrying these tags, comma-separated.
+        :type tags: str
+        :param without_tags: Show only the agent rooms that carry no tags at all.
+        :type without_tags: bool
+        :param quota_filter: Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one.
+        :type quota_filter: int
+        :param filter_value: Show only the agent rooms whose title matches this text.
         :type filter_value: str
+        :param sort_by: Field to sort by, for example `DateAndTime`.
+        :type sort_by: str
+        :param sort_order: Sort direction, `ascending` or `descending`.
+        :type sort_order: str
+        :param start_index: Index of the first entry to return; 0 starts at the beginning.
+        :type start_index: int
+        :param count: How many entries to return. The internal service applies its own default.
+        :type count: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1024,19 +1022,18 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_agents_serialize(
+        _param = self._ai_agents_list_serialize(
             subject_id=subject_id,
             subject_owner_id=subject_owner_id,
-            without_tags=without_tags,
-            tags=tags,
             exclude_subject=exclude_subject,
-            subject_filter=subject_filter,
+            tags=tags,
+            without_tags=without_tags,
             quota_filter=quota_filter,
-            count=count,
-            start_index=start_index,
+            filter_value=filter_value,
             sort_by=sort_by,
             sort_order=sort_order,
-            filter_value=filter_value,
+            start_index=start_index,
+            count=count,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1044,12 +1041,12 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderContentWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1062,20 +1059,19 @@ class AgentsApi:
 
 
     @validate_call
-    def get_agents_with_http_info(
+    def ai_agents_list_with_http_info(
         self,
-        subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
-        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
-        without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
-        tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
-        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
+        subject_id: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms this user takes part in.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms owned by this user.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Invert the user filter: leave out what `subjectId` selects instead of keeping it.")] = None,
+        tags: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms carrying these tags, comma-separated.")] = None,
+        without_tags: Annotated[Optional[StrictBool], Field(description="Show only the agent rooms that carry no tags at all.")] = None,
+        quota_filter: Annotated[Optional[StrictInt], Field(description="Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms whose title matches this text.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Field to sort by, for example `DateAndTime`.")] = None,
+        sort_order: Annotated[Optional[StrictStr], Field(description="Sort direction, `ascending` or `descending`.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="Index of the first entry to return; 0 starts at the beginning.")] = None,
+        count: Annotated[Optional[StrictInt], Field(description="How many entries to return. The internal service applies its own default.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1088,35 +1084,33 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """Get ai agents
+    ) -> ApiResponse[AiFolderContentWrapper]:
+        """List agents
 
-        Get ai agents
+        Lists the portal's AI agent rooms. The query is forwarded unchanged to the DocSpace AI service, so it takes the same paging, sorting and filtering parameters as an ordinary room listing, and the answer is that service's folder-content payload rather than a shape of this API's own. Array and object query values are dropped rather than guessed at, so send flat strings. The profile bound to each agent is not included here - read one agent with `GET api/2.0/ai/agents/{id}` for that.
 
-        :param subject_id: The filter by user ID.
+        :param subject_id: Show only the agent rooms this user takes part in.
         :type subject_id: str
-        :param subject_owner_id: The filter by room owner ID.
+        :param subject_owner_id: Show only the agent rooms owned by this user.
         :type subject_owner_id: str
-        :param without_tags: Specifies whether to search by tags or not.
-        :type without_tags: bool
-        :param tags: The tags in the serialized format.
-        :type tags: str
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param exclude_subject: Invert the user filter: leave out what `subjectId` selects instead of keeping it.
         :type exclude_subject: bool
-        :param subject_filter: The filter by user (Owner - 0, Member - 1).
-        :type subject_filter: SubjectFilter
-        :param quota_filter: The filter by quota (All - 0, Default - 1, Custom - 2).
-        :type quota_filter: QuotaFilter
-        :param count: Specifies the maximum number of items to retrieve.
-        :type count: int
-        :param start_index: The index from which to start retrieving the room content.
-        :type start_index: int
-        :param sort_by: Specifies the field by which the room content should be sorted.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text filter value used to refine search or query operations.
+        :param tags: Show only the agent rooms carrying these tags, comma-separated.
+        :type tags: str
+        :param without_tags: Show only the agent rooms that carry no tags at all.
+        :type without_tags: bool
+        :param quota_filter: Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one.
+        :type quota_filter: int
+        :param filter_value: Show only the agent rooms whose title matches this text.
         :type filter_value: str
+        :param sort_by: Field to sort by, for example `DateAndTime`.
+        :type sort_by: str
+        :param sort_order: Sort direction, `ascending` or `descending`.
+        :type sort_order: str
+        :param start_index: Index of the first entry to return; 0 starts at the beginning.
+        :type start_index: int
+        :param count: How many entries to return. The internal service applies its own default.
+        :type count: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1139,19 +1133,18 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_agents_serialize(
+        _param = self._ai_agents_list_serialize(
             subject_id=subject_id,
             subject_owner_id=subject_owner_id,
-            without_tags=without_tags,
-            tags=tags,
             exclude_subject=exclude_subject,
-            subject_filter=subject_filter,
+            tags=tags,
+            without_tags=without_tags,
             quota_filter=quota_filter,
-            count=count,
-            start_index=start_index,
+            filter_value=filter_value,
             sort_by=sort_by,
             sort_order=sort_order,
-            filter_value=filter_value,
+            start_index=start_index,
+            count=count,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1159,12 +1152,12 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderContentWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1177,20 +1170,19 @@ class AgentsApi:
 
 
     @validate_call
-    def get_agents_without_preload_content(
+    def ai_agents_list_without_preload_content(
         self,
-        subject_id: Annotated[Optional[StrictStr], Field(description="The filter by user ID.")] = None,
-        subject_owner_id: Annotated[Optional[StrictStr], Field(description="The filter by room owner ID.")] = None,
-        without_tags: Annotated[Optional[StrictBool], Field(description="Specifies whether to search by tags or not.")] = None,
-        tags: Annotated[Optional[StrictStr], Field(description="The tags in the serialized format.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        subject_filter: Annotated[Optional[SubjectFilter], Field(description="The filter by user (Owner - 0, Member - 1).")] = None,
-        quota_filter: Annotated[Optional[QuotaFilter], Field(description="The filter by quota (All - 0, Default - 1, Custom - 2).")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Specifies the maximum number of items to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The index from which to start retrieving the room content.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the room content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text filter value used to refine search or query operations.")] = None,
+        subject_id: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms this user takes part in.")] = None,
+        subject_owner_id: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms owned by this user.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Invert the user filter: leave out what `subjectId` selects instead of keeping it.")] = None,
+        tags: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms carrying these tags, comma-separated.")] = None,
+        without_tags: Annotated[Optional[StrictBool], Field(description="Show only the agent rooms that carry no tags at all.")] = None,
+        quota_filter: Annotated[Optional[StrictInt], Field(description="Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Show only the agent rooms whose title matches this text.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="Field to sort by, for example `DateAndTime`.")] = None,
+        sort_order: Annotated[Optional[StrictStr], Field(description="Sort direction, `ascending` or `descending`.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="Index of the first entry to return; 0 starts at the beginning.")] = None,
+        count: Annotated[Optional[StrictInt], Field(description="How many entries to return. The internal service applies its own default.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1204,34 +1196,32 @@ class AgentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get ai agents
+        """List agents
 
-        Get ai agents
+        Lists the portal's AI agent rooms. The query is forwarded unchanged to the DocSpace AI service, so it takes the same paging, sorting and filtering parameters as an ordinary room listing, and the answer is that service's folder-content payload rather than a shape of this API's own. Array and object query values are dropped rather than guessed at, so send flat strings. The profile bound to each agent is not included here - read one agent with `GET api/2.0/ai/agents/{id}` for that.
 
-        :param subject_id: The filter by user ID.
+        :param subject_id: Show only the agent rooms this user takes part in.
         :type subject_id: str
-        :param subject_owner_id: The filter by room owner ID.
+        :param subject_owner_id: Show only the agent rooms owned by this user.
         :type subject_owner_id: str
-        :param without_tags: Specifies whether to search by tags or not.
-        :type without_tags: bool
-        :param tags: The tags in the serialized format.
-        :type tags: str
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param exclude_subject: Invert the user filter: leave out what `subjectId` selects instead of keeping it.
         :type exclude_subject: bool
-        :param subject_filter: The filter by user (Owner - 0, Member - 1).
-        :type subject_filter: SubjectFilter
-        :param quota_filter: The filter by quota (All - 0, Default - 1, Custom - 2).
-        :type quota_filter: QuotaFilter
-        :param count: Specifies the maximum number of items to retrieve.
-        :type count: int
-        :param start_index: The index from which to start retrieving the room content.
-        :type start_index: int
-        :param sort_by: Specifies the field by which the room content should be sorted.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text filter value used to refine search or query operations.
+        :param tags: Show only the agent rooms carrying these tags, comma-separated.
+        :type tags: str
+        :param without_tags: Show only the agent rooms that carry no tags at all.
+        :type without_tags: bool
+        :param quota_filter: Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one.
+        :type quota_filter: int
+        :param filter_value: Show only the agent rooms whose title matches this text.
         :type filter_value: str
+        :param sort_by: Field to sort by, for example `DateAndTime`.
+        :type sort_by: str
+        :param sort_order: Sort direction, `ascending` or `descending`.
+        :type sort_order: str
+        :param start_index: Index of the first entry to return; 0 starts at the beginning.
+        :type start_index: int
+        :param count: How many entries to return. The internal service applies its own default.
+        :type count: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1254,19 +1244,18 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_agents_serialize(
+        _param = self._ai_agents_list_serialize(
             subject_id=subject_id,
             subject_owner_id=subject_owner_id,
-            without_tags=without_tags,
-            tags=tags,
             exclude_subject=exclude_subject,
-            subject_filter=subject_filter,
+            tags=tags,
+            without_tags=without_tags,
             quota_filter=quota_filter,
-            count=count,
-            start_index=start_index,
+            filter_value=filter_value,
             sort_by=sort_by,
             sort_order=sort_order,
-            filter_value=filter_value,
+            start_index=start_index,
+            count=count,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1274,12 +1263,12 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderContentWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1287,20 +1276,19 @@ class AgentsApi:
         return response_data.response
 
 
-    def _get_agents_serialize(
+    def _ai_agents_list_serialize(
         self,
         subject_id,
         subject_owner_id,
-        without_tags,
-        tags,
         exclude_subject,
-        subject_filter,
+        tags,
+        without_tags,
         quota_filter,
-        count,
-        start_index,
+        filter_value,
         sort_by,
         sort_order,
-        filter_value,
+        start_index,
+        count,
         _request_auth,
         _content_type,
         _headers,
@@ -1331,33 +1319,25 @@ class AgentsApi:
             
             _query_params.append(('subjectOwnerId', subject_owner_id))
             
-        if without_tags is not None:
+        if exclude_subject is not None:
             
-            _query_params.append(('withoutTags', without_tags))
+            _query_params.append(('excludeSubject', exclude_subject))
             
         if tags is not None:
             
             _query_params.append(('tags', tags))
             
-        if exclude_subject is not None:
+        if without_tags is not None:
             
-            _query_params.append(('excludeSubject', exclude_subject))
-            
-        if subject_filter is not None:
-            
-            _query_params.append(('subjectFilter', subject_filter.value))
+            _query_params.append(('withoutTags', without_tags))
             
         if quota_filter is not None:
             
-            _query_params.append(('quotaFilter', quota_filter.value))
+            _query_params.append(('quotaFilter', quota_filter))
             
-        if count is not None:
+        if filter_value is not None:
             
-            _query_params.append(('count', count))
-            
-        if start_index is not None:
-            
-            _query_params.append(('startIndex', start_index))
+            _query_params.append(('filterValue', filter_value))
             
         if sort_by is not None:
             
@@ -1365,11 +1345,15 @@ class AgentsApi:
             
         if sort_order is not None:
             
-            _query_params.append(('sortOrder', sort_order.value))
+            _query_params.append(('sortOrder', sort_order))
             
-        if filter_value is not None:
+        if start_index is not None:
             
-            _query_params.append(('filterValue', filter_value))
+            _query_params.append(('startIndex', start_index))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
             
         # process the header parameters
         if self._fields is not None:
@@ -1389,12 +1373,8 @@ class AgentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1419,7 +1399,7 @@ class AgentsApi:
 
 
     @validate_call
-    def get_agents_new_items(
+    def ai_agents_news(
         self,
         _request_timeout: Union[
             None,
@@ -1433,10 +1413,10 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> NewItemsAgentNewItemsArrayWrapper:
-        """Get the room new items
+    ) -> AiNewItemsAgentNewItemsArrayWrapper:
+        """List agent news items
 
-        Returns the room new items.
+        Lists the unread items across the caller's AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service's new-items payload. This is a read-only operation and does not mark anything as seen.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1460,7 +1440,7 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_agents_new_items_serialize(
+        _param = self._ai_agents_news_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1468,12 +1448,12 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "NewItemsAgentNewItemsArrayWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiNewItemsAgentNewItemsArrayWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1486,7 +1466,7 @@ class AgentsApi:
 
 
     @validate_call
-    def get_agents_new_items_with_http_info(
+    def ai_agents_news_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -1500,10 +1480,10 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[NewItemsAgentNewItemsArrayWrapper]:
-        """Get the room new items
+    ) -> ApiResponse[AiNewItemsAgentNewItemsArrayWrapper]:
+        """List agent news items
 
-        Returns the room new items.
+        Lists the unread items across the caller's AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service's new-items payload. This is a read-only operation and does not mark anything as seen.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1527,7 +1507,7 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_agents_new_items_serialize(
+        _param = self._ai_agents_news_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1535,12 +1515,12 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "NewItemsAgentNewItemsArrayWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiNewItemsAgentNewItemsArrayWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1553,7 +1533,7 @@ class AgentsApi:
 
 
     @validate_call
-    def get_agents_new_items_without_preload_content(
+    def ai_agents_news_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -1568,9 +1548,9 @@ class AgentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the room new items
+        """List agent news items
 
-        Returns the room new items.
+        Lists the unread items across the caller's AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service's new-items payload. This is a read-only operation and does not mark anything as seen.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1594,7 +1574,7 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_agents_new_items_serialize(
+        _param = self._ai_agents_news_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1602,12 +1582,12 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "NewItemsAgentNewItemsArrayWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiNewItemsAgentNewItemsArrayWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1615,7 +1595,7 @@ class AgentsApi:
         return response_data.response
 
 
-    def _get_agents_new_items_serialize(
+    def _ai_agents_news_serialize(
         self,
         _request_auth,
         _content_type,
@@ -1655,12 +1635,8 @@ class AgentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1685,9 +1661,9 @@ class AgentsApi:
 
 
     @validate_call
-    def reset_agents_quota(
+    def ai_agents_reset_quota(
         self,
-        update_rooms_room_ids_request_dto_integer: Optional[UpdateRoomsRoomIdsRequestDtoInteger] = None,
+        ai_agents_reset_quota_request: AiAgentsResetQuotaRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1700,13 +1676,13 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerArrayWrapper:
-        """Reset the AI agents quota limit
+    ) -> AiFolderArrayWrapper:
+        """Reset agents' quota
 
-        Resets the quota limit for the AI agents with the IDs specified in the request.
+        Returns the listed AI agent rooms to the portal's default storage quota, forwarding `roomIds` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. This is the counterpart of `PUT api/2.0/ai/agents/agentquota` and takes no quota value of its own. Rooms already on the default are unaffected.
 
-        :param update_rooms_room_ids_request_dto_integer:
-        :type update_rooms_room_ids_request_dto_integer: UpdateRoomsRoomIdsRequestDtoInteger
+        :param ai_agents_reset_quota_request: (required)
+        :type ai_agents_reset_quota_request: AiAgentsResetQuotaRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1729,8 +1705,8 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._reset_agents_quota_serialize(
-            update_rooms_room_ids_request_dto_integer=update_rooms_room_ids_request_dto_integer,
+        _param = self._ai_agents_reset_quota_serialize(
+            ai_agents_reset_quota_request=ai_agents_reset_quota_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1738,12 +1714,13 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderArrayWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1756,9 +1733,9 @@ class AgentsApi:
 
 
     @validate_call
-    def reset_agents_quota_with_http_info(
+    def ai_agents_reset_quota_with_http_info(
         self,
-        update_rooms_room_ids_request_dto_integer: Optional[UpdateRoomsRoomIdsRequestDtoInteger] = None,
+        ai_agents_reset_quota_request: AiAgentsResetQuotaRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1771,13 +1748,13 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerArrayWrapper]:
-        """Reset the AI agents quota limit
+    ) -> ApiResponse[AiFolderArrayWrapper]:
+        """Reset agents' quota
 
-        Resets the quota limit for the AI agents with the IDs specified in the request.
+        Returns the listed AI agent rooms to the portal's default storage quota, forwarding `roomIds` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. This is the counterpart of `PUT api/2.0/ai/agents/agentquota` and takes no quota value of its own. Rooms already on the default are unaffected.
 
-        :param update_rooms_room_ids_request_dto_integer:
-        :type update_rooms_room_ids_request_dto_integer: UpdateRoomsRoomIdsRequestDtoInteger
+        :param ai_agents_reset_quota_request: (required)
+        :type ai_agents_reset_quota_request: AiAgentsResetQuotaRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1800,8 +1777,8 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._reset_agents_quota_serialize(
-            update_rooms_room_ids_request_dto_integer=update_rooms_room_ids_request_dto_integer,
+        _param = self._ai_agents_reset_quota_serialize(
+            ai_agents_reset_quota_request=ai_agents_reset_quota_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1809,12 +1786,13 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderArrayWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1827,9 +1805,9 @@ class AgentsApi:
 
 
     @validate_call
-    def reset_agents_quota_without_preload_content(
+    def ai_agents_reset_quota_without_preload_content(
         self,
-        update_rooms_room_ids_request_dto_integer: Optional[UpdateRoomsRoomIdsRequestDtoInteger] = None,
+        ai_agents_reset_quota_request: AiAgentsResetQuotaRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1843,12 +1821,12 @@ class AgentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Reset the AI agents quota limit
+        """Reset agents' quota
 
-        Resets the quota limit for the AI agents with the IDs specified in the request.
+        Returns the listed AI agent rooms to the portal's default storage quota, forwarding `roomIds` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. This is the counterpart of `PUT api/2.0/ai/agents/agentquota` and takes no quota value of its own. Rooms already on the default are unaffected.
 
-        :param update_rooms_room_ids_request_dto_integer:
-        :type update_rooms_room_ids_request_dto_integer: UpdateRoomsRoomIdsRequestDtoInteger
+        :param ai_agents_reset_quota_request: (required)
+        :type ai_agents_reset_quota_request: AiAgentsResetQuotaRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1871,8 +1849,8 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._reset_agents_quota_serialize(
-            update_rooms_room_ids_request_dto_integer=update_rooms_room_ids_request_dto_integer,
+        _param = self._ai_agents_reset_quota_serialize(
+            ai_agents_reset_quota_request=ai_agents_reset_quota_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1880,12 +1858,13 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderArrayWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1893,9 +1872,9 @@ class AgentsApi:
         return response_data.response
 
 
-    def _reset_agents_quota_serialize(
+    def _ai_agents_reset_quota_serialize(
         self,
-        update_rooms_room_ids_request_dto_integer,
+        ai_agents_reset_quota_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1921,8 +1900,8 @@ class AgentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_rooms_room_ids_request_dto_integer is not None:
-            _body_params = update_rooms_room_ids_request_dto_integer
+        if ai_agents_reset_quota_request is not None:
+            _body_params = ai_agents_reset_quota_request
 
 
         # set the HTTP header `Accept`
@@ -1949,12 +1928,8 @@ class AgentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -1979,10 +1954,10 @@ class AgentsApi:
 
 
     @validate_call
-    def update_agent(
+    def ai_agents_update(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        update_room_request: Annotated[UpdateRoomRequest, Field(description="The request parameters for updating a room.")],
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
+        ai_agents_update_request: AiAgentsUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1995,15 +1970,15 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
-        """Update an ai agent
+    ) -> AiFolderWrapper:
+        """Update an agent
 
-        Updates an ai agent.
+        Changes an AI agent room - its title, tags or standing instruction - and optionally rebinds its model. The ID has to be the room's integer identifier. `profileId` is not part of the room contract: it is taken out of the forwarded body and applied afterwards as the agent's assignment, and it has to be a UUID naming an existing chat-capable profile. An instruction sent as `chatSettings.prompt` has its markup stripped, as on create; note that when `chatSettings` is present the upstream service still requires the rest of that object to be valid, so send it whole.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param update_room_request: The request parameters for updating a room. (required)
-        :type update_room_request: UpdateRoomRequest
+        :param id: The agent identifier. (required)
+        :type id: str
+        :param ai_agents_update_request: (required)
+        :type ai_agents_update_request: AiAgentsUpdateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2026,9 +2001,9 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_agent_serialize(
+        _param = self._ai_agents_update_serialize(
             id=id,
-            update_room_request=update_room_request,
+            ai_agents_update_request=ai_agents_update_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2036,12 +2011,14 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2054,10 +2031,10 @@ class AgentsApi:
 
 
     @validate_call
-    def update_agent_with_http_info(
+    def ai_agents_update_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        update_room_request: Annotated[UpdateRoomRequest, Field(description="The request parameters for updating a room.")],
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
+        ai_agents_update_request: AiAgentsUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2070,15 +2047,15 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
-        """Update an ai agent
+    ) -> ApiResponse[AiFolderWrapper]:
+        """Update an agent
 
-        Updates an ai agent.
+        Changes an AI agent room - its title, tags or standing instruction - and optionally rebinds its model. The ID has to be the room's integer identifier. `profileId` is not part of the room contract: it is taken out of the forwarded body and applied afterwards as the agent's assignment, and it has to be a UUID naming an existing chat-capable profile. An instruction sent as `chatSettings.prompt` has its markup stripped, as on create; note that when `chatSettings` is present the upstream service still requires the rest of that object to be valid, so send it whole.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param update_room_request: The request parameters for updating a room. (required)
-        :type update_room_request: UpdateRoomRequest
+        :param id: The agent identifier. (required)
+        :type id: str
+        :param ai_agents_update_request: (required)
+        :type ai_agents_update_request: AiAgentsUpdateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2101,9 +2078,9 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_agent_serialize(
+        _param = self._ai_agents_update_serialize(
             id=id,
-            update_room_request=update_room_request,
+            ai_agents_update_request=ai_agents_update_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2111,12 +2088,14 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2129,10 +2108,10 @@ class AgentsApi:
 
 
     @validate_call
-    def update_agent_without_preload_content(
+    def ai_agents_update_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The room ID.")],
-        update_room_request: Annotated[UpdateRoomRequest, Field(description="The request parameters for updating a room.")],
+        id: Annotated[StrictStr, Field(description="The agent identifier.")],
+        ai_agents_update_request: AiAgentsUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2146,14 +2125,14 @@ class AgentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update an ai agent
+        """Update an agent
 
-        Updates an ai agent.
+        Changes an AI agent room - its title, tags or standing instruction - and optionally rebinds its model. The ID has to be the room's integer identifier. `profileId` is not part of the room contract: it is taken out of the forwarded body and applied afterwards as the agent's assignment, and it has to be a UUID naming an existing chat-capable profile. An instruction sent as `chatSettings.prompt` has its markup stripped, as on create; note that when `chatSettings` is present the upstream service still requires the rest of that object to be valid, so send it whole.
 
-        :param id: The room ID. (required)
-        :type id: int
-        :param update_room_request: The request parameters for updating a room. (required)
-        :type update_room_request: UpdateRoomRequest
+        :param id: The agent identifier. (required)
+        :type id: str
+        :param ai_agents_update_request: (required)
+        :type ai_agents_update_request: AiAgentsUpdateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2176,9 +2155,9 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_agent_serialize(
+        _param = self._ai_agents_update_serialize(
             id=id,
-            update_room_request=update_room_request,
+            ai_agents_update_request=ai_agents_update_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2186,12 +2165,14 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderWrapper",
+            '400': "AiErrorResponse",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2199,10 +2180,10 @@ class AgentsApi:
         return response_data.response
 
 
-    def _update_agent_serialize(
+    def _ai_agents_update_serialize(
         self,
         id,
-        update_room_request,
+        ai_agents_update_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2230,8 +2211,8 @@ class AgentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_room_request is not None:
-            _body_params = update_room_request
+        if ai_agents_update_request is not None:
+            _body_params = ai_agents_update_request
 
 
         # set the HTTP header `Accept`
@@ -2258,12 +2239,8 @@ class AgentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 
@@ -2288,9 +2265,9 @@ class AgentsApi:
 
 
     @validate_call
-    def update_agents_quota(
+    def ai_agents_update_quota(
         self,
-        update_rooms_quota_request_dto_integer: Optional[UpdateRoomsQuotaRequestDtoInteger] = None,
+        ai_agents_update_quota_request: AiAgentsUpdateQuotaRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2303,13 +2280,13 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerArrayWrapper:
-        """Change the AI agent quota limit
+    ) -> AiFolderArrayWrapper:
+        """Update agents' quota
 
-        Changes the quota limit for the AI agents with the IDs specified in the request.
+        Sets the storage quota of the listed AI agent rooms in one call, forwarding `roomIds` and `quota` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. A quota applies to the room's stored files, not to the model usage of its chats. Use `PUT api/2.0/ai/agents/resetquota` to return rooms to the portal default instead of naming a number.
 
-        :param update_rooms_quota_request_dto_integer:
-        :type update_rooms_quota_request_dto_integer: UpdateRoomsQuotaRequestDtoInteger
+        :param ai_agents_update_quota_request: (required)
+        :type ai_agents_update_quota_request: AiAgentsUpdateQuotaRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2332,8 +2309,8 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_agents_quota_serialize(
-            update_rooms_quota_request_dto_integer=update_rooms_quota_request_dto_integer,
+        _param = self._ai_agents_update_quota_serialize(
+            ai_agents_update_quota_request=ai_agents_update_quota_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2341,12 +2318,13 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderArrayWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2359,9 +2337,9 @@ class AgentsApi:
 
 
     @validate_call
-    def update_agents_quota_with_http_info(
+    def ai_agents_update_quota_with_http_info(
         self,
-        update_rooms_quota_request_dto_integer: Optional[UpdateRoomsQuotaRequestDtoInteger] = None,
+        ai_agents_update_quota_request: AiAgentsUpdateQuotaRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2374,13 +2352,13 @@ class AgentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerArrayWrapper]:
-        """Change the AI agent quota limit
+    ) -> ApiResponse[AiFolderArrayWrapper]:
+        """Update agents' quota
 
-        Changes the quota limit for the AI agents with the IDs specified in the request.
+        Sets the storage quota of the listed AI agent rooms in one call, forwarding `roomIds` and `quota` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. A quota applies to the room's stored files, not to the model usage of its chats. Use `PUT api/2.0/ai/agents/resetquota` to return rooms to the portal default instead of naming a number.
 
-        :param update_rooms_quota_request_dto_integer:
-        :type update_rooms_quota_request_dto_integer: UpdateRoomsQuotaRequestDtoInteger
+        :param ai_agents_update_quota_request: (required)
+        :type ai_agents_update_quota_request: AiAgentsUpdateQuotaRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2403,8 +2381,8 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_agents_quota_serialize(
-            update_rooms_quota_request_dto_integer=update_rooms_quota_request_dto_integer,
+        _param = self._ai_agents_update_quota_serialize(
+            ai_agents_update_quota_request=ai_agents_update_quota_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2412,12 +2390,13 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderArrayWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2430,9 +2409,9 @@ class AgentsApi:
 
 
     @validate_call
-    def update_agents_quota_without_preload_content(
+    def ai_agents_update_quota_without_preload_content(
         self,
-        update_rooms_quota_request_dto_integer: Optional[UpdateRoomsQuotaRequestDtoInteger] = None,
+        ai_agents_update_quota_request: AiAgentsUpdateQuotaRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2446,12 +2425,12 @@ class AgentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Change the AI agent quota limit
+        """Update agents' quota
 
-        Changes the quota limit for the AI agents with the IDs specified in the request.
+        Sets the storage quota of the listed AI agent rooms in one call, forwarding `roomIds` and `quota` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. A quota applies to the room's stored files, not to the model usage of its chats. Use `PUT api/2.0/ai/agents/resetquota` to return rooms to the portal default instead of naming a number.
 
-        :param update_rooms_quota_request_dto_integer:
-        :type update_rooms_quota_request_dto_integer: UpdateRoomsQuotaRequestDtoInteger
+        :param ai_agents_update_quota_request: (required)
+        :type ai_agents_update_quota_request: AiAgentsUpdateQuotaRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2474,8 +2453,8 @@ class AgentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_agents_quota_serialize(
-            update_rooms_quota_request_dto_integer=update_rooms_quota_request_dto_integer,
+        _param = self._ai_agents_update_quota_serialize(
+            ai_agents_update_quota_request=ai_agents_update_quota_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2483,12 +2462,13 @@ class AgentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerArrayWrapper",
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
+            '200': "AiFolderArrayWrapper",
+            '401': "AiErrorResponse",
+            '403': "AiErrorResponse",
+            '413': "AiErrorResponse",
+            '500': "AiErrorResponse",
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2496,9 +2476,9 @@ class AgentsApi:
         return response_data.response
 
 
-    def _update_agents_quota_serialize(
+    def _ai_agents_update_quota_serialize(
         self,
-        update_rooms_quota_request_dto_integer,
+        ai_agents_update_quota_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2524,8 +2504,8 @@ class AgentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_rooms_quota_request_dto_integer is not None:
-            _body_params = update_rooms_quota_request_dto_integer
+        if ai_agents_update_quota_request is not None:
+            _body_params = ai_agents_update_quota_request
 
 
         # set the HTTP header `Accept`
@@ -2552,12 +2532,8 @@ class AgentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
+            'cookieAuth', 
+            'bearerAuth'
         ]
 
 

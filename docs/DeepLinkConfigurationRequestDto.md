@@ -1,0 +1,29 @@
+# DeepLinkConfigurationRequestDto
+How the portal opens its links on a mobile device.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**deep_link_settings** | [**DeepLinkSettingsRequestDto**](DeepLinkSettingsRequestDto.md) | The deep link configuration to store. Only its `handlingMode` is read - whether a link always opens in the  browser, always in the native application, or asks the user each time - and a mode outside the defined set is  refused with 400 before anything is stored. | [optional] 
+
+## Example
+
+```python
+from docspace_api_sdk.models.deep_link_configuration_request_dto import DeepLinkConfigurationRequestDto
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of DeepLinkConfigurationRequestDto from a JSON string
+deep_link_configuration_request_dto_instance = DeepLinkConfigurationRequestDto.from_json(json)
+# print the JSON string representation of the object
+print(DeepLinkConfigurationRequestDto.to_json())
+
+# convert the object into a dict
+deep_link_configuration_request_dto_dict = deep_link_configuration_request_dto_instance.to_dict()
+# create an instance of DeepLinkConfigurationRequestDto from a dict
+deep_link_configuration_request_dto_from_dict = DeepLinkConfigurationRequestDto.from_dict(deep_link_configuration_request_dto_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

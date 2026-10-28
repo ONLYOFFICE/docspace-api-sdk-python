@@ -18,26 +18,28 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from uuid import UUID
-from docspace_api_sdk.models.ace_short_wrapper_array_wrapper import AceShortWrapperArrayWrapper
+from docspace_api_sdk.models.ace_short_array_wrapper import AceShortArrayWrapper
 from docspace_api_sdk.models.base_batch_request_dto import BaseBatchRequestDto
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
 from docspace_api_sdk.models.change_owner_request_dto import ChangeOwnerRequestDto
+from docspace_api_sdk.models.encryption_key_array_wrapper import EncryptionKeyArrayWrapper
 from docspace_api_sdk.models.external_share_request_param import ExternalShareRequestParam
 from docspace_api_sdk.models.external_share_wrapper import ExternalShareWrapper
 from docspace_api_sdk.models.file_entry_base_array_wrapper import FileEntryBaseArrayWrapper
 from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
-from docspace_api_sdk.models.group_member_security_request_array_wrapper import GroupMemberSecurityRequestArrayWrapper
-from docspace_api_sdk.models.mention_message_wrapper import MentionMessageWrapper
-from docspace_api_sdk.models.mention_wrapper_array_wrapper import MentionWrapperArrayWrapper
+from docspace_api_sdk.models.group_member_security_array_wrapper import GroupMemberSecurityArrayWrapper
+from docspace_api_sdk.models.mention_array_wrapper import MentionArrayWrapper
+from docspace_api_sdk.models.mention_message_request import MentionMessageRequest
 from docspace_api_sdk.models.security_info_request_dto import SecurityInfoRequestDto
 from docspace_api_sdk.models.security_info_simple_request_dto import SecurityInfoSimpleRequestDto
+from docspace_api_sdk.models.error_api_response import ErrorApiResponse
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -61,8 +63,8 @@ class SharingApi:
     @validate_call
     def apply_external_share_password(
         self,
-        key: Annotated[StrictStr, Field(description="The unique document identifier.")],
-        external_share_request_param: Annotated[ExternalShareRequestParam, Field(description="The external data share request parameters.")],
+        key: Annotated[StrictStr, Field(description="The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand.")],
+        external_share_request_param: Annotated[ExternalShareRequestParam, Field(description="The body of the request, holding the password to check.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -76,13 +78,13 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ExternalShareWrapper:
-        """Apply external data password
+        """Unlock a password-protected link
 
-        Applies a password specified in the request to get the external data.
+        Submits the password of a protected external share link and answers with the same resolved link data as  `GET api/2.0/files/share/{key}`, so this operation is called only after that one reported that a password is  required. The token in the path is the `requestToken` of the link, and the password is the one chosen by the  member who shared the entry. The call needs no authentication; a signed-in caller that may already read the  room is let through by the resolve operation itself and does not need the password at all. A correct password  is remembered for the caller, so later requests with the same token resolve without repeating it, and a wrong  one is reported in the `status` field as an invalid password rather than as an HTTP error, while the  remembered password is dropped. Attempts are counted per link and per calling address: once the portal's limit  is reached, further attempts are rejected until the block expires, which makes the operation unsuitable for  trying passwords in a loop. Nothing about the entry is changed by the call itself.
 
-        :param key: The unique document identifier. (required)
+        :param key: The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. (required)
         :type key: str
-        :param external_share_request_param: The external data share request parameters. (required)
+        :param external_share_request_param: The body of the request, holding the password to check. (required)
         :type external_share_request_param: ExternalShareRequestParam
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -117,10 +119,14 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '403': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -135,8 +141,8 @@ class SharingApi:
     @validate_call
     def apply_external_share_password_with_http_info(
         self,
-        key: Annotated[StrictStr, Field(description="The unique document identifier.")],
-        external_share_request_param: Annotated[ExternalShareRequestParam, Field(description="The external data share request parameters.")],
+        key: Annotated[StrictStr, Field(description="The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand.")],
+        external_share_request_param: Annotated[ExternalShareRequestParam, Field(description="The body of the request, holding the password to check.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -150,13 +156,13 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ExternalShareWrapper]:
-        """Apply external data password
+        """Unlock a password-protected link
 
-        Applies a password specified in the request to get the external data.
+        Submits the password of a protected external share link and answers with the same resolved link data as  `GET api/2.0/files/share/{key}`, so this operation is called only after that one reported that a password is  required. The token in the path is the `requestToken` of the link, and the password is the one chosen by the  member who shared the entry. The call needs no authentication; a signed-in caller that may already read the  room is let through by the resolve operation itself and does not need the password at all. A correct password  is remembered for the caller, so later requests with the same token resolve without repeating it, and a wrong  one is reported in the `status` field as an invalid password rather than as an HTTP error, while the  remembered password is dropped. Attempts are counted per link and per calling address: once the portal's limit  is reached, further attempts are rejected until the block expires, which makes the operation unsuitable for  trying passwords in a loop. Nothing about the entry is changed by the call itself.
 
-        :param key: The unique document identifier. (required)
+        :param key: The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. (required)
         :type key: str
-        :param external_share_request_param: The external data share request parameters. (required)
+        :param external_share_request_param: The body of the request, holding the password to check. (required)
         :type external_share_request_param: ExternalShareRequestParam
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -191,10 +197,14 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '403': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -209,8 +219,8 @@ class SharingApi:
     @validate_call
     def apply_external_share_password_without_preload_content(
         self,
-        key: Annotated[StrictStr, Field(description="The unique document identifier.")],
-        external_share_request_param: Annotated[ExternalShareRequestParam, Field(description="The external data share request parameters.")],
+        key: Annotated[StrictStr, Field(description="The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand.")],
+        external_share_request_param: Annotated[ExternalShareRequestParam, Field(description="The body of the request, holding the password to check.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -224,13 +234,13 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Apply external data password
+        """Unlock a password-protected link
 
-        Applies a password specified in the request to get the external data.
+        Submits the password of a protected external share link and answers with the same resolved link data as  `GET api/2.0/files/share/{key}`, so this operation is called only after that one reported that a password is  required. The token in the path is the `requestToken` of the link, and the password is the one chosen by the  member who shared the entry. The call needs no authentication; a signed-in caller that may already read the  room is let through by the resolve operation itself and does not need the password at all. A correct password  is remembered for the caller, so later requests with the same token resolve without repeating it, and a wrong  one is reported in the `status` field as an invalid password rather than as an HTTP error, while the  remembered password is dropped. Attempts are counted per link and per calling address: once the portal's limit  is reached, further attempts are rejected until the block expires, which makes the operation unsuitable for  trying passwords in a loop. Nothing about the entry is changed by the call itself.
 
-        :param key: The unique document identifier. (required)
+        :param key: The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. (required)
         :type key: str
-        :param external_share_request_param: The external data share request parameters. (required)
+        :param external_share_request_param: The body of the request, holding the password to check. (required)
         :type external_share_request_param: ExternalShareRequestParam
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -265,10 +275,14 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '403': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -335,6 +349,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -375,9 +395,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileEntryBaseArrayWrapper:
-        """Change the file owner
+        """Change the room or file owner
 
-        Changes the owner of the file with the ID specified in the request.
+        Hands the ownership of the listed rooms and files over to a single account, and returns the entries as they  look afterwards. Among folders only rooms are accepted - take their identifiers from  `GET api/2.0/files/rooms`; a plain folder is refused. A file is accepted only while it lies in the portal's  common section, so a file kept inside a room or in a personal section is refused as well, and so is a file  that is locked or currently open in the editor. The new owner has to be an active account that is allowed to  manage rooms, and a private room additionally requires that this account has already set up its encryption  keys; a deactivated account, a guest or a plain member is rejected. The caller must be the creator of every  listed room, or a portal administrator. The call mutates the entries one at a time and stops at the first item  it may not touch, leaving the entries already processed changed, so a partial answer is possible; an item  whose owner is already the target account is returned untouched, which makes a repeat safe. The previous owner  keeps access to a transferred room as its manager, while a transferred file is saved as a new version authored  by the new owner. An entry that lives on a connected third-party account is quietly left out.
 
         :param change_owner_request_dto:
         :type change_owner_request_dto: ChangeOwnerRequestDto
@@ -413,11 +433,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -446,9 +470,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileEntryBaseArrayWrapper]:
-        """Change the file owner
+        """Change the room or file owner
 
-        Changes the owner of the file with the ID specified in the request.
+        Hands the ownership of the listed rooms and files over to a single account, and returns the entries as they  look afterwards. Among folders only rooms are accepted - take their identifiers from  `GET api/2.0/files/rooms`; a plain folder is refused. A file is accepted only while it lies in the portal's  common section, so a file kept inside a room or in a personal section is refused as well, and so is a file  that is locked or currently open in the editor. The new owner has to be an active account that is allowed to  manage rooms, and a private room additionally requires that this account has already set up its encryption  keys; a deactivated account, a guest or a plain member is rejected. The caller must be the creator of every  listed room, or a portal administrator. The call mutates the entries one at a time and stops at the first item  it may not touch, leaving the entries already processed changed, so a partial answer is possible; an item  whose owner is already the target account is returned untouched, which makes a repeat safe. The previous owner  keeps access to a transferred room as its manager, while a transferred file is saved as a new version authored  by the new owner. An entry that lives on a connected third-party account is quietly left out.
 
         :param change_owner_request_dto:
         :type change_owner_request_dto: ChangeOwnerRequestDto
@@ -484,11 +508,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -517,9 +545,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Change the file owner
+        """Change the room or file owner
 
-        Changes the owner of the file with the ID specified in the request.
+        Hands the ownership of the listed rooms and files over to a single account, and returns the entries as they  look afterwards. Among folders only rooms are accepted - take their identifiers from  `GET api/2.0/files/rooms`; a plain folder is refused. A file is accepted only while it lies in the portal's  common section, so a file kept inside a room or in a personal section is refused as well, and so is a file  that is locked or currently open in the editor. The new owner has to be an active account that is allowed to  manage rooms, and a private room additionally requires that this account has already set up its encryption  keys; a deactivated account, a guest or a plain member is rejected. The caller must be the creator of every  listed room, or a portal administrator. The call mutates the entries one at a time and stops at the first item  it may not touch, leaving the entries already processed changed, so a partial answer is possible; an item  whose owner is already the target account is returned untouched, which makes a repeat safe. The previous owner  keeps access to a transferred room as its manager, while a transferred file is saved as a new version authored  by the new owner. An entry that lives on a connected third-party account is quietly left out.
 
         :param change_owner_request_dto:
         :type change_owner_request_dto: ChangeOwnerRequestDto
@@ -555,11 +583,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -653,11 +685,310 @@ class SharingApi:
 
 
     @validate_call
+    def get_encryption_access(
+        self,
+        file_id: Union[Annotated[StrictInt, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")], Annotated[StrictStr, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> EncryptionKeyArrayWrapper:
+        """Get file encryption keys
+
+        Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member's public key, and the caller's own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
+
+        :param file_id: The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. (required)
+        :type file_id: Union[int, str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_encryption_access_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EncryptionKeyArrayWrapper",
+            '403': None,
+            '404': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_encryption_access_with_http_info(
+        self,
+        file_id: Union[Annotated[StrictInt, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")], Annotated[StrictStr, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[EncryptionKeyArrayWrapper]:
+        """Get file encryption keys
+
+        Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member's public key, and the caller's own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
+
+        :param file_id: The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. (required)
+        :type file_id: Union[int, str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_encryption_access_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EncryptionKeyArrayWrapper",
+            '403': None,
+            '404': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_encryption_access_without_preload_content(
+        self,
+        file_id: Union[Annotated[StrictInt, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")], Annotated[StrictStr, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get file encryption keys
+
+        Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member's public key, and the caller's own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
+
+        :param file_id: The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. (required)
+        :type file_id: Union[int, str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_encryption_access_serialize(
+            file_id=file_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "EncryptionKeyArrayWrapper",
+            '403': None,
+            '404': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_encryption_access_serialize(
+        self,
+        file_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if file_id is not None:
+            _path_params['fileId'] = file_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/file/{fileId}/publickeys"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_external_share_data(
         self,
-        key: Annotated[StrictStr, Field(description="The unique key of the external shared data.")],
-        file_id: Annotated[Optional[StrictStr], Field(description="The unique document identifier.")] = None,
-        folder_id: Annotated[Optional[StrictStr], Field(description="The unique folder identifier.")] = None,
+        key: Annotated[StrictStr, Field(description="The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand.")],
+        file_id: Annotated[Optional[StrictStr], Field(description="A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins.")] = None,
+        folder_id: Annotated[Optional[StrictStr], Field(description="A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -671,15 +1002,15 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ExternalShareWrapper:
-        """Get the external data
+        """Resolve an external share link
 
-        Returns the external data by the key specified in the request.
+        Resolves the token of an external share link into the room or file it points at, and reports the outcome of  validating the link. The token is the `requestToken` of a link returned by the link operations of an entry,  such as `GET api/2.0/files/file/{id}/link` or `GET api/2.0/files/rooms/{id}/link`. The call needs no  authentication and answers a refused link in the `status` field rather than with an HTTP error, so that field  has to be read before anything else: a token that matches no link, and a link whose entry has been archived or  moved to the trash, both resolve as invalid; a link past its expiration date resolves as expired; a  password-protected link resolves as requiring a password, which is then submitted through  `POST api/2.0/files/share/{key}/password`; and a public link resolves as denied when the portal forbids  sharing with people outside it. The call is not read-only: for a signed-in caller the first successful  resolution puts the entry into the account's own lists, and for a visitor without an account it opens an  anonymous session that later requests with the same token reuse. Pass `fileId` or `folderId` to have an entry  inside the link's target echoed back.
 
-        :param key: The unique key of the external shared data. (required)
+        :param key: The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. (required)
         :type key: str
-        :param file_id: The unique document identifier.
+        :param file_id: A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins.
         :type file_id: str
-        :param folder_id: The unique folder identifier.
+        :param folder_id: A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well.
         :type folder_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -715,10 +1046,13 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -733,9 +1067,9 @@ class SharingApi:
     @validate_call
     def get_external_share_data_with_http_info(
         self,
-        key: Annotated[StrictStr, Field(description="The unique key of the external shared data.")],
-        file_id: Annotated[Optional[StrictStr], Field(description="The unique document identifier.")] = None,
-        folder_id: Annotated[Optional[StrictStr], Field(description="The unique folder identifier.")] = None,
+        key: Annotated[StrictStr, Field(description="The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand.")],
+        file_id: Annotated[Optional[StrictStr], Field(description="A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins.")] = None,
+        folder_id: Annotated[Optional[StrictStr], Field(description="A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -749,15 +1083,15 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ExternalShareWrapper]:
-        """Get the external data
+        """Resolve an external share link
 
-        Returns the external data by the key specified in the request.
+        Resolves the token of an external share link into the room or file it points at, and reports the outcome of  validating the link. The token is the `requestToken` of a link returned by the link operations of an entry,  such as `GET api/2.0/files/file/{id}/link` or `GET api/2.0/files/rooms/{id}/link`. The call needs no  authentication and answers a refused link in the `status` field rather than with an HTTP error, so that field  has to be read before anything else: a token that matches no link, and a link whose entry has been archived or  moved to the trash, both resolve as invalid; a link past its expiration date resolves as expired; a  password-protected link resolves as requiring a password, which is then submitted through  `POST api/2.0/files/share/{key}/password`; and a public link resolves as denied when the portal forbids  sharing with people outside it. The call is not read-only: for a signed-in caller the first successful  resolution puts the entry into the account's own lists, and for a visitor without an account it opens an  anonymous session that later requests with the same token reuse. Pass `fileId` or `folderId` to have an entry  inside the link's target echoed back.
 
-        :param key: The unique key of the external shared data. (required)
+        :param key: The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. (required)
         :type key: str
-        :param file_id: The unique document identifier.
+        :param file_id: A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins.
         :type file_id: str
-        :param folder_id: The unique folder identifier.
+        :param folder_id: A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well.
         :type folder_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -793,10 +1127,13 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -811,9 +1148,9 @@ class SharingApi:
     @validate_call
     def get_external_share_data_without_preload_content(
         self,
-        key: Annotated[StrictStr, Field(description="The unique key of the external shared data.")],
-        file_id: Annotated[Optional[StrictStr], Field(description="The unique document identifier.")] = None,
-        folder_id: Annotated[Optional[StrictStr], Field(description="The unique folder identifier.")] = None,
+        key: Annotated[StrictStr, Field(description="The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand.")],
+        file_id: Annotated[Optional[StrictStr], Field(description="A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins.")] = None,
+        folder_id: Annotated[Optional[StrictStr], Field(description="A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -827,15 +1164,15 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the external data
+        """Resolve an external share link
 
-        Returns the external data by the key specified in the request.
+        Resolves the token of an external share link into the room or file it points at, and reports the outcome of  validating the link. The token is the `requestToken` of a link returned by the link operations of an entry,  such as `GET api/2.0/files/file/{id}/link` or `GET api/2.0/files/rooms/{id}/link`. The call needs no  authentication and answers a refused link in the `status` field rather than with an HTTP error, so that field  has to be read before anything else: a token that matches no link, and a link whose entry has been archived or  moved to the trash, both resolve as invalid; a link past its expiration date resolves as expired; a  password-protected link resolves as requiring a password, which is then submitted through  `POST api/2.0/files/share/{key}/password`; and a public link resolves as denied when the portal forbids  sharing with people outside it. The call is not read-only: for a signed-in caller the first successful  resolution puts the entry into the account's own lists, and for a visitor without an account it opens an  anonymous session that later requests with the same token reuse. Pass `fileId` or `folderId` to have an entry  inside the link's target echoed back.
 
-        :param key: The unique key of the external shared data. (required)
+        :param key: The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link's own identifier, so it cannot be assembled by hand. (required)
         :type key: str
-        :param file_id: The unique document identifier.
+        :param file_id: A file inside the room the link points at, echoed back in the answer's entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link's target, and passing it together  with a folder has no effect - the file wins.
         :type file_id: str
-        :param folder_id: The unique folder identifier.
+        :param folder_id: A folder inside the room the link points at, echoed back in the answer's entity fields. It is ignored when the  folder does not sit under the link's target, and when a file is passed as well.
         :type folder_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -871,10 +1208,13 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ExternalShareWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -935,6 +1275,12 @@ class SharingApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -961,9 +1307,9 @@ class SharingApi:
     @validate_call
     def get_file_security_info(
         self,
-        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")], Annotated[StrictStr, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")]],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -977,15 +1323,15 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """Get the shared file information
+        """Get file sharing rights
 
-        Returns the detailed information about the shared file with the ID specified in the request.
+        Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
 
-        :param id: The file unique identifier. (required)
-        :type id: int
-        :param count: The number of items to retrieve in the request.
+        :param id: The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. (required)
+        :type id: Union[int, str]
+        :param count: How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
         :type count: int
-        :param start_index: The starting index for the query results.
+        :param start_index: How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1021,11 +1367,16 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1040,9 +1391,9 @@ class SharingApi:
     @validate_call
     def get_file_security_info_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")], Annotated[StrictStr, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")]],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1056,15 +1407,15 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """Get the shared file information
+        """Get file sharing rights
 
-        Returns the detailed information about the shared file with the ID specified in the request.
+        Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
 
-        :param id: The file unique identifier. (required)
-        :type id: int
-        :param count: The number of items to retrieve in the request.
+        :param id: The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. (required)
+        :type id: Union[int, str]
+        :param count: How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
         :type count: int
-        :param start_index: The starting index for the query results.
+        :param start_index: How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1100,11 +1451,16 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1119,9 +1475,9 @@ class SharingApi:
     @validate_call
     def get_file_security_info_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The file unique identifier.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")], Annotated[StrictStr, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")]],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1135,15 +1491,15 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the shared file information
+        """Get file sharing rights
 
-        Returns the detailed information about the shared file with the ID specified in the request.
+        Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
 
-        :param id: The file unique identifier. (required)
-        :type id: int
-        :param count: The number of items to retrieve in the request.
+        :param id: The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. (required)
+        :type id: Union[int, str]
+        :param count: How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
         :type count: int
-        :param start_index: The starting index for the query results.
+        :param start_index: How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1179,11 +1535,16 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1276,9 +1637,9 @@ class SharingApi:
     @validate_call
     def get_folder_security_info(
         self,
-        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1292,15 +1653,15 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """Get the shared folder information
+        """Get folder sharing rights
 
-        Returns the detailed information about the shared folder with the ID specified in the request.
+        Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
 
-        :param id: The folder unique identifier. (required)
-        :type id: int
-        :param count: The number of items to retrieve in the request.
+        :param id: The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param count: How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
         :type count: int
-        :param start_index: The starting index for the query results.
+        :param start_index: How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1336,11 +1697,16 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1355,9 +1721,9 @@ class SharingApi:
     @validate_call
     def get_folder_security_info_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1371,15 +1737,15 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """Get the shared folder information
+        """Get folder sharing rights
 
-        Returns the detailed information about the shared folder with the ID specified in the request.
+        Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
 
-        :param id: The folder unique identifier. (required)
-        :type id: int
-        :param count: The number of items to retrieve in the request.
+        :param id: The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param count: How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
         :type count: int
-        :param start_index: The starting index for the query results.
+        :param start_index: How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1415,11 +1781,16 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1434,9 +1805,9 @@ class SharingApi:
     @validate_call
     def get_folder_security_info_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1450,15 +1821,15 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the shared folder information
+        """Get folder sharing rights
 
-        Returns the detailed information about the shared folder with the ID specified in the request.
+        Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
 
-        :param id: The folder unique identifier. (required)
-        :type id: int
-        :param count: The number of items to retrieve in the request.
+        :param id: The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param count: How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
         :type count: int
-        :param start_index: The starting index for the query results.
+        :param start_index: How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1494,11 +1865,16 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1591,11 +1967,11 @@ class SharingApi:
     @validate_call
     def get_groups_members_with_file_security(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID.")],
-        group_id: Annotated[UUID, Field(description="The group ID.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
+        file_id: Union[Annotated[StrictInt, Field(description="The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
+        group_id: Annotated[UUID, Field(description="The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.")],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many members at most to answer with.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many members to skip before answering, used together with `count` to page through a large group.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1608,20 +1984,20 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GroupMemberSecurityRequestArrayWrapper:
-        """Get file group members with security information
+    ) -> GroupMemberSecurityArrayWrapper:
+        """Get file access of group members
 
-        Returns the group members with their file security information.
+        Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member's level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
 
-        :param file_id: The file ID. (required)
-        :type file_id: int
-        :param group_id: The group ID. (required)
+        :param file_id: The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
+        :type file_id: Union[int, str]
+        :param group_id: The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list. (required)
         :type group_id: UUID
-        :param count: The number of items to be retrieved in the current query.
+        :param count: How many members at most to answer with.
         :type count: int
-        :param start_index: The starting index for the query result set.
+        :param start_index: How many members to skip before answering, used together with `count` to page through a large group.
         :type start_index: int
-        :param filter_value: The filter value used for searching or querying group members based on text input.
+        :param filter_value: Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1658,12 +2034,16 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1678,11 +2058,11 @@ class SharingApi:
     @validate_call
     def get_groups_members_with_file_security_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID.")],
-        group_id: Annotated[UUID, Field(description="The group ID.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
+        file_id: Union[Annotated[StrictInt, Field(description="The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
+        group_id: Annotated[UUID, Field(description="The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.")],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many members at most to answer with.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many members to skip before answering, used together with `count` to page through a large group.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1695,20 +2075,20 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GroupMemberSecurityRequestArrayWrapper]:
-        """Get file group members with security information
+    ) -> ApiResponse[GroupMemberSecurityArrayWrapper]:
+        """Get file access of group members
 
-        Returns the group members with their file security information.
+        Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member's level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
 
-        :param file_id: The file ID. (required)
-        :type file_id: int
-        :param group_id: The group ID. (required)
+        :param file_id: The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
+        :type file_id: Union[int, str]
+        :param group_id: The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list. (required)
         :type group_id: UUID
-        :param count: The number of items to be retrieved in the current query.
+        :param count: How many members at most to answer with.
         :type count: int
-        :param start_index: The starting index for the query result set.
+        :param start_index: How many members to skip before answering, used together with `count` to page through a large group.
         :type start_index: int
-        :param filter_value: The filter value used for searching or querying group members based on text input.
+        :param filter_value: Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1745,12 +2125,16 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1765,11 +2149,11 @@ class SharingApi:
     @validate_call
     def get_groups_members_with_file_security_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID.")],
-        group_id: Annotated[UUID, Field(description="The group ID.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
+        file_id: Union[Annotated[StrictInt, Field(description="The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
+        group_id: Annotated[UUID, Field(description="The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.")],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many members at most to answer with.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many members to skip before answering, used together with `count` to page through a large group.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1783,19 +2167,19 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get file group members with security information
+        """Get file access of group members
 
-        Returns the group members with their file security information.
+        Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member's level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
 
-        :param file_id: The file ID. (required)
-        :type file_id: int
-        :param group_id: The group ID. (required)
+        :param file_id: The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
+        :type file_id: Union[int, str]
+        :param group_id: The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list. (required)
         :type group_id: UUID
-        :param count: The number of items to be retrieved in the current query.
+        :param count: How many members at most to answer with.
         :type count: int
-        :param start_index: The starting index for the query result set.
+        :param start_index: How many members to skip before answering, used together with `count` to page through a large group.
         :type start_index: int
-        :param filter_value: The filter value used for searching or querying group members based on text input.
+        :param filter_value: Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1832,12 +2216,16 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1938,11 +2326,11 @@ class SharingApi:
     @validate_call
     def get_groups_members_with_folder_security(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        group_id: Annotated[UUID, Field(description="The group ID.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        group_id: Annotated[UUID, Field(description="The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.")],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many members at most to answer with.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many members to skip before answering, used together with `count` to page through a large group.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1955,20 +2343,20 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GroupMemberSecurityRequestArrayWrapper:
-        """Get folder group members with security information
+    ) -> GroupMemberSecurityArrayWrapper:
+        """Get folder access of group members
 
-        Returns the group members with their folder security information.
+        Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member's level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param group_id: The group ID. (required)
+        :param folder_id: The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
+        :param group_id: The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list. (required)
         :type group_id: UUID
-        :param count: The number of items to be retrieved in the current query.
+        :param count: How many members at most to answer with.
         :type count: int
-        :param start_index: The starting index for the query result set.
+        :param start_index: How many members to skip before answering, used together with `count` to page through a large group.
         :type start_index: int
-        :param filter_value: The filter value used for searching or querying group members based on text input.
+        :param filter_value: Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2005,12 +2393,16 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2025,11 +2417,11 @@ class SharingApi:
     @validate_call
     def get_groups_members_with_folder_security_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        group_id: Annotated[UUID, Field(description="The group ID.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        group_id: Annotated[UUID, Field(description="The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.")],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many members at most to answer with.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many members to skip before answering, used together with `count` to page through a large group.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2042,20 +2434,20 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GroupMemberSecurityRequestArrayWrapper]:
-        """Get folder group members with security information
+    ) -> ApiResponse[GroupMemberSecurityArrayWrapper]:
+        """Get folder access of group members
 
-        Returns the group members with their folder security information.
+        Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member's level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param group_id: The group ID. (required)
+        :param folder_id: The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
+        :param group_id: The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list. (required)
         :type group_id: UUID
-        :param count: The number of items to be retrieved in the current query.
+        :param count: How many members at most to answer with.
         :type count: int
-        :param start_index: The starting index for the query result set.
+        :param start_index: How many members to skip before answering, used together with `count` to page through a large group.
         :type start_index: int
-        :param filter_value: The filter value used for searching or querying group members based on text input.
+        :param filter_value: Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2092,12 +2484,16 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2112,11 +2508,11 @@ class SharingApi:
     @validate_call
     def get_groups_members_with_folder_security_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        group_id: Annotated[UUID, Field(description="The group ID.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to be retrieved in the current query.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query result set.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The filter value used for searching or querying group members based on text input.")] = None,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        group_id: Annotated[UUID, Field(description="The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.")],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many members at most to answer with.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many members to skip before answering, used together with `count` to page through a large group.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2130,19 +2526,19 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get folder group members with security information
+        """Get folder access of group members
 
-        Returns the group members with their folder security information.
+        Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member's level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param group_id: The group ID. (required)
+        :param folder_id: The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
+        :param group_id: The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list. (required)
         :type group_id: UUID
-        :param count: The number of items to be retrieved in the current query.
+        :param count: How many members at most to answer with.
         :type count: int
-        :param start_index: The starting index for the query result set.
+        :param start_index: How many members to skip before answering, used together with `count` to page through a large group.
         :type start_index: int
-        :param filter_value: The filter value used for searching or querying group members based on text input.
+        :param filter_value: Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2179,12 +2575,16 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GroupMemberSecurityRequestArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "GroupMemberSecurityArrayWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2299,9 +2699,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """Get the sharing rights
+        """Get sharing rights in batch
 
-        Returns the sharing rights for all the files and folders specified in the request.
+        Returns who has access to the files and folders listed in the request, merged into one list of subjects, and  is the batch counterpart of `GET api/2.0/files/file/{id}/share` and `GET api/2.0/files/rooms/{id}/share`.  Identifiers come from any listing operation, such as `GET api/2.0/files/{folderId}`. The caller needs read  access to every listed entry: a single entry it cannot read makes the whole call fail instead of dropping that  entry, so the list has to be filtered beforehand. Identifiers that match nothing are skipped without an error,  and an empty list of identifiers gives an empty answer. The call is read-only. Each account or group appears  once: the caller's own record comes first, the owner's record second, and the rest are ordered by display  name. When the same subject holds different rights on the listed entries, its access is reported as the  `Varies` value instead of a real level, which means the entries have to be inspected one by one to see the  difference. Records that describe external links are included only for a caller that is allowed to read the  links of the entry.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2337,11 +2737,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2370,9 +2774,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """Get the sharing rights
+        """Get sharing rights in batch
 
-        Returns the sharing rights for all the files and folders specified in the request.
+        Returns who has access to the files and folders listed in the request, merged into one list of subjects, and  is the batch counterpart of `GET api/2.0/files/file/{id}/share` and `GET api/2.0/files/rooms/{id}/share`.  Identifiers come from any listing operation, such as `GET api/2.0/files/{folderId}`. The caller needs read  access to every listed entry: a single entry it cannot read makes the whole call fail instead of dropping that  entry, so the list has to be filtered beforehand. Identifiers that match nothing are skipped without an error,  and an empty list of identifiers gives an empty answer. The call is read-only. Each account or group appears  once: the caller's own record comes first, the owner's record second, and the rest are ordered by display  name. When the same subject holds different rights on the listed entries, its access is reported as the  `Varies` value instead of a real level, which means the entries have to be inspected one by one to see the  difference. Records that describe external links are included only for a caller that is allowed to read the  links of the entry.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2408,11 +2812,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2441,9 +2849,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the sharing rights
+        """Get sharing rights in batch
 
-        Returns the sharing rights for all the files and folders specified in the request.
+        Returns who has access to the files and folders listed in the request, merged into one list of subjects, and  is the batch counterpart of `GET api/2.0/files/file/{id}/share` and `GET api/2.0/files/rooms/{id}/share`.  Identifiers come from any listing operation, such as `GET api/2.0/files/{folderId}`. The caller needs read  access to every listed entry: a single entry it cannot read makes the whole call fail instead of dropping that  entry, so the list has to be filtered beforehand. Identifiers that match nothing are skipped without an error,  and an empty list of identifiers gives an empty answer. The call is read-only. Each account or group appears  once: the caller's own record comes first, the owner's record second, and the rest are ordered by display  name. When the same subject holds different rights on the listed entries, its access is reported as the  `Varies` value instead of a real level, which means the entries have to be inspected one by one to see the  difference. Records that describe external links are included only for a caller that is allowed to read the  links of the entry.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2479,11 +2887,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2579,7 +2991,7 @@ class SharingApi:
     @validate_call
     def get_shared_users(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
+        file_id: Union[Annotated[StrictInt, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")], Annotated[StrictStr, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2592,13 +3004,13 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> MentionWrapperArrayWrapper:
-        """Get user access rights by file ID
+    ) -> MentionArrayWrapper:
+        """Get users to mention in a file
 
-        Returns a list of users with their access rights to the file with the ID specified in the request.
+        Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
 
-        :param file_id: The file unique identifier. (required)
-        :type file_id: int
+        :param file_id: The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. (required)
+        :type file_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2630,12 +3042,17 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MentionWrapperArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "MentionArrayWrapper",
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2650,7 +3067,7 @@ class SharingApi:
     @validate_call
     def get_shared_users_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
+        file_id: Union[Annotated[StrictInt, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")], Annotated[StrictStr, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2663,13 +3080,13 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[MentionWrapperArrayWrapper]:
-        """Get user access rights by file ID
+    ) -> ApiResponse[MentionArrayWrapper]:
+        """Get users to mention in a file
 
-        Returns a list of users with their access rights to the file with the ID specified in the request.
+        Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
 
-        :param file_id: The file unique identifier. (required)
-        :type file_id: int
+        :param file_id: The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. (required)
+        :type file_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2701,12 +3118,17 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MentionWrapperArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "MentionArrayWrapper",
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2721,7 +3143,7 @@ class SharingApi:
     @validate_call
     def get_shared_users_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file unique identifier.")],
+        file_id: Union[Annotated[StrictInt, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")], Annotated[StrictStr, Field(description="The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2735,12 +3157,12 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get user access rights by file ID
+        """Get users to mention in a file
 
-        Returns a list of users with their access rights to the file with the ID specified in the request.
+        Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
 
-        :param file_id: The file unique identifier. (required)
-        :type file_id: int
+        :param file_id: The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string. (required)
+        :type file_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2772,12 +3194,17 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MentionWrapperArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "MentionArrayWrapper",
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2874,9 +3301,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """Remove the sharing rights
+        """Remove sharing rights in batch
 
-        Removes the sharing rights from all the files and folders specified in the request.
+        Revokes the access of every account and group on the files and folders listed in the request, and clears the  entries from the caller's own favorites, recent and unread marks. The owner's own record is kept, since  removing it would take the entry away from the account that owns it, and external links survive untouched -  remove those through the link operations of the entry. The caller must be allowed to change the access of each  entry, which means the creator of the room, a portal administrator, or a member with the rights to manage it;  a caller whose only access came through an external link may use this call to drop the entry from its own  list, while a directly invited member or an unrelated account is refused. The answer is always `true` and  identifiers that match nothing are skipped silently, so a successful answer is not proof that anything was  revoked - read the rights back with `POST api/2.0/files/share`. The call is destructive and safe to repeat. To  take the rights of one account away instead of all of them, call `PUT api/2.0/files/share` with that account's  access set to `None`.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2912,11 +3339,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2945,9 +3376,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """Remove the sharing rights
+        """Remove sharing rights in batch
 
-        Removes the sharing rights from all the files and folders specified in the request.
+        Revokes the access of every account and group on the files and folders listed in the request, and clears the  entries from the caller's own favorites, recent and unread marks. The owner's own record is kept, since  removing it would take the entry away from the account that owns it, and external links survive untouched -  remove those through the link operations of the entry. The caller must be allowed to change the access of each  entry, which means the creator of the room, a portal administrator, or a member with the rights to manage it;  a caller whose only access came through an external link may use this call to drop the entry from its own  list, while a directly invited member or an unrelated account is refused. The answer is always `true` and  identifiers that match nothing are skipped silently, so a successful answer is not proof that anything was  revoked - read the rights back with `POST api/2.0/files/share`. The call is destructive and safe to repeat. To  take the rights of one account away instead of all of them, call `PUT api/2.0/files/share` with that account's  access set to `None`.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -2983,11 +3414,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3016,9 +3451,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Remove the sharing rights
+        """Remove sharing rights in batch
 
-        Removes the sharing rights from all the files and folders specified in the request.
+        Revokes the access of every account and group on the files and folders listed in the request, and clears the  entries from the caller's own favorites, recent and unread marks. The owner's own record is kept, since  removing it would take the entry away from the account that owns it, and external links survive untouched -  remove those through the link operations of the entry. The caller must be allowed to change the access of each  entry, which means the creator of the room, a portal administrator, or a member with the rights to manage it;  a caller whose only access came through an external link may use this call to drop the entry from its own  list, while a directly invited member or an unrelated account is refused. The answer is always `true` and  identifiers that match nothing are skipped silently, so a successful answer is not proof that anything was  revoked - read the rights back with `POST api/2.0/files/share`. The call is destructive and safe to repeat. To  take the rights of one account away instead of all of them, call `PUT api/2.0/files/share` with that account's  access set to `None`.
 
         :param base_batch_request_dto:
         :type base_batch_request_dto: BaseBatchRequestDto
@@ -3054,11 +3489,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3154,8 +3593,8 @@ class SharingApi:
     @validate_call
     def send_editor_notify(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID with the mention message.")],
-        mention_message_wrapper: Annotated[Optional[MentionMessageWrapper], Field(description="The mention message.")] = None,
+        file_id: Union[Annotated[StrictInt, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
+        mention_message_request: Annotated[Optional[MentionMessageRequest], Field(description="The notification to send.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3168,15 +3607,15 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AceShortWrapperArrayWrapper:
-        """Send the mention message
+    ) -> AceShortArrayWrapper:
+        """Notify mentioned users
 
-        Sends a message to the users who are mentioned in the file with the ID specified in the request.
+        Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
 
-        :param file_id: The file ID with the mention message. (required)
-        :type file_id: int
-        :param mention_message_wrapper: The mention message.
-        :type mention_message_wrapper: MentionMessageWrapper
+        :param file_id: The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
+        :type file_id: Union[int, str]
+        :param mention_message_request: The notification to send.
+        :type mention_message_request: MentionMessageRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3201,7 +3640,7 @@ class SharingApi:
 
         _param = self._send_editor_notify_serialize(
             file_id=file_id,
-            mention_message_wrapper=mention_message_wrapper,
+            mention_message_request=mention_message_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3209,15 +3648,17 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AceShortWrapperArrayWrapper",
+            '200': "AceShortArrayWrapper",
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3232,8 +3673,8 @@ class SharingApi:
     @validate_call
     def send_editor_notify_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID with the mention message.")],
-        mention_message_wrapper: Annotated[Optional[MentionMessageWrapper], Field(description="The mention message.")] = None,
+        file_id: Union[Annotated[StrictInt, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
+        mention_message_request: Annotated[Optional[MentionMessageRequest], Field(description="The notification to send.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3246,15 +3687,15 @@ class SharingApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AceShortWrapperArrayWrapper]:
-        """Send the mention message
+    ) -> ApiResponse[AceShortArrayWrapper]:
+        """Notify mentioned users
 
-        Sends a message to the users who are mentioned in the file with the ID specified in the request.
+        Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
 
-        :param file_id: The file ID with the mention message. (required)
-        :type file_id: int
-        :param mention_message_wrapper: The mention message.
-        :type mention_message_wrapper: MentionMessageWrapper
+        :param file_id: The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
+        :type file_id: Union[int, str]
+        :param mention_message_request: The notification to send.
+        :type mention_message_request: MentionMessageRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3279,7 +3720,7 @@ class SharingApi:
 
         _param = self._send_editor_notify_serialize(
             file_id=file_id,
-            mention_message_wrapper=mention_message_wrapper,
+            mention_message_request=mention_message_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3287,15 +3728,17 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AceShortWrapperArrayWrapper",
+            '200': "AceShortArrayWrapper",
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3310,8 +3753,8 @@ class SharingApi:
     @validate_call
     def send_editor_notify_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID with the mention message.")],
-        mention_message_wrapper: Annotated[Optional[MentionMessageWrapper], Field(description="The mention message.")] = None,
+        file_id: Union[Annotated[StrictInt, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
+        mention_message_request: Annotated[Optional[MentionMessageRequest], Field(description="The notification to send.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3325,14 +3768,14 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Send the mention message
+        """Notify mentioned users
 
-        Sends a message to the users who are mentioned in the file with the ID specified in the request.
+        Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
 
-        :param file_id: The file ID with the mention message. (required)
-        :type file_id: int
-        :param mention_message_wrapper: The mention message.
-        :type mention_message_wrapper: MentionMessageWrapper
+        :param file_id: The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
+        :type file_id: Union[int, str]
+        :param mention_message_request: The notification to send.
+        :type mention_message_request: MentionMessageRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3357,7 +3800,7 @@ class SharingApi:
 
         _param = self._send_editor_notify_serialize(
             file_id=file_id,
-            mention_message_wrapper=mention_message_wrapper,
+            mention_message_request=mention_message_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3365,15 +3808,17 @@ class SharingApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AceShortWrapperArrayWrapper",
+            '200': "AceShortArrayWrapper",
             '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3384,7 +3829,7 @@ class SharingApi:
     def _send_editor_notify_serialize(
         self,
         file_id,
-        mention_message_wrapper,
+        mention_message_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3412,8 +3857,8 @@ class SharingApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if mention_message_wrapper is not None:
-            _body_params = mention_message_wrapper
+        if mention_message_request is not None:
+            _body_params = mention_message_request
 
 
         # set the HTTP header `Accept`
@@ -3472,8 +3917,8 @@ class SharingApi:
     @validate_call
     def set_file_security_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID.")],
-        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
+        id: Union[Annotated[StrictInt, Field(description="The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
+        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The rights to apply to the file, and whether to announce them by mail.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3489,11 +3934,11 @@ class SharingApi:
     ) -> FileShareArrayWrapper:
         """Share a file
 
-        Sets the sharing settings to a file with the ID specified in the request.
+        Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
 
-        :param file_id: The file ID. (required)
-        :type file_id: int
-        :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
+        :param id: The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param security_info_simple_request_dto: The rights to apply to the file, and whether to announce them by mail. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3518,7 +3963,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_file_security_info_serialize(
-            file_id=file_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3528,11 +3973,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3547,8 +3996,8 @@ class SharingApi:
     @validate_call
     def set_file_security_info_with_http_info(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID.")],
-        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
+        id: Union[Annotated[StrictInt, Field(description="The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
+        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The rights to apply to the file, and whether to announce them by mail.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3564,11 +4013,11 @@ class SharingApi:
     ) -> ApiResponse[FileShareArrayWrapper]:
         """Share a file
 
-        Sets the sharing settings to a file with the ID specified in the request.
+        Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
 
-        :param file_id: The file ID. (required)
-        :type file_id: int
-        :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
+        :param id: The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param security_info_simple_request_dto: The rights to apply to the file, and whether to announce them by mail. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3593,7 +4042,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_file_security_info_serialize(
-            file_id=file_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3603,11 +4052,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3622,8 +4075,8 @@ class SharingApi:
     @validate_call
     def set_file_security_info_without_preload_content(
         self,
-        file_id: Annotated[StrictInt, Field(description="The file ID.")],
-        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
+        id: Union[Annotated[StrictInt, Field(description="The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.")]],
+        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The rights to apply to the file, and whether to announce them by mail.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3639,11 +4092,11 @@ class SharingApi:
     ) -> RESTResponseType:
         """Share a file
 
-        Sets the sharing settings to a file with the ID specified in the request.
+        Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
 
-        :param file_id: The file ID. (required)
-        :type file_id: int
-        :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
+        :param id: The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param security_info_simple_request_dto: The rights to apply to the file, and whether to announce them by mail. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3668,7 +4121,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_file_security_info_serialize(
-            file_id=file_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3678,11 +4131,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3692,7 +4149,7 @@ class SharingApi:
 
     def _set_file_security_info_serialize(
         self,
-        file_id,
+        id,
         security_info_simple_request_dto,
         _request_auth,
         _content_type,
@@ -3715,8 +4172,8 @@ class SharingApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if file_id is not None:
-            _path_params['fileId'] = file_id
+        if id is not None:
+            _path_params['id'] = id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -3758,7 +4215,7 @@ class SharingApi:
         ]
 
 
-        resource_path = "/api/2.0/files/file/{fileId}/share"
+        resource_path = "/api/2.0/files/file/{id}/share"
 
         return self.api_client.param_serialize(
             method='PUT',
@@ -3781,8 +4238,8 @@ class SharingApi:
     @validate_call
     def set_folder_security_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The rights to apply to the folder, and whether to announce them by mail.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3798,11 +4255,11 @@ class SharingApi:
     ) -> FileShareArrayWrapper:
         """Share a folder
 
-        Sets the sharing settings to a folder with the ID specified in the request.
+        Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
+        :param id: The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param security_info_simple_request_dto: The rights to apply to the folder, and whether to announce them by mail. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3827,7 +4284,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_folder_security_info_serialize(
-            folder_id=folder_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3837,11 +4294,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3856,8 +4317,8 @@ class SharingApi:
     @validate_call
     def set_folder_security_info_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The rights to apply to the folder, and whether to announce them by mail.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3873,11 +4334,11 @@ class SharingApi:
     ) -> ApiResponse[FileShareArrayWrapper]:
         """Share a folder
 
-        Sets the sharing settings to a folder with the ID specified in the request.
+        Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
+        :param id: The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param security_info_simple_request_dto: The rights to apply to the folder, and whether to announce them by mail. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3902,7 +4363,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_folder_security_info_serialize(
-            folder_id=folder_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3912,11 +4373,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3931,8 +4396,8 @@ class SharingApi:
     @validate_call
     def set_folder_security_info_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The parameters of the security information simple request.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        security_info_simple_request_dto: Annotated[SecurityInfoSimpleRequestDto, Field(description="The rights to apply to the folder, and whether to announce them by mail.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3948,11 +4413,11 @@ class SharingApi:
     ) -> RESTResponseType:
         """Share a folder
 
-        Sets the sharing settings to a folder with the ID specified in the request.
+        Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param security_info_simple_request_dto: The parameters of the security information simple request. (required)
+        :param id: The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param security_info_simple_request_dto: The rights to apply to the folder, and whether to announce them by mail. (required)
         :type security_info_simple_request_dto: SecurityInfoSimpleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3977,7 +4442,7 @@ class SharingApi:
         """ # noqa: E501
 
         _param = self._set_folder_security_info_serialize(
-            folder_id=folder_id,
+            id=id,
             security_info_simple_request_dto=security_info_simple_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3987,11 +4452,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4001,7 +4470,7 @@ class SharingApi:
 
     def _set_folder_security_info_serialize(
         self,
-        folder_id,
+        id,
         security_info_simple_request_dto,
         _request_auth,
         _content_type,
@@ -4024,8 +4493,8 @@ class SharingApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if folder_id is not None:
-            _path_params['folderId'] = folder_id
+        if id is not None:
+            _path_params['id'] = id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -4067,7 +4536,7 @@ class SharingApi:
         ]
 
 
-        resource_path = "/api/2.0/files/folder/{folderId}/share"
+        resource_path = "/api/2.0/files/folder/{id}/share"
 
         return self.api_client.param_serialize(
             method='PUT',
@@ -4104,9 +4573,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """Set the sharing rights
+        """Set sharing rights in batch
 
-        Sets the sharing rights to all the files and folders specified in the request.
+        Grants, changes or withdraws the access of the listed accounts and groups on every file and folder named in  the request at once, and returns the resulting rights. Entry identifiers come from a listing operation, and  the accounts and groups come from the portal's own account and group lists; an access of `None` withdraws the  rights instead of granting them. The caller must be allowed to change the access of every listed entry - the  creator of the room, a member with the rights to manage it, or a portal administrator - and a read-only member  or a guest is refused even when the payload changes nothing. A subject the caller is not allowed to share  with, such as a guest that belongs to another member, is skipped without an error, and an empty `share`  collection makes the call do nothing and answer with an empty list. Repeating the same request leaves the same  rights in place. The answer holds one record per listed subject for each entry that was actually processed, so  it is shorter than the request when something was skipped and worth comparing against it. For a single room  prefer `PUT api/2.0/files/rooms/{id}/share`, which also invites members by email.
 
         :param security_info_request_dto:
         :type security_info_request_dto: SecurityInfoRequestDto
@@ -4142,11 +4611,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4175,9 +4648,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """Set the sharing rights
+        """Set sharing rights in batch
 
-        Sets the sharing rights to all the files and folders specified in the request.
+        Grants, changes or withdraws the access of the listed accounts and groups on every file and folder named in  the request at once, and returns the resulting rights. Entry identifiers come from a listing operation, and  the accounts and groups come from the portal's own account and group lists; an access of `None` withdraws the  rights instead of granting them. The caller must be allowed to change the access of every listed entry - the  creator of the room, a member with the rights to manage it, or a portal administrator - and a read-only member  or a guest is refused even when the payload changes nothing. A subject the caller is not allowed to share  with, such as a guest that belongs to another member, is skipped without an error, and an empty `share`  collection makes the call do nothing and answer with an empty list. Repeating the same request leaves the same  rights in place. The answer holds one record per listed subject for each entry that was actually processed, so  it is shorter than the request when something was skipped and worth comparing against it. For a single room  prefer `PUT api/2.0/files/rooms/{id}/share`, which also invites members by email.
 
         :param security_info_request_dto:
         :type security_info_request_dto: SecurityInfoRequestDto
@@ -4213,11 +4686,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4246,9 +4723,9 @@ class SharingApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Set the sharing rights
+        """Set sharing rights in batch
 
-        Sets the sharing rights to all the files and folders specified in the request.
+        Grants, changes or withdraws the access of the listed accounts and groups on every file and folder named in  the request at once, and returns the resulting rights. Entry identifiers come from a listing operation, and  the accounts and groups come from the portal's own account and group lists; an access of `None` withdraws the  rights instead of granting them. The caller must be allowed to change the access of every listed entry - the  creator of the room, a member with the rights to manage it, or a portal administrator - and a read-only member  or a guest is refused even when the payload changes nothing. A subject the caller is not allowed to share  with, such as a guest that belongs to another member, is skipped without an error, and an empty `share`  collection makes the call do nothing and answer with an empty list. Repeating the same request leaves the same  rights in place. The answer holds one record per listed subject for each entry that was actually processed, so  it is shorter than the request when something was skipped and worth comparing against it. For a single room  prefer `PUT api/2.0/files/rooms/{id}/share`, which also invites members by email.
 
         :param security_info_request_dto:
         :type security_info_request_dto: SecurityInfoRequestDto
@@ -4284,11 +4761,15 @@ class SharingApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

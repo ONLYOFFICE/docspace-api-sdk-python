@@ -21,6 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
@@ -28,10 +29,11 @@ from typing_extensions import Self
 
 class TenantBannerSettingsDto(BaseModel):
     """
-    The request parameters for managing the visibility settings of the promotional banners for the current tenant.
+    Whether the portal hides its promotional banners.
     """ # noqa: E501
-    hidden: Optional[StrictBool] = Field(default=None, description="The banners visibility flag.")
-    __properties: ClassVar[List[str]] = ["hidden"]
+    hidden: Optional[StrictBool] = Field(default=None, description="The banners visibility flag.", json_schema_extra={"examples": [False]})
+    last_modified: Optional[datetime] = Field(default=None, description="The timestamp indicating when the settings were last modified.", alias="lastModified", json_schema_extra={"examples": ["1990-01-01T00:00:00Z"]})
+    __properties: ClassVar[List[str]] = ["hidden", "lastModified"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +87,8 @@ class TenantBannerSettingsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "hidden": obj.get("hidden")
+            "hidden": obj.get("hidden"),
+            "lastModified": obj.get("lastModified")
         })
         return _obj
 

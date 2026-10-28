@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from datetime import datetime
@@ -26,15 +26,16 @@ from pydantic import Field, StrictBool
 from typing import Optional
 from typing_extensions import Annotated
 from uuid import UUID
-from docspace_api_sdk.models.backup_dto import BackupDto
 from docspace_api_sdk.models.backup_history_record_array_wrapper import BackupHistoryRecordArrayWrapper
 from docspace_api_sdk.models.backup_progress_wrapper import BackupProgressWrapper
-from docspace_api_sdk.models.backup_restore_dto import BackupRestoreDto
-from docspace_api_sdk.models.backup_schedule_dto import BackupScheduleDto
 from docspace_api_sdk.models.backup_service_state_wrapper import BackupServiceStateWrapper
+from docspace_api_sdk.models.backups_count_result_wrapper import BackupsCountResultWrapper
 from docspace_api_sdk.models.boolean_wrapper import BooleanWrapper
+from docspace_api_sdk.models.create_backup_schedule_request_dto import CreateBackupScheduleRequestDto
 from docspace_api_sdk.models.int32_wrapper import Int32Wrapper
 from docspace_api_sdk.models.schedule_wrapper import ScheduleWrapper
+from docspace_api_sdk.models.start_backup_request_dto import StartBackupRequestDto
+from docspace_api_sdk.models.start_backup_restore_request_dto import StartBackupRestoreRequestDto
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -71,9 +72,9 @@ class BackupApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BooleanWrapper:
-        """Cancel current backup
+        """Cancel the running backup
 
-        Cancel current backup.
+        Drops the backup job of the current portal from the queue, which cancels it if it is still running.  The caller needs the portal settings permission. It answers false, not an error, when there is nothing  to cancel, so the result says whether a job was actually dropped rather than whether the call  succeeded.  This affects backup jobs only: a restoring job cannot be cancelled through the API. The cancelled job  leaves the queue, so a following `GET api/2.0/backup/getbackupprogress` reports no job at all rather  than a job with the `Canceled` status.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -106,11 +107,14 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -138,9 +142,9 @@ class BackupApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BooleanWrapper]:
-        """Cancel current backup
+        """Cancel the running backup
 
-        Cancel current backup.
+        Drops the backup job of the current portal from the queue, which cancels it if it is still running.  The caller needs the portal settings permission. It answers false, not an error, when there is nothing  to cancel, so the result says whether a job was actually dropped rather than whether the call  succeeded.  This affects backup jobs only: a restoring job cannot be cancelled through the API. The cancelled job  leaves the queue, so a following `GET api/2.0/backup/getbackupprogress` reports no job at all rather  than a job with the `Canceled` status.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -173,11 +177,14 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -205,9 +212,9 @@ class BackupApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Cancel current backup
+        """Cancel the running backup
 
-        Cancel current backup.
+        Drops the backup job of the current portal from the queue, which cancels it if it is still running.  The caller needs the portal settings permission. It answers false, not an error, when there is nothing  to cancel, so the result says whether a job was actually dropped rather than whether the call  succeeded.  This affects backup jobs only: a restoring job cannot be cancelled through the API. The cancelled job  leaves the queue, so a following `GET api/2.0/backup/getbackupprogress` reports no job at all rather  than a job with the `Canceled` status.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -240,11 +247,14 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -324,7 +334,7 @@ class BackupApi:
     @validate_call
     def create_backup_schedule(
         self,
-        backup_schedule_dto: Optional[BackupScheduleDto] = None,
+        create_backup_schedule_request_dto: Optional[CreateBackupScheduleRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -340,10 +350,10 @@ class BackupApi:
     ) -> BooleanWrapper:
         """Create the backup schedule
 
-        Creates the backup schedule of the current portal with the parameters specified in the request.
+        Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling  back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
 
-        :param backup_schedule_dto:
-        :type backup_schedule_dto: BackupScheduleDto
+        :param create_backup_schedule_request_dto:
+        :type create_backup_schedule_request_dto: CreateBackupScheduleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -367,7 +377,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._create_backup_schedule_serialize(
-            backup_schedule_dto=backup_schedule_dto,
+            create_backup_schedule_request_dto=create_backup_schedule_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -380,11 +390,13 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -399,7 +411,7 @@ class BackupApi:
     @validate_call
     def create_backup_schedule_with_http_info(
         self,
-        backup_schedule_dto: Optional[BackupScheduleDto] = None,
+        create_backup_schedule_request_dto: Optional[CreateBackupScheduleRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -415,10 +427,10 @@ class BackupApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Create the backup schedule
 
-        Creates the backup schedule of the current portal with the parameters specified in the request.
+        Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling  back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
 
-        :param backup_schedule_dto:
-        :type backup_schedule_dto: BackupScheduleDto
+        :param create_backup_schedule_request_dto:
+        :type create_backup_schedule_request_dto: CreateBackupScheduleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -442,7 +454,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._create_backup_schedule_serialize(
-            backup_schedule_dto=backup_schedule_dto,
+            create_backup_schedule_request_dto=create_backup_schedule_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -455,11 +467,13 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -474,7 +488,7 @@ class BackupApi:
     @validate_call
     def create_backup_schedule_without_preload_content(
         self,
-        backup_schedule_dto: Optional[BackupScheduleDto] = None,
+        create_backup_schedule_request_dto: Optional[CreateBackupScheduleRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -490,10 +504,10 @@ class BackupApi:
     ) -> RESTResponseType:
         """Create the backup schedule
 
-        Creates the backup schedule of the current portal with the parameters specified in the request.
+        Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling  back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
 
-        :param backup_schedule_dto:
-        :type backup_schedule_dto: BackupScheduleDto
+        :param create_backup_schedule_request_dto:
+        :type create_backup_schedule_request_dto: CreateBackupScheduleRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -517,7 +531,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._create_backup_schedule_serialize(
-            backup_schedule_dto=backup_schedule_dto,
+            create_backup_schedule_request_dto=create_backup_schedule_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -530,11 +544,13 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -544,7 +560,7 @@ class BackupApi:
 
     def _create_backup_schedule_serialize(
         self,
-        backup_schedule_dto,
+        create_backup_schedule_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -570,8 +586,8 @@ class BackupApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if backup_schedule_dto is not None:
-            _body_params = backup_schedule_dto
+        if create_backup_schedule_request_dto is not None:
+            _body_params = create_backup_schedule_request_dto
 
 
         # set the HTTP header `Accept`
@@ -630,7 +646,7 @@ class BackupApi:
     @validate_call
     def delete_backup(
         self,
-        id: Annotated[UUID, Field(description="The backup ID.")],
+        id: Annotated[UUID, Field(description="The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -646,9 +662,9 @@ class BackupApi:
     ) -> BooleanWrapper:
         """Delete the backup
 
-        Deletes the backup with the ID specified in the request.
+        Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
 
-        :param id: The backup ID. (required)
+        :param id: The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. (required)
         :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -682,12 +698,17 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -702,7 +723,7 @@ class BackupApi:
     @validate_call
     def delete_backup_with_http_info(
         self,
-        id: Annotated[UUID, Field(description="The backup ID.")],
+        id: Annotated[UUID, Field(description="The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -718,9 +739,9 @@ class BackupApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Delete the backup
 
-        Deletes the backup with the ID specified in the request.
+        Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
 
-        :param id: The backup ID. (required)
+        :param id: The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. (required)
         :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -754,12 +775,17 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -774,7 +800,7 @@ class BackupApi:
     @validate_call
     def delete_backup_without_preload_content(
         self,
-        id: Annotated[UUID, Field(description="The backup ID.")],
+        id: Annotated[UUID, Field(description="The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -790,9 +816,9 @@ class BackupApi:
     ) -> RESTResponseType:
         """Delete the backup
 
-        Deletes the backup with the ID specified in the request.
+        Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
 
-        :param id: The backup ID. (required)
+        :param id: The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with. (required)
         :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -826,12 +852,17 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -914,7 +945,7 @@ class BackupApi:
     @validate_call
     def delete_backup_history(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -930,9 +961,9 @@ class BackupApi:
     ) -> BooleanWrapper:
         """Delete the backup history
 
-        Deletes the backup history from the current portal.
+        Deletes every backup of the current portal, both the history records and the archives themselves, and  leaves the backup schedule alone. `dump` clears the backups of the whole server instead and requires  the space access permission.  The records are walked one by one and a failure on any of them is swallowed, so the result is always  true even when some archives could not be deleted: it does not mean the history is now empty. Call  `GET api/2.0/backup/getbackuphistory` afterwards to see what is left.  Each record is removed before its archive, so an archive whose deletion fails stays in the storage  with nothing pointing at it.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -966,12 +997,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -986,7 +1021,7 @@ class BackupApi:
     @validate_call
     def delete_backup_history_with_http_info(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1002,9 +1037,9 @@ class BackupApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Delete the backup history
 
-        Deletes the backup history from the current portal.
+        Deletes every backup of the current portal, both the history records and the archives themselves, and  leaves the backup schedule alone. `dump` clears the backups of the whole server instead and requires  the space access permission.  The records are walked one by one and a failure on any of them is swallowed, so the result is always  true even when some archives could not be deleted: it does not mean the history is now empty. Call  `GET api/2.0/backup/getbackuphistory` afterwards to see what is left.  Each record is removed before its archive, so an archive whose deletion fails stays in the storage  with nothing pointing at it.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1038,12 +1073,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1058,7 +1097,7 @@ class BackupApi:
     @validate_call
     def delete_backup_history_without_preload_content(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1074,9 +1113,9 @@ class BackupApi:
     ) -> RESTResponseType:
         """Delete the backup history
 
-        Deletes the backup history from the current portal.
+        Deletes every backup of the current portal, both the history records and the archives themselves, and  leaves the backup schedule alone. `dump` clears the backups of the whole server instead and requires  the space access permission.  The records are walked one by one and a failure on any of them is swallowed, so the result is always  true even when some archives could not be deleted: it does not mean the history is now empty. Call  `GET api/2.0/backup/getbackuphistory` afterwards to see what is left.  Each record is removed before its archive, so an archive whose deletion fails stays in the storage  with nothing pointing at it.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1110,12 +1149,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1150,7 +1193,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -1200,7 +1243,7 @@ class BackupApi:
     @validate_call
     def delete_backup_schedule(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1216,9 +1259,9 @@ class BackupApi:
     ) -> BooleanWrapper:
         """Delete the backup schedule
 
-        Deletes the backup schedule of the current portal.
+        Deletes the backup schedule of the current portal, which stops the scheduled backups; `dump` deletes  the schedule of the whole server instead and requires the space access permission. The archives the  schedule has already produced are kept and stay listed by  `GET api/2.0/backup/getbackuphistory` - delete them through  `DELETE api/2.0/backup/deletebackup/{id}` if they are no longer wanted.  The result is always true, including when there was no schedule to delete, so it confirms that the  portal now has none rather than that anything was removed. The deletion is written to the audit trail  either way.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1252,12 +1295,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1272,7 +1319,7 @@ class BackupApi:
     @validate_call
     def delete_backup_schedule_with_http_info(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1288,9 +1335,9 @@ class BackupApi:
     ) -> ApiResponse[BooleanWrapper]:
         """Delete the backup schedule
 
-        Deletes the backup schedule of the current portal.
+        Deletes the backup schedule of the current portal, which stops the scheduled backups; `dump` deletes  the schedule of the whole server instead and requires the space access permission. The archives the  schedule has already produced are kept and stay listed by  `GET api/2.0/backup/getbackuphistory` - delete them through  `DELETE api/2.0/backup/deletebackup/{id}` if they are no longer wanted.  The result is always true, including when there was no schedule to delete, so it confirms that the  portal now has none rather than that anything was removed. The deletion is written to the audit trail  either way.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1324,12 +1371,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1344,7 +1395,7 @@ class BackupApi:
     @validate_call
     def delete_backup_schedule_without_preload_content(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1360,9 +1411,9 @@ class BackupApi:
     ) -> RESTResponseType:
         """Delete the backup schedule
 
-        Deletes the backup schedule of the current portal.
+        Deletes the backup schedule of the current portal, which stops the scheduled backups; `dump` deletes  the schedule of the whole server instead and requires the space access permission. The archives the  schedule has already produced are kept and stay listed by  `GET api/2.0/backup/getbackuphistory` - delete them through  `DELETE api/2.0/backup/deletebackup/{id}` if they are no longer wanted.  The result is always true, including when there was no schedule to delete, so it confirms that the  portal now has none rather than that anything was removed. The deletion is written to the audit trail  either way.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1396,12 +1447,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BooleanWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1436,7 +1491,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -1486,7 +1541,7 @@ class BackupApi:
     @validate_call
     def get_backup_history(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1502,9 +1557,9 @@ class BackupApi:
     ) -> BackupHistoryRecordArrayWrapper:
         """Get the backup history
 
-        Returns the history of the started backup.
+        Lists the backups of the current portal whose archive is still present in the storage it was written  to. The records come back in no particular order, so sort them by `createdOn` if the newest one is  wanted. `dump` lists the backups of the whole server instead and requires the space access  permission.  Despite being a read operation, this prunes the history as it goes: a record whose archive is no  longer in its storage is deleted outright, so the list can shrink between two calls without anybody  deleting anything. A record whose storage can no longer be reached at all - a disconnected  third-party account, for instance - is neither returned nor deleted, so it stays invisible while  still occupying the history.  The `id` of a record is the same value as the `taskId` that  `POST api/2.0/backup/startbackup` returned for it, and it is what  `DELETE api/2.0/backup/deletebackup/{id}` and the `backupId` of  `POST api/2.0/backup/startrestore` expect.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1538,12 +1593,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupHistoryRecordArrayWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1558,7 +1617,7 @@ class BackupApi:
     @validate_call
     def get_backup_history_with_http_info(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1574,9 +1633,9 @@ class BackupApi:
     ) -> ApiResponse[BackupHistoryRecordArrayWrapper]:
         """Get the backup history
 
-        Returns the history of the started backup.
+        Lists the backups of the current portal whose archive is still present in the storage it was written  to. The records come back in no particular order, so sort them by `createdOn` if the newest one is  wanted. `dump` lists the backups of the whole server instead and requires the space access  permission.  Despite being a read operation, this prunes the history as it goes: a record whose archive is no  longer in its storage is deleted outright, so the list can shrink between two calls without anybody  deleting anything. A record whose storage can no longer be reached at all - a disconnected  third-party account, for instance - is neither returned nor deleted, so it stays invisible while  still occupying the history.  The `id` of a record is the same value as the `taskId` that  `POST api/2.0/backup/startbackup` returned for it, and it is what  `DELETE api/2.0/backup/deletebackup/{id}` and the `backupId` of  `POST api/2.0/backup/startrestore` expect.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1610,12 +1669,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupHistoryRecordArrayWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1630,7 +1693,7 @@ class BackupApi:
     @validate_call
     def get_backup_history_without_preload_content(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1646,9 +1709,9 @@ class BackupApi:
     ) -> RESTResponseType:
         """Get the backup history
 
-        Returns the history of the started backup.
+        Lists the backups of the current portal whose archive is still present in the storage it was written  to. The records come back in no particular order, so sort them by `createdOn` if the newest one is  wanted. `dump` lists the backups of the whole server instead and requires the space access  permission.  Despite being a read operation, this prunes the history as it goes: a record whose archive is no  longer in its storage is deleted outright, so the list can shrink between two calls without anybody  deleting anything. A record whose storage can no longer be reached at all - a disconnected  third-party account, for instance - is neither returned nor deleted, so it stays invisible while  still occupying the history.  The `id` of a record is the same value as the `taskId` that  `POST api/2.0/backup/startbackup` returned for it, and it is what  `DELETE api/2.0/backup/deletebackup/{id}` and the `backupId` of  `POST api/2.0/backup/startrestore` expect.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1682,12 +1745,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupHistoryRecordArrayWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1722,7 +1789,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -1772,7 +1839,7 @@ class BackupApi:
     @validate_call
     def get_backup_progress(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1788,9 +1855,9 @@ class BackupApi:
     ) -> BackupProgressWrapper:
         """Get the backup progress
 
-        Returns the progress of the started backup.
+        Reports the state of the backup job of the current portal, and is the operation to poll after  `POST api/2.0/backup/startbackup`. The queue holds one job per portal, so no job ID is passed in;  `dump` asks for the state of the server-wide job instead and requires the space access permission.  When there is no such job - none was ever started, or the finished one has already been dropped from  the queue - the call still answers 200, but the body carries no `response` member at all, so a client  has to treat the payload as optional rather than expect an empty object.  While the job runs, `isCompleted` is false, `error` and `link` are empty strings and `progress` grows  from 0 to 100. Once it stops, `isCompleted` turns true and `status` says how it ended: a non-empty  `error` is the only report of a failure, `warning` is set when the archive was written but some files  could not be read or when the job was cancelled, and `link` becomes the download link to the stored  archive.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1825,11 +1892,14 @@ class BackupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1844,7 +1914,7 @@ class BackupApi:
     @validate_call
     def get_backup_progress_with_http_info(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1860,9 +1930,9 @@ class BackupApi:
     ) -> ApiResponse[BackupProgressWrapper]:
         """Get the backup progress
 
-        Returns the progress of the started backup.
+        Reports the state of the backup job of the current portal, and is the operation to poll after  `POST api/2.0/backup/startbackup`. The queue holds one job per portal, so no job ID is passed in;  `dump` asks for the state of the server-wide job instead and requires the space access permission.  When there is no such job - none was ever started, or the finished one has already been dropped from  the queue - the call still answers 200, but the body carries no `response` member at all, so a client  has to treat the payload as optional rather than expect an empty object.  While the job runs, `isCompleted` is false, `error` and `link` are empty strings and `progress` grows  from 0 to 100. Once it stops, `isCompleted` turns true and `status` says how it ended: a non-empty  `error` is the only report of a failure, `warning` is set when the archive was written but some files  could not be read or when the job was cancelled, and `link` becomes the download link to the stored  archive.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1897,11 +1967,14 @@ class BackupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1916,7 +1989,7 @@ class BackupApi:
     @validate_call
     def get_backup_progress_without_preload_content(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1932,9 +2005,9 @@ class BackupApi:
     ) -> RESTResponseType:
         """Get the backup progress
 
-        Returns the progress of the started backup.
+        Reports the state of the backup job of the current portal, and is the operation to poll after  `POST api/2.0/backup/startbackup`. The queue holds one job per portal, so no job ID is passed in;  `dump` asks for the state of the server-wide job instead and requires the space access permission.  When there is no such job - none was ever started, or the finished one has already been dropped from  the queue - the call still answers 200, but the body carries no `response` member at all, so a client  has to treat the payload as optional rather than expect an empty object.  While the job runs, `isCompleted` is false, `error` and `link` are empty strings and `progress` grows  from 0 to 100. Once it stops, `isCompleted` turns true and `status` says how it ended: a non-empty  `error` is the only report of a failure, `warning` is set when the archive was written but some files  could not be read or when the job was cancelled, and `link` becomes the download link to the stored  archive.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1969,11 +2042,14 @@ class BackupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2008,7 +2084,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -2058,7 +2134,7 @@ class BackupApi:
     @validate_call
     def get_backup_schedule(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2074,9 +2150,9 @@ class BackupApi:
     ) -> ScheduleWrapper:
         """Get the backup schedule
 
-        Returns the backup schedule of the current portal.
+        Returns the backup schedule of the current portal. A portal keeps at most one schedule, so no ID is  passed in, and when none is set the call still answers 200 with a body that carries no `response`  member at all. `dump` asks for the schedule of the whole server instead of the one of this portal and  requires the space access permission.  The answer cannot be sent back unchanged: `storageParams` is returned as an object keyed by parameter  name, while `POST api/2.0/backup/createbackupschedule` expects an array of key and value pairs. For  every storage type except `ThirdPartyConsumer` the `folderId` key of the answer is built from the  stored base path rather than read back from the saved parameters, and a schedule that keeps an  unlimited number of copies reports `backupsStored` as null instead of 0.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2110,12 +2186,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ScheduleWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2130,7 +2210,7 @@ class BackupApi:
     @validate_call
     def get_backup_schedule_with_http_info(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2146,9 +2226,9 @@ class BackupApi:
     ) -> ApiResponse[ScheduleWrapper]:
         """Get the backup schedule
 
-        Returns the backup schedule of the current portal.
+        Returns the backup schedule of the current portal. A portal keeps at most one schedule, so no ID is  passed in, and when none is set the call still answers 200 with a body that carries no `response`  member at all. `dump` asks for the schedule of the whole server instead of the one of this portal and  requires the space access permission.  The answer cannot be sent back unchanged: `storageParams` is returned as an object keyed by parameter  name, while `POST api/2.0/backup/createbackupschedule` expects an array of key and value pairs. For  every storage type except `ThirdPartyConsumer` the `folderId` key of the answer is built from the  stored base path rather than read back from the saved parameters, and a schedule that keeps an  unlimited number of copies reports `backupsStored` as null instead of 0.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2182,12 +2262,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ScheduleWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2202,7 +2286,7 @@ class BackupApi:
     @validate_call
     def get_backup_schedule_without_preload_content(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2218,9 +2302,9 @@ class BackupApi:
     ) -> RESTResponseType:
         """Get the backup schedule
 
-        Returns the backup schedule of the current portal.
+        Returns the backup schedule of the current portal. A portal keeps at most one schedule, so no ID is  passed in, and when none is set the call still answers 200 with a body that carries no `response`  member at all. `dump` asks for the schedule of the whole server instead of the one of this portal and  requires the space access permission.  The answer cannot be sent back unchanged: `storageParams` is returned as an object keyed by parameter  name, while `POST api/2.0/backup/createbackupschedule` expects an array of key and value pairs. For  every storage type except `ThirdPartyConsumer` the `folderId` key of the answer is built from the  stored base path rather than read back from the saved parameters, and a schedule that keeps an  unlimited number of copies reports `backupsStored` as null instead of 0.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Applies the operation to the whole server rather than to the current portal, which requires the space  access permission and works on a standalone installation only. Server-wide backups and schedules are  kept apart from the ones of a portal, so the two values address different data.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2254,12 +2338,16 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ScheduleWrapper",
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2294,7 +2382,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -2344,9 +2432,9 @@ class BackupApi:
     @validate_call
     def get_backups_count(
         self,
-        var_from: Annotated[Optional[datetime], Field(description="The from date.")] = None,
-        to: Annotated[Optional[datetime], Field(description="The to date.")] = None,
-        paid: Annotated[Optional[StrictBool], Field(description="Specifies if the backups are paid or not.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The end of the period, in UTC and inclusive. It defaults to the moment of the call.")] = None,
+        paid: Annotated[Optional[StrictBool], Field(description="Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2362,13 +2450,13 @@ class BackupApi:
     ) -> Int32Wrapper:
         """Get the number of backups
 
-        Returns the number of backups for a period of time. The default is the current calendar month.
+        Counts the backups of the current portal that were created within a period, and `paid` chooses which  kind is counted: false, the default, counts the ones covered by the free monthly allowance, and true  counts the ones charged to the portal wallet.  The period defaults to the current calendar month - `from` becomes the first day of the month at  00:00 UTC and `to` becomes the moment of the call. Both bounds are UTC and inclusive, and a `from`  later than `to` is rejected. Called with no parameters at all, this returns exactly the figure the  free monthly allowance is measured against.  The count is over history records rather than over stored archives, so it includes backups that have  already been deleted; use `GET api/2.0/backup/getbackuphistory` to see what can still be restored.
 
-        :param var_from: The from date.
+        :param var_from: The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.
         :type var_from: datetime
-        :param to: The to date.
+        :param to: The end of the period, in UTC and inclusive. It defaults to the moment of the call.
         :type to: datetime
-        :param paid: Specifies if the backups are paid or not.
+        :param paid: Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.
         :type paid: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2406,11 +2494,13 @@ class BackupApi:
             '200': "Int32Wrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2425,9 +2515,9 @@ class BackupApi:
     @validate_call
     def get_backups_count_with_http_info(
         self,
-        var_from: Annotated[Optional[datetime], Field(description="The from date.")] = None,
-        to: Annotated[Optional[datetime], Field(description="The to date.")] = None,
-        paid: Annotated[Optional[StrictBool], Field(description="Specifies if the backups are paid or not.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The end of the period, in UTC and inclusive. It defaults to the moment of the call.")] = None,
+        paid: Annotated[Optional[StrictBool], Field(description="Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2443,13 +2533,13 @@ class BackupApi:
     ) -> ApiResponse[Int32Wrapper]:
         """Get the number of backups
 
-        Returns the number of backups for a period of time. The default is the current calendar month.
+        Counts the backups of the current portal that were created within a period, and `paid` chooses which  kind is counted: false, the default, counts the ones covered by the free monthly allowance, and true  counts the ones charged to the portal wallet.  The period defaults to the current calendar month - `from` becomes the first day of the month at  00:00 UTC and `to` becomes the moment of the call. Both bounds are UTC and inclusive, and a `from`  later than `to` is rejected. Called with no parameters at all, this returns exactly the figure the  free monthly allowance is measured against.  The count is over history records rather than over stored archives, so it includes backups that have  already been deleted; use `GET api/2.0/backup/getbackuphistory` to see what can still be restored.
 
-        :param var_from: The from date.
+        :param var_from: The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.
         :type var_from: datetime
-        :param to: The to date.
+        :param to: The end of the period, in UTC and inclusive. It defaults to the moment of the call.
         :type to: datetime
-        :param paid: Specifies if the backups are paid or not.
+        :param paid: Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.
         :type paid: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2487,11 +2577,13 @@ class BackupApi:
             '200': "Int32Wrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2506,9 +2598,9 @@ class BackupApi:
     @validate_call
     def get_backups_count_without_preload_content(
         self,
-        var_from: Annotated[Optional[datetime], Field(description="The from date.")] = None,
-        to: Annotated[Optional[datetime], Field(description="The to date.")] = None,
-        paid: Annotated[Optional[StrictBool], Field(description="Specifies if the backups are paid or not.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The end of the period, in UTC and inclusive. It defaults to the moment of the call.")] = None,
+        paid: Annotated[Optional[StrictBool], Field(description="Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2524,13 +2616,13 @@ class BackupApi:
     ) -> RESTResponseType:
         """Get the number of backups
 
-        Returns the number of backups for a period of time. The default is the current calendar month.
+        Counts the backups of the current portal that were created within a period, and `paid` chooses which  kind is counted: false, the default, counts the ones covered by the free monthly allowance, and true  counts the ones charged to the portal wallet.  The period defaults to the current calendar month - `from` becomes the first day of the month at  00:00 UTC and `to` becomes the moment of the call. Both bounds are UTC and inclusive, and a `from`  later than `to` is rejected. Called with no parameters at all, this returns exactly the figure the  free monthly allowance is measured against.  The count is over history records rather than over stored archives, so it includes backups that have  already been deleted; use `GET api/2.0/backup/getbackuphistory` to see what can still be restored.
 
-        :param var_from: The from date.
+        :param var_from: The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.
         :type var_from: datetime
-        :param to: The to date.
+        :param to: The end of the period, in UTC and inclusive. It defaults to the moment of the call.
         :type to: datetime
-        :param paid: Specifies if the backups are paid or not.
+        :param paid: Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.
         :type paid: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2568,11 +2660,13 @@ class BackupApi:
             '200': "Int32Wrapper",
             '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2683,6 +2777,353 @@ class BackupApi:
 
 
     @validate_call
+    def get_backups_counts(
+        self,
+        var_from: Annotated[Optional[datetime], Field(description="The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The end of the period, in UTC and inclusive. It defaults to the moment of the call.")] = None,
+        paid: Annotated[Optional[StrictBool], Field(description="Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BackupsCountResultWrapper:
+        """Get free and paid backup counts
+
+        Counts the backups of the current portal created within a period and splits the result into the ones  covered by the free monthly allowance and the ones charged to the portal wallet, which saves calling  `GET api/2.0/backup/getbackupscount` twice.  The `paid` query parameter is accepted but not read here: the answer always carries both figures. The  period behaves as it does for `GET api/2.0/backup/getbackupscount` - it defaults to the current  calendar month, both bounds are UTC and inclusive, and a `from` later than `to` is rejected.  The counts are over history records rather than over stored archives, so they include backups that  have already been deleted.
+
+        :param var_from: The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.
+        :type var_from: datetime
+        :param to: The end of the period, in UTC and inclusive. It defaults to the moment of the call.
+        :type to: datetime
+        :param paid: Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.
+        :type paid: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_backups_counts_serialize(
+            var_from=var_from,
+            to=to,
+            paid=paid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BackupsCountResultWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_backups_counts_with_http_info(
+        self,
+        var_from: Annotated[Optional[datetime], Field(description="The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The end of the period, in UTC and inclusive. It defaults to the moment of the call.")] = None,
+        paid: Annotated[Optional[StrictBool], Field(description="Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BackupsCountResultWrapper]:
+        """Get free and paid backup counts
+
+        Counts the backups of the current portal created within a period and splits the result into the ones  covered by the free monthly allowance and the ones charged to the portal wallet, which saves calling  `GET api/2.0/backup/getbackupscount` twice.  The `paid` query parameter is accepted but not read here: the answer always carries both figures. The  period behaves as it does for `GET api/2.0/backup/getbackupscount` - it defaults to the current  calendar month, both bounds are UTC and inclusive, and a `from` later than `to` is rejected.  The counts are over history records rather than over stored archives, so they include backups that  have already been deleted.
+
+        :param var_from: The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.
+        :type var_from: datetime
+        :param to: The end of the period, in UTC and inclusive. It defaults to the moment of the call.
+        :type to: datetime
+        :param paid: Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.
+        :type paid: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_backups_counts_serialize(
+            var_from=var_from,
+            to=to,
+            paid=paid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BackupsCountResultWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_backups_counts_without_preload_content(
+        self,
+        var_from: Annotated[Optional[datetime], Field(description="The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The end of the period, in UTC and inclusive. It defaults to the moment of the call.")] = None,
+        paid: Annotated[Optional[StrictBool], Field(description="Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get free and paid backup counts
+
+        Counts the backups of the current portal created within a period and splits the result into the ones  covered by the free monthly allowance and the ones charged to the portal wallet, which saves calling  `GET api/2.0/backup/getbackupscount` twice.  The `paid` query parameter is accepted but not read here: the answer always carries both figures. The  period behaves as it does for `GET api/2.0/backup/getbackupscount` - it defaults to the current  calendar month, both bounds are UTC and inclusive, and a `from` later than `to` is rejected.  The counts are over history records rather than over stored archives, so they include backups that  have already been deleted.
+
+        :param var_from: The start of the period, in UTC and inclusive. It defaults to the first day of the current calendar  month at 00:00 UTC, and it has to be no later than `to`.
+        :type var_from: datetime
+        :param to: The end of the period, in UTC and inclusive. It defaults to the moment of the call.
+        :type to: datetime
+        :param paid: Counts the backups charged to the portal wallet when true, and the ones covered by the free monthly  allowance when false, which is the default. It is read only by  `GET api/2.0/backup/getbackupscount` and is ignored by  `GET api/2.0/backup/getbackupscountbypaid`, which always reports both.
+        :type paid: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_backups_counts_serialize(
+            var_from=var_from,
+            to=to,
+            paid=paid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BackupsCountResultWrapper",
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_backups_counts_serialize(
+        self,
+        var_from,
+        to,
+        paid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if var_from is not None:
+            if isinstance(var_from, datetime):
+                _query_params.append(
+                    (
+                        'from',
+                        var_from.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('from', var_from))
+            
+        if to is not None:
+            if isinstance(to, datetime):
+                _query_params.append(
+                    (
+                        'to',
+                        to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('to', to))
+            
+        if paid is not None:
+            
+            _query_params.append(('paid', paid))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/backup/getbackupscountbypaid"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_backups_service_state(
         self,
         _request_timeout: Union[
@@ -2698,9 +3139,9 @@ class BackupApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BackupServiceStateWrapper:
-        """Get the backup service state
+        """Check whether backups are enabled
 
-        Returns the backup service state.
+        Reports whether the paid backup service is switched on for the current portal. This is a wallet  setting of the portal, not the health of the backup service or of the worker that runs the jobs, so a  false answer does not mean backups are unavailable and a true one does not mean they are working.  While it is on, backups beyond the free monthly allowance are charged to the portal wallet. While it  is off and that allowance is used up, `POST api/2.0/backup/startbackup` and  `POST api/2.0/backup/createbackupschedule` answer 402.  Starting a backup once the allowance is used up switches the service on by itself, as soon as a  billing session opens for the portal, so this flag can change without anybody editing the portal  settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2734,11 +3175,13 @@ class BackupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupServiceStateWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2766,9 +3209,9 @@ class BackupApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[BackupServiceStateWrapper]:
-        """Get the backup service state
+        """Check whether backups are enabled
 
-        Returns the backup service state.
+        Reports whether the paid backup service is switched on for the current portal. This is a wallet  setting of the portal, not the health of the backup service or of the worker that runs the jobs, so a  false answer does not mean backups are unavailable and a true one does not mean they are working.  While it is on, backups beyond the free monthly allowance are charged to the portal wallet. While it  is off and that allowance is used up, `POST api/2.0/backup/startbackup` and  `POST api/2.0/backup/createbackupschedule` answer 402.  Starting a backup once the allowance is used up switches the service on by itself, as soon as a  billing session opens for the portal, so this flag can change without anybody editing the portal  settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2802,11 +3245,13 @@ class BackupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupServiceStateWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2834,9 +3279,9 @@ class BackupApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the backup service state
+        """Check whether backups are enabled
 
-        Returns the backup service state.
+        Reports whether the paid backup service is switched on for the current portal. This is a wallet  setting of the portal, not the health of the backup service or of the worker that runs the jobs, so a  false answer does not mean backups are unavailable and a true one does not mean they are working.  While it is on, backups beyond the free monthly allowance are charged to the portal wallet. While it  is off and that allowance is used up, `POST api/2.0/backup/startbackup` and  `POST api/2.0/backup/createbackupschedule` answer 402.  Starting a backup once the allowance is used up switches the service on by itself, as soon as a  billing session opens for the portal, so this flag can change without anybody editing the portal  settings.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2870,11 +3315,13 @@ class BackupApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupServiceStateWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2954,7 +3401,7 @@ class BackupApi:
     @validate_call
     def get_restore_progress(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2970,9 +3417,9 @@ class BackupApi:
     ) -> BackupProgressWrapper:
         """Get the restoring progress
 
-        Returns the progress of the started restoring process.
+        Reports the state of the restoring job, and is the operation to poll after  `POST api/2.0/backup/startrestore`. It is the only operation of this service that needs no  authorization and the only one that stays reachable while the portal is being restored, which is  exactly the state a client polls it in - every other operation of the service answers 403 then.  `dump` is read as three states rather than as a flag: omit it to get whichever restoring job concerns  this portal, including a server-wide one, pass false to get the job of this portal only, and pass true  to get the server-wide job; on a portal that is not a standalone installation the value is forced to  false. When there is no matching job the call still answers 200, but the body carries no `response`  member at all.  `isCompleted` is the field to poll, a non-empty `error` is the only report of a failure, and neither  `link` nor `warning` is ever filled in for a restoring job.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3006,10 +3453,13 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3024,7 +3474,7 @@ class BackupApi:
     @validate_call
     def get_restore_progress_with_http_info(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3040,9 +3490,9 @@ class BackupApi:
     ) -> ApiResponse[BackupProgressWrapper]:
         """Get the restoring progress
 
-        Returns the progress of the started restoring process.
+        Reports the state of the restoring job, and is the operation to poll after  `POST api/2.0/backup/startrestore`. It is the only operation of this service that needs no  authorization and the only one that stays reachable while the portal is being restored, which is  exactly the state a client polls it in - every other operation of the service answers 403 then.  `dump` is read as three states rather than as a flag: omit it to get whichever restoring job concerns  this portal, including a server-wide one, pass false to get the job of this portal only, and pass true  to get the server-wide job; on a portal that is not a standalone installation the value is forced to  false. When there is no matching job the call still answers 200, but the body carries no `response`  member at all.  `isCompleted` is the field to poll, a non-empty `error` is the only report of a failure, and neither  `link` nor `warning` is ever filled in for a restoring job.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3076,10 +3526,13 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3094,7 +3547,7 @@ class BackupApi:
     @validate_call
     def get_restore_progress_without_preload_content(
         self,
-        dump: Annotated[Optional[StrictBool], Field(description="Specifies if a dump will be created or not.")] = None,
+        dump: Annotated[Optional[StrictBool], Field(description="Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3110,9 +3563,9 @@ class BackupApi:
     ) -> RESTResponseType:
         """Get the restoring progress
 
-        Returns the progress of the started restoring process.
+        Reports the state of the restoring job, and is the operation to poll after  `POST api/2.0/backup/startrestore`. It is the only operation of this service that needs no  authorization and the only one that stays reachable while the portal is being restored, which is  exactly the state a client polls it in - every other operation of the service answers 403 then.  `dump` is read as three states rather than as a flag: omit it to get whichever restoring job concerns  this portal, including a server-wide one, pass false to get the job of this portal only, and pass true  to get the server-wide job; on a portal that is not a standalone installation the value is forced to  false. When there is no matching job the call still answers 200, but the body carries no `response`  member at all.  `isCompleted` is the field to poll, a non-empty `error` is the only report of a failure, and neither  `link` nor `warning` is ever filled in for a restoring job.
 
-        :param dump: Specifies if a dump will be created or not.
+        :param dump: Which restoring job to look for, read as three states rather than as a flag: leave it out for  whichever job concerns this portal, including a server-wide one, send false for the job of this  portal alone, and send true for the server-wide job. On a portal that is not a standalone  installation the value is forced to false.
         :type dump: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3146,10 +3599,13 @@ class BackupApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BackupProgressWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3184,7 +3640,7 @@ class BackupApi:
         # process the query parameters
         if dump is not None:
             
-            _query_params.append(('Dump', dump))
+            _query_params.append(('dump', dump))
             
         # process the header parameters
         # process the form parameters
@@ -3202,6 +3658,12 @@ class BackupApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -3228,7 +3690,7 @@ class BackupApi:
     @validate_call
     def start_backup(
         self,
-        backup_dto: Optional[BackupDto] = None,
+        start_backup_request_dto: Optional[StartBackupRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3244,10 +3706,10 @@ class BackupApi:
     ) -> BackupProgressWrapper:
         """Start the backup
 
-        Starts the backup of the current portal with the parameters specified in the request.
+        Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
 
-        :param backup_dto:
-        :type backup_dto: BackupDto
+        :param start_backup_request_dto:
+        :type start_backup_request_dto: StartBackupRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3271,7 +3733,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_serialize(
-            backup_dto=backup_dto,
+            start_backup_request_dto=start_backup_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3284,11 +3746,13 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3303,7 +3767,7 @@ class BackupApi:
     @validate_call
     def start_backup_with_http_info(
         self,
-        backup_dto: Optional[BackupDto] = None,
+        start_backup_request_dto: Optional[StartBackupRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3319,10 +3783,10 @@ class BackupApi:
     ) -> ApiResponse[BackupProgressWrapper]:
         """Start the backup
 
-        Starts the backup of the current portal with the parameters specified in the request.
+        Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
 
-        :param backup_dto:
-        :type backup_dto: BackupDto
+        :param start_backup_request_dto:
+        :type start_backup_request_dto: StartBackupRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3346,7 +3810,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_serialize(
-            backup_dto=backup_dto,
+            start_backup_request_dto=start_backup_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3359,11 +3823,13 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3378,7 +3844,7 @@ class BackupApi:
     @validate_call
     def start_backup_without_preload_content(
         self,
-        backup_dto: Optional[BackupDto] = None,
+        start_backup_request_dto: Optional[StartBackupRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3394,10 +3860,10 @@ class BackupApi:
     ) -> RESTResponseType:
         """Start the backup
 
-        Starts the backup of the current portal with the parameters specified in the request.
+        Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
 
-        :param backup_dto:
-        :type backup_dto: BackupDto
+        :param start_backup_request_dto:
+        :type start_backup_request_dto: StartBackupRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3421,7 +3887,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_serialize(
-            backup_dto=backup_dto,
+            start_backup_request_dto=start_backup_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3434,11 +3900,13 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3448,7 +3916,7 @@ class BackupApi:
 
     def _start_backup_serialize(
         self,
-        backup_dto,
+        start_backup_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -3474,8 +3942,8 @@ class BackupApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if backup_dto is not None:
-            _body_params = backup_dto
+        if start_backup_request_dto is not None:
+            _body_params = start_backup_request_dto
 
 
         # set the HTTP header `Accept`
@@ -3534,7 +4002,7 @@ class BackupApi:
     @validate_call
     def start_backup_restore(
         self,
-        backup_restore_dto: Optional[BackupRestoreDto] = None,
+        start_backup_restore_request_dto: Optional[StartBackupRestoreRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3550,10 +4018,10 @@ class BackupApi:
     ) -> BackupProgressWrapper:
         """Start the restoring process
 
-        Starts the data restoring process of the current portal with the parameters specified in the request.
+        Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
 
-        :param backup_restore_dto:
-        :type backup_restore_dto: BackupRestoreDto
+        :param start_backup_restore_request_dto:
+        :type start_backup_restore_request_dto: StartBackupRestoreRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3577,7 +4045,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_restore_serialize(
-            backup_restore_dto=backup_restore_dto,
+            start_backup_restore_request_dto=start_backup_restore_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3590,11 +4058,13 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3609,7 +4079,7 @@ class BackupApi:
     @validate_call
     def start_backup_restore_with_http_info(
         self,
-        backup_restore_dto: Optional[BackupRestoreDto] = None,
+        start_backup_restore_request_dto: Optional[StartBackupRestoreRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3625,10 +4095,10 @@ class BackupApi:
     ) -> ApiResponse[BackupProgressWrapper]:
         """Start the restoring process
 
-        Starts the data restoring process of the current portal with the parameters specified in the request.
+        Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
 
-        :param backup_restore_dto:
-        :type backup_restore_dto: BackupRestoreDto
+        :param start_backup_restore_request_dto:
+        :type start_backup_restore_request_dto: StartBackupRestoreRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3652,7 +4122,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_restore_serialize(
-            backup_restore_dto=backup_restore_dto,
+            start_backup_restore_request_dto=start_backup_restore_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3665,11 +4135,13 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3684,7 +4156,7 @@ class BackupApi:
     @validate_call
     def start_backup_restore_without_preload_content(
         self,
-        backup_restore_dto: Optional[BackupRestoreDto] = None,
+        start_backup_restore_request_dto: Optional[StartBackupRestoreRequestDto] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3700,10 +4172,10 @@ class BackupApi:
     ) -> RESTResponseType:
         """Start the restoring process
 
-        Starts the data restoring process of the current portal with the parameters specified in the request.
+        Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
 
-        :param backup_restore_dto:
-        :type backup_restore_dto: BackupRestoreDto
+        :param start_backup_restore_request_dto:
+        :type start_backup_restore_request_dto: StartBackupRestoreRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3727,7 +4199,7 @@ class BackupApi:
         """ # noqa: E501
 
         _param = self._start_backup_restore_serialize(
-            backup_restore_dto=backup_restore_dto,
+            start_backup_restore_request_dto=start_backup_restore_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3740,11 +4212,13 @@ class BackupApi:
             '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3754,7 +4228,7 @@ class BackupApi:
 
     def _start_backup_restore_serialize(
         self,
-        backup_restore_dto,
+        start_backup_restore_request_dto,
         _request_auth,
         _content_type,
         _headers,
@@ -3780,8 +4254,8 @@ class BackupApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if backup_restore_dto is not None:
-            _body_params = backup_restore_dto
+        if start_backup_restore_request_dto is not None:
+            _body_params = start_backup_restore_request_dto
 
 
         # set the HTTP header `Accept`

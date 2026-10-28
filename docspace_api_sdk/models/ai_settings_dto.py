@@ -23,7 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from uuid import UUID
+from docspace_api_sdk.models.ai_tool_permission_mode import AiToolPermissionMode
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,24 +31,14 @@ class AiSettingsDto(BaseModel):
     """
     The AI module settings.
     """ # noqa: E501
-    web_search_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether web search is enabled for AI chat sessions.", alias="webSearchEnabled")
-    web_search_need_reset: Optional[StrictBool] = Field(default=None, description="Indicates whether the web search API key needs to be reconfigured.", alias="webSearchNeedReset")
-    vectorization_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether document vectorization is enabled.", alias="vectorizationEnabled")
-    vectorization_need_reset: Optional[StrictBool] = Field(default=None, description="Indicates whether the embedding provider API key needs to be reconfigured.", alias="vectorizationNeedReset")
-    ai_ready: Optional[StrictBool] = Field(default=None, description="Indicates whether the AI subsystem is fully configured and operational.", alias="aiReady")
-    ai_ready_need_reset: Optional[StrictBool] = Field(default=None, description="Indicates whether the AI provider API key needs to be reconfigured.", alias="aiReadyNeedReset")
-    portal_mcp_server_id: Optional[UUID] = Field(default=None, description="The unique identifier of the portal-level MCP server, if configured.", alias="portalMcpServerId")
-    embedding_model: Optional[StrictStr] = Field(description="The name of the embedding model used for document vectorization.", alias="embeddingModel")
-    model_aliases: Optional[Dict[str, StrictStr]] = Field(description="Mapping of model identifiers to human-readable aliases.", alias="modelAliases")
-    knowledge_search_tool_name: Optional[StrictStr] = Field(description="The tool name used by the AI assistant for knowledge base search.", alias="knowledgeSearchToolName")
-    web_search_tool_name: Optional[StrictStr] = Field(description="The tool name used by the AI assistant for web search.", alias="webSearchToolName")
-    web_crawling_tool_name: Optional[StrictStr] = Field(description="The tool name used by the AI assistant for web page crawling.", alias="webCrawlingToolName")
-    generate_docx_tool_name: Optional[StrictStr] = Field(description="The tool name used by the AI to launch docx creation in the editor.", alias="generateDocxToolName")
-    generate_form_tool_name: Optional[StrictStr] = Field(description="The tool name used by the AI assistant to launch form creation in the editor.", alias="generateFormToolName")
-    generate_presentation_tool_name: Optional[StrictStr] = Field(description="The tool name used by the AI assistant to launch presentation creation in the editor.", alias="generatePresentationToolName")
-    system_ai_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the system-level AI provider is enabled.", alias="systemAiEnabled")
-    recommended_model_for_forms: Optional[StrictStr] = Field(default=None, description="The identifier of the model recommended for form generation.", alias="recommendedModelForForms")
-    __properties: ClassVar[List[str]] = ["webSearchEnabled", "webSearchNeedReset", "vectorizationEnabled", "vectorizationNeedReset", "aiReady", "aiReadyNeedReset", "portalMcpServerId", "embeddingModel", "modelAliases", "knowledgeSearchToolName", "webSearchToolName", "webCrawlingToolName", "generateDocxToolName", "generateFormToolName", "generatePresentationToolName", "systemAiEnabled", "recommendedModelForForms"]
+    vectorization_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether document vectorization is enabled.", alias="vectorizationEnabled", json_schema_extra={"examples": [True]})
+    vectorization_need_reset: Optional[StrictBool] = Field(default=None, description="Indicates whether the embedding provider API key needs to be reconfigured.", alias="vectorizationNeedReset", json_schema_extra={"examples": [False]})
+    ai_ready: Optional[StrictBool] = Field(default=None, description="Indicates whether the AI subsystem is fully configured and operational.", alias="aiReady", json_schema_extra={"examples": [True]})
+    embedding_model: Optional[StrictStr] = Field(description="The name of the embedding model used for document vectorization.", alias="embeddingModel", json_schema_extra={"examples": ["text-embedding-3-small"]})
+    system_ai_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the system-level AI provider is enabled.", alias="systemAiEnabled", json_schema_extra={"examples": [True]})
+    recommended_model_for_forms: Optional[StrictStr] = Field(default=None, description="The identifier of the model recommended for form generation.", alias="recommendedModelForForms", json_schema_extra={"examples": ["gpt-5.4"]})
+    tool_permission_mode: Optional[AiToolPermissionMode] = Field(default=None, description="How tool calls made by the model are approved for the current user. The default applies while the user has stored nothing.", alias="toolPermissionMode")
+    __properties: ClassVar[List[str]] = ["vectorizationEnabled", "vectorizationNeedReset", "aiReady", "embeddingModel", "systemAiEnabled", "recommendedModelForForms", "toolPermissionMode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,50 +79,10 @@ class AiSettingsDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if portal_mcp_server_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.portal_mcp_server_id is None and "portal_mcp_server_id" in self.model_fields_set:
-            _dict['portalMcpServerId'] = None
-
         # set to None if embedding_model (nullable) is None
         # and model_fields_set contains the field
         if self.embedding_model is None and "embedding_model" in self.model_fields_set:
             _dict['embeddingModel'] = None
-
-        # set to None if model_aliases (nullable) is None
-        # and model_fields_set contains the field
-        if self.model_aliases is None and "model_aliases" in self.model_fields_set:
-            _dict['modelAliases'] = None
-
-        # set to None if knowledge_search_tool_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.knowledge_search_tool_name is None and "knowledge_search_tool_name" in self.model_fields_set:
-            _dict['knowledgeSearchToolName'] = None
-
-        # set to None if web_search_tool_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.web_search_tool_name is None and "web_search_tool_name" in self.model_fields_set:
-            _dict['webSearchToolName'] = None
-
-        # set to None if web_crawling_tool_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.web_crawling_tool_name is None and "web_crawling_tool_name" in self.model_fields_set:
-            _dict['webCrawlingToolName'] = None
-
-        # set to None if generate_docx_tool_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.generate_docx_tool_name is None and "generate_docx_tool_name" in self.model_fields_set:
-            _dict['generateDocxToolName'] = None
-
-        # set to None if generate_form_tool_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.generate_form_tool_name is None and "generate_form_tool_name" in self.model_fields_set:
-            _dict['generateFormToolName'] = None
-
-        # set to None if generate_presentation_tool_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.generate_presentation_tool_name is None and "generate_presentation_tool_name" in self.model_fields_set:
-            _dict['generatePresentationToolName'] = None
 
         # set to None if recommended_model_for_forms (nullable) is None
         # and model_fields_set contains the field
@@ -152,23 +102,13 @@ class AiSettingsDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "webSearchEnabled": obj.get("webSearchEnabled"),
-            "webSearchNeedReset": obj.get("webSearchNeedReset"),
             "vectorizationEnabled": obj.get("vectorizationEnabled"),
             "vectorizationNeedReset": obj.get("vectorizationNeedReset"),
             "aiReady": obj.get("aiReady"),
-            "aiReadyNeedReset": obj.get("aiReadyNeedReset"),
-            "portalMcpServerId": obj.get("portalMcpServerId"),
             "embeddingModel": obj.get("embeddingModel"),
-            "modelAliases": obj.get("modelAliases"),
-            "knowledgeSearchToolName": obj.get("knowledgeSearchToolName"),
-            "webSearchToolName": obj.get("webSearchToolName"),
-            "webCrawlingToolName": obj.get("webCrawlingToolName"),
-            "generateDocxToolName": obj.get("generateDocxToolName"),
-            "generateFormToolName": obj.get("generateFormToolName"),
-            "generatePresentationToolName": obj.get("generatePresentationToolName"),
             "systemAiEnabled": obj.get("systemAiEnabled"),
-            "recommendedModelForForms": obj.get("recommendedModelForForms")
+            "recommendedModelForForms": obj.get("recommendedModelForForms"),
+            "toolPermissionMode": obj.get("toolPermissionMode")
         })
         return _obj
 

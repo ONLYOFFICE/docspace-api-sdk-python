@@ -29,12 +29,12 @@ UPDATEMEMBERSQUOTAREQUESTDTOQUOTA_ONE_OF_SCHEMAS = ["int", "str"]
 
 class UpdateMembersQuotaRequestDtoQuota(BaseModel):
     """
-    The quota in JSON format.
+    The personal storage limit in bytes, as a whole number. A value of 0 or more becomes the limit, and any  negative value switches the personal limit off so that the portal default applies again. It is read only by  `PUT api/2.0/people/userquota`.
     """
     # data type: int
-    oneof_schema_1_validator: Optional[StrictInt] = None
+    oneof_schema_1_validator: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [1234]})
     # data type: str
-    oneof_schema_2_validator: Optional[StrictStr] = None
+    oneof_schema_2_validator: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["some text"]})
     actual_instance: Optional[Union[int, str]] = None
     one_of_schemas: Set[str] = { "int", "str" }
 

@@ -1,10 +1,11 @@
 # TfaConfirmDataWrapper
+The successful API response containing the TfaConfirmDataDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**TfaConfirmDataDto**](TfaConfirmDataDto.md) |  | [optional] 
+**response** | [**TfaConfirmDataDto**](TfaConfirmDataDto.md) | The TfaConfirmDataDto object returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

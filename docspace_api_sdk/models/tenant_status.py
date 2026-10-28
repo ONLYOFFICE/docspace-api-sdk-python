@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class TenantStatus(int, Enum):
     """
-    [0 - Active, 1 - Suspended, 2 - Remove pending, 3 - Transfering, 4 - Restoring, 5 - Migrating, 6 - Encryption]
+    [0 - Active, 1 - Suspended, 2 - Remove pending, 3 - Transfering, 4 - Restoring, 5 - Migrating, 6 - Encryption, 7 - Blocked]
     """
 
     """
@@ -37,6 +37,7 @@ class TenantStatus(int, Enum):
     Restoring = 4
     Migrating = 5
     Encryption = 6
+    Blocked = 7
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

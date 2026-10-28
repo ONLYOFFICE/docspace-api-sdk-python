@@ -30,28 +30,29 @@ from typing_extensions import Self
 
 class WebPluginDto(BaseModel):
     """
-    The web plugin information.
+    One web plugin available to the portal: its manifest, where to load it from, and the state the portal keeps.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(description="The web plugin name.")
-    version: Optional[StrictStr] = Field(description="The web plugin version.")
-    min_doc_space_version: Optional[StrictStr] = Field(default=None, description="The minimum version of DocSpace with which the plugin is guaranteed to work.", alias="minDocSpaceVersion")
-    description: Optional[StrictStr] = Field(description="The web plugin description.")
-    license: Optional[StrictStr] = Field(description="The web plugin license.")
-    author: Optional[StrictStr] = Field(description="The web plugin author.")
-    home_page: Optional[StrictStr] = Field(description="The web plugin home page URL.", alias="homePage")
-    plugin_name: Optional[StrictStr] = Field(description="The name by which the web plugin is registered in the window object.", alias="pluginName")
-    scopes: Optional[StrictStr] = Field(description="The web plugin scopes.")
-    image: Optional[StrictStr] = Field(description="The web plugin image.")
-    create_by: EmployeeDto = Field(alias="createBy")
-    create_on: datetime = Field(description="The date and time when the web plugin was created.", alias="createOn")
-    enabled: StrictBool = Field(description="Specifies if the web plugin is enabled or not.")
-    system: StrictBool = Field(description="Specifies if the web plugin is system or not.")
-    url: Optional[StrictStr] = Field(description="The web plugin URL.")
-    css_url: Optional[StrictStr] = Field(description="The web plugin css URL.", alias="cssUrl")
-    settings: Optional[StrictStr] = Field(description="The web plugin settings.")
-    name_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The web plugin localized name.", alias="nameLocale")
-    description_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The web plugin localized description.", alias="descriptionLocale")
-    __properties: ClassVar[List[str]] = ["name", "version", "minDocSpaceVersion", "description", "license", "author", "homePage", "pluginName", "scopes", "image", "createBy", "createOn", "enabled", "system", "url", "cssUrl", "settings", "nameLocale", "descriptionLocale"]
+    name: Optional[StrictStr] = Field(description="The plugin's manifest name, which is what every other operation of this group addresses it by and what  makes it unique within the portal - an installation-wide plugin wins the name over a portal one.", json_schema_extra={"examples": ["Example Plugin"]})
+    version: Optional[StrictStr] = Field(description="The plugin's own version from its manifest. The portal does not compare it against anything; it is there  for a person to read.", json_schema_extra={"examples": ["1.0.0"]})
+    min_doc_space_version: Optional[StrictStr] = Field(default=None, description="The oldest portal version the plugin declares it works with. It is a claim from the manifest and is not  enforced, so a plugin can be loaded on an older portal and simply misbehave; compare it with the `version`  of `GET api/2.0/settings`.", alias="minDocSpaceVersion", json_schema_extra={"examples": ["12.0.0"]})
+    description: Optional[StrictStr] = Field(description="The plugin's description from its manifest, in the language the manifest was written in. The translations  of it are in `descriptionLocale`.", json_schema_extra={"examples": ["A plugin that provides additional functionality"]})
+    license: Optional[StrictStr] = Field(description="The licence the plugin is published under, as its manifest states it. Nothing checks it.", json_schema_extra={"examples": ["MIT"]})
+    author: Optional[StrictStr] = Field(description="Who wrote the plugin, as its manifest states it - not the portal member who uploaded it, who is  `createBy`.", json_schema_extra={"examples": ["ONLYOFFICE"]})
+    home_page: Optional[StrictStr] = Field(description="The plugin's own page, for a person to read more about it. It is empty when the manifest names none.", alias="homePage", json_schema_extra={"examples": ["https://example.com"]})
+    plugin_name: Optional[StrictStr] = Field(description="The global the plugin registers itself under in the browser once its script has run, which is how a  client reaches it. It is distinct from `name`, the identifier the portal uses.", alias="pluginName", json_schema_extra={"examples": ["examplePlugin"]})
+    scopes: Optional[StrictStr] = Field(description="Which parts of the interface the plugin hooks into, as one comma-separated string rather than a list.", json_schema_extra={"examples": ["Files,Rooms"]})
+    image: Optional[StrictStr] = Field(description="The plugin's icon exactly as its manifest declares it, which is normally a file name inside the plugin's  own package rather than an absolute address - resolve it against the directory `url` points into.", json_schema_extra={"examples": ["icon.svg"]})
+    create_by: EmployeeDto = Field(description="The portal member who uploaded the plugin. For a plugin that ships with the installation it is an empty  profile, since no member put it there.", alias="createBy")
+    create_on: datetime = Field(description="When the plugin was uploaded. It stays at its zero value for a plugin that ships with the installation.", alias="createOn", json_schema_extra={"examples": ["2024-01-15T10:30:00Z"]})
+    enabled: StrictBool = Field(description="Whether the portal loads the plugin. It is the state this portal stored, so an installation-wide plugin  can be on for one portal and off for another.", json_schema_extra={"examples": [True]})
+    system: StrictBool = Field(description="Whether the plugin ships with the installation rather than having been uploaded here. A system plugin  cannot be deleted through `DELETE api/2.0/settings/webplugins/{name}`, only switched off.", json_schema_extra={"examples": [False]})
+    url: Optional[StrictStr] = Field(description="The address of the plugin's script, which a client loads to run it. It ends in a `hash` query taken from  `version`, so the address changes whenever the plugin is updated and an old one may be cached.", json_schema_extra={"examples": ["https://example.com/plugin.js"]})
+    css_url: Optional[StrictStr] = Field(description="The absolute address of the plugin's stylesheet, empty for a plugin that ships none.", alias="cssUrl", json_schema_extra={"examples": ["https://example.com/plugin.css"]})
+    settings: Optional[StrictStr] = Field(description="The settings string the portal keeps for the plugin, stored and returned verbatim - only the plugin knows  its shape. It is empty until `PUT api/2.0/settings/webplugins/{name}` saves one.", json_schema_extra={"examples": ["{\"theme\":\"dark\"}"]})
+    name_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The plugin's name translated, keyed by culture name. A culture that is missing falls back to `name`, and  the whole map is empty for a plugin that ships no translations.", alias="nameLocale", json_schema_extra={"examples": [{"en-US": "Example plugin", "de-DE": "Beispiel-Plugin"}]})
+    description_locale: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The plugin's description translated, keyed the same way as `nameLocale` and falling back to  `description`.", alias="descriptionLocale", json_schema_extra={"examples": [{"en-US": "Adds extra actions", "de-DE": "Fugt Aktionen hinzu"}]})
+    runtime: Optional[StrictStr] = Field(default=None, description="How the script at `url` is to be loaded - as an ES module or as a classic script. It is empty for a  plugin whose manifest does not say, which a client treats as a classic script.", json_schema_extra={"examples": ["module"]})
+    __properties: ClassVar[List[str]] = ["name", "version", "minDocSpaceVersion", "description", "license", "author", "homePage", "pluginName", "scopes", "image", "createBy", "createOn", "enabled", "system", "url", "cssUrl", "settings", "nameLocale", "descriptionLocale", "runtime"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -160,15 +161,10 @@ class WebPluginDto(BaseModel):
         if self.settings is None and "settings" in self.model_fields_set:
             _dict['settings'] = None
 
-        # set to None if name_locale (nullable) is None
+        # set to None if runtime (nullable) is None
         # and model_fields_set contains the field
-        if self.name_locale is None and "name_locale" in self.model_fields_set:
-            _dict['nameLocale'] = None
-
-        # set to None if description_locale (nullable) is None
-        # and model_fields_set contains the field
-        if self.description_locale is None and "description_locale" in self.model_fields_set:
-            _dict['descriptionLocale'] = None
+        if self.runtime is None and "runtime" in self.model_fields_set:
+            _dict['runtime'] = None
 
         return _dict
 
@@ -201,7 +197,8 @@ class WebPluginDto(BaseModel):
             "cssUrl": obj.get("cssUrl"),
             "settings": obj.get("settings"),
             "nameLocale": obj.get("nameLocale"),
-            "descriptionLocale": obj.get("descriptionLocale")
+            "descriptionLocale": obj.get("descriptionLocale"),
+            "runtime": obj.get("runtime")
         })
         return _obj
 

@@ -4,20 +4,20 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_agent**](#create_agent) | **POST** /api/2.0/ai/agents | Create an ai agent
-[**delete_agent**](#delete_agent) | **DELETE** /api/2.0/ai/agents/{id} | Remove an ai agent
-[**get_agent_info**](#get_agent_info) | **GET** /api/2.0/ai/agents/{id} | Return an ai agent
-[**get_agents**](#get_agents) | **GET** /api/2.0/ai/agents | Get ai agents
-[**get_agents_new_items**](#get_agents_new_items) | **GET** /api/2.0/ai/agents/news | Get the room new items
-[**reset_agents_quota**](#reset_agents_quota) | **PUT** /api/2.0/ai/agents/resetquota | Reset the AI agents quota limit
-[**update_agent**](#update_agent) | **PUT** /api/2.0/ai/agents/{id} | Update an ai agent
-[**update_agents_quota**](#update_agents_quota) | **PUT** /api/2.0/ai/agents/agentquota | Change the AI agent quota limit
+[**ai_agents_create**](#ai_agents_create) | **POST** /api/2.0/ai/agents | Create an agent
+[**ai_agents_delete**](#ai_agents_delete) | **DELETE** /api/2.0/ai/agents/{id} | Delete an agent
+[**ai_agents_get**](#ai_agents_get) | **GET** /api/2.0/ai/agents/{id} | Get an agent
+[**ai_agents_list**](#ai_agents_list) | **GET** /api/2.0/ai/agents | List agents
+[**ai_agents_news**](#ai_agents_news) | **GET** /api/2.0/ai/agents/news | List agent news items
+[**ai_agents_reset_quota**](#ai_agents_reset_quota) | **PUT** /api/2.0/ai/agents/resetquota | Reset agents' quota
+[**ai_agents_update**](#ai_agents_update) | **PUT** /api/2.0/ai/agents/{id} | Update an agent
+[**ai_agents_update_quota**](#ai_agents_update_quota) | **PUT** /api/2.0/ai/agents/agentquota | Update agents' quota
 
 
-# **create_agent**
-> FolderIntegerWrapper create_agent(create_agent_request_dto=create_agent_request_dto)
+# **ai_agents_create**
+> AiFolderWrapper ai_agents_create(ai_agents_create_request)
 
-Creates an ai agent.
+Creates an AI agent room and binds a model to it, in that order. `profileId` is required, has to be a UUID, has to name an existing profile, and that profile has to support chat - an image-only model is refused here rather than failing on every later request. `prompt` is required and is stored on the room as its standing instruction with any markup stripped, so it cannot round-trip HTML into another user's reply. The two steps are not atomic: when the room is created but the model binding fails, the call reports an error and the room is left behind, so re-bind it with `PUT api/2.0/ai/agents/{id}` rather than creating a second one.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -26,23 +26,23 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_agent_request_dto** | [**CreateAgentRequestDto**](CreateAgentRequestDto.md)|  | [optional] 
+ **ai_agents_create_request** | [**AiAgentsCreateRequest**](AiAgentsCreateRequest.md)|  | 
 
 ### Return type
 
-[**FolderIntegerWrapper**](FolderIntegerWrapper.md)
+[**AiFolderWrapper**](AiFolderWrapper.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.create_agent_request_dto import CreateAgentRequestDto
-from docspace_api_sdk.models.folder_integer_wrapper import FolderIntegerWrapper
+from docspace_api_sdk.models.ai_agents_create_request import AiAgentsCreateRequest
+from docspace_api_sdk.models.ai_folder_wrapper import AiFolderWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -55,7 +55,7 @@ configuration = docspace_api_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure Bearer authorization (JWT): Bearer
+# Configure Bearer authorization: bearerAuth
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
@@ -63,15 +63,15 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
-    create_agent_request_dto = docspace_api_sdk.CreateAgentRequestDto() # CreateAgentRequestDto |  (optional)
+    ai_agents_create_request = docspace_api_sdk.AiAgentsCreateRequest() # AiAgentsCreateRequest | 
 
     try:
-        # Create an ai agent
-        api_response = api_instance.create_agent(create_agent_request_dto=create_agent_request_dto)
-        print("The response of AgentsApi->create_agent:\n")
+        # Create an agent
+        api_response = api_instance.ai_agents_create(ai_agents_create_request)
+        print("The response of AgentsApi->ai_agents_create:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AgentsApi->create_agent: %s\n" % e)
+        print("Exception when calling AgentsApi->ai_agents_create: %s\n" % e)
 ```
 
 
@@ -85,18 +85,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**200** | The created agent room, with the model already bound to it. |  -  |
+**400** | `profileId` is missing, is not a UUID, names no existing profile, or names one that does not support chat; or `prompt` is missing. |  -  |
+**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_agent**
-> FileOperationWrapper delete_agent(id, delete_room_request)
+# **ai_agents_delete**
+> AiFileOperationWrapper ai_agents_delete(id, ai_agents_delete_request)
 
-Removes an ai agent.
+Deletes an AI agent room. The ID has to be the room's integer identifier, and the body is forwarded to the DocSpace AI service unchanged, so it accepts the same options as deleting an ordinary room - `deleteAfter` among them. Deletion is asynchronous there: the answer is a file-operation payload to poll, not a completed result. The agent's model binding is deliberately left behind, because the upstream assignment API has no per-entry delete, so an orphaned assignment row survives the room.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -105,24 +106,24 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID. | 
- **delete_room_request** | [**DeleteRoomRequest**](DeleteRoomRequest.md)| The parameters for deleting a room. | 
+ **id** | **str**| The agent identifier. | 
+ **ai_agents_delete_request** | [**AiAgentsDeleteRequest**](AiAgentsDeleteRequest.md)|  | 
 
 ### Return type
 
-[**FileOperationWrapper**](FileOperationWrapper.md)
+[**AiFileOperationWrapper**](AiFileOperationWrapper.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.delete_room_request import DeleteRoomRequest
-from docspace_api_sdk.models.file_operation_wrapper import FileOperationWrapper
+from docspace_api_sdk.models.ai_agents_delete_request import AiAgentsDeleteRequest
+from docspace_api_sdk.models.ai_file_operation_wrapper import AiFileOperationWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -135,7 +136,7 @@ configuration = docspace_api_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure Bearer authorization (JWT): Bearer
+# Configure Bearer authorization: bearerAuth
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
@@ -143,16 +144,16 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
-    id = 10 # int | The room ID.
-    delete_room_request = docspace_api_sdk.DeleteRoomRequest() # DeleteRoomRequest | The parameters for deleting a room.
+    id = '1234' # str | The agent identifier.
+    ai_agents_delete_request = docspace_api_sdk.AiAgentsDeleteRequest() # AiAgentsDeleteRequest | 
 
     try:
-        # Remove an ai agent
-        api_response = api_instance.delete_agent(id, delete_room_request)
-        print("The response of AgentsApi->delete_agent:\n")
+        # Delete an agent
+        api_response = api_instance.ai_agents_delete(id, ai_agents_delete_request)
+        print("The response of AgentsApi->ai_agents_delete:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AgentsApi->delete_agent: %s\n" % e)
+        print("Exception when calling AgentsApi->ai_agents_delete: %s\n" % e)
 ```
 
 
@@ -166,18 +167,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | File operation |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**200** | The queued file operation. Deletion runs asynchronously, so poll DocSpace for its outcome. |  -  |
+**400** | The agent ID is not a positive integer. |  -  |
+**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_agent_info**
-> FolderIntegerWrapper get_agent_info(id)
+# **ai_agents_get**
+> AiAgentsGet200Response ai_agents_get(id)
 
-Returns an ai agent.
+Returns one AI agent room, enriched with the `profileId` currently bound to it so an edit form can prefill its model selector. The ID is the room's integer identifier, and a non-integer value is refused rather than passed on to fail opaquely upstream. The binding lives in an assignment rather than on the room, so it is looked up separately: a missing or unreadable assignment simply leaves `profileId` out of the answer instead of failing the call. The standing instruction comes back on the room as `chatSettings.prompt`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -186,22 +188,22 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID. | 
+ **id** | **str**| The agent identifier. | 
 
 ### Return type
 
-[**FolderIntegerWrapper**](FolderIntegerWrapper.md)
+[**AiAgentsGet200Response**](AiAgentsGet200Response.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.folder_integer_wrapper import FolderIntegerWrapper
+from docspace_api_sdk.models.ai_agents_get200_response import AiAgentsGet200Response
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -214,7 +216,7 @@ configuration = docspace_api_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure Bearer authorization (JWT): Bearer
+# Configure Bearer authorization: bearerAuth
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
@@ -222,15 +224,15 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
-    id = 1 # int | The room ID.
+    id = '1234' # str | The agent identifier.
 
     try:
-        # Return an ai agent
-        api_response = api_instance.get_agent_info(id)
-        print("The response of AgentsApi->get_agent_info:\n")
+        # Get an agent
+        api_response = api_instance.ai_agents_get(id)
+        print("The response of AgentsApi->ai_agents_get:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AgentsApi->get_agent_info: %s\n" % e)
+        print("Exception when calling AgentsApi->ai_agents_get: %s\n" % e)
 ```
 
 
@@ -244,18 +246,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**200** | The agent room, with `profileId` added when a model is bound to it. |  -  |
+**400** | The agent ID is not a positive integer. |  -  |
+**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_agents**
-> FolderContentIntegerWrapper get_agents(subject_id=subject_id, subject_owner_id=subject_owner_id, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, subject_filter=subject_filter, quota_filter=quota_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
+# **ai_agents_list**
+> AiFolderContentWrapper ai_agents_list(subject_id=subject_id, subject_owner_id=subject_owner_id, exclude_subject=exclude_subject, tags=tags, without_tags=without_tags, quota_filter=quota_filter, filter_value=filter_value, sort_by=sort_by, sort_order=sort_order, start_index=start_index, count=count)
 
-Get ai agents
+Lists the portal's AI agent rooms. The query is forwarded unchanged to the DocSpace AI service, so it takes the same paging, sorting and filtering parameters as an ordinary room listing, and the answer is that service's folder-content payload rather than a shape of this API's own. Array and object query values are dropped rather than guessed at, so send flat strings. The profile bound to each agent is not included here - read one agent with `GET api/2.0/ai/agents/{id}` for that.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -264,36 +266,32 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **subject_id** | **str**| The filter by user ID. | [optional] 
- **subject_owner_id** | **str**| The filter by room owner ID. | [optional] 
- **without_tags** | **bool**| Specifies whether to search by tags or not. | [optional] 
- **tags** | **str**| The tags in the serialized format. | [optional] 
- **exclude_subject** | **bool**| Specifies whether to exclude search by user or group ID. | [optional] 
- **subject_filter** | [**SubjectFilter**](.md)| The filter by user (Owner - 0, Member - 1). | [optional] 
- **quota_filter** | [**QuotaFilter**](.md)| The filter by quota (All - 0, Default - 1, Custom - 2). | [optional] 
- **count** | **int**| Specifies the maximum number of items to retrieve. | [optional] 
- **start_index** | **int**| The index from which to start retrieving the room content. | [optional] 
- **sort_by** | **str**| Specifies the field by which the room content should be sorted. | [optional] 
- **sort_order** | [**SortOrder**](.md)| The order in which the results are sorted. | [optional] 
- **filter_value** | **str**| The text filter value used to refine search or query operations. | [optional] 
+ **subject_id** | **str**| Show only the agent rooms this user takes part in. | [optional] 
+ **subject_owner_id** | **str**| Show only the agent rooms owned by this user. | [optional] 
+ **exclude_subject** | **bool**| Invert the user filter: leave out what `subjectId` selects instead of keeping it. | [optional] 
+ **tags** | **str**| Show only the agent rooms carrying these tags, comma-separated. | [optional] 
+ **without_tags** | **bool**| Show only the agent rooms that carry no tags at all. | [optional] 
+ **quota_filter** | **int**| Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. | [optional] 
+ **filter_value** | **str**| Show only the agent rooms whose title matches this text. | [optional] 
+ **sort_by** | **str**| Field to sort by, for example `DateAndTime`. | [optional] 
+ **sort_order** | **str**| Sort direction, `ascending` or `descending`. | [optional] 
+ **start_index** | **int**| Index of the first entry to return; 0 starts at the beginning. | [optional] 
+ **count** | **int**| How many entries to return. The internal service applies its own default. | [optional] 
 
 ### Return type
 
-[**FolderContentIntegerWrapper**](FolderContentIntegerWrapper.md)
+[**AiFolderContentWrapper**](AiFolderContentWrapper.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
-from docspace_api_sdk.models.quota_filter import QuotaFilter
-from docspace_api_sdk.models.sort_order import SortOrder
-from docspace_api_sdk.models.subject_filter import SubjectFilter
+from docspace_api_sdk.models.ai_folder_content_wrapper import AiFolderContentWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -306,7 +304,7 @@ configuration = docspace_api_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure Bearer authorization (JWT): Bearer
+# Configure Bearer authorization: bearerAuth
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
@@ -314,26 +312,25 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
-    subject_id = '00000000-0000-0000-0000-000000000000' # str | The filter by user ID. (optional)
-    subject_owner_id = '00000000-0000-0000-0000-000000000000' # str | The filter by room owner ID. (optional)
-    without_tags = false # bool | Specifies whether to search by tags or not. (optional)
-    tags = 'ai,assistant' # str | The tags in the serialized format. (optional)
-    exclude_subject = false # bool | Specifies whether to exclude search by user or group ID. (optional)
-    subject_filter = docspace_api_sdk.SubjectFilter() # SubjectFilter | The filter by user (Owner - 0, Member - 1). (optional)
-    quota_filter = docspace_api_sdk.QuotaFilter() # QuotaFilter | The filter by quota (All - 0, Default - 1, Custom - 2). (optional)
-    count = 25 # int | Specifies the maximum number of items to retrieve. (optional)
-    start_index = 0 # int | The index from which to start retrieving the room content. (optional)
-    sort_by = 'DateAndTime' # str | Specifies the field by which the room content should be sorted. (optional)
-    sort_order = docspace_api_sdk.SortOrder() # SortOrder | The order in which the results are sorted. (optional)
-    filter_value = 'my agent' # str | The text filter value used to refine search or query operations. (optional)
+    subject_id = '00000000-0000-0000-0000-000000000000' # str | Show only the agent rooms this user takes part in. (optional)
+    subject_owner_id = '00000000-0000-0000-0000-000000000000' # str | Show only the agent rooms owned by this user. (optional)
+    exclude_subject = false # bool | Invert the user filter: leave out what `subjectId` selects instead of keeping it. (optional)
+    tags = 'ai,assistant' # str | Show only the agent rooms carrying these tags, comma-separated. (optional)
+    without_tags = false # bool | Show only the agent rooms that carry no tags at all. (optional)
+    quota_filter = 0 # int | Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. (optional)
+    filter_value = 'assistant' # str | Show only the agent rooms whose title matches this text. (optional)
+    sort_by = 'DateAndTime' # str | Field to sort by, for example `DateAndTime`. (optional)
+    sort_order = 'descending' # str | Sort direction, `ascending` or `descending`. (optional)
+    start_index = 0 # int | Index of the first entry to return; 0 starts at the beginning. (optional)
+    count = 25 # int | How many entries to return. The internal service applies its own default. (optional)
 
     try:
-        # Get ai agents
-        api_response = api_instance.get_agents(subject_id=subject_id, subject_owner_id=subject_owner_id, without_tags=without_tags, tags=tags, exclude_subject=exclude_subject, subject_filter=subject_filter, quota_filter=quota_filter, count=count, start_index=start_index, sort_by=sort_by, sort_order=sort_order, filter_value=filter_value)
-        print("The response of AgentsApi->get_agents:\n")
+        # List agents
+        api_response = api_instance.ai_agents_list(subject_id=subject_id, subject_owner_id=subject_owner_id, exclude_subject=exclude_subject, tags=tags, without_tags=without_tags, quota_filter=quota_filter, filter_value=filter_value, sort_by=sort_by, sort_order=sort_order, start_index=start_index, count=count)
+        print("The response of AgentsApi->ai_agents_list:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AgentsApi->get_agents: %s\n" % e)
+        print("Exception when calling AgentsApi->ai_agents_list: %s\n" % e)
 ```
 
 
@@ -347,18 +344,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**200** | The agent rooms, in the DocSpace AI service's folder-content envelope. |  -  |
+**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_agents_new_items**
-> NewItemsAgentNewItemsArrayWrapper get_agents_new_items()
+# **ai_agents_news**
+> AiNewItemsAgentNewItemsArrayWrapper ai_agents_news()
 
-Returns the room new items.
+Lists the unread items across the caller's AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service's new-items payload. This is a read-only operation and does not mark anything as seen.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -368,18 +364,18 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**NewItemsAgentNewItemsArrayWrapper**](NewItemsAgentNewItemsArrayWrapper.md)
+[**AiNewItemsAgentNewItemsArrayWrapper**](AiNewItemsAgentNewItemsArrayWrapper.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.new_items_agent_new_items_array_wrapper import NewItemsAgentNewItemsArrayWrapper
+from docspace_api_sdk.models.ai_new_items_agent_new_items_array_wrapper import AiNewItemsAgentNewItemsArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -392,7 +388,7 @@ configuration = docspace_api_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure Bearer authorization (JWT): Bearer
+# Configure Bearer authorization: bearerAuth
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
@@ -402,12 +398,12 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.AgentsApi(api_client)
 
     try:
-        # Get the room new items
-        api_response = api_instance.get_agents_new_items()
-        print("The response of AgentsApi->get_agents_new_items:\n")
+        # List agent news items
+        api_response = api_instance.ai_agents_news()
+        print("The response of AgentsApi->ai_agents_news:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AgentsApi->get_agents_new_items: %s\n" % e)
+        print("Exception when calling AgentsApi->ai_agents_news: %s\n" % e)
 ```
 
 
@@ -421,18 +417,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of new items |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**200** | The unread items of the caller's agent rooms. |  -  |
+**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **reset_agents_quota**
-> FolderIntegerArrayWrapper reset_agents_quota(update_rooms_room_ids_request_dto_integer=update_rooms_room_ids_request_dto_integer)
+# **ai_agents_reset_quota**
+> AiFolderArrayWrapper ai_agents_reset_quota(ai_agents_reset_quota_request)
 
-Resets the quota limit for the AI agents with the IDs specified in the request.
+Returns the listed AI agent rooms to the portal's default storage quota, forwarding `roomIds` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. This is the counterpart of `PUT api/2.0/ai/agents/agentquota` and takes no quota value of its own. Rooms already on the default are unaffected.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -441,23 +436,23 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_rooms_room_ids_request_dto_integer** | [**UpdateRoomsRoomIdsRequestDtoInteger**](UpdateRoomsRoomIdsRequestDtoInteger.md)|  | [optional] 
+ **ai_agents_reset_quota_request** | [**AiAgentsResetQuotaRequest**](AiAgentsResetQuotaRequest.md)|  | 
 
 ### Return type
 
-[**FolderIntegerArrayWrapper**](FolderIntegerArrayWrapper.md)
+[**AiFolderArrayWrapper**](AiFolderArrayWrapper.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.folder_integer_array_wrapper import FolderIntegerArrayWrapper
-from docspace_api_sdk.models.update_rooms_room_ids_request_dto_integer import UpdateRoomsRoomIdsRequestDtoInteger
+from docspace_api_sdk.models.ai_agents_reset_quota_request import AiAgentsResetQuotaRequest
+from docspace_api_sdk.models.ai_folder_array_wrapper import AiFolderArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -470,7 +465,7 @@ configuration = docspace_api_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure Bearer authorization (JWT): Bearer
+# Configure Bearer authorization: bearerAuth
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
@@ -478,15 +473,15 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
-    update_rooms_room_ids_request_dto_integer = docspace_api_sdk.UpdateRoomsRoomIdsRequestDtoInteger() # UpdateRoomsRoomIdsRequestDtoInteger |  (optional)
+    ai_agents_reset_quota_request = docspace_api_sdk.AiAgentsResetQuotaRequest() # AiAgentsResetQuotaRequest | 
 
     try:
-        # Reset the AI agents quota limit
-        api_response = api_instance.reset_agents_quota(update_rooms_room_ids_request_dto_integer=update_rooms_room_ids_request_dto_integer)
-        print("The response of AgentsApi->reset_agents_quota:\n")
+        # Reset agents' quota
+        api_response = api_instance.ai_agents_reset_quota(ai_agents_reset_quota_request)
+        print("The response of AgentsApi->ai_agents_reset_quota:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AgentsApi->reset_agents_quota: %s\n" % e)
+        print("Exception when calling AgentsApi->ai_agents_reset_quota: %s\n" % e)
 ```
 
 
@@ -500,18 +495,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of AI agents with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**200** | The updated agent rooms, one entry each. |  -  |
+**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_agent**
-> FolderIntegerWrapper update_agent(id, update_room_request)
+# **ai_agents_update**
+> AiFolderWrapper ai_agents_update(id, ai_agents_update_request)
 
-Updates an ai agent.
+Changes an AI agent room - its title, tags or standing instruction - and optionally rebinds its model. The ID has to be the room's integer identifier. `profileId` is not part of the room contract: it is taken out of the forwarded body and applied afterwards as the agent's assignment, and it has to be a UUID naming an existing chat-capable profile. An instruction sent as `chatSettings.prompt` has its markup stripped, as on create; note that when `chatSettings` is present the upstream service still requires the rest of that object to be valid, so send it whole.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -520,24 +515,24 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**| The room ID. | 
- **update_room_request** | [**UpdateRoomRequest**](UpdateRoomRequest.md)| The request parameters for updating a room. | 
+ **id** | **str**| The agent identifier. | 
+ **ai_agents_update_request** | [**AiAgentsUpdateRequest**](AiAgentsUpdateRequest.md)|  | 
 
 ### Return type
 
-[**FolderIntegerWrapper**](FolderIntegerWrapper.md)
+[**AiFolderWrapper**](AiFolderWrapper.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.folder_integer_wrapper import FolderIntegerWrapper
-from docspace_api_sdk.models.update_room_request import UpdateRoomRequest
+from docspace_api_sdk.models.ai_agents_update_request import AiAgentsUpdateRequest
+from docspace_api_sdk.models.ai_folder_wrapper import AiFolderWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -550,7 +545,7 @@ configuration = docspace_api_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure Bearer authorization (JWT): Bearer
+# Configure Bearer authorization: bearerAuth
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
@@ -558,16 +553,16 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
-    id = 56 # int | The room ID.
-    update_room_request = docspace_api_sdk.UpdateRoomRequest() # UpdateRoomRequest | The request parameters for updating a room.
+    id = '1234' # str | The agent identifier.
+    ai_agents_update_request = docspace_api_sdk.AiAgentsUpdateRequest() # AiAgentsUpdateRequest | 
 
     try:
-        # Update an ai agent
-        api_response = api_instance.update_agent(id, update_room_request)
-        print("The response of AgentsApi->update_agent:\n")
+        # Update an agent
+        api_response = api_instance.ai_agents_update(id, ai_agents_update_request)
+        print("The response of AgentsApi->ai_agents_update:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AgentsApi->update_agent: %s\n" % e)
+        print("Exception when calling AgentsApi->ai_agents_update: %s\n" % e)
 ```
 
 
@@ -581,18 +576,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Updated agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**200** | The updated agent room. |  -  |
+**400** | The agent ID is not a positive integer, or `profileId` is not a UUID, names no existing profile, or names one that does not support chat. |  -  |
+**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_agents_quota**
-> FolderIntegerArrayWrapper update_agents_quota(update_rooms_quota_request_dto_integer=update_rooms_quota_request_dto_integer)
+# **ai_agents_update_quota**
+> AiFolderArrayWrapper ai_agents_update_quota(ai_agents_update_quota_request)
 
-Changes the quota limit for the AI agents with the IDs specified in the request.
+Sets the storage quota of the listed AI agent rooms in one call, forwarding `roomIds` and `quota` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. A quota applies to the room's stored files, not to the model usage of its chats. Use `PUT api/2.0/ai/agents/resetquota` to return rooms to the portal default instead of naming a number.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -601,23 +597,23 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_rooms_quota_request_dto_integer** | [**UpdateRoomsQuotaRequestDtoInteger**](UpdateRoomsQuotaRequestDtoInteger.md)|  | [optional] 
+ **ai_agents_update_quota_request** | [**AiAgentsUpdateQuotaRequest**](AiAgentsUpdateQuotaRequest.md)|  | 
 
 ### Return type
 
-[**FolderIntegerArrayWrapper**](FolderIntegerArrayWrapper.md)
+[**AiFolderArrayWrapper**](AiFolderArrayWrapper.md)
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.folder_integer_array_wrapper import FolderIntegerArrayWrapper
-from docspace_api_sdk.models.update_rooms_quota_request_dto_integer import UpdateRoomsQuotaRequestDtoInteger
+from docspace_api_sdk.models.ai_agents_update_quota_request import AiAgentsUpdateQuotaRequest
+from docspace_api_sdk.models.ai_folder_array_wrapper import AiFolderArrayWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -630,7 +626,7 @@ configuration = docspace_api_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure Bearer authorization (JWT): Bearer
+# Configure Bearer authorization: bearerAuth
 configuration = docspace_api_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
@@ -638,15 +634,15 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.AgentsApi(api_client)
-    update_rooms_quota_request_dto_integer = docspace_api_sdk.UpdateRoomsQuotaRequestDtoInteger() # UpdateRoomsQuotaRequestDtoInteger |  (optional)
+    ai_agents_update_quota_request = docspace_api_sdk.AiAgentsUpdateQuotaRequest() # AiAgentsUpdateQuotaRequest | 
 
     try:
-        # Change the AI agent quota limit
-        api_response = api_instance.update_agents_quota(update_rooms_quota_request_dto_integer=update_rooms_quota_request_dto_integer)
-        print("The response of AgentsApi->update_agents_quota:\n")
+        # Update agents' quota
+        api_response = api_instance.ai_agents_update_quota(ai_agents_update_quota_request)
+        print("The response of AgentsApi->ai_agents_update_quota:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AgentsApi->update_agents_quota: %s\n" % e)
+        print("Exception when calling AgentsApi->ai_agents_update_quota: %s\n" % e)
 ```
 
 
@@ -660,11 +656,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of AI agents with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-**401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**200** | The updated agent rooms, one entry each. |  -  |
+**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**413** | The request body is larger than 100 KB, the JSON parser's limit on this route. |  -  |
+**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

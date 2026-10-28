@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class QuotaWrapper(BaseModel):
     """
-    QuotaWrapper
+    The successful API response containing the QuotaDto object.
     """ # noqa: E501
-    response: Optional[QuotaDto] = None
+    response: Optional[QuotaDto] = Field(default=None, description="The QuotaDto object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

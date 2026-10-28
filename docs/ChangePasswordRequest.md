@@ -5,8 +5,8 @@ The request parameters for updating a user password.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**password** | **str** | The user password. | [optional] 
-**password_hash** | **str** | The user password hash. | [optional] 
+**password** | **str** | The new password in plain text. It is checked against the portal password policy and rejected with 400 when  it is too weak, then hashed by the portal. Send it only over a secure connection, and prefer `passwordHash`  when the client can compute it. | [optional] 
+**password_hash** | **str** | The new password already hashed by the client, which is what the portal stores. It is a PBKDF2-HMACSHA256  hash of the plain password, computed with the salt, the iteration count and the key size the portal settings  publish, and written as lowercase hexadecimal. When it is sent, `password` is ignored and the password policy  is not applied. | [optional] 
 
 ## Example
 

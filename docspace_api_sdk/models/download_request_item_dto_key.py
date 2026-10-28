@@ -29,12 +29,12 @@ DOWNLOADREQUESTITEMDTOKEY_ONE_OF_SCHEMAS = ["int", "str"]
 
 class DownloadRequestItemDtoKey(BaseModel):
     """
-    The unique identifier or reference key for the file to be downloaded.
+    The file to convert and pack, by id — a number for a file stored in the portal itself, a string for a file on  a connected third-party account.
     """
     # data type: int
-    oneof_schema_1_validator: Optional[StrictInt] = None
+    oneof_schema_1_validator: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [1234]})
     # data type: str
-    oneof_schema_2_validator: Optional[StrictStr] = None
+    oneof_schema_2_validator: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["some text"]})
     actual_instance: Optional[Union[int, str]] = None
     one_of_schemas: Set[str] = { "int", "str" }
 

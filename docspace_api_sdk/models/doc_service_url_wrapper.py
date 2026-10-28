@@ -30,9 +30,9 @@ from typing_extensions import Self
 
 class DocServiceUrlWrapper(BaseModel):
     """
-    DocServiceUrlWrapper
+    The successful API response containing the DocServiceUrlDto object.
     """ # noqa: E501
-    response: Optional[DocServiceUrlDto] = None
+    response: Optional[DocServiceUrlDto] = Field(default=None, description="The DocServiceUrlDto object returned by the operation.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")

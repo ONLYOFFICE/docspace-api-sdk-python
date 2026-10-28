@@ -33,11 +33,11 @@ from docspace_api_sdk.models.email_invitation_dto import EmailInvitationDto
 
 class FileShareParams(EmailInvitationDto):
     """
-    The collection of file sharing parameters.
+    One sharing entry: an account, a group or an email address, and the access level it is given.
     """
 
-    share_to: Optional[UUID] = Field(default=None, description="The ID of the user to whom the file will be shared.", alias="shareTo")
-    access: Optional[FileShare] = None
+    share_to: Optional[UUID] = Field(default=None, description="The account or the group the entry is about, taken from the portal people and group listings. Leave it out and  give an email address instead to share with somebody who has no account yet.", alias="shareTo", json_schema_extra={"examples": ["e9a7b4c1-2d3f-4a56-8b90-1c2d3e4f5a6b"]})
+    access: Optional[FileShare] = Field(default=None, description="What the subject may do with the shared item. The value 0 takes the access away again, and which of the other  levels are accepted depends on what is being shared.")
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,11 +77,6 @@ class FileShareParams(EmailInvitationDto):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if email (nullable) is None
-        # and model_fields_set contains the field
-        if self.email is None and "email" in self.model_fields_set:
-            _dict['email'] = None
-
         return _dict
 
     @classmethod

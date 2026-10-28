@@ -27,11 +27,11 @@ from docspace_api_sdk.models.get_portal_prices200_response_links_inner import Ge
 from typing import Optional, Set
 from typing_extensions import Self
 
-class STRINGArrayWrapper(BaseModel):
+class StringArrayWrapper(BaseModel):
     """
-    STRINGArrayWrapper
+    The successful API response.
     """ # noqa: E501
-    response: Optional[List[StrictStr]] = None
+    response: Optional[List[StrictStr]] = Field(default=None, description="The response payload.")
     count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")
@@ -56,7 +56,7 @@ class STRINGArrayWrapper(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of STRINGArrayWrapper from a JSON string"""
+        """Create an instance of StringArrayWrapper from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -88,7 +88,7 @@ class STRINGArrayWrapper(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of STRINGArrayWrapper from a dict"""
+        """Create an instance of StringArrayWrapper from a dict"""
         if obj is None:
             return None
 

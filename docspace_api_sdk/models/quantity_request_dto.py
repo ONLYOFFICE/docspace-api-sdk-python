@@ -22,15 +22,15 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
 class QuantityRequestDto(BaseModel):
     """
-    The request parameters for specifying payment quantity.
+    The new size of the portal subscription.
     """ # noqa: E501
-    quantity: Optional[Dict[str, StrictInt]] = Field(default=None, description="The mapping of item identifiers to their respective quantities in the payment.")
+    quantity: Dict[str, StrictInt] = Field(description="The plan and the number of units it is to cover, as a single pair. While the portal is on a priced plan the  key has to be the `name` of that same plan, which `GET api/2.0/portal/payment/quota` reports, because the  subscription is resized rather than swapped; the value is the total the subscription is to have afterwards,  not the difference. Exactly one pair is accepted, and a value that is already in effect is refused with 400.", json_schema_extra={"examples": [{"admin": 1}]})
     __properties: ClassVar[List[str]] = ["quantity"]
 
     model_config = ConfigDict(
@@ -72,11 +72,6 @@ class QuantityRequestDto(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if quantity (nullable) is None
-        # and model_fields_set contains the field
-        if self.quantity is None and "quantity" in self.model_fields_set:
-            _dict['quantity'] = None
-
         return _dict
 
     @classmethod

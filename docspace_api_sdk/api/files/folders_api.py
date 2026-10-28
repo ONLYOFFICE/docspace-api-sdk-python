@@ -19,39 +19,46 @@
 from __future__ import annotations
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr
+from datetime import datetime
+from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr, field_validator
 from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
 from uuid import UUID
-from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.apply_filter_option import ApplyFilterOption
+from docspace_api_sdk.models.audit_report_format import AuditReportFormat
 from docspace_api_sdk.models.check_upload_request import CheckUploadRequest
-from docspace_api_sdk.models.create_folder import CreateFolder
-from docspace_api_sdk.models.delete_folder import DeleteFolder
+from docspace_api_sdk.models.create_folder_request import CreateFolderRequest
+from docspace_api_sdk.models.delete_folder_request import DeleteFolderRequest
+from docspace_api_sdk.models.document_builder_task_wrapper import DocumentBuilderTaskWrapper
+from docspace_api_sdk.models.file_array_wrapper import FileArrayWrapper
 from docspace_api_sdk.models.file_entry_base_array_wrapper import FileEntryBaseArrayWrapper
-from docspace_api_sdk.models.file_integer_array_wrapper import FileIntegerArrayWrapper
-from docspace_api_sdk.models.file_integer_wrapper import FileIntegerWrapper
 from docspace_api_sdk.models.file_operation_array_wrapper import FileOperationArrayWrapper
 from docspace_api_sdk.models.file_share_array_wrapper import FileShareArrayWrapper
 from docspace_api_sdk.models.file_share_wrapper import FileShareWrapper
+from docspace_api_sdk.models.file_wrapper import FileWrapper
 from docspace_api_sdk.models.files_statistics_result_wrapper import FilesStatisticsResultWrapper
 from docspace_api_sdk.models.filter_type import FilterType
-from docspace_api_sdk.models.folder_content_integer_array_wrapper import FolderContentIntegerArrayWrapper
-from docspace_api_sdk.models.folder_content_integer_wrapper import FolderContentIntegerWrapper
-from docspace_api_sdk.models.folder_integer_wrapper import FolderIntegerWrapper
+from docspace_api_sdk.models.folder_content_array_wrapper import FolderContentArrayWrapper
+from docspace_api_sdk.models.folder_content_wrapper import FolderContentWrapper
 from docspace_api_sdk.models.folder_link_request import FolderLinkRequest
+from docspace_api_sdk.models.folder_metadata_search import FolderMetadataSearch
+from docspace_api_sdk.models.folder_wrapper import FolderWrapper
 from docspace_api_sdk.models.forms_item_array_wrapper import FormsItemArrayWrapper
 from docspace_api_sdk.models.history_array_wrapper import HistoryArrayWrapper
-from docspace_api_sdk.models.location import Location
 from docspace_api_sdk.models.order_request_dto import OrderRequestDto
-from docspace_api_sdk.models.string_array_wrapper import STRINGArrayWrapper
+from docspace_api_sdk.models.request_location import RequestLocation
 from docspace_api_sdk.models.search_area import SearchArea
 from docspace_api_sdk.models.sort_order import SortOrder
-from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.models.string_array_wrapper import StringArrayWrapper
 from docspace_api_sdk.models.xlsx_report_response_wrapper import XlsxReportResponseWrapper
+from docspace_api_sdk.models.error_api_response import ErrorApiResponse
+from docspace_api_sdk.models.third_party_folder_wrapper import ThirdPartyFolderWrapper
+from docspace_api_sdk.models.third_party_folder_content_wrapper import ThirdPartyFolderContentWrapper
+from docspace_api_sdk.models.third_party_file_wrapper import ThirdPartyFileWrapper
+from docspace_api_sdk.models.third_party_file_array_wrapper import ThirdPartyFileArrayWrapper
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -87,8 +94,8 @@ class FoldersApi:
     @validate_call
     def check_upload(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        check_upload_request: Annotated[CheckUploadRequest, Field(description="The request parameters for checking file uploads.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.")], Annotated[StrictStr, Field(description="The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.")]],
+        check_upload_request: Annotated[CheckUploadRequest, Field(description="The names to test against the files the folder already holds.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -101,14 +108,14 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> STRINGArrayWrapper:
-        """Check file uploads
+    ) -> StringArrayWrapper:
+        """Check for upload conflicts
 
-        Checks the file uploads to the folder with the ID specified in the request.
+        Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param check_upload_request: The request parameters for checking file uploads. (required)
+        :param folder_id: The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. (required)
+        :type folder_id: Union[int, str]
+        :param check_upload_request: The names to test against the files the folder already holds. (required)
         :type check_upload_request: CheckUploadRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -142,12 +149,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "StringArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -162,8 +174,8 @@ class FoldersApi:
     @validate_call
     def check_upload_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        check_upload_request: Annotated[CheckUploadRequest, Field(description="The request parameters for checking file uploads.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.")], Annotated[StrictStr, Field(description="The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.")]],
+        check_upload_request: Annotated[CheckUploadRequest, Field(description="The names to test against the files the folder already holds.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -176,14 +188,14 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[STRINGArrayWrapper]:
-        """Check file uploads
+    ) -> ApiResponse[StringArrayWrapper]:
+        """Check for upload conflicts
 
-        Checks the file uploads to the folder with the ID specified in the request.
+        Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param check_upload_request: The request parameters for checking file uploads. (required)
+        :param folder_id: The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. (required)
+        :type folder_id: Union[int, str]
+        :param check_upload_request: The names to test against the files the folder already holds. (required)
         :type check_upload_request: CheckUploadRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -217,12 +229,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "StringArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -237,8 +254,8 @@ class FoldersApi:
     @validate_call
     def check_upload_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        check_upload_request: Annotated[CheckUploadRequest, Field(description="The request parameters for checking file uploads.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.")], Annotated[StrictStr, Field(description="The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.")]],
+        check_upload_request: Annotated[CheckUploadRequest, Field(description="The names to test against the files the folder already holds.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -252,13 +269,13 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Check file uploads
+        """Check for upload conflicts
 
-        Checks the file uploads to the folder with the ID specified in the request.
+        Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param check_upload_request: The request parameters for checking file uploads. (required)
+        :param folder_id: The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. (required)
+        :type folder_id: Union[int, str]
+        :param check_upload_request: The names to test against the files the folder already holds. (required)
         :type check_upload_request: CheckUploadRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -292,12 +309,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "STRINGArrayWrapper",
-            '401': None,
-            '429': None,
+            '200': "StringArrayWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -393,11 +415,11 @@ class FoldersApi:
 
 
 
-    @validate_call
+    @overload
     def create_folder(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID for the folder creation.")],
-        create_folder: Annotated[CreateFolder, Field(description="The parameters for creating a folder.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -410,15 +432,72 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
+    ) -> FolderWrapper: ...
+
+    @overload
+    def create_folder(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
+
+    @overload
+    def create_folder(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")], Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")]],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def create_folder(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")], Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")]],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
         """Create a folder
 
-        Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
+        Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
 
-        :param folder_id: The folder ID for the folder creation. (required)
-        :type folder_id: int
-        :param create_folder: The parameters for creating a folder. (required)
-        :type create_folder: CreateFolder
+        :param folder_id: The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. (required)
+        :type folder_id: Union[int, str]
+        :param create_folder_request: The title carried by the request body. (required)
+        :type create_folder_request: CreateFolderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -443,7 +522,7 @@ class FoldersApi:
 
         _param = self._create_folder_serialize(
             folder_id=folder_id,
-            create_folder=create_folder,
+            create_folder_request=create_folder_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -451,12 +530,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -468,11 +552,11 @@ class FoldersApi:
         ).data
 
 
-    @validate_call
+    @overload
     def create_folder_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID for the folder creation.")],
-        create_folder: Annotated[CreateFolder, Field(description="The parameters for creating a folder.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -485,15 +569,72 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderWrapper]: ...
+
+    @overload
+    def create_folder_with_http_info(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
+
+    @overload
+    def create_folder_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")], Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")]],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def create_folder_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")], Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")]],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
         """Create a folder
 
-        Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
+        Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
 
-        :param folder_id: The folder ID for the folder creation. (required)
-        :type folder_id: int
-        :param create_folder: The parameters for creating a folder. (required)
-        :type create_folder: CreateFolder
+        :param folder_id: The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. (required)
+        :type folder_id: Union[int, str]
+        :param create_folder_request: The title carried by the request body. (required)
+        :type create_folder_request: CreateFolderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -518,7 +659,7 @@ class FoldersApi:
 
         _param = self._create_folder_serialize(
             folder_id=folder_id,
-            create_folder=create_folder,
+            create_folder_request=create_folder_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -526,12 +667,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -546,8 +692,8 @@ class FoldersApi:
     @validate_call
     def create_folder_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID for the folder creation.")],
-        create_folder: Annotated[CreateFolder, Field(description="The parameters for creating a folder.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")], Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")]],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -563,12 +709,12 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Create a folder
 
-        Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
+        Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
 
-        :param folder_id: The folder ID for the folder creation. (required)
-        :type folder_id: int
-        :param create_folder: The parameters for creating a folder. (required)
-        :type create_folder: CreateFolder
+        :param folder_id: The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. (required)
+        :type folder_id: Union[int, str]
+        :param create_folder_request: The title carried by the request body. (required)
+        :type create_folder_request: CreateFolderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -593,7 +739,7 @@ class FoldersApi:
 
         _param = self._create_folder_serialize(
             folder_id=folder_id,
-            create_folder=create_folder,
+            create_folder_request=create_folder_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -601,12 +747,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -617,7 +768,7 @@ class FoldersApi:
     def _create_folder_serialize(
         self,
         folder_id,
-        create_folder,
+        create_folder_request,
         _request_auth,
         _content_type,
         _headers,
@@ -645,8 +796,8 @@ class FoldersApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_folder is not None:
-            _body_params = create_folder
+        if create_folder_request is not None:
+            _body_params = create_folder_request
 
 
         # set the HTTP header `Accept`
@@ -705,8 +856,8 @@ class FoldersApi:
     @validate_call
     def create_folder_primary_external_link(
         self,
-        id: Annotated[StrictInt, Field(description="The folder ID.")],
-        folder_link_request: Annotated[FolderLinkRequest, Field(description="The folder link parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the link belongs to.")], Annotated[StrictStr, Field(description="The folder or room the link belongs to.")]],
+        folder_link_request: Annotated[FolderLinkRequest, Field(description="The link and the way it is to be shaped.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -720,13 +871,13 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareWrapper:
-        """Create primary external link
+        """Create the folder primary external link
 
-        Creates a primary external link by the identifier specified in the request.
+        Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
 
-        :param id: The folder ID. (required)
-        :type id: int
-        :param folder_link_request: The folder link parameters. (required)
+        :param id: The folder or room the link belongs to. (required)
+        :type id: Union[int, str]
+        :param folder_link_request: The link and the way it is to be shaped. (required)
         :type folder_link_request: FolderLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -761,13 +912,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -782,8 +936,8 @@ class FoldersApi:
     @validate_call
     def create_folder_primary_external_link_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The folder ID.")],
-        folder_link_request: Annotated[FolderLinkRequest, Field(description="The folder link parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the link belongs to.")], Annotated[StrictStr, Field(description="The folder or room the link belongs to.")]],
+        folder_link_request: Annotated[FolderLinkRequest, Field(description="The link and the way it is to be shaped.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -797,13 +951,13 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareWrapper]:
-        """Create primary external link
+        """Create the folder primary external link
 
-        Creates a primary external link by the identifier specified in the request.
+        Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
 
-        :param id: The folder ID. (required)
-        :type id: int
-        :param folder_link_request: The folder link parameters. (required)
+        :param id: The folder or room the link belongs to. (required)
+        :type id: Union[int, str]
+        :param folder_link_request: The link and the way it is to be shaped. (required)
         :type folder_link_request: FolderLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -838,13 +992,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -859,8 +1016,8 @@ class FoldersApi:
     @validate_call
     def create_folder_primary_external_link_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The folder ID.")],
-        folder_link_request: Annotated[FolderLinkRequest, Field(description="The folder link parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the link belongs to.")], Annotated[StrictStr, Field(description="The folder or room the link belongs to.")]],
+        folder_link_request: Annotated[FolderLinkRequest, Field(description="The link and the way it is to be shaped.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -874,13 +1031,13 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create primary external link
+        """Create the folder primary external link
 
-        Creates a primary external link by the identifier specified in the request.
+        Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
 
-        :param id: The folder ID. (required)
-        :type id: int
-        :param folder_link_request: The folder link parameters. (required)
+        :param id: The folder or room the link belongs to. (required)
+        :type id: Union[int, str]
+        :param folder_link_request: The link and the way it is to be shaped. (required)
         :type folder_link_request: FolderLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -915,13 +1072,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1020,7 +1180,10 @@ class FoldersApi:
     @validate_call
     def create_report_folder_history(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose history is exported; the report covers the folder itself and the entries inside it.")],
+        format: Annotated[Optional[AuditReportFormat], Field(description="The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1033,13 +1196,19 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> StringWrapper:
-        """Generates folder history
+    ) -> DocumentBuilderTaskWrapper:
+        """Start the folder history report generation
 
-        Generates the activity history of a folder.
+        Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`; the URL of a CSV file too large for the editor  downloads it instead of opening it. An XLSX report keeps only the most recent events, at most 200,000 by default  and fewer when the events are long, and its header says how many were left out; `format=Csv` exports every event  of the period. `from` and `to` limit the exported period; leaving both out exports the whole history. While a  report for the same folder and caller is still running, this call joins it and answers with the running task  instead of starting a second one, so retrying is safe. The caller needs read access to the folder and may not be  a guest - otherwise the call is refused with 403, and a folder that does not exist with 404; the report is  available on every pricing plan, and 402 comes only when the login history and audit trail section is turned  off for the portal. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
 
-        :param folder_id: (required)
+        :param folder_id: The folder whose history is exported; the report covers the folder itself and the entries inside it. (required)
         :type folder_id: int
+        :param format: The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents.
+        :type format: AuditReportFormat
+        :param var_from: The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.
+        :type var_from: datetime
+        :param to: The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.
+        :type to: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1064,6 +1233,9 @@ class FoldersApi:
 
         _param = self._create_report_folder_history_serialize(
             folder_id=folder_id,
+            format=format,
+            var_from=var_from,
+            to=to,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1071,14 +1243,18 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "DocumentBuilderTaskWrapper",
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1093,7 +1269,10 @@ class FoldersApi:
     @validate_call
     def create_report_folder_history_with_http_info(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose history is exported; the report covers the folder itself and the entries inside it.")],
+        format: Annotated[Optional[AuditReportFormat], Field(description="The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1106,13 +1285,19 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[StringWrapper]:
-        """Generates folder history
+    ) -> ApiResponse[DocumentBuilderTaskWrapper]:
+        """Start the folder history report generation
 
-        Generates the activity history of a folder.
+        Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`; the URL of a CSV file too large for the editor  downloads it instead of opening it. An XLSX report keeps only the most recent events, at most 200,000 by default  and fewer when the events are long, and its header says how many were left out; `format=Csv` exports every event  of the period. `from` and `to` limit the exported period; leaving both out exports the whole history. While a  report for the same folder and caller is still running, this call joins it and answers with the running task  instead of starting a second one, so retrying is safe. The caller needs read access to the folder and may not be  a guest - otherwise the call is refused with 403, and a folder that does not exist with 404; the report is  available on every pricing plan, and 402 comes only when the login history and audit trail section is turned  off for the portal. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
 
-        :param folder_id: (required)
+        :param folder_id: The folder whose history is exported; the report covers the folder itself and the entries inside it. (required)
         :type folder_id: int
+        :param format: The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents.
+        :type format: AuditReportFormat
+        :param var_from: The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.
+        :type var_from: datetime
+        :param to: The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.
+        :type to: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1137,6 +1322,9 @@ class FoldersApi:
 
         _param = self._create_report_folder_history_serialize(
             folder_id=folder_id,
+            format=format,
+            var_from=var_from,
+            to=to,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1144,14 +1332,18 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "DocumentBuilderTaskWrapper",
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1166,7 +1358,10 @@ class FoldersApi:
     @validate_call
     def create_report_folder_history_without_preload_content(
         self,
-        folder_id: StrictInt,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose history is exported; the report covers the folder itself and the entries inside it.")],
+        format: Annotated[Optional[AuditReportFormat], Field(description="The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents.")] = None,
+        var_from: Annotated[Optional[datetime], Field(description="The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.")] = None,
+        to: Annotated[Optional[datetime], Field(description="The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1180,12 +1375,18 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Generates folder history
+        """Start the folder history report generation
 
-        Generates the activity history of a folder.
+        Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`; the URL of a CSV file too large for the editor  downloads it instead of opening it. An XLSX report keeps only the most recent events, at most 200,000 by default  and fewer when the events are long, and its header says how many were left out; `format=Csv` exports every event  of the period. `from` and `to` limit the exported period; leaving both out exports the whole history. While a  report for the same folder and caller is still running, this call joins it and answers with the running task  instead of starting a second one, so retrying is safe. The caller needs read access to the folder and may not be  a guest - otherwise the call is refused with 403, and a folder that does not exist with 404; the report is  available on every pricing plan, and 402 comes only when the login history and audit trail section is turned  off for the portal. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
 
-        :param folder_id: (required)
+        :param folder_id: The folder whose history is exported; the report covers the folder itself and the entries inside it. (required)
         :type folder_id: int
+        :param format: The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents.
+        :type format: AuditReportFormat
+        :param var_from: The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.
+        :type var_from: datetime
+        :param to: The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.
+        :type to: datetime
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1210,6 +1411,9 @@ class FoldersApi:
 
         _param = self._create_report_folder_history_serialize(
             folder_id=folder_id,
+            format=format,
+            var_from=var_from,
+            to=to,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1217,14 +1421,18 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StringWrapper",
+            '200': "DocumentBuilderTaskWrapper",
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1235,6 +1443,9 @@ class FoldersApi:
     def _create_report_folder_history_serialize(
         self,
         folder_id,
+        format,
+        var_from,
+        to,
         _request_auth,
         _content_type,
         _headers,
@@ -1259,6 +1470,36 @@ class FoldersApi:
         if folder_id is not None:
             _path_params['folderId'] = folder_id
         # process the query parameters
+        if format is not None:
+            
+            _query_params.append(('format', format.value))
+            
+        if var_from is not None:
+            if isinstance(var_from, datetime):
+                _query_params.append(
+                    (
+                        'from',
+                        var_from.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('from', var_from))
+            
+        if to is not None:
+            if isinstance(to, datetime):
+                _query_params.append(
+                    (
+                        'to',
+                        to.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('to', to))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -1307,8 +1548,8 @@ class FoldersApi:
     @validate_call
     def delete_folder(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID to delete.")],
-        delete_folder: Annotated[DeleteFolder, Field(description="The parameters for deleting a folder.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder to delete, together with everything it holds.")], Annotated[StrictStr, Field(description="The folder to delete, together with everything it holds.")]],
+        delete_folder_request: Annotated[DeleteFolderRequest, Field(description="How the deletion is to be carried out.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1324,12 +1565,12 @@ class FoldersApi:
     ) -> FileOperationArrayWrapper:
         """Delete a folder
 
-        Deletes a folder with the ID specified in the request.
+        Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
 
-        :param folder_id: The folder ID to delete. (required)
-        :type folder_id: int
-        :param delete_folder: The parameters for deleting a folder. (required)
-        :type delete_folder: DeleteFolder
+        :param folder_id: The folder to delete, together with everything it holds. (required)
+        :type folder_id: Union[int, str]
+        :param delete_folder_request: How the deletion is to be carried out. (required)
+        :type delete_folder_request: DeleteFolderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1354,7 +1595,7 @@ class FoldersApi:
 
         _param = self._delete_folder_serialize(
             folder_id=folder_id,
-            delete_folder=delete_folder,
+            delete_folder_request=delete_folder_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1363,11 +1604,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1382,8 +1628,8 @@ class FoldersApi:
     @validate_call
     def delete_folder_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID to delete.")],
-        delete_folder: Annotated[DeleteFolder, Field(description="The parameters for deleting a folder.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder to delete, together with everything it holds.")], Annotated[StrictStr, Field(description="The folder to delete, together with everything it holds.")]],
+        delete_folder_request: Annotated[DeleteFolderRequest, Field(description="How the deletion is to be carried out.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1399,12 +1645,12 @@ class FoldersApi:
     ) -> ApiResponse[FileOperationArrayWrapper]:
         """Delete a folder
 
-        Deletes a folder with the ID specified in the request.
+        Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
 
-        :param folder_id: The folder ID to delete. (required)
-        :type folder_id: int
-        :param delete_folder: The parameters for deleting a folder. (required)
-        :type delete_folder: DeleteFolder
+        :param folder_id: The folder to delete, together with everything it holds. (required)
+        :type folder_id: Union[int, str]
+        :param delete_folder_request: How the deletion is to be carried out. (required)
+        :type delete_folder_request: DeleteFolderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1429,7 +1675,7 @@ class FoldersApi:
 
         _param = self._delete_folder_serialize(
             folder_id=folder_id,
-            delete_folder=delete_folder,
+            delete_folder_request=delete_folder_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1438,11 +1684,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1457,8 +1708,8 @@ class FoldersApi:
     @validate_call
     def delete_folder_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID to delete.")],
-        delete_folder: Annotated[DeleteFolder, Field(description="The parameters for deleting a folder.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder to delete, together with everything it holds.")], Annotated[StrictStr, Field(description="The folder to delete, together with everything it holds.")]],
+        delete_folder_request: Annotated[DeleteFolderRequest, Field(description="How the deletion is to be carried out.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1474,12 +1725,12 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Delete a folder
 
-        Deletes a folder with the ID specified in the request.
+        Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
 
-        :param folder_id: The folder ID to delete. (required)
-        :type folder_id: int
-        :param delete_folder: The parameters for deleting a folder. (required)
-        :type delete_folder: DeleteFolder
+        :param folder_id: The folder to delete, together with everything it holds. (required)
+        :type folder_id: Union[int, str]
+        :param delete_folder_request: How the deletion is to be carried out. (required)
+        :type delete_folder_request: DeleteFolderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1504,7 +1755,7 @@ class FoldersApi:
 
         _param = self._delete_folder_serialize(
             folder_id=folder_id,
-            delete_folder=delete_folder,
+            delete_folder_request=delete_folder_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1513,11 +1764,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileOperationArrayWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1528,7 +1784,7 @@ class FoldersApi:
     def _delete_folder_serialize(
         self,
         folder_id,
-        delete_folder,
+        delete_folder_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1556,8 +1812,8 @@ class FoldersApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if delete_folder is not None:
-            _body_params = delete_folder
+        if delete_folder_request is not None:
+            _body_params = delete_folder_request
 
 
         # set the HTTP header `Accept`
@@ -1616,7 +1872,7 @@ class FoldersApi:
     @validate_call
     def generate_xlsx_by_folder(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1632,9 +1888,9 @@ class FoldersApi:
     ) -> XlsxReportResponseWrapper:
         """Generate XLSX report by folder
 
-        Triggers asynchronous XLSX report generation for the specified form results folder.
+        Rebuilds the spreadsheet that gathers the answers submitted to a form, starting from the Complete folder  that holds the filled copies. The answer names the original form the results belong to, says in `isNewFile`  whether the spreadsheet is being created or an existing one rewritten in place, and carries the queued job in  `task`; the file itself is not ready yet, so poll `GET api/2.0/files/file/{fileId}/xlsx` with the identifier  of the form until the task reports completion. The folder has to be the Complete folder of a form-filling  room and has to hold at least one submitted copy whose original form still exists, and the caller needs the  right to maintain that form, which the room manager has. A folder that does not exist, or one that holds  nothing to report on, is answered with 404, and a folder of the wrong kind or a caller without those rights  with 403. The call is mutating: it writes the results file of the form.
 
-        :param folder_id: The folder unique identifier. (required)
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1670,11 +1926,14 @@ class FoldersApi:
             '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1689,7 +1948,7 @@ class FoldersApi:
     @validate_call
     def generate_xlsx_by_folder_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1705,9 +1964,9 @@ class FoldersApi:
     ) -> ApiResponse[XlsxReportResponseWrapper]:
         """Generate XLSX report by folder
 
-        Triggers asynchronous XLSX report generation for the specified form results folder.
+        Rebuilds the spreadsheet that gathers the answers submitted to a form, starting from the Complete folder  that holds the filled copies. The answer names the original form the results belong to, says in `isNewFile`  whether the spreadsheet is being created or an existing one rewritten in place, and carries the queued job in  `task`; the file itself is not ready yet, so poll `GET api/2.0/files/file/{fileId}/xlsx` with the identifier  of the form until the task reports completion. The folder has to be the Complete folder of a form-filling  room and has to hold at least one submitted copy whose original form still exists, and the caller needs the  right to maintain that form, which the room manager has. A folder that does not exist, or one that holds  nothing to report on, is answered with 404, and a folder of the wrong kind or a caller without those rights  with 403. The call is mutating: it writes the results file of the form.
 
-        :param folder_id: The folder unique identifier. (required)
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1743,11 +2002,14 @@ class FoldersApi:
             '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1762,7 +2024,7 @@ class FoldersApi:
     @validate_call
     def generate_xlsx_by_folder_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1778,9 +2040,9 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Generate XLSX report by folder
 
-        Triggers asynchronous XLSX report generation for the specified form results folder.
+        Rebuilds the spreadsheet that gathers the answers submitted to a form, starting from the Complete folder  that holds the filled copies. The answer names the original form the results belong to, says in `isNewFile`  whether the spreadsheet is being created or an existing one rewritten in place, and carries the queued job in  `task`; the file itself is not ready yet, so poll `GET api/2.0/files/file/{fileId}/xlsx` with the identifier  of the form until the task reports completion. The folder has to be the Complete folder of a form-filling  room and has to hold at least one submitted copy whose original form still exists, and the caller needs the  right to maintain that form, which the room manager has. A folder that does not exist, or one that holds  nothing to report on, is answered with 404, and a folder of the wrong kind or a caller without those rights  with 403. The call is mutating: it writes the results file of the form.
 
-        :param folder_id: The folder unique identifier. (required)
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1816,11 +2078,14 @@ class FoldersApi:
             '200': "XlsxReportResponseWrapper",
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -1903,13 +2168,16 @@ class FoldersApi:
     @validate_call
     def get_favorites_folder(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1922,25 +2190,31 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerWrapper:
+    ) -> FolderContentWrapper:
         """Get the Favorites section
 
-        Returns the detailed list of files and folders located in the Favorites section.
+        Returns the caller's own Favorites section: the files and folders this account has marked as favorite,  together with the section folder itself. Favorites are per-account, so the entries another member marked are  not listed here, and a guest sees only their own, usually empty, list. Mark a single file with  `GET api/2.0/files/favorites/{fileId}`, or add and remove batches of files and folders with  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`. Nothing in the section is modified,  though passing `sortBy` saves the requested order as the default order for this account. Entries the caller  can no longer read, and entries that have been moved to the Trash section, drop out of the listing even  though their favorite mark stays, so the section can shrink without an explicit unmark. `folders` and `files`  hold one page of the section, `total` counts the entries matching the request before `count` and `startIndex`  are applied, and `current` describes the section folder itself.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
         :type filter_type: FilterType
-        :param count: The maximum number of items to retrieve in the request.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used as a filter or search criterion for folder content queries.
+        :param filter_value: The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1971,6 +2245,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1978,14 +2255,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2000,13 +2280,16 @@ class FoldersApi:
     @validate_call
     def get_favorites_folder_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2019,25 +2302,31 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerWrapper]:
+    ) -> ApiResponse[FolderContentWrapper]:
         """Get the Favorites section
 
-        Returns the detailed list of files and folders located in the Favorites section.
+        Returns the caller's own Favorites section: the files and folders this account has marked as favorite,  together with the section folder itself. Favorites are per-account, so the entries another member marked are  not listed here, and a guest sees only their own, usually empty, list. Mark a single file with  `GET api/2.0/files/favorites/{fileId}`, or add and remove batches of files and folders with  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`. Nothing in the section is modified,  though passing `sortBy` saves the requested order as the default order for this account. Entries the caller  can no longer read, and entries that have been moved to the Trash section, drop out of the listing even  though their favorite mark stays, so the section can shrink without an explicit unmark. `folders` and `files`  hold one page of the section, `total` counts the entries matching the request before `count` and `startIndex`  are applied, and `current` describes the section folder itself.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
         :type filter_type: FilterType
-        :param count: The maximum number of items to retrieve in the request.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used as a filter or search criterion for folder content queries.
+        :param filter_value: The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2068,6 +2357,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2075,14 +2367,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2097,13 +2392,16 @@ class FoldersApi:
     @validate_call
     def get_favorites_folder_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2119,22 +2417,28 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get the Favorites section
 
-        Returns the detailed list of files and folders located in the Favorites section.
+        Returns the caller's own Favorites section: the files and folders this account has marked as favorite,  together with the section folder itself. Favorites are per-account, so the entries another member marked are  not listed here, and a guest sees only their own, usually empty, list. Mark a single file with  `GET api/2.0/files/favorites/{fileId}`, or add and remove batches of files and folders with  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`. Nothing in the section is modified,  though passing `sortBy` saves the requested order as the default order for this account. Entries the caller  can no longer read, and entries that have been moved to the Trash section, drop out of the listing even  though their favorite mark stays, so the section can shrink without an explicit unmark. `folders` and `files`  hold one page of the section, `total` counts the entries matching the request before `count` and `startIndex`  are applied, and `current` describes the section folder itself.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
         :type filter_type: FilterType
-        :param count: The maximum number of items to retrieve in the request.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used as a filter or search criterion for folder content queries.
+        :param filter_value: The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2165,6 +2469,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2172,14 +2479,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2196,6 +2506,9 @@ class FoldersApi:
         sort_by,
         sort_order,
         filter_value,
+        metadata_template_id,
+        metadata_filters,
+        include_hidden_metadata,
         _request_auth,
         _content_type,
         _headers,
@@ -2245,6 +2558,18 @@ class FoldersApi:
         if filter_value is not None:
             
             _query_params.append(('filterValue', filter_value))
+            
+        if metadata_template_id is not None:
+            
+            _query_params.append(('metadataTemplateId', metadata_template_id))
+            
+        if metadata_filters is not None:
+            
+            _query_params.append(('metadataFilters', metadata_filters))
+            
+        if include_hidden_metadata is not None:
+            
+            _query_params.append(('includeHiddenMetadata', include_hidden_metadata))
             
         # process the header parameters
         if self._fields is not None:
@@ -2311,7 +2636,7 @@ class FoldersApi:
     ) -> FilesStatisticsResultWrapper:
         """Get used space of files
 
-        Returns the used space of files in the root folders.
+        Reports how much storage the portal spends on documents, split by section - My documents, Trash, Rooms,  Archive and, where the feature is on, AI agents - each entry naming the section and the space it takes in  bytes. The figures cover the whole portal rather than the calling account, and moving an entry between  sections moves its space with it, which is why deleting a file to the Trash does not free anything until the  Trash is emptied. Only a caller who may change portal settings, that is the owner and the portal  administrators, is allowed here; a room administrator, an ordinary member and a guest are all refused. The  call is read-only, takes no parameters and answers with the sections in a fixed order. The quota of the portal  as a whole, storage outside documents included, is not part of this answer.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2344,11 +2669,14 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2378,7 +2706,7 @@ class FoldersApi:
     ) -> ApiResponse[FilesStatisticsResultWrapper]:
         """Get used space of files
 
-        Returns the used space of files in the root folders.
+        Reports how much storage the portal spends on documents, split by section - My documents, Trash, Rooms,  Archive and, where the feature is on, AI agents - each entry naming the section and the space it takes in  bytes. The figures cover the whole portal rather than the calling account, and moving an entry between  sections moves its space with it, which is why deleting a file to the Trash does not free anything until the  Trash is emptied. Only a caller who may change portal settings, that is the owner and the portal  administrators, is allowed here; a room administrator, an ordinary member and a guest are all refused. The  call is read-only, takes no parameters and answers with the sections in a fixed order. The quota of the portal  as a whole, storage outside documents included, is not part of this answer.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2411,11 +2739,14 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2445,7 +2776,7 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get used space of files
 
-        Returns the used space of files in the root folders.
+        Reports how much storage the portal spends on documents, split by section - My documents, Trash, Rooms,  Archive and, where the feature is on, AI agents - each entry naming the section and the space it takes in  bytes. The figures cover the whole portal rather than the calling account, and moving an entry between  sections moves its space with it, which is why deleting a file to the Trash does not free anything until the  Trash is emptied. Only a caller who may change portal settings, that is the owner and the portal  administrators, is allowed here; a room administrator, an ordinary member and a guest are all refused. The  call is read-only, takes no parameters and answers with the sections in a fixed order. The quota of the portal  as a whole, storage outside documents included, is not part of this answer.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2478,11 +2809,14 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FilesStatisticsResultWrapper",
-            '401': None,
-            '429': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2562,7 +2896,7 @@ class FoldersApi:
     @validate_call
     def get_folder(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2578,9 +2912,9 @@ class FoldersApi:
     ) -> FormsItemArrayWrapper:
         """Get folder form filter
 
-        Returns the form filter of a folder with the ID specified in the request.
+        Lists the fields the completed forms of a form-filling room carry, each of them a key and the kind of value  behind it, so that a client can offer them as filters. Feed a pair from this list back as `formsItemKey` and  `formsItemType` of `GET api/2.0/files/{folderId}` to keep only the completed forms whose field of that name  holds a value. The fields are read from the search index of one of the forms already gathered, so they appear  once indexing has caught up with the first submission. Only the Complete folder of a form-filling room  carries such fields: for any other folder, for a folder that does not exist and for one that has been deleted  the answer is an empty list rather than a refusal, and the same holds while nothing has been submitted yet.  The operation reads the index alone, changes nothing and needs no authorization.
 
-        :param folder_id: The folder unique identifier. (required)
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2614,10 +2948,13 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2632,7 +2969,7 @@ class FoldersApi:
     @validate_call
     def get_folder_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2648,9 +2985,9 @@ class FoldersApi:
     ) -> ApiResponse[FormsItemArrayWrapper]:
         """Get folder form filter
 
-        Returns the form filter of a folder with the ID specified in the request.
+        Lists the fields the completed forms of a form-filling room carry, each of them a key and the kind of value  behind it, so that a client can offer them as filters. Feed a pair from this list back as `formsItemKey` and  `formsItemType` of `GET api/2.0/files/{folderId}` to keep only the completed forms whose field of that name  holds a value. The fields are read from the search index of one of the forms already gathered, so they appear  once indexing has caught up with the first submission. Only the Complete folder of a form-filling room  carries such fields: for any other folder, for a folder that does not exist and for one that has been deleted  the answer is an empty list rather than a refusal, and the same holds while nothing has been submitted yet.  The operation reads the index alone, changes nothing and needs no authorization.
 
-        :param folder_id: The folder unique identifier. (required)
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2684,10 +3021,13 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2702,7 +3042,7 @@ class FoldersApi:
     @validate_call
     def get_folder_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2718,9 +3058,9 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get folder form filter
 
-        Returns the form filter of a folder with the ID specified in the request.
+        Lists the fields the completed forms of a form-filling room carry, each of them a key and the kind of value  behind it, so that a client can offer them as filters. Feed a pair from this list back as `formsItemKey` and  `formsItemType` of `GET api/2.0/files/{folderId}` to keep only the completed forms whose field of that name  holds a value. The fields are read from the search index of one of the forms already gathered, so they appear  once indexing has caught up with the first submission. Only the Complete folder of a form-filling room  carries such fields: for any other folder, for a folder that does not exist and for one that has been deleted  the answer is an empty list rather than a refusal, and the same holds while nothing has been submitted yet.  The operation reads the index alone, changes nothing and needs no authorization.
 
-        :param folder_id: The folder unique identifier. (required)
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
         :type folder_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2754,10 +3094,13 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FormsItemArrayWrapper",
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2808,6 +3151,12 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -2831,27 +3180,31 @@ class FoldersApi:
 
 
 
-    @validate_call
+    @overload
     def get_folder_by_folder_id(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        shared_by: Annotated[Optional[UUID], Field(description="The identifier of the user who shared the folder or file.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
-        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Specifies whether to include files from subfolders in the results.")] = None,
-        extension: Annotated[Optional[StrictStr], Field(description="Specifies whether to search for the specific file extension.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
-        forms_item_type: Annotated[Optional[StrictStr], Field(description="The forms item type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated request.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The property used for sorting the folder request results.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as a filter parameter for folder content queries.")] = None,
-        location: Annotated[Optional[Location], Field(description="The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")],
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.")] = None,
+        room_id: Annotated[Optional[StrictInt], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.")] = None,
+        extension: Annotated[Optional[StrictStr], Field(description="Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.")] = None,
+        forms_item_key: Annotated[Optional[StrictStr], Field(description="Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.")] = None,
+        forms_item_type: Annotated[Optional[StrictStr], Field(description="The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.")] = None,
+        location: Annotated[Optional[RequestLocation], Field(description="Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2864,47 +3217,172 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerWrapper:
+    ) -> FolderContentWrapper: ...
+
+    @overload
+    def get_folder_by_folder_id(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")],
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.")] = None,
+        room_id: Annotated[Optional[StrictStr], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.")] = None,
+        extension: Annotated[Optional[StrictStr], Field(description="Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.")] = None,
+        forms_item_key: Annotated[Optional[StrictStr], Field(description="Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.")] = None,
+        forms_item_type: Annotated[Optional[StrictStr], Field(description="The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.")] = None,
+        location: Annotated[Optional[RequestLocation], Field(description="Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderContentWrapper: ...
+
+    @overload
+    def get_folder_by_folder_id(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")], Annotated[StrictStr, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")]],
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.")] = None,
+        room_id: Union[Annotated[Optional[StrictInt], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")], Annotated[Optional[StrictStr], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")]] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.")] = None,
+        extension: Annotated[Optional[StrictStr], Field(description="Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.")] = None,
+        forms_item_key: Annotated[Optional[StrictStr], Field(description="Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.")] = None,
+        forms_item_type: Annotated[Optional[StrictStr], Field(description="The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.")] = None,
+        location: Annotated[Optional[RequestLocation], Field(description="Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderContentWrapper, ThirdPartyFolderContentWrapper]: ...
+
+    @validate_call
+    def get_folder_by_folder_id(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")], Annotated[StrictStr, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")]],
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.")] = None,
+        room_id: Union[Annotated[Optional[StrictInt], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")], Annotated[Optional[StrictStr], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")]] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.")] = None,
+        extension: Annotated[Optional[StrictStr], Field(description="Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.")] = None,
+        forms_item_key: Annotated[Optional[StrictStr], Field(description="Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.")] = None,
+        forms_item_type: Annotated[Optional[StrictStr], Field(description="The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.")] = None,
+        location: Annotated[Optional[RequestLocation], Field(description="Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderContentWrapper, ThirdPartyFolderContentWrapper]:
         """Get a folder by ID
 
-        Returns the detailed list of files and folders located in the folder with the ID specified in the request.
+        Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param user_id_or_group_id: The user or group ID.
+        :param folder_id: The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it. (required)
+        :type folder_id: Union[int, str]
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param shared_by: The identifier of the user who shared the folder or file.
+        :param shared_by: Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.
         :type shared_by: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.
         :type filter_type: FilterType
-        :param room_id: The room ID.
-        :type room_id: int
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param room_id: Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.
+        :type room_id: Union[int, str]
+        :param folder_type: Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
+        :type folder_type: List[int]
+        :param exclude_subject: Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.
         :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
+        :param apply_filter_option: Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
         :type apply_filter_option: ApplyFilterOption
-        :param with_sub_folders: Specifies whether to include files from subfolders in the results.
+        :param with_sub_folders: Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.
         :type with_sub_folders: bool
-        :param extension: Specifies whether to search for the specific file extension.
+        :param extension: Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.
         :type extension: str
-        :param search_area: The search area.
+        :param search_area: Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.
         :type search_area: SearchArea
-        :param forms_item_key: The forms item key.
+        :param forms_item_key: Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.
         :type forms_item_key: str
-        :param forms_item_type: The forms item type.
+        :param forms_item_type: The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.
         :type forms_item_type: str
-        :param count: The maximum number of items to retrieve in the request.
+        :param count: The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated request.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: The property used for sorting the folder request results.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text value used as a filter parameter for folder content queries.
+        :param filter_value: The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
         :type filter_value: str
-        :param location: The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
-        :type location: Location
+        :param location: Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
+        :type location: RequestLocation
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2933,6 +3411,7 @@ class FoldersApi:
             shared_by=shared_by,
             filter_type=filter_type,
             room_id=room_id,
+            folder_type=folder_type,
             exclude_subject=exclude_subject,
             apply_filter_option=apply_filter_option,
             with_sub_folders=with_sub_folders,
@@ -2946,6 +3425,9 @@ class FoldersApi:
             sort_order=sort_order,
             filter_value=filter_value,
             location=location,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2953,13 +3435,16 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': ("ThirdPartyFolderContentWrapper" if isinstance(folder_id, str) else "FolderContentWrapper"),
+            '400': None,
             '403': None,
             '404': None,
-            '429': None,
+            '500': None,
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -2971,27 +3456,31 @@ class FoldersApi:
         ).data
 
 
-    @validate_call
+    @overload
     def get_folder_by_folder_id_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        shared_by: Annotated[Optional[UUID], Field(description="The identifier of the user who shared the folder or file.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
-        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Specifies whether to include files from subfolders in the results.")] = None,
-        extension: Annotated[Optional[StrictStr], Field(description="Specifies whether to search for the specific file extension.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
-        forms_item_type: Annotated[Optional[StrictStr], Field(description="The forms item type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated request.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The property used for sorting the folder request results.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as a filter parameter for folder content queries.")] = None,
-        location: Annotated[Optional[Location], Field(description="The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")],
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.")] = None,
+        room_id: Annotated[Optional[StrictInt], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.")] = None,
+        extension: Annotated[Optional[StrictStr], Field(description="Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.")] = None,
+        forms_item_key: Annotated[Optional[StrictStr], Field(description="Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.")] = None,
+        forms_item_type: Annotated[Optional[StrictStr], Field(description="The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.")] = None,
+        location: Annotated[Optional[RequestLocation], Field(description="Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3004,47 +3493,172 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerWrapper]:
+    ) -> ApiResponse[FolderContentWrapper]: ...
+
+    @overload
+    def get_folder_by_folder_id_with_http_info(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")],
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.")] = None,
+        room_id: Annotated[Optional[StrictStr], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.")] = None,
+        extension: Annotated[Optional[StrictStr], Field(description="Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.")] = None,
+        forms_item_key: Annotated[Optional[StrictStr], Field(description="Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.")] = None,
+        forms_item_type: Annotated[Optional[StrictStr], Field(description="The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.")] = None,
+        location: Annotated[Optional[RequestLocation], Field(description="Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderContentWrapper]: ...
+
+    @overload
+    def get_folder_by_folder_id_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")], Annotated[StrictStr, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")]],
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.")] = None,
+        room_id: Union[Annotated[Optional[StrictInt], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")], Annotated[Optional[StrictStr], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")]] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.")] = None,
+        extension: Annotated[Optional[StrictStr], Field(description="Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.")] = None,
+        forms_item_key: Annotated[Optional[StrictStr], Field(description="Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.")] = None,
+        forms_item_type: Annotated[Optional[StrictStr], Field(description="The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.")] = None,
+        location: Annotated[Optional[RequestLocation], Field(description="Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderContentWrapper, ThirdPartyFolderContentWrapper]]: ...
+
+    @validate_call
+    def get_folder_by_folder_id_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")], Annotated[StrictStr, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")]],
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.")] = None,
+        room_id: Union[Annotated[Optional[StrictInt], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")], Annotated[Optional[StrictStr], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")]] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.")] = None,
+        extension: Annotated[Optional[StrictStr], Field(description="Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.")] = None,
+        forms_item_key: Annotated[Optional[StrictStr], Field(description="Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.")] = None,
+        forms_item_type: Annotated[Optional[StrictStr], Field(description="The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.")] = None,
+        location: Annotated[Optional[RequestLocation], Field(description="Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderContentWrapper, ThirdPartyFolderContentWrapper]]:
         """Get a folder by ID
 
-        Returns the detailed list of files and folders located in the folder with the ID specified in the request.
+        Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param user_id_or_group_id: The user or group ID.
+        :param folder_id: The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it. (required)
+        :type folder_id: Union[int, str]
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param shared_by: The identifier of the user who shared the folder or file.
+        :param shared_by: Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.
         :type shared_by: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.
         :type filter_type: FilterType
-        :param room_id: The room ID.
-        :type room_id: int
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param room_id: Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.
+        :type room_id: Union[int, str]
+        :param folder_type: Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
+        :type folder_type: List[int]
+        :param exclude_subject: Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.
         :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
+        :param apply_filter_option: Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
         :type apply_filter_option: ApplyFilterOption
-        :param with_sub_folders: Specifies whether to include files from subfolders in the results.
+        :param with_sub_folders: Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.
         :type with_sub_folders: bool
-        :param extension: Specifies whether to search for the specific file extension.
+        :param extension: Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.
         :type extension: str
-        :param search_area: The search area.
+        :param search_area: Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.
         :type search_area: SearchArea
-        :param forms_item_key: The forms item key.
+        :param forms_item_key: Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.
         :type forms_item_key: str
-        :param forms_item_type: The forms item type.
+        :param forms_item_type: The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.
         :type forms_item_type: str
-        :param count: The maximum number of items to retrieve in the request.
+        :param count: The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated request.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: The property used for sorting the folder request results.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text value used as a filter parameter for folder content queries.
+        :param filter_value: The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
         :type filter_value: str
-        :param location: The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
-        :type location: Location
+        :param location: Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
+        :type location: RequestLocation
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3073,6 +3687,7 @@ class FoldersApi:
             shared_by=shared_by,
             filter_type=filter_type,
             room_id=room_id,
+            folder_type=folder_type,
             exclude_subject=exclude_subject,
             apply_filter_option=apply_filter_option,
             with_sub_folders=with_sub_folders,
@@ -3086,6 +3701,9 @@ class FoldersApi:
             sort_order=sort_order,
             filter_value=filter_value,
             location=location,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3093,13 +3711,16 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': ("ThirdPartyFolderContentWrapper" if isinstance(folder_id, str) else "FolderContentWrapper"),
+            '400': None,
             '403': None,
             '404': None,
-            '429': None,
+            '500': None,
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3114,24 +3735,28 @@ class FoldersApi:
     @validate_call
     def get_folder_by_folder_id_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        shared_by: Annotated[Optional[UUID], Field(description="The identifier of the user who shared the folder or file.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        room_id: Annotated[Optional[StrictInt], Field(description="The room ID.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders, or all elements from the specified folder.")] = None,
-        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Specifies whether to include files from subfolders in the results.")] = None,
-        extension: Annotated[Optional[StrictStr], Field(description="Specifies whether to search for the specific file extension.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        forms_item_key: Annotated[Optional[StrictStr], Field(description="The forms item key.")] = None,
-        forms_item_type: Annotated[Optional[StrictStr], Field(description="The forms item type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated request.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The property used for sorting the folder request results.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text value used as a filter parameter for folder content queries.")] = None,
-        location: Annotated[Optional[Location], Field(description="The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.")] = None,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")], Annotated[StrictStr, Field(description="The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.")]],
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        shared_by: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.")] = None,
+        room_id: Union[Annotated[Optional[StrictInt], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")], Annotated[Optional[StrictStr], Field(description="Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.")]] = None,
+        folder_type: Annotated[Optional[List[StrictInt]], Field(description="Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        with_sub_folders: Annotated[Optional[StrictBool], Field(description="Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.")] = None,
+        extension: Annotated[Optional[StrictStr], Field(description="Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.")] = None,
+        forms_item_key: Annotated[Optional[StrictStr], Field(description="Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.")] = None,
+        forms_item_type: Annotated[Optional[StrictStr], Field(description="The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.")] = None,
+        location: Annotated[Optional[RequestLocation], Field(description="Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3147,44 +3772,52 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get a folder by ID
 
-        Returns the detailed list of files and folders located in the folder with the ID specified in the request.
+        Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
 
-        :param folder_id: The folder ID. (required)
-        :type folder_id: int
-        :param user_id_or_group_id: The user or group ID.
+        :param folder_id: The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it. (required)
+        :type folder_id: Union[int, str]
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param shared_by: The identifier of the user who shared the folder or file.
+        :param shared_by: Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.
         :type shared_by: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.
         :type filter_type: FilterType
-        :param room_id: The room ID.
-        :type room_id: int
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param room_id: Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.
+        :type room_id: Union[int, str]
+        :param folder_type: Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
+        :type folder_type: List[int]
+        :param exclude_subject: Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.
         :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders, or all elements from the specified folder.
+        :param apply_filter_option: Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
         :type apply_filter_option: ApplyFilterOption
-        :param with_sub_folders: Specifies whether to include files from subfolders in the results.
+        :param with_sub_folders: Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.
         :type with_sub_folders: bool
-        :param extension: Specifies whether to search for the specific file extension.
+        :param extension: Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.
         :type extension: str
-        :param search_area: The search area.
+        :param search_area: Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.
         :type search_area: SearchArea
-        :param forms_item_key: The forms item key.
+        :param forms_item_key: Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.
         :type forms_item_key: str
-        :param forms_item_type: The forms item type.
+        :param forms_item_type: The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.
         :type forms_item_type: str
-        :param count: The maximum number of items to retrieve in the request.
+        :param count: The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated request.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: The property used for sorting the folder request results.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text value used as a filter parameter for folder content queries.
+        :param filter_value: The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
         :type filter_value: str
-        :param location: The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
-        :type location: Location
+        :param location: Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
+        :type location: RequestLocation
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3213,6 +3846,7 @@ class FoldersApi:
             shared_by=shared_by,
             filter_type=filter_type,
             room_id=room_id,
+            folder_type=folder_type,
             exclude_subject=exclude_subject,
             apply_filter_option=apply_filter_option,
             with_sub_folders=with_sub_folders,
@@ -3226,6 +3860,9 @@ class FoldersApi:
             sort_order=sort_order,
             filter_value=filter_value,
             location=location,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3233,13 +3870,16 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': ("ThirdPartyFolderContentWrapper" if isinstance(folder_id, str) else "FolderContentWrapper"),
+            '400': None,
             '403': None,
             '404': None,
-            '429': None,
+            '500': None,
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3254,6 +3894,7 @@ class FoldersApi:
         shared_by,
         filter_type,
         room_id,
+        folder_type,
         exclude_subject,
         apply_filter_option,
         with_sub_folders,
@@ -3267,6 +3908,9 @@ class FoldersApi:
         sort_order,
         filter_value,
         location,
+        metadata_template_id,
+        metadata_filters,
+        include_hidden_metadata,
         _request_auth,
         _content_type,
         _headers,
@@ -3276,6 +3920,7 @@ class FoldersApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'folderType': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3306,6 +3951,10 @@ class FoldersApi:
         if room_id is not None:
             
             _query_params.append(('roomId', room_id))
+            
+        if folder_type is not None:
+            
+            _query_params.append(('folderType', folder_type))
             
         if exclude_subject is not None:
             
@@ -3357,7 +4006,19 @@ class FoldersApi:
             
         if location is not None:
             
-            _query_params.append(('Location', location.value))
+            _query_params.append(('location', location.value))
+            
+        if metadata_template_id is not None:
+            
+            _query_params.append(('metadataTemplateId', metadata_template_id))
+            
+        if metadata_filters is not None:
+            
+            _query_params.append(('metadataFilters', metadata_filters))
+            
+        if include_hidden_metadata is not None:
+            
+            _query_params.append(('includeHiddenMetadata', include_hidden_metadata))
             
         # process the header parameters
         # process the form parameters
@@ -3375,6 +4036,12 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -3401,11 +4068,11 @@ class FoldersApi:
     @validate_call
     def get_folder_history(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID of the history request.")],
-        from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history request.")] = None,
-        to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history request.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve for the folder history.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which the history records are retrieved in the request.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose activity log is read; the log covers the folder itself and the entries inside it.")],
+        from_date: Annotated[Optional[datetime], Field(description="The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps.")] = None,
+        to_date: Annotated[Optional[datetime], Field(description="The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3421,17 +4088,17 @@ class FoldersApi:
     ) -> HistoryArrayWrapper:
         """Get folder history
 
-        Returns the activity history of a folder with a specified identifier.
+        Lists what has happened to a folder and to the entries inside it - creations, renames, uploads, moves,  deletions and changes of access - each record naming the action, the moment it happened and the member behind  it. Records that belong to one action are grouped, so a batch arrives as a single entry carrying the rest of  itself in `related`, and the list runs from the most recent record backwards. `fromDate` and `toDate` narrow  the period, `startIndex` and `count` page through the result, and the number of records matching the request  is reported in the response headers rather than in the body. Any member who can read the folder may read its  history; a caller without access is answered with 403 and a folder that does not exist with 404. When the  folder is a form-filling folder the caller reached through a filling invitation, the history is narrowed to  what that caller may see. The call is read-only. To take the same history away as a spreadsheet, start a  report with `POST api/2.0/files/folder/{folderId}/log/report`.
 
-        :param folder_id: The folder ID of the history request. (required)
+        :param folder_id: The folder whose activity log is read; the log covers the folder itself and the entries inside it. (required)
         :type folder_id: int
-        :param from_date: The start date of the history request.
-        :type from_date: ApiDateTime
-        :param to_date: The end date of the history request.
-        :type to_date: ApiDateTime
-        :param count: The number of records to retrieve for the folder history.
+        :param from_date: The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps.
+        :type from_date: datetime
+        :param to_date: The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry.
+        :type to_date: datetime
+        :param count: How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body.
         :type count: int
-        :param start_index: The starting index from which the history records are retrieved in the request.
+        :param start_index: How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3469,13 +4136,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3490,11 +4160,11 @@ class FoldersApi:
     @validate_call
     def get_folder_history_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID of the history request.")],
-        from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history request.")] = None,
-        to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history request.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve for the folder history.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which the history records are retrieved in the request.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose activity log is read; the log covers the folder itself and the entries inside it.")],
+        from_date: Annotated[Optional[datetime], Field(description="The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps.")] = None,
+        to_date: Annotated[Optional[datetime], Field(description="The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3510,17 +4180,17 @@ class FoldersApi:
     ) -> ApiResponse[HistoryArrayWrapper]:
         """Get folder history
 
-        Returns the activity history of a folder with a specified identifier.
+        Lists what has happened to a folder and to the entries inside it - creations, renames, uploads, moves,  deletions and changes of access - each record naming the action, the moment it happened and the member behind  it. Records that belong to one action are grouped, so a batch arrives as a single entry carrying the rest of  itself in `related`, and the list runs from the most recent record backwards. `fromDate` and `toDate` narrow  the period, `startIndex` and `count` page through the result, and the number of records matching the request  is reported in the response headers rather than in the body. Any member who can read the folder may read its  history; a caller without access is answered with 403 and a folder that does not exist with 404. When the  folder is a form-filling folder the caller reached through a filling invitation, the history is narrowed to  what that caller may see. The call is read-only. To take the same history away as a spreadsheet, start a  report with `POST api/2.0/files/folder/{folderId}/log/report`.
 
-        :param folder_id: The folder ID of the history request. (required)
+        :param folder_id: The folder whose activity log is read; the log covers the folder itself and the entries inside it. (required)
         :type folder_id: int
-        :param from_date: The start date of the history request.
-        :type from_date: ApiDateTime
-        :param to_date: The end date of the history request.
-        :type to_date: ApiDateTime
-        :param count: The number of records to retrieve for the folder history.
+        :param from_date: The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps.
+        :type from_date: datetime
+        :param to_date: The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry.
+        :type to_date: datetime
+        :param count: How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body.
         :type count: int
-        :param start_index: The starting index from which the history records are retrieved in the request.
+        :param start_index: How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3558,13 +4228,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3579,11 +4252,11 @@ class FoldersApi:
     @validate_call
     def get_folder_history_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID of the history request.")],
-        from_date: Annotated[Optional[ApiDateTime], Field(description="The start date of the history request.")] = None,
-        to_date: Annotated[Optional[ApiDateTime], Field(description="The end date of the history request.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of records to retrieve for the folder history.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index from which the history records are retrieved in the request.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose activity log is read; the log covers the folder itself and the entries inside it.")],
+        from_date: Annotated[Optional[datetime], Field(description="The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps.")] = None,
+        to_date: Annotated[Optional[datetime], Field(description="The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3599,17 +4272,17 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get folder history
 
-        Returns the activity history of a folder with a specified identifier.
+        Lists what has happened to a folder and to the entries inside it - creations, renames, uploads, moves,  deletions and changes of access - each record naming the action, the moment it happened and the member behind  it. Records that belong to one action are grouped, so a batch arrives as a single entry carrying the rest of  itself in `related`, and the list runs from the most recent record backwards. `fromDate` and `toDate` narrow  the period, `startIndex` and `count` page through the result, and the number of records matching the request  is reported in the response headers rather than in the body. Any member who can read the folder may read its  history; a caller without access is answered with 403 and a folder that does not exist with 404. When the  folder is a form-filling folder the caller reached through a filling invitation, the history is narrowed to  what that caller may see. The call is read-only. To take the same history away as a spreadsheet, start a  report with `POST api/2.0/files/folder/{folderId}/log/report`.
 
-        :param folder_id: The folder ID of the history request. (required)
+        :param folder_id: The folder whose activity log is read; the log covers the folder itself and the entries inside it. (required)
         :type folder_id: int
-        :param from_date: The start date of the history request.
-        :type from_date: ApiDateTime
-        :param to_date: The end date of the history request.
-        :type to_date: ApiDateTime
-        :param count: The number of records to retrieve for the folder history.
+        :param from_date: The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps.
+        :type from_date: datetime
+        :param to_date: The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry.
+        :type to_date: datetime
+        :param count: How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body.
         :type count: int
-        :param start_index: The starting index from which the history records are retrieved in the request.
+        :param start_index: How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3647,13 +4320,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "HistoryArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3693,12 +4369,30 @@ class FoldersApi:
             _path_params['folderId'] = folder_id
         # process the query parameters
         if from_date is not None:
-            
-            _query_params.append(('fromDate', from_date))
+            if isinstance(from_date, datetime):
+                _query_params.append(
+                    (
+                        'fromDate',
+                        from_date.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('fromDate', from_date))
             
         if to_date is not None:
-            
-            _query_params.append(('toDate', to_date))
+            if isinstance(to_date, datetime):
+                _query_params.append(
+                    (
+                        'toDate',
+                        to_date.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('toDate', to_date))
             
         if count is not None:
             
@@ -3753,10 +4447,10 @@ class FoldersApi:
 
 
 
-    @validate_call
+    @overload
     def get_folder_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3769,13 +4463,67 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
+    ) -> FolderWrapper: ...
+
+    @overload
+    def get_folder_info(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
+
+    @overload
+    def get_folder_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def get_folder_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
         """Get folder information
 
-        Returns the detailed information about a folder with the ID specified in the request.
+        Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3807,11 +4555,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '401': None,
+            '403': None,
+            '404': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3823,10 +4577,10 @@ class FoldersApi:
         ).data
 
 
-    @validate_call
+    @overload
     def get_folder_info_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3839,13 +4593,67 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderWrapper]: ...
+
+    @overload
+    def get_folder_info_with_http_info(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
+
+    @overload
+    def get_folder_info_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def get_folder_info_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
         """Get folder information
 
-        Returns the detailed information about a folder with the ID specified in the request.
+        Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3877,11 +4685,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '401': None,
+            '403': None,
+            '404': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -3896,7 +4710,7 @@ class FoldersApi:
     @validate_call
     def get_folder_info_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3912,10 +4726,10 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get folder information
 
-        Returns the detailed information about a folder with the ID specified in the request.
+        Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3947,11 +4761,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '401': None,
+            '403': None,
+            '404': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4002,6 +4822,12 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -4028,7 +4854,7 @@ class FoldersApi:
     @validate_call
     def get_folder_links(
         self,
-        id: Annotated[StrictInt, Field(description="The folder ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder or room whose external links are listed.")], Annotated[StrictStr, Field(description="The folder or room whose external links are listed.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4042,12 +4868,12 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareArrayWrapper:
-        """Get the folder links
+        """Get folder external links
 
-        Returns the links of the folder with the ID specified in the request.
+        Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
 
-        :param id: The folder ID. (required)
-        :type id: int
+        :param id: The folder or room whose external links are listed. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4080,11 +4906,15 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4099,7 +4929,7 @@ class FoldersApi:
     @validate_call
     def get_folder_links_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The folder ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder or room whose external links are listed.")], Annotated[StrictStr, Field(description="The folder or room whose external links are listed.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4113,12 +4943,12 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareArrayWrapper]:
-        """Get the folder links
+        """Get folder external links
 
-        Returns the links of the folder with the ID specified in the request.
+        Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
 
-        :param id: The folder ID. (required)
-        :type id: int
+        :param id: The folder or room whose external links are listed. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4151,11 +4981,15 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4170,7 +5004,7 @@ class FoldersApi:
     @validate_call
     def get_folder_links_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The folder ID.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder or room whose external links are listed.")], Annotated[StrictStr, Field(description="The folder or room whose external links are listed.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4184,12 +5018,12 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get the folder links
+        """Get folder external links
 
-        Returns the links of the folder with the ID specified in the request.
+        Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
 
-        :param id: The folder ID. (required)
-        :type id: int
+        :param id: The folder or room whose external links are listed. (required)
+        :type id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4222,11 +5056,15 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareArrayWrapper",
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4309,7 +5147,7 @@ class FoldersApi:
     @validate_call
     def get_folder_path(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4325,10 +5163,10 @@ class FoldersApi:
     ) -> FileEntryBaseArrayWrapper:
         """Get the folder path
 
-        Returns a path to the folder with the ID specified in the request.
+        Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4362,11 +5200,15 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4381,7 +5223,7 @@ class FoldersApi:
     @validate_call
     def get_folder_path_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4397,10 +5239,10 @@ class FoldersApi:
     ) -> ApiResponse[FileEntryBaseArrayWrapper]:
         """Get the folder path
 
-        Returns a path to the folder with the ID specified in the request.
+        Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4434,11 +5276,15 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4453,7 +5299,7 @@ class FoldersApi:
     @validate_call
     def get_folder_path_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4469,10 +5315,10 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get the folder path
 
-        Returns a path to the folder with the ID specified in the request.
+        Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4506,11 +5352,15 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4593,9 +5443,9 @@ class FoldersApi:
     @validate_call
     def get_folder_primary_external_link(
         self,
-        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4609,15 +5459,15 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FileShareWrapper:
-        """Get primary external link
+        """Get the folder primary external link
 
-        Returns the primary external link by the identifier specified in the request.
+        Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
 
-        :param id: The folder unique identifier. (required)
-        :type id: int
-        :param count: The number of items to retrieve in the request.
+        :param id: The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param count: How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
         :type count: int
-        :param start_index: The starting index for the query results.
+        :param start_index: How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4653,12 +5503,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '401': None,
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4673,9 +5527,9 @@ class FoldersApi:
     @validate_call
     def get_folder_primary_external_link_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4689,15 +5543,15 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FileShareWrapper]:
-        """Get primary external link
+        """Get the folder primary external link
 
-        Returns the primary external link by the identifier specified in the request.
+        Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
 
-        :param id: The folder unique identifier. (required)
-        :type id: int
-        :param count: The number of items to retrieve in the request.
+        :param id: The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param count: How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
         :type count: int
-        :param start_index: The starting index for the query results.
+        :param start_index: How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4733,12 +5587,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '401': None,
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4753,9 +5611,9 @@ class FoldersApi:
     @validate_call
     def get_folder_primary_external_link_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for the query results.")] = None,
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.")]],
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4769,15 +5627,15 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get primary external link
+        """Get the folder primary external link
 
-        Returns the primary external link by the identifier specified in the request.
+        Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
 
-        :param id: The folder unique identifier. (required)
-        :type id: int
-        :param count: The number of items to retrieve in the request.
+        :param id: The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (required)
+        :type id: Union[int, str]
+        :param count: How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
         :type count: int
-        :param start_index: The starting index for the query results.
+        :param start_index: How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
         :type start_index: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4813,12 +5671,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
+            '400': None,
+            '401': None,
             '403': None,
             '404': None,
-            '429': None,
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4879,6 +5741,12 @@ class FoldersApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
         ]
 
 
@@ -4905,7 +5773,7 @@ class FoldersApi:
     @validate_call
     def get_folders(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4921,10 +5789,10 @@ class FoldersApi:
     ) -> FileEntryBaseArrayWrapper:
         """Get subfolders
 
-        Returns a list of all the subfolders from a folder with the ID specified in the request.
+        Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4958,11 +5826,15 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -4977,7 +5849,7 @@ class FoldersApi:
     @validate_call
     def get_folders_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4993,10 +5865,10 @@ class FoldersApi:
     ) -> ApiResponse[FileEntryBaseArrayWrapper]:
         """Get subfolders
 
-        Returns a list of all the subfolders from a folder with the ID specified in the request.
+        Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5030,11 +5902,15 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5049,7 +5925,7 @@ class FoldersApi:
     @validate_call
     def get_folders_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5065,10 +5941,10 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get subfolders
 
-        Returns a list of all the subfolders from a folder with the ID specified in the request.
+        Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5102,11 +5978,15 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5187,16 +6067,18 @@ class FoldersApi:
 
 
     @validate_call
-    def get_my_folder(
+    def get_forms_folder(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5209,27 +6091,487 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerWrapper:
+    ) -> FolderContentWrapper:
+        """Get the Forms section
+
+        Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `metadataTemplateId` and  `metadataFilters` keep only the rooms carrying the template and matching the conditions (an unknown template  or field, or a malformed condition, is refused with 400), `count` and `startIndex` page through it, `total`  reports how many rooms match the request in full, and `current` describes the section folder itself.
+
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+        :type user_id_or_group_id: UUID
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+        :type filter_type: FilterType
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+        :type count: int
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+        :type start_index: int
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+        :type sort_by: str
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+        :type sort_order: SortOrder
+        :param filter_value: The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
+        :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_forms_folder_serialize(
+            user_id_or_group_id=user_id_or_group_id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_forms_folder_with_http_info(
+        self,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FolderContentWrapper]:
+        """Get the Forms section
+
+        Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `metadataTemplateId` and  `metadataFilters` keep only the rooms carrying the template and matching the conditions (an unknown template  or field, or a malformed condition, is refused with 400), `count` and `startIndex` page through it, `total`  reports how many rooms match the request in full, and `current` describes the section folder itself.
+
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+        :type user_id_or_group_id: UUID
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+        :type filter_type: FilterType
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+        :type count: int
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+        :type start_index: int
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+        :type sort_by: str
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+        :type sort_order: SortOrder
+        :param filter_value: The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
+        :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_forms_folder_serialize(
+            user_id_or_group_id=user_id_or_group_id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_forms_folder_without_preload_content(
+        self,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the Forms section
+
+        Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `metadataTemplateId` and  `metadataFilters` keep only the rooms carrying the template and matching the conditions (an unknown template  or field, or a malformed condition, is refused with 400), `count` and `startIndex` page through it, `total`  reports how many rooms match the request in full, and `current` describes the section folder itself.
+
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+        :type user_id_or_group_id: UUID
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+        :type filter_type: FilterType
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+        :type count: int
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+        :type start_index: int
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+        :type sort_by: str
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+        :type sort_order: SortOrder
+        :param filter_value: The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
+        :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_forms_folder_serialize(
+            user_id_or_group_id=user_id_or_group_id,
+            filter_type=filter_type,
+            count=count,
+            start_index=start_index,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "FolderContentWrapper",
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_forms_folder_serialize(
+        self,
+        user_id_or_group_id,
+        filter_type,
+        count,
+        start_index,
+        sort_by,
+        sort_order,
+        filter_value,
+        metadata_template_id,
+        metadata_filters,
+        include_hidden_metadata,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if user_id_or_group_id is not None:
+            
+            _query_params.append(('userIdOrGroupId', user_id_or_group_id))
+            
+        if filter_type is not None:
+            
+            _query_params.append(('filterType', filter_type.value))
+            
+        if count is not None:
+            
+            _query_params.append(('count', count))
+            
+        if start_index is not None:
+            
+            _query_params.append(('startIndex', start_index))
+            
+        if sort_by is not None:
+            
+            _query_params.append(('sortBy', sort_by))
+            
+        if sort_order is not None:
+            
+            _query_params.append(('sortOrder', sort_order.value))
+            
+        if filter_value is not None:
+            
+            _query_params.append(('filterValue', filter_value))
+            
+        if metadata_template_id is not None:
+            
+            _query_params.append(('metadataTemplateId', metadata_template_id))
+            
+        if metadata_filters is not None:
+            
+            _query_params.append(('metadataFilters', metadata_filters))
+            
+        if include_hidden_metadata is not None:
+            
+            _query_params.append(('includeHiddenMetadata', include_hidden_metadata))
+            
+        # process the header parameters
+        if self._fields is not None:
+            _header_params['fields'] = self._fields
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/@forms"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_my_folder(
+        self,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FolderContentWrapper:
         """Get the My documents section
 
-        Returns the detailed list of files and folders located in the My documents section.
+        Returns the contents of the caller's My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId`, `filterValue` or a metadata filter narrows the request, the search descends through the whole  subtree. `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while.  `metadataTemplateId` and `metadataFilters` keep only the entries carrying the template and matching the  conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or field, or a malformed  condition, is refused with 400. `folders` and `files` hold one page of the result, `total` counts everything  that matches before `count` and `startIndex` are applied, and `current` describes the section folder. To open  a folder inside the section, call `GET api/2.0/files/{folderId}` with its identifier.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
         :type filter_type: FilterType
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :param apply_filter_option: Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
         :type apply_filter_option: ApplyFilterOption
-        :param count: The maximum number of items to retrieve in the response.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The starting position of the items to be retrieved.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
+        :param filter_value: The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5261,6 +6603,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5268,14 +6613,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5290,14 +6638,17 @@ class FoldersApi:
     @validate_call
     def get_my_folder_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5310,27 +6661,33 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerWrapper]:
+    ) -> ApiResponse[FolderContentWrapper]:
         """Get the My documents section
 
-        Returns the detailed list of files and folders located in the My documents section.
+        Returns the contents of the caller's My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId`, `filterValue` or a metadata filter narrows the request, the search descends through the whole  subtree. `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while.  `metadataTemplateId` and `metadataFilters` keep only the entries carrying the template and matching the  conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or field, or a malformed  condition, is refused with 400. `folders` and `files` hold one page of the result, `total` counts everything  that matches before `count` and `startIndex` are applied, and `current` describes the section folder. To open  a folder inside the section, call `GET api/2.0/files/{folderId}` with its identifier.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
         :type filter_type: FilterType
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :param apply_filter_option: Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
         :type apply_filter_option: ApplyFilterOption
-        :param count: The maximum number of items to retrieve in the response.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The starting position of the items to be retrieved.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
+        :param filter_value: The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5362,6 +6719,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5369,14 +6729,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5391,14 +6754,17 @@ class FoldersApi:
     @validate_call
     def get_my_folder_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5414,24 +6780,30 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get the My documents section
 
-        Returns the detailed list of files and folders located in the My documents section.
+        Returns the contents of the caller's My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId`, `filterValue` or a metadata filter narrows the request, the search descends through the whole  subtree. `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while.  `metadataTemplateId` and `metadataFilters` keep only the entries carrying the template and matching the  conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or field, or a malformed  condition, is refused with 400. `folders` and `files` hold one page of the result, `total` counts everything  that matches before `count` and `startIndex` are applied, and `current` describes the section folder. To open  a folder inside the section, call `GET api/2.0/files/{folderId}` with its identifier.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
         :type filter_type: FilterType
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :param apply_filter_option: Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
         :type apply_filter_option: ApplyFilterOption
-        :param count: The maximum number of items to retrieve in the response.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The starting position of the items to be retrieved.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
+        :param filter_value: The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5463,6 +6835,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5470,14 +6845,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5495,6 +6873,9 @@ class FoldersApi:
         sort_by,
         sort_order,
         filter_value,
+        metadata_template_id,
+        metadata_filters,
+        include_hidden_metadata,
         _request_auth,
         _content_type,
         _headers,
@@ -5549,6 +6930,18 @@ class FoldersApi:
             
             _query_params.append(('filterValue', filter_value))
             
+        if metadata_template_id is not None:
+            
+            _query_params.append(('metadataTemplateId', metadata_template_id))
+            
+        if metadata_filters is not None:
+            
+            _query_params.append(('metadataFilters', metadata_filters))
+            
+        if include_hidden_metadata is not None:
+            
+            _query_params.append(('includeHiddenMetadata', include_hidden_metadata))
+            
         # process the header parameters
         if self._fields is not None:
             _header_params['fields'] = self._fields
@@ -5599,7 +6992,7 @@ class FoldersApi:
     @validate_call
     def get_new_folder_items(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5615,10 +7008,10 @@ class FoldersApi:
     ) -> FileEntryBaseArrayWrapper:
         """Get new folder items
 
-        Returns a list of all the new items from a folder with the ID specified in the request.
+        Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5652,11 +7045,15 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5671,7 +7068,7 @@ class FoldersApi:
     @validate_call
     def get_new_folder_items_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5687,10 +7084,10 @@ class FoldersApi:
     ) -> ApiResponse[FileEntryBaseArrayWrapper]:
         """Get new folder items
 
-        Returns a list of all the new items from a folder with the ID specified in the request.
+        Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5724,11 +7121,15 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5743,7 +7144,7 @@ class FoldersApi:
     @validate_call
     def get_new_folder_items_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")], Annotated[StrictStr, Field(description="The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.")]],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5759,10 +7160,10 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get new folder items
 
-        Returns a list of all the new items from a folder with the ID specified in the request.
+        Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
+        :param folder_id: The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (required)
+        :type folder_id: Union[int, str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5796,11 +7197,15 @@ class FoldersApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileEntryBaseArrayWrapper",
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -5881,412 +7286,22 @@ class FoldersApi:
 
 
     @validate_call
-    def get_privacy_folder(
-        self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerWrapper:
-        """Get the Private Room section
-
-        Returns the detailed list of files and folders located in the Private Room section.
-
-        :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
-        :type filter_type: FilterType
-        :param count: The maximum number of items to retrieve in the request.
-        :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
-        :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text used as a filter or search criterion for folder content queries.
-        :type filter_value: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_privacy_folder_serialize(
-            user_id_or_group_id=user_id_or_group_id,
-            filter_type=filter_type,
-            count=count,
-            start_index=start_index,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            filter_value=filter_value,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '403': None,
-            '404': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def get_privacy_folder_with_http_info(
-        self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerWrapper]:
-        """Get the Private Room section
-
-        Returns the detailed list of files and folders located in the Private Room section.
-
-        :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
-        :type filter_type: FilterType
-        :param count: The maximum number of items to retrieve in the request.
-        :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
-        :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text used as a filter or search criterion for folder content queries.
-        :type filter_value: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_privacy_folder_serialize(
-            user_id_or_group_id=user_id_or_group_id,
-            filter_type=filter_type,
-            count=count,
-            start_index=start_index,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            filter_value=filter_value,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '403': None,
-            '404': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def get_privacy_folder_without_preload_content(
-        self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the request.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The zero-based index of the first item to retrieve in a paginated list.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter or search criterion for folder content queries.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Get the Private Room section
-
-        Returns the detailed list of files and folders located in the Private Room section.
-
-        :param user_id_or_group_id: The user or group ID.
-        :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
-        :type filter_type: FilterType
-        :param count: The maximum number of items to retrieve in the request.
-        :type count: int
-        :param start_index: The zero-based index of the first item to retrieve in a paginated list.
-        :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
-        :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
-        :type sort_order: SortOrder
-        :param filter_value: The text used as a filter or search criterion for folder content queries.
-        :type filter_value: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_privacy_folder_serialize(
-            user_id_or_group_id=user_id_or_group_id,
-            filter_type=filter_type,
-            count=count,
-            start_index=start_index,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            filter_value=filter_value,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
-            '403': None,
-            '404': None,
-            '401': None,
-            '429': None,
-            '502': None,
-            '503': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _get_privacy_folder_serialize(
-        self,
-        user_id_or_group_id,
-        filter_type,
-        count,
-        start_index,
-        sort_by,
-        sort_order,
-        filter_value,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if user_id_or_group_id is not None:
-            
-            _query_params.append(('userIdOrGroupId', user_id_or_group_id))
-            
-        if filter_type is not None:
-            
-            _query_params.append(('filterType', filter_type.value))
-            
-        if count is not None:
-            
-            _query_params.append(('count', count))
-            
-        if start_index is not None:
-            
-            _query_params.append(('startIndex', start_index))
-            
-        if sort_by is not None:
-            
-            _query_params.append(('sortBy', sort_by))
-            
-        if sort_order is not None:
-            
-            _query_params.append(('sortOrder', sort_order.value))
-            
-        if filter_value is not None:
-            
-            _query_params.append(('filterValue', filter_value))
-            
-        # process the header parameters
-        if self._fields is not None:
-            _header_params['fields'] = self._fields
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'Basic', 
-            'OAuth2', 
-            'ApiKeyBearer', 
-            'asc_auth_key', 
-            'Bearer', 
-            'OpenId'
-        ]
-
-
-        resource_path = "/api/2.0/files/@privacy"
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path=resource_path,
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
     def get_recent_folder(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned.")] = None,
+        extension: Annotated[Optional[List[StrictStr]], Field(description="The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6299,33 +7314,39 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerWrapper:
+    ) -> FolderContentWrapper:
         """Get the Recent section
 
-        Returns the detailed list of files located in the Recent section.
+        Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member's history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds.
         :type filter_type: FilterType
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param exclude_subject: Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept.
         :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :param apply_filter_option: Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back.
         :type apply_filter_option: ApplyFilterOption
-        :param search_area: The search area.
+        :param search_area: The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned.
         :type search_area: SearchArea
-        :param extension: Specifies whether to search for a specific file extension in the Recent folder.
+        :param extension: The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension.
         :type extension: List[str]
-        :param count: The maximum number of items to return.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The starting position of the results to be returned in the query response.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: Specifies the sorting criteria for the folder request.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
+        :param filter_value: The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6360,6 +7381,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6367,14 +7391,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6389,17 +7416,20 @@ class FoldersApi:
     @validate_call
     def get_recent_folder_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned.")] = None,
+        extension: Annotated[Optional[List[StrictStr]], Field(description="The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6412,33 +7442,39 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerWrapper]:
+    ) -> ApiResponse[FolderContentWrapper]:
         """Get the Recent section
 
-        Returns the detailed list of files located in the Recent section.
+        Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member's history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds.
         :type filter_type: FilterType
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param exclude_subject: Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept.
         :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :param apply_filter_option: Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back.
         :type apply_filter_option: ApplyFilterOption
-        :param search_area: The search area.
+        :param search_area: The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned.
         :type search_area: SearchArea
-        :param extension: Specifies whether to search for a specific file extension in the Recent folder.
+        :param extension: The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension.
         :type extension: List[str]
-        :param count: The maximum number of items to return.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The starting position of the results to be returned in the query response.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: Specifies the sorting criteria for the folder request.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
+        :param filter_value: The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6473,6 +7509,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6480,14 +7519,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6502,17 +7544,20 @@ class FoldersApi:
     @validate_call
     def get_recent_folder_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        exclude_subject: Annotated[Optional[StrictBool], Field(description="Specifies whether to exclude search by user or group ID.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        search_area: Annotated[Optional[SearchArea], Field(description="The search area.")] = None,
-        extension: Annotated[Optional[List[List[StrictStr]]], Field(description="Specifies whether to search for a specific file extension in the Recent folder.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to return.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the results to be returned in the query response.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the sorting criteria for the folder request.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds.")] = None,
+        exclude_subject: Annotated[Optional[StrictBool], Field(description="Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back.")] = None,
+        search_area: Annotated[Optional[SearchArea], Field(description="The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned.")] = None,
+        extension: Annotated[Optional[List[StrictStr]], Field(description="The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6528,30 +7573,36 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get the Recent section
 
-        Returns the detailed list of files located in the Recent section.
+        Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member's history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds.
         :type filter_type: FilterType
-        :param exclude_subject: Specifies whether to exclude search by user or group ID.
+        :param exclude_subject: Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept.
         :type exclude_subject: bool
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :param apply_filter_option: Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back.
         :type apply_filter_option: ApplyFilterOption
-        :param search_area: The search area.
+        :param search_area: The area a listing is taken from. The Recent section is assembled from the caller's own open history rather  than from an area, so the value does not change which files are returned.
         :type search_area: SearchArea
-        :param extension: Specifies whether to search for a specific file extension in the Recent folder.
+        :param extension: The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension.
         :type extension: List[str]
-        :param count: The maximum number of items to return.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The starting position of the results to be returned in the query response.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: Specifies the sorting criteria for the folder request.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
+        :param filter_value: The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6586,6 +7637,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6593,14 +7647,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6621,6 +7678,9 @@ class FoldersApi:
         sort_by,
         sort_order,
         filter_value,
+        metadata_template_id,
+        metadata_filters,
+        include_hidden_metadata,
         _request_auth,
         _content_type,
         _headers,
@@ -6630,7 +7690,7 @@ class FoldersApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'extension': 'csv',
+            'extension': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -6688,6 +7748,18 @@ class FoldersApi:
             
             _query_params.append(('filterValue', filter_value))
             
+        if metadata_template_id is not None:
+            
+            _query_params.append(('metadataTemplateId', metadata_template_id))
+            
+        if metadata_filters is not None:
+            
+            _query_params.append(('metadataFilters', metadata_filters))
+            
+        if include_hidden_metadata is not None:
+            
+            _query_params.append(('includeHiddenMetadata', include_hidden_metadata))
+            
         # process the header parameters
         if self._fields is not None:
             _header_params['fields'] = self._fields
@@ -6738,16 +7810,9 @@ class FoldersApi:
 
 
     @validate_call
-    def get_root_folders(
+    def get_report_folder_history(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        without_trash: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the Trash section or not.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for searching or retrieving folder contents.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6760,26 +7825,332 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerArrayWrapper:
+    ) -> DocumentBuilderTaskWrapper:
+        """Get the folder history report generation status
+
+        Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and `resultFileId`,  `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My documents. An empty  answer means there is no report for this folder and caller, either because none was started or because a  finished one has already been picked up by an earlier poll. The caller needs read access to the folder and may  not be a guest; a caller who fails the access rule is answered with 403, a folder that does not exist with 404,  and a portal with the login history and audit trail section turned off with 402. The call is read-only, and each caller sees only  their own report.
+
+        :param folder_id: The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report. (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DocumentBuilderTaskWrapper",
+            '402': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_report_folder_history_with_http_info(
+        self,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DocumentBuilderTaskWrapper]:
+        """Get the folder history report generation status
+
+        Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and `resultFileId`,  `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My documents. An empty  answer means there is no report for this folder and caller, either because none was started or because a  finished one has already been picked up by an earlier poll. The caller needs read access to the folder and may  not be a guest; a caller who fails the access rule is answered with 403, a folder that does not exist with 404,  and a portal with the login history and audit trail section turned off with 402. The call is read-only, and each caller sees only  their own report.
+
+        :param folder_id: The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report. (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DocumentBuilderTaskWrapper",
+            '402': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_report_folder_history_without_preload_content(
+        self,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get the folder history report generation status
+
+        Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and `resultFileId`,  `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My documents. An empty  answer means there is no report for this folder and caller, either because none was started or because a  finished one has already been picked up by an earlier poll. The caller needs read access to the folder and may  not be a guest; a caller who fails the access rule is answered with 403, a folder that does not exist with 404,  and a portal with the login history and audit trail section turned off with 402. The call is read-only, and each caller sees only  their own report.
+
+        :param folder_id: The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report. (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DocumentBuilderTaskWrapper",
+            '402': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_report_folder_history_serialize(
+        self,
+        folder_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if folder_id is not None:
+            _path_params['folderId'] = folder_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}/log/report"
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_root_folders(
+        self,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold.")] = None,
+        without_trash: Annotated[Optional[StrictBool], Field(description="Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FolderContentArrayWrapper:
         """Get filtered sections
 
-        Returns all the sections matching the parameters specified in the request.
+        Returns every top-level section the calling account can see in one response, each of them a full section  object carrying its own first page of content: Favorites, Recent, Shared with me, My documents,  Trash, Rooms, Forms, Archive and, while AI access is enabled for the portal, AI agents. A section is  left out when the account has none of it, which is why a guest gets no personal section, and Recent is  listed only while it is switched on with `PUT api/2.0/files/displayrecent`. Pass `withoutTrash=true` to drop  the Trash section. The filters, `count` and `startIndex` are applied to each section separately, so  `count=1` returns one entry per section and every section reports its own `total`. Because it builds the  content of all of them, this is the most expensive listing in the module: when a single section is enough,  read it directly, for example with `GET api/2.0/files/@my`. The call modifies nothing in the sections and  leaves their new-item badges untouched, though passing `sortBy` saves the requested order as the default order  for this account.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold.
         :type filter_type: FilterType
-        :param without_trash: Specifies whether to return the Trash section or not.
+        :param without_trash: Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own.
         :type without_trash: bool
-        :param count: The maximum number of items to retrieve in the response.
+        :param count: The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total.
         :type count: int
-        :param start_index: The starting position of the items to be retrieved.
+        :param start_index: The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section.
         :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used as a filter for searching or retrieving folder contents.
+        :param filter_value: The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6819,14 +8190,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerArrayWrapper",
+            '200': "FolderContentArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6841,14 +8215,14 @@ class FoldersApi:
     @validate_call
     def get_root_folders_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        without_trash: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the Trash section or not.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for searching or retrieving folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold.")] = None,
+        without_trash: Annotated[Optional[StrictBool], Field(description="Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6861,26 +8235,26 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerArrayWrapper]:
+    ) -> ApiResponse[FolderContentArrayWrapper]:
         """Get filtered sections
 
-        Returns all the sections matching the parameters specified in the request.
+        Returns every top-level section the calling account can see in one response, each of them a full section  object carrying its own first page of content: Favorites, Recent, Shared with me, My documents,  Trash, Rooms, Forms, Archive and, while AI access is enabled for the portal, AI agents. A section is  left out when the account has none of it, which is why a guest gets no personal section, and Recent is  listed only while it is switched on with `PUT api/2.0/files/displayrecent`. Pass `withoutTrash=true` to drop  the Trash section. The filters, `count` and `startIndex` are applied to each section separately, so  `count=1` returns one entry per section and every section reports its own `total`. Because it builds the  content of all of them, this is the most expensive listing in the module: when a single section is enough,  read it directly, for example with `GET api/2.0/files/@my`. The call modifies nothing in the sections and  leaves their new-item badges untouched, though passing `sortBy` saves the requested order as the default order  for this account.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold.
         :type filter_type: FilterType
-        :param without_trash: Specifies whether to return the Trash section or not.
+        :param without_trash: Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own.
         :type without_trash: bool
-        :param count: The maximum number of items to retrieve in the response.
+        :param count: The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total.
         :type count: int
-        :param start_index: The starting position of the items to be retrieved.
+        :param start_index: The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section.
         :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used as a filter for searching or retrieving folder contents.
+        :param filter_value: The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6920,14 +8294,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerArrayWrapper",
+            '200': "FolderContentArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -6942,14 +8319,14 @@ class FoldersApi:
     @validate_call
     def get_root_folders_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        without_trash: Annotated[Optional[StrictBool], Field(description="Specifies whether to return the Trash section or not.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the field by which the folder content should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used as a filter for searching or retrieving folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold.")] = None,
+        without_trash: Annotated[Optional[StrictBool], Field(description="Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6965,23 +8342,23 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get filtered sections
 
-        Returns all the sections matching the parameters specified in the request.
+        Returns every top-level section the calling account can see in one response, each of them a full section  object carrying its own first page of content: Favorites, Recent, Shared with me, My documents,  Trash, Rooms, Forms, Archive and, while AI access is enabled for the portal, AI agents. A section is  left out when the account has none of it, which is why a guest gets no personal section, and Recent is  listed only while it is switched on with `PUT api/2.0/files/displayrecent`. Pass `withoutTrash=true` to drop  the Trash section. The filters, `count` and `startIndex` are applied to each section separately, so  `count=1` returns one entry per section and every section reports its own `total`. Because it builds the  content of all of them, this is the most expensive listing in the module: when a single section is enough,  read it directly, for example with `GET api/2.0/files/@my`. The call modifies nothing in the sections and  leaves their new-item badges untouched, though passing `sortBy` saves the requested order as the default order  for this account.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold.
         :type filter_type: FilterType
-        :param without_trash: Specifies whether to return the Trash section or not.
+        :param without_trash: Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own.
         :type without_trash: bool
-        :param count: The maximum number of items to retrieve in the response.
+        :param count: The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total.
         :type count: int
-        :param start_index: The starting position of the items to be retrieved.
+        :param start_index: The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section.
         :type start_index: int
-        :param sort_by: Specifies the field by which the folder content should be sorted.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used as a filter for searching or retrieving folder contents.
+        :param filter_value: The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7021,14 +8398,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerArrayWrapper",
+            '200': "FolderContentArrayWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7150,14 +8530,17 @@ class FoldersApi:
     @validate_call
     def get_trash_folder(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7170,27 +8553,33 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderContentIntegerWrapper:
+    ) -> FolderContentWrapper:
         """Get the Trash section
 
-        Returns the detailed list of files and folders located in the Trash section.
+        Returns the caller's Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `metadataTemplateId` and `metadataFilters` keep only the deleted entries carrying the  template and matching the conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or  field, or a malformed condition, is refused with 400. `folders` and `files` hold one page of the result,  `total` counts everything that matches before `count` and `startIndex` are applied, and `current` describes  the section folder. An account that is given no Trash of its own, an outsider for instance, receives 404.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
         :type filter_type: FilterType
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :param apply_filter_option: Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
         :type apply_filter_option: ApplyFilterOption
-        :param count: The maximum number of items to retrieve in the response.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The starting position of the items to be retrieved.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
+        :param filter_value: The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7222,6 +8611,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7229,14 +8621,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7251,14 +8646,17 @@ class FoldersApi:
     @validate_call
     def get_trash_folder_with_http_info(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7271,27 +8669,33 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderContentIntegerWrapper]:
+    ) -> ApiResponse[FolderContentWrapper]:
         """Get the Trash section
 
-        Returns the detailed list of files and folders located in the Trash section.
+        Returns the caller's Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `metadataTemplateId` and `metadataFilters` keep only the deleted entries carrying the  template and matching the conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or  field, or a malformed condition, is refused with 400. `folders` and `files` hold one page of the result,  `total` counts everything that matches before `count` and `startIndex` are applied, and `current` describes  the section folder. An account that is given no Trash of its own, an outsider for instance, receives 404.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
         :type filter_type: FilterType
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :param apply_filter_option: Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
         :type apply_filter_option: ApplyFilterOption
-        :param count: The maximum number of items to retrieve in the response.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The starting position of the items to be retrieved.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
+        :param filter_value: The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7323,6 +8727,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7330,14 +8737,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7352,14 +8762,17 @@ class FoldersApi:
     @validate_call
     def get_trash_folder_without_preload_content(
         self,
-        user_id_or_group_id: Annotated[Optional[UUID], Field(description="The user or group ID.")] = None,
-        filter_type: Annotated[Optional[FilterType], Field(description="The filter type.")] = None,
-        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Specifies whether to return only files, only folders or all elements.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of items to retrieve in the response.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting position of the items to be retrieved.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The property used to specify the sorting criteria for folder contents.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="The text used for filtering or searching folder contents.")] = None,
+        user_id_or_group_id: Annotated[Optional[UUID], Field(description="Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.")] = None,
+        filter_type: Annotated[Optional[FilterType], Field(description="Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.")] = None,
+        apply_filter_option: Annotated[Optional[ApplyFilterOption], Field(description="Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.")] = None,
+        metadata_template_id: Annotated[Optional[StrictInt], Field(description="The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.")] = None,
+        metadata_filters: Annotated[Optional[StrictStr], Field(description="The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.")] = None,
+        include_hidden_metadata: Annotated[Optional[StrictBool], Field(description="Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7375,24 +8788,30 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Get the Trash section
 
-        Returns the detailed list of files and folders located in the Trash section.
+        Returns the caller's Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `metadataTemplateId` and `metadataFilters` keep only the deleted entries carrying the  template and matching the conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or  field, or a malformed condition, is refused with 400. `folders` and `files` hold one page of the result,  `total` counts everything that matches before `count` and `startIndex` are applied, and `current` describes  the section folder. An account that is given no Trash of its own, an outsider for instance, receives 404.
 
-        :param user_id_or_group_id: The user or group ID.
+        :param user_id_or_group_id: Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
         :type user_id_or_group_id: UUID
-        :param filter_type: The filter type.
+        :param filter_type: Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
         :type filter_type: FilterType
-        :param apply_filter_option: Specifies whether to return only files, only folders or all elements.
+        :param apply_filter_option: Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
         :type apply_filter_option: ApplyFilterOption
-        :param count: The maximum number of items to retrieve in the response.
+        :param count: The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
         :type count: int
-        :param start_index: The starting position of the items to be retrieved.
+        :param start_index: The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
         :type start_index: int
-        :param sort_by: The property used to specify the sorting criteria for folder contents.
+        :param sort_by: The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
         :type sort_order: SortOrder
-        :param filter_value: The text used for filtering or searching folder contents.
+        :param filter_value: The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
         :type filter_value: str
+        :param metadata_template_id: The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+        :type metadata_template_id: int
+        :param metadata_filters: The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+        :type metadata_filters: str
+        :param include_hidden_metadata: Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+        :type include_hidden_metadata: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7424,6 +8843,9 @@ class FoldersApi:
             sort_by=sort_by,
             sort_order=sort_order,
             filter_value=filter_value,
+            metadata_template_id=metadata_template_id,
+            metadata_filters=metadata_filters,
+            include_hidden_metadata=include_hidden_metadata,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7431,14 +8853,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderContentIntegerWrapper",
+            '200': "FolderContentWrapper",
+            '400': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7456,6 +8881,9 @@ class FoldersApi:
         sort_by,
         sort_order,
         filter_value,
+        metadata_template_id,
+        metadata_filters,
+        include_hidden_metadata,
         _request_auth,
         _content_type,
         _headers,
@@ -7510,6 +8938,18 @@ class FoldersApi:
             
             _query_params.append(('filterValue', filter_value))
             
+        if metadata_template_id is not None:
+            
+            _query_params.append(('metadataTemplateId', metadata_template_id))
+            
+        if metadata_filters is not None:
+            
+            _query_params.append(('metadataFilters', metadata_filters))
+            
+        if include_hidden_metadata is not None:
+            
+            _query_params.append(('includeHiddenMetadata', include_hidden_metadata))
+            
         # process the header parameters
         if self._fields is not None:
             _header_params['fields'] = self._fields
@@ -7557,14 +8997,14 @@ class FoldersApi:
 
 
 
-    @validate_call
+    @overload
     def insert_file(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID for inserting a file.")],
-        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be inserted.")] = None,
-        insert_file_title: Annotated[Optional[StrictStr], Field(description="The file title to be inserted.")] = None,
-        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create a new file if it already exists or not.")] = None,
-        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")],
+        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        insert_file_title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
         insert_file_stream_can_read: Optional[StrictBool] = None,
         insert_file_stream_can_write: Optional[StrictBool] = None,
         insert_file_stream_can_seek: Optional[StrictBool] = None,
@@ -7585,20 +9025,110 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FileIntegerWrapper:
+    ) -> FileWrapper: ...
+
+    @overload
+    def insert_file(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")],
+        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        insert_file_title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        insert_file_stream_can_read: Optional[StrictBool] = None,
+        insert_file_stream_can_write: Optional[StrictBool] = None,
+        insert_file_stream_can_seek: Optional[StrictBool] = None,
+        insert_file_stream_can_timeout: Optional[StrictBool] = None,
+        insert_file_stream_length: Optional[StrictInt] = None,
+        insert_file_stream_position: Optional[StrictInt] = None,
+        insert_file_stream_read_timeout: Optional[StrictInt] = None,
+        insert_file_stream_write_timeout: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFileWrapper: ...
+
+    @overload
+    def insert_file(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")], Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")]],
+        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        insert_file_title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        insert_file_stream_can_read: Optional[StrictBool] = None,
+        insert_file_stream_can_write: Optional[StrictBool] = None,
+        insert_file_stream_can_seek: Optional[StrictBool] = None,
+        insert_file_stream_can_timeout: Optional[StrictBool] = None,
+        insert_file_stream_length: Optional[StrictInt] = None,
+        insert_file_stream_position: Optional[StrictInt] = None,
+        insert_file_stream_read_timeout: Optional[StrictInt] = None,
+        insert_file_stream_write_timeout: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FileWrapper, ThirdPartyFileWrapper]: ...
+
+    @validate_call
+    def insert_file(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")], Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")]],
+        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        insert_file_title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        insert_file_stream_can_read: Optional[StrictBool] = None,
+        insert_file_stream_can_write: Optional[StrictBool] = None,
+        insert_file_stream_can_seek: Optional[StrictBool] = None,
+        insert_file_stream_can_timeout: Optional[StrictBool] = None,
+        insert_file_stream_length: Optional[StrictInt] = None,
+        insert_file_stream_position: Optional[StrictInt] = None,
+        insert_file_stream_read_timeout: Optional[StrictInt] = None,
+        insert_file_stream_write_timeout: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FileWrapper, ThirdPartyFileWrapper]:
         """Insert a file
 
-        Inserts a file specified in the request to the selected folder by single file uploading.
+        Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
 
-        :param folder_id: The folder ID for inserting a file. (required)
-        :type folder_id: int
-        :param insert_file_file: The file to be inserted.
+        :param folder_id: The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. (required)
+        :type folder_id: Union[int, str]
+        :param insert_file_file: The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
         :type insert_file_file: bytes
-        :param insert_file_title: The file title to be inserted.
+        :param insert_file_title: The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
         :type insert_file_title: str
-        :param insert_file_create_new_if_exist: Specifies whether to create a new file if it already exists or not.
+        :param insert_file_create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type insert_file_create_new_if_exist: bool
-        :param insert_file_keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param insert_file_keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type insert_file_keep_convert_status: bool
         :param insert_file_stream_can_read:
         :type insert_file_stream_can_read: bool
@@ -7659,14 +9189,19 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerWrapper",
+            '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7678,14 +9213,14 @@ class FoldersApi:
         ).data
 
 
-    @validate_call
+    @overload
     def insert_file_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID for inserting a file.")],
-        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be inserted.")] = None,
-        insert_file_title: Annotated[Optional[StrictStr], Field(description="The file title to be inserted.")] = None,
-        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create a new file if it already exists or not.")] = None,
-        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")],
+        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        insert_file_title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
         insert_file_stream_can_read: Optional[StrictBool] = None,
         insert_file_stream_can_write: Optional[StrictBool] = None,
         insert_file_stream_can_seek: Optional[StrictBool] = None,
@@ -7706,20 +9241,110 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FileIntegerWrapper]:
+    ) -> ApiResponse[FileWrapper]: ...
+
+    @overload
+    def insert_file_with_http_info(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")],
+        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        insert_file_title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        insert_file_stream_can_read: Optional[StrictBool] = None,
+        insert_file_stream_can_write: Optional[StrictBool] = None,
+        insert_file_stream_can_seek: Optional[StrictBool] = None,
+        insert_file_stream_can_timeout: Optional[StrictBool] = None,
+        insert_file_stream_length: Optional[StrictInt] = None,
+        insert_file_stream_position: Optional[StrictInt] = None,
+        insert_file_stream_read_timeout: Optional[StrictInt] = None,
+        insert_file_stream_write_timeout: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFileWrapper]: ...
+
+    @overload
+    def insert_file_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")], Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")]],
+        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        insert_file_title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        insert_file_stream_can_read: Optional[StrictBool] = None,
+        insert_file_stream_can_write: Optional[StrictBool] = None,
+        insert_file_stream_can_seek: Optional[StrictBool] = None,
+        insert_file_stream_can_timeout: Optional[StrictBool] = None,
+        insert_file_stream_length: Optional[StrictInt] = None,
+        insert_file_stream_position: Optional[StrictInt] = None,
+        insert_file_stream_read_timeout: Optional[StrictInt] = None,
+        insert_file_stream_write_timeout: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FileWrapper, ThirdPartyFileWrapper]]: ...
+
+    @validate_call
+    def insert_file_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")], Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")]],
+        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        insert_file_title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        insert_file_stream_can_read: Optional[StrictBool] = None,
+        insert_file_stream_can_write: Optional[StrictBool] = None,
+        insert_file_stream_can_seek: Optional[StrictBool] = None,
+        insert_file_stream_can_timeout: Optional[StrictBool] = None,
+        insert_file_stream_length: Optional[StrictInt] = None,
+        insert_file_stream_position: Optional[StrictInt] = None,
+        insert_file_stream_read_timeout: Optional[StrictInt] = None,
+        insert_file_stream_write_timeout: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FileWrapper, ThirdPartyFileWrapper]]:
         """Insert a file
 
-        Inserts a file specified in the request to the selected folder by single file uploading.
+        Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
 
-        :param folder_id: The folder ID for inserting a file. (required)
-        :type folder_id: int
-        :param insert_file_file: The file to be inserted.
+        :param folder_id: The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. (required)
+        :type folder_id: Union[int, str]
+        :param insert_file_file: The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
         :type insert_file_file: bytes
-        :param insert_file_title: The file title to be inserted.
+        :param insert_file_title: The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
         :type insert_file_title: str
-        :param insert_file_create_new_if_exist: Specifies whether to create a new file if it already exists or not.
+        :param insert_file_create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type insert_file_create_new_if_exist: bool
-        :param insert_file_keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param insert_file_keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type insert_file_keep_convert_status: bool
         :param insert_file_stream_can_read:
         :type insert_file_stream_can_read: bool
@@ -7780,14 +9405,19 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerWrapper",
+            '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7802,11 +9432,11 @@ class FoldersApi:
     @validate_call
     def insert_file_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID for inserting a file.")],
-        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be inserted.")] = None,
-        insert_file_title: Annotated[Optional[StrictStr], Field(description="The file title to be inserted.")] = None,
-        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create a new file if it already exists or not.")] = None,
-        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")], Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")]],
+        insert_file_file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        insert_file_title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        insert_file_create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        insert_file_keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
         insert_file_stream_can_read: Optional[StrictBool] = None,
         insert_file_stream_can_write: Optional[StrictBool] = None,
         insert_file_stream_can_seek: Optional[StrictBool] = None,
@@ -7830,17 +9460,17 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Insert a file
 
-        Inserts a file specified in the request to the selected folder by single file uploading.
+        Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
 
-        :param folder_id: The folder ID for inserting a file. (required)
-        :type folder_id: int
-        :param insert_file_file: The file to be inserted.
+        :param folder_id: The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. (required)
+        :type folder_id: Union[int, str]
+        :param insert_file_file: The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
         :type insert_file_file: bytes
-        :param insert_file_title: The file title to be inserted.
+        :param insert_file_title: The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
         :type insert_file_title: str
-        :param insert_file_create_new_if_exist: Specifies whether to create a new file if it already exists or not.
+        :param insert_file_create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type insert_file_create_new_if_exist: bool
-        :param insert_file_keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param insert_file_keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type insert_file_keep_convert_status: bool
         :param insert_file_stream_can_read:
         :type insert_file_stream_can_read: bool
@@ -7901,14 +9531,19 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerWrapper",
+            '200': ("ThirdPartyFileWrapper" if isinstance(folder_id, str) else "FileWrapper"),
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -7958,29 +9593,29 @@ class FoldersApi:
         # process the header parameters
         # process the form parameters
         if insert_file_file is not None:
-            _files['InsertFile.File'] = insert_file_file
+            _files['insertFile.file'] = insert_file_file
         if insert_file_title is not None:
-            _form_params.append(('InsertFile.Title', insert_file_title))
+            _form_params.append(('insertFile.title', insert_file_title))
         if insert_file_create_new_if_exist is not None:
-            _form_params.append(('InsertFile.CreateNewIfExist', insert_file_create_new_if_exist))
+            _form_params.append(('insertFile.createNewIfExist', insert_file_create_new_if_exist))
         if insert_file_keep_convert_status is not None:
-            _form_params.append(('InsertFile.KeepConvertStatus', insert_file_keep_convert_status))
+            _form_params.append(('insertFile.keepConvertStatus', insert_file_keep_convert_status))
         if insert_file_stream_can_read is not None:
-            _form_params.append(('InsertFile.Stream.CanRead', insert_file_stream_can_read))
+            _form_params.append(('insertFile.stream.canRead', insert_file_stream_can_read))
         if insert_file_stream_can_write is not None:
-            _form_params.append(('InsertFile.Stream.CanWrite', insert_file_stream_can_write))
+            _form_params.append(('insertFile.stream.canWrite', insert_file_stream_can_write))
         if insert_file_stream_can_seek is not None:
-            _form_params.append(('InsertFile.Stream.CanSeek', insert_file_stream_can_seek))
+            _form_params.append(('insertFile.stream.canSeek', insert_file_stream_can_seek))
         if insert_file_stream_can_timeout is not None:
-            _form_params.append(('InsertFile.Stream.CanTimeout', insert_file_stream_can_timeout))
+            _form_params.append(('insertFile.stream.canTimeout', insert_file_stream_can_timeout))
         if insert_file_stream_length is not None:
-            _form_params.append(('InsertFile.Stream.Length', insert_file_stream_length))
+            _form_params.append(('insertFile.stream.length', insert_file_stream_length))
         if insert_file_stream_position is not None:
-            _form_params.append(('InsertFile.Stream.Position', insert_file_stream_position))
+            _form_params.append(('insertFile.stream.position', insert_file_stream_position))
         if insert_file_stream_read_timeout is not None:
-            _form_params.append(('InsertFile.Stream.ReadTimeout', insert_file_stream_read_timeout))
+            _form_params.append(('insertFile.stream.readTimeout', insert_file_stream_read_timeout))
         if insert_file_stream_write_timeout is not None:
-            _form_params.append(('InsertFile.Stream.WriteTimeout', insert_file_stream_write_timeout))
+            _form_params.append(('insertFile.stream.writeTimeout', insert_file_stream_write_timeout))
         # process the body parameter
 
 
@@ -8040,10 +9675,10 @@ class FoldersApi:
     @validate_call
     def insert_file_to_my_from_body(
         self,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be inserted.")] = None,
-        title: Annotated[Optional[StrictStr], Field(description="The file title to be inserted.")] = None,
-        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create a new file if it already exists or not.")] = None,
-        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
         stream_can_read: Optional[StrictBool] = None,
         stream_can_write: Optional[StrictBool] = None,
         stream_can_seek: Optional[StrictBool] = None,
@@ -8064,18 +9699,18 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FileIntegerWrapper:
-        """Insert a file to the My documents section
+    ) -> FileWrapper:
+        """Insert a file into My documents
 
-        Inserts a file specified in the request to the My documents section by single file uploading.
+        Stores one file in the caller's own My documents section, the personal storage every portal member has, and  returns the stored file. The destination takes no identifier: it is resolved from the calling account and  created on first use, while a guest account has none and is answered as missing (404). Send the content as a  `multipart/form-data` part or as the raw request body, and name it with `title`, which wins over the name of  the uploaded part and has invalid characters replaced before storing. The call is not idempotent: by default a  file of the same title is overwritten as a new version, while `createNewIfExist=true` stores a separate copy  under a title made unique with a numeric suffix; a title held by a file that is locked or open in the editor  cannot be overwritten either, and a second file appears under the same title. Formats listed in  `extsMustConvert` of `GET api/2.0/files/settings` are converted after the response is sent;  `keepConvertStatus=true` keeps that result readable through `GET api/2.0/files/file/{fileId}/checkconversion`,  which otherwise drops it. Files over the single-request size limit or the account's storage quota are refused:  send those through `POST api/2.0/files/{folderId}/upload/create_session`, and use  `POST api/2.0/files/{folderId}/insert` for any other destination.
 
-        :param file: The file to be inserted.
+        :param file: The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
         :type file: bytes
-        :param title: The file title to be inserted.
+        :param title: The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
         :type title: str
-        :param create_new_if_exist: Specifies whether to create a new file if it already exists or not.
+        :param create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type create_new_if_exist: bool
-        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type keep_convert_status: bool
         :param stream_can_read:
         :type stream_can_read: bool
@@ -8135,14 +9770,19 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerWrapper",
+            '200': "FileWrapper",
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8157,10 +9797,10 @@ class FoldersApi:
     @validate_call
     def insert_file_to_my_from_body_with_http_info(
         self,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be inserted.")] = None,
-        title: Annotated[Optional[StrictStr], Field(description="The file title to be inserted.")] = None,
-        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create a new file if it already exists or not.")] = None,
-        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
         stream_can_read: Optional[StrictBool] = None,
         stream_can_write: Optional[StrictBool] = None,
         stream_can_seek: Optional[StrictBool] = None,
@@ -8181,18 +9821,18 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FileIntegerWrapper]:
-        """Insert a file to the My documents section
+    ) -> ApiResponse[FileWrapper]:
+        """Insert a file into My documents
 
-        Inserts a file specified in the request to the My documents section by single file uploading.
+        Stores one file in the caller's own My documents section, the personal storage every portal member has, and  returns the stored file. The destination takes no identifier: it is resolved from the calling account and  created on first use, while a guest account has none and is answered as missing (404). Send the content as a  `multipart/form-data` part or as the raw request body, and name it with `title`, which wins over the name of  the uploaded part and has invalid characters replaced before storing. The call is not idempotent: by default a  file of the same title is overwritten as a new version, while `createNewIfExist=true` stores a separate copy  under a title made unique with a numeric suffix; a title held by a file that is locked or open in the editor  cannot be overwritten either, and a second file appears under the same title. Formats listed in  `extsMustConvert` of `GET api/2.0/files/settings` are converted after the response is sent;  `keepConvertStatus=true` keeps that result readable through `GET api/2.0/files/file/{fileId}/checkconversion`,  which otherwise drops it. Files over the single-request size limit or the account's storage quota are refused:  send those through `POST api/2.0/files/{folderId}/upload/create_session`, and use  `POST api/2.0/files/{folderId}/insert` for any other destination.
 
-        :param file: The file to be inserted.
+        :param file: The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
         :type file: bytes
-        :param title: The file title to be inserted.
+        :param title: The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
         :type title: str
-        :param create_new_if_exist: Specifies whether to create a new file if it already exists or not.
+        :param create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type create_new_if_exist: bool
-        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type keep_convert_status: bool
         :param stream_can_read:
         :type stream_can_read: bool
@@ -8252,14 +9892,19 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerWrapper",
+            '200': "FileWrapper",
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8274,10 +9919,10 @@ class FoldersApi:
     @validate_call
     def insert_file_to_my_from_body_without_preload_content(
         self,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be inserted.")] = None,
-        title: Annotated[Optional[StrictStr], Field(description="The file title to be inserted.")] = None,
-        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create a new file if it already exists or not.")] = None,
-        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.")] = None,
+        title: Annotated[Optional[StrictStr], Field(description="The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
         stream_can_read: Optional[StrictBool] = None,
         stream_can_write: Optional[StrictBool] = None,
         stream_can_seek: Optional[StrictBool] = None,
@@ -8299,17 +9944,17 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Insert a file to the My documents section
+        """Insert a file into My documents
 
-        Inserts a file specified in the request to the My documents section by single file uploading.
+        Stores one file in the caller's own My documents section, the personal storage every portal member has, and  returns the stored file. The destination takes no identifier: it is resolved from the calling account and  created on first use, while a guest account has none and is answered as missing (404). Send the content as a  `multipart/form-data` part or as the raw request body, and name it with `title`, which wins over the name of  the uploaded part and has invalid characters replaced before storing. The call is not idempotent: by default a  file of the same title is overwritten as a new version, while `createNewIfExist=true` stores a separate copy  under a title made unique with a numeric suffix; a title held by a file that is locked or open in the editor  cannot be overwritten either, and a second file appears under the same title. Formats listed in  `extsMustConvert` of `GET api/2.0/files/settings` are converted after the response is sent;  `keepConvertStatus=true` keeps that result readable through `GET api/2.0/files/file/{fileId}/checkconversion`,  which otherwise drops it. Files over the single-request size limit or the account's storage quota are refused:  send those through `POST api/2.0/files/{folderId}/upload/create_session`, and use  `POST api/2.0/files/{folderId}/insert` for any other destination.
 
-        :param file: The file to be inserted.
+        :param file: The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
         :type file: bytes
-        :param title: The file title to be inserted.
+        :param title: The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
         :type title: str
-        :param create_new_if_exist: Specifies whether to create a new file if it already exists or not.
+        :param create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type create_new_if_exist: bool
-        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type keep_convert_status: bool
         :param stream_can_read:
         :type stream_can_read: bool
@@ -8369,14 +10014,19 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerWrapper",
+            '200': "FileWrapper",
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8423,29 +10073,29 @@ class FoldersApi:
         # process the header parameters
         # process the form parameters
         if file is not None:
-            _files['File'] = file
+            _files['file'] = file
         if title is not None:
-            _form_params.append(('Title', title))
+            _form_params.append(('title', title))
         if create_new_if_exist is not None:
-            _form_params.append(('CreateNewIfExist', create_new_if_exist))
+            _form_params.append(('createNewIfExist', create_new_if_exist))
         if keep_convert_status is not None:
-            _form_params.append(('KeepConvertStatus', keep_convert_status))
+            _form_params.append(('keepConvertStatus', keep_convert_status))
         if stream_can_read is not None:
-            _form_params.append(('Stream.CanRead', stream_can_read))
+            _form_params.append(('stream.canRead', stream_can_read))
         if stream_can_write is not None:
-            _form_params.append(('Stream.CanWrite', stream_can_write))
+            _form_params.append(('stream.canWrite', stream_can_write))
         if stream_can_seek is not None:
-            _form_params.append(('Stream.CanSeek', stream_can_seek))
+            _form_params.append(('stream.canSeek', stream_can_seek))
         if stream_can_timeout is not None:
-            _form_params.append(('Stream.CanTimeout', stream_can_timeout))
+            _form_params.append(('stream.canTimeout', stream_can_timeout))
         if stream_length is not None:
-            _form_params.append(('Stream.Length', stream_length))
+            _form_params.append(('stream.length', stream_length))
         if stream_position is not None:
-            _form_params.append(('Stream.Position', stream_position))
+            _form_params.append(('stream.position', stream_position))
         if stream_read_timeout is not None:
-            _form_params.append(('Stream.ReadTimeout', stream_read_timeout))
+            _form_params.append(('stream.readTimeout', stream_read_timeout))
         if stream_write_timeout is not None:
-            _form_params.append(('Stream.WriteTimeout', stream_write_timeout))
+            _form_params.append(('stream.writeTimeout', stream_write_timeout))
         # process the body parameter
 
 
@@ -8502,11 +10152,11 @@ class FoldersApi:
 
 
 
-    @validate_call
+    @overload
     def rename_folder(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID for the folder creation.")],
-        create_folder: Annotated[CreateFolder, Field(description="The parameters for creating a folder.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8519,15 +10169,72 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
+    ) -> FolderWrapper: ...
+
+    @overload
+    def rename_folder(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
+
+    @overload
+    def rename_folder(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")], Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")]],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def rename_folder(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")], Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")]],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
         """Rename a folder
 
-        Renames the selected folder with a new title specified in the request.
+        Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
 
-        :param folder_id: The folder ID for the folder creation. (required)
-        :type folder_id: int
-        :param create_folder: The parameters for creating a folder. (required)
-        :type create_folder: CreateFolder
+        :param folder_id: The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. (required)
+        :type folder_id: Union[int, str]
+        :param create_folder_request: The title carried by the request body. (required)
+        :type create_folder_request: CreateFolderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8552,7 +10259,7 @@ class FoldersApi:
 
         _param = self._rename_folder_serialize(
             folder_id=folder_id,
-            create_folder=create_folder,
+            create_folder_request=create_folder_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8560,13 +10267,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8578,11 +10289,11 @@ class FoldersApi:
         ).data
 
 
-    @validate_call
+    @overload
     def rename_folder_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID for the folder creation.")],
-        create_folder: Annotated[CreateFolder, Field(description="The parameters for creating a folder.")],
+        folder_id: Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8595,15 +10306,72 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderWrapper]: ...
+
+    @overload
+    def rename_folder_with_http_info(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
+
+    @overload
+    def rename_folder_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")], Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")]],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def rename_folder_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")], Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")]],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
         """Rename a folder
 
-        Renames the selected folder with a new title specified in the request.
+        Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
 
-        :param folder_id: The folder ID for the folder creation. (required)
-        :type folder_id: int
-        :param create_folder: The parameters for creating a folder. (required)
-        :type create_folder: CreateFolder
+        :param folder_id: The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. (required)
+        :type folder_id: Union[int, str]
+        :param create_folder_request: The title carried by the request body. (required)
+        :type create_folder_request: CreateFolderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8628,7 +10396,7 @@ class FoldersApi:
 
         _param = self._rename_folder_serialize(
             folder_id=folder_id,
-            create_folder=create_folder,
+            create_folder_request=create_folder_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8636,13 +10404,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8657,8 +10429,8 @@ class FoldersApi:
     @validate_call
     def rename_folder_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID for the folder creation.")],
-        create_folder: Annotated[CreateFolder, Field(description="The parameters for creating a folder.")],
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")], Annotated[StrictStr, Field(description="The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.")]],
+        create_folder_request: Annotated[CreateFolderRequest, Field(description="The title carried by the request body.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8674,12 +10446,12 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Rename a folder
 
-        Renames the selected folder with a new title specified in the request.
+        Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
 
-        :param folder_id: The folder ID for the folder creation. (required)
-        :type folder_id: int
-        :param create_folder: The parameters for creating a folder. (required)
-        :type create_folder: CreateFolder
+        :param folder_id: The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. (required)
+        :type folder_id: Union[int, str]
+        :param create_folder_request: The title carried by the request body. (required)
+        :type create_folder_request: CreateFolderRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8704,7 +10476,7 @@ class FoldersApi:
 
         _param = self._rename_folder_serialize(
             folder_id=folder_id,
-            create_folder=create_folder,
+            create_folder_request=create_folder_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8712,13 +10484,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '400': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8729,7 +10505,7 @@ class FoldersApi:
     def _rename_folder_serialize(
         self,
         folder_id,
-        create_folder,
+        create_folder_request,
         _request_auth,
         _content_type,
         _headers,
@@ -8757,8 +10533,8 @@ class FoldersApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_folder is not None:
-            _body_params = create_folder
+        if create_folder_request is not None:
+            _body_params = create_folder_request
 
 
         # set the HTTP header `Accept`
@@ -8814,11 +10590,11 @@ class FoldersApi:
 
 
 
-    @validate_call
-    def set_folder_order(
+    @overload
+    def search_folder(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
-        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The folder order information.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
+        folder_metadata_search: Annotated[FolderMetadataSearch, Field(description="The search parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8831,15 +10607,72 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FolderIntegerWrapper:
-        """Set folder order
+    ) -> FolderContentWrapper: ...
 
-        Sets the order of a folder with ID specified in the request.
+    @overload
+    def search_folder(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder ID.")],
+        folder_metadata_search: Annotated[FolderMetadataSearch, Field(description="The search parameters.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderContentWrapper: ...
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
-        :param order_request_dto: The folder order information.
-        :type order_request_dto: OrderRequestDto
+    @overload
+    def search_folder(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder ID.")], Annotated[StrictStr, Field(description="The folder ID.")]],
+        folder_metadata_search: Annotated[FolderMetadataSearch, Field(description="The search parameters.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderContentWrapper, ThirdPartyFolderContentWrapper]: ...
+
+    @validate_call
+    def search_folder(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder ID.")], Annotated[StrictStr, Field(description="The folder ID.")]],
+        folder_metadata_search: Annotated[FolderMetadataSearch, Field(description="The search parameters.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderContentWrapper, ThirdPartyFolderContentWrapper]:
+        """Search a folder by metadata
+
+        Searches the folder by metadata. The same filter the folder listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+        :param folder_id: The folder ID. (required)
+        :type folder_id: Union[int, str]
+        :param folder_metadata_search: The search parameters. (required)
+        :type folder_metadata_search: FolderMetadataSearch
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8862,9 +10695,9 @@ class FoldersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._set_folder_order_serialize(
+        _param = self._search_folder_serialize(
             folder_id=folder_id,
-            order_request_dto=order_request_dto,
+            folder_metadata_search=folder_metadata_search,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8872,12 +10705,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderContentWrapper" if isinstance(folder_id, str) else "FolderContentWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8889,11 +10727,11 @@ class FoldersApi:
         ).data
 
 
-    @validate_call
-    def set_folder_order_with_http_info(
+    @overload
+    def search_folder_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
-        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The folder order information.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder ID.")],
+        folder_metadata_search: Annotated[FolderMetadataSearch, Field(description="The search parameters.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8906,14 +10744,372 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FolderIntegerWrapper]:
+    ) -> ApiResponse[FolderContentWrapper]: ...
+
+    @overload
+    def search_folder_with_http_info(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder ID.")],
+        folder_metadata_search: Annotated[FolderMetadataSearch, Field(description="The search parameters.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderContentWrapper]: ...
+
+    @overload
+    def search_folder_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder ID.")], Annotated[StrictStr, Field(description="The folder ID.")]],
+        folder_metadata_search: Annotated[FolderMetadataSearch, Field(description="The search parameters.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderContentWrapper, ThirdPartyFolderContentWrapper]]: ...
+
+    @validate_call
+    def search_folder_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder ID.")], Annotated[StrictStr, Field(description="The folder ID.")]],
+        folder_metadata_search: Annotated[FolderMetadataSearch, Field(description="The search parameters.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderContentWrapper, ThirdPartyFolderContentWrapper]]:
+        """Search a folder by metadata
+
+        Searches the folder by metadata. The same filter the folder listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+        :param folder_id: The folder ID. (required)
+        :type folder_id: Union[int, str]
+        :param folder_metadata_search: The search parameters. (required)
+        :type folder_metadata_search: FolderMetadataSearch
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_folder_serialize(
+            folder_id=folder_id,
+            folder_metadata_search=folder_metadata_search,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': ("ThirdPartyFolderContentWrapper" if isinstance(folder_id, str) else "FolderContentWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def search_folder_without_preload_content(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder ID.")], Annotated[StrictStr, Field(description="The folder ID.")]],
+        folder_metadata_search: Annotated[FolderMetadataSearch, Field(description="The search parameters.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Search a folder by metadata
+
+        Searches the folder by metadata. The same filter the folder listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+        :param folder_id: The folder ID. (required)
+        :type folder_id: Union[int, str]
+        :param folder_metadata_search: The search parameters. (required)
+        :type folder_metadata_search: FolderMetadataSearch
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_folder_serialize(
+            folder_id=folder_id,
+            folder_metadata_search=folder_metadata_search,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': ("ThirdPartyFolderContentWrapper" if isinstance(folder_id, str) else "FolderContentWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _search_folder_serialize(
+        self,
+        folder_id,
+        folder_metadata_search,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if folder_id is not None:
+            _path_params['folderId'] = folder_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if folder_metadata_search is not None:
+            _body_params = folder_metadata_search
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/{folderId}/search"
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @overload
+    def set_folder_order(
+        self,
+        folder_id: Annotated[StrictInt, Field(description="The folder to move.")],
+        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The position the folder is to take.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FolderWrapper: ...
+
+    @overload
+    def set_folder_order(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder to move.")],
+        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The position the folder is to take.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFolderWrapper: ...
+
+    @overload
+    def set_folder_order(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder to move.")], Annotated[StrictStr, Field(description="The folder to move.")]],
+        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The position the folder is to take.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]: ...
+
+    @validate_call
+    def set_folder_order(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder to move.")], Annotated[StrictStr, Field(description="The folder to move.")]],
+        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The position the folder is to take.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FolderWrapper, ThirdPartyFolderWrapper]:
         """Set folder order
 
-        Sets the order of a folder with ID specified in the request.
+        Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
-        :param order_request_dto: The folder order information.
+        :param folder_id: The folder to move. (required)
+        :type folder_id: Union[int, str]
+        :param order_request_dto: The position the folder is to take.
         :type order_request_dto: OrderRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8947,12 +11143,154 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @overload
+    def set_folder_order_with_http_info(
+        self,
+        folder_id: Annotated[StrictInt, Field(description="The folder to move.")],
+        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The position the folder is to take.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FolderWrapper]: ...
+
+    @overload
+    def set_folder_order_with_http_info(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder to move.")],
+        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The position the folder is to take.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFolderWrapper]: ...
+
+    @overload
+    def set_folder_order_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder to move.")], Annotated[StrictStr, Field(description="The folder to move.")]],
+        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The position the folder is to take.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]: ...
+
+    @validate_call
+    def set_folder_order_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder to move.")], Annotated[StrictStr, Field(description="The folder to move.")]],
+        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The position the folder is to take.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FolderWrapper, ThirdPartyFolderWrapper]]:
+        """Set folder order
+
+        Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
+
+        :param folder_id: The folder to move. (required)
+        :type folder_id: Union[int, str]
+        :param order_request_dto: The position the folder is to take.
+        :type order_request_dto: OrderRequestDto
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._set_folder_order_serialize(
+            folder_id=folder_id,
+            order_request_dto=order_request_dto,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -8967,8 +11305,8 @@ class FoldersApi:
     @validate_call
     def set_folder_order_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder unique identifier.")],
-        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The folder order information.")] = None,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder to move.")], Annotated[StrictStr, Field(description="The folder to move.")]],
+        order_request_dto: Annotated[Optional[OrderRequestDto], Field(description="The position the folder is to take.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8984,11 +11322,11 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Set folder order
 
-        Sets the order of a folder with ID specified in the request.
+        Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
 
-        :param folder_id: The folder unique identifier. (required)
-        :type folder_id: int
-        :param order_request_dto: The folder order information.
+        :param folder_id: The folder to move. (required)
+        :type folder_id: Union[int, str]
+        :param order_request_dto: The position the folder is to take.
         :type order_request_dto: OrderRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9022,12 +11360,17 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FolderIntegerWrapper",
-            '401': None,
-            '429': None,
+            '200': ("ThirdPartyFolderWrapper" if isinstance(folder_id, str) else "FolderWrapper"),
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9126,8 +11469,8 @@ class FoldersApi:
     @validate_call
     def set_folder_primary_external_link(
         self,
-        id: Annotated[StrictInt, Field(description="The folder ID.")],
-        folder_link_request: Annotated[FolderLinkRequest, Field(description="The folder link parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the link belongs to.")], Annotated[StrictStr, Field(description="The folder or room the link belongs to.")]],
+        folder_link_request: Annotated[FolderLinkRequest, Field(description="The link and the way it is to be shaped.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9143,11 +11486,11 @@ class FoldersApi:
     ) -> FileShareWrapper:
         """Set the folder external link
 
-        Sets the folder external link with the ID specified in the request.
+        Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
 
-        :param id: The folder ID. (required)
-        :type id: int
-        :param folder_link_request: The folder link parameters. (required)
+        :param id: The folder or room the link belongs to. (required)
+        :type id: Union[int, str]
+        :param folder_link_request: The link and the way it is to be shaped. (required)
         :type folder_link_request: FolderLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9182,11 +11525,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9201,8 +11549,8 @@ class FoldersApi:
     @validate_call
     def set_folder_primary_external_link_with_http_info(
         self,
-        id: Annotated[StrictInt, Field(description="The folder ID.")],
-        folder_link_request: Annotated[FolderLinkRequest, Field(description="The folder link parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the link belongs to.")], Annotated[StrictStr, Field(description="The folder or room the link belongs to.")]],
+        folder_link_request: Annotated[FolderLinkRequest, Field(description="The link and the way it is to be shaped.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9218,11 +11566,11 @@ class FoldersApi:
     ) -> ApiResponse[FileShareWrapper]:
         """Set the folder external link
 
-        Sets the folder external link with the ID specified in the request.
+        Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
 
-        :param id: The folder ID. (required)
-        :type id: int
-        :param folder_link_request: The folder link parameters. (required)
+        :param id: The folder or room the link belongs to. (required)
+        :type id: Union[int, str]
+        :param folder_link_request: The link and the way it is to be shaped. (required)
         :type folder_link_request: FolderLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9257,11 +11605,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9276,8 +11629,8 @@ class FoldersApi:
     @validate_call
     def set_folder_primary_external_link_without_preload_content(
         self,
-        id: Annotated[StrictInt, Field(description="The folder ID.")],
-        folder_link_request: Annotated[FolderLinkRequest, Field(description="The folder link parameters.")],
+        id: Union[Annotated[StrictInt, Field(description="The folder or room the link belongs to.")], Annotated[StrictStr, Field(description="The folder or room the link belongs to.")]],
+        folder_link_request: Annotated[FolderLinkRequest, Field(description="The link and the way it is to be shaped.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9293,11 +11646,11 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Set the folder external link
 
-        Sets the folder external link with the ID specified in the request.
+        Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
 
-        :param id: The folder ID. (required)
-        :type id: int
-        :param folder_link_request: The folder link parameters. (required)
+        :param id: The folder or room the link belongs to. (required)
+        :type id: Union[int, str]
+        :param folder_link_request: The link and the way it is to be shaped. (required)
         :type folder_link_request: FolderLinkRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9332,11 +11685,16 @@ class FoldersApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FileShareWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9433,13 +11791,9 @@ class FoldersApi:
 
 
     @validate_call
-    def upload_file(
+    def terminate_report_folder_history(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID to upload a file.")],
-        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
-        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
-        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9452,21 +11806,13 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FileIntegerArrayWrapper:
-        """Upload a file
+    ) -> None:
+        """Terminate the folder history report generation
 
-        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
+        Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest; a caller who fails  the access rule is answered with 403, a folder that does not exist with 404, and a portal with the login history  and audit trail section turned off with 402. Each caller can only terminate their own report.
 
-        :param folder_id: The folder ID to upload a file. (required)
+        :param folder_id: The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report. (required)
         :type folder_id: int
-        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
-        :type create_new_if_exist: bool
-        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
-        :type store_original_file: bool
-        :param keep_convert_status: Specifies whether to keep the file converting status or not.
-        :type keep_convert_status: bool
-        :param file: The file to be uploaded.
-        :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9489,12 +11835,8 @@ class FoldersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_file_serialize(
+        _param = self._terminate_report_folder_history_serialize(
             folder_id=folder_id,
-            create_new_if_exist=create_new_if_exist,
-            store_original_file=store_original_file,
-            keep_convert_status=keep_convert_status,
-            file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9502,14 +11844,18 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerArrayWrapper",
+            '200': None,
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9522,13 +11868,9 @@ class FoldersApi:
 
 
     @validate_call
-    def upload_file_with_http_info(
+    def terminate_report_folder_history_with_http_info(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID to upload a file.")],
-        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
-        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
-        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9541,20 +11883,312 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FileIntegerArrayWrapper]:
+    ) -> ApiResponse[None]:
+        """Terminate the folder history report generation
+
+        Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest; a caller who fails  the access rule is answered with 403, a folder that does not exist with 404, and a portal with the login history  and audit trail section turned off with 402. Each caller can only terminate their own report.
+
+        :param folder_id: The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report. (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._terminate_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def terminate_report_folder_history_without_preload_content(
+        self,
+        folder_id: Annotated[StrictInt, Field(description="The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Terminate the folder history report generation
+
+        Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest; a caller who fails  the access rule is answered with 403, a folder that does not exist with 404, and a portal with the login history  and audit trail section turned off with 402. Each caller can only terminate their own report.
+
+        :param folder_id: The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report. (required)
+        :type folder_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._terminate_report_folder_history_serialize(
+            folder_id=folder_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
+            '400': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _terminate_report_folder_history_serialize(
+        self,
+        folder_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if folder_id is not None:
+            _path_params['folderId'] = folder_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'Basic', 
+            'OAuth2', 
+            'ApiKeyBearer', 
+            'asc_auth_key', 
+            'Bearer', 
+            'OpenId'
+        ]
+
+
+        resource_path = "/api/2.0/files/folder/{folderId}/log/report"
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path=resource_path,
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @overload
+    def upload_file(
+        self,
+        folder_id: Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")],
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> FileArrayWrapper: ...
+
+    @overload
+    def upload_file(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")],
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ThirdPartyFileArrayWrapper: ...
+
+    @overload
+    def upload_file(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")], Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")]],
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FileArrayWrapper, ThirdPartyFileArrayWrapper]: ...
+
+    @validate_call
+    def upload_file(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")], Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")]],
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Union[FileArrayWrapper, ThirdPartyFileArrayWrapper]:
         """Upload a file
 
-        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
+        Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
 
-        :param folder_id: The folder ID to upload a file. (required)
-        :type folder_id: int
-        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :param folder_id: The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. (required)
+        :type folder_id: Union[int, str]
+        :param create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type create_new_if_exist: bool
-        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :param store_original_file: Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
         :type store_original_file: bool
-        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type keep_convert_status: bool
-        :param file: The file to be uploaded.
+        :param file: The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
         :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9591,14 +12225,179 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerArrayWrapper",
+            '200': ("ThirdPartyFileArrayWrapper" if isinstance(folder_id, str) else "FileArrayWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @overload
+    def upload_file_with_http_info(
+        self,
+        folder_id: Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")],
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[FileArrayWrapper]: ...
+
+    @overload
+    def upload_file_with_http_info(
+        self,
+        folder_id: Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")],
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ThirdPartyFileArrayWrapper]: ...
+
+    @overload
+    def upload_file_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")], Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")]],
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FileArrayWrapper, ThirdPartyFileArrayWrapper]]: ...
+
+    @validate_call
+    def upload_file_with_http_info(
+        self,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")], Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")]],
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Union[FileArrayWrapper, ThirdPartyFileArrayWrapper]]:
+        """Upload a file
+
+        Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
+
+        :param folder_id: The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. (required)
+        :type folder_id: Union[int, str]
+        :param create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+        :type create_new_if_exist: bool
+        :param store_original_file: Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
+        :type store_original_file: bool
+        :param keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+        :type keep_convert_status: bool
+        :param file: The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
+        :type file: bytes
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._upload_file_serialize(
+            folder_id=folder_id,
+            create_new_if_exist=create_new_if_exist,
+            store_original_file=store_original_file,
+            keep_convert_status=keep_convert_status,
+            file=file,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': ("ThirdPartyFileArrayWrapper" if isinstance(folder_id, str) else "FileArrayWrapper"),
+            '400': None,
+            '402': None,
+            '403': None,
+            '404': None,
+            '415': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '502': None,
+            '503': None,
+        }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9613,11 +12412,11 @@ class FoldersApi:
     @validate_call
     def upload_file_without_preload_content(
         self,
-        folder_id: Annotated[StrictInt, Field(description="The folder ID to upload a file.")],
-        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
-        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
-        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
+        folder_id: Union[Annotated[StrictInt, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")], Annotated[StrictStr, Field(description="The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.")]],
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9633,17 +12432,17 @@ class FoldersApi:
     ) -> RESTResponseType:
         """Upload a file
 
-        Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
+        Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
 
-        :param folder_id: The folder ID to upload a file. (required)
-        :type folder_id: int
-        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :param folder_id: The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. (required)
+        :type folder_id: Union[int, str]
+        :param create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type create_new_if_exist: bool
-        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :param store_original_file: Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
         :type store_original_file: bool
-        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type keep_convert_status: bool
-        :param file: The file to be uploaded.
+        :param file: The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
         :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9680,14 +12479,19 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerArrayWrapper",
+            '200': ("ThirdPartyFileArrayWrapper" if isinstance(folder_id, str) else "FileArrayWrapper"),
+            '400': None,
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9741,7 +12545,7 @@ class FoldersApi:
         # process the header parameters
         # process the form parameters
         if file is not None:
-            _files['File'] = file
+            _files['file'] = file
         # process the body parameter
 
 
@@ -9801,10 +12605,10 @@ class FoldersApi:
     @validate_call
     def upload_file_to_my(
         self,
-        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
-        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
-        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9817,18 +12621,18 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> FileIntegerArrayWrapper:
-        """Upload a file to the My documents section
+    ) -> FileArrayWrapper:
+        """Upload a file to My documents
 
-        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
+        Uploads one file into the caller's own My documents section and returns it inside a single-element array; one  request stores exactly one file. The destination takes no identifier: it is resolved from the calling account  and created on first use, while a guest account has none and is answered as missing (404). The body has to be  `multipart/form-data` carrying the file part; a request without it is rejected as invalid, and the stored name  comes from that part, since unlike `POST api/2.0/files/@my/insert` there is no separate title. The call is not  idempotent: by default a file of the same title is overwritten as a new version, while `createNewIfExist=true`  stores a separate copy under a title made unique with a numeric suffix. `storeOriginalFile` is not a  per-request switch: it writes the same account setting as `PUT api/2.0/files/storeoriginal`, which decides  what happens to the formats listed in `extsMustConvert` of `GET api/2.0/files/settings` when they are  converted after the response - false replaces the uploaded file with the converted one, true keeps both;  `keepConvertStatus=true` keeps that conversion result readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. Files over the single-request size limit or the account's  storage quota are refused; send those through `POST api/2.0/files/{folderId}/upload/create_session`.
 
-        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :param create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type create_new_if_exist: bool
-        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :param store_original_file: Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
         :type store_original_file: bool
-        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type keep_convert_status: bool
-        :param file: The file to be uploaded.
+        :param file: The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
         :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9864,14 +12668,19 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerArrayWrapper",
+            '200': "FileArrayWrapper",
+            '400': None,
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9886,10 +12695,10 @@ class FoldersApi:
     @validate_call
     def upload_file_to_my_with_http_info(
         self,
-        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
-        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
-        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9902,18 +12711,18 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[FileIntegerArrayWrapper]:
-        """Upload a file to the My documents section
+    ) -> ApiResponse[FileArrayWrapper]:
+        """Upload a file to My documents
 
-        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
+        Uploads one file into the caller's own My documents section and returns it inside a single-element array; one  request stores exactly one file. The destination takes no identifier: it is resolved from the calling account  and created on first use, while a guest account has none and is answered as missing (404). The body has to be  `multipart/form-data` carrying the file part; a request without it is rejected as invalid, and the stored name  comes from that part, since unlike `POST api/2.0/files/@my/insert` there is no separate title. The call is not  idempotent: by default a file of the same title is overwritten as a new version, while `createNewIfExist=true`  stores a separate copy under a title made unique with a numeric suffix. `storeOriginalFile` is not a  per-request switch: it writes the same account setting as `PUT api/2.0/files/storeoriginal`, which decides  what happens to the formats listed in `extsMustConvert` of `GET api/2.0/files/settings` when they are  converted after the response - false replaces the uploaded file with the converted one, true keeps both;  `keepConvertStatus=true` keeps that conversion result readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. Files over the single-request size limit or the account's  storage quota are refused; send those through `POST api/2.0/files/{folderId}/upload/create_session`.
 
-        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :param create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type create_new_if_exist: bool
-        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :param store_original_file: Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
         :type store_original_file: bool
-        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type keep_convert_status: bool
-        :param file: The file to be uploaded.
+        :param file: The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
         :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9949,14 +12758,19 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerArrayWrapper",
+            '200': "FileArrayWrapper",
+            '400': None,
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -9971,10 +12785,10 @@ class FoldersApi:
     @validate_call
     def upload_file_to_my_without_preload_content(
         self,
-        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Specifies whether to create the new file if it already exists or not.")] = None,
-        store_original_file: Annotated[Optional[StrictBool], Field(description="Specifies whether to upload documents in the original formats as well or not.")] = None,
-        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Specifies whether to keep the file converting status or not.")] = None,
-        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The file to be uploaded.")] = None,
+        create_new_if_exist: Annotated[Optional[StrictBool], Field(description="Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.")] = None,
+        store_original_file: Annotated[Optional[StrictBool], Field(description="Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.")] = None,
+        keep_convert_status: Annotated[Optional[StrictBool], Field(description="Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.")] = None,
+        file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9988,17 +12802,17 @@ class FoldersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Upload a file to the My documents section
+        """Upload a file to My documents
 
-        Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
+        Uploads one file into the caller's own My documents section and returns it inside a single-element array; one  request stores exactly one file. The destination takes no identifier: it is resolved from the calling account  and created on first use, while a guest account has none and is answered as missing (404). The body has to be  `multipart/form-data` carrying the file part; a request without it is rejected as invalid, and the stored name  comes from that part, since unlike `POST api/2.0/files/@my/insert` there is no separate title. The call is not  idempotent: by default a file of the same title is overwritten as a new version, while `createNewIfExist=true`  stores a separate copy under a title made unique with a numeric suffix. `storeOriginalFile` is not a  per-request switch: it writes the same account setting as `PUT api/2.0/files/storeoriginal`, which decides  what happens to the formats listed in `extsMustConvert` of `GET api/2.0/files/settings` when they are  converted after the response - false replaces the uploaded file with the converted one, true keeps both;  `keepConvertStatus=true` keeps that conversion result readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. Files over the single-request size limit or the account's  storage quota are refused; send those through `POST api/2.0/files/{folderId}/upload/create_session`.
 
-        :param create_new_if_exist: Specifies whether to create the new file if it already exists or not.
+        :param create_new_if_exist: Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
         :type create_new_if_exist: bool
-        :param store_original_file: Specifies whether to upload documents in the original formats as well or not.
+        :param store_original_file: Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
         :type store_original_file: bool
-        :param keep_convert_status: Specifies whether to keep the file converting status or not.
+        :param keep_convert_status: Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
         :type keep_convert_status: bool
-        :param file: The file to be uploaded.
+        :param file: The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
         :type file: bytes
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10034,14 +12848,19 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FileIntegerArrayWrapper",
+            '200': "FileArrayWrapper",
+            '400': None,
+            '402': None,
             '403': None,
             '404': None,
-            '401': None,
-            '429': None,
+            '415': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -10092,7 +12911,7 @@ class FoldersApi:
         # process the header parameters
         # process the form parameters
         if file is not None:
-            _files['File'] = file
+            _files['file'] = file
         # process the body parameter
 
 

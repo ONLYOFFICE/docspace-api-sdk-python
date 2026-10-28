@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
@@ -52,14 +52,14 @@ class UserStatusApi:
     @validate_call
     def get_by_status(
         self,
-        status: Annotated[EmployeeStatus, Field(description="The user status.")],
-        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the criteria used to filter the profiles in the request.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of user profiles to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving data in a paginated request.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split multiple filter criteria in a query string.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="A string value representing additional filter criteria used in query parameters.")] = None,
+        status: Annotated[EmployeeStatus, Field(description="The account state to list, taken from the route: `Active` for working accounts, `Terminated` for disabled  ones, `Pending` for open invitations, or `All` for every state.")],
+        filter_by: Annotated[Optional[StrictStr], Field(description="The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the ordering: `Ascending`, which is the default, or `Descending`.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -75,23 +75,23 @@ class UserStatusApi:
     ) -> EmployeeFullArrayWrapper:
         """Get profiles by status
 
-        Returns a list of profiles filtered by the user status.
+        Returns a page of the accounts that are in one particular state - the status is taken from the route - with  the full profile of each of them.  The caller has to be a room admin, a DocSpace admin or a People module admin; a member or a guest gets 403.  The call is read-only, paged by `count` and `startIndex`, ordered by `sortBy` and `sortOrder`, and reports  the number of matches in the total count of the response.  Narrow it with `filterValue` on the name and the email; setting `filterBy` to `group` makes the same  `filterValue` the ID of the group to keep the members of, and because the value is then applied as the text  filter as well, that combination normally matches nothing - use `GET api/2.0/people/filter` with `groupId`  to filter by group.  `GET api/2.0/people` is the same operation fixed to the `Active` status.
 
-        :param status: The user status. (required)
+        :param status: The account state to list, taken from the route: `Active` for working accounts, `Terminated` for disabled  ones, `Pending` for open invitations, or `All` for every state. (required)
         :type status: EmployeeStatus
-        :param filter_by: Specifies the criteria used to filter the profiles in the request.
+        :param filter_by: The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter.
         :type filter_by: str
-        :param count: The maximum number of user profiles to retrieve.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index for retrieving data in a paginated request.
+        :param start_index: The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
         :type start_index: int
-        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :param sort_by: What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction of the ordering: `Ascending`, which is the default, or `Descending`.
         :type sort_order: SortOrder
-        :param filter_separator: Represents the separator used to split multiple filter criteria in a query string.
+        :param filter_separator: The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match.
         :type filter_separator: str
-        :param filter_value: A string value representing additional filter criteria used in query parameters.
+        :param filter_value: The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -132,11 +132,15 @@ class UserStatusApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -151,14 +155,14 @@ class UserStatusApi:
     @validate_call
     def get_by_status_with_http_info(
         self,
-        status: Annotated[EmployeeStatus, Field(description="The user status.")],
-        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the criteria used to filter the profiles in the request.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of user profiles to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving data in a paginated request.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split multiple filter criteria in a query string.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="A string value representing additional filter criteria used in query parameters.")] = None,
+        status: Annotated[EmployeeStatus, Field(description="The account state to list, taken from the route: `Active` for working accounts, `Terminated` for disabled  ones, `Pending` for open invitations, or `All` for every state.")],
+        filter_by: Annotated[Optional[StrictStr], Field(description="The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the ordering: `Ascending`, which is the default, or `Descending`.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -174,23 +178,23 @@ class UserStatusApi:
     ) -> ApiResponse[EmployeeFullArrayWrapper]:
         """Get profiles by status
 
-        Returns a list of profiles filtered by the user status.
+        Returns a page of the accounts that are in one particular state - the status is taken from the route - with  the full profile of each of them.  The caller has to be a room admin, a DocSpace admin or a People module admin; a member or a guest gets 403.  The call is read-only, paged by `count` and `startIndex`, ordered by `sortBy` and `sortOrder`, and reports  the number of matches in the total count of the response.  Narrow it with `filterValue` on the name and the email; setting `filterBy` to `group` makes the same  `filterValue` the ID of the group to keep the members of, and because the value is then applied as the text  filter as well, that combination normally matches nothing - use `GET api/2.0/people/filter` with `groupId`  to filter by group.  `GET api/2.0/people` is the same operation fixed to the `Active` status.
 
-        :param status: The user status. (required)
+        :param status: The account state to list, taken from the route: `Active` for working accounts, `Terminated` for disabled  ones, `Pending` for open invitations, or `All` for every state. (required)
         :type status: EmployeeStatus
-        :param filter_by: Specifies the criteria used to filter the profiles in the request.
+        :param filter_by: The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter.
         :type filter_by: str
-        :param count: The maximum number of user profiles to retrieve.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index for retrieving data in a paginated request.
+        :param start_index: The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
         :type start_index: int
-        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :param sort_by: What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction of the ordering: `Ascending`, which is the default, or `Descending`.
         :type sort_order: SortOrder
-        :param filter_separator: Represents the separator used to split multiple filter criteria in a query string.
+        :param filter_separator: The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match.
         :type filter_separator: str
-        :param filter_value: A string value representing additional filter criteria used in query parameters.
+        :param filter_value: The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -231,11 +235,15 @@ class UserStatusApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -250,14 +258,14 @@ class UserStatusApi:
     @validate_call
     def get_by_status_without_preload_content(
         self,
-        status: Annotated[EmployeeStatus, Field(description="The user status.")],
-        filter_by: Annotated[Optional[StrictStr], Field(description="Specifies the criteria used to filter the profiles in the request.")] = None,
-        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of user profiles to retrieve.")] = None,
-        start_index: Annotated[Optional[StrictInt], Field(description="The starting index for retrieving data in a paginated request.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="Specifies the property or field name by which the results should be sorted.")] = None,
-        sort_order: Annotated[Optional[SortOrder], Field(description="The order in which the results are sorted.")] = None,
-        filter_separator: Annotated[Optional[StrictStr], Field(description="Represents the separator used to split multiple filter criteria in a query string.")] = None,
-        filter_value: Annotated[Optional[StrictStr], Field(description="A string value representing additional filter criteria used in query parameters.")] = None,
+        status: Annotated[EmployeeStatus, Field(description="The account state to list, taken from the route: `Active` for working accounts, `Terminated` for disabled  ones, `Pending` for open invitations, or `All` for every state.")],
+        filter_by: Annotated[Optional[StrictStr], Field(description="The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter.")] = None,
+        count: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The size of the page. It defaults to 100, which is also the largest value the operation accepts.")] = None,
+        start_index: Annotated[Optional[StrictInt], Field(description="The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.")] = None,
+        sort_order: Annotated[Optional[SortOrder], Field(description="The direction of the ordering: `Ascending`, which is the default, or `Descending`.")] = None,
+        filter_separator: Annotated[Optional[StrictStr], Field(description="The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match.")] = None,
+        filter_value: Annotated[Optional[StrictStr], Field(description="The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -273,23 +281,23 @@ class UserStatusApi:
     ) -> RESTResponseType:
         """Get profiles by status
 
-        Returns a list of profiles filtered by the user status.
+        Returns a page of the accounts that are in one particular state - the status is taken from the route - with  the full profile of each of them.  The caller has to be a room admin, a DocSpace admin or a People module admin; a member or a guest gets 403.  The call is read-only, paged by `count` and `startIndex`, ordered by `sortBy` and `sortOrder`, and reports  the number of matches in the total count of the response.  Narrow it with `filterValue` on the name and the email; setting `filterBy` to `group` makes the same  `filterValue` the ID of the group to keep the members of, and because the value is then applied as the text  filter as well, that combination normally matches nothing - use `GET api/2.0/people/filter` with `groupId`  to filter by group.  `GET api/2.0/people` is the same operation fixed to the `Active` status.
 
-        :param status: The user status. (required)
+        :param status: The account state to list, taken from the route: `Active` for working accounts, `Terminated` for disabled  ones, `Pending` for open invitations, or `All` for every state. (required)
         :type status: EmployeeStatus
-        :param filter_by: Specifies the criteria used to filter the profiles in the request.
+        :param filter_by: The only recognised value is `group`, which makes `filterValue` the ID of the group to keep the members of.  Any other value, and omitting the field, applies no group filter.
         :type filter_by: str
-        :param count: The maximum number of user profiles to retrieve.
+        :param count: The size of the page. It defaults to 100, which is also the largest value the operation accepts.
         :type count: int
-        :param start_index: The starting index for retrieving data in a paginated request.
+        :param start_index: The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
         :type start_index: int
-        :param sort_by: Specifies the property or field name by which the results should be sorted.
+        :param sort_by: What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.
         :type sort_by: str
-        :param sort_order: The order in which the results are sorted.
+        :param sort_order: The direction of the ordering: `Ascending`, which is the default, or `Descending`.
         :type sort_order: SortOrder
-        :param filter_separator: Represents the separator used to split multiple filter criteria in a query string.
+        :param filter_separator: The character that splits `filterValue` into several terms, of which any one may match. Omit it to split  the value on spaces instead, in which case every term has to match.
         :type filter_separator: str
-        :param filter_value: A string value representing additional filter criteria used in query parameters.
+        :param filter_value: The text to match against the name and the email of the account, case-insensitively. Omit it to apply no  text filter.
         :type filter_value: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -330,11 +338,15 @@ class UserStatusApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '500': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -452,8 +464,8 @@ class UserStatusApi:
     @validate_call
     def update_user_activation_status(
         self,
-        activationstatus: Annotated[EmployeeActivationStatus, Field(description="The new user activation status.")],
-        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
+        activation_status: Annotated[EmployeeActivationStatus, Field(description="The activation state to set on the calling account, taken from the route: `NotActivated`, `Activated`,  `Pending` or `AutoGenerated`.")],
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The account to change. Only `userIds` is read, it has to hold exactly one entry, and that entry has to be the  calling account; `resendAll` is ignored here.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -467,13 +479,13 @@ class UserStatusApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmployeeFullArrayWrapper:
-        """Set an activation status to the users
+        """Set my activation status
 
-        Sets the required activation status to the list of users with the IDs specified in the request.
+        Sets the activation state of the calling account, which is how a person finishes confirming their email  address after following the link they were sent.  The request has to carry the confirmation token from that link rather than an ordinary session, and the  account must be allowed to edit its own profile.  Despite taking a list, it accepts exactly one ID and that ID has to be the calling account: an empty list,  more than one entry, or somebody else's ID is answered with 400, so it cannot be used to activate other  people.  Setting `Activated` on the portal owner sends the administrator welcome email, once per portal.  The change raises a `UserUpdated` webhook, and the answer holds the profile in its new state - or nothing at  all when the account has meanwhile disappeared, which is skipped without an error.  The account status is a different thing and is changed through `PUT api/2.0/people/status/{status}`.
 
-        :param activationstatus: The new user activation status. (required)
-        :type activationstatus: EmployeeActivationStatus
-        :param update_members_request_dto: The request parameters for updating the user information. (required)
+        :param activation_status: The activation state to set on the calling account, taken from the route: `NotActivated`, `Activated`,  `Pending` or `AutoGenerated`. (required)
+        :type activation_status: EmployeeActivationStatus
+        :param update_members_request_dto: The account to change. Only `userIds` is read, it has to hold exactly one entry, and that entry has to be the  calling account; `resendAll` is ignored here. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -498,7 +510,7 @@ class UserStatusApi:
         """ # noqa: E501
 
         _param = self._update_user_activation_status_serialize(
-            activationstatus=activationstatus,
+            activation_status=activation_status,
             update_members_request_dto=update_members_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -508,11 +520,15 @@ class UserStatusApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -527,8 +543,8 @@ class UserStatusApi:
     @validate_call
     def update_user_activation_status_with_http_info(
         self,
-        activationstatus: Annotated[EmployeeActivationStatus, Field(description="The new user activation status.")],
-        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
+        activation_status: Annotated[EmployeeActivationStatus, Field(description="The activation state to set on the calling account, taken from the route: `NotActivated`, `Activated`,  `Pending` or `AutoGenerated`.")],
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The account to change. Only `userIds` is read, it has to hold exactly one entry, and that entry has to be the  calling account; `resendAll` is ignored here.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -542,13 +558,13 @@ class UserStatusApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EmployeeFullArrayWrapper]:
-        """Set an activation status to the users
+        """Set my activation status
 
-        Sets the required activation status to the list of users with the IDs specified in the request.
+        Sets the activation state of the calling account, which is how a person finishes confirming their email  address after following the link they were sent.  The request has to carry the confirmation token from that link rather than an ordinary session, and the  account must be allowed to edit its own profile.  Despite taking a list, it accepts exactly one ID and that ID has to be the calling account: an empty list,  more than one entry, or somebody else's ID is answered with 400, so it cannot be used to activate other  people.  Setting `Activated` on the portal owner sends the administrator welcome email, once per portal.  The change raises a `UserUpdated` webhook, and the answer holds the profile in its new state - or nothing at  all when the account has meanwhile disappeared, which is skipped without an error.  The account status is a different thing and is changed through `PUT api/2.0/people/status/{status}`.
 
-        :param activationstatus: The new user activation status. (required)
-        :type activationstatus: EmployeeActivationStatus
-        :param update_members_request_dto: The request parameters for updating the user information. (required)
+        :param activation_status: The activation state to set on the calling account, taken from the route: `NotActivated`, `Activated`,  `Pending` or `AutoGenerated`. (required)
+        :type activation_status: EmployeeActivationStatus
+        :param update_members_request_dto: The account to change. Only `userIds` is read, it has to hold exactly one entry, and that entry has to be the  calling account; `resendAll` is ignored here. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -573,7 +589,7 @@ class UserStatusApi:
         """ # noqa: E501
 
         _param = self._update_user_activation_status_serialize(
-            activationstatus=activationstatus,
+            activation_status=activation_status,
             update_members_request_dto=update_members_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -583,11 +599,15 @@ class UserStatusApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -602,8 +622,8 @@ class UserStatusApi:
     @validate_call
     def update_user_activation_status_without_preload_content(
         self,
-        activationstatus: Annotated[EmployeeActivationStatus, Field(description="The new user activation status.")],
-        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
+        activation_status: Annotated[EmployeeActivationStatus, Field(description="The activation state to set on the calling account, taken from the route: `NotActivated`, `Activated`,  `Pending` or `AutoGenerated`.")],
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The account to change. Only `userIds` is read, it has to hold exactly one entry, and that entry has to be the  calling account; `resendAll` is ignored here.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -617,13 +637,13 @@ class UserStatusApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Set an activation status to the users
+        """Set my activation status
 
-        Sets the required activation status to the list of users with the IDs specified in the request.
+        Sets the activation state of the calling account, which is how a person finishes confirming their email  address after following the link they were sent.  The request has to carry the confirmation token from that link rather than an ordinary session, and the  account must be allowed to edit its own profile.  Despite taking a list, it accepts exactly one ID and that ID has to be the calling account: an empty list,  more than one entry, or somebody else's ID is answered with 400, so it cannot be used to activate other  people.  Setting `Activated` on the portal owner sends the administrator welcome email, once per portal.  The change raises a `UserUpdated` webhook, and the answer holds the profile in its new state - or nothing at  all when the account has meanwhile disappeared, which is skipped without an error.  The account status is a different thing and is changed through `PUT api/2.0/people/status/{status}`.
 
-        :param activationstatus: The new user activation status. (required)
-        :type activationstatus: EmployeeActivationStatus
-        :param update_members_request_dto: The request parameters for updating the user information. (required)
+        :param activation_status: The activation state to set on the calling account, taken from the route: `NotActivated`, `Activated`,  `Pending` or `AutoGenerated`. (required)
+        :type activation_status: EmployeeActivationStatus
+        :param update_members_request_dto: The account to change. Only `userIds` is read, it has to hold exactly one entry, and that entry has to be the  calling account; `resendAll` is ignored here. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -648,7 +668,7 @@ class UserStatusApi:
         """ # noqa: E501
 
         _param = self._update_user_activation_status_serialize(
-            activationstatus=activationstatus,
+            activation_status=activation_status,
             update_members_request_dto=update_members_request_dto,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -658,11 +678,15 @@ class UserStatusApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '403': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -672,7 +696,7 @@ class UserStatusApi:
 
     def _update_user_activation_status_serialize(
         self,
-        activationstatus,
+        activation_status,
         update_members_request_dto,
         _request_auth,
         _content_type,
@@ -695,8 +719,8 @@ class UserStatusApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if activationstatus is not None:
-            _path_params['activationstatus'] = activationstatus.value
+        if activation_status is not None:
+            _path_params['activationStatus'] = activation_status.value
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -738,7 +762,7 @@ class UserStatusApi:
         ]
 
 
-        resource_path = "/api/2.0/people/activationstatus/{activationstatus}"
+        resource_path = "/api/2.0/people/activationstatus/{activationStatus}"
 
         return self.api_client.param_serialize(
             method='PUT',
@@ -761,8 +785,8 @@ class UserStatusApi:
     @validate_call
     def update_user_status(
         self,
-        status: Annotated[EmployeeStatus, Field(description="The new user status.")],
-        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
+        status: Annotated[EmployeeStatus, Field(description="The state to put the listed accounts into, taken from the route. Only `Active`, which enables an account,  and `Terminated`, which disables it, are accepted; any other value is rejected with 400.")],
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The accounts to enable or disable. Only `userIds` is read by this operation; `resendAll` belongs to the  invitation operations and is ignored here.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -778,11 +802,11 @@ class UserStatusApi:
     ) -> EmployeeFullArrayWrapper:
         """Change a user status
 
-        Changes a status of the users with the IDs specified in the request.
+        Enables or disables several portal accounts at once, which is the way to suspend somebody without deleting  them and to bring them back later.  Only `Active` and `Terminated` are accepted in the route; any other status answers 400.  The caller needs the permission to edit users, and the whole list is checked before anything is applied: a  system account, an LDAP account, the portal owner, the caller themselves, or - unless the caller is the  portal owner - a DocSpace administrator rejects the entire call with 403 and changes nothing.  Disabling ends every session of the account and takes its seat back, while enabling takes a seat again and  can therefore answer 402 when the tariff or the user quota has none left; the accounts are then processed one  by one, so a quota failure partway through leaves the earlier ones enabled.  Enabling only affects accounts that were disabled, and an account that had never filled in its name comes  back as `Pending` rather than `Active` when it still has an unused invitation, so read the `status` in the  answer instead of assuming it matches the request.  Each changed account raises a `UserUpdated` webhook, and disabling is what  `DELETE api/2.0/people/{userId}` requires before it will delete an account.
 
-        :param status: The new user status. (required)
+        :param status: The state to put the listed accounts into, taken from the route. Only `Active`, which enables an account,  and `Terminated`, which disables it, are accepted; any other value is rejected with 400. (required)
         :type status: EmployeeStatus
-        :param update_members_request_dto: The request parameters for updating the user information. (required)
+        :param update_members_request_dto: The accounts to enable or disable. Only `userIds` is read by this operation; `resendAll` belongs to the  invitation operations and is ignored here. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -818,12 +842,15 @@ class UserStatusApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
             '400': None,
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -838,8 +865,8 @@ class UserStatusApi:
     @validate_call
     def update_user_status_with_http_info(
         self,
-        status: Annotated[EmployeeStatus, Field(description="The new user status.")],
-        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
+        status: Annotated[EmployeeStatus, Field(description="The state to put the listed accounts into, taken from the route. Only `Active`, which enables an account,  and `Terminated`, which disables it, are accepted; any other value is rejected with 400.")],
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The accounts to enable or disable. Only `userIds` is read by this operation; `resendAll` belongs to the  invitation operations and is ignored here.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -855,11 +882,11 @@ class UserStatusApi:
     ) -> ApiResponse[EmployeeFullArrayWrapper]:
         """Change a user status
 
-        Changes a status of the users with the IDs specified in the request.
+        Enables or disables several portal accounts at once, which is the way to suspend somebody without deleting  them and to bring them back later.  Only `Active` and `Terminated` are accepted in the route; any other status answers 400.  The caller needs the permission to edit users, and the whole list is checked before anything is applied: a  system account, an LDAP account, the portal owner, the caller themselves, or - unless the caller is the  portal owner - a DocSpace administrator rejects the entire call with 403 and changes nothing.  Disabling ends every session of the account and takes its seat back, while enabling takes a seat again and  can therefore answer 402 when the tariff or the user quota has none left; the accounts are then processed one  by one, so a quota failure partway through leaves the earlier ones enabled.  Enabling only affects accounts that were disabled, and an account that had never filled in its name comes  back as `Pending` rather than `Active` when it still has an unused invitation, so read the `status` in the  answer instead of assuming it matches the request.  Each changed account raises a `UserUpdated` webhook, and disabling is what  `DELETE api/2.0/people/{userId}` requires before it will delete an account.
 
-        :param status: The new user status. (required)
+        :param status: The state to put the listed accounts into, taken from the route. Only `Active`, which enables an account,  and `Terminated`, which disables it, are accepted; any other value is rejected with 400. (required)
         :type status: EmployeeStatus
-        :param update_members_request_dto: The request parameters for updating the user information. (required)
+        :param update_members_request_dto: The accounts to enable or disable. Only `userIds` is read by this operation; `resendAll` belongs to the  invitation operations and is ignored here. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -895,12 +922,15 @@ class UserStatusApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
             '400': None,
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -915,8 +945,8 @@ class UserStatusApi:
     @validate_call
     def update_user_status_without_preload_content(
         self,
-        status: Annotated[EmployeeStatus, Field(description="The new user status.")],
-        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The request parameters for updating the user information.")],
+        status: Annotated[EmployeeStatus, Field(description="The state to put the listed accounts into, taken from the route. Only `Active`, which enables an account,  and `Terminated`, which disables it, are accepted; any other value is rejected with 400.")],
+        update_members_request_dto: Annotated[UpdateMembersRequestDto, Field(description="The accounts to enable or disable. Only `userIds` is read by this operation; `resendAll` belongs to the  invitation operations and is ignored here.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -932,11 +962,11 @@ class UserStatusApi:
     ) -> RESTResponseType:
         """Change a user status
 
-        Changes a status of the users with the IDs specified in the request.
+        Enables or disables several portal accounts at once, which is the way to suspend somebody without deleting  them and to bring them back later.  Only `Active` and `Terminated` are accepted in the route; any other status answers 400.  The caller needs the permission to edit users, and the whole list is checked before anything is applied: a  system account, an LDAP account, the portal owner, the caller themselves, or - unless the caller is the  portal owner - a DocSpace administrator rejects the entire call with 403 and changes nothing.  Disabling ends every session of the account and takes its seat back, while enabling takes a seat again and  can therefore answer 402 when the tariff or the user quota has none left; the accounts are then processed one  by one, so a quota failure partway through leaves the earlier ones enabled.  Enabling only affects accounts that were disabled, and an account that had never filled in its name comes  back as `Pending` rather than `Active` when it still has an unused invitation, so read the `status` in the  answer instead of assuming it matches the request.  Each changed account raises a `UserUpdated` webhook, and disabling is what  `DELETE api/2.0/people/{userId}` requires before it will delete an account.
 
-        :param status: The new user status. (required)
+        :param status: The state to put the listed accounts into, taken from the route. Only `Active`, which enables an account,  and `Terminated`, which disables it, are accepted; any other value is rejected with 400. (required)
         :type status: EmployeeStatus
-        :param update_members_request_dto: The request parameters for updating the user information. (required)
+        :param update_members_request_dto: The accounts to enable or disable. Only `userIds` is read by this operation; `resendAll` belongs to the  invitation operations and is ignored here. (required)
         :type update_members_request_dto: UpdateMembersRequestDto
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -972,12 +1002,15 @@ class UserStatusApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmployeeFullArrayWrapper",
             '400': None,
+            '402': None,
             '403': None,
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

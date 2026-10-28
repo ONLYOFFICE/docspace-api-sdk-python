@@ -29,24 +29,23 @@ from typing_extensions import Self
 
 class ClientInfoResponse(BaseModel):
     """
-    The response containing public client information.
+    The consent-facing subset of a client: everything needed to render a consent screen, and nothing that would let a caller act as the client.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The client name.")
-    description: Optional[StrictStr] = Field(default=None, description="The client description.")
-    scopes: Optional[List[StrictStr]] = Field(default=None, description="The client scopes.")
-    public: Optional[StrictBool] = None
-    client_id: Optional[StrictStr] = Field(default=None, description="The client ID.")
-    website_url: Optional[StrictStr] = Field(default=None, description="The URL to the client's website")
-    terms_url: Optional[StrictStr] = Field(default=None, description="The URL to the client's terms of service.")
-    policy_url: Optional[StrictStr] = Field(default=None, description="The URL to the client's privacy policy.")
-    logo: Optional[StrictStr] = Field(default=None, description="The client logo in base64 format.")
-    authentication_methods: Optional[List[StrictStr]] = Field(default=None, description="The authentication methods supported by the client.")
-    is_public: Optional[StrictBool] = Field(default=None, description="Indicates whether the client is accessible by third-party tenants.")
-    created_on: Optional[datetime] = Field(default=None, description="The date and time when the client was created.")
-    created_by: Optional[StrictStr] = Field(default=None, description="The user who created the client.")
-    modified_on: Optional[datetime] = Field(default=None, description="The date and time when the client was last modified.")
-    modified_by: Optional[StrictStr] = Field(default=None, description="The user who last modified the client.")
-    __properties: ClassVar[List[str]] = ["name", "description", "scopes", "public", "client_id", "website_url", "terms_url", "policy_url", "logo", "authentication_methods", "is_public", "created_on", "created_by", "modified_on", "modified_by"]
+    name: Optional[StrictStr] = Field(default=None, description="The display name shown to the user on the consent screen, between 3 and 256 characters.", json_schema_extra={"examples": ["Example Name"]})
+    description: Optional[StrictStr] = Field(default=None, description="The free-text description shown next to the name on the consent screen, at most 255 characters.", json_schema_extra={"examples": ["Example Description"]})
+    scopes: Optional[List[StrictStr]] = Field(default=None, description="The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here.")
+    client_id: Optional[StrictStr] = Field(default=None, description="The generated identifier of the client, sent as client_id in every OAuth2 request. It is assigned when the client is registered and never changes afterwards.", json_schema_extra={"examples": ["6c7cf17b-1bd3-47d5-94c6-be2d3570e168"]})
+    website_url: Optional[StrictStr] = Field(default=None, description="The URL of the client home page, offered to the user before they consent.", json_schema_extra={"examples": ["http://example.com"]})
+    terms_url: Optional[StrictStr] = Field(default=None, description="The URL of the client terms of service, linked from the consent screen.", json_schema_extra={"examples": ["http://example.com"]})
+    policy_url: Optional[StrictStr] = Field(default=None, description="The URL of the client privacy policy, linked from the consent screen.", json_schema_extra={"examples": ["http://example.com"]})
+    logo: Optional[StrictStr] = Field(default=None, description="The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted, the whole string may not exceed 2000000 characters and the decoded image may not exceed 256000 bytes.", json_schema_extra={"examples": ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="]})
+    authentication_methods: Optional[List[StrictStr]] = Field(default=None, description="How the client authenticates itself at the token endpoint: client_secret_post for a confidential client that sends its secret, none for a public client that proves itself with PKCE instead.")
+    created_on: Optional[datetime] = Field(default=None, description="When the client was registered, as an ISO-8601 timestamp with a zone offset.", json_schema_extra={"examples": ["2024-04-04T12:00:00Z"]})
+    created_by: Optional[StrictStr] = Field(default=None, description="The identifier of the user who registered the client. A plain user may read and change only the clients where this is their own identifier.", json_schema_extra={"examples": ["6c7cf17b-1bd3-47d5-94c6-be2d3570e168"]})
+    modified_on: Optional[datetime] = Field(default=None, description="When the client was last changed, as an ISO-8601 timestamp with a zone offset.", json_schema_extra={"examples": ["2024-04-04T12:00:00Z"]})
+    modified_by: Optional[StrictStr] = Field(default=None, description="The identifier of the user who last changed the client.", json_schema_extra={"examples": ["6c7cf17b-1bd3-47d5-94c6-be2d3570e168"]})
+    is_public: Optional[StrictBool] = Field(default=None, description="Whether the client is offered to third-party tenants rather than only to the tenant that registered it.", json_schema_extra={"examples": [False]})
+    __properties: ClassVar[List[str]] = ["name", "description", "scopes", "client_id", "website_url", "terms_url", "policy_url", "logo", "authentication_methods", "created_on", "created_by", "modified_on", "modified_by", "is_public"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,18 +102,17 @@ class ClientInfoResponse(BaseModel):
             "name": obj.get("name"),
             "description": obj.get("description"),
             "scopes": obj.get("scopes"),
-            "public": obj.get("public"),
             "client_id": obj.get("client_id"),
             "website_url": obj.get("website_url"),
             "terms_url": obj.get("terms_url"),
             "policy_url": obj.get("policy_url"),
             "logo": obj.get("logo"),
             "authentication_methods": obj.get("authentication_methods"),
-            "is_public": obj.get("is_public"),
             "created_on": obj.get("created_on"),
             "created_by": obj.get("created_by"),
             "modified_on": obj.get("modified_on"),
-            "modified_by": obj.get("modified_by")
+            "modified_by": obj.get("modified_by"),
+            "is_public": obj.get("is_public")
         })
         return _obj
 

@@ -1,10 +1,11 @@
 # CapabilitiesWrapper
+The successful API response containing the CapabilitiesDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**CapabilitiesDto**](CapabilitiesDto.md) |  | [optional] 
+**response** | [**CapabilitiesDto**](CapabilitiesDto.md) | The CapabilitiesDto object returned by the operation. | [optional] 
 **count** | **int** | The total number of items in the response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 

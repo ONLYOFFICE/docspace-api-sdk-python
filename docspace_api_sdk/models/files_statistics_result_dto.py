@@ -29,14 +29,15 @@ from typing_extensions import Self
 
 class FilesStatisticsResultDto(BaseModel):
     """
-    The file statistics result parameters.
+    The space that stored documents take in each section of the portal, in bytes. The figures cover every account of  the portal rather than the caller alone, and a section the portal does not have comes back as null instead of a  zero figure.
     """ # noqa: E501
-    my_documents_used_space: Optional[FilesStatisticsFolder] = Field(default=None, alias="myDocumentsUsedSpace")
-    trash_used_space: Optional[FilesStatisticsFolder] = Field(default=None, alias="trashUsedSpace")
-    archive_used_space: Optional[FilesStatisticsFolder] = Field(default=None, alias="archiveUsedSpace")
-    rooms_used_space: Optional[FilesStatisticsFolder] = Field(default=None, alias="roomsUsedSpace")
-    ai_agents_used_space: Optional[FilesStatisticsFolder] = Field(default=None, alias="aiAgentsUsedSpace")
-    __properties: ClassVar[List[str]] = ["myDocumentsUsedSpace", "trashUsedSpace", "archiveUsedSpace", "roomsUsedSpace", "aiAgentsUsedSpace"]
+    my_documents_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The space taken by the personal Files sections of all accounts of the portal added together. An item deleted  to the trash keeps taking space and is counted in `trashUsedSpace` until the trash is emptied.", alias="myDocumentsUsedSpace")
+    trash_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The space held by the items deleted to the trash from any section, which is given back only when the trash is  emptied or the items are erased for good.", alias="trashUsedSpace")
+    archive_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The space taken by the content of the archived rooms, the archived form filling rooms included. Restoring a  room moves its space back to `roomsUsedSpace` or `formsUsedSpace`.", alias="archiveUsedSpace")
+    rooms_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The space taken by the content of the active rooms, except the form filling rooms, whose content is reported  in `formsUsedSpace`. Archiving a room moves its space to `archiveUsedSpace`.", alias="roomsUsedSpace")
+    ai_agents_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The space taken by the content of the AI agents section, which exists only in a portal where the AI agents  feature is active; creating an AI room is not enough to bring the section into being.", alias="aiAgentsUsedSpace")
+    forms_used_space: Optional[FilesStatisticsFolder] = Field(default=None, description="The space taken by the content of the active form filling rooms, which is kept apart from `roomsUsedSpace`  even though those rooms are listed among the rooms.", alias="formsUsedSpace")
+    __properties: ClassVar[List[str]] = ["myDocumentsUsedSpace", "trashUsedSpace", "archiveUsedSpace", "roomsUsedSpace", "aiAgentsUsedSpace", "formsUsedSpace"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +93,9 @@ class FilesStatisticsResultDto(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of ai_agents_used_space
         if self.ai_agents_used_space:
             _dict['aiAgentsUsedSpace'] = self.ai_agents_used_space.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of forms_used_space
+        if self.forms_used_space:
+            _dict['formsUsedSpace'] = self.forms_used_space.to_dict()
         return _dict
 
     @classmethod
@@ -109,7 +113,8 @@ class FilesStatisticsResultDto(BaseModel):
             "trashUsedSpace": FilesStatisticsFolder.from_dict(obj["trashUsedSpace"]) if obj.get("trashUsedSpace") is not None else None,
             "archiveUsedSpace": FilesStatisticsFolder.from_dict(obj["archiveUsedSpace"]) if obj.get("archiveUsedSpace") is not None else None,
             "roomsUsedSpace": FilesStatisticsFolder.from_dict(obj["roomsUsedSpace"]) if obj.get("roomsUsedSpace") is not None else None,
-            "aiAgentsUsedSpace": FilesStatisticsFolder.from_dict(obj["aiAgentsUsedSpace"]) if obj.get("aiAgentsUsedSpace") is not None else None
+            "aiAgentsUsedSpace": FilesStatisticsFolder.from_dict(obj["aiAgentsUsedSpace"]) if obj.get("aiAgentsUsedSpace") is not None else None,
+            "formsUsedSpace": FilesStatisticsFolder.from_dict(obj["formsUsedSpace"]) if obj.get("formsUsedSpace") is not None else None
         })
         return _obj
 

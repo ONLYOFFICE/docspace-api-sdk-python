@@ -28,9 +28,9 @@ from typing_extensions import Self
 
 class ImportableApiEntity(BaseModel):
     """
-    ImportableApiEntity
+    The parameters of an importable API entity.
     """ # noqa: E501
-    should_import: Optional[StrictBool] = Field(default=None, alias="shouldImport")
+    should_import: Optional[StrictBool] = Field(default=None, description="Specifies whether the API entity should be imported.", alias="shouldImport", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["shouldImport"]
 
     model_config = ConfigDict(

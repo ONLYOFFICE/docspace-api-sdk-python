@@ -18,7 +18,7 @@
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
 from typing import Optional
@@ -63,7 +63,7 @@ class ThemeApi:
     ) -> DarkThemeSettingsWrapper:
         """Change the portal theme
 
-        Changes the current portal theme.
+        Sets the interface theme of the calling account to `Base` for the light theme, `Dark` for the dark one, or  `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it changes  nothing for anybody else and cannot be set on another account.  It needs no permission, takes effect at once and is idempotent - sending the theme that is already in use  changes nothing.  The answer echoes the theme that was stored, which is the value the request asked for.  The same value is reported as `theme` by `GET api/2.0/people/@self`.
 
         :param dark_theme_settings_request_dto:
         :type dark_theme_settings_request_dto: DarkThemeSettingsRequestDto
@@ -99,11 +99,14 @@ class ThemeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DarkThemeSettingsWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -134,7 +137,7 @@ class ThemeApi:
     ) -> ApiResponse[DarkThemeSettingsWrapper]:
         """Change the portal theme
 
-        Changes the current portal theme.
+        Sets the interface theme of the calling account to `Base` for the light theme, `Dark` for the dark one, or  `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it changes  nothing for anybody else and cannot be set on another account.  It needs no permission, takes effect at once and is idempotent - sending the theme that is already in use  changes nothing.  The answer echoes the theme that was stored, which is the value the request asked for.  The same value is reported as `theme` by `GET api/2.0/people/@self`.
 
         :param dark_theme_settings_request_dto:
         :type dark_theme_settings_request_dto: DarkThemeSettingsRequestDto
@@ -170,11 +173,14 @@ class ThemeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DarkThemeSettingsWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -205,7 +211,7 @@ class ThemeApi:
     ) -> RESTResponseType:
         """Change the portal theme
 
-        Changes the current portal theme.
+        Sets the interface theme of the calling account to `Base` for the light theme, `Dark` for the dark one, or  `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it changes  nothing for anybody else and cannot be set on another account.  It needs no permission, takes effect at once and is idempotent - sending the theme that is already in use  changes nothing.  The answer echoes the theme that was stored, which is the value the request asked for.  The same value is reported as `theme` by `GET api/2.0/people/@self`.
 
         :param dark_theme_settings_request_dto:
         :type dark_theme_settings_request_dto: DarkThemeSettingsRequestDto
@@ -241,11 +247,14 @@ class ThemeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DarkThemeSettingsWrapper",
-            '401': None,
-            '429': None,
+            '400': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -356,7 +365,7 @@ class ThemeApi:
     ) -> DarkThemeSettingsWrapper:
         """Get the portal theme
 
-        Returns a theme which is set to the current portal.
+        Returns the interface theme the calling account has chosen: `Base` for the light theme, `Dark` for the dark  one, or `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it describes the  caller alone and cannot be read for anybody else.  It needs no permission and is read-only.  A caller that has never chosen a theme gets the portal default rather than an empty answer.  The same value is also reported as `theme` by `GET api/2.0/people/@self`, so a client that reads the profile  on start-up does not need this operation as well.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -389,11 +398,13 @@ class ThemeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DarkThemeSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -423,7 +434,7 @@ class ThemeApi:
     ) -> ApiResponse[DarkThemeSettingsWrapper]:
         """Get the portal theme
 
-        Returns a theme which is set to the current portal.
+        Returns the interface theme the calling account has chosen: `Base` for the light theme, `Dark` for the dark  one, or `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it describes the  caller alone and cannot be read for anybody else.  It needs no permission and is read-only.  A caller that has never chosen a theme gets the portal default rather than an empty answer.  The same value is also reported as `theme` by `GET api/2.0/people/@self`, so a client that reads the profile  on start-up does not need this operation as well.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -456,11 +467,13 @@ class ThemeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DarkThemeSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout
@@ -490,7 +503,7 @@ class ThemeApi:
     ) -> RESTResponseType:
         """Get the portal theme
 
-        Returns a theme which is set to the current portal.
+        Returns the interface theme the calling account has chosen: `Base` for the light theme, `Dark` for the dark  one, or `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it describes the  caller alone and cannot be read for anybody else.  It needs no permission and is read-only.  A caller that has never chosen a theme gets the portal default rather than an empty answer.  The same value is also reported as `theme` by `GET api/2.0/people/@self`, so a client that reads the profile  on start-up does not need this operation as well.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -523,11 +536,13 @@ class ThemeApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DarkThemeSettingsWrapper",
-            '401': None,
-            '429': None,
+            '401': "ErrorApiResponse",
+            '429': "ErrorApiResponse",
+            '500': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
+
         response_data = self.api_client.call_api(
             *_param,
             _request_timeout=_request_timeout

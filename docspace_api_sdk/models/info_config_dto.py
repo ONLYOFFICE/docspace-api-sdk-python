@@ -23,21 +23,21 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.ace_short_wrapper import AceShortWrapper
+from docspace_api_sdk.models.ace_short_dto import AceShortDto
 from docspace_api_sdk.models.editor_type import EditorType
 from typing import Optional, Set
 from typing_extensions import Self
 
 class InfoConfigDto(BaseModel):
     """
-    The information config parameters.
+    The facts the editor information panel shows about the open document.
     """ # noqa: E501
-    favorite: Optional[StrictBool] = Field(default=None, description="Specifies if the file is favorite or not.")
-    folder: Optional[StrictStr] = Field(default=None, description="The folder of the file.")
-    owner: Optional[StrictStr] = Field(default=None, description="The file owner.")
-    sharing_settings: Optional[List[AceShortWrapper]] = Field(default=None, description="The sharing settings of the file.", alias="sharingSettings")
-    type: Optional[EditorType] = None
-    uploaded: Optional[StrictStr] = Field(default=None, description="The uploaded file.")
+    favorite: Optional[StrictBool] = Field(default=None, description="Whether the caller has this document among their favorites. It is empty when favorites do not apply - for an  anonymous caller, for a guest, and for an encrypted document.", json_schema_extra={"examples": [False]})
+    folder: Optional[StrictStr] = Field(default=None, description="The place of the document as a readable path, its folders joined from the root downwards. It is empty in the  embedded layout, which shows no such panel.", json_schema_extra={"examples": ["My documents \\\\ Reports"]})
+    owner: Optional[StrictStr] = Field(default=None, description="The display name of the owner of the document. It is empty for an anonymous session.", json_schema_extra={"examples": ["John Doe"]})
+    sharing_settings: Optional[List[AceShortDto]] = Field(default=None, description="Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner.", alias="sharingSettings", json_schema_extra={"examples": [[]]})
+    type: Optional[EditorType] = Field(default=None, description="The layout the information panel is rendered for.")
+    uploaded: Optional[StrictStr] = Field(default=None, description="When the document was created on the portal, already formatted for reading in the culture of the caller rather  than as a machine timestamp.", json_schema_extra={"examples": ["01/01/2026 12:00 PM"]})
     __properties: ClassVar[List[str]] = ["favorite", "folder", "owner", "sharingSettings", "type", "uploaded"]
 
     model_config = ConfigDict(
@@ -127,7 +127,7 @@ class InfoConfigDto(BaseModel):
             "favorite": obj.get("favorite"),
             "folder": obj.get("folder"),
             "owner": obj.get("owner"),
-            "sharingSettings": [AceShortWrapper.from_dict(_item) for _item in obj["sharingSettings"]] if obj.get("sharingSettings") is not None else None,
+            "sharingSettings": [AceShortDto.from_dict(_item) for _item in obj["sharingSettings"]] if obj.get("sharingSettings") is not None else None,
             "type": obj.get("type"),
             "uploaded": obj.get("uploaded")
         })

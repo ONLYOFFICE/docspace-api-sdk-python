@@ -1,11 +1,15 @@
 # TenantAuditSettingsWrapper
-The tenant audit settings wrapper.
+The successful API response containing the TenantAuditSettingsDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**TenantAuditSettings**](TenantAuditSettings.md) |  | [optional] 
+**response** | [**TenantAuditSettingsDto**](TenantAuditSettingsDto.md) | The TenantAuditSettingsDto object returned by the operation. | [optional] 
+**count** | **int** | The total number of items in the response | [optional] 
+**links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
+**status** | **int** | HTTP status code of the response | [optional] 
+**status_code** | **int** | HTTP status code of the response (duplicate of status) | [optional] 
 
 ## Example
 

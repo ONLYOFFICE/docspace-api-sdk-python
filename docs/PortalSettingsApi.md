@@ -6,17 +6,26 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**continue_portal**](#continue_portal) | **PUT** /api/2.0/portal/continue | Restore a portal
 [**delete_portal**](#delete_portal) | **DELETE** /api/2.0/portal/delete | Delete a portal
-[**get_portal_information**](#get_portal_information) | **GET** /api/2.0/portal | Get a portal
+[**get_portal_information**](#get_portal_information) | **GET** /api/2.0/portal | Get portal information
 [**get_portal_path**](#get_portal_path) | **GET** /api/2.0/portal/path | Get a path to the portal
 [**send_delete_instructions**](#send_delete_instructions) | **POST** /api/2.0/portal/delete | Send removal instructions
 [**send_suspend_instructions**](#send_suspend_instructions) | **POST** /api/2.0/portal/suspend | Send suspension instructions
 [**suspend_portal**](#suspend_portal) | **PUT** /api/2.0/portal/suspend | Deactivate a portal
+[**unblock_portal**](#unblock_portal) | **PUT** /api/2.0/portal/unblock | Unblock a portal
 
 
 # **continue_portal**
 > continue_portal()
 
-Restores the current portal.
+Brings a deactivated portal back to the active state, so its users can sign in again and its domain serves the
+portal as before. It is reached only with the reactivation link that `POST api/2.0/portal/suspend` mails to
+the portal owner: that link authorizes the call in place of an authentication token, and no ordinary token is
+accepted here. The call is mutating and idempotent - it sets the status to active, re-applies the portal's
+Content Security Policy and refreshes its base domain, and a portal that is already active is simply left
+active. Nothing is returned in the body; read the result from `status` in `GET api/2.0/portal`. Deactivating
+the portal again means asking for a fresh letter with `POST api/2.0/portal/suspend`, because each link is
+issued for one operation. This operation cannot bring back a removed portal: the deletion behind
+`DELETE api/2.0/portal/delete` is final, and a removed portal has to be restored from a backup instead.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -69,16 +78,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | The portal is active again and its users can sign in; the response carries no content |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -87,7 +97,16 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **delete_portal**
 > StringWrapper delete_portal()
 
-Deletes the current portal.
+Removes this portal for good: its rooms, files, accounts, settings and OAuth clients go with it and its domain
+stops serving the portal. It is reached only with the removal link that `POST api/2.0/portal/delete` mails to
+the portal owner - that link authorizes the call instead of an authentication token - and the owner is checked
+again here; on a server installation the last remaining space cannot be removed. The call is destructive and
+cannot be undone, and there is no restore operation, so take a backup with `POST api/2.0/backup/startbackup`
+first when the content still matters. It keeps working while the portal's payment has lapsed. Along the way
+the portal is dropped from the hosting cache, the owner is mailed a confirmation, the removal is written to
+the audit trail and, for a portal that was paying, the support team is notified as well. The answer is the
+absolute URL of the feedback form to send the departing owner to. To pause the portal instead of erasing it,
+use `PUT api/2.0/portal/suspend`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -150,9 +169,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | URL to the feedback form about removing a portal |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | The absolute URL of the feedback form to send the owner of the removed portal to |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The account the confirmation link was issued for is not the portal owner |  -  |
+**500** | On a server installation every other space has limited access, so the last remaining space cannot be removed |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -161,7 +182,17 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_portal_information**
 > TenantWrapper get_portal_information()
 
-Returns the current portal information.
+Returns the portal the request was addressed to - the tenant behind the current domain - with its name, alias,
+owner, language, time zone, industry, trusted-domain rules, version and creation date. Nothing has to be
+called first, the call is read-only and idempotent, and it keeps answering while the portal's payment has
+lapsed. What comes back depends on the caller's rights: a caller with the portal-settings right gets the whole
+record, while every other user gets an object in which only `tenantId` is filled and no error is raised - so
+check `tenantAlias` for null before reading the rest. `status` says whether the portal is active, suspended or
+pending removal, and `creationDateTime`, `statusChangeDate`, `lastModified` and `versionChanged` are UTC.
+`region` names the data-center region a hosted portal is served from and stays empty on a server installation
+and when the portal cache is off, while `hostedRegion` is the region written on the record itself. The
+settings of the same portal are read with `GET api/2.0/settings`, its tariff with `GET api/2.0/portal/tariff`
+and its quota with `GET api/2.0/portal/quota`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -205,7 +236,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
     api_instance = docspace_api_sdk.SettingsApi(api_client)
 
     try:
-        # Get a portal
+        # Get portal information
         api_response = api_instance.get_portal_information()
         print("The response of SettingsApi->get_portal_information:\n")
         pprint(api_response)
@@ -224,18 +255,28 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Current portal information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | The portal record, or an object in which only `tenantId` is filled when the caller has no portal-settings right |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_portal_path**
-> ObjectWrapper get_portal_path(virtual_path=virtual_path)
+> StringWrapper get_portal_path(virtual_path=virtual_path)
 
-Returns the full absolute path to the current portal.
+Turns a portal-relative path into the absolute URL a client can open, filling in the scheme, the current
+portal domain and the virtual root the portal is hosted on. Any signed-in user may call it, nothing has to be
+called first, and the call is read-only and idempotent - it neither checks that the path exists nor that the
+caller is allowed to open it. `virtualPath` is taken as it is: an omitted or empty value yields the portal
+root, a value starting with `/` is appended to that root, a value starting with `~/` is resolved against the
+virtual root, and a value that already starts with `http://`, `https://` or `mailto:` is handed back
+unchanged. The answer is a bare JSON string. The domain in the result is the one the portal answers on right
+now, so a renamed portal starts returning the new domain without any change on the client. Use it to build
+links that have to survive a rename; the portal's own addresses and settings are read from
+`GET api/2.0/settings` instead.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -244,11 +285,11 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **virtual_path** | **str**| The virtual path for the portal resource access. | [optional] 
+ **virtual_path** | **str**| The path to resolve. It is taken as it is: an omitted or empty value yields the portal root, a value starting  with `/` is appended to that root, a value starting with `~/` is resolved against the virtual root, and one  that already begins with `http://`, `https://` or `mailto:` is handed back unchanged. Nothing checks that the  path exists or that the caller may open it. | [optional] 
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**StringWrapper**](StringWrapper.md)
 
 ### Authorization
 
@@ -259,7 +300,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.object_wrapper import ObjectWrapper
+from docspace_api_sdk.models.string_wrapper import StringWrapper
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -280,7 +321,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.SettingsApi(api_client)
-    virtual_path = '/portal/documents' # str | The virtual path for the portal resource access. (optional)
+    virtual_path = '/portal/documents' # str | The path to resolve. It is taken as it is: an omitted or empty value yields the portal root, a value starting  with `/` is appended to that root, a value starting with `~/` is resolved against the virtual root, and one  that already begins with `http://`, `https://` or `mailto:` is handed back unchanged. Nothing checks that the  path exists or that the caller may open it. (optional)
 
     try:
         # Get a path to the portal
@@ -302,9 +343,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Portal path |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | The absolute URL that the given portal-relative path resolves to |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -313,7 +356,16 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **send_delete_instructions**
 > send_delete_instructions()
 
-Sends the instructions to remove the current portal.
+Mails the portal owner the confirmation link that removes this portal; nothing about the portal changes until
+that link is used. The caller has to be the portal owner and hold the portal-settings right, and on a server
+installation the last remaining space cannot be removed - the call is refused when every other space has
+limited access. The letter goes to the owner's own address whoever asked for it, and it warns about the
+subscription that will stop renewing when the portal is on a paid plan. The operation keeps working while the
+portal's payment has lapsed, is mutating only in that it sends a message, and is rate-limited to five requests
+per fifteen minutes per user and path by default, answering 429 above that. Nothing is returned in the body.
+The link in the letter authorizes `DELETE api/2.0/portal/delete`, which deletes the portal with all of its
+rooms, files and accounts and cannot be undone. To pause the portal instead of deleting it, send the
+deactivation letter with `POST api/2.0/portal/suspend`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -366,16 +418,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | The removal letter has been handed to the mail service; nothing about the portal has changed yet and the response carries no content |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller is not the portal owner or has no portal-settings right |  -  |
+**500** | On a server installation every other space has limited access, so the last remaining space cannot be removed |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -384,7 +438,16 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **send_suspend_instructions**
 > send_suspend_instructions()
 
-Sends the instructions to suspend the current portal.
+Mails the portal owner the two confirmation links that deactivate this portal and bring it back again, and
+records the request in the audit trail; the portal itself is not changed here. The caller has to be the portal
+owner and hold the portal-settings right, and on a server installation the last remaining space cannot be
+deactivated - the call is refused when every other space has limited access. The letter always goes to the
+owner's own address, and the operation keeps working while the portal's payment has lapsed. It is mutating
+only in that it sends a message, and it is rate-limited to five requests per fifteen minutes per user and path
+by default, answering 429 above that. Nothing is returned in the body, so a client cannot tell from the answer
+whether the mail was delivered. The first link in the letter authorizes `PUT api/2.0/portal/suspend`, which
+suspends the portal, and the second one authorizes `PUT api/2.0/portal/continue`, which makes it active again.
+To remove the portal instead of pausing it, use `POST api/2.0/portal/delete`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -437,16 +500,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | The deactivation letter has been handed to the mail service and the request is recorded in the audit trail; the portal itself is still active and the response carries no content |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller is not the portal owner or has no portal-settings right |  -  |
+**500** | On a server installation every other space has limited access, so the last remaining space cannot be deactivated |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -455,7 +520,16 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **suspend_portal**
 > suspend_portal()
 
-Deactivates the current portal.
+Deactivates this portal: its status becomes suspended and its users can no longer work in it, while all of its
+rooms, files and accounts stay untouched. It is reached only with the deactivation link that
+`POST api/2.0/portal/suspend` mails to the portal owner - that link authorizes the call instead of an
+authentication token - and the owner is checked again here, so a link issued for another account is refused.
+On a server installation the last remaining space cannot be deactivated. The call is mutating and idempotent:
+it sets the status, records the deactivation in the audit trail and refreshes the portal's base domain, and
+repeating it leaves the portal suspended. Nothing is returned in the body; the new state is read from `status`
+in `GET api/2.0/portal`. Bring the portal back with `PUT api/2.0/portal/continue`, using the second link from
+the same letter. To remove the portal and its content for good, use `DELETE api/2.0/portal/delete` instead -
+that cannot be undone.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -508,16 +582,100 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+**200** | The portal is now suspended, its users can no longer work in it and its content is kept; the response carries no content |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The account the confirmation link was issued for is not the portal owner |  -  |
+**500** | On a server installation every other space has limited access, so the last remaining space cannot be deactivated |  -  |
 **401** | Unauthorized |  -  |
-**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **unblock_portal**
+> unblock_portal()
+
+Unblocks this portal, blocked by the retention policy after a long period without use, so its users can sign in
+again. The portal must be blocked. The call is authorized only by the unblocking link the retention letters send
+to the owner; it works for the current block only. The call is mutating: it makes the portal active, records the
+unblocking in the audit trail, refreshes its Content Security Policy and restarts the retention count. Nothing
+is returned in the body; to check the status, read `tenantStatus` from `GET api/2.0/settings`, which a blocked
+portal still answers. A lapsed paid tariff stays unpaid after the unblocking, so renewing it is the next step.
+The letters of a free portal carry no such link: support unblocks it. The call does not bring back a portal
+deleted at the end of its retention period, or one its owner deactivated, which `PUT api/2.0/portal/continue`
+brings back. An invalid link, a link of an earlier block, or a portal that is no longer blocked, a repeated call
+included, is refused with 401; an ordinary sign-in token instead of the link is refused with 403.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.SettingsApi(api_client)
+
+    try:
+        # Unblock a portal
+        api_instance.unblock_portal()
+    except Exception as e:
+        print("Exception when calling SettingsApi->unblock_portal: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The portal is active again and its users can sign in; the response carries no content |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**401** | The unblocking link is invalid, was mailed for an earlier block, or the portal is not blocked |  -  |
+**403** | The call carries an ordinary sign-in token instead of the unblocking link |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

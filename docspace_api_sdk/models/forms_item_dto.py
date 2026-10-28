@@ -28,10 +28,10 @@ from typing_extensions import Self
 
 class FormsItemDto(BaseModel):
     """
-    The forms item information.
+    One field of a form, offered as a filter over the copies gathered in a form-filling room.
     """ # noqa: E501
-    key: Optional[StrictStr] = Field(default=None, description="The form item key.              <example>field_name</example>")
-    type: Optional[StrictStr] = Field(default=None, description="The form item type.              <example>text</example>")
+    key: Optional[StrictStr] = Field(default=None, description="The name of the field as it is written in the form; send it back as `formsItemKey` to keep only              the completed copies whose field of that name holds a value.              <example>first_name</example>")
+    type: Optional[StrictStr] = Field(default=None, description="The kind of value the field holds, a text box or a checkbox for instance; send it back as              `formsItemType` beside the key.              <example>text</example>")
     __properties: ClassVar[List[str]] = ["key", "type"]
 
     model_config = ConfigDict(
