@@ -32,6 +32,7 @@ from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.employee_status import EmployeeStatus
 from docspace_api_sdk.models.group_summary_dto import GroupSummaryDto
 from docspace_api_sdk.models.mobile_phone_activation_status import MobilePhoneActivationStatus
+from docspace_api_sdk.models.user_service_limit_dto import UserServiceLimitDto
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
@@ -70,6 +71,7 @@ class EmployeeFullDto(EmployeeDto):
     used_space: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The portal used space of the user.", alias="usedSpace", json_schema_extra={"examples": [12345]})
     shared: Optional[StrictBool] = Field(default=None, description="Specifies if the user has access rights.", json_schema_extra={"examples": [False]})
     is_custom_quota: Optional[StrictBool] = Field(default=None, description="Specifies if the user has a custom quota or not.", alias="isCustomQuota", json_schema_extra={"examples": [False]})
+    ai_services_limit: Optional[UserServiceLimitDto] = Field(default=None, description="The spending limit on the AI services in force for this user - the personal one, or else the limit for every  user - with what the user spent against it. Null when no such limit applies to the user, when the portal has no  billing service, or when the caller is neither a DocSpace administrator nor the user; the limit of the portal as  a whole is not reflected here. The value, and the spending in particular, can lag by a few minutes.", alias="aiServicesLimit")
     login_event_id: Optional[StrictInt] = Field(default=None, description="The current login event ID.", alias="loginEventId", json_schema_extra={"examples": [123]})
     auth_cookie_lifetime: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The auth cookie lifetime in seconds.", alias="authCookieLifetime", json_schema_extra={"examples": [3600]})
     created_by: Optional[EmployeeDto] = Field(default=None, description="The user who created the current user.", alias="createdBy")
@@ -132,6 +134,9 @@ class EmployeeFullDto(EmployeeDto):
                 if _item_groups:
                     _items.append(_item_groups.to_dict())
             _dict['groups'] = _items
+        # override the default output from pydantic by calling `to_dict()` of ai_services_limit
+        if self.ai_services_limit:
+            _dict['aiServicesLimit'] = self.ai_services_limit.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
             _dict['createdBy'] = self.created_by.to_dict()
@@ -280,6 +285,7 @@ class EmployeeFullDto(EmployeeDto):
             "usedSpace": obj.get("usedSpace"),
             "shared": obj.get("shared"),
             "isCustomQuota": obj.get("isCustomQuota"),
+            "aiServicesLimit": UserServiceLimitDto.from_dict(obj["aiServicesLimit"]) if obj.get("aiServicesLimit") is not None else None,
             "loginEventId": obj.get("loginEventId"),
             "authCookieLifetime": obj.get("authCookieLifetime"),
             "createdBy": EmployeeDto.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,

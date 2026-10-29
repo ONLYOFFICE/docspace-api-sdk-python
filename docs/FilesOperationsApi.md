@@ -229,6 +229,8 @@ second call made while the first is still running is refused with 403 as well. A
 nothing and simply answers with the operations that are already there. An anonymous caller may use the call
 for the items covered by the external link they hold.
 
+Raises the `folder.downloaded` webhook for every listed folder, rooms included, once the queued operation starts packing it; the folders inside it raise none. Raises the `file.downloaded` webhook for every listed file, once the queued operation packs it; the files inside listed folders raise none.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -631,6 +633,8 @@ replaced by its own files and subfolders, so the folder itself is not recreated 
 selection queues nothing and answers with the operations that are already there. To remove the originals
 instead use `PUT api/2.0/files/fileops/move`.
 
+Raises the `folder.copied` webhook for every copied folder, the folders inside it included. Raises the `room.copied` webhook for every listed room copied into its own section, an AI agent included. Raises the `file.copied` webhook for every copied file, the files inside copied folders included, once the queued operation processes it.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -927,6 +931,8 @@ room manager or content-creator rights, editing or read rights are refused with 
 to nothing is answered as missing. An empty selection queues nothing and answers with the operations that are
 already there. To clear the Trash itself use `PUT api/2.0/files/fileops/emptytrash`.
 
+Raises the `folder.trashed` webhook for every listed folder moved to the trash; the folders inside it raise none. Raises the `folder.deleted` webhook instead for a listed folder deleted at once. Raises the `room.deleted` webhook for every listed room. Raises the `agent.deleted` webhook instead for a listed AI agent. Raises the `file.trashed` webhook for every listed file the queued operation moves to the trash; the files inside listed folders raise none. Raises the `file.deleted` webhook instead for a listed file that is deleted at once: `immediately` is true, or the file is already in the trash or in a third-party storage.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -1112,6 +1118,8 @@ that deleting the file itself would need, so a member with read-only rights is r
 archived room and a file that is already in Trash, and a file that does not exist is answered as missing. To
 delete the file itself use `PUT api/2.0/files/fileops/delete`.
 
+Raises the `file.updated` webhook once for every removed version.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -1202,6 +1210,8 @@ duplicates its content as well. No destination is taken — to place a copy some
 which inside a room means room manager or content-creator rights: read or editing rights, and an item the
 caller has no access to at all, are refused with 403. An empty selection queues nothing and answers with the
 operations that are already there.
+
+Raises the `folder.copied` webhook for every duplicated folder, the folders inside it included. Raises the `room.copied` webhook for every listed room, an AI agent included. Raises the `file.copied` webhook for every duplicated file, the files inside duplicated folders and rooms included, once the queued operation processes it.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1295,6 +1305,8 @@ whole Trash is emptied. What is removed here cannot be restored afterwards, whic
 `PUT api/2.0/files/fileops/delete`, where `immediately=false` puts items into Trash in the first place.
 Calling it on an already empty Trash queues nothing and answers with the operations that are already there.
 
+Raises the `folder.deleted` webhook for every folder lying directly in the trash. Raises the `file.deleted` webhook for every file lying directly in the trash; the files inside trashed folders raise none.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -1385,6 +1397,8 @@ record and the buffered parts are removed, so it cannot be repeated and there is
 afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the
 progress from the chunk calls first. An unknown, already closed or expired session id fails instead of
 answering as missing.
+
+Raises the `file.uploaded` webhook without `file.created`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1750,6 +1764,8 @@ refused with 403, and why content-creator rights inside a room allow copying an 
 it. A room cannot be moved this way — use `PUT api/2.0/files/rooms/{id}/archive` instead. To keep the
 originals use `PUT api/2.0/files/fileops/copy`. An empty selection queues nothing.
 
+Raises the `folder.moved` webhook for every listed folder; the folders inside it raise none unless it is merged into a folder of the same name. Raises the `folder.restored` webhook instead for a folder moved out of the trash. Raises the `room.archived` webhook for every listed room moved to the archive. Raises the `room.restored` webhook for every listed room moved out of the archive. Raises the `file.moved` webhook for every moved file once the queued operation processes it; the files inside a moved folder raise none unless it is merged into a folder of the same name. Raises the `file.restored` webhook instead for a file moved out of the trash.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -2026,6 +2042,8 @@ read-only access, a guest and an anonymous caller are all refused. A file that i
 lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves
 the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
 
+Raises the `file.updated` webhook.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -2223,6 +2241,8 @@ A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0
 the first such call and needs no separate finalize step. A part larger than that limit is refused. The first
 part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a
 form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+
+Raises the `file.uploaded` webhook on the request that completes the upload, without `file.created`.
 
 For more information, see [api.onlyoffice.com]().
 

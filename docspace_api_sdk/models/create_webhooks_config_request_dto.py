@@ -36,9 +36,9 @@ class CreateWebhooksConfigRequestDto(BaseModel):
     uri: Annotated[str, Field(min_length=1, strict=True)] = Field(description="The address the portal posts the event payload to. It has to be an absolute `http` or `https` address outside  the installation own network, and it is probed before anything is stored: it must answer a HEAD request with  a success code, and a redirect does not count as one.", json_schema_extra={"examples": ["https://example.com/webhook"]})
     secret_key: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=50)]] = Field(default=None, description="The shared secret the payload signature is computed with, so the receiver can tell a genuine call from a  forged one. It has to satisfy the portal password rules published by  `GET api/2.0/settings/security/password`, and it is never echoed back by any operation. On an update an empty  value keeps the secret already stored.", alias="secretKey", json_schema_extra={"examples": ["my-secret-key-123"]})
     enabled: Optional[StrictBool] = Field(default=None, description="Whether the subscription delivers at all. While it is off the matching events are dropped rather than queued,  so nothing from that period arrives once it is switched on again.", json_schema_extra={"examples": [True]})
-    ssl: Optional[StrictBool] = Field(default=None, description="Whether the target certificate is verified. Setting it demands an `https` target with a valid certificate;  leaving it off delivers without checking the certificate at all.", json_schema_extra={"examples": [True]})
-    triggers: Optional[WebhookTrigger] = Field(default=None, description="The events the subscription listens for, as a bitmask combining the flags; 0 subscribes to all of them. Take  the flags the caller role is allowed to use from `GET api/2.0/settings/webhook/triggers`, since a flag beyond  that set is refused with 400. A subscription still only fires for events its creator may see.")
-    target_id: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The single entity the subscription is narrowed to, by its identifier - a room or a file, for instance.  Leaving it out delivers events about every entity the subscribed triggers cover.", alias="targetId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000001"]})
+    ssl: Optional[StrictBool] = Field(default=None, description="Whether the target certificate is verified. `true` demands an `https` address with a valid certificate; `false`  delivers without checking the certificate, and is what a plain `http` target needs.", json_schema_extra={"examples": [True]})
+    triggers: Optional[WebhookTrigger] = Field(default=None, description="The events the subscription listens for, as a bitmask adding together the `id` values of the entries of `GET  api/2.0/settings/webhook/triggers`. 0 is the catch-all, not none: it stands for every event the  subscription creator's role may receive, not for every event of the portal.")
+    target_id: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The single entity the subscription is narrowed to, by its identifier in the API that owns it. For user events  it is the GUID of a user (`id` of `GET api/2.0/people`), for group events the GUID of a group (`id` of `GET  api/2.0/group`), and either must be one the subscription's creator may see; for file, folder, room and form  events it is the entry ID from the Files API (`id` of `GET api/2.0/files/rooms` or of a folder listing), a  number for the portal's own storage and a string for third-party storage. Leaving it out delivers events  about every entity the subscribed triggers cover.", alias="targetId", json_schema_extra={"examples": ["9924256a-739c-462b-be1a-e1d3a1d6f2d4"]})
     __properties: ClassVar[List[str]] = ["name", "uri", "secretKey", "enabled", "ssl", "triggers", "targetId"]
 
     model_config = ConfigDict(
@@ -84,6 +84,11 @@ class CreateWebhooksConfigRequestDto(BaseModel):
         # and model_fields_set contains the field
         if self.secret_key is None and "secret_key" in self.model_fields_set:
             _dict['secretKey'] = None
+
+        # set to None if ssl (nullable) is None
+        # and model_fields_set contains the field
+        if self.ssl is None and "ssl" in self.model_fields_set:
+            _dict['ssl'] = None
 
         # set to None if target_id (nullable) is None
         # and model_fields_set contains the field

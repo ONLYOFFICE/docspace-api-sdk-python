@@ -23,6 +23,8 @@ The AI action a request or an assignment applies to. Each action has its own ass
 
 * `FORMANALYSIS` (value: `'FormAnalysis'`)
 
+* `GENERATEMETA` (value: `'GenerateMeta'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

@@ -8,6 +8,7 @@ from docspace_api_sdk.api.ai.attachments_api import AttachmentsApi
 from docspace_api_sdk.api.ai.context_api import ContextApi
 from docspace_api_sdk.api.ai.editor_tools_api import EditorToolsApi
 from docspace_api_sdk.api.ai.export_api import ExportApi
+from docspace_api_sdk.api.ai.metadata_api import MetadataApi
 from docspace_api_sdk.api.ai.open_ai_passthrough_api import OpenAIPassthroughApi
 from docspace_api_sdk.api.ai.preferences_api import PreferencesApi
 from docspace_api_sdk.api.ai.profiles_api import ProfilesApi
@@ -52,6 +53,7 @@ from docspace_api_sdk.api.people.user_data_api import UserDataApi
 from docspace_api_sdk.api.people.user_status_api import UserStatusApi
 from docspace_api_sdk.api.people.user_type_api import UserTypeApi
 from docspace_api_sdk.api.portal.guests_api import GuestsApi
+from docspace_api_sdk.api.portal.module_events_api import ModuleEventsApi
 from docspace_api_sdk.api.portal.payment_api import PaymentApi
 from docspace_api_sdk.api.portal.quota_api import QuotaApi
 from docspace_api_sdk.api.portal.settings_api import SettingsApi

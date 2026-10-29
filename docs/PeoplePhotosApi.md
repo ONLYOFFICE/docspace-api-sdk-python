@@ -116,9 +116,10 @@ A caller may only do this to their own profile - the ID in the route has to be t
 administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.
 The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new
 avatar has to be uploaded through `POST api/2.0/people/{userId}/photo` to replace it.
-The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a
-`UserUpdated` webhook.
+The call is idempotent, so removing an avatar from a profile that has none succeeds as well.
 The answer still holds the URLs of every size, now pointing at the default image.
+
+Raises the `user.updated` webhook even when the profile had no avatar.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -300,9 +301,10 @@ The URL has to be absolute or relative to the portal, and it has to use HTTPS un
 over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.
 Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use
 `DELETE api/2.0/people/{userId}/photo` to remove an avatar rather than sending an empty value.
-The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,
-and is subject to the portal limit on image size.
+The downloaded image replaces the stored avatar and all of its sizes at once and is subject to the portal limit on image size.
 To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userId}/photo`.
+
+Raises the `user.updated` webhook.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -401,7 +403,8 @@ This operation reports every problem in the body instead of as a status code: it
 set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an
 oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the
 status alone.
-A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
+
+Raises the `user.updated` webhook only when `autosave` is true and the image is saved to the profile.
 
 For more information, see [api.onlyoffice.com]().
 

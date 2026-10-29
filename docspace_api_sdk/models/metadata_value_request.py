@@ -34,7 +34,7 @@ class MetadataValueRequest(BaseModel):
     """ # noqa: E501
     field_id: StrictInt = Field(description="The field ID.", alias="fieldId", json_schema_extra={"examples": [1]})
     string_value: Optional[StrictStr] = Field(default=None, description="The string value.", alias="stringValue", json_schema_extra={"examples": ["ACME Corp"]})
-    number_value: Optional[StrictInt] = Field(default=None, description="The number value.", alias="numberValue", json_schema_extra={"examples": [150000]})
+    number_value: Optional[StrictInt] = Field(default=None, description="The number value: a whole number of at most 2^53-1 (9007199254740991) in magnitude, the largest integer a JSON  client reads exactly. A larger one is refused rather than stored and returned rounded.", alias="numberValue", json_schema_extra={"examples": [150000]})
     date_value: Optional[datetime] = Field(default=None, description="The date value. A value without a time zone offset is treated as UTC, the same way the metadata filters treat their date bounds.", alias="dateValue", json_schema_extra={"examples": ["2026-06-01T00:00:00Z"]})
     option_ids: Optional[List[UUID]] = Field(default=None, description="The selected choice option IDs.", alias="optionIds", json_schema_extra={"examples": [["4f1e2d3c-5b6a-4788-99aa-0c1d2e3f4a55"]]})
     __properties: ClassVar[List[str]] = ["fieldId", "stringValue", "numberValue", "dateValue", "optionIds"]

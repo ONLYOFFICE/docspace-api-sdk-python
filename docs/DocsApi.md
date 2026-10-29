@@ -29,6 +29,8 @@ result that does not fit the storage quota of the portal, the room or the caller
 conversion the document service fails is answered with 502: the service may be down or the file damaged; a retry
 helps only in the first case.
 
+Raises the `file.created` webhook.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -128,6 +130,8 @@ reason a failed build gave. A build that has not finished after 10 minutes is gi
 caller runs one script at a time: a new request while an earlier one is queued or running is refused with 403,
 so wait for `finished` before starting the next. For a plain format change use `POST api/2.0/docs/converter`.
 What can be refused in advance fails at once with 400, 403 or 404.
+
+Raises the `file.created` and `file.updated` webhooks for each file the queued script saves: `file.created` for a new file, `file.updated` for an existing one.
 
 For more information, see [api.onlyoffice.com]().
 

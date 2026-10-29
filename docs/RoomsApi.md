@@ -160,6 +160,8 @@ cannot be archived at all and is answered as missing. The room is not archived w
 `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use
 `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
 
+Raises the `room.archived` webhook once the queued operation moves the room to the archive, for an AI agent as well.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -256,6 +258,8 @@ setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without
 logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an
 unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives
 archiving and unarchiving.
+
+Raises the `room.updated` webhook when the color or the cover changes. Raises the `agent.updated` webhook instead when the room is an AI agent.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -356,6 +360,8 @@ sign. Tag names the portal does not know yet are added to the tag catalogue. `sh
 any non-empty value is rejected, so invite members afterwards with `PUT api/2.0/files/rooms/{id}/share`.
 Passing the portal room limit ends the call as a billing refusal and creates nothing.
 
+Raises the `room.created` webhook unless `roomType` is `AiRoom`. Raises the `agent.created` webhook instead when `roomType` is `AiRoom`, which creates an AI agent in the Rooms section.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -449,6 +455,8 @@ template logo and makes `logo` pointless. `quota` is accepted only while the per
 a template of a public room cannot be instantiated while the portal forbids external sharing. A template that
 does not exist or cannot be read is answered as missing.
 
+Raises the `room.created` webhook once the queued operation builds the room. Raises the `room.updated` webhook after it when `quota` is given.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -539,6 +547,8 @@ cannot be reused for a second room and a path somebody else uploaded is refused.
 without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the
 interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the
 room, an archived room is refused, and an unknown room is answered with 404.
+
+Raises the `room.updated` webhook when a logo is given in `tmpFile`. Raises the `agent.updated` webhook instead when the room is an AI agent.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -731,6 +741,8 @@ tracked per caller, and starting another replaces the previous record. Setting `
 `share` and `groups` and shares the finished template with everyone instead, while `copyLogo` reuses the
 source room's own picture and makes `logo` irrelevant.
 
+Raises the `room.created` webhook for the new template, once the queued operation builds it. Raises the `room.updated` webhook after it when `quota` is given.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -825,6 +837,8 @@ from the path becomes the room itself and `tags` and `logo` are then dropped. A 
 off. The
 answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary
 link, readable with `GET api/2.0/files/rooms/{id}/link`.
+
+Raises the `room.created` webhook unless `roomType` is `AiRoom`. Raises the `agent.created` webhook instead when `roomType` is `AiRoom`.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1007,6 +1021,8 @@ returned record again by its `id`. The record is kept until it is read once, so 
 still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived
 room is deleted the same way, and a second delete of the same id reports that the room is missing.
 
+Raises the `room.deleted` webhook once the queued operation deletes the room. Raises the `agent.deleted` webhook instead when the room is an AI agent.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -1102,6 +1118,8 @@ and repeating the call is therefore harmless. The caller must be a manager of th
 with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was
 deleted is answered as missing. After the logo is removed a new one can be set again through
 `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
+
+Raises the `room.updated` webhook when the room had a logo. Raises the `agent.updated` webhook instead when the room is an AI agent.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -3069,8 +3087,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **search_rooms**
 > FolderContentWrapper search_rooms(rooms_metadata_search_request_dto=rooms_metadata_search_request_dto)
 
-Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters
-query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+Lists one page of the rooms of a section narrowed by metadata: the active rooms by default, or the archive, the room
+templates, the form templates or the Forms section, chosen with `searchArea`, while `type` narrows the room types.
+The filter is a typed body: `metadataTemplateId` alone keeps the rooms the template is assigned to, every condition
+in `metadataFilters` must hold at once, and `filterValue` adds a text search over room titles and metadata values;
+the template and field IDs come from `GET api/2.0/files/metadata/templates`, and a body with none of them lists the
+section unfiltered. A caller sees only the rooms they created or were invited to, a DocSpace admin sees all of
+them, so an empty page means nothing visible matched. The call changes nothing but the sort order: a `sortBy` value
+is stored as the account's default order for later listings, and omitting it reuses the stored one. The rooms come
+in `folders` while `files` stays empty, and `total` counts every match before `count` and `startIndex` page through
+them. An unknown template or field, a field outside the named template, more than 20 conditions, an unrecognised
+`sortBy` or a `count` out of range is refused with 400, a section the caller cannot read with 403. For the tag,
+member, owner, storage, quota and privacy filters use `GET api/2.0/files/rooms`, which takes the same metadata
+filter as a JSON string.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -3139,7 +3168,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns the matching rooms of the section |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-**400** | Invalid metadata filter |  -  |
+**400** | An unknown metadata template or field, a field outside the named template, more than 20 conditions, an unrecognised `sortBy` or a `count` out of range |  -  |
 **403** | You don't have enough permission to view the room content |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -3444,8 +3473,8 @@ answered with 404. The export is not done when the response arrives: poll
 outcome, which stays empty while the job is running. Starting the job again while it is still running returns
 the same record instead of a second job, so a retry is safe; a finished job is replaced by the new one. One
 job is kept per room. A form whose data cannot be exported does not stop the others: it comes back in `forms`
-with `success` false and its own `error`. When the portal has no external database configured the call fails
-and nothing is queued.
+with `success` false and its own `error`. When the portal has no external database configured the call is
+refused with 400 and nothing is queued.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -3515,10 +3544,10 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **200** | The synchronization job record to poll |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | The room is not a form filling room, or the caller cannot edit it |  -  |
 **404** | No folder with this ID exists |  -  |
-**500** | The portal has no external database configured |  -  |
+**400** | The portal has no external database configured |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
-**400** | Bad Request. |  -  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3707,6 +3736,8 @@ it is. The room is not moved when the response arrives: poll `GET api/2.0/files/
 true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished
 record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room
 id is reported as missing.
+
+Raises the `room.restored` webhook once the queued operation moves the room out of the archive, for an AI agent as well.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -3898,6 +3929,8 @@ cover. A `quota` of -1 switches the room back to no custom limit, any other nega
 default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on
 renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use
 `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
+
+Raises the `room.updated` webhook on every successful call, even one that changes nothing. Raises the `agent.updated` webhook instead when the room is an AI agent. Raises the `folder.updated` webhook instead when the ID is a folder inside a room rather than the room itself, which a manager of that room may pass and the operation does not refuse.
 
 For more information, see [api.onlyoffice.com]().
 

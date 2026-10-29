@@ -126,9 +126,11 @@ Despite taking a list, it accepts exactly one ID and that ID has to be the calli
 more than one entry, or somebody else's ID is answered with 400, so it cannot be used to activate other
 people.
 Setting `Activated` on the portal owner sends the administrator welcome email, once per portal.
-The change raises a `UserUpdated` webhook, and the answer holds the profile in its new state - or nothing at
+The answer holds the profile in its new state - or nothing at
 all when the account has meanwhile disappeared, which is skipped without an error.
 The account status is a different thing and is changed through `PUT api/2.0/people/status/{status}`.
+
+Raises the `user.updated` webhook.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -225,8 +227,10 @@ by one, so a quota failure partway through leaves the earlier ones enabled.
 Enabling only affects accounts that were disabled, and an account that had never filled in its name comes
 back as `Pending` rather than `Active` when it still has an unused invitation, so read the `status` in the
 answer instead of assuming it matches the request.
-Each changed account raises a `UserUpdated` webhook, and disabling is what
+Disabling is what
 `DELETE api/2.0/people/{userId}` requires before it will delete an account.
+
+Raises the `user.updated` webhook for every listed account, whether or not its status changes.
 
 For more information, see [api.onlyoffice.com]().
 

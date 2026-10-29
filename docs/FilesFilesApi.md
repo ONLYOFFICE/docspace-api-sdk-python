@@ -459,6 +459,8 @@ destination folder, and is otherwise refused with 403; a missing file or folder 
 format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another
 copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
 
+Raises the `file.created` webhook. Raises the `file.uploaded` webhook as well when the copy is converted to another format.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -658,6 +660,8 @@ to create files in the folder, and the room roots, Archive and the template sect
 admin. The call is mutating and not idempotent. To create the file in the caller's own section use
 `POST api/2.0/files/@my/file`.
 
+Raises the `file.created` webhook.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -758,6 +762,8 @@ not idempotent: each call adds another file. A guest has no My documents section
 cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a
 room or any other folder use
 `POST api/2.0/files/{folderId}/file`.
+
+Raises the `file.created` webhook.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -950,6 +956,8 @@ file appears beside it instead. The caller needs the right to create files in th
 refused with 403. The call is mutating. To create the file in the caller's own section use
 `POST api/2.0/files/@my/html`.
 
+Raises the `file.created` webhook whether the content creates a new file or is saved as a new version of an existing file.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -1050,6 +1058,8 @@ its history, repeating it with `false` fills the section with numbered copies. A
 section and is refused. To create the file in a room or another folder use
 `POST api/2.0/files/{folderId}/html`.
 
+Raises the `file.created` webhook whether the content creates a new file or is saved as a new version of an existing file.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -1142,6 +1152,8 @@ with `false`, which is also the default, another file is created and its title m
 (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file
 appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To
 create the file in the caller's own section use `POST api/2.0/files/@my/text`.
+
+Raises the `file.created` webhook whether the content creates a new file or is saved as a new version of an existing file.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1241,6 +1253,8 @@ with `false`, which is also the default, another file is created and its title m
 Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a
 new file appears beside it instead. The call is mutating. A guest has no My documents section and is
 refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
+
+Raises the `file.created` webhook whether the content creates a new file or is saved as a new version of an existing file.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1425,6 +1439,8 @@ the caller. The caller needs the right to delete the file, which the room admin,
 room manager and a content creator acting on their own file have; editing access alone, read access, a guest
 and a member without access to the room are all refused. The call is destructive. To delete several items at
 once use `PUT api/2.0/files/fileops/delete`.
+
+Raises the `file.trashed` webhook once the queued operation moves the file to the trash. Raises the `file.deleted` webhook instead when the file is deleted at once: `immediately` is true, or the file is already in the trash or in a third-party storage.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -3395,6 +3411,8 @@ needs the right to lock the file, which the room admin, a DocSpace admin acting 
 with content-creator rights have; a member without access to the room and a guest are refused, and so is a
 file in Trash. A lock set by somebody else can only be released by a room manager.
 
+Raises the `file.updated` webhook on every successful call, even one that changes nothing; with `lockFile=false` on a file of the portal storage it is raised twice, once for the unlocking note appended to the version comment and once for the unlock itself.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -3494,6 +3512,8 @@ content-creator rights have, while stopping a filling that somebody else started
 alone, so a content creator is refused with 403 there. The call is mutating; the state that resulted is read
 with `GET api/2.0/files/file/{fileId}/formroles`.
 
+Raises the `form.stopped` webhook when `action` is `Stop`, and for `Edit` in a form-filling room where filling had started.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -3584,6 +3604,8 @@ mode, and a form opened from the templates folder is read-only and, outside the 
 embedded. When the portal is over its storage quota the configuration comes back read-only with the exceeded
 scope named. In a private room the caller's encryption keys are added to the editor configuration. Payment is
 not required and an anonymous caller opens through an external link.
+
+Raises the `form.stopped` webhook when a PDF form whose filling had started in a form-filling room is opened with `edit` true.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -3691,6 +3713,8 @@ or already the current one. The caller needs the right to edit the history of th
 refused with 403, an anonymous caller included. The call is mutating and not idempotent. A locked file, one in
 Trash, one being edited, an encrypted one and one kept in a connected third-party storage are all refused.
 
+Raises the `file.updated` webhook.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -3790,6 +3814,8 @@ The call is mutating and not idempotent: an ordinary call adds a version to the 
 another version and leaves a running editing session in place. It is refused with 403 when the file is locked,
 lies in Trash, or is open in an editing session started by somebody else, and an unknown file id is reported
 as missing. For content too large to post in one request use `POST api/2.0/files/file/{fileId}/edit_session`.
+
+Raises the `file.updated` webhook.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -3895,6 +3921,8 @@ answered with 404. The call is mutating and not idempotent: each call adds anoth
 when one of that name is already there. The result is marked as new for the room, and for a form the portal
 recognises it is stored as a PDF form. To convert in place instead use
 `PUT api/2.0/files/file/{fileId}/checkconversion`.
+
+Raises the `file.created` webhook.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -4377,6 +4405,8 @@ acting on somebody else's file, a guest and an anonymous caller are refused with
 answered with 404. The call is mutating and idempotent. To move several items in one go use
 `PUT api/2.0/files/order`.
 
+Raises the `file.updated` webhook when the order changes.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -4474,6 +4504,8 @@ a room the caller may administer, which the room admin and a DocSpace admin acti
 read-only access, a guest and an anonymous caller are refused, and an identifier that matches nothing is
 answered as not found. Ordering only means something in rooms whose contents are indexed. The call is
 mutating. For a single file use `PUT api/2.0/files/{fileId}/order`.
+
+Raises the `folder.updated` webhook for every folder in the list whose order changes. Raises the `file.updated` webhook for every file in the list whose order changes.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -4958,6 +4990,8 @@ somebody else's file additionally needs room-manager rights: a member or room ad
 read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while
 a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for
 everybody else who can read it.
+
+Raises the `file.updated` webhook for a rename that takes effect, and again for a switch to `lastVersion`.
 
 For more information, see [api.onlyoffice.com]().
 

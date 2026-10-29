@@ -1,0 +1,9 @@
+# Per-run logs the generate-webhook-sdk skill writes into generated/.
+.generate.log
+.verify.log
+
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

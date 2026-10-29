@@ -129,6 +129,8 @@ whose owner is already the target account is returned untouched, which makes a r
 keeps access to a transferred room as its manager, while a transferred file is saved as a new version authored
 by the new owner. An entry that lives on a connected third-party account is quietly left out.
 
+Raises the `room.updated` webhook for every listed room whose owner changes. Raises the `agent.updated` webhook instead for a listed AI agent whose owner changes. Raises the `file.updated` webhook for every file whose owner changes.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters

@@ -37,9 +37,11 @@ password policy and rejected with 400 when it is too weak, and when both are omi
 generated and the account is created without anybody knowing it.
 When the portal has no free paid seat the account is still created, silently as a `User` instead of the
 requested type, so read the `type` in the answer rather than assuming the request was honoured.
-Creating a profile raises a `UserCreated` webhook, downloads the avatar named in `files` if one is given, and
+Creating a profile downloads the avatar named in `files` if one is given and
 answers with the new profile including its ID.
 To invite several people by email at once instead, use `POST api/2.0/people/invite`.
+
+Raises the `user.created` webhook once the avatar named in `files`, if any, is saved: when that download fails, the profile exists but the webhook is not sent.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -225,8 +227,10 @@ OAuth clients, while the data it owned is erased by a queued job afterwards, whi
 `GET api/2.0/people/remove/progress/{userId}`.
 The removal is permanent and cannot be undone, so hand the rooms and the shared files over first through
 `POST api/2.0/people/reassign/start` - an account whose reassignment has not finished cannot be deleted.
-The call raises a `UserDeleted` webhook and answers with the profile as it was just before it was removed.
+The call answers with the profile as it was just before it was removed.
 To delete several accounts at once use `PUT api/2.0/people/delete`.
+
+Raises the `user.deleted` webhook. Raises the `folder.created` webhook once the queued data deletion creates the folder in the caller's personal section that takes over the files and folders the account shared from its own; not when it shared none.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -320,7 +324,9 @@ group memberships are untouched, which is why an administrator still has to eras
 `DELETE api/2.0/people/{userId}` - that operation requires exactly this disabled state.
 The step is reversible until then: re-enabling the account through `PUT api/2.0/people/status/{status}`
 restores it.
-The call raises a `UserUpdated` webhook, not a delete one, and answers with the profile in its new state.
+The call answers with the profile in its new state.
+
+Raises the `user.updated` webhook rather than `user.deleted`: the profile is only disabled.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -867,9 +873,11 @@ tariff has left, and a malformed or punycode address is rejected with 400, so th
 batch but applied one address at a time - a failure partway through leaves the earlier invitations sent.
 The answer is not the result of this call: it lists every profile of the portal that is still pending and
 that the caller may see, so previously invited people appear in it as well.
-Each newly invited profile raises a `UserInvited` webhook, and repeated calls are throttled.
+Repeated calls are throttled.
 Use `PUT api/2.0/people/invite` to send the invitation email again, and `POST api/2.0/people` to create a
 profile without mailing anybody.
+
+Raises the `user.invited` webhook for every address that does not belong to a profile yet.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -960,11 +968,13 @@ not delete: a room admin when the caller is not a DocSpace admin, and a DocSpace
 the portal owner.
 The answer lists every account that was asked for, including the ones that were skipped, so it is not proof
 that an account was deleted - read `GET api/2.0/people/{userId}` for that, which then answers 404.
-The removal is permanent and cannot be undone, and each deleted account raises a `UserDeleted` webhook while
-its data is erased by a queued job that can be watched through
+The removal is permanent and cannot be undone, and the data of each deleted account is
+erased by a queued job that can be watched through
 `GET api/2.0/people/remove/progress/{userId}`.
 Hand the rooms and the shared files over first through `POST api/2.0/people/reassign/start` - an account with
 an unfinished reassignment cannot be deleted.
+
+Raises the `user.deleted` webhook for every account it deletes; an account the caller may not delete is skipped without one. Raises the `folder.created` webhook for every deleted account that shared files or folders from its personal section, once the queued data deletion creates the folder in the caller's personal section that takes them over.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1154,11 +1164,13 @@ gives the account the `Terminated` status and ends every session it has, which i
 The `isUser` flag turns the account into a guest when true and back into a member when false, both of which
 can answer 402 because either direction takes a seat; a request to make the portal owner, a DocSpace
 administrator or a module administrator a guest is ignored without an error.
-A change raises a `UserUpdated` webhook and the answer holds the profile as it is afterwards, so read it
+The answer holds the profile as it is afterwards, so read it
 instead of assuming the request was applied.
 For the language use `PUT api/2.0/people/{userId}/culture`, for the type
 `PUT api/2.0/people/type/{type}`, and for the status of several accounts at once
 `PUT api/2.0/people/status/{status}`.
+
+Raises the `user.updated` webhook when the call changes the profile; on another member's profile only `disable` and `isUser` change anything.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -1250,9 +1262,11 @@ The culture has to be one the portal has enabled, otherwise the operation answer
 from the portal settings rather than guessing a code.
 A caller may only change their own language - the ID in the route has to be the calling account, and an
 administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.
-The change takes effect immediately, raises a `UserUpdated` webhook, and answers with the profile carrying
+The change takes effect immediately and answers with the profile carrying
 the new `cultureName`.
 Other profile fields are not touched here; use `PUT api/2.0/people/{userId}` for those.
+
+Raises the `user.updated` webhook even when the culture does not change.
 
 For more information, see [api.onlyoffice.com]().
 

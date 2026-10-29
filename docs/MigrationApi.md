@@ -535,6 +535,8 @@ and once the job has ended the uploaded backup is deleted, so a new call has not
 is uploaded and parsed again. When the import is done, close it with `POST api/2.0/migration/finish`, which can
 also mail the imported users their activation link.
 
+Raises the `room.created` webhook for every room the queued import creates. Raises the `folder.created` webhook for every folder the queued import creates, including the one in the personal section of each imported user that receives that user's files. Raises the `room.updated` webhook for every imported room the queued import hands over to its original owner, when that owner is imported as a room admin or a DocSpace admin.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters

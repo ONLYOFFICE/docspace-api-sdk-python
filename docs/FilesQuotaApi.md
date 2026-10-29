@@ -20,6 +20,8 @@ the rest keep what they had. Only numeric room ids are processed, which means id
 connected third-party account are silently skipped. Use `PUT api/2.0/files/rooms/roomquota` to set an explicit
 value, and a quota of -1 in `PUT api/2.0/files/rooms/{id}` to leave the room with no custom limit at all.
 
+Raises the `room.updated` webhook for every listed room. Raises the `agent.updated` webhook instead for a listed AI agent. Raises the `folder.updated` webhook instead for a listed ID that is a folder rather than a room, which the operation does not refuse.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -109,6 +111,8 @@ room. Only numeric room ids are processed, which means ids of rooms stored in a 
 are silently skipped. A room whose limit already equals the requested value is left untouched and still
 returned. To go back to the portal default use `PUT api/2.0/files/rooms/resetquota`, and to drop the custom
 limit entirely send a quota of -1 to `PUT api/2.0/files/rooms/{id}`.
+
+Raises the `room.updated` webhook for every listed room, even when its quota does not change. Raises the `agent.updated` webhook instead for a listed AI agent. Raises the `folder.updated` webhook instead for a listed ID that is a folder rather than a room, which the operation does not refuse.
 
 For more information, see [api.onlyoffice.com]().
 

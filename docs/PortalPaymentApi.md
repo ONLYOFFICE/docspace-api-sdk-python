@@ -9,11 +9,15 @@ Method | HTTP request | Description
 [**create_customer_monthly_usage_report**](#create_customer_monthly_usage_report) | **POST** /api/2.0/portal/payment/customer/usage/monthly/report | Start the monthly usage report
 [**create_customer_operations_report**](#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start the operations report
 [**create_customer_service_usage_report**](#create_customer_service_usage_report) | **POST** /api/2.0/portal/payment/customer/usage/report | Start the service usage report
+[**create_service_limit**](#create_service_limit) | **POST** /api/2.0/portal/payment/servicelimit | Create a service limit
+[**delete_service_limit**](#delete_service_limit) | **DELETE** /api/2.0/portal/payment/servicelimit/{id} | Delete a service limit
+[**disable_participant_service_limits**](#disable_participant_service_limits) | **PUT** /api/2.0/portal/payment/servicelimit/participants/disable | Disable the user service limits
 [**get_accounting_service_prices**](#get_accounting_service_prices) | **GET** /api/2.0/portal/payment/accounting/prices/{serviceName} | Get the service prices from the accounting service
 [**get_active_services**](#get_active_services) | **GET** /api/2.0/portal/payment/activeservices | Get the active wallet services
 [**get_ai_prices**](#get_ai_prices) | **GET** /api/2.0/portal/payment/ai-prices | Get AI model prices
 [**get_checkout_setup_url**](#get_checkout_setup_url) | **GET** /api/2.0/portal/payment/checkoutsetupurl | Get the checkout setup page URL
 [**get_customer_balance**](#get_customer_balance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance
+[**get_customer_deposits**](#get_customer_deposits) | **GET** /api/2.0/portal/payment/customer/deposits | Get the wallet top-ups
 [**get_customer_info**](#get_customer_info) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer information
 [**get_customer_monthly_usage**](#get_customer_monthly_usage) | **GET** /api/2.0/portal/payment/customer/usage/monthly | Get the customer monthly usage
 [**get_customer_monthly_usage_report**](#get_customer_monthly_usage_report) | **GET** /api/2.0/portal/payment/customer/usage/monthly/report | Get the monthly usage report status
@@ -21,6 +25,9 @@ Method | HTTP request | Description
 [**get_customer_operations_report**](#get_customer_operations_report) | **GET** /api/2.0/portal/payment/customer/operationsreport | Get the operations report status
 [**get_customer_service_usage**](#get_customer_service_usage) | **GET** /api/2.0/portal/payment/customer/usage | Get the customer service usage
 [**get_customer_service_usage_report**](#get_customer_service_usage_report) | **GET** /api/2.0/portal/payment/customer/usage/report | Get the service usage report status
+[**get_deposit_invoice**](#get_deposit_invoice) | **GET** /api/2.0/portal/payment/customer/deposits/{id}/invoice | Get the top-up invoice
+[**get_global_service_limit**](#get_global_service_limit) | **GET** /api/2.0/portal/payment/servicelimit/global | Get the global service limit
+[**get_participant_service_limits**](#get_participant_service_limits) | **GET** /api/2.0/portal/payment/servicelimit/participants | Get the user service limits
 [**get_payment_account**](#get_payment_account) | **GET** /api/2.0/portal/payment/account | Get the billing account page
 [**get_payment_currencies**](#get_payment_currencies) | **GET** /api/2.0/portal/payment/currencies | Get the billing currencies
 [**get_payment_quotas**](#get_payment_quotas) | **GET** /api/2.0/portal/payment/quotas | Get the purchasable quotas
@@ -28,13 +35,16 @@ Method | HTTP request | Description
 [**get_portal_prices**](#get_portal_prices) | **GET** /api/2.0/portal/payment/prices | Get the product prices
 [**get_quota_payment_information**](#get_quota_payment_information) | **GET** /api/2.0/portal/payment/quota | Get the current plan and limits
 [**get_restricted_ai_models**](#get_restricted_ai_models) | **GET** /api/2.0/portal/payment/ai-model/restrictions | Get restricted AI models
+[**get_service_limit**](#get_service_limit) | **GET** /api/2.0/portal/payment/servicelimit/{id} | Get a service limit
 [**get_subscription_balance_info**](#get_subscription_balance_info) | **GET** /api/2.0/portal/payment/subscription/balance | Get the subscription balance information
 [**get_tenant_wallet_service_settings**](#get_tenant_wallet_service_settings) | **GET** /api/2.0/portal/payment/servicessettings | Get the wallet service settings
 [**get_tenant_wallet_settings**](#get_tenant_wallet_settings) | **GET** /api/2.0/portal/payment/topupsettings | Get the auto top-up settings
+[**get_total_service_limit**](#get_total_service_limit) | **GET** /api/2.0/portal/payment/servicelimit/total | Get the portal service limit
 [**get_wallet_service**](#get_wallet_service) | **GET** /api/2.0/portal/payment/walletservice | Get a wallet service
 [**get_wallet_services**](#get_wallet_services) | **GET** /api/2.0/portal/payment/walletservices | Get wallet services
 [**move_subscription_to_wallet**](#move_subscription_to_wallet) | **POST** /api/2.0/portal/payment/subscription/movetowallet | Move the subscription to the wallet
 [**send_payment_request**](#send_payment_request) | **POST** /api/2.0/portal/payment/request | Contact the sales team
+[**set_participant_service_limits**](#set_participant_service_limits) | **PUT** /api/2.0/portal/payment/servicelimit/participants | Set the user service limits
 [**set_restricted_ai_models**](#set_restricted_ai_models) | **PUT** /api/2.0/portal/payment/ai-model/restrictions | Set restricted AI models
 [**set_tenant_wallet_settings**](#set_tenant_wallet_settings) | **POST** /api/2.0/portal/payment/topupsettings | Set the auto top-up settings
 [**terminate_customer_monthly_usage_report**](#terminate_customer_monthly_usage_report) | **DELETE** /api/2.0/portal/payment/customer/usage/monthly/report | Terminate the monthly usage report
@@ -42,6 +52,7 @@ Method | HTTP request | Description
 [**terminate_customer_service_usage_report**](#terminate_customer_service_usage_report) | **DELETE** /api/2.0/portal/payment/customer/usage/report | Terminate the service usage report
 [**top_up_deposit**](#top_up_deposit) | **POST** /api/2.0/portal/payment/deposit | Top up the wallet
 [**update_payment**](#update_payment) | **PUT** /api/2.0/portal/payment/update | Change the subscription quantity
+[**update_service_limit**](#update_service_limit) | **PUT** /api/2.0/portal/payment/servicelimit | Update a service limit
 [**update_wallet_payment**](#update_wallet_payment) | **PUT** /api/2.0/portal/payment/updatewallet | Change a wallet service quantity
 
 
@@ -507,17 +518,18 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_accounting_service_prices**
-> ServicePriceArrayWrapper get_accounting_service_prices(service_name, active=active)
+# **create_service_limit**
+> ServiceLimitWrapper create_service_limit(create_service_limit_request_dto=create_service_limit_request_dto)
 
-Returns the portal's automatic wallet top-up settings: whether it is switched on, the balance that triggers
-it, the balance it tops the wallet up to and the currency it charges in. Only a DocSpace administrator may
-read it, no billing customer is needed, and the call is read-only. A portal that has never configured it gets
-the defaults rather than an empty result, so `enabled` is the field that says whether anything happens at all.
-Two of the values are kept by the portal itself and cannot be set through this API: `lowBalanceThreshold` is
-the balance below which the portal warns its administrators by mail, and `lowBalanceNotified` says whether
-that warning has already gone out for the current dip. Change the rest with
-`POST api/2.0/portal/payment/topupsettings`.
+Creates a spending limit on the AI services - AI tools and AI search together - with `scope` saying whom it
+applies to: `Total` for the portal as a whole, `Global` for every user separately, `Custom` for the user in
+`userId`, which only this scope takes. A personal limit applies to its user instead of the one for every user,
+and the limit of the portal is checked on top of both. The portal needs a billing customer, and the caller needs
+the permission to edit the portal settings as well as DocSpace administrator rights. At least one of
+`amountValue` and `quantityValue` must be given; with both, the services stop as soon as either is reached. The
+call is mutating and written to the portal audit trail. It is not idempotent: a second limit of the same scope,
+or for the same user, is refused with 409 - change the existing one with
+`PUT api/2.0/portal/payment/servicelimit` instead. The scope, the user and the period cannot be changed later.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -526,7 +538,271 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **service_name** | **str**| The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error. | 
+ **create_service_limit_request_dto** | [**CreateServiceLimitRequestDto**](CreateServiceLimitRequestDto.md)|  | [optional] 
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.create_service_limit_request_dto import CreateServiceLimitRequestDto
+from docspace_api_sdk.models.service_limit_wrapper import ServiceLimitWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    create_service_limit_request_dto = docspace_api_sdk.CreateServiceLimitRequestDto() # CreateServiceLimitRequestDto |  (optional)
+
+    try:
+        # Create a service limit
+        api_response = api_instance.create_service_limit(create_service_limit_request_dto=create_service_limit_request_dto)
+        print("The response of PaymentApi->create_service_limit:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->create_service_limit: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The service limit as it was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | Neither `amountValue` nor `quantityValue` is given, `userId` is missing for the scope `Custom` or given for another scope, a value is outside its range, or the accounting service rejects a threshold, such as a quantity for services with different units |  -  |
+**403** | The caller may not edit the portal settings or is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+**404** | The portal has no billing customer, or the user does not exist |  -  |
+**409** | A limit of this scope, or for this user, exists already |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_service_limit**
+> delete_service_limit(id)
+
+Removes one spending limit on the AI services completely - the limit of the portal as a whole, the one for
+every user, or a personal one - so it no longer restricts anyone. The portal needs a billing customer, and the
+caller needs the permission to edit the portal settings as well as DocSpace administrator rights. The call is
+destructive and cannot be undone: unlike switching a limit off with `PUT api/2.0/portal/payment/servicelimit`,
+which keeps its settings, a deleted limit is gone, and a new one has to be created with
+`POST api/2.0/portal/payment/servicelimit`. Deleting a personal limit lets the limit for every user apply to
+that user. It is written to the portal audit trail. An ID that does not exist, belongs to another portal or is
+not a limit on the AI services answers 404, which is also what a repeated deletion of the same limit gets.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    id = 42 # int | The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+
+    try:
+        # Delete a service limit
+        api_instance.delete_service_limit(id)
+    except Exception as e:
+        print("Exception when calling PaymentApi->delete_service_limit: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The service limit has been deleted; the response carries no content |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The ID is zero or negative |  -  |
+**403** | The caller may not edit the portal settings or is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+**404** | The portal has no billing customer, or the portal has no limit on the AI services with this ID |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **disable_participant_service_limits**
+> Int32Wrapper disable_participant_service_limits()
+
+Switches off every personal spending limit on the AI services in one call, so each user falls back to the limit
+for every user, if one is set. The limit of the portal as a whole and the one for every user stay as they are.
+The portal needs a billing customer, and the caller needs the permission to edit the portal settings as well as
+DocSpace administrator rights. The switched-off limits stop restricting their users at once and are kept, so
+each can be switched back on with `PUT api/2.0/portal/payment/servicelimit`. The call is mutating and
+idempotent - repeating it switches off nothing more - and it is written to the portal audit trail. The answer is
+the number of personal limits that were switched off, zero when none was in force. To switch off the limit of a
+single user, use `PUT api/2.0/portal/payment/servicelimit` with `enabled` set to false.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**Int32Wrapper**](Int32Wrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.int32_wrapper import Int32Wrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+
+    try:
+        # Disable the user service limits
+        api_response = api_instance.disable_participant_service_limits()
+        print("The response of PaymentApi->disable_participant_service_limits:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->disable_participant_service_limits: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The number of personal limits that were switched off |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller may not edit the portal settings or is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+**404** | The portal has no billing customer |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_accounting_service_prices**
+> ServicePriceArrayWrapper get_accounting_service_prices(service_name, active=active)
+
+Returns the price list of one wallet service as the accounting service keeps it: every price record with its
+time unit, cost and resulting price, volume threshold, validity period, status and discount category. Take
+the service name from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`. The caller must
+be a DocSpace administrator, and the server must have the billing and accounting services configured;
+otherwise the call fails with 403. The call is read-only and can be repeated safely. By default the list
+also holds retired and not yet started records; `active=true` keeps only the prices in force now. A service
+with no prices comes back as an empty list. Amounts are in the currency of the service, which the records do
+not name. The list is cached for all portals for up to an hour, so a change in the accounting service can
+take that long to appear. For the current price of every plan and wallet service as the customer sees it, use
+`GET api/2.0/portal/payment/quotas`. An unknown service name fails with 500, as does an unreachable
+accounting service.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **service_name** | **str**| The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`. | 
  **active** | **bool**| Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs. | [optional] 
 
 ### Return type
@@ -563,7 +839,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.PaymentApi(api_client)
-    service_name = 'ai-tools' # str | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error.
+    service_name = 'ai-tools' # str | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`.
     active = false # bool | Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs. (optional)
 
     try:
@@ -588,8 +864,8 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The list of the service prices |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | The `serviceName` is longer than 255 characters |  -  |
-**403** | The caller is not a DocSpace administrator, or the portal has no billing service configured |  -  |
-**500** | The accounting service is not configured, answers the price request with an error or cannot be reached |  -  |
+**403** | The caller is not a DocSpace administrator, or the billing and accounting services are not configured on the server |  -  |
+**500** | The accounting service does not know the service name, answers the price request with an error or cannot be reached |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -942,6 +1218,107 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **400** | Bad Request. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_customer_deposits**
+> DepositReportWrapper get_customer_deposits(start_date=start_date, end_date=end_date, status=status, offset=offset, limit=limit)
+
+Lists the top-ups of the portal's wallet - the payments into it - one page at a time, which is what a list of
+payments with their invoices is built from. A portal that is not a billing customer yet has no top-ups and
+gets an empty result rather than an error. Only the payer or the portal owner may read it, as with the
+invoices, and the call is read-only. Every filter is optional: `startDate` and `endDate` default to the
+portal creation date and the present moment, a value without `Z` or an offset is read in the portal time
+zone, and `status` narrows to how a top-up ended. `offset` and `limit` default to 0 and 25 and are echoed next
+to `totalQuantity`, `totalPage` and `currentPage`; a negative `offset` or a `limit` outside 1 to 100 fails
+with 400. An empty result means the portal is not a billing customer, has no wallet at the accounting service
+yet, or that service could not be read; a period without top-ups gives an empty `collection`. A top-up with
+`hasInvoice` true has an invoice, opened with `GET api/2.0/portal/payment/customer/deposits/{id}/invoice`.
+For the full wallet history, charges and refunds included, use
+`GET api/2.0/portal/payment/customer/operations`.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **start_date** | **datetime**| The beginning of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is  read in the portal time zone, not in the caller's; defaults to the portal creation date. | [optional] 
+ **end_date** | **datetime**| The end of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is read in  the portal time zone, not in the caller's; defaults to the moment the call is made. | [optional] 
+ **status** | [**OperationStatus**](.md)| The outcome to keep. A top-up that is still being settled is reported as pending and may change later, while  the other outcomes are final; every outcome is reported when this is omitted. | [optional] 
+ **offset** | **int**| The number of top-ups to skip before the first one returned, for walking through a long history page by page.  Counted after the filters are applied, and starts at 0 when omitted. | [optional] 
+ **limit** | **int**| The maximum number of top-ups returned in one page. Defaults to 25 when omitted; the answer echoes the window  back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed without  counting the items. | [optional] 
+
+### Return type
+
+[**DepositReportWrapper**](DepositReportWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.deposit_report_wrapper import DepositReportWrapper
+from docspace_api_sdk.models.operation_status import OperationStatus
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    start_date = '2025-01-01T00:00:00Z' # datetime | The beginning of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is  read in the portal time zone, not in the caller's; defaults to the portal creation date. (optional)
+    end_date = '2025-12-31T23:59:59Z' # datetime | The end of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is read in  the portal time zone, not in the caller's; defaults to the moment the call is made. (optional)
+    status = docspace_api_sdk.OperationStatus() # OperationStatus | The outcome to keep. A top-up that is still being settled is reported as pending and may change later, while  the other outcomes are final; every outcome is reported when this is omitted. (optional)
+    offset = 0 # int | The number of top-ups to skip before the first one returned, for walking through a long history page by page.  Counted after the filters are applied, and starts at 0 when omitted. (optional)
+    limit = 25 # int | The maximum number of top-ups returned in one page. Defaults to 25 when omitted; the answer echoes the window  back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed without  counting the items. (optional)
+
+    try:
+        # Get the wallet top-ups
+        api_response = api_instance.get_customer_deposits(start_date=start_date, end_date=end_date, status=status, offset=offset, limit=limit)
+        print("The response of PaymentApi->get_customer_deposits:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_customer_deposits: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A page of wallet top-ups with its paging information, or an empty result when the portal is not a billing customer, has no wallet at the accounting service yet, or that service could not be read |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | `offset` is negative, `limit` is outside 1 to 100, or a parameter cannot be read, such as a `status` that is not one of its values or a date that is not ISO 8601 |  -  |
+**403** | The caller is neither the payer nor the portal owner, or the portal has no billing service configured |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1609,6 +1986,280 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_deposit_invoice**
+> StringWrapper get_deposit_invoice(id)
+
+Hands back the address of the page on which the billing provider shows the invoice for one top-up of the
+portal's wallet, so a client can open or download it. The top-up is named by the `id` that
+`GET api/2.0/portal/payment/customer/deposits` returns, and only one listed there with `hasInvoice` true has an
+invoice to show. Only the payer or the portal owner may read it, as with the billing account page, and the
+call changes nothing. The address is absolute and points to the billing provider rather than to the portal;
+it is asked for anew on every call, so request it when the user is about to open the invoice instead of
+storing it. A top-up this portal does not have, one without an invoice, or a portal that is not a billing
+customer answers 404, and an `id` that is not a number fails with 400. An installation without a billing
+service answers 403, and 402 means the billing or the accounting service rejected the request or did not
+answer, which a later retry may get past.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| The ID of the top-up, taken from the `id` field of `GET api/2.0/portal/payment/customer/deposits`. | 
+
+### Return type
+
+[**StringWrapper**](StringWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.string_wrapper import StringWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    id = 15342 # int | The ID of the top-up, taken from the `id` field of `GET api/2.0/portal/payment/customer/deposits`.
+
+    try:
+        # Get the top-up invoice
+        api_response = api_instance.get_deposit_invoice(id)
+        print("The response of PaymentApi->get_deposit_invoice:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_deposit_invoice: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The absolute address of the hosted invoice page for the top-up |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | `id` is not a number |  -  |
+**402** | The billing or the accounting service rejected the request for the top-up or its invoice link, or did not answer |  -  |
+**403** | The caller is neither the payer nor the portal owner, or the portal has no billing service configured |  -  |
+**404** | The portal has no billing customer, no top-up with this ID, or the top-up has no invoice |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_global_service_limit**
+> ServiceLimitWrapper get_global_service_limit()
+
+Returns the spending limit on the AI services for every user - the same ceiling applied to each user separately,
+for any user without a personal limit in force. Only a DocSpace administrator may read it, an installation
+without a billing service answers 403, and the call is read-only. It comes without spending, since that is
+counted per user: read it for each user from `GET api/2.0/portal/payment/servicelimit/participants`; `periodEnd`
+still says when the current period ends for everyone. When no
+such limit has been set, or it was deleted, the answer is 200 with a null `response`; create the limit with
+`POST api/2.0/portal/payment/servicelimit` and the scope `Global`. A switched-off limit is still returned, with
+`enabled` false. A portal with no billing customer answers 404.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.service_limit_wrapper import ServiceLimitWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+
+    try:
+        # Get the global service limit
+        api_response = api_instance.get_global_service_limit()
+        print("The response of PaymentApi->get_global_service_limit:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_global_service_limit: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The limit for every user, or null when no such limit is set |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+**404** | The portal has no billing customer |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_participant_service_limits**
+> ServiceLimitReportWrapper get_participant_service_limits(offset=offset, limit=limit, order_by=order_by, order_type=order_type)
+
+Lists, one page at a time, the spending limit on the AI services in force for each portal user, with what the
+user spent against it in the current period and what is left. Only a DocSpace administrator may read it, an
+installation without a billing service answers 403, a portal with no billing customer answers 404, and the call
+is read-only; a portal with no limits gets an empty page. A user's own limit wins over the one for every user: an item with the scope `Custom` is a
+personal limit, one with `Global` the limit for every user, its ID repeated for each user it applies to.
+Switched-off limits are not listed, and a user who has not used the AI services yet may be missing. `offset`
+and `limit` page through the result and default to 0 and 25, and the answer repeats them next to
+`totalQuantity`, `totalPage` and `currentPage`; `orderBy` and `orderType` sort it, the newest limits first by
+default.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int**| The number of limits to skip before the first one returned, counted in the sort order of the list. | [optional] 
+ **limit** | **int**| The largest number of limits one page holds. | [optional] 
+ **order_by** | [**ServiceLimitOrderBy**](.md)| The field the list is sorted by: the user a limit applies to, or the moment it was created. | [optional] 
+ **order_type** | [**OperationOrderType**](.md)| The direction the field named in `orderBy` is sorted in. | [optional] 
+
+### Return type
+
+[**ServiceLimitReportWrapper**](ServiceLimitReportWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.operation_order_type import OperationOrderType
+from docspace_api_sdk.models.service_limit_order_by import ServiceLimitOrderBy
+from docspace_api_sdk.models.service_limit_report_wrapper import ServiceLimitReportWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    offset = 0 # int | The number of limits to skip before the first one returned, counted in the sort order of the list. (optional)
+    limit = 25 # int | The largest number of limits one page holds. (optional)
+    order_by = docspace_api_sdk.ServiceLimitOrderBy() # ServiceLimitOrderBy | The field the list is sorted by: the user a limit applies to, or the moment it was created. (optional)
+    order_type = docspace_api_sdk.OperationOrderType() # OperationOrderType | The direction the field named in `orderBy` is sorted in. (optional)
+
+    try:
+        # Get the user service limits
+        api_response = api_instance.get_participant_service_limits(offset=offset, limit=limit, order_by=order_by, order_type=order_type)
+        print("The response of PaymentApi->get_participant_service_limits:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_participant_service_limits: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A page of the limits in force for the users with their spending and paging information |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | `offset` is negative, `limit` is outside the allowed page size, or `orderBy` or `orderType` is not one of its values |  -  |
+**403** | The caller is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+**404** | The portal has no billing customer |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_payment_account**
 > StringWrapper get_payment_account(back_url=back_url)
 
@@ -2050,15 +2701,15 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **get_quota_payment_information**
 > QuotaWrapper get_quota_payment_information(refresh=refresh)
 
-Returns the quota the portal is on right now - its paid plan or the free one - with everything a client needs
-to render itself: the price, the features that are switched on, the limits they grant (rooms, storage in
-bytes, users, administrators, AI) and how much of each is already used. Every signed-in member of the portal
-reads it, so it is not restricted to administrators; only guests are refused with 403. The call is read-only.
-The plan is served from the cache by default, which is what a start-up needs; `refresh=true` fetches it from
-the billing service instead, so use that right after a purchase and not routinely, because it is a remote
-call. The catalogue of the quotas that could be bought instead is `GET api/2.0/portal/payment/quotas`, and the
-money side of the same portal - customer, wallet and balance - starts at
-`GET api/2.0/portal/payment/customerinfo`.
+Returns the quota the portal is on - its paid plan or the free one - with the limits its features grant and how
+much of each is already used. Any signed-in member except a guest may call it. The call is read-only; the plan
+comes from the cache, and `refresh=true` re-reads it from the billing service, a remote call meant for right
+after a purchase. The answer is trimmed to the caller's user type: a DocSpace administrator or the owner gets
+the price, the due date and all features, a room administrator only the `manager`, `room`, `total_size` and
+`statistic` features, and a user only `total_size`. For both of the latter `price` is an empty object and
+`dueDate` is omitted, while the storage quota settings (`usersQuota`, `roomsQuota`, `aiAgentsQuota`,
+`tenantCustomQuota`) come back as for an administrator. The quotas that could be bought instead are
+`GET api/2.0/portal/payment/quotas`. A guest is refused with 403.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2125,7 +2776,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The quota the portal is on, with its price, features, limits and current usage |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | The quota the portal is on with its limits and current usage, trimmed to what the caller's user type may see |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | The caller is a guest of this portal |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -2213,6 +2864,94 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **500** | The AI gateway answers with an error or cannot be reached |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_service_limit**
+> ServiceLimitWrapper get_service_limit(id)
+
+Returns one spending limit on the AI services of the portal by its ID - the limit of the portal as a whole, the
+one for every user, or a personal one. Only a DocSpace administrator may read it, an installation without a
+billing service answers 403, and the call is read-only. The limit comes back with its scope, thresholds, their
+currency and unit, the period and whether it is in force, but without its spending: that comes with
+`GET api/2.0/portal/payment/servicelimit/total` for the portal and with
+`GET api/2.0/portal/payment/servicelimit/participants` for each user. A portal with no billing customer, and an
+ID that does not exist, belongs to another portal or is not a limit on the AI services, answer 404.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits. | 
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.service_limit_wrapper import ServiceLimitWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    id = 42 # int | The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+
+    try:
+        # Get a service limit
+        api_response = api_instance.get_service_limit(id)
+        print("The response of PaymentApi->get_service_limit:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_service_limit: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The service limit with its scope, thresholds, period and state |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The ID is zero or negative |  -  |
+**403** | The caller is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+**404** | The portal has no billing customer, or the portal has no limit on the AI services with this ID |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2466,6 +3205,90 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 |-------------|-------------|------------------|
 **200** | The automatic top-up settings of the portal, or their defaults when it has never configured them |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **403** | The caller is not a DocSpace administrator |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
+**500** | Internal Server Error. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_total_service_limit**
+> ServiceLimitWrapper get_total_service_limit()
+
+Returns the spending limit on the AI services for the portal as a whole - the ceiling the spending of every user
+counts towards - together with what was spent against it in the current period and what is left. Only a
+DocSpace administrator may read it, an installation without a billing service answers 403, and the call is
+read-only. The limit is checked in addition to the limits
+of the users, so a user can be stopped by it before reaching their own. The spending includes the expected cost
+of AI operations still in progress. When no such limit has been set, or it was deleted, the answer is 200 with a
+null `response`; create the limit with `POST api/2.0/portal/payment/servicelimit` and the scope `Total`. A
+switched-off limit is still returned, with `enabled` false. A portal with no billing customer answers 404.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.service_limit_wrapper import ServiceLimitWrapper
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+
+    try:
+        # Get the portal service limit
+        api_response = api_instance.get_total_service_limit()
+        print("The response of PaymentApi->get_total_service_limit:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->get_total_service_limit: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The limit of the portal as a whole with its spending, or null when no such limit is set |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**403** | The caller is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+**404** | The portal has no billing customer |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
@@ -2732,7 +3555,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **400** | The request body cannot be read or has no `quantity`, `quantity` does not hold exactly one product or does not name the administrators wallet product, the number asked for is not greater than zero or is below the administrators the portal already has, or the plan currently paid is a wallet product or has no product identifier |  -  |
 **402** | The plan of the portal is not paid, the balance could not be moved, or the wallet is still short of the price after the top-up |  -  |
 **403** | The caller is not the payer of this portal, the portal has no billing service configured, or the customer has no payment method set |  -  |
-**404** | This portal has no billing customer, its paid plan has no subscription, the price of the administrators product is unknown, or after the move its wallet has no balance or no sub-account in the accounting currency |  -  |
+**404** | This portal has no billing customer, its paid plan has no subscription, or after the move its wallet has no balance or no sub-account in the accounting currency |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (10 req / 1 min limit per user/IP). <br>  |
 **500** | Internal Server Error. |  -  |
@@ -2821,6 +3644,99 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **403** | The caller is not a DocSpace administrator |  -  |
 **429** | This user has made more than ten requests in a minute |  * Retry-After - Seconds to wait before retrying (10 req / 1 min limit per user/IP). <br>  |
 **401** | Unauthorized |  -  |
+**500** | Internal Server Error. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_participant_service_limits**
+> Int32Wrapper set_participant_service_limits(set_participant_service_limits_request_dto=set_participant_service_limits_request_dto)
+
+Sets the same personal spending limit on the AI services for each of the listed portal users in one call,
+replacing the personal limit any of them already has and switching it on, so it is how a ceiling is rolled out
+to a group of users. The portal needs a billing customer, and the caller needs the permission to edit the portal
+settings as well as DocSpace administrator rights. At least one of `amountValue` and `quantityValue` must be
+given, every user in `userIds` must exist on the portal, and a user listed twice is limited once. One call takes
+at most 1000 users; split a larger group into several calls. Unlike
+`PUT api/2.0/portal/payment/servicelimit`, this sets the whole limit: a threshold left out is removed, and the
+period may change, though a lifetime limit set to lifetime again keeps counting from where it was. Each personal
+limit applies instead of the one for every user, and the limit of the portal is checked on top. The call is mutating and idempotent, and it is written to the portal audit trail. The answer is
+the number of personal limits that were set; the result is listed by
+`GET api/2.0/portal/payment/servicelimit/participants`.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **set_participant_service_limits_request_dto** | [**SetParticipantServiceLimitsRequestDto**](SetParticipantServiceLimitsRequestDto.md)|  | [optional] 
+
+### Return type
+
+[**Int32Wrapper**](Int32Wrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.int32_wrapper import Int32Wrapper
+from docspace_api_sdk.models.set_participant_service_limits_request_dto import SetParticipantServiceLimitsRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    set_participant_service_limits_request_dto = docspace_api_sdk.SetParticipantServiceLimitsRequestDto() # SetParticipantServiceLimitsRequestDto |  (optional)
+
+    try:
+        # Set the user service limits
+        api_response = api_instance.set_participant_service_limits(set_participant_service_limits_request_dto=set_participant_service_limits_request_dto)
+        print("The response of PaymentApi->set_participant_service_limits:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->set_participant_service_limits: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The number of personal limits that were set |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | `userIds` is empty or lists more than 1000 users, neither `amountValue` nor `quantityValue` is given, a value is outside its range, or the accounting service rejects a threshold, such as a quantity for services with different units |  -  |
+**403** | The caller may not edit the portal settings or is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+**404** | The portal has no billing customer, or one of the users does not exist |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -3434,6 +4350,98 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 **404** | This portal has no billing customer yet |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (10 req / 1 min limit per user/IP). <br>  |
+**500** | Internal Server Error. |  -  |
+**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_service_limit**
+> ServiceLimitWrapper update_service_limit(update_service_limit_request_dto=update_service_limit_request_dto)
+
+Changes the thresholds of an existing spending limit on the AI services, or switches it off and back on with
+`enabled`. The portal needs a billing customer, and the caller needs the permission to edit the portal settings
+as well as DocSpace administrator rights. Only the given fields change: an omitted threshold keeps its value, so
+a threshold once set cannot be removed here - delete the limit with
+`DELETE api/2.0/portal/payment/servicelimit/{id}` and create it anew with
+`POST api/2.0/portal/payment/servicelimit`, which is also the way to change its scope, user or period. A
+switched-off limit stops restricting the AI services at once. The call is mutating and idempotent, it is written
+to the portal audit trail, and a new threshold applies from the very next operation; lowering it below what was
+already spent blocks the AI services until the period ends. An ID that does not exist, belongs to another portal
+or is not a limit on the AI services answers 404.
+
+For more information, see [api.onlyoffice.com]().
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **update_service_limit_request_dto** | [**UpdateServiceLimitRequestDto**](UpdateServiceLimitRequestDto.md)|  | [optional] 
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+
+```python
+import docspace_api_sdk
+from docspace_api_sdk.models.service_limit_wrapper import ServiceLimitWrapper
+from docspace_api_sdk.models.update_service_limit_request_dto import UpdateServiceLimitRequestDto
+from docspace_api_sdk.rest import ApiException
+from pprint import pprint
+
+configuration = docspace_api_sdk.Configuration(
+    host = "https://your-docspace.onlyoffice.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): Bearer
+configuration = docspace_api_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+# Enter a context with an instance of the API client
+with docspace_api_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = docspace_api_sdk.PaymentApi(api_client)
+    update_service_limit_request_dto = docspace_api_sdk.UpdateServiceLimitRequestDto() # UpdateServiceLimitRequestDto |  (optional)
+
+    try:
+        # Update a service limit
+        api_response = api_instance.update_service_limit(update_service_limit_request_dto=update_service_limit_request_dto)
+        print("The response of PaymentApi->update_service_limit:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PaymentApi->update_service_limit: %s\n" % e)
+```
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The service limit as it was stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | The ID is zero or negative, a value is outside its range, or the accounting service rejects a threshold, such as a quantity for services with different units |  -  |
+**403** | The caller may not edit the portal settings or is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+**404** | The portal has no billing customer, or the portal has no limit on the AI services with this ID |  -  |
+**401** | Unauthorized |  -  |
+**429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

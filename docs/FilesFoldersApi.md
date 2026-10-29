@@ -148,6 +148,8 @@ parent that does not exist. Rooms are not created here: use `POST api/2.0/files/
 operation for ordinary folders within them. Members of the room are notified of the new folder. Read the
 identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
 
+Raises the `folder.created` webhook.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -446,6 +448,8 @@ so files somebody is working on are not pulled away. The caller needs the right 
 the room manager, a portal administrator acting as room manager and a content creator acting on a folder of
 their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete
 several items at once use `PUT api/2.0/files/fileops/delete`.
+
+Raises the `folder.trashed` webhook once the queued operation moves the folder to the trash; the folders inside it raise none. Raises the `folder.deleted` webhook instead when the folder is deleted at once: `immediately` is true, or it is already in the trash, inside a room or the root of a third-party storage. Raises the `room.deleted` webhook instead when the folder is a room. Raises the `agent.deleted` webhook instead when it is an AI agent.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2383,6 +2387,8 @@ the background; pass `keepConvertStatus` to keep the outcome readable through
 `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a
 chunked session instead.
 
+Raises the `file.created` and `file.uploaded` webhooks whether the upload creates a new file or is saved as a new version of an existing file.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -2507,6 +2513,8 @@ which otherwise drops it. Files over the single-request size limit or the accoun
 send those through `POST api/2.0/files/{folderId}/upload/create_session`, and use
 `POST api/2.0/files/{folderId}/insert` for any other destination.
 
+Raises the `file.created` and `file.uploaded` webhooks whether the upload creates a new file or is saved as a new version of an existing file.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -2622,6 +2630,8 @@ room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other
 mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder
 may change with the title.
 
+Raises the `folder.updated` webhook when the title changes. Raises the `room.updated` webhook instead when the folder is a room. Raises the `agent.updated` webhook instead when it is an AI agent.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -2709,8 +2719,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 # **search_folder**
 > FolderContentWrapper search_folder(folder_id, folder_metadata_search)
 
-Searches the folder by metadata. The same filter the folder listing takes in the metadataTemplateId and metadataFilters
-query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+Lists one page of the contents of a folder narrowed by metadata, in the shape `GET api/2.0/files/{folderId}` returns:
+subfolders in `folders`, files in `files`, the folder itself in `current`. The filter is a typed body:
+`metadataTemplateId` alone keeps the entries the template is assigned to, every condition in `metadataFilters` must
+hold at once, and `filterValue` adds a text search over titles and metadata values; the template and field IDs come
+from `GET api/2.0/files/metadata/templates`, and a body with none of them lists the folder unfiltered. The caller
+needs read access to the folder. No entry is changed, but a recognised `sortBy` is saved as the account's default
+order while an unrecognised one is ignored, and opening a room or an ordinary folder clears its new-item marks for
+the caller. `withSubFolders` searches the whole subtree unless switched off; `total` counts every match, and `count`
+with `startIndex` page through them. A folder in a connected third-party storage carries no metadata, so a filter
+there returns an empty page. An unknown template or field, a field outside the named template, more than 20
+conditions, or a filter in the Templates or Private section is refused with 400; a folder the caller may not read
+with 403, a missing one with 404. To combine metadata with the user, extension or form filters, use
+`GET api/2.0/files/{folderId}`, which takes the same filter as a JSON string.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -2719,7 +2740,7 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **folder_id** | **Union[int, str]**| The folder ID. | 
+ **folder_id** | **Union[int, str]**| The folder or room to search in; take the id from a listing such as `GET api/2.0/files/@root`. A numeric id  addresses a folder of the portal, a string one a folder in a connected third-party storage. | 
  **folder_metadata_search** | [**FolderMetadataSearch**](FolderMetadataSearch.md)| The search parameters. | 
 
 ### Return type
@@ -2761,7 +2782,7 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.FoldersApi(api_client)
-    folder_id = 1 # int | The folder ID.
+    folder_id = 1 # int | The folder or room to search in; take the id from a listing such as `GET api/2.0/files/@root`. A numeric id  addresses a folder of the portal, a string one a folder in a connected third-party storage.
     folder_metadata_search = docspace_api_sdk.FolderMetadataSearch() # FolderMetadataSearch | The search parameters.
 
     try:
@@ -2784,7 +2805,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Folder contents |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**200** | One page of the folder contents that match the filter, with the folder itself and the chain of its parents |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 **400** | Invalid metadata filter, or a metadata filter on a section that cannot apply it |  -  |
 **403** | You don't have enough permission to view the folder content |  -  |
 **404** | The required folder was not found |  -  |
@@ -2808,6 +2829,8 @@ it only means something in rooms whose contents are indexed - elsewhere the valu
 caller needs edit access to the folder, which room managers and content creators have, and a member without it
 is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.
 To move several entries in one go use `PUT api/2.0/files/order`.
+
+Raises the `folder.updated` webhook when the order changes.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -3092,6 +3115,8 @@ uploads. The caller needs the right to add content to the folder, so a reader, a
 a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a
 file is rejected as invalid, and a payload above the portal upload limit is refused.
 
+Raises the `file.created` and `file.uploaded` webhooks whether the upload creates a new file or is saved as a new version of an existing file.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -3199,6 +3224,8 @@ converted after the response - false replaces the uploaded file with the convert
 `keepConvertStatus=true` keeps that conversion result readable through
 `GET api/2.0/files/file/{fileId}/checkconversion`. Files over the single-request size limit or the account's
 storage quota are refused; send those through `POST api/2.0/files/{folderId}/upload/create_session`.
+
+Raises the `file.created` and `file.uploaded` webhooks whether the upload creates a new file or is saved as a new version of an existing file.
 
 For more information, see [api.onlyoffice.com]().
 

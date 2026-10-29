@@ -37,7 +37,7 @@ class AiApproveToolCallRequest(BaseModel):
     thread_id: StrictStr = Field(description="Thread the assistant message belongs to.", alias="threadId")
     message_id: StrictStr = Field(description="Storage id of the assistant message holding the tool call.", alias="messageId")
     idx: Union[StrictFloat, StrictInt] = Field(description="Index of the tool-call content part inside `message.content`.")
-    message: AiThreadMessageLike = Field(description="Snapshot of the assistant message at the time the tool call surfaced.")
+    message: Optional[AiThreadMessageLike] = Field(default=None, description="Snapshot of the assistant message at the time the tool call surfaced. Optional and ignored: the engine resumes from the stored message, and the copy inflated the body past the parser limit (Bug 84608).")
     action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
     entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId")
     profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId")

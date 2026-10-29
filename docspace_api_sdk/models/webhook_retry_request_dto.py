@@ -23,6 +23,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,7 @@ class WebhookRetryRequestDto(BaseModel):
     """
     Which past webhook deliveries are sent again.
     """ # noqa: E501
-    ids: Optional[List[StrictInt]] = Field(default=None, description="The delivery records to send again, by the identifiers `GET api/2.0/settings/webhooks/log` reports. An  identifier that exists nowhere, and one belonging to another member subscription when the caller is not a  DocSpace administrator, is skipped in silence rather than failing the call, so compare the number of records  that come back against the number sent. An empty list is accepted and queues nothing.", json_schema_extra={"examples": [[1, 2, 3]]})
+    ids: Optional[Annotated[List[StrictInt], Field(max_length=100)]] = Field(default=None, description="The delivery records to send again, by the `id` values `GET api/2.0/settings/webhooks/log` reports. The bound  is per call: a longer batch has to be split into several calls.", json_schema_extra={"examples": [[1, 2, 3]]})
     __properties: ClassVar[List[str]] = ["ids"]
 
     model_config = ConfigDict(

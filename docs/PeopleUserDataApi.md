@@ -464,6 +464,8 @@ The job does not finish within this call: poll `GET api/2.0/people/delete/person
 The job deletes the files permanently and cannot be undone or cancelled - there is no terminate operation for
 this flow, unlike the user data deletion.
 
+Raises the `folder.created` webhook once the queued job creates the folder that takes over the files and folders the caller shared from the personal folder, in the personal section of the member who last changed that folder or of the portal owner; not when the caller shared none.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -550,6 +552,8 @@ Pass `deleteProfile` as true to delete the source profile once the transfer succ
 profile is kept.
 Use `GET api/2.0/people/reassign/necessary` first to find out whether the user owns anything that has to be
 reassigned at all.
+
+Raises the `user.deleted` webhook for the source account when `deleteProfile` is true, once the reassignment finishes successfully. Raises the `folder.created` webhook once the queued reassignment creates the folder in the recipient's personal section that takes over the files and folders the source account shared from its own; not when it shared none.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -641,6 +645,8 @@ user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/r
 This operation destroys the data and cannot be undone; to keep the rooms and the shared files of the account
 instead, transfer them first through `POST api/2.0/people/reassign/start`.
 An unknown ID and a rejected precondition both answer 400 and name the ID they rejected.
+
+Raises the `folder.created` webhook once the queued data deletion creates the folder in the caller's personal section that takes over the files and folders the account shared from its own; not when it shared none.
 
 For more information, see [api.onlyoffice.com]().
 

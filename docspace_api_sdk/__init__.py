@@ -31,6 +31,7 @@ __all__ = [
     "ContextApi",
     "EditorToolsApi",
     "ExportApi",
+    "MetadataApi",
     "OpenAIPassthroughApi",
     "PreferencesApi",
     "ProfilesApi",
@@ -75,6 +76,7 @@ __all__ = [
     "UserStatusApi",
     "UserTypeApi",
     "GuestsApi",
+    "ModuleEventsApi",
     "PaymentApi",
     "QuotaApi",
     "SettingsApi",
@@ -191,6 +193,11 @@ __all__ = [
     "AiEmbeddingPriceDto",
     "AiEmbeddingProviderType",
     "AiEmployeeDto",
+    "AiEntryMetadata",
+    "AiEntryMetadataCustomFieldsInner",
+    "AiEntryMetadataField",
+    "AiEntryMetadataFieldOptionsInner",
+    "AiEntryMetadataTemplatesInner",
     "AiEntryPricingDtoAiChatPriceDto",
     "AiEntryPricingDtoAiEmbeddingPriceDto",
     "AiEntryPricingDtoAiImagePriceDto",
@@ -226,7 +233,21 @@ __all__ = [
     "AiLogoCoverDto",
     "AiLogoDto",
     "AiMCPItem",
+    "AiMetaFill200Response",
+    "AiMetaFill200ResponseFilledInner",
+    "AiMetaFill200ResponseFilledInnerValue",
+    "AiMetaFill200ResponseSourcesInner",
+    "AiMetaFill200ResponseUnresolvedInner",
+    "AiMetaFillRequest",
+    "AiMetaGenerate200Response",
+    "AiMetaGenerate200ResponseFieldsInner",
+    "AiMetaGenerate200ResponseSkippedInner",
+    "AiMetaGenerate200ResponseSourcesInner",
+    "AiMetaGenerate402Response",
+    "AiMetaGenerateRequest",
+    "AiMetaGenerateRequestId",
     "AiMetadataMatchDto",
+    "AiMetadataValue",
     "AiModel",
     "AiNewItemsAgentNewItemsArrayWrapper",
     "AiNewItemsDtoAgentNewItemsDto",
@@ -453,6 +474,7 @@ __all__ = [
     "CreateMetadataTemplateRequestDto",
     "CreateRoomFromTemplateDto",
     "CreateRoomRequestDto",
+    "CreateServiceLimitRequestDto",
     "CreateTagRequestDto",
     "CreateTextOrHtmlFileRequest",
     "CreateThirdPartyRoomRequest",
@@ -508,6 +530,9 @@ __all__ = [
     "DeleteFolderRequest",
     "DeleteRoomRequest",
     "DeleteVersionBatchRequestDto",
+    "DepositDto",
+    "DepositReportDto",
+    "DepositReportWrapper",
     "DiscountCategoryDto",
     "DisplayRequestDto",
     "DistributedTaskStatus",
@@ -912,6 +937,15 @@ __all__ = [
     "SecurityInfoRequestDto",
     "SecurityInfoSimpleRequestDto",
     "SecurityRequestDto",
+    "SendModuleEventRequest",
+    "ServiceLimitDto",
+    "ServiceLimitOrderBy",
+    "ServiceLimitPeriod",
+    "ServiceLimitReportDto",
+    "ServiceLimitReportWrapper",
+    "ServiceLimitScope",
+    "ServiceLimitUsageDto",
+    "ServiceLimitWrapper",
     "ServicePriceArrayWrapper",
     "ServicePriceDto",
     "SessionRequest",
@@ -921,6 +955,7 @@ __all__ = [
     "SetCustomFields",
     "SetManagerRequest",
     "SetMetadataValues",
+    "SetParticipantServiceLimitsRequestDto",
     "SetPublicDto",
     "SetRestrictedAiModelsRequestDto",
     "SetWalletTopUpSettingsRequest",
@@ -1088,6 +1123,7 @@ __all__ = [
     "UpdateRoomRequest",
     "UpdateRoomsQuotaRequestDto",
     "UpdateRoomsRoomIdsRequestDto",
+    "UpdateServiceLimitRequestDto",
     "UpdateTagRequestDto",
     "UpdateWebhooksConfigRequestDto",
     "UploadResultDto",
@@ -1101,6 +1137,7 @@ __all__ = [
     "UserExistsResponseWrapper",
     "UserInvitation",
     "UserInvitationRequestDto",
+    "UserServiceLimitDto",
     "ValidationErrorResponse",
     "ValidationResult",
     "VectorizationStatus",
@@ -1153,6 +1190,7 @@ from docspace_api_sdk.api.ai.attachments_api import AttachmentsApi as Attachment
 from docspace_api_sdk.api.ai.context_api import ContextApi as ContextApi
 from docspace_api_sdk.api.ai.editor_tools_api import EditorToolsApi as EditorToolsApi
 from docspace_api_sdk.api.ai.export_api import ExportApi as ExportApi
+from docspace_api_sdk.api.ai.metadata_api import MetadataApi as MetadataApi
 from docspace_api_sdk.api.ai.open_ai_passthrough_api import OpenAIPassthroughApi as OpenAIPassthroughApi
 from docspace_api_sdk.api.ai.preferences_api import PreferencesApi as PreferencesApi
 from docspace_api_sdk.api.ai.profiles_api import ProfilesApi as ProfilesApi
@@ -1197,6 +1235,7 @@ from docspace_api_sdk.api.people.user_data_api import UserDataApi as UserDataApi
 from docspace_api_sdk.api.people.user_status_api import UserStatusApi as UserStatusApi
 from docspace_api_sdk.api.people.user_type_api import UserTypeApi as UserTypeApi
 from docspace_api_sdk.api.portal.guests_api import GuestsApi as GuestsApi
+from docspace_api_sdk.api.portal.module_events_api import ModuleEventsApi as ModuleEventsApi
 from docspace_api_sdk.api.portal.payment_api import PaymentApi as PaymentApi
 from docspace_api_sdk.api.portal.quota_api import QuotaApi as QuotaApi
 from docspace_api_sdk.api.portal.settings_api import SettingsApi as SettingsApi
@@ -1317,6 +1356,11 @@ from docspace_api_sdk.models.ai_editor_tools_list200_response_tools_inner import
 from docspace_api_sdk.models.ai_embedding_price_dto import AiEmbeddingPriceDto as AiEmbeddingPriceDto
 from docspace_api_sdk.models.ai_embedding_provider_type import AiEmbeddingProviderType as AiEmbeddingProviderType
 from docspace_api_sdk.models.ai_employee_dto import AiEmployeeDto as AiEmployeeDto
+from docspace_api_sdk.models.ai_entry_metadata import AiEntryMetadata as AiEntryMetadata
+from docspace_api_sdk.models.ai_entry_metadata_custom_fields_inner import AiEntryMetadataCustomFieldsInner as AiEntryMetadataCustomFieldsInner
+from docspace_api_sdk.models.ai_entry_metadata_field import AiEntryMetadataField as AiEntryMetadataField
+from docspace_api_sdk.models.ai_entry_metadata_field_options_inner import AiEntryMetadataFieldOptionsInner as AiEntryMetadataFieldOptionsInner
+from docspace_api_sdk.models.ai_entry_metadata_templates_inner import AiEntryMetadataTemplatesInner as AiEntryMetadataTemplatesInner
 from docspace_api_sdk.models.ai_entry_pricing_dto_ai_chat_price_dto import AiEntryPricingDtoAiChatPriceDto as AiEntryPricingDtoAiChatPriceDto
 from docspace_api_sdk.models.ai_entry_pricing_dto_ai_embedding_price_dto import AiEntryPricingDtoAiEmbeddingPriceDto as AiEntryPricingDtoAiEmbeddingPriceDto
 from docspace_api_sdk.models.ai_entry_pricing_dto_ai_image_price_dto import AiEntryPricingDtoAiImagePriceDto as AiEntryPricingDtoAiImagePriceDto
@@ -1352,7 +1396,21 @@ from docspace_api_sdk.models.ai_import_result_imported import AiImportResultImpo
 from docspace_api_sdk.models.ai_logo_cover_dto import AiLogoCoverDto as AiLogoCoverDto
 from docspace_api_sdk.models.ai_logo_dto import AiLogoDto as AiLogoDto
 from docspace_api_sdk.models.ai_mcp_item import AiMCPItem as AiMCPItem
+from docspace_api_sdk.models.ai_meta_fill200_response import AiMetaFill200Response as AiMetaFill200Response
+from docspace_api_sdk.models.ai_meta_fill200_response_filled_inner import AiMetaFill200ResponseFilledInner as AiMetaFill200ResponseFilledInner
+from docspace_api_sdk.models.ai_meta_fill200_response_filled_inner_value import AiMetaFill200ResponseFilledInnerValue as AiMetaFill200ResponseFilledInnerValue
+from docspace_api_sdk.models.ai_meta_fill200_response_sources_inner import AiMetaFill200ResponseSourcesInner as AiMetaFill200ResponseSourcesInner
+from docspace_api_sdk.models.ai_meta_fill200_response_unresolved_inner import AiMetaFill200ResponseUnresolvedInner as AiMetaFill200ResponseUnresolvedInner
+from docspace_api_sdk.models.ai_meta_fill_request import AiMetaFillRequest as AiMetaFillRequest
+from docspace_api_sdk.models.ai_meta_generate200_response import AiMetaGenerate200Response as AiMetaGenerate200Response
+from docspace_api_sdk.models.ai_meta_generate200_response_fields_inner import AiMetaGenerate200ResponseFieldsInner as AiMetaGenerate200ResponseFieldsInner
+from docspace_api_sdk.models.ai_meta_generate200_response_skipped_inner import AiMetaGenerate200ResponseSkippedInner as AiMetaGenerate200ResponseSkippedInner
+from docspace_api_sdk.models.ai_meta_generate200_response_sources_inner import AiMetaGenerate200ResponseSourcesInner as AiMetaGenerate200ResponseSourcesInner
+from docspace_api_sdk.models.ai_meta_generate402_response import AiMetaGenerate402Response as AiMetaGenerate402Response
+from docspace_api_sdk.models.ai_meta_generate_request import AiMetaGenerateRequest as AiMetaGenerateRequest
+from docspace_api_sdk.models.ai_meta_generate_request_id import AiMetaGenerateRequestId as AiMetaGenerateRequestId
 from docspace_api_sdk.models.ai_metadata_match_dto import AiMetadataMatchDto as AiMetadataMatchDto
+from docspace_api_sdk.models.ai_metadata_value import AiMetadataValue as AiMetadataValue
 from docspace_api_sdk.models.ai_model import AiModel as AiModel
 from docspace_api_sdk.models.ai_new_items_agent_new_items_array_wrapper import AiNewItemsAgentNewItemsArrayWrapper as AiNewItemsAgentNewItemsArrayWrapper
 from docspace_api_sdk.models.ai_new_items_dto_agent_new_items_dto import AiNewItemsDtoAgentNewItemsDto as AiNewItemsDtoAgentNewItemsDto
@@ -1579,6 +1637,7 @@ from docspace_api_sdk.models.create_folder_request import CreateFolderRequest as
 from docspace_api_sdk.models.create_metadata_template_request_dto import CreateMetadataTemplateRequestDto as CreateMetadataTemplateRequestDto
 from docspace_api_sdk.models.create_room_from_template_dto import CreateRoomFromTemplateDto as CreateRoomFromTemplateDto
 from docspace_api_sdk.models.create_room_request_dto import CreateRoomRequestDto as CreateRoomRequestDto
+from docspace_api_sdk.models.create_service_limit_request_dto import CreateServiceLimitRequestDto as CreateServiceLimitRequestDto
 from docspace_api_sdk.models.create_tag_request_dto import CreateTagRequestDto as CreateTagRequestDto
 from docspace_api_sdk.models.create_text_or_html_file_request import CreateTextOrHtmlFileRequest as CreateTextOrHtmlFileRequest
 from docspace_api_sdk.models.create_third_party_room_request import CreateThirdPartyRoomRequest as CreateThirdPartyRoomRequest
@@ -1634,6 +1693,9 @@ from docspace_api_sdk.models.delete_file_request import DeleteFileRequest as Del
 from docspace_api_sdk.models.delete_folder_request import DeleteFolderRequest as DeleteFolderRequest
 from docspace_api_sdk.models.delete_room_request import DeleteRoomRequest as DeleteRoomRequest
 from docspace_api_sdk.models.delete_version_batch_request_dto import DeleteVersionBatchRequestDto as DeleteVersionBatchRequestDto
+from docspace_api_sdk.models.deposit_dto import DepositDto as DepositDto
+from docspace_api_sdk.models.deposit_report_dto import DepositReportDto as DepositReportDto
+from docspace_api_sdk.models.deposit_report_wrapper import DepositReportWrapper as DepositReportWrapper
 from docspace_api_sdk.models.discount_category_dto import DiscountCategoryDto as DiscountCategoryDto
 from docspace_api_sdk.models.display_request_dto import DisplayRequestDto as DisplayRequestDto
 from docspace_api_sdk.models.distributed_task_status import DistributedTaskStatus as DistributedTaskStatus
@@ -2038,6 +2100,15 @@ from docspace_api_sdk.models.security_dto import SecurityDto as SecurityDto
 from docspace_api_sdk.models.security_info_request_dto import SecurityInfoRequestDto as SecurityInfoRequestDto
 from docspace_api_sdk.models.security_info_simple_request_dto import SecurityInfoSimpleRequestDto as SecurityInfoSimpleRequestDto
 from docspace_api_sdk.models.security_request_dto import SecurityRequestDto as SecurityRequestDto
+from docspace_api_sdk.models.send_module_event_request import SendModuleEventRequest as SendModuleEventRequest
+from docspace_api_sdk.models.service_limit_dto import ServiceLimitDto as ServiceLimitDto
+from docspace_api_sdk.models.service_limit_order_by import ServiceLimitOrderBy as ServiceLimitOrderBy
+from docspace_api_sdk.models.service_limit_period import ServiceLimitPeriod as ServiceLimitPeriod
+from docspace_api_sdk.models.service_limit_report_dto import ServiceLimitReportDto as ServiceLimitReportDto
+from docspace_api_sdk.models.service_limit_report_wrapper import ServiceLimitReportWrapper as ServiceLimitReportWrapper
+from docspace_api_sdk.models.service_limit_scope import ServiceLimitScope as ServiceLimitScope
+from docspace_api_sdk.models.service_limit_usage_dto import ServiceLimitUsageDto as ServiceLimitUsageDto
+from docspace_api_sdk.models.service_limit_wrapper import ServiceLimitWrapper as ServiceLimitWrapper
 from docspace_api_sdk.models.service_price_array_wrapper import ServicePriceArrayWrapper as ServicePriceArrayWrapper
 from docspace_api_sdk.models.service_price_dto import ServicePriceDto as ServicePriceDto
 from docspace_api_sdk.models.session_request import SessionRequest as SessionRequest
@@ -2047,6 +2118,7 @@ from docspace_api_sdk.models.set_audit_lifetime_settings_request import SetAudit
 from docspace_api_sdk.models.set_custom_fields import SetCustomFields as SetCustomFields
 from docspace_api_sdk.models.set_manager_request import SetManagerRequest as SetManagerRequest
 from docspace_api_sdk.models.set_metadata_values import SetMetadataValues as SetMetadataValues
+from docspace_api_sdk.models.set_participant_service_limits_request_dto import SetParticipantServiceLimitsRequestDto as SetParticipantServiceLimitsRequestDto
 from docspace_api_sdk.models.set_public_dto import SetPublicDto as SetPublicDto
 from docspace_api_sdk.models.set_restricted_ai_models_request_dto import SetRestrictedAiModelsRequestDto as SetRestrictedAiModelsRequestDto
 from docspace_api_sdk.models.set_wallet_top_up_settings_request import SetWalletTopUpSettingsRequest as SetWalletTopUpSettingsRequest
@@ -2214,6 +2286,7 @@ from docspace_api_sdk.models.update_room_group_request import UpdateRoomGroupReq
 from docspace_api_sdk.models.update_room_request import UpdateRoomRequest as UpdateRoomRequest
 from docspace_api_sdk.models.update_rooms_quota_request_dto import UpdateRoomsQuotaRequestDto as UpdateRoomsQuotaRequestDto
 from docspace_api_sdk.models.update_rooms_room_ids_request_dto import UpdateRoomsRoomIdsRequestDto as UpdateRoomsRoomIdsRequestDto
+from docspace_api_sdk.models.update_service_limit_request_dto import UpdateServiceLimitRequestDto as UpdateServiceLimitRequestDto
 from docspace_api_sdk.models.update_tag_request_dto import UpdateTagRequestDto as UpdateTagRequestDto
 from docspace_api_sdk.models.update_webhooks_config_request_dto import UpdateWebhooksConfigRequestDto as UpdateWebhooksConfigRequestDto
 from docspace_api_sdk.models.upload_result_dto import UploadResultDto as UploadResultDto
@@ -2227,6 +2300,7 @@ from docspace_api_sdk.models.user_exists_response_dto import UserExistsResponseD
 from docspace_api_sdk.models.user_exists_response_wrapper import UserExistsResponseWrapper as UserExistsResponseWrapper
 from docspace_api_sdk.models.user_invitation import UserInvitation as UserInvitation
 from docspace_api_sdk.models.user_invitation_request_dto import UserInvitationRequestDto as UserInvitationRequestDto
+from docspace_api_sdk.models.user_service_limit_dto import UserServiceLimitDto as UserServiceLimitDto
 from docspace_api_sdk.models.validation_error_response import ValidationErrorResponse as ValidationErrorResponse
 from docspace_api_sdk.models.validation_result import ValidationResult as ValidationResult
 from docspace_api_sdk.models.vectorization_status import VectorizationStatus as VectorizationStatus

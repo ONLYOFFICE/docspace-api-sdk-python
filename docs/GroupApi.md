@@ -26,9 +26,10 @@ The name is required and cannot be blank, and unlike the operations that add mem
 every listed account upfront and rejects the whole call with 400 if any of them is unusable - a guest, a
 disabled account or an ID that matches nobody.
 The call is not idempotent: names are not unique, so repeating it creates a second group with the same name.
-Creating a group raises a `GroupCreated` webhook, and the answer holds the new group with its members
-included.
+The answer holds the new group with its members included.
 Members can be changed afterwards through `PUT api/2.0/group/{id}` or the dedicated member operations.
+
+Raises the `group.created` webhook once for the new group. The `user.*` payloads of its manager and members are not re-sent.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -121,6 +122,8 @@ use `PUT api/2.0/group/{id}/manager` for that.
 The answer is the group with its members after the addition.
 To replace the whole list instead of extending it, use `POST api/2.0/group/{id}/members`.
 
+Raises the `group.updated` webhook only when at least one listed account is actually added, not for an empty list or for accounts that are already members or cannot be members. The added members' `user.*` payloads are not re-sent.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -210,10 +213,12 @@ group that has not been deleted, otherwise the operation answers 404.
 The removal is permanent and cannot be undone, and it affects sharing: everything that was shared with the
 group loses that share, so members who had access only through this group lose it too.
 The accounts themselves are kept - only their membership disappears.
-The call answers 204 with no body and raises a `GroupDeleted` webhook; a second call with the same ID answers
+The call answers 204 with no body; a second call with the same ID answers
 404 rather than succeeding again.
 To empty a group without deleting it, move its members away with
 `PUT api/2.0/group/{fromId}/members/{toId}` or remove them through `DELETE api/2.0/group/{id}/members`.
+
+Raises the `group.deleted` webhook once for the deleted group. The `user.*` payloads of its former members are not re-sent.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -582,6 +587,8 @@ The answer is the destination group with its members, not the source one.
 To move a chosen few instead of everybody, use `PUT api/2.0/group/{id}/members` and
 `DELETE api/2.0/group/{id}/members`.
 
+Raises the `group.updated` webhook once for the source group when it had members, and once for the destination group when its members or manager actually change; not at all when both IDs name the same group. The moved members' `user.*` payloads are not re-sent.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -674,6 +681,8 @@ both skipped without an error, and an empty list simply changes nothing.
 The answer is the group with the members that remain.
 Emptying a group cannot be done through `POST api/2.0/group/{id}/members`, which needs at least one valid
 account, so list every member here, or move them away with `PUT api/2.0/group/{fromId}/members/{toId}`.
+
+Raises the `group.updated` webhook only when at least one listed account is actually a member and is removed, not for an empty list or a list of non-members. The removed members' `user.*` payloads are not re-sent.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -768,6 +777,8 @@ the previous manager stays in the group as an ordinary member.
 A group has one manager, which makes the call idempotent when it names the account that manages it already.
 The answer is the group with its new manager.
 To change the members rather than the manager, use `PUT api/2.0/group/{id}/members`.
+
+Raises the `group.updated` webhook only when the manager or the members actually change, not when the account already manages the group or cannot be a group member. The `user.*` payloads of the new and the previous manager are not re-sent.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -866,6 +877,8 @@ the request was applied verbatim.
 To add or remove a few accounts without touching the others, use `PUT api/2.0/group/{id}/members` and
 `DELETE api/2.0/group/{id}/members`.
 
+Raises the `group.updated` webhook only when the members or the manager of the group actually change, not when the list names the current members again. The added and removed members' `user.*` payloads are not re-sent.
+
 For more information, see [api.onlyoffice.com]().
 
 ### Parameters
@@ -959,7 +972,9 @@ nobody - are silently skipped instead of failing the call, so compare the member
 sent to see what was actually applied.
 Members are added first and removed afterwards, an account listed in both lists therefore ends up removed,
 and removing an account that is not a member changes nothing.
-The change raises a `GroupUpdated` webhook, and the answer holds the group as it is after the update.
+The answer holds the group as it is after the update.
+
+Raises the `group.updated` webhook only when the name, the manager or the members actually change, not for a call that repeats the current values. The `user.*` payloads of the added and removed members and of the manager are not re-sent.
 
 For more information, see [api.onlyoffice.com]().
 
