@@ -421,8 +421,6 @@ __all__ = [
     "CheckDestFolderWrapper",
     "CheckDocServiceUrlRequestDto",
     "CheckFillFormDraftRequest",
-    "CheckMoveOrCopyBatchItemsDestFolderIdParameter",
-    "CheckMoveOrCopyBatchItemsFolderIdsParameterInner",
     "CheckUploadRequest",
     "ChunkedUploadSessionDto",
     "ChunkedUploadSessionResultDto",
@@ -1584,8 +1582,6 @@ from docspace_api_sdk.models.check_dest_folder_result import CheckDestFolderResu
 from docspace_api_sdk.models.check_dest_folder_wrapper import CheckDestFolderWrapper as CheckDestFolderWrapper
 from docspace_api_sdk.models.check_doc_service_url_request_dto import CheckDocServiceUrlRequestDto as CheckDocServiceUrlRequestDto
 from docspace_api_sdk.models.check_fill_form_draft_request import CheckFillFormDraftRequest as CheckFillFormDraftRequest
-from docspace_api_sdk.models.check_move_or_copy_batch_items_dest_folder_id_parameter import CheckMoveOrCopyBatchItemsDestFolderIdParameter as CheckMoveOrCopyBatchItemsDestFolderIdParameter
-from docspace_api_sdk.models.check_move_or_copy_batch_items_folder_ids_parameter_inner import CheckMoveOrCopyBatchItemsFolderIdsParameterInner as CheckMoveOrCopyBatchItemsFolderIdsParameterInner
 from docspace_api_sdk.models.check_upload_request import CheckUploadRequest as CheckUploadRequest
 from docspace_api_sdk.models.chunked_upload_session_dto import ChunkedUploadSessionDto as ChunkedUploadSessionDto
 from docspace_api_sdk.models.chunked_upload_session_result_dto import ChunkedUploadSessionResultDto as ChunkedUploadSessionResultDto
