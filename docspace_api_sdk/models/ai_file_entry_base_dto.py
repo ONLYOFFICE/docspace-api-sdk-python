@@ -57,7 +57,8 @@ class AiFileEntryBaseDto(BaseModel):
     order: Optional[StrictStr] = Field(default=None, description="The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged.", json_schema_extra={"examples": ["1.3.2"]})
     is_favorite: Optional[StrictBool] = Field(default=None, description="Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false.", alias="isFavorite", json_schema_extra={"examples": [True]})
     file_entry_type: Optional[AiFileEntryType] = Field(default=None, description="Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here.", alias="fileEntryType")
-    __properties: ClassVar[List[str]] = ["title", "access", "sharedBy", "ownedBy", "shared", "sharedForUser", "sharedExternal", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType"]
+    entry_kind: Optional[StrictStr] = Field(default=None, description="Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out.", alias="entryKind", json_schema_extra={"examples": ["file"]})
+    __properties: ClassVar[List[str]] = ["title", "access", "sharedBy", "ownedBy", "shared", "sharedForUser", "sharedExternal", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType", "entryKind"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -188,7 +189,8 @@ class AiFileEntryBaseDto(BaseModel):
             "providerId": obj.get("providerId"),
             "order": obj.get("order"),
             "isFavorite": obj.get("isFavorite"),
-            "fileEntryType": obj.get("fileEntryType")
+            "fileEntryType": obj.get("fileEntryType"),
+            "entryKind": obj.get("entryKind")
         })
         return _obj
 

@@ -21,7 +21,7 @@ from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_file_entry_dto_all_of_available_share_rights import AiFileEntryDtoAllOfAvailableShareRights
 from docspace_api_sdk.models.ai_file_entry_dto_all_of_security import AiFileEntryDtoAllOfSecurity
@@ -36,6 +36,7 @@ from docspace_api_sdk.models.logo_dto import LogoDto
 from docspace_api_sdk.models.metadata_match_dto import MetadataMatchDto
 from docspace_api_sdk.models.room_data_lifetime_dto import RoomDataLifetimeDto
 from docspace_api_sdk.models.room_type import RoomType
+from docspace_api_sdk.models.third_party_file_entry_dto import ThirdPartyFileEntryDto
 from docspace_api_sdk.models.watermark_dto import WatermarkDto
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
@@ -165,6 +166,71 @@ class ThirdPartyFolderDto(ThirdPartyFileEntryDto):
         # override the default output from pydantic by calling `to_dict()` of chat_settings
         if self.chat_settings:
             _dict['chatSettings'] = self.chat_settings.to_dict()
+        # set to None if title (nullable) is None
+        # and model_fields_set contains the field
+        if self.title is None and "title" in self.model_fields_set:
+            _dict['title'] = None
+
+        # set to None if short_web_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.short_web_url is None and "short_web_url" in self.model_fields_set:
+            _dict['shortWebUrl'] = None
+
+        # set to None if provider_item (nullable) is None
+        # and model_fields_set contains the field
+        if self.provider_item is None and "provider_item" in self.model_fields_set:
+            _dict['providerItem'] = None
+
+        # set to None if provider_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.provider_key is None and "provider_key" in self.model_fields_set:
+            _dict['providerKey'] = None
+
+        # set to None if provider_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.provider_id is None and "provider_id" in self.model_fields_set:
+            _dict['providerId'] = None
+
+        # set to None if order (nullable) is None
+        # and model_fields_set contains the field
+        if self.order is None and "order" in self.model_fields_set:
+            _dict['order'] = None
+
+        # set to None if is_favorite (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_favorite is None and "is_favorite" in self.model_fields_set:
+            _dict['isFavorite'] = None
+
+        # set to None if id (nullable) is None
+        # and model_fields_set contains the field
+        if self.id is None and "id" in self.model_fields_set:
+            _dict['id'] = None
+
+        # set to None if root_folder_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.root_folder_id is None and "root_folder_id" in self.model_fields_set:
+            _dict['rootFolderId'] = None
+
+        # set to None if origin_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.origin_id is None and "origin_id" in self.model_fields_set:
+            _dict['originId'] = None
+
+        # set to None if origin_room_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.origin_room_id is None and "origin_room_id" in self.model_fields_set:
+            _dict['originRoomId'] = None
+
+        # set to None if origin_title (nullable) is None
+        # and model_fields_set contains the field
+        if self.origin_title is None and "origin_title" in self.model_fields_set:
+            _dict['originTitle'] = None
+
+        # set to None if origin_room_title (nullable) is None
+        # and model_fields_set contains the field
+        if self.origin_room_title is None and "origin_room_title" in self.model_fields_set:
+            _dict['originRoomTitle'] = None
+
         # set to None if share_settings (nullable) is None
         # and model_fields_set contains the field
         if self.share_settings is None and "share_settings" in self.model_fields_set:
@@ -179,6 +245,31 @@ class ThirdPartyFolderDto(ThirdPartyFileEntryDto):
         # and model_fields_set contains the field
         if self.available_share_rights is None and "available_share_rights" in self.model_fields_set:
             _dict['availableShareRights'] = None
+
+        # set to None if request_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.request_token is None and "request_token" in self.model_fields_set:
+            _dict['requestToken'] = None
+
+        # set to None if external (nullable) is None
+        # and model_fields_set contains the field
+        if self.external is None and "external" in self.model_fields_set:
+            _dict['external'] = None
+
+        # set to None if is_link_expired (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_link_expired is None and "is_link_expired" in self.model_fields_set:
+            _dict['isLinkExpired'] = None
+
+        # set to None if assigned_metadata_templates (nullable) is None
+        # and model_fields_set contains the field
+        if self.assigned_metadata_templates is None and "assigned_metadata_templates" in self.model_fields_set:
+            _dict['assignedMetadataTemplates'] = None
+
+        # set to None if metadata_matches (nullable) is None
+        # and model_fields_set contains the field
+        if self.metadata_matches is None and "metadata_matches" in self.model_fields_set:
+            _dict['metadataMatches'] = None
 
         # set to None if parent_id (nullable) is None
         # and model_fields_set contains the field

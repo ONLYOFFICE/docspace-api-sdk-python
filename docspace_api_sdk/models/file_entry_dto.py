@@ -21,13 +21,15 @@ from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from importlib import import_module
+from pydantic import ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.ai_file_entry_dto_all_of_available_share_rights import AiFileEntryDtoAllOfAvailableShareRights
 from docspace_api_sdk.models.ai_file_entry_dto_all_of_security import AiFileEntryDtoAllOfSecurity
 from docspace_api_sdk.models.ai_file_entry_dto_all_of_share_settings import AiFileEntryDtoAllOfShareSettings
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
+from docspace_api_sdk.models.file_entry_base_dto import FileEntryBaseDto
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.file_share import FileShare
 from docspace_api_sdk.models.folder_type import FolderType
@@ -75,7 +77,7 @@ class FileEntryDto(FileEntryBaseDto):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
+    def from_json(cls, json_str: str) -> Optional[Union[FileDto, FolderDto, ThirdPartyFileDto, ThirdPartyFolderDto]]:
         """Create an instance of FileEntryDto from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -137,6 +139,41 @@ class FileEntryDto(FileEntryBaseDto):
                 if _item_metadata_matches:
                     _items.append(_item_metadata_matches.to_dict())
             _dict['metadataMatches'] = _items
+        # set to None if title (nullable) is None
+        # and model_fields_set contains the field
+        if self.title is None and "title" in self.model_fields_set:
+            _dict['title'] = None
+
+        # set to None if short_web_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.short_web_url is None and "short_web_url" in self.model_fields_set:
+            _dict['shortWebUrl'] = None
+
+        # set to None if provider_item (nullable) is None
+        # and model_fields_set contains the field
+        if self.provider_item is None and "provider_item" in self.model_fields_set:
+            _dict['providerItem'] = None
+
+        # set to None if provider_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.provider_key is None and "provider_key" in self.model_fields_set:
+            _dict['providerKey'] = None
+
+        # set to None if provider_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.provider_id is None and "provider_id" in self.model_fields_set:
+            _dict['providerId'] = None
+
+        # set to None if order (nullable) is None
+        # and model_fields_set contains the field
+        if self.order is None and "order" in self.model_fields_set:
+            _dict['order'] = None
+
+        # set to None if is_favorite (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_favorite is None and "is_favorite" in self.model_fields_set:
+            _dict['isFavorite'] = None
+
         # set to None if origin_title (nullable) is None
         # and model_fields_set contains the field
         if self.origin_title is None and "origin_title" in self.model_fields_set:

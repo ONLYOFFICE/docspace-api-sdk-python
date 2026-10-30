@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from importlib import import_module
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.file_entry_type import FileEntryType
@@ -30,6 +31,15 @@ from docspace_api_sdk.models.file_share import FileShare
 from docspace_api_sdk.models.folder_type import FolderType
 from typing import Optional, Set
 from typing_extensions import Self
+
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from docspace_api_sdk.models.file_dto import FileDto
+    from docspace_api_sdk.models.folder_dto import FolderDto
+    from docspace_api_sdk.models.third_party_file_dto import ThirdPartyFileDto
+    from docspace_api_sdk.models.third_party_folder_dto import ThirdPartyFolderDto
+    from docspace_api_sdk.models.file_entry_dto import FileEntryDto
+    from docspace_api_sdk.models.third_party_file_entry_dto import ThirdPartyFileEntryDto
 
 class FileEntryBaseDto(BaseModel):
     """
@@ -57,7 +67,8 @@ class FileEntryBaseDto(BaseModel):
     order: Optional[StrictStr] = Field(default=None, description="The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged.", json_schema_extra={"examples": ["1.3.2"]})
     is_favorite: Optional[StrictBool] = Field(default=None, description="Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false.", alias="isFavorite", json_schema_extra={"examples": [True]})
     file_entry_type: Optional[FileEntryType] = Field(default=None, description="Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here.", alias="fileEntryType")
-    __properties: ClassVar[List[str]] = ["title", "access", "sharedBy", "ownedBy", "shared", "sharedForUser", "sharedExternal", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType"]
+    entry_kind: Optional[StrictStr] = Field(default=None, description="Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out.", alias="entryKind", json_schema_extra={"examples": ["file"]})
+    __properties: ClassVar[List[str]] = ["title", "access", "sharedBy", "ownedBy", "shared", "sharedForUser", "sharedExternal", "parentShared", "shortWebUrl", "created", "createdBy", "updated", "autoDelete", "rootFolderType", "parentRoomType", "updatedBy", "providerItem", "providerKey", "providerId", "order", "isFavorite", "fileEntryType", "entryKind"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -65,6 +76,23 @@ class FileEntryBaseDto(BaseModel):
         protected_namespaces=(),
     )
 
+
+    # JSON field name that stores the object type
+    __discriminator_property_name: ClassVar[str] = 'entryKind'
+
+    # discriminator mappings
+    __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
+        'file': 'FileDto','folder': 'FolderDto','thirdPartyFile': 'ThirdPartyFileDto','thirdPartyFolder': 'ThirdPartyFolderDto','FileEntryDto': 'FileEntryDto','ThirdPartyFileEntryDto': 'ThirdPartyFileEntryDto'
+    }
+
+    @classmethod
+    def get_discriminator_value(cls, obj: Dict[str, Any]) -> Optional[str]:
+        """Returns the discriminator value (object type) of the data"""
+        discriminator_value = obj.get(cls.__discriminator_property_name)
+        if discriminator_value:
+            return cls.__discriminator_value_class_map.get(discriminator_value)
+        else:
+            return None
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -76,7 +104,7 @@ class FileEntryBaseDto(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
+    def from_json(cls, json_str: str) -> Optional[Union[FileDto, FolderDto, ThirdPartyFileDto, ThirdPartyFolderDto, FileEntryDto, ThirdPartyFileEntryDto]]:
         """Create an instance of FileEntryBaseDto from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -157,10 +185,31 @@ class FileEntryBaseDto(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Union[FileDto, FolderDto, ThirdPartyFileDto, ThirdPartyFolderDto, FileEntryDto, ThirdPartyFileEntryDto]]:
         """Create an instance of FileEntryBaseDto from a dict"""
         if obj is None:
             return None
+
+        # Only the base dispatches: a subclass reaches this through super().from_dict while building itself, is
+        # already the mapped type, and takes the fields declared here like any other model.
+        if cls is FileEntryBaseDto:
+            object_type = cls.get_discriminator_value(obj)
+            if object_type ==  'FileDto':
+                return import_module("docspace_api_sdk.models.file_dto").FileDto.from_dict(obj)
+            if object_type ==  'FolderDto':
+                return import_module("docspace_api_sdk.models.folder_dto").FolderDto.from_dict(obj)
+            if object_type ==  'ThirdPartyFileDto':
+                return import_module("docspace_api_sdk.models.third_party_file_dto").ThirdPartyFileDto.from_dict(obj)
+            if object_type ==  'ThirdPartyFolderDto':
+                return import_module("docspace_api_sdk.models.third_party_folder_dto").ThirdPartyFolderDto.from_dict(obj)
+            if object_type ==  'FileEntryDto':
+                return import_module("docspace_api_sdk.models.file_entry_dto").FileEntryDto.from_dict(obj)
+            if object_type ==  'ThirdPartyFileEntryDto':
+                return import_module("docspace_api_sdk.models.third_party_file_entry_dto").ThirdPartyFileEntryDto.from_dict(obj)
+
+            raise ValueError("FileEntryBaseDto failed to lookup discriminator value from " +
+                                json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                                ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
 
 
         if not isinstance(obj, dict):
@@ -188,7 +237,8 @@ class FileEntryBaseDto(BaseModel):
             "providerId": obj.get("providerId"),
             "order": obj.get("order"),
             "isFavorite": obj.get("isFavorite"),
-            "fileEntryType": obj.get("fileEntryType")
+            "fileEntryType": obj.get("fileEntryType"),
+            "entryKind": obj.get("entryKind")
         })
         return _obj
 
