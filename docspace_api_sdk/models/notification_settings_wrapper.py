@@ -33,11 +33,12 @@ class NotificationSettingsWrapper(BaseModel):
     The successful API response containing the NotificationSettingsDto object.
     """ # noqa: E501
     response: Optional[NotificationSettingsDto] = Field(default=None, description="The NotificationSettingsDto object returned by the operation.")
-    count: Optional[StrictInt] = Field(default=None, description="The total number of items in the response")
+    count: Optional[StrictInt] = Field(default=None, description="How many items this response carries: the length of the page for a list, 1 for a single object")
+    total: Optional[StrictInt] = Field(default=None, description="How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response")
     links: Optional[List[GetPortalPrices200ResponseLinksInner]] = Field(default=None, description="List of links related to the response")
     status: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response")
     status_code: Optional[StrictInt] = Field(default=None, description="HTTP status code of the response (duplicate of status)", alias="statusCode")
-    __properties: ClassVar[List[str]] = ["response", "count", "links", "status", "statusCode"]
+    __properties: ClassVar[List[str]] = ["response", "count", "total", "links", "status", "statusCode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +104,7 @@ class NotificationSettingsWrapper(BaseModel):
         _obj = cls.model_validate({
             "response": NotificationSettingsDto.from_dict(obj["response"]) if obj.get("response") is not None else None,
             "count": obj.get("count"),
+            "total": obj.get("total"),
             "links": [GetPortalPrices200ResponseLinksInner.from_dict(_item) for _item in obj["links"]] if obj.get("links") is not None else None,
             "status": obj.get("status"),
             "statusCode": obj.get("statusCode")

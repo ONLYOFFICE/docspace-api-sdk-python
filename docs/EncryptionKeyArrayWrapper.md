@@ -6,7 +6,8 @@ The successful API response containing the list of EncryptionKeyDto objects.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **response** | [**List[EncryptionKeyDto]**](EncryptionKeyDto.md) | The list of EncryptionKeyDto objects returned by the operation. | [optional] 
-**count** | **int** | The total number of items in the response | [optional] 
+**count** | **int** | How many items this response carries: the length of the page for a list, 1 for a single object | [optional] 
+**total** | **int** | How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response | [optional] 
 **links** | [**List[GetPortalPrices200ResponseLinksInner]**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] 
 **status** | **int** | HTTP status code of the response | [optional] 
 **status_code** | **int** | HTTP status code of the response (duplicate of status) | [optional] 
