@@ -23,12 +23,12 @@ import pprint
 import re  # noqa: F401
 from pydantic import ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from docspace_api_sdk.models.ai_file_entry_dto_all_of_available_share_rights import AiFileEntryDtoAllOfAvailableShareRights
-from docspace_api_sdk.models.ai_file_entry_dto_all_of_security import AiFileEntryDtoAllOfSecurity
-from docspace_api_sdk.models.ai_file_entry_dto_all_of_share_settings import AiFileEntryDtoAllOfShareSettings
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.file_dto_all_of_view_accessibility import FileDtoAllOfViewAccessibility
+from docspace_api_sdk.models.file_entry_dto_all_of_available_share_rights import FileEntryDtoAllOfAvailableShareRights
+from docspace_api_sdk.models.file_entry_dto_all_of_security import FileEntryDtoAllOfSecurity
+from docspace_api_sdk.models.file_entry_dto_all_of_share_settings import FileEntryDtoAllOfShareSettings
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.file_share import FileShare
 from docspace_api_sdk.models.file_status import FileStatus
@@ -279,6 +279,11 @@ class ThirdPartyFileDto(ThirdPartyFileEntryDto):
         # and model_fields_set contains the field
         if self.assigned_metadata_templates is None and "assigned_metadata_templates" in self.model_fields_set:
             _dict['assignedMetadataTemplates'] = None
+
+        # set to None if has_metadata_fields (nullable) is None
+        # and model_fields_set contains the field
+        if self.has_metadata_fields is None and "has_metadata_fields" in self.model_fields_set:
+            _dict['hasMetadataFields'] = None
 
         # set to None if metadata_matches (nullable) is None
         # and model_fields_set contains the field

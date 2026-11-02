@@ -1986,7 +1986,7 @@ class FilesApi:
     ) -> Union[ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]:
         """Create the editing session
 
-        Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
+        Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, a payload above the portal limit for  chunked uploads is refused before the session is created. A `fileSize` of -1 means the size is not known in  advance, as for a WebDAV body sent without Content-Length; a smaller value is rejected as an invalid request.
 
         :param file_id: The file whose content the session will replace; take the id from a folder listing or from the file itself. (required)
         :type file_id: Union[int, str]
@@ -2025,13 +2025,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyChunkedUploadSessionResultWrapper" if isinstance(file_id, str) else "ChunkedUploadSessionResultWrapper"),
+            '400': None,
             '402': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2124,7 +2124,7 @@ class FilesApi:
     ) -> ApiResponse[Union[ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]]:
         """Create the editing session
 
-        Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
+        Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, a payload above the portal limit for  chunked uploads is refused before the session is created. A `fileSize` of -1 means the size is not known in  advance, as for a WebDAV body sent without Content-Length; a smaller value is rejected as an invalid request.
 
         :param file_id: The file whose content the session will replace; take the id from a folder listing or from the file itself. (required)
         :type file_id: Union[int, str]
@@ -2163,13 +2163,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyChunkedUploadSessionResultWrapper" if isinstance(file_id, str) else "ChunkedUploadSessionResultWrapper"),
+            '400': None,
             '402': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }
@@ -2205,7 +2205,7 @@ class FilesApi:
     ) -> RESTResponseType:
         """Create the editing session
 
-        Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
+        Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, a payload above the portal limit for  chunked uploads is refused before the session is created. A `fileSize` of -1 means the size is not known in  advance, as for a WebDAV body sent without Content-Length; a smaller value is rejected as an invalid request.
 
         :param file_id: The file whose content the session will replace; take the id from a folder listing or from the file itself. (required)
         :type file_id: Union[int, str]
@@ -2244,13 +2244,13 @@ class FilesApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': ("ThirdPartyChunkedUploadSessionResultWrapper" if isinstance(file_id, str) else "ChunkedUploadSessionResultWrapper"),
+            '400': None,
             '402': None,
             '403': None,
             '404': None,
             '401': "ErrorApiResponse",
             '429': "ErrorApiResponse",
             '500': "ErrorApiResponse",
-            '400': "ErrorApiResponse",
             '502': None,
             '503': None,
         }

@@ -2,7 +2,6 @@
 
 # import apis into api package
 from docspace_api_sdk.api.ai.ai_api import AIApi
-from docspace_api_sdk.api.ai.agents_api import AgentsApi
 from docspace_api_sdk.api.ai.assignments_api import AssignmentsApi
 from docspace_api_sdk.api.ai.attachments_api import AttachmentsApi
 from docspace_api_sdk.api.ai.context_api import ContextApi
@@ -59,6 +58,7 @@ from docspace_api_sdk.api.portal.quota_api import QuotaApi
 from docspace_api_sdk.api.portal.settings_api import SettingsApi
 from docspace_api_sdk.api.portal.users_api import UsersApi
 from docspace_api_sdk.api.rooms.rooms_api import RoomsApi
+from docspace_api_sdk.api.rooms.ai_api import AIApi
 from docspace_api_sdk.api.rooms.groups_api import GroupsApi
 from docspace_api_sdk.api.rooms.privacy_room_api import PrivacyRoomApi
 from docspace_api_sdk.api.security.access_to_dev_tools_api import AccessToDevToolsApi

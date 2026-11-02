@@ -558,8 +558,9 @@ handler, the expiry and the reserved size, and nothing is written until the part
 Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current
 one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be
 allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader
-and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit
-for chunked uploads is refused before the session is created.
+and a guest get 403. A file that does not exist is answered as missing, a payload above the portal limit for
+chunked uploads is refused before the session is created. A `fileSize` of -1 means the size is not known in
+advance, as for a WebDAV body sent without Content-Length; a smaller value is rejected as an invalid request.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -633,13 +634,13 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The created editing session, wrapped in the success envelope |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+**400** | `fileSize` is below -1 |  -  |
 **402** | The declared `fileSize` exceeds the portal limit for chunked uploads |  -  |
 **403** | The caller cannot edit this file, or the file is locked, open in the editor, in the trash or encrypted |  -  |
 **404** | No file with the specified ID |  -  |
 **401** | Unauthorized |  -  |
 **429** | Too Many Requests. |  * Retry-After -  <br>  |
 **500** | Internal Server Error. |  -  |
-**400** | Bad Request. |  -  |
 **502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 **503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

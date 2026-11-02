@@ -24,12 +24,12 @@ import re  # noqa: F401
 from importlib import import_module
 from pydantic import ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from docspace_api_sdk.models.ai_file_entry_dto_all_of_available_share_rights import AiFileEntryDtoAllOfAvailableShareRights
-from docspace_api_sdk.models.ai_file_entry_dto_all_of_security import AiFileEntryDtoAllOfSecurity
-from docspace_api_sdk.models.ai_file_entry_dto_all_of_share_settings import AiFileEntryDtoAllOfShareSettings
 from docspace_api_sdk.models.api_date_time import ApiDateTime
 from docspace_api_sdk.models.employee_dto import EmployeeDto
 from docspace_api_sdk.models.file_entry_base_dto import FileEntryBaseDto
+from docspace_api_sdk.models.file_entry_dto_all_of_available_share_rights import FileEntryDtoAllOfAvailableShareRights
+from docspace_api_sdk.models.file_entry_dto_all_of_security import FileEntryDtoAllOfSecurity
+from docspace_api_sdk.models.file_entry_dto_all_of_share_settings import FileEntryDtoAllOfShareSettings
 from docspace_api_sdk.models.file_entry_type import FileEntryType
 from docspace_api_sdk.models.file_share import FileShare
 from docspace_api_sdk.models.folder_type import FolderType
@@ -51,14 +51,15 @@ class FileEntryDto(FileEntryBaseDto):
     origin_title: Optional[StrictStr] = Field(default=None, description="The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash.", alias="originTitle", json_schema_extra={"examples": ["Contracts"]})
     origin_room_title: Optional[StrictStr] = Field(default=None, description="The name of the room the entry was deleted from, null for anything that was not deleted out of a room.", alias="originRoomTitle", json_schema_extra={"examples": ["Legal team"]})
     can_share: Optional[StrictBool] = Field(default=None, description="Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager.", alias="canShare", json_schema_extra={"examples": [True]})
-    share_settings: Optional[AiFileEntryDtoAllOfShareSettings] = Field(default=None, alias="shareSettings")
-    security: Optional[AiFileEntryDtoAllOfSecurity] = None
-    available_share_rights: Optional[AiFileEntryDtoAllOfAvailableShareRights] = Field(default=None, alias="availableShareRights")
+    share_settings: Optional[FileEntryDtoAllOfShareSettings] = Field(default=None, alias="shareSettings")
+    security: Optional[FileEntryDtoAllOfSecurity] = None
+    available_share_rights: Optional[FileEntryDtoAllOfAvailableShareRights] = Field(default=None, alias="availableShareRights")
     request_token: Optional[StrictStr] = Field(default=None, description="The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link.", alias="requestToken", json_schema_extra={"examples": ["q7Ry8cQ1lZ0dP3sK2mXfA9tBnV6hJ4uE8wCz5oLg"]})
     external: Optional[StrictBool] = Field(default=None, description="Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved.", json_schema_extra={"examples": [False]})
     expiration_date: Optional[ApiDateTime] = Field(default=None, description="When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved.", alias="expirationDate")
     is_link_expired: Optional[StrictBool] = Field(default=None, description="Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved.", alias="isLinkExpired", json_schema_extra={"examples": [False]})
     assigned_metadata_templates: Optional[List[StrictInt]] = Field(default=None, description="The IDs of the metadata templates assigned to the file entry.", alias="assignedMetadataTemplates")
+    has_metadata_fields: Optional[StrictBool] = Field(default=None, description="Whether the entry has a metadata field a user can see and fill, by hand or with the AI filling: a field of a  visible assigned template, or a custom field. False when the entry has no metadata, when its assigned templates  are all hidden, or when they have no fields. It says nothing about the values: it stays true once every field is  filled, and nothing about the caller's rights: writing the values still needs the right to edit the entry  (`security.Edit`). It cannot be derived from `assignedMetadataTemplates`, which lists hidden templates too and  never lists the custom fields. Present, with a value, in the folder listing and in the file and folder info  responses; absent in the other responses that carry an entry (the answer to a creation, an upload or a rename),  which do not compute it, and for an entry of a third-party storage, which has no metadata. The same flag is  answered by `GET api/2.0/files/metadata/file/{fileId}` and `GET api/2.0/files/metadata/folder/{folderId}`.", alias="hasMetadataFields", json_schema_extra={"examples": [True]})
     metadata_matches: Optional[List[MetadataMatchDto]] = Field(default=None, description="Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.", alias="metadataMatches")
 
     model_config = ConfigDict(
@@ -219,6 +220,11 @@ class FileEntryDto(FileEntryBaseDto):
         if self.assigned_metadata_templates is None and "assigned_metadata_templates" in self.model_fields_set:
             _dict['assignedMetadataTemplates'] = None
 
+        # set to None if has_metadata_fields (nullable) is None
+        # and model_fields_set contains the field
+        if self.has_metadata_fields is None and "has_metadata_fields" in self.model_fields_set:
+            _dict['hasMetadataFields'] = None
+
         # set to None if metadata_matches (nullable) is None
         # and model_fields_set contains the field
         if self.metadata_matches is None and "metadata_matches" in self.model_fields_set:
@@ -245,14 +251,15 @@ class FileEntryDto(FileEntryBaseDto):
             "originTitle": obj.get("originTitle"),
             "originRoomTitle": obj.get("originRoomTitle"),
             "canShare": obj.get("canShare"),
-            "shareSettings": AiFileEntryDtoAllOfShareSettings.from_dict(obj["shareSettings"]) if obj.get("shareSettings") is not None else None,
-            "security": AiFileEntryDtoAllOfSecurity.from_dict(obj["security"]) if obj.get("security") is not None else None,
-            "availableShareRights": AiFileEntryDtoAllOfAvailableShareRights.from_dict(obj["availableShareRights"]) if obj.get("availableShareRights") is not None else None,
+            "shareSettings": FileEntryDtoAllOfShareSettings.from_dict(obj["shareSettings"]) if obj.get("shareSettings") is not None else None,
+            "security": FileEntryDtoAllOfSecurity.from_dict(obj["security"]) if obj.get("security") is not None else None,
+            "availableShareRights": FileEntryDtoAllOfAvailableShareRights.from_dict(obj["availableShareRights"]) if obj.get("availableShareRights") is not None else None,
             "requestToken": obj.get("requestToken"),
             "external": obj.get("external"),
             "expirationDate": ApiDateTime.from_dict(obj["expirationDate"]) if obj.get("expirationDate") is not None else None,
             "isLinkExpired": obj.get("isLinkExpired"),
             "assignedMetadataTemplates": obj.get("assignedMetadataTemplates"),
+            "hasMetadataFields": obj.get("hasMetadataFields"),
             "metadataMatches": [MetadataMatchDto.from_dict(_item) for _item in obj["metadataMatches"]] if obj.get("metadataMatches") is not None else None
         }
         all_fields = {**base_dict, **extra_fields}

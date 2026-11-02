@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class SubjectType(int, Enum):
     """
-    [0 - User, 1 - External link, 2 - Group, 3 - Invitation link, 4 - Primary external link]
+    [0 - User, 1 - External link, 2 - Group, 3 - Invitation link, 4 - Primary external link, 5 - Read access to a room linked to an AI project the user is a member of]
     """
 
     """
@@ -35,6 +35,7 @@ class SubjectType(int, Enum):
     Group = 2
     InvitationLink = 3
     PrimaryExternalLink = 4
+    AiProject = 5
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

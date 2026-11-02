@@ -33,7 +33,7 @@ class CreateMetadataTemplateRequestDto(BaseModel):
     """ # noqa: E501
     name: Optional[StrictStr] = Field(description="The template name.", json_schema_extra={"examples": ["Contracts"]})
     visible: Optional[StrictBool] = Field(default=None, description="Specifies if the template is visible in the UI pickers.", json_schema_extra={"examples": [True]})
-    fields: Optional[List[MetadataFieldRequest]] = Field(default=None, description="The template metadata fields.", json_schema_extra={"examples": [[{"name": "Contract number", "type": 0}, {"name": "Signed on", "type": 1}]]})
+    fields: Optional[List[MetadataFieldRequest]] = Field(default=None, description="The template metadata fields. At least one field is required: a template without fields is not created.", json_schema_extra={"examples": [[{"name": "Contract number", "type": 0}, {"name": "Signed on", "type": 1}]]})
     __properties: ClassVar[List[str]] = ["name", "visible", "fields"]
 
     model_config = ConfigDict(

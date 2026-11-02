@@ -20,12 +20,11 @@
 
 
 
-__version__ = "4.0.0"
+__version__ = "4.1.0"
 
 # Define package exports
 __all__ = [
     "AIApi",
-    "AgentsApi",
     "AssignmentsApi",
     "AttachmentsApi",
     "ContextApi",
@@ -82,6 +81,7 @@ __all__ = [
     "SettingsApi",
     "UsersApi",
     "RoomsApi",
+    "AIApi",
     "GroupsApi",
     "PrivacyRoomApi",
     "AccessToDevToolsApi",
@@ -154,16 +154,6 @@ __all__ = [
     "AiActionArgs",
     "AiActionArgsPrompt",
     "AiActionType",
-    "AiAgentNewItemsDto",
-    "AiAgentsCreateRequest",
-    "AiAgentsDeleteRequest",
-    "AiAgentsGet200Response",
-    "AiAgentsGet200ResponseAllOfResponse",
-    "AiAgentsResetQuotaRequest",
-    "AiAgentsUpdateQuotaRequest",
-    "AiAgentsUpdateQuotaRequestRoomIdsInner",
-    "AiAgentsUpdateRequest",
-    "AiApiDateTime",
     "AiApproveToolCallRequest",
     "AiAssignmentMutationResult",
     "AiAssignmentsAssignRequest",
@@ -179,20 +169,17 @@ __all__ = [
     "AiBulkAssignmentResultErrorsInner",
     "AiChatEvent",
     "AiChatPriceDto",
-    "AiChatSettingsDto",
     "AiChatToolPermissionMode",
     "AiChatToolPrefsScope",
     "AiConfigDto",
     "AiCreateProfileInput",
     "AiCreatePromptInput",
-    "AiDistributedTaskStatus",
     "AiEditorToolsCall200Response",
     "AiEditorToolsCallRequest",
     "AiEditorToolsList200Response",
     "AiEditorToolsList200ResponseToolsInner",
     "AiEmbeddingPriceDto",
     "AiEmbeddingProviderType",
-    "AiEmployeeDto",
     "AiEntryMetadata",
     "AiEntryMetadataCustomFieldsInner",
     "AiEntryMetadataField",
@@ -208,30 +195,12 @@ __all__ = [
     "AiExportTextToDocx202Response",
     "AiExportTextToDocxRequest",
     "AiExportTextToDocxRequestFolderId",
-    "AiFileEntryBaseDto",
-    "AiFileEntryDto",
-    "AiFileEntryDtoAllOfAvailableShareRights",
-    "AiFileEntryDtoAllOfSecurity",
-    "AiFileEntryDtoAllOfShareSettings",
-    "AiFileEntryType",
-    "AiFileOperationDto",
-    "AiFileOperationType",
-    "AiFileOperationWrapper",
-    "AiFileShare",
-    "AiFolderArrayWrapper",
-    "AiFolderContentDto",
-    "AiFolderContentWrapper",
-    "AiFolderDto",
     "AiFolderMutationResult",
-    "AiFolderType",
-    "AiFolderWrapper",
     "AiImagePriceDto",
     "AiImportError",
     "AiImportMode",
     "AiImportResult",
     "AiImportResultImported",
-    "AiLogoCoverDto",
-    "AiLogoDto",
     "AiMCPItem",
     "AiMetaFill200Response",
     "AiMetaFill200ResponseFilledInner",
@@ -246,11 +215,8 @@ __all__ = [
     "AiMetaGenerate402Response",
     "AiMetaGenerateRequest",
     "AiMetaGenerateRequestId",
-    "AiMetadataMatchDto",
     "AiMetadataValue",
     "AiModel",
-    "AiNewItemsAgentNewItemsArrayWrapper",
-    "AiNewItemsDtoAgentNewItemsDto",
     "AiOpenAIChatCompletionChunk",
     "AiOpenAIChoiceDelta",
     "AiOpenAIChunkChoice",
@@ -280,6 +246,13 @@ __all__ = [
     "AiProfilesListProviderModelsRequest",
     "AiProfilesTestConnection200Response",
     "AiProfilesTestConnection200ResponseAnyOf",
+    "AiProjectModel",
+    "AiProjectModelDto",
+    "AiProjectModelProfile",
+    "AiProjectModelWrapper",
+    "AiProjectSourceDto",
+    "AiProjectSourcesDto",
+    "AiProjectSourcesWrapper",
     "AiPrompt",
     "AiPromptBundle",
     "AiPromptFolder",
@@ -297,14 +270,15 @@ __all__ = [
     "AiReasoningSupport",
     "AiRegenerateStreamRequest",
     "AiResolvedAssignment",
-    "AiRoomDataLifetimeDto",
-    "AiRoomDataLifetimePeriod",
-    "AiRoomType",
     "AiSendCustomRequest",
     "AiSendRequest",
     "AiSendStreamBody",
     "AiSettingsDto",
     "AiSettingsWrapper",
+    "AiSkillDto",
+    "AiSkillsDto",
+    "AiSkillsRoomDto",
+    "AiSkillsWrapper",
     "AiSuccessResponse",
     "AiThread",
     "AiThreadMessageLike",
@@ -340,8 +314,6 @@ __all__ = [
     "AiVectorizationSettingsWrapper",
     "AiVectorizationStartTask200Response",
     "AiVectorizationStartTaskRequest",
-    "AiWatermarkAdditions",
-    "AiWatermarkDto",
     "AiWebSearchConfig",
     "AiWebSearchConfigure400Response",
     "AiWebSearchConfigureRequest",
@@ -655,6 +627,9 @@ __all__ = [
     "FileEntryBaseDto",
     "FileEntryBaseWrapper",
     "FileEntryDto",
+    "FileEntryDtoAllOfAvailableShareRights",
+    "FileEntryDtoAllOfSecurity",
+    "FileEntryDtoAllOfShareSettings",
     "FileEntryType",
     "FileKeysDto",
     "FileLinkDto",
@@ -771,6 +746,7 @@ __all__ = [
     "LicensorDetailsDto",
     "LicensorDetailsWrapper",
     "LinkAccountRequestDto",
+    "LinkAiProjectSourcesRequest",
     "LinkType",
     "LocationType",
     "LockFileRequest",
@@ -1101,8 +1077,10 @@ __all__ = [
     "TopUpDepositRequestDto",
     "TransactionInfoDto",
     "TurnOnAdminMessageSettingsRequestDto",
+    "UnlinkAiProjectSourcesRequest",
     "UpcomingPaymentArrayWrapper",
     "UpcomingPaymentDto",
+    "UpdateAiProjectModelRequest",
     "UpdateApiKeyRequest",
     "UpdateClientRequest",
     "UpdateCommentRequest",
@@ -1182,7 +1160,6 @@ __all__ = [
 
 # import apis into sdk package
 from docspace_api_sdk.api.ai.ai_api import AIApi as AIApi
-from docspace_api_sdk.api.ai.agents_api import AgentsApi as AgentsApi
 from docspace_api_sdk.api.ai.assignments_api import AssignmentsApi as AssignmentsApi
 from docspace_api_sdk.api.ai.attachments_api import AttachmentsApi as AttachmentsApi
 from docspace_api_sdk.api.ai.context_api import ContextApi as ContextApi
@@ -1239,6 +1216,7 @@ from docspace_api_sdk.api.portal.quota_api import QuotaApi as QuotaApi
 from docspace_api_sdk.api.portal.settings_api import SettingsApi as SettingsApi
 from docspace_api_sdk.api.portal.users_api import UsersApi as UsersApi
 from docspace_api_sdk.api.rooms.rooms_api import RoomsApi as RoomsApi
+from docspace_api_sdk.api.rooms.ai_api import AIApi as AIApi
 from docspace_api_sdk.api.rooms.groups_api import GroupsApi as GroupsApi
 from docspace_api_sdk.api.rooms.privacy_room_api import PrivacyRoomApi as PrivacyRoomApi
 from docspace_api_sdk.api.security.access_to_dev_tools_api import AccessToDevToolsApi as AccessToDevToolsApi
@@ -1315,16 +1293,6 @@ from docspace_api_sdk.models.admin_message_settings_request_dto import AdminMess
 from docspace_api_sdk.models.ai_action_args import AiActionArgs as AiActionArgs
 from docspace_api_sdk.models.ai_action_args_prompt import AiActionArgsPrompt as AiActionArgsPrompt
 from docspace_api_sdk.models.ai_action_type import AiActionType as AiActionType
-from docspace_api_sdk.models.ai_agent_new_items_dto import AiAgentNewItemsDto as AiAgentNewItemsDto
-from docspace_api_sdk.models.ai_agents_create_request import AiAgentsCreateRequest as AiAgentsCreateRequest
-from docspace_api_sdk.models.ai_agents_delete_request import AiAgentsDeleteRequest as AiAgentsDeleteRequest
-from docspace_api_sdk.models.ai_agents_get200_response import AiAgentsGet200Response as AiAgentsGet200Response
-from docspace_api_sdk.models.ai_agents_get200_response_all_of_response import AiAgentsGet200ResponseAllOfResponse as AiAgentsGet200ResponseAllOfResponse
-from docspace_api_sdk.models.ai_agents_reset_quota_request import AiAgentsResetQuotaRequest as AiAgentsResetQuotaRequest
-from docspace_api_sdk.models.ai_agents_update_quota_request import AiAgentsUpdateQuotaRequest as AiAgentsUpdateQuotaRequest
-from docspace_api_sdk.models.ai_agents_update_quota_request_room_ids_inner import AiAgentsUpdateQuotaRequestRoomIdsInner as AiAgentsUpdateQuotaRequestRoomIdsInner
-from docspace_api_sdk.models.ai_agents_update_request import AiAgentsUpdateRequest as AiAgentsUpdateRequest
-from docspace_api_sdk.models.ai_api_date_time import AiApiDateTime as AiApiDateTime
 from docspace_api_sdk.models.ai_approve_tool_call_request import AiApproveToolCallRequest as AiApproveToolCallRequest
 from docspace_api_sdk.models.ai_assignment_mutation_result import AiAssignmentMutationResult as AiAssignmentMutationResult
 from docspace_api_sdk.models.ai_assignments_assign_request import AiAssignmentsAssignRequest as AiAssignmentsAssignRequest
@@ -1340,20 +1308,17 @@ from docspace_api_sdk.models.ai_bulk_assignment_result import AiBulkAssignmentRe
 from docspace_api_sdk.models.ai_bulk_assignment_result_errors_inner import AiBulkAssignmentResultErrorsInner as AiBulkAssignmentResultErrorsInner
 from docspace_api_sdk.models.ai_chat_event import AiChatEvent as AiChatEvent
 from docspace_api_sdk.models.ai_chat_price_dto import AiChatPriceDto as AiChatPriceDto
-from docspace_api_sdk.models.ai_chat_settings_dto import AiChatSettingsDto as AiChatSettingsDto
 from docspace_api_sdk.models.ai_chat_tool_permission_mode import AiChatToolPermissionMode as AiChatToolPermissionMode
 from docspace_api_sdk.models.ai_chat_tool_prefs_scope import AiChatToolPrefsScope as AiChatToolPrefsScope
 from docspace_api_sdk.models.ai_config_dto import AiConfigDto as AiConfigDto
 from docspace_api_sdk.models.ai_create_profile_input import AiCreateProfileInput as AiCreateProfileInput
 from docspace_api_sdk.models.ai_create_prompt_input import AiCreatePromptInput as AiCreatePromptInput
-from docspace_api_sdk.models.ai_distributed_task_status import AiDistributedTaskStatus as AiDistributedTaskStatus
 from docspace_api_sdk.models.ai_editor_tools_call200_response import AiEditorToolsCall200Response as AiEditorToolsCall200Response
 from docspace_api_sdk.models.ai_editor_tools_call_request import AiEditorToolsCallRequest as AiEditorToolsCallRequest
 from docspace_api_sdk.models.ai_editor_tools_list200_response import AiEditorToolsList200Response as AiEditorToolsList200Response
 from docspace_api_sdk.models.ai_editor_tools_list200_response_tools_inner import AiEditorToolsList200ResponseToolsInner as AiEditorToolsList200ResponseToolsInner
 from docspace_api_sdk.models.ai_embedding_price_dto import AiEmbeddingPriceDto as AiEmbeddingPriceDto
 from docspace_api_sdk.models.ai_embedding_provider_type import AiEmbeddingProviderType as AiEmbeddingProviderType
-from docspace_api_sdk.models.ai_employee_dto import AiEmployeeDto as AiEmployeeDto
 from docspace_api_sdk.models.ai_entry_metadata import AiEntryMetadata as AiEntryMetadata
 from docspace_api_sdk.models.ai_entry_metadata_custom_fields_inner import AiEntryMetadataCustomFieldsInner as AiEntryMetadataCustomFieldsInner
 from docspace_api_sdk.models.ai_entry_metadata_field import AiEntryMetadataField as AiEntryMetadataField
@@ -1369,30 +1334,12 @@ from docspace_api_sdk.models.ai_error_response import AiErrorResponse as AiError
 from docspace_api_sdk.models.ai_export_text_to_docx202_response import AiExportTextToDocx202Response as AiExportTextToDocx202Response
 from docspace_api_sdk.models.ai_export_text_to_docx_request import AiExportTextToDocxRequest as AiExportTextToDocxRequest
 from docspace_api_sdk.models.ai_export_text_to_docx_request_folder_id import AiExportTextToDocxRequestFolderId as AiExportTextToDocxRequestFolderId
-from docspace_api_sdk.models.ai_file_entry_base_dto import AiFileEntryBaseDto as AiFileEntryBaseDto
-from docspace_api_sdk.models.ai_file_entry_dto import AiFileEntryDto as AiFileEntryDto
-from docspace_api_sdk.models.ai_file_entry_dto_all_of_available_share_rights import AiFileEntryDtoAllOfAvailableShareRights as AiFileEntryDtoAllOfAvailableShareRights
-from docspace_api_sdk.models.ai_file_entry_dto_all_of_security import AiFileEntryDtoAllOfSecurity as AiFileEntryDtoAllOfSecurity
-from docspace_api_sdk.models.ai_file_entry_dto_all_of_share_settings import AiFileEntryDtoAllOfShareSettings as AiFileEntryDtoAllOfShareSettings
-from docspace_api_sdk.models.ai_file_entry_type import AiFileEntryType as AiFileEntryType
-from docspace_api_sdk.models.ai_file_operation_dto import AiFileOperationDto as AiFileOperationDto
-from docspace_api_sdk.models.ai_file_operation_type import AiFileOperationType as AiFileOperationType
-from docspace_api_sdk.models.ai_file_operation_wrapper import AiFileOperationWrapper as AiFileOperationWrapper
-from docspace_api_sdk.models.ai_file_share import AiFileShare as AiFileShare
-from docspace_api_sdk.models.ai_folder_array_wrapper import AiFolderArrayWrapper as AiFolderArrayWrapper
-from docspace_api_sdk.models.ai_folder_content_dto import AiFolderContentDto as AiFolderContentDto
-from docspace_api_sdk.models.ai_folder_content_wrapper import AiFolderContentWrapper as AiFolderContentWrapper
-from docspace_api_sdk.models.ai_folder_dto import AiFolderDto as AiFolderDto
 from docspace_api_sdk.models.ai_folder_mutation_result import AiFolderMutationResult as AiFolderMutationResult
-from docspace_api_sdk.models.ai_folder_type import AiFolderType as AiFolderType
-from docspace_api_sdk.models.ai_folder_wrapper import AiFolderWrapper as AiFolderWrapper
 from docspace_api_sdk.models.ai_image_price_dto import AiImagePriceDto as AiImagePriceDto
 from docspace_api_sdk.models.ai_import_error import AiImportError as AiImportError
 from docspace_api_sdk.models.ai_import_mode import AiImportMode as AiImportMode
 from docspace_api_sdk.models.ai_import_result import AiImportResult as AiImportResult
 from docspace_api_sdk.models.ai_import_result_imported import AiImportResultImported as AiImportResultImported
-from docspace_api_sdk.models.ai_logo_cover_dto import AiLogoCoverDto as AiLogoCoverDto
-from docspace_api_sdk.models.ai_logo_dto import AiLogoDto as AiLogoDto
 from docspace_api_sdk.models.ai_mcp_item import AiMCPItem as AiMCPItem
 from docspace_api_sdk.models.ai_meta_fill200_response import AiMetaFill200Response as AiMetaFill200Response
 from docspace_api_sdk.models.ai_meta_fill200_response_filled_inner import AiMetaFill200ResponseFilledInner as AiMetaFill200ResponseFilledInner
@@ -1407,11 +1354,8 @@ from docspace_api_sdk.models.ai_meta_generate200_response_sources_inner import A
 from docspace_api_sdk.models.ai_meta_generate402_response import AiMetaGenerate402Response as AiMetaGenerate402Response
 from docspace_api_sdk.models.ai_meta_generate_request import AiMetaGenerateRequest as AiMetaGenerateRequest
 from docspace_api_sdk.models.ai_meta_generate_request_id import AiMetaGenerateRequestId as AiMetaGenerateRequestId
-from docspace_api_sdk.models.ai_metadata_match_dto import AiMetadataMatchDto as AiMetadataMatchDto
 from docspace_api_sdk.models.ai_metadata_value import AiMetadataValue as AiMetadataValue
 from docspace_api_sdk.models.ai_model import AiModel as AiModel
-from docspace_api_sdk.models.ai_new_items_agent_new_items_array_wrapper import AiNewItemsAgentNewItemsArrayWrapper as AiNewItemsAgentNewItemsArrayWrapper
-from docspace_api_sdk.models.ai_new_items_dto_agent_new_items_dto import AiNewItemsDtoAgentNewItemsDto as AiNewItemsDtoAgentNewItemsDto
 from docspace_api_sdk.models.ai_open_ai_chat_completion_chunk import AiOpenAIChatCompletionChunk as AiOpenAIChatCompletionChunk
 from docspace_api_sdk.models.ai_open_ai_choice_delta import AiOpenAIChoiceDelta as AiOpenAIChoiceDelta
 from docspace_api_sdk.models.ai_open_ai_chunk_choice import AiOpenAIChunkChoice as AiOpenAIChunkChoice
@@ -1441,6 +1385,13 @@ from docspace_api_sdk.models.ai_profiles_list_provider_models400_response_any_of
 from docspace_api_sdk.models.ai_profiles_list_provider_models_request import AiProfilesListProviderModelsRequest as AiProfilesListProviderModelsRequest
 from docspace_api_sdk.models.ai_profiles_test_connection200_response import AiProfilesTestConnection200Response as AiProfilesTestConnection200Response
 from docspace_api_sdk.models.ai_profiles_test_connection200_response_any_of import AiProfilesTestConnection200ResponseAnyOf as AiProfilesTestConnection200ResponseAnyOf
+from docspace_api_sdk.models.ai_project_model import AiProjectModel as AiProjectModel
+from docspace_api_sdk.models.ai_project_model_dto import AiProjectModelDto as AiProjectModelDto
+from docspace_api_sdk.models.ai_project_model_profile import AiProjectModelProfile as AiProjectModelProfile
+from docspace_api_sdk.models.ai_project_model_wrapper import AiProjectModelWrapper as AiProjectModelWrapper
+from docspace_api_sdk.models.ai_project_source_dto import AiProjectSourceDto as AiProjectSourceDto
+from docspace_api_sdk.models.ai_project_sources_dto import AiProjectSourcesDto as AiProjectSourcesDto
+from docspace_api_sdk.models.ai_project_sources_wrapper import AiProjectSourcesWrapper as AiProjectSourcesWrapper
 from docspace_api_sdk.models.ai_prompt import AiPrompt as AiPrompt
 from docspace_api_sdk.models.ai_prompt_bundle import AiPromptBundle as AiPromptBundle
 from docspace_api_sdk.models.ai_prompt_folder import AiPromptFolder as AiPromptFolder
@@ -1458,14 +1409,15 @@ from docspace_api_sdk.models.ai_reasoning_level import AiReasoningLevel as AiRea
 from docspace_api_sdk.models.ai_reasoning_support import AiReasoningSupport as AiReasoningSupport
 from docspace_api_sdk.models.ai_regenerate_stream_request import AiRegenerateStreamRequest as AiRegenerateStreamRequest
 from docspace_api_sdk.models.ai_resolved_assignment import AiResolvedAssignment as AiResolvedAssignment
-from docspace_api_sdk.models.ai_room_data_lifetime_dto import AiRoomDataLifetimeDto as AiRoomDataLifetimeDto
-from docspace_api_sdk.models.ai_room_data_lifetime_period import AiRoomDataLifetimePeriod as AiRoomDataLifetimePeriod
-from docspace_api_sdk.models.ai_room_type import AiRoomType as AiRoomType
 from docspace_api_sdk.models.ai_send_custom_request import AiSendCustomRequest as AiSendCustomRequest
 from docspace_api_sdk.models.ai_send_request import AiSendRequest as AiSendRequest
 from docspace_api_sdk.models.ai_send_stream_body import AiSendStreamBody as AiSendStreamBody
 from docspace_api_sdk.models.ai_settings_dto import AiSettingsDto as AiSettingsDto
 from docspace_api_sdk.models.ai_settings_wrapper import AiSettingsWrapper as AiSettingsWrapper
+from docspace_api_sdk.models.ai_skill_dto import AiSkillDto as AiSkillDto
+from docspace_api_sdk.models.ai_skills_dto import AiSkillsDto as AiSkillsDto
+from docspace_api_sdk.models.ai_skills_room_dto import AiSkillsRoomDto as AiSkillsRoomDto
+from docspace_api_sdk.models.ai_skills_wrapper import AiSkillsWrapper as AiSkillsWrapper
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse as AiSuccessResponse
 from docspace_api_sdk.models.ai_thread import AiThread as AiThread
 from docspace_api_sdk.models.ai_thread_message_like import AiThreadMessageLike as AiThreadMessageLike
@@ -1501,8 +1453,6 @@ from docspace_api_sdk.models.ai_vectorization_settings_dto import AiVectorizatio
 from docspace_api_sdk.models.ai_vectorization_settings_wrapper import AiVectorizationSettingsWrapper as AiVectorizationSettingsWrapper
 from docspace_api_sdk.models.ai_vectorization_start_task200_response import AiVectorizationStartTask200Response as AiVectorizationStartTask200Response
 from docspace_api_sdk.models.ai_vectorization_start_task_request import AiVectorizationStartTaskRequest as AiVectorizationStartTaskRequest
-from docspace_api_sdk.models.ai_watermark_additions import AiWatermarkAdditions as AiWatermarkAdditions
-from docspace_api_sdk.models.ai_watermark_dto import AiWatermarkDto as AiWatermarkDto
 from docspace_api_sdk.models.ai_web_search_config import AiWebSearchConfig as AiWebSearchConfig
 from docspace_api_sdk.models.ai_web_search_configure400_response import AiWebSearchConfigure400Response as AiWebSearchConfigure400Response
 from docspace_api_sdk.models.ai_web_search_configure_request import AiWebSearchConfigureRequest as AiWebSearchConfigureRequest
@@ -1816,6 +1766,9 @@ from docspace_api_sdk.models.file_entry_base_array_wrapper import FileEntryBaseA
 from docspace_api_sdk.models.file_entry_base_dto import FileEntryBaseDto as FileEntryBaseDto
 from docspace_api_sdk.models.file_entry_base_wrapper import FileEntryBaseWrapper as FileEntryBaseWrapper
 from docspace_api_sdk.models.file_entry_dto import FileEntryDto as FileEntryDto
+from docspace_api_sdk.models.file_entry_dto_all_of_available_share_rights import FileEntryDtoAllOfAvailableShareRights as FileEntryDtoAllOfAvailableShareRights
+from docspace_api_sdk.models.file_entry_dto_all_of_security import FileEntryDtoAllOfSecurity as FileEntryDtoAllOfSecurity
+from docspace_api_sdk.models.file_entry_dto_all_of_share_settings import FileEntryDtoAllOfShareSettings as FileEntryDtoAllOfShareSettings
 from docspace_api_sdk.models.file_entry_type import FileEntryType as FileEntryType
 from docspace_api_sdk.models.file_keys_dto import FileKeysDto as FileKeysDto
 from docspace_api_sdk.models.file_link_dto import FileLinkDto as FileLinkDto
@@ -1932,6 +1885,7 @@ from docspace_api_sdk.models.licensor_details_array_wrapper import LicensorDetai
 from docspace_api_sdk.models.licensor_details_dto import LicensorDetailsDto as LicensorDetailsDto
 from docspace_api_sdk.models.licensor_details_wrapper import LicensorDetailsWrapper as LicensorDetailsWrapper
 from docspace_api_sdk.models.link_account_request_dto import LinkAccountRequestDto as LinkAccountRequestDto
+from docspace_api_sdk.models.link_ai_project_sources_request import LinkAiProjectSourcesRequest as LinkAiProjectSourcesRequest
 from docspace_api_sdk.models.link_type import LinkType as LinkType
 from docspace_api_sdk.models.location_type import LocationType as LocationType
 from docspace_api_sdk.models.lock_file_request import LockFileRequest as LockFileRequest
@@ -2262,8 +2216,10 @@ from docspace_api_sdk.models.token_diagnostics_wrapper import TokenDiagnosticsWr
 from docspace_api_sdk.models.top_up_deposit_request_dto import TopUpDepositRequestDto as TopUpDepositRequestDto
 from docspace_api_sdk.models.transaction_info_dto import TransactionInfoDto as TransactionInfoDto
 from docspace_api_sdk.models.turn_on_admin_message_settings_request_dto import TurnOnAdminMessageSettingsRequestDto as TurnOnAdminMessageSettingsRequestDto
+from docspace_api_sdk.models.unlink_ai_project_sources_request import UnlinkAiProjectSourcesRequest as UnlinkAiProjectSourcesRequest
 from docspace_api_sdk.models.upcoming_payment_array_wrapper import UpcomingPaymentArrayWrapper as UpcomingPaymentArrayWrapper
 from docspace_api_sdk.models.upcoming_payment_dto import UpcomingPaymentDto as UpcomingPaymentDto
+from docspace_api_sdk.models.update_ai_project_model_request import UpdateAiProjectModelRequest as UpdateAiProjectModelRequest
 from docspace_api_sdk.models.update_api_key_request import UpdateApiKeyRequest as UpdateApiKeyRequest
 from docspace_api_sdk.models.update_client_request import UpdateClientRequest as UpdateClientRequest
 from docspace_api_sdk.models.update_comment_request import UpdateCommentRequest as UpdateCommentRequest

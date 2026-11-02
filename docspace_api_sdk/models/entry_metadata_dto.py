@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.custom_field_value_dto import CustomFieldValueDto
 from docspace_api_sdk.models.entry_template_dto import EntryTemplateDto
@@ -34,7 +34,8 @@ class EntryMetadataDto(BaseModel):
     """ # noqa: E501
     templates: Optional[List[EntryTemplateDto]] = Field(default=None, description="The assigned metadata templates, each field carrying its value on the entry.", json_schema_extra={"examples": [[{"id": 3, "name": "Contracts", "visible": True, "fields": []}]]})
     custom_fields: Optional[List[CustomFieldValueDto]] = Field(default=None, description="The custom fields with their values.", alias="customFields", json_schema_extra={"examples": [[{"name": "Project code", "value": "A-42"}]]})
-    __properties: ClassVar[List[str]] = ["templates", "customFields"]
+    has_metadata_fields: Optional[StrictBool] = Field(default=None, description="Whether the entry has a metadata field a user can see and fill, by hand or with the AI filling: a field of a  template in `templates` whose `visible` is true, or a custom field in `customFields`. False when both lists are  empty, when every template is hidden, or when none of the visible ones has a field. It says nothing about the  values: it stays true once every field is filled. The same flag is carried by the entry in a folder listing and  in the file and folder info responses as `hasMetadataFields`, so a client that has the listing needs no call here  to decide whether to offer the filling.", alias="hasMetadataFields", json_schema_extra={"examples": [True]})
+    __properties: ClassVar[List[str]] = ["templates", "customFields", "hasMetadataFields"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,7 +114,8 @@ class EntryMetadataDto(BaseModel):
 
         _obj = cls.model_validate({
             "templates": [EntryTemplateDto.from_dict(_item) for _item in obj["templates"]] if obj.get("templates") is not None else None,
-            "customFields": [CustomFieldValueDto.from_dict(_item) for _item in obj["customFields"]] if obj.get("customFields") is not None else None
+            "customFields": [CustomFieldValueDto.from_dict(_item) for _item in obj["customFields"]] if obj.get("customFields") is not None else None,
+            "hasMetadataFields": obj.get("hasMetadataFields")
         })
         return _obj
 
