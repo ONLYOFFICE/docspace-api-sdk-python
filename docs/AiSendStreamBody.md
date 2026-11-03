@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **thread_id** | **str** | Target thread; a new one is created (with an auto title) when omitted. | [optional] 
 **user_message** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | The user turn to send. | 
-**action_args** | [**AiActionArgs**](AiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] 
+**action_args** | [**AiActionArgs**](AiActionArgs.md) | Per-request options of the round: extra tools, reasoning, a prompt override and the connected context. | [optional] 
 **entity_id** | **str** | Optional entity (room) scope for profile resolution. | [optional] 
+**context_entity_id** | **str** | The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted. | [optional] 
 **profile_id** | **str** | Session-level profile override for this request only. | [optional] 
 
 ## Example

@@ -254,7 +254,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_assignments_get_all_assignments**
-> Dict[str, str] ai_assignments_get_all_assignments(entity_id=entity_id, expand=expand)
+> AiAssignmentsGetAllAssignments200Response ai_assignments_get_all_assignments(entity_id=entity_id, expand=expand)
 
 Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId`, when sent, has to name a room the caller can open; the bindings are portal-wide, so the answer is the same set with or without it. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others. With `expand=profile` the answer is `{ assignments, profilesTotal, chatProfilesTotal }`: the assigned profiles themselves (as `GET api/2.0/ai/profiles/list` describes them) keyed by action, a binding whose profile no longer exists left out, plus how many profiles the portal has and how many of them can chat; this is the one read a chat needs to start.
 
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, str]**
+[**AiAssignmentsGetAllAssignments200Response**](AiAssignmentsGetAllAssignments200Response.md)
 
 ### Authorization
 
@@ -281,6 +281,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
+from docspace_api_sdk.models.ai_assignments_get_all_assignments200_response import AiAssignmentsGetAllAssignments200Response
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 

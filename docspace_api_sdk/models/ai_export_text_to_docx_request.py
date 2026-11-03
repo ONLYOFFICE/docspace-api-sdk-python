@@ -21,8 +21,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_export_text_to_docx_request_folder_id import AiExportTextToDocxRequestFolderId
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,7 +34,18 @@ class AiExportTextToDocxRequest(BaseModel):
     title: StrictStr = Field(description="Document title (also the file name).")
     content: StrictStr = Field(description="Markdown content to convert.")
     folder_id: AiExportTextToDocxRequestFolderId = Field(alias="folderId")
-    __properties: ClassVar[List[str]] = ["title", "content", "folderId"]
+    format: Optional[StrictStr] = Field(default=None, description="Output format: `Docx` (the default when omitted), `Pdf`, or `Md`, which stores the markdown verbatim instead of converting it.")
+    __properties: ClassVar[List[str]] = ["title", "content", "folderId", "format"]
+
+    @field_validator('format')
+    def format_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['Docx', 'Pdf', 'Md']):
+            raise ValueError("must be one of enum values ('Docx', 'Pdf', 'Md')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +104,8 @@ class AiExportTextToDocxRequest(BaseModel):
         _obj = cls.model_validate({
             "title": obj.get("title"),
             "content": obj.get("content"),
-            "folderId": AiExportTextToDocxRequestFolderId.from_dict(obj["folderId"]) if obj.get("folderId") is not None else None
+            "folderId": AiExportTextToDocxRequestFolderId.from_dict(obj["folderId"]) if obj.get("folderId") is not None else None,
+            "format": obj.get("format")
         })
         return _obj
 

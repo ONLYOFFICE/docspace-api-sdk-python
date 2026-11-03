@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AiWebSearchMutationResult(BaseModel):
     """
-    Outcome of `WebSearchEngine.configure` — either the persisted config or a field-scoped error suitable for the settings form.
+    The outcome of storing a web-search configuration: the stored configuration, or an error naming the field that was refused.
     """ # noqa: E501
     success: StrictBool = Field(description="True when the configuration was persisted.", json_schema_extra={"examples": [True]})
     config: Optional[AiWebSearchConfig] = Field(default=None, description="The persisted web-search configuration. Present on success.")

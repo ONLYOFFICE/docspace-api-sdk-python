@@ -158,6 +158,8 @@ __all__ = [
     "AiAssignmentMutationResult",
     "AiAssignmentsAssignRequest",
     "AiAssignmentsCascadeProfileDeleteRequest",
+    "AiAssignmentsExpanded",
+    "AiAssignmentsGetAllAssignments200Response",
     "AiAttachment",
     "AiAttachmentFormKeysInner",
     "AiAttachmentsLinkToMessageRequest",
@@ -167,11 +169,15 @@ __all__ = [
     "AiBuiltinProviderType",
     "AiBulkAssignmentResult",
     "AiBulkAssignmentResultErrorsInner",
+    "AiChatErrorPayload",
     "AiChatEvent",
     "AiChatPriceDto",
     "AiChatToolPermissionMode",
     "AiChatToolPrefsScope",
     "AiConfigDto",
+    "AiContextFolder",
+    "AiContextRoom",
+    "AiContextRoomRef",
     "AiCreateProfileInput",
     "AiCreatePromptInput",
     "AiEditorToolsCall200Response",
@@ -195,12 +201,14 @@ __all__ = [
     "AiExportTextToDocx202Response",
     "AiExportTextToDocxRequest",
     "AiExportTextToDocxRequestFolderId",
+    "AiFolderContextRef",
     "AiFolderMutationResult",
     "AiImagePriceDto",
     "AiImportError",
     "AiImportMode",
     "AiImportResult",
     "AiImportResultImported",
+    "AiKnowledgeRoomRef",
     "AiMCPItem",
     "AiMetaFill200Response",
     "AiMetaFill200ResponseFilledInner",
@@ -270,6 +278,7 @@ __all__ = [
     "AiReasoningSupport",
     "AiRegenerateStreamRequest",
     "AiResolvedAssignment",
+    "AiRoomSkill",
     "AiSendCustomRequest",
     "AiSendRequest",
     "AiSendStreamBody",
@@ -280,10 +289,14 @@ __all__ = [
     "AiSkillsRoomDto",
     "AiSkillsWrapper",
     "AiSuccessResponse",
+    "AiSuggestedQuestion",
+    "AiSuggestedQuestionsResult",
     "AiThread",
     "AiThreadMessageLike",
     "AiThreadMessageLikeContent",
     "AiThreadMessageLikeContentAnyOfInner",
+    "AiThreadMessageLikeContentAnyOfInnerAudio",
+    "AiThreadMessageLikeContentAnyOfInnerInterrupt",
     "AiThreadMessageLikeStatus",
     "AiThreadsAppendUserMessage200Response",
     "AiThreadsAppendUserMessageRequest",
@@ -298,6 +311,8 @@ __all__ = [
     "AiToolAnnotations",
     "AiToolCallData",
     "AiToolPermissionMode",
+    "AiToolPermissionModeDto",
+    "AiToolPermissionModeWrapper",
     "AiToolsAddCustomServerRequest",
     "AiToolsBulkResult",
     "AiToolsBulkResultErrorsInner",
@@ -1297,6 +1312,8 @@ from docspace_api_sdk.models.ai_approve_tool_call_request import AiApproveToolCa
 from docspace_api_sdk.models.ai_assignment_mutation_result import AiAssignmentMutationResult as AiAssignmentMutationResult
 from docspace_api_sdk.models.ai_assignments_assign_request import AiAssignmentsAssignRequest as AiAssignmentsAssignRequest
 from docspace_api_sdk.models.ai_assignments_cascade_profile_delete_request import AiAssignmentsCascadeProfileDeleteRequest as AiAssignmentsCascadeProfileDeleteRequest
+from docspace_api_sdk.models.ai_assignments_expanded import AiAssignmentsExpanded as AiAssignmentsExpanded
+from docspace_api_sdk.models.ai_assignments_get_all_assignments200_response import AiAssignmentsGetAllAssignments200Response as AiAssignmentsGetAllAssignments200Response
 from docspace_api_sdk.models.ai_attachment import AiAttachment as AiAttachment
 from docspace_api_sdk.models.ai_attachment_form_keys_inner import AiAttachmentFormKeysInner as AiAttachmentFormKeysInner
 from docspace_api_sdk.models.ai_attachments_link_to_message_request import AiAttachmentsLinkToMessageRequest as AiAttachmentsLinkToMessageRequest
@@ -1306,11 +1323,15 @@ from docspace_api_sdk.models.ai_attachments_save_files_many_request import AiAtt
 from docspace_api_sdk.models.ai_builtin_provider_type import AiBuiltinProviderType as AiBuiltinProviderType
 from docspace_api_sdk.models.ai_bulk_assignment_result import AiBulkAssignmentResult as AiBulkAssignmentResult
 from docspace_api_sdk.models.ai_bulk_assignment_result_errors_inner import AiBulkAssignmentResultErrorsInner as AiBulkAssignmentResultErrorsInner
+from docspace_api_sdk.models.ai_chat_error_payload import AiChatErrorPayload as AiChatErrorPayload
 from docspace_api_sdk.models.ai_chat_event import AiChatEvent as AiChatEvent
 from docspace_api_sdk.models.ai_chat_price_dto import AiChatPriceDto as AiChatPriceDto
 from docspace_api_sdk.models.ai_chat_tool_permission_mode import AiChatToolPermissionMode as AiChatToolPermissionMode
 from docspace_api_sdk.models.ai_chat_tool_prefs_scope import AiChatToolPrefsScope as AiChatToolPrefsScope
 from docspace_api_sdk.models.ai_config_dto import AiConfigDto as AiConfigDto
+from docspace_api_sdk.models.ai_context_folder import AiContextFolder as AiContextFolder
+from docspace_api_sdk.models.ai_context_room import AiContextRoom as AiContextRoom
+from docspace_api_sdk.models.ai_context_room_ref import AiContextRoomRef as AiContextRoomRef
 from docspace_api_sdk.models.ai_create_profile_input import AiCreateProfileInput as AiCreateProfileInput
 from docspace_api_sdk.models.ai_create_prompt_input import AiCreatePromptInput as AiCreatePromptInput
 from docspace_api_sdk.models.ai_editor_tools_call200_response import AiEditorToolsCall200Response as AiEditorToolsCall200Response
@@ -1334,12 +1355,14 @@ from docspace_api_sdk.models.ai_error_response import AiErrorResponse as AiError
 from docspace_api_sdk.models.ai_export_text_to_docx202_response import AiExportTextToDocx202Response as AiExportTextToDocx202Response
 from docspace_api_sdk.models.ai_export_text_to_docx_request import AiExportTextToDocxRequest as AiExportTextToDocxRequest
 from docspace_api_sdk.models.ai_export_text_to_docx_request_folder_id import AiExportTextToDocxRequestFolderId as AiExportTextToDocxRequestFolderId
+from docspace_api_sdk.models.ai_folder_context_ref import AiFolderContextRef as AiFolderContextRef
 from docspace_api_sdk.models.ai_folder_mutation_result import AiFolderMutationResult as AiFolderMutationResult
 from docspace_api_sdk.models.ai_image_price_dto import AiImagePriceDto as AiImagePriceDto
 from docspace_api_sdk.models.ai_import_error import AiImportError as AiImportError
 from docspace_api_sdk.models.ai_import_mode import AiImportMode as AiImportMode
 from docspace_api_sdk.models.ai_import_result import AiImportResult as AiImportResult
 from docspace_api_sdk.models.ai_import_result_imported import AiImportResultImported as AiImportResultImported
+from docspace_api_sdk.models.ai_knowledge_room_ref import AiKnowledgeRoomRef as AiKnowledgeRoomRef
 from docspace_api_sdk.models.ai_mcp_item import AiMCPItem as AiMCPItem
 from docspace_api_sdk.models.ai_meta_fill200_response import AiMetaFill200Response as AiMetaFill200Response
 from docspace_api_sdk.models.ai_meta_fill200_response_filled_inner import AiMetaFill200ResponseFilledInner as AiMetaFill200ResponseFilledInner
@@ -1409,6 +1432,7 @@ from docspace_api_sdk.models.ai_reasoning_level import AiReasoningLevel as AiRea
 from docspace_api_sdk.models.ai_reasoning_support import AiReasoningSupport as AiReasoningSupport
 from docspace_api_sdk.models.ai_regenerate_stream_request import AiRegenerateStreamRequest as AiRegenerateStreamRequest
 from docspace_api_sdk.models.ai_resolved_assignment import AiResolvedAssignment as AiResolvedAssignment
+from docspace_api_sdk.models.ai_room_skill import AiRoomSkill as AiRoomSkill
 from docspace_api_sdk.models.ai_send_custom_request import AiSendCustomRequest as AiSendCustomRequest
 from docspace_api_sdk.models.ai_send_request import AiSendRequest as AiSendRequest
 from docspace_api_sdk.models.ai_send_stream_body import AiSendStreamBody as AiSendStreamBody
@@ -1419,10 +1443,14 @@ from docspace_api_sdk.models.ai_skills_dto import AiSkillsDto as AiSkillsDto
 from docspace_api_sdk.models.ai_skills_room_dto import AiSkillsRoomDto as AiSkillsRoomDto
 from docspace_api_sdk.models.ai_skills_wrapper import AiSkillsWrapper as AiSkillsWrapper
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse as AiSuccessResponse
+from docspace_api_sdk.models.ai_suggested_question import AiSuggestedQuestion as AiSuggestedQuestion
+from docspace_api_sdk.models.ai_suggested_questions_result import AiSuggestedQuestionsResult as AiSuggestedQuestionsResult
 from docspace_api_sdk.models.ai_thread import AiThread as AiThread
 from docspace_api_sdk.models.ai_thread_message_like import AiThreadMessageLike as AiThreadMessageLike
 from docspace_api_sdk.models.ai_thread_message_like_content import AiThreadMessageLikeContent as AiThreadMessageLikeContent
 from docspace_api_sdk.models.ai_thread_message_like_content_any_of_inner import AiThreadMessageLikeContentAnyOfInner as AiThreadMessageLikeContentAnyOfInner
+from docspace_api_sdk.models.ai_thread_message_like_content_any_of_inner_audio import AiThreadMessageLikeContentAnyOfInnerAudio as AiThreadMessageLikeContentAnyOfInnerAudio
+from docspace_api_sdk.models.ai_thread_message_like_content_any_of_inner_interrupt import AiThreadMessageLikeContentAnyOfInnerInterrupt as AiThreadMessageLikeContentAnyOfInnerInterrupt
 from docspace_api_sdk.models.ai_thread_message_like_status import AiThreadMessageLikeStatus as AiThreadMessageLikeStatus
 from docspace_api_sdk.models.ai_threads_append_user_message200_response import AiThreadsAppendUserMessage200Response as AiThreadsAppendUserMessage200Response
 from docspace_api_sdk.models.ai_threads_append_user_message_request import AiThreadsAppendUserMessageRequest as AiThreadsAppendUserMessageRequest
@@ -1437,6 +1465,8 @@ from docspace_api_sdk.models.ai_threads_update_message_request import AiThreadsU
 from docspace_api_sdk.models.ai_tool_annotations import AiToolAnnotations as AiToolAnnotations
 from docspace_api_sdk.models.ai_tool_call_data import AiToolCallData as AiToolCallData
 from docspace_api_sdk.models.ai_tool_permission_mode import AiToolPermissionMode as AiToolPermissionMode
+from docspace_api_sdk.models.ai_tool_permission_mode_dto import AiToolPermissionModeDto as AiToolPermissionModeDto
+from docspace_api_sdk.models.ai_tool_permission_mode_wrapper import AiToolPermissionModeWrapper as AiToolPermissionModeWrapper
 from docspace_api_sdk.models.ai_tools_add_custom_server_request import AiToolsAddCustomServerRequest as AiToolsAddCustomServerRequest
 from docspace_api_sdk.models.ai_tools_bulk_result import AiToolsBulkResult as AiToolsBulkResult
 from docspace_api_sdk.models.ai_tools_bulk_result_errors_inner import AiToolsBulkResultErrorsInner as AiToolsBulkResultErrorsInner

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | Storage-assigned UUID. | 
 **kind** | **str** | file | image. | 
-**source** | **str** | Origin of the attachment. `user` — uploaded by the user in the composer (the default when unset, for backward compatibility). `tool` — produced by a tool call (e.g. `generate_image`). Lets the integrator's adapter route or apply policies (separate bucket, quotas, TTL, CDN) per source. | [optional] 
+**source** | **str** | Where the attachment came from: `user` - attached by the user (also when unset); `tool` - produced by a tool call (for example `generate_image`). | [optional] 
 **title** | **str** | Display label (filename or user-visible title). | 
 **content** | **str** | Extracted text for files. | [optional] 
 **var_base64** | **str** | Base64 data URL for images. | [optional] 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **type** | **float** | ONLYOFFICE file type code (for files). | [optional] 
 **message_id** | **str** | Owning message id once linked. Unset while the attachment is a draft. | [optional] 
 **thread_id** | **str** | Owning thread id once linked. Unset while the attachment is a draft. | [optional] 
-**entity_id** | **str** | Opaque scope token (entity / room) the attachment was created in. Drafts carry it so an entity switch keeps in-flight composer state isolated; once linked to a message the field is redundant with the thread's own entity binding. | [optional] 
+**entity_id** | **str** | The room or folder the attachment was created in, as an opaque token; once the attachment is bound to a message it repeats the thread's own scope. | [optional] 
 **created_at** | **float** | Storage-assigned creation timestamp. | 
 **can_analyze** | **bool** | Whether the attached form can be analyzed. | [optional] 
 **form_keys** | [**List[AiAttachmentFormKeysInner]**](AiAttachmentFormKeysInner.md) | Keys of the fields inside the form. `key` is the field identifier, `text` its human-readable label. | [optional] 

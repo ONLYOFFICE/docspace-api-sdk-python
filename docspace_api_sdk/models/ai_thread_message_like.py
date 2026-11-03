@@ -37,8 +37,8 @@ class AiThreadMessageLike(BaseModel):
     content: AiThreadMessageLikeContent
     created_at: Optional[StrictStr] = Field(default=None, description="Creation timestamp, ISO-8601 on the wire.", alias="createdAt", json_schema_extra={"examples": ["2026-01-01T00:00:00.000Z"]})
     status: Optional[AiThreadMessageLikeStatus] = None
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Arbitrary per-message metadata.", json_schema_extra={"examples": [{}]})
-    attachments: Optional[List[Dict[str, Any]]] = Field(default=None, description="Attachments linked to the message.", json_schema_extra={"examples": [["55555555-5555-5555-5555-555555555555"]]})
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Per-message metadata. The chat library writes `custom` (with the round's `contextEntityId`) and `steps` (token usage per provider request); `unstable_state`, `unstable_annotations`, `unstable_data` and `submittedFeedback` may appear as well. Read it as an open map.", json_schema_extra={"examples": [{}]})
+    attachments: Optional[List[Dict[str, Any]]] = Field(default=None, description="Attachments linked to the message (`id`, `type`, `name`, `contentType`, `status`, `content`). Read them as open objects.", json_schema_extra={"examples": [["55555555-5555-5555-5555-555555555555"]]})
     __properties: ClassVar[List[str]] = ["id", "role", "content", "createdAt", "status", "metadata", "attachments"]
 
     @field_validator('role')

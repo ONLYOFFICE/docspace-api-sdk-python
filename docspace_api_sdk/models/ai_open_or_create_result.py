@@ -29,10 +29,10 @@ from typing_extensions import Self
 
 class AiOpenOrCreateResult(BaseModel):
     """
-    Resolved thread state returned by `ThreadsEngine.openOrCreate`.
+    The thread that was opened or created, with its stored messages.
     """ # noqa: E501
     thread_id: StrictStr = Field(description="The thread that was opened, or the one just created.", alias="threadId")
-    title: StrictStr = Field(description="Empty string for existing threads — the engine doesn't re-fetch.")
+    title: StrictStr = Field(description="The title generated for a thread this call created; an empty string when it opened an existing thread.")
     prior_messages: List[AiThreadMessageLike] = Field(description="The messages already in the thread - empty for a thread that was just created.", alias="priorMessages")
     __properties: ClassVar[List[str]] = ["threadId", "title", "priorMessages"]
 

@@ -11,9 +11,9 @@ Method | HTTP request | Description
 
 
 # **ai_context_get_context_folders**
-> AiSuccessResponse ai_context_get_context_folders()
+> List[AiContextFolder] ai_context_get_context_folders()
 
-
+Lists the Instructions rooms the caller can connect to a chat as context, grouped under the account they belong to (`docspace` for this portal). Only a room the caller can read that holds at least one skill is listed: one without skills would connect nothing. An empty list means there is nothing to connect. At most 1000 Instructions rooms are read; any beyond them are left out without a signal. Read the skills of one room with `GET api/2.0/ai/context/get-room-skills`. This is a read-only operation.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -23,7 +23,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**List[AiContextFolder]**](AiContextFolder.md)
 
 ### Authorization
 
@@ -34,7 +34,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
+from docspace_api_sdk.models.ai_context_folder import AiContextFolder
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -76,7 +76,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
+**200** | The Instructions rooms the caller can connect, grouped by account. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 **403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
@@ -84,9 +84,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_context_get_knowledge_folders**
-> AiSuccessResponse ai_context_get_knowledge_folders()
+> List[AiContextFolder] ai_context_get_knowledge_folders()
 
-
+Lists the Knowledge rooms the caller can connect to a chat as its knowledge base, grouped under the account they belong to (`docspace` for this portal). A connected Knowledge room limits the knowledge search of a round to it (`actionArgs.knowledgeRooms`). An empty list means there is none the caller can read. At most 1000 Knowledge rooms are listed; any beyond them are left out without a signal. This is a read-only operation.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -96,7 +96,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**List[AiContextFolder]**](AiContextFolder.md)
 
 ### Authorization
 
@@ -107,7 +107,7 @@ This endpoint does not need any parameter.
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
+from docspace_api_sdk.models.ai_context_folder import AiContextFolder
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -149,7 +149,7 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
+**200** | The Knowledge rooms the caller can connect, grouped by account. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 **403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
@@ -157,9 +157,9 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_context_get_room_skill**
-> AiSuccessResponse ai_context_get_room_skill(cloud, room_id, skill_id)
+> str ai_context_get_room_skill(room_id, skill_id, cloud=cloud)
 
-
+Returns the Markdown file of one skill of an Instructions room as a JSON string. `roomId` and `skillId` are required, and the skill has to be one of that room's skills: the ID of any other file, readable or not, answers 404, as does a room that is not an Instructions room the caller can read. Only the first 256 KiB of the file are read, which covers the 64 K characters a chat passes to the model; a longer file comes back cut there without a signal. This is a read-only operation.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -168,13 +168,13 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cloud** | **str**|  | 
- **room_id** | **str**|  | 
- **skill_id** | **str**|  | 
+ **room_id** | **str**| The Instructions room identifier. | 
+ **skill_id** | **str**| The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it. | 
+ **cloud** | **str**| The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it. | [optional] 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+**str**
 
 ### Authorization
 
@@ -185,7 +185,6 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -206,13 +205,13 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ContextApi(api_client)
-    cloud = 'cloud_example' # str | 
-    room_id = 'room_id_example' # str | 
-    skill_id = 'skill_id_example' # str | 
+    room_id = 'room_id_example' # str | The Instructions room identifier.
+    skill_id = 'skill_id_example' # str | The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it.
+    cloud = 'cloud_example' # str | The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it. (optional)
 
     try:
         # Get room skill
-        api_response = api_instance.ai_context_get_room_skill(cloud, room_id, skill_id)
+        api_response = api_instance.ai_context_get_room_skill(room_id, skill_id, cloud=cloud)
         print("The response of ContextApi->ai_context_get_room_skill:\n")
         pprint(api_response)
     except Exception as e:
@@ -230,17 +229,19 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
+**200** | The skill's Markdown file as a JSON string, its first 256 KiB. |  -  |
+**400** | `roomId` or `skillId` is missing. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 **403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**404** | The room is not an Instructions room the caller can read, or `skillId` is not one of its skills. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_context_get_room_skills**
-> AiSuccessResponse ai_context_get_room_skills(cloud, room_id)
+> List[AiRoomSkill] ai_context_get_room_skills(room_id, cloud=cloud)
 
-
+Lists the skills of one Instructions room: the ID, name and description from the frontmatter of each skill file, not its body. `roomId` is required; `cloud` is accepted and not read. A room that is not an Instructions room the caller can read answers 404. Read the body of one skill with `GET api/2.0/ai/context/get-room-skill`. This is a read-only operation.
 
 For more information, see [api.onlyoffice.com]().
 
@@ -249,12 +250,12 @@ For more information, see [api.onlyoffice.com]().
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cloud** | **str**|  | 
- **room_id** | **str**|  | 
+ **room_id** | **str**| The Instructions room identifier. | 
+ **cloud** | **str**| The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it. | [optional] 
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**List[AiRoomSkill]**](AiRoomSkill.md)
 
 ### Authorization
 
@@ -265,7 +266,7 @@ Name | Type | Description  | Notes
 
 ```python
 import docspace_api_sdk
-from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
+from docspace_api_sdk.models.ai_room_skill import AiRoomSkill
 from docspace_api_sdk.rest import ApiException
 from pprint import pprint
 
@@ -286,12 +287,12 @@ configuration = docspace_api_sdk.Configuration(
 with docspace_api_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = docspace_api_sdk.ContextApi(api_client)
-    cloud = 'cloud_example' # str | 
-    room_id = 'room_id_example' # str | 
+    room_id = 'room_id_example' # str | The Instructions room identifier.
+    cloud = 'cloud_example' # str | The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it. (optional)
 
     try:
         # Get room skills
-        api_response = api_instance.ai_context_get_room_skills(cloud, room_id)
+        api_response = api_instance.ai_context_get_room_skills(room_id, cloud=cloud)
         print("The response of ContextApi->ai_context_get_room_skills:\n")
         pprint(api_response)
     except Exception as e:
@@ -309,9 +310,11 @@ with docspace_api_sdk.ApiClient(configuration) as api_client:
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  -  |
+**200** | The skills of the room, frontmatter only. |  -  |
+**400** | `roomId` is missing. |  -  |
 **401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 **403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+**404** | The room is not an Instructions room the caller can read. |  -  |
 **500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -28,6 +28,7 @@ from docspace_api_sdk.models.ai_action_type import AiActionType
 from docspace_api_sdk.models.ai_assignment_mutation_result import AiAssignmentMutationResult
 from docspace_api_sdk.models.ai_assignments_assign_request import AiAssignmentsAssignRequest
 from docspace_api_sdk.models.ai_assignments_cascade_profile_delete_request import AiAssignmentsCascadeProfileDeleteRequest
+from docspace_api_sdk.models.ai_assignments_get_all_assignments200_response import AiAssignmentsGetAllAssignments200Response
 from docspace_api_sdk.models.ai_bulk_assignment_result import AiBulkAssignmentResult
 from docspace_api_sdk.models.ai_resolved_assignment import AiResolvedAssignment
 from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
@@ -956,7 +957,7 @@ class AssignmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Dict[str, str]:
+    ) -> AiAssignmentsGetAllAssignments200Response:
         """Get all assignments
 
         Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId`, when sent, has to name a room the caller can open; the bindings are portal-wide, so the answer is the same set with or without it. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others. With `expand=profile` the answer is `{ assignments, profilesTotal, chatProfilesTotal }`: the assigned profiles themselves (as `GET api/2.0/ai/profiles/list` describes them) keyed by action, a binding whose profile no longer exists left out, plus how many profiles the portal has and how many of them can chat; this is the one read a chat needs to start.
@@ -997,7 +998,7 @@ class AssignmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, str]",
+            '200': "AiAssignmentsGetAllAssignments200Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1032,7 +1033,7 @@ class AssignmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Dict[str, str]]:
+    ) -> ApiResponse[AiAssignmentsGetAllAssignments200Response]:
         """Get all assignments
 
         Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId`, when sent, has to name a room the caller can open; the bindings are portal-wide, so the answer is the same set with or without it. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others. With `expand=profile` the answer is `{ assignments, profilesTotal, chatProfilesTotal }`: the assigned profiles themselves (as `GET api/2.0/ai/profiles/list` describes them) keyed by action, a binding whose profile no longer exists left out, plus how many profiles the portal has and how many of them can chat; this is the one read a chat needs to start.
@@ -1073,7 +1074,7 @@ class AssignmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, str]",
+            '200': "AiAssignmentsGetAllAssignments200Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",
@@ -1149,7 +1150,7 @@ class AssignmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Dict[str, str]",
+            '200': "AiAssignmentsGetAllAssignments200Response",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '404': "AiErrorResponse",

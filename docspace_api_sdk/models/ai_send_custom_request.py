@@ -35,8 +35,9 @@ class AiSendCustomRequest(BaseModel):
     is_stream: StrictBool = Field(description="Stream the reply (ndjson) when true, else return a single message.", alias="isStream")
     system_prompt: StrictStr = Field(description="Caller-supplied system prompt for this one-turn call.", alias="systemPrompt")
     user_message: AiThreadMessageLike = Field(alias="userMessage")
-    action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
-    __properties: ClassVar[List[str]] = ["isStream", "systemPrompt", "userMessage", "actionArgs"]
+    action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.", alias="actionArgs")
+    profile_id: Optional[StrictStr] = Field(default=None, description="Profile to run this call on. When omitted, or when no profile has this id, the `Default` assignment is used.", alias="profileId")
+    __properties: ClassVar[List[str]] = ["isStream", "systemPrompt", "userMessage", "actionArgs", "profileId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,7 +100,8 @@ class AiSendCustomRequest(BaseModel):
             "isStream": obj.get("isStream"),
             "systemPrompt": obj.get("systemPrompt"),
             "userMessage": AiThreadMessageLike.from_dict(obj["userMessage"]) if obj.get("userMessage") is not None else None,
-            "actionArgs": AiActionArgs.from_dict(obj["actionArgs"]) if obj.get("actionArgs") is not None else None
+            "actionArgs": AiActionArgs.from_dict(obj["actionArgs"]) if obj.get("actionArgs") is not None else None,
+            "profileId": obj.get("profileId")
         })
         return _obj
 

@@ -25,7 +25,7 @@ from pydantic import Field
 from typing import Any, Dict
 from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_settings_wrapper import AiSettingsWrapper
-from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
+from docspace_api_sdk.models.ai_tool_permission_mode_wrapper import AiToolPermissionModeWrapper
 from docspace_api_sdk.models.ai_user_settings_wrapper import AiUserSettingsWrapper
 from docspace_api_sdk.models.ai_vectorization_settings_wrapper import AiVectorizationSettingsWrapper
 
@@ -325,10 +325,10 @@ class SettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiSuccessResponse:
+    ) -> AiToolPermissionModeWrapper:
         """Get the tool permission mode
 
-        Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+        Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service's `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -360,7 +360,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiToolPermissionModeWrapper",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -392,10 +392,10 @@ class SettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiSuccessResponse]:
+    ) -> ApiResponse[AiToolPermissionModeWrapper]:
         """Get the tool permission mode
 
-        Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+        Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service's `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -427,7 +427,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiToolPermissionModeWrapper",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -462,7 +462,7 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Get the tool permission mode
 
-        Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+        Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service's `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -494,7 +494,7 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiToolPermissionModeWrapper",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -1112,10 +1112,10 @@ class SettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiSuccessResponse:
+    ) -> AiToolPermissionModeWrapper:
         """Set the tool permission mode
 
-        Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+        Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service's `response` envelope. The mode applies to every chat of the user in the portal.
 
         :param ai_settings_set_tool_mode_request: `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum. (required)
         :type ai_settings_set_tool_mode_request: Dict[str, Optional[object]]
@@ -1150,7 +1150,8 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiToolPermissionModeWrapper",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1184,10 +1185,10 @@ class SettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiSuccessResponse]:
+    ) -> ApiResponse[AiToolPermissionModeWrapper]:
         """Set the tool permission mode
 
-        Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+        Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service's `response` envelope. The mode applies to every chat of the user in the portal.
 
         :param ai_settings_set_tool_mode_request: `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum. (required)
         :type ai_settings_set_tool_mode_request: Dict[str, Optional[object]]
@@ -1222,7 +1223,8 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiToolPermissionModeWrapper",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",
@@ -1259,7 +1261,7 @@ class SettingsApi:
     ) -> RESTResponseType:
         """Set the tool permission mode
 
-        Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+        Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service's `response` envelope. The mode applies to every chat of the user in the portal.
 
         :param ai_settings_set_tool_mode_request: `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum. (required)
         :type ai_settings_set_tool_mode_request: Dict[str, Optional[object]]
@@ -1294,7 +1296,8 @@ class SettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "AiToolPermissionModeWrapper",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '413': "AiErrorResponse",

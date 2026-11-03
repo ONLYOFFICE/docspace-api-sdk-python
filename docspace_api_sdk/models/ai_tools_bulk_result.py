@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class AiToolsBulkResult(BaseModel):
     """
-    Outcome of `ToolsEngine.replaceAllCustomServers` — either every entry persisted, or no entries persisted plus a per-key error report.
+    The outcome of replacing the custom MCP servers: either every entry was stored, or none was and the errors are reported per server.
     """ # noqa: E501
     success: StrictBool = Field(description="True when every custom MCP server was persisted.", json_schema_extra={"examples": [True]})
     errors: Optional[List[AiToolsBulkResultErrorsInner]] = Field(default=None, description="What was rejected, per server. Present on failure - and then no server was persisted.", json_schema_extra={"examples": [[]]})

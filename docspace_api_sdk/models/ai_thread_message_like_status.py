@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from docspace_api_sdk.models.ai_chat_error_payload import AiChatErrorPayload
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,8 +31,10 @@ class AiThreadMessageLikeStatus(BaseModel):
     """
     Delivery/generation status of the message.
     """ # noqa: E501
-    type: StrictStr
-    __properties: ClassVar[List[str]] = ["type"]
+    type: StrictStr = Field(description="`running`, `requires-action`, `complete` or `incomplete`.")
+    reason: Optional[StrictStr] = Field(default=None, description="Why the message is in that state: `tool-calls` or `interrupt` for `requires-action`; `stop` or `unknown` for `complete`; `cancelled`, `tool-calls`, `length`, `content-filter`, `other` or `error` for `incomplete`. An `incomplete` message the chat stored carries `cancelled` (the round was stopped) or `error`.")
+    error: Optional[AiChatErrorPayload] = Field(default=None, description="What failed, on an `incomplete` message whose `reason` is `error`.")
+    __properties: ClassVar[List[str]] = ["type", "reason", "error"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,6 +75,9 @@ class AiThreadMessageLikeStatus(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of error
+        if self.error:
+            _dict['error'] = self.error.to_dict()
         return _dict
 
     @classmethod
@@ -85,7 +91,9 @@ class AiThreadMessageLikeStatus(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "type": obj.get("type")
+            "type": obj.get("type"),
+            "reason": obj.get("reason"),
+            "error": AiChatErrorPayload.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
 

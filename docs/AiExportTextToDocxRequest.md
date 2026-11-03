@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **title** | **str** | Document title (also the file name). | 
 **content** | **str** | Markdown content to convert. | 
 **folder_id** | [**AiExportTextToDocxRequestFolderId**](AiExportTextToDocxRequestFolderId.md) |  | 
+**format** | **str** | Output format: `Docx` (the default when omitted), `Pdf`, or `Md`, which stores the markdown verbatim instead of converting it. | [optional] 
 
 ## Example
 

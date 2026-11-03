@@ -5,7 +5,7 @@ Versioned, self-contained bundle of every saved prompt and folder. Stable wire f
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **float** | The bundle format version, so an import can migrate an older export. | 
+**version** | **int** | The bundle format version, so an import can migrate an older export. | 
 **folders** | [**List[AiPromptFolder]**](AiPromptFolder.md) | Every exported prompt folder. | 
 **prompts** | [**List[AiPrompt]**](AiPrompt.md) | Every exported prompt. | 
 

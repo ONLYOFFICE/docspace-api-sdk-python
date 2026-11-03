@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class AiImportMode(str, Enum):
     """
-    Mode passed to `PromptsEngine.importBundle`.
+    How an imported prompt bundle meets the library: `merge` adds to it, `replace` replaces it.
     """
 
     """

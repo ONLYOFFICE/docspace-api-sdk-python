@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class AiImportError(BaseModel):
     """
-    Per-entry error reported by `PromptsEngine.importBundle`.
+    One refused entry of a prompt bundle import.
     """ # noqa: E501
     kind: StrictStr = Field(description="`folder` or `prompt`, plus the offending name or id.", json_schema_extra={"examples": ["prompt"]})
     ref: StrictStr = Field(description="The offending entry - its name or its id.", json_schema_extra={"examples": ["33333333-3333-3333-3333-333333333333"]})

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message_id** | **str** | Identifier of the message that was appended to the thread. | 
+**message_id** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | The stored message itself - with its storage-assigned `id` and `createdAt` - despite the field name, which is kept for the clients that already read it. The message ID is `messageId.id`. | 
 
 ## Example
 

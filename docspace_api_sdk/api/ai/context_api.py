@@ -21,8 +21,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union, overload
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
-from docspace_api_sdk.models.ai_success_response import AiSuccessResponse
+from pydantic import Field, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
+from docspace_api_sdk.models.ai_context_folder import AiContextFolder
+from docspace_api_sdk.models.ai_room_skill import AiRoomSkill
 
 from docspace_api_sdk.api_client import ApiClient, RequestSerialized
 from docspace_api_sdk.api_response import ApiResponse
@@ -58,9 +61,10 @@ class ContextApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiSuccessResponse:
+    ) -> List[AiContextFolder]:
         """Get context folders
 
+        Lists the Instructions rooms the caller can connect to a chat as context, grouped under the account they belong to (`docspace` for this portal). Only a room the caller can read that holds at least one skill is listed: one without skills would connect nothing. An empty list means there is nothing to connect. At most 1000 Instructions rooms are read; any beyond them are left out without a signal. Read the skills of one room with `GET api/2.0/ai/context/get-room-skills`. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -92,7 +96,7 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "List[AiContextFolder]",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -124,9 +128,10 @@ class ContextApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiSuccessResponse]:
+    ) -> ApiResponse[List[AiContextFolder]]:
         """Get context folders
 
+        Lists the Instructions rooms the caller can connect to a chat as context, grouped under the account they belong to (`docspace` for this portal). Only a room the caller can read that holds at least one skill is listed: one without skills would connect nothing. An empty list means there is nothing to connect. At most 1000 Instructions rooms are read; any beyond them are left out without a signal. Read the skills of one room with `GET api/2.0/ai/context/get-room-skills`. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -158,7 +163,7 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "List[AiContextFolder]",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -193,6 +198,7 @@ class ContextApi:
     ) -> RESTResponseType:
         """Get context folders
 
+        Lists the Instructions rooms the caller can connect to a chat as context, grouped under the account they belong to (`docspace` for this portal). Only a room the caller can read that holds at least one skill is listed: one without skills would connect nothing. An empty list means there is nothing to connect. At most 1000 Instructions rooms are read; any beyond them are left out without a signal. Read the skills of one room with `GET api/2.0/ai/context/get-room-skills`. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -224,7 +230,7 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "List[AiContextFolder]",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -317,9 +323,10 @@ class ContextApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiSuccessResponse:
+    ) -> List[AiContextFolder]:
         """Get knowledge folders
 
+        Lists the Knowledge rooms the caller can connect to a chat as its knowledge base, grouped under the account they belong to (`docspace` for this portal). A connected Knowledge room limits the knowledge search of a round to it (`actionArgs.knowledgeRooms`). An empty list means there is none the caller can read. At most 1000 Knowledge rooms are listed; any beyond them are left out without a signal. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -351,7 +358,7 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "List[AiContextFolder]",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -383,9 +390,10 @@ class ContextApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiSuccessResponse]:
+    ) -> ApiResponse[List[AiContextFolder]]:
         """Get knowledge folders
 
+        Lists the Knowledge rooms the caller can connect to a chat as its knowledge base, grouped under the account they belong to (`docspace` for this portal). A connected Knowledge room limits the knowledge search of a round to it (`actionArgs.knowledgeRooms`). An empty list means there is none the caller can read. At most 1000 Knowledge rooms are listed; any beyond them are left out without a signal. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -417,7 +425,7 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "List[AiContextFolder]",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -452,6 +460,7 @@ class ContextApi:
     ) -> RESTResponseType:
         """Get knowledge folders
 
+        Lists the Knowledge rooms the caller can connect to a chat as its knowledge base, grouped under the account they belong to (`docspace` for this portal). A connected Knowledge room limits the knowledge search of a round to it (`actionArgs.knowledgeRooms`). An empty list means there is none the caller can read. At most 1000 Knowledge rooms are listed; any beyond them are left out without a signal. This is a read-only operation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -483,7 +492,7 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "List[AiContextFolder]",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
             '500': "AiErrorResponse",
@@ -564,9 +573,9 @@ class ContextApi:
     @validate_call
     def ai_context_get_room_skill(
         self,
-        cloud: StrictStr,
-        room_id: StrictStr,
-        skill_id: StrictStr,
+        room_id: Annotated[StrictStr, Field(description="The Instructions room identifier.")],
+        skill_id: Annotated[StrictStr, Field(description="The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it.")],
+        cloud: Annotated[Optional[StrictStr], Field(description="The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -579,16 +588,17 @@ class ContextApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiSuccessResponse:
+    ) -> str:
         """Get room skill
 
+        Returns the Markdown file of one skill of an Instructions room as a JSON string. `roomId` and `skillId` are required, and the skill has to be one of that room's skills: the ID of any other file, readable or not, answers 404, as does a room that is not an Instructions room the caller can read. Only the first 256 KiB of the file are read, which covers the 64 K characters a chat passes to the model; a longer file comes back cut there without a signal. This is a read-only operation.
 
-        :param cloud: (required)
-        :type cloud: str
-        :param room_id: (required)
+        :param room_id: The Instructions room identifier. (required)
         :type room_id: str
-        :param skill_id: (required)
+        :param skill_id: The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it. (required)
         :type skill_id: str
+        :param cloud: The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
+        :type cloud: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -612,9 +622,9 @@ class ContextApi:
         """ # noqa: E501
 
         _param = self._ai_context_get_room_skill_serialize(
-            cloud=cloud,
             room_id=room_id,
             skill_id=skill_id,
+            cloud=cloud,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -622,9 +632,11 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "str",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -642,9 +654,9 @@ class ContextApi:
     @validate_call
     def ai_context_get_room_skill_with_http_info(
         self,
-        cloud: StrictStr,
-        room_id: StrictStr,
-        skill_id: StrictStr,
+        room_id: Annotated[StrictStr, Field(description="The Instructions room identifier.")],
+        skill_id: Annotated[StrictStr, Field(description="The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it.")],
+        cloud: Annotated[Optional[StrictStr], Field(description="The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -657,16 +669,17 @@ class ContextApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiSuccessResponse]:
+    ) -> ApiResponse[str]:
         """Get room skill
 
+        Returns the Markdown file of one skill of an Instructions room as a JSON string. `roomId` and `skillId` are required, and the skill has to be one of that room's skills: the ID of any other file, readable or not, answers 404, as does a room that is not an Instructions room the caller can read. Only the first 256 KiB of the file are read, which covers the 64 K characters a chat passes to the model; a longer file comes back cut there without a signal. This is a read-only operation.
 
-        :param cloud: (required)
-        :type cloud: str
-        :param room_id: (required)
+        :param room_id: The Instructions room identifier. (required)
         :type room_id: str
-        :param skill_id: (required)
+        :param skill_id: The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it. (required)
         :type skill_id: str
+        :param cloud: The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
+        :type cloud: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -690,9 +703,9 @@ class ContextApi:
         """ # noqa: E501
 
         _param = self._ai_context_get_room_skill_serialize(
-            cloud=cloud,
             room_id=room_id,
             skill_id=skill_id,
+            cloud=cloud,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -700,9 +713,11 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "str",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -720,9 +735,9 @@ class ContextApi:
     @validate_call
     def ai_context_get_room_skill_without_preload_content(
         self,
-        cloud: StrictStr,
-        room_id: StrictStr,
-        skill_id: StrictStr,
+        room_id: Annotated[StrictStr, Field(description="The Instructions room identifier.")],
+        skill_id: Annotated[StrictStr, Field(description="The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it.")],
+        cloud: Annotated[Optional[StrictStr], Field(description="The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -738,13 +753,14 @@ class ContextApi:
     ) -> RESTResponseType:
         """Get room skill
 
+        Returns the Markdown file of one skill of an Instructions room as a JSON string. `roomId` and `skillId` are required, and the skill has to be one of that room's skills: the ID of any other file, readable or not, answers 404, as does a room that is not an Instructions room the caller can read. Only the first 256 KiB of the file are read, which covers the 64 K characters a chat passes to the model; a longer file comes back cut there without a signal. This is a read-only operation.
 
-        :param cloud: (required)
-        :type cloud: str
-        :param room_id: (required)
+        :param room_id: The Instructions room identifier. (required)
         :type room_id: str
-        :param skill_id: (required)
+        :param skill_id: The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it. (required)
         :type skill_id: str
+        :param cloud: The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
+        :type cloud: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -768,9 +784,9 @@ class ContextApi:
         """ # noqa: E501
 
         _param = self._ai_context_get_room_skill_serialize(
-            cloud=cloud,
             room_id=room_id,
             skill_id=skill_id,
+            cloud=cloud,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -778,9 +794,11 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "str",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -793,9 +811,9 @@ class ContextApi:
 
     def _ai_context_get_room_skill_serialize(
         self,
-        cloud,
         room_id,
         skill_id,
+        cloud,
         _request_auth,
         _content_type,
         _headers,
@@ -874,8 +892,8 @@ class ContextApi:
     @validate_call
     def ai_context_get_room_skills(
         self,
-        cloud: StrictStr,
-        room_id: StrictStr,
+        room_id: Annotated[StrictStr, Field(description="The Instructions room identifier.")],
+        cloud: Annotated[Optional[StrictStr], Field(description="The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -888,14 +906,15 @@ class ContextApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiSuccessResponse:
+    ) -> List[AiRoomSkill]:
         """Get room skills
 
+        Lists the skills of one Instructions room: the ID, name and description from the frontmatter of each skill file, not its body. `roomId` is required; `cloud` is accepted and not read. A room that is not an Instructions room the caller can read answers 404. Read the body of one skill with `GET api/2.0/ai/context/get-room-skill`. This is a read-only operation.
 
-        :param cloud: (required)
-        :type cloud: str
-        :param room_id: (required)
+        :param room_id: The Instructions room identifier. (required)
         :type room_id: str
+        :param cloud: The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
+        :type cloud: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -919,8 +938,8 @@ class ContextApi:
         """ # noqa: E501
 
         _param = self._ai_context_get_room_skills_serialize(
-            cloud=cloud,
             room_id=room_id,
+            cloud=cloud,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -928,9 +947,11 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "List[AiRoomSkill]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -948,8 +969,8 @@ class ContextApi:
     @validate_call
     def ai_context_get_room_skills_with_http_info(
         self,
-        cloud: StrictStr,
-        room_id: StrictStr,
+        room_id: Annotated[StrictStr, Field(description="The Instructions room identifier.")],
+        cloud: Annotated[Optional[StrictStr], Field(description="The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -962,14 +983,15 @@ class ContextApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiSuccessResponse]:
+    ) -> ApiResponse[List[AiRoomSkill]]:
         """Get room skills
 
+        Lists the skills of one Instructions room: the ID, name and description from the frontmatter of each skill file, not its body. `roomId` is required; `cloud` is accepted and not read. A room that is not an Instructions room the caller can read answers 404. Read the body of one skill with `GET api/2.0/ai/context/get-room-skill`. This is a read-only operation.
 
-        :param cloud: (required)
-        :type cloud: str
-        :param room_id: (required)
+        :param room_id: The Instructions room identifier. (required)
         :type room_id: str
+        :param cloud: The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
+        :type cloud: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -993,8 +1015,8 @@ class ContextApi:
         """ # noqa: E501
 
         _param = self._ai_context_get_room_skills_serialize(
-            cloud=cloud,
             room_id=room_id,
+            cloud=cloud,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1002,9 +1024,11 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "List[AiRoomSkill]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -1022,8 +1046,8 @@ class ContextApi:
     @validate_call
     def ai_context_get_room_skills_without_preload_content(
         self,
-        cloud: StrictStr,
-        room_id: StrictStr,
+        room_id: Annotated[StrictStr, Field(description="The Instructions room identifier.")],
+        cloud: Annotated[Optional[StrictStr], Field(description="The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1039,11 +1063,12 @@ class ContextApi:
     ) -> RESTResponseType:
         """Get room skills
 
+        Lists the skills of one Instructions room: the ID, name and description from the frontmatter of each skill file, not its body. `roomId` is required; `cloud` is accepted and not read. A room that is not an Instructions room the caller can read answers 404. Read the body of one skill with `GET api/2.0/ai/context/get-room-skill`. This is a read-only operation.
 
-        :param cloud: (required)
-        :type cloud: str
-        :param room_id: (required)
+        :param room_id: The Instructions room identifier. (required)
         :type room_id: str
+        :param cloud: The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
+        :type cloud: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1067,8 +1092,8 @@ class ContextApi:
         """ # noqa: E501
 
         _param = self._ai_context_get_room_skills_serialize(
-            cloud=cloud,
             room_id=room_id,
+            cloud=cloud,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1076,9 +1101,11 @@ class ContextApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiSuccessResponse",
+            '200': "List[AiRoomSkill]",
+            '400': "AiErrorResponse",
             '401': "AiErrorResponse",
             '403': "AiErrorResponse",
+            '404': "AiErrorResponse",
             '500': "AiErrorResponse",
         }
 
@@ -1091,8 +1118,8 @@ class ContextApi:
 
     def _ai_context_get_room_skills_serialize(
         self,
-        cloud,
         room_id,
+        cloud,
         _request_auth,
         _content_type,
         _headers,

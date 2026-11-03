@@ -37,11 +37,12 @@ class AiApproveToolCallRequest(BaseModel):
     thread_id: StrictStr = Field(description="Thread the assistant message belongs to.", alias="threadId")
     message_id: StrictStr = Field(description="Storage id of the assistant message holding the tool call.", alias="messageId")
     idx: Union[StrictFloat, StrictInt] = Field(description="Index of the tool-call content part inside `message.content`.")
-    message: Optional[AiThreadMessageLike] = Field(default=None, description="Snapshot of the assistant message at the time the tool call surfaced. Optional and ignored: the engine resumes from the stored message, and the copy inflated the body past the parser limit (Bug 84608).")
-    action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
+    message: Optional[AiThreadMessageLike] = Field(default=None, description="A copy of the assistant message as it was when the tool call surfaced. Optional and ignored: the round resumes from the stored message. Leave it out - a long conversation's copy can push the body past the size limit.")
+    action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.", alias="actionArgs")
     entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId")
+    context_entity_id: Optional[StrictStr] = Field(default=None, description="The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.", alias="contextEntityId")
     profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId")
-    __properties: ClassVar[List[str]] = ["result", "allowAlways", "threadId", "messageId", "idx", "message", "actionArgs", "entityId", "profileId"]
+    __properties: ClassVar[List[str]] = ["result", "allowAlways", "threadId", "messageId", "idx", "message", "actionArgs", "entityId", "contextEntityId", "profileId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -114,6 +115,7 @@ class AiApproveToolCallRequest(BaseModel):
             "message": AiThreadMessageLike.from_dict(obj["message"]) if obj.get("message") is not None else None,
             "actionArgs": AiActionArgs.from_dict(obj["actionArgs"]) if obj.get("actionArgs") is not None else None,
             "entityId": obj.get("entityId"),
+            "contextEntityId": obj.get("contextEntityId"),
             "profileId": obj.get("profileId")
         })
         return _obj

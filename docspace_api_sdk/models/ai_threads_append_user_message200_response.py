@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
+from docspace_api_sdk.models.ai_thread_message_like import AiThreadMessageLike
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,7 @@ class AiThreadsAppendUserMessage200Response(BaseModel):
     """
     AiThreadsAppendUserMessage200Response
     """ # noqa: E501
-    message_id: StrictStr = Field(description="Identifier of the message that was appended to the thread.", alias="messageId", json_schema_extra={"examples": ["22222222-2222-2222-2222-222222222222"]})
+    message_id: AiThreadMessageLike = Field(description="The stored message itself - with its storage-assigned `id` and `createdAt` - despite the field name, which is kept for the clients that already read it. The message ID is `messageId.id`.", alias="messageId")
     __properties: ClassVar[List[str]] = ["messageId"]
 
     model_config = ConfigDict(
@@ -72,6 +73,9 @@ class AiThreadsAppendUserMessage200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of message_id
+        if self.message_id:
+            _dict['messageId'] = self.message_id.to_dict()
         return _dict
 
     @classmethod
@@ -85,7 +89,7 @@ class AiThreadsAppendUserMessage200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "messageId": obj.get("messageId")
+            "messageId": AiThreadMessageLike.from_dict(obj["messageId"]) if obj.get("messageId") is not None else None
         })
         return _obj
 

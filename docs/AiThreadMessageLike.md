@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **content** | [**AiThreadMessageLikeContent**](AiThreadMessageLikeContent.md) |  | 
 **created_at** | **str** | Creation timestamp, ISO-8601 on the wire. | [optional] 
 **status** | [**AiThreadMessageLikeStatus**](AiThreadMessageLikeStatus.md) |  | [optional] 
-**metadata** | **object** | Arbitrary per-message metadata. | [optional] 
-**attachments** | **List[object]** | Attachments linked to the message. | [optional] 
+**metadata** | **object** | Per-message metadata. The chat library writes `custom` (with the round's `contextEntityId`) and `steps` (token usage per provider request); `unstable_state`, `unstable_annotations`, `unstable_data` and `submittedFeedback` may appear as well. Read it as an open map. | [optional] 
+**attachments** | **List[object]** | Attachments linked to the message (`id`, `type`, `name`, `contentType`, `status`, `content`). Read them as open objects. | [optional] 
 
 ## Example
 

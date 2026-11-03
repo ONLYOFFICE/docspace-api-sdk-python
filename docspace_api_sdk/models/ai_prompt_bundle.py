@@ -21,8 +21,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, field_validator
-from typing import Any, ClassVar, Dict, List, Union
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from docspace_api_sdk.models.ai_prompt import AiPrompt
 from docspace_api_sdk.models.ai_prompt_folder import AiPromptFolder
 from typing import Optional, Set
@@ -32,17 +33,10 @@ class AiPromptBundle(BaseModel):
     """
     Versioned, self-contained bundle of every saved prompt and folder. Stable wire format — `version` lets the import path migrate older shapes if the schema ever changes.
     """ # noqa: E501
-    version: Union[StrictFloat, StrictInt] = Field(description="The bundle format version, so an import can migrate an older export.", json_schema_extra={"examples": [1]})
+    version: Annotated[int, Field(le=1, strict=True, ge=1)] = Field(description="The bundle format version, so an import can migrate an older export.", json_schema_extra={"examples": [1]})
     folders: List[AiPromptFolder] = Field(description="Every exported prompt folder.", json_schema_extra={"examples": [[]]})
     prompts: List[AiPrompt] = Field(description="Every exported prompt.", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["version", "folders", "prompts"]
-
-    @field_validator('version')
-    def version_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set([1]):
-            raise ValueError("must be one of enum values (1)")
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

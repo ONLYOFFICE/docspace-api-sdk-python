@@ -34,10 +34,11 @@ class AiSendStreamBody(BaseModel):
     """ # noqa: E501
     thread_id: Optional[StrictStr] = Field(default=None, description="Target thread; a new one is created (with an auto title) when omitted.", alias="threadId", json_schema_extra={"examples": ["11111111-1111-1111-1111-111111111111"]})
     user_message: AiThreadMessageLike = Field(description="The user turn to send.", alias="userMessage")
-    action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
+    action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.", alias="actionArgs")
     entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId", json_schema_extra={"examples": ["1234"]})
+    context_entity_id: Optional[StrictStr] = Field(default=None, description="The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.", alias="contextEntityId")
     profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId", json_schema_extra={"examples": ["00000000-0000-0000-0000-000000000000"]})
-    __properties: ClassVar[List[str]] = ["threadId", "userMessage", "actionArgs", "entityId", "profileId"]
+    __properties: ClassVar[List[str]] = ["threadId", "userMessage", "actionArgs", "entityId", "contextEntityId", "profileId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +102,7 @@ class AiSendStreamBody(BaseModel):
             "userMessage": AiThreadMessageLike.from_dict(obj["userMessage"]) if obj.get("userMessage") is not None else None,
             "actionArgs": AiActionArgs.from_dict(obj["actionArgs"]) if obj.get("actionArgs") is not None else None,
             "entityId": obj.get("entityId"),
+            "contextEntityId": obj.get("contextEntityId"),
             "profileId": obj.get("profileId")
         })
         return _obj

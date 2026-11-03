@@ -21,7 +21,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from docspace_api_sdk.models.ai_action_args import AiActionArgs
 from typing import Optional, Set
@@ -32,10 +32,14 @@ class AiRegenerateStreamRequest(BaseModel):
     AiRegenerateStreamRequest
     """ # noqa: E501
     thread_id: StrictStr = Field(description="Target thread (must already exist).", alias="threadId")
-    action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
+    message_id: Optional[StrictStr] = Field(default=None, description="The user message to re-roll from: everything stored after it is deleted. When omitted, or no longer in the thread, the last user message is used.", alias="messageId")
+    keep_count: Optional[StrictInt] = Field(default=None, description="How many messages from the start of the thread to keep, used when `messageId` does not resolve. The message at `keepCount - 1` has to be a user message; otherwise the value is ignored.", alias="keepCount")
+    expected_length: Optional[StrictInt] = Field(default=None, description="The thread length the caller saw when it computed `keepCount`. When it differs from the stored length, `keepCount` is discarded and the last user message is used instead.", alias="expectedLength")
+    action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.", alias="actionArgs")
     entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId")
+    context_entity_id: Optional[StrictStr] = Field(default=None, description="The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.", alias="contextEntityId")
     profile_id: Optional[StrictStr] = Field(default=None, description="Session-level profile override for this request only.", alias="profileId")
-    __properties: ClassVar[List[str]] = ["threadId", "actionArgs", "entityId", "profileId"]
+    __properties: ClassVar[List[str]] = ["threadId", "messageId", "keepCount", "expectedLength", "actionArgs", "entityId", "contextEntityId", "profileId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,8 +97,12 @@ class AiRegenerateStreamRequest(BaseModel):
 
         _obj = cls.model_validate({
             "threadId": obj.get("threadId"),
+            "messageId": obj.get("messageId"),
+            "keepCount": obj.get("keepCount"),
+            "expectedLength": obj.get("expectedLength"),
             "actionArgs": AiActionArgs.from_dict(obj["actionArgs"]) if obj.get("actionArgs") is not None else None,
             "entityId": obj.get("entityId"),
+            "contextEntityId": obj.get("contextEntityId"),
             "profileId": obj.get("profileId")
         })
         return _obj

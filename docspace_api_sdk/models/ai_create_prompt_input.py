@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class AiCreatePromptInput(BaseModel):
     """
-    Input for creating a prompt — the engine generates `id`/`createdAt`/`updatedAt`.
+    Input for creating a prompt; the service fills in `id`, `createdAt` and `updatedAt`.
     """ # noqa: E501
     name: StrictStr = Field(description="The prompt name.", json_schema_extra={"examples": ["Contract summary"]})
     text: StrictStr = Field(description="The prompt body.", json_schema_extra={"examples": ["Summarise the key obligations and dates in the attached contract."]})

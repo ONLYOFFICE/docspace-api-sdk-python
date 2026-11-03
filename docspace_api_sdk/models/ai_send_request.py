@@ -35,9 +35,10 @@ class AiSendRequest(BaseModel):
     """ # noqa: E501
     action_type: AiActionType = Field(description="Which AI action to run — selects the assignment slot and action.", alias="actionType")
     user_message: AiThreadMessageLike = Field(description="The user turn to send.", alias="userMessage")
-    action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request engine options: extra tools, reasoning, prompt override.", alias="actionArgs")
+    action_args: Optional[AiActionArgs] = Field(default=None, description="Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.", alias="actionArgs")
     entity_id: Optional[StrictStr] = Field(default=None, description="Optional entity (room) scope for profile resolution.", alias="entityId")
-    __properties: ClassVar[List[str]] = ["actionType", "userMessage", "actionArgs", "entityId"]
+    context_entity_id: Optional[StrictStr] = Field(default=None, description="The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.", alias="contextEntityId")
+    __properties: ClassVar[List[str]] = ["actionType", "userMessage", "actionArgs", "entityId", "contextEntityId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,7 +101,8 @@ class AiSendRequest(BaseModel):
             "actionType": obj.get("actionType"),
             "userMessage": AiThreadMessageLike.from_dict(obj["userMessage"]) if obj.get("userMessage") is not None else None,
             "actionArgs": AiActionArgs.from_dict(obj["actionArgs"]) if obj.get("actionArgs") is not None else None,
-            "entityId": obj.get("entityId")
+            "entityId": obj.get("entityId"),
+            "contextEntityId": obj.get("contextEntityId")
         })
         return _obj
 

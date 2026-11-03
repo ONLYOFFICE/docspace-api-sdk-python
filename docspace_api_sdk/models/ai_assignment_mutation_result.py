@@ -29,7 +29,7 @@ from typing_extensions import Self
 
 class AiAssignmentMutationResult(BaseModel):
     """
-    Outcome of `AssignmentsEngine.assign` / `AssignmentsEngine.unassign`. Either a success or a field-scoped error suitable for displaying in the profile editor.
+    The outcome of an assign or unassign: a success, or an error naming the field that was refused.
     """ # noqa: E501
     success: StrictBool = Field(description="True when the assignment was persisted.", json_schema_extra={"examples": [True]})
     error: Optional[AiErrorData] = Field(default=None, description="Why the assignment was rejected. Present on failure.")
